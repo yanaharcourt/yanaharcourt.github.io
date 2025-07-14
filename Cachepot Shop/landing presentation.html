@@ -1,0 +1,2187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicate Weaves - Interactive Design Presentation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Основные цвета проекта */
+            --bg-color: #F5F2EB;
+            --line-color: #B6B8B1;
+            --body-text: #223129;
+            --accent-color: #D89736;
+            --card-bg: #2C3B33;
+            --text-light: #6B7280;
+            --text-medium: #374151;
+            
+            /* Шрифты */
+            --font-primary: 'Inter', sans-serif;
+            --font-secondary: 'Cormorant', serif;
+            --font-decorative: 'Miama Nueva', cursive;
+            
+            /* Размеры */
+            --font-size-hero: clamp(48px, 8vw, 72px);
+            --font-size-h1: clamp(40px, 6vw, 64px);
+            --font-size-h2: clamp(32px, 5vw, 48px);
+            --font-size-h3: clamp(24px, 4vw, 32px);
+            --font-size-body-large: clamp(16px, 2vw, 22px);
+            --font-size-body: clamp(14px, 1.5vw, 18px);
+            
+            /* Высота строк */
+            --line-height-tight: 1.2;
+            --line-height-normal: 1.5;
+            --line-height-relaxed: 1.7;
+        }
+
+        @font-face {
+            font-family: 'Miama Nueva';
+            src: url('./miamanueva.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--bg-color);
+            color: var(--body-text);
+            line-height: var(--line-height-relaxed);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor.hover {
+            transform: translate(-50%, -50%) scale(2);
+            background-color: var(--accent-color);
+            border-color: transparent;
+        }
+
+        /* Side Navigation */
+        .side-nav {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: transparent;
+            border: 2px solid var(--line-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-dot.active {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: scale(1.3);
+        }
+
+        .nav-dot::after {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-dot.active::after {
+            width: 20px;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), var(--card-bg));
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 60px;
+            overflow: hidden;
+        }
+
+        .section-content {
+            max-width: 1320px;
+            width: 100%;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-color) 0%, #f8f6f1 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="%23D89736" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-title {
+            font-family: var(--font-decorative);
+            font-size: var(--font-size-hero);
+            color: var(--card-bg);
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 30px;
+            line-height: var(--line-height-tight);
+            margin-top: 100px;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-primary);
+            font-size: var(--font-size-body-large);
+            color: var(--body-text);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto 50px;
+            line-height: var(--line-height-relaxed);
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            border-radius: 20px;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        /* Challenge Section */
+        .challenge {
+            background-color: var(--card-bg);
+            color: white;
+        }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .challenge-content h2 {
+            font-family: var(--font-decorative);
+            font-size: var(--font-size-h1);
+            font-weight: 300;
+            color: var(--accent-color);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .challenge-content p {
+            font-size: var(--font-size-body-large);
+            line-height: var(--line-height-relaxed);
+            font-weight: 300;
+        }
+
+        .challenge-image {
+            width: 100%;
+            height: 400px;
+            background: var(--bg-color);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--body-text);
+            font-style: italic;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--accent-color);
+            border-radius: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 8px;
+            opacity: 0.7;
+            z-index: 100;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            width: 4px;
+            height: 8px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(20px); opacity: 0; }
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .floating-circle {
+            width: 100px;
+            height: 100px;
+            border: 1px solid var(--accent-color);
+            border-radius: 50%;
+            top: 20%;
+            right: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-line {
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            top: 70%;
+            left: 10%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Assessment Section */
+        .assessment {
+            background: linear-gradient(135deg, var(--bg-color) 0%, #f0ede6 100%);
+        }
+
+        .assessment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .assessment-content h2 {
+            font-family: var(--font-decorative);
+            font-size: var(--font-size-h1);
+            font-weight: 300;
+            color: var(--card-bg);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .assessment-content p {
+            font-size: var(--font-size-body-large);
+            line-height: var(--line-height-relaxed);
+            font-weight: 300;
+            color: var(--body-text);
+        }
+
+        .assessment-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(44, 59, 51, 0.15);
+            transform: translateX(50px);
+            opacity: 0;
+        }
+
+        /* Solution Section */
+        .solution {
+            background-color: var(--card-bg);
+            color: white;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .solution-content h2 {
+            font-family: var(--font-decorative);
+            font-size: var(--font-size-h1);
+            font-weight: 300;
+            color: var(--accent-color);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .solution-content p {
+            font-size: var(--font-size-body-large);
+            line-height: var(--line-height-relaxed);
+            font-weight: 300;
+        }
+
+        .solution-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+        }
+
+        .solution-list li {
+            font-size: var(--font-size-body);
+            line-height: var(--line-height-relaxed);
+            font-weight: 300;
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .solution-list li::before {
+            content: "→";
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Colour Solutions Section */
+        .colour-solutions {
+            background: linear-gradient(135deg, var(--bg-color) 0%, #f8f6f1 100%);
+        }
+
+        .colour-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .colour-content h2 {
+            font-family: var(--font-decorative);
+            font-size: var(--font-size-h1);
+            font-weight: 300;
+            color: var(--card-bg);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .colour-content p {
+            font-size: var(--font-size-body-large);
+            line-height: var(--line-height-relaxed);
+            font-weight: 300;
+            color: var(--body-text);
+        }
+
+        .colour-images {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .colour-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            transform: translateY(30px);
+            opacity: 0;
+        }
+
+        /* Layout Innovation Section */
+        .layout-innovation {
+            background-color: var(--card-bg);
+            color: white;
+        }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .layout-content h2 {
+            font-family: var(--font-decorative);
+            font-size: var(--font-size-h1);
+            font-weight: 300;
+            color: var(--accent-color);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .layout-content p {
+            font-size: var(--font-size-body-large);
+            line-height: var(--line-height-relaxed);
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .layout-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateX(-50px);
+            opacity: 0;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background: linear-gradient(135deg, var(--bg-color) 0%, #f0ede6 100%);
+        }
+
+        /* Catalog Section */
+        .catalog {
+            background-color: var(--card-bg);
+            color: white;
+        }
+
+        /* Delivery Section */
+        .delivery {
+            background: linear-gradient(135deg, var(--bg-color) 0%, #f8f6f1 100%);
+        }
+
+        .delivery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .delivery-content h2 {
+            font-family: var(--font-decorative);
+            font-size: var(--font-size-h1);
+            font-weight: 300;
+            color: var(--card-bg);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .delivery-content p {
+            font-size: var(--font-size-body-large);
+            line-height: var(--line-height-relaxed);
+            font-weight: 300;
+            color: var(--body-text);
+        }
+
+        .delivery-images {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .delivery-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            transform: translateY(30px);
+            opacity: 0;
+        }
+
+        /* Social Section */
+        .social {
+            background-color: var(--card-bg);
+            color: white;
+        }
+
+        /* Product Card Section */
+        .product-card {
+            background: linear-gradient(135deg, var(--bg-color) 0%, #f0ede6 100%);
+        }
+
+        .product-content {
+            text-align: center;
+            margin-bottom: 60px;
+            margin-top: 60px;
+        }
+
+        .product-content h2 {
+            font-family: var(--font-decorative);
+            font-size: var(--font-size-h1);
+            font-weight: 300;
+            color: var(--card-bg);
+            font-style: italic;
+            margin-bottom: 50px;
+        }
+
+        .product-text-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 60px;
+            text-align: left;
+        }
+
+        .product-text {
+            font-size: var(--font-size-body-large);
+            line-height: var(--line-height-relaxed);
+            font-weight: 300;
+            color: var(--body-text);
+            margin-bottom: 20px;
+        }
+
+        .product-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .product-list li {
+            font-size: var(--font-size-body);
+            line-height: var(--line-height-relaxed);
+            font-weight: 300;
+            color: var(--body-text);
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .product-list li::before {
+            content: "•";
+            color: var(--card-bg);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .product-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .challenge-grid,
+            .assessment-grid,
+            .solution-grid,
+            .colour-grid,
+            .layout-grid,
+            .delivery-grid,
+            .product-text-grid,
+            .product-images {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .assessment-image,
+            .layout-image {
+                transform: translateY(30px);
+            }
+
+            .colour-images,
+            .delivery-images {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Responsive Design Section */
+        .responsive-design {
+            background: linear-gradient(135deg, var(--bg-color) 0%, #f8f6f1 100%);
+            position: relative;
+            overflow: visible;
+            margin-bottom: 40px;
+        }
+
+        .responsive-content {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .responsive-content h2 {
+            font-family: var(--font-decorative);
+            font-size: var(--font-size-h1);
+            font-weight: 300;
+            color: var(--card-bg);
+            font-style: italic;
+            margin-bottom: 30px;
+            margin-top: 60px;
+        }
+
+        .responsive-description {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 800px;
+            margin: 0 auto 80px;
+            text-align: left;
+        }
+
+        .responsive-text {
+            font-size: var(--font-size-body-large);
+            line-height: var(--line-height-relaxed);
+            font-weight: 300;
+            color: var(--body-text);
+        }
+
+        .phones-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 40px;
+            perspective: 1000px;
+            min-height: 600px;
+            position: relative;
+        }
+
+        .phone {
+            position: relative;
+            transform-style: preserve-3d;
+            opacity: 0;
+            transform: translateY(100px) rotateX(15deg);
+            transition: all 0.5s ease;
+        }
+
+        .phone-1 {
+            z-index: 3;
+            transform: translateY(100px) rotateX(15deg) rotateY(-10deg);
+        }
+
+        .phone-2 {
+            z-index: 4;
+            transform: translateY(100px) rotateX(15deg) scale(1.1);
+        }
+
+        .phone-3 {
+            z-index: 3;
+            transform: translateY(100px) rotateX(15deg) rotateY(10deg);
+        }
+
+        .phone img {
+            width: 280px;
+            height: auto;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .phone:hover {
+            transform: translateY(-10px) rotateX(0deg) rotateY(0deg) scale(1.05);
+        }
+
+        /* Phone Labels */
+        .phone-label {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-primary);
+            font-size: var(--font-size-body-small);
+            color: var(--text-light);
+            font-weight: 300;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .phone:hover .phone-label {
+            opacity: 1;
+            bottom: -30px;
+        }
+
+        /* Floating geometric elements */
+        .responsive-design::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .responsive-design::after {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            right: 15%;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, var(--accent-color), transparent);
+            opacity: 0.2;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .responsive-description {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+                margin-bottom: 60px;
+            }
+
+            .phones-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+                min-height: auto;
+            }
+
+            .phone {
+                transform: translateY(50px) !important;
+            }
+
+            .phone img {
+                width: 220px;
+            }
+
+            .phone:hover {
+                transform: translateY(40px) scale(1.02) !important;
+            }
+        }
+
+        /* Final Comparison Section - Updated Styles */
+        .final-comparison {
+            background: linear-gradient(135deg, var(--bg-color) 0%, #f0ede6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 80px 60px;
+            overflow: hidden;
+        }
+
+        .final-comparison::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 8%;
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: float 12s ease-in-out infinite;
+        }
+
+        .final-comparison::after {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            right: 10%;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--accent-color), transparent);
+            opacity: 0.15;
+            animation: float 8s ease-in-out infinite reverse;
+            border-radius: 50%;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        .comparison-container {
+            max-width: 1320px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .comparison-header {
+            text-align: center;
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .comparison-title {
+            font-family: var(--font-decorative);
+            font-size: var(--font-size-h1);
+            font-weight: 300;
+            color: var(--card-bg);
+            font-style: italic;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            margin-top: 60px;
+        }
+
+        .comparison-subtitle {
+            font-size: var(--font-size-body-large);
+            line-height: var(--line-height-relaxed);
+            font-weight: 300;
+            color: var(--body-text);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .comparison-main {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .comparison-side {
+            position: relative;
+            opacity: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .comparison-side.before {
+            transform: translateX(-80px);
+            flex: 0.8;
+        }
+
+        .comparison-side.after {
+            transform: translateX(80px);
+            flex: 0.3;
+        }
+
+        /* Remove labels completely */
+        .comparison-label {
+            display: none;
+        }
+
+        .comparison-image {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            transition: transform 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            background: none;
+            box-shadow: none;
+        }
+
+        .comparison-side.before .comparison-image {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .comparison-side.after .comparison-image {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .comparison-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.8s ease;
+        }
+
+        .comparison-side:hover .comparison-image {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .comparison-side:hover .comparison-image::before {
+            transform: translateX(100%);
+        }
+
+        .transformation-arrow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 5;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 30px rgba(216, 151, 54, 0.3);
+        }
+
+        .transformation-arrow.visible {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .transformation-arrow:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 15px 40px rgba(216, 151, 54, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .final-comparison {
+                padding: 60px 30px;
+            }
+
+            .comparison-main {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .comparison-side.before,
+            .comparison-side.after {
+                transform: translateY(50px);
+                flex: 1;
+            }
+
+            .comparison-side.before .comparison-image {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .comparison-side.after .comparison-image {
+                width: 35%;
+                max-width: 35%;
+                margin: 0 auto;
+            }
+
+            .comparison-insights {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .transformation-arrow {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .insight-card {
+                padding: 25px;
+            }
+
+            .impact-summary {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .final-comparison {
+                padding: 40px 20px;
+            }
+
+            .comparison-header {
+                margin-bottom: 50px;
+            }
+
+            .comparison-title {
+                font-size: 36px;
+            }
+
+            .comparison-subtitle {
+                font-size: 16px;
+            }
+
+            .comparison-main {
+                gap: 30px;
+            }
+
+            .comparison-side.after .comparison-image {
+                width: 30%;
+                max-width: 30%;
+            }
+        }
+        /* Conclusion Section */
+        .conclusion {
+            background-color: var(--card-bg);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 100px 60px;
+            overflow: hidden;
+        }
+
+        .conclusion::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(216, 151, 54, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(216, 151, 54, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .conclusion-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .conclusion-header {
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .conclusion-title {
+            font-family: var(--font-decorative);
+            font-size: var(--font-size-h1);
+            font-weight: 300;
+            color: var(--accent-color);
+            font-style: italic;
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+
+        .conclusion-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .conclusion-paragraph {
+            font-size: var(--font-size-body-large);
+            line-height: var(--line-height-relaxed);
+            font-weight: 300;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Live Site CTA Section */
+        .live-site-cta {
+            background: linear-gradient(135deg, var(--bg-color) 0%, #f0ede6 100%);
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 80px 60px;
+            overflow: hidden;
+        }
+
+        .live-site-cta::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 10%;
+            width: 120px;
+            height: 120px;
+            border: 3px solid var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: floatSlow 15s ease-in-out infinite;
+        }
+
+        .live-site-cta::after {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            right: 15%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--accent-color), transparent);
+            opacity: 0.1;
+            animation: floatSlow 12s ease-in-out infinite reverse;
+            border-radius: 50%;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(10deg); }
+        }
+
+        .cta-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-header {
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .cta-title {
+            font-family: var(--font-decorative);
+            font-size: var(--font-size-h2);
+            font-weight: 400;
+            color: var(--card-bg);
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .cta-subtitle {
+            font-size: var(--font-size-body-large);
+            line-height: var(--line-height-relaxed);
+            font-weight: 300;
+            color: var(--body-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Interactive Button */
+        .live-site-button {
+            position: relative;
+            display: inline-block;
+            margin-top: 40px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .button-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #bf7b2f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-family: var(--font-primary);
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 20px 40px rgba(216, 151, 54, 0.3),
+                0 0 0 0 rgba(216, 151, 54, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-circle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .button-circle:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 
+                0 30px 60px rgba(216, 151, 54, 0.4),
+                0 0 0 20px rgba(216, 151, 54, 0.1);
+        }
+
+        .button-circle:hover::before {
+            transform: translateX(100%);
+        }
+
+        .button-text {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .button-main-text {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .button-sub-text {
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Pulsing animation */
+        .button-circle {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 
+                    0 20px 40px rgba(216, 151, 54, 0.3),
+                    0 0 0 0 rgba(216, 151, 54, 0.4);
+            }
+            50% {
+                box-shadow: 
+                    0 20px 40px rgba(216, 151, 54, 0.3),
+                    0 0 0 20px rgba(216, 151, 54, 0.1);
+            }
+        }
+
+        /* Floating elements around button */
+        .floating-elements {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            pointer-events: none;
+        }
+
+        .floating-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .dot-1 {
+            top: 10%;
+            left: 20%;
+            animation: floatDot 4s ease-in-out infinite;
+        }
+
+        .dot-2 {
+            top: 30%;
+            right: 15%;
+            animation: floatDot 5s ease-in-out infinite reverse;
+        }
+
+        .dot-3 {
+            bottom: 20%;
+            left: 25%;
+            animation: floatDot 6s ease-in-out infinite;
+        }
+
+        .dot-4 {
+            bottom: 15%;
+            right: 20%;
+            animation: floatDot 4.5s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatDot {
+            0%, 100% { transform: translateY(0px); opacity: 0.6; }
+            50% { transform: translateY(-20px); opacity: 0.3; }
+        }
+
+        /* Thank you message */
+        .thank-you {
+            margin-top: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .thank-you-text {
+            font-family: var(--font-decorative);
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .conclusion {
+                padding: 80px 30px;
+            }
+
+            .conclusion-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .conclusion-paragraph {
+                text-align: center;
+            }
+
+            .live-site-cta {
+                padding: 60px 30px;
+            }
+
+            .button-circle {
+                width: 160px;
+                height: 160px;
+            }
+
+            .button-main-text {
+                font-size: 14px;
+            }
+
+            .button-sub-text {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .conclusion {
+                padding: 60px 20px;
+            }
+
+            .live-site-cta {
+                padding: 50px 20px;
+            }
+
+            .conclusion-title {
+                font-size: 36px;
+            }
+
+            .cta-title {
+                font-size: 28px;
+            }
+
+            .button-circle {
+                width: 140px;
+                height: 140px;
+            }
+
+            .button-main-text {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar"></div>
+
+    <!-- Side Navigation -->
+    <div class="side-nav">
+        <div class="nav-dot active" data-section="0"></div>
+        <div class="nav-dot" data-section="1"></div>
+        <div class="nav-dot" data-section="2"></div>
+        <div class="nav-dot" data-section="3"></div>
+        <div class="nav-dot" data-section="4"></div>
+        <div class="nav-dot" data-section="5"></div>
+        <div class="nav-dot" data-section="6"></div>
+        <div class="nav-dot" data-section="7"></div>
+        <div class="nav-dot" data-section="8"></div>
+        <div class="nav-dot" data-section="9"></div>
+        <div class="nav-dot" data-section="10"></div>
+        <div class="nav-dot" data-section="11"></div>
+        <div class="nav-dot" data-section="12"></div>
+        <div class="nav-dot" data-section="13"></div>
+        <div class="nav-dot" data-section="14"></div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator"></div>
+
+    <!-- Sections -->
+    <section class="section hero" data-section="0">
+        <div class="floating-element floating-circle"></div>
+        <div class="floating-element floating-line"></div>
+        
+        <div class="section-content hero-content">
+            <img src="./Presentation/Mockup.png" alt="Delicate Weaves Website Mockup" class="hero-image">
+        </div>
+    </section>
+
+    <section class="section challenge" data-section="1">
+        <div class="section-content">
+            <div class="challenge-grid">
+                <div class="challenge-content">
+                    <h2>Challenge</h2>
+                    <p>
+                        When analysing the Delicate Weaves website, a manufacturer of premium 
+                        handcrafted rattan products, I identified a significant gap between 
+                        product quality and its online presentation.
+                    </p>
+                    <ul class="solution-list">
+                        <li>Visual design failed to communicate the brand's premium positioning</li>
+                        <li>The website didn't reflect the uniqueness and value of handcrafted work</li>
+                        <li>Lack of clear visual information hierarchy</li>
+                        <li>Decorative elements distracted from actual products</li>
+                        <li>Light minimalistic design didn't differentiate the brand from competitors</li>
+                    </ul>
+                </div>
+                <div class="challenge-image">
+                    Original Website Analysis
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section solution" data-section="2">
+        <div class="section-content">
+            <div class="solution-grid">
+                <div class="challenge-image" style="background: var(--bg-color); color: var(--body-text);">
+                    Solution Concept
+                </div>
+                <div class="solution-content">
+                    <h2>Solution</h2>
+                    <p>
+                        My task was to create a design that would emphasise the brand's premium status 
+                        and establish an emotional connection with the audience. I developed a concept based on:
+                    </p>
+                    <ul class="solution-list">
+                        <li>A deep, rich colour scheme where the dark green background creates a sense of premium quality</li>
+                        <li>A thoughtful typographic system combining three fonts to establish clear hierarchy</li>
+                        <li>An asymmetrical grid with authentic product photography showcasing items in interior contexts</li>
+                        <li>Carefully calculated proportions and spacing creating a sense of air and lightness</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section assessment" data-section="3">
+        <div class="section-content">
+            <div class="assessment-grid">
+                <img src="./Presentation/Image 1.png" alt="Initial Assessment" class="assessment-image">
+                <div class="assessment-content">
+                    <h2>Initial Assessment</h2>
+                    <p>
+                        The initial review of the original Delicate Weaves website revealed several crucial 
+                        challenges. The light background and scattered colour accents created an impression 
+                        of a standard online shop, failing to reflect the true value of handcrafted pieces. 
+                        While charming, the decorative elephant illustration diverted attention from the actual products.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section colour-solutions" data-section="4">
+        <div class="section-content">
+            <div class="colour-grid">
+                <div class="colour-content">
+                    <h2>Colour Solutions</h2>
+                    <p>
+                        In my redesign approach, I decided to completely rethink the brand's presentation. 
+                        Deep green became the foundation of the new visual language – creating an immersive 
+                        natural aesthetic whilst emphasising the collection's premium quality. I introduced 
+                        golden accents as a reference to the warmth and richness of rattan textures.
+                    </p>
+                </div>
+                <div class="colour-images">
+                    <img src="./Presentation/Image 2 Green.png" alt="Green Color Palette" class="colour-image">
+                    <img src="./Presentation/Image 3 Yellow.png" alt="Yellow Color Palette" class="colour-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section layout-innovation" data-section="5">
+        <div class="section-content">
+            <div class="layout-grid">
+                <img src="./Presentation/Image 4.png" alt="Layout Innovation" class="layout-image">
+                <div class="layout-content">
+                    <h2>Layout Innovation</h2>
+                    <p>
+                        I paid particular attention to the compositional solution. Instead of the original 
+                        website's static structure, I created an asymmetrical grid with photographs of actual products.
+                    </p>
+                    <p>
+                        Each image in a white frame works as a window into the world of refined interiors, 
+                        showcasing the products in their natural environment.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section benefits" data-section="6">
+        <div class="section-content">
+            <div class="assessment-grid">
+                <div class="assessment-content">
+                    <h2>Benefits Reconstruction</h2>
+                    <p>
+                        In my redesign, I transformed the standard three-column layout into a more dynamic 
+                        composition. I retained the three key benefits – versatility, sustainability, and 
+                        durability – but presented them in an artful, asymmetric arrangement. The integration 
+                        of a high-quality product photograph adds tangible value to the textual content.
+                    </p>
+                </div>
+                <img src="./Presentation/Image 5.png" alt="Benefits Reconstruction" class="assessment-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="section catalog" data-section="7">
+        <div class="section-content">
+            <div class="solution-grid">
+                <img src="./Presentation/Image 6.png" alt="Catalog Journey" class="layout-image">
+                <div class="solution-content">
+                    <h2>Catalog Journey</h2>
+                    <p>
+                        Instead of a conventional product grid, I created a guided category system that 
+                        helps clients make informed decisions about their planters. Each category features 
+                        an elegant combination of visual content and benefit description.
+                    </p>
+                    <p>
+                        The division into "with plastic insert" and "without" makes the choice intuitive, 
+                        whilst lifestyle photography helps buyers envision the pieces in their own space.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section delivery" data-section="8">
+        <div class="section-content">
+            <div class="delivery-grid">
+                <div class="colour-content">
+                    <h2>Delivery Enhancement</h2>
+                    <p>
+                        Instead of a basic delivery information section, I created a visually engaging 
+                        element featuring a linear-style map of Russia. The transition from a flat green 
+                        image to an elegant outline solution adds premium feel and contemporary touch. 
+                        Accent words highlighted in gold and set in Miama Nueva font create a harmonious 
+                        balance with the overall website aesthetics.
+                    </p>
+                </div>
+                <div class="delivery-images">
+                    <img src="./Presentation/Image 7.png" alt="Delivery Enhancement - Original" class="delivery-image">
+                    <img src="./Presentation/Image 8.png" alt="Delivery Enhancement - New" class="delivery-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section social" data-section="9">
+        <div class="section-content">
+            <div class="solution-grid">
+                <img src="./Presentation/Image 9.png" alt="Social Engagement Journey" class="layout-image">
+                <div class="solution-content">
+                    <h2>Social Engagement Journey</h2>
+                    <p>
+                        In the redesign, I transformed the reviews section from a simple mobile display 
+                        into a more expressive typographic composition. Reviews became a central narrative 
+                        element, with each testimonial highlighted through elegant typography and golden accents.
+                    </p>
+                    <p>
+                        The contact section received a new structure with a clear division into two parts: 
+                        contact information and feedback form. The addition of business hours, physical address 
+                        and social media links makes brand interaction more accessible, whilst the minimalist 
+                        feedback form design simplifies the communication process.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section product-card" data-section="10">
+        <div class="section-content">
+            <div class="product-content">
+                <h2>Product Card</h2>
+                <div class="product-text-grid">
+                    <div>
+                        <p class="product-text">
+                            After developing the overall website structure, I focused on the key element 
+                            of any e-commerce project — the product card. This component requires special 
+                            attention as it's where users make their purchasing decisions.
+                        </p>
+                        <p class="product-text">
+                            In redesigning the product card, I implemented several significant improvements 
+                            to create a more intuitive and informative interface:
+                        </p>
+                    </div>
+                    <div>
+                        <ul class="product-list">
+                            <li>Added a breadcrumb trail to aid users in understanding how to navigate the website</li>
+                            <li>For "Description," "Characteristics," and "Reviews," basic tabs were changed into interactive buttons</li>
+                            <li>For better reading, the product description was organised by dividing the material into logical paragraphs</li>
+                            <li>A system for choosing pot sizes (15 cm, 20 cm, 25 cm, and 30 cm) was put into place</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-images">
+                    <img src="./Presentation/Image 10.png" alt="Product Card - Original" class="product-image">
+                    <img src="./Presentation/Image 11.png" alt="Product Card - Redesigned" class="product-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Responsive Design секции -->
+    <section class="section responsive-design" data-section="11">
+        <div class="section-content">
+            <div class="responsive-content">
+                <h2>Responsive Design</h2>
+                <div class="responsive-description">
+                    <div class="responsive-text">
+                        Mobile users represent over 60% of e-commerce traffic, making responsive design critical for Delicate Weaves' success.
+                    </div>
+                    <div class="responsive-text">
+                        The adaptation preserves the sophisticated aesthetic while optimizing for thumb-friendly interactions and faster loading times.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="phones-container">
+                <div class="phone phone-1">
+                    <img src="./Presentation/Image 12.png" alt="Mobile Design - Home Page">
+                    <!-- <div class="phone-label">Home Page</div> -->
+                </div>
+                <div class="phone phone-2">
+                    <img src="./Presentation/Image 13.png" alt="Mobile Design - Product Catalog">
+                    <!-- <div class="phone-label">Catalog</div> -->
+                </div>
+                <div class="phone phone-3">
+                    <img src="./Presentation/Image 14.png" alt="Mobile Design - Product Details">
+                    <!-- <div class="phone-label">Product Card</div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Comparison Section -->
+    <section class="section final-comparison" data-section="12">
+        <div class="comparison-container">
+            <div class="comparison-header">
+                <h2 class="comparison-title">Design Evolution</h2>
+                <p class="comparison-subtitle">
+                    After completing the initial redesign, I created a second iteration to further refine the visual approach and explore alternative design solutions for the Delicate Weaves brand experience.
+                </p>
+            </div>
+
+            <div class="comparison-main">
+                <div class="comparison-side before">
+                    <div class="comparison-label label-before">Desktop</div>
+                    <img src="./Presentation/Image 15.png" alt="Desktop Design Version" class="comparison-image">
+                </div>
+
+                <div class="comparison-side after">
+                    <div class="comparison-label label-after">Mobile</div>
+                    <img src="./Presentation/Image 16.png" alt="Mobile Design Version" class="comparison-image">
+                </div>
+
+                <div class="transformation-arrow">⟷</div>
+            </div>
+    </section>
+
+    <!-- Conclusion Section -->
+    <section class="section conclusion" data-section="13">
+        <div class="conclusion-container">
+            <div class="conclusion-header">
+                <h2 class="conclusion-title">Conclusion</h2>
+            </div>
+
+            <div class="conclusion-content">
+                <div class="conclusion-paragraph">
+                    I showed how many design philosophies can equally effectively communicate brand values and produce memorable user experiences with this redesign project. The second version emphasises organised harmony and a distinct visual hierarchy, whereas the first version celebrates fine typography and exquisite asymmetry.
+                </div>
+                <div class="conclusion-paragraph">
+                    Both approaches effectively enhance the Delicate Weaves brand, demonstrating that high-end design can exist in a variety of ways while preserving the essential elements of the brand. This project demonstrates the value of adaptability in contemporary online design, when user requirements and aesthetic preferences are ever-changing.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Site CTA Section -->
+    <section class="section live-site-cta" data-section="14">
+        <div class="cta-container">
+            <div class="cta-header">
+                <h2 class="cta-title">Experience the Design</h2>
+                <p class="cta-subtitle">
+                    Ready to explore the live website? Discover how the redesigned Delicate Weaves 
+                    experience brings handcrafted rattan products to life through thoughtful design.
+                </p>
+            </div>
+
+            <div class="live-site-button">
+                <div class="floating-elements">
+                    <div class="floating-dot dot-1"></div>
+                    <div class="floating-dot dot-2"></div>
+                    <div class="floating-dot dot-3"></div>
+                    <div class="floating-dot dot-4"></div>
+                </div>
+                
+                <a href="landing.html" class="button-circle" target="_blank">
+                    <div class="button-text">
+                        <span class="button-main-text">View Live Site</span>
+                        <span class="button-sub-text">Click to explore</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="thank-you">
+                <p class="thank-you-text">Thank you for this journey!</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    // Register GSAP plugins
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Custom Cursor
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', (e) => {
+        gsap.to(cursor, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.1
+        });
+    });
+
+    // Cursor hover effects
+    document.querySelectorAll('a, button, .nav-dot').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    // Progress Bar
+    ScrollTrigger.create({
+        trigger: "body",
+        start: "top top",
+        end: "bottom bottom",
+        onUpdate: self => {
+            gsap.to(".progress-bar", {
+                width: (self.progress * 100) + "%",
+                duration: 0.1
+            });
+        }
+    });
+
+    // Function to animate phones
+    function animatePhones(section) {
+        const phones = section.querySelectorAll('.phone');
+        phones.forEach((phone, i) => {
+            gsap.to(phone, {
+                opacity: 1,
+                y: 0,
+                rotateX: 0,
+                rotateY: 0,
+                scale: phone.classList.contains('phone-2') ? 1.1 : 1,
+                duration: 1.2,
+                delay: 0.3 + (i * 0.2),
+                ease: "power2.out"
+            });
+        });
+    }
+
+    // Enhanced section-specific animations
+    function animateSectionElements(section, index) {
+        // Animate images
+        const images = section.querySelectorAll('.assessment-image, .layout-image, .colour-image, .delivery-image, .product-image');
+        images.forEach((img, i) => {
+            gsap.to(img, {
+                opacity: 1,
+                x: 0,
+                y: 0,
+                duration: 1.2,
+                delay: 0.3 + (i * 0.2),
+                ease: "power2.out"
+            });
+        });
+
+        // Animate list items
+        const listItems = section.querySelectorAll('.solution-list li, .product-list li');
+        listItems.forEach((item, i) => {
+            gsap.to(item, {
+                opacity: 1,
+                x: 0,
+                duration: 0.8,
+                delay: 0.5 + (i * 0.1),
+                ease: "power2.out"
+            });
+        });
+
+        // Animate floating elements for hero
+        if (index === 0) {
+            gsap.to('.floating-circle', {
+                opacity: 0.6,
+                duration: 2,
+                delay: 1,
+                ease: "power2.out"
+            });
+            gsap.to('.floating-line', {
+                opacity: 0.6,
+                duration: 2,
+                delay: 1.5,
+                ease: "power2.out"
+            });
+        }
+
+        // Animate phones for responsive design section
+        if (index === 11) {
+            animatePhones(section);
+        }
+    }
+
+    // Section animations with enhanced effects
+    gsap.utils.toArray('.section').forEach((section, index) => {
+        const content = section.querySelector('.section-content');
+        
+        gsap.set(content, { opacity: 0, y: 50 });
+        
+        ScrollTrigger.create({
+            trigger: section,
+            start: "top 80%",
+            end: "bottom 20%",
+            onEnter: () => {
+                gsap.to(content, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power2.out"
+                });
+                
+                // Animate specific elements within each section
+                animateSectionElements(section, index);
+                updateActiveNav(index);
+            },
+            onLeave: () => {
+                if (index < gsap.utils.toArray('.section').length - 1) {
+                    updateActiveNav(index + 1);
+                }
+            },
+            onEnterBack: () => {
+                updateActiveNav(index);
+            }
+        });
+    });
+
+    // Hero image animation
+    gsap.to('.hero-image', {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        delay: 0.5,
+        ease: "power2.out"
+    });
+
+    // Navigation
+    function updateActiveNav(index) {
+        document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+    }
+
+    // Nav dot clicks
+    document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            const sections = gsap.utils.toArray('.section');
+            gsap.to(window, {
+                scrollTo: sections[index],
+                duration: 1,
+                ease: "power2.inOut"
+            });
+        });
+    });
+
+    // Hide scroll indicator after first scroll
+    ScrollTrigger.create({
+        trigger: "body",
+        start: "top top",
+        end: "bottom bottom",
+        onUpdate: self => {
+            if (self.progress > 0.1) {
+                gsap.to('.scroll-indicator', {
+                    opacity: 0,
+                    duration: 0.3
+                });
+            } else {
+                gsap.to('.scroll-indicator', {
+                    opacity: 0.7,
+                    duration: 0.3
+                });
+            }
+        }
+    });
+
+    // Smooth scroll
+    ScrollTrigger.normalizeScroll(true);
+    
+    // Initialize
+    gsap.set('.section-content', { opacity: 0, y: 50 });
+    gsap.to('.section:first-child .section-content', {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.3,
+        ease: "power2.out"
+    });
+    </script>
+    <script>
+        // Register GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animation timeline for the comparison section
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".final-comparison",
+                start: "top 80%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        // Header animation
+        tl.to(".comparison-header", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out"
+        })
+
+        // Before and After images animation
+        .to(".comparison-side.before", {
+            opacity: 1,
+            x: 0,
+            duration: 1.2,
+            ease: "power2.out"
+        }, "-=0.5")
+        .to(".comparison-side.after", {
+            opacity: 1,
+            x: 0,
+            duration: 1.2,
+            ease: "power2.out"
+        }, "-=1")
+
+        // Transformation arrow
+        .to(".transformation-arrow", {
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: "back.out(1.7)"
+        }, "-=0.3")
+
+        // Insights cards
+        .to(".comparison-insights", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out"
+        }, "-=0.2")
+
+        // Animate insight list items
+        .to(".insight-list li", {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out"
+        }, "-=0.5")
+
+        // Impact summary
+        .to(".impact-summary", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out"
+        }, "-=0.3");
+
+        // Hover effects for comparison images
+        document.querySelectorAll('.comparison-side').forEach(side => {
+            side.addEventListener('mouseenter', () => {
+                gsap.to(side.querySelector('.comparison-image'), {
+                    scale: 1.02,
+                    y: -10,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            });
+
+            side.addEventListener('mouseleave', () => {
+                gsap.to(side.querySelector('.comparison-image'), {
+                    scale: 1,
+                    y: 0,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            });
+        });
+
+        // Arrow pulse animation
+        gsap.to(".transformation-arrow", {
+            scale: 1.1,
+            duration: 2,
+            ease: "power2.inOut",
+            yoyo: true,
+            repeat: -1
+        });
+    </script>
+    <script>
+        // Register GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Conclusion section animations
+        const conclusionTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".conclusion",
+                start: "top 80%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        conclusionTl
+            .to(".conclusion-header", {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out"
+            })
+            .to(".conclusion-content", {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out"
+            }, "-=0.5")
+            .to(".conclusion-paragraph", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.3,
+                ease: "power2.out"
+            }, "-=0.5");
+
+        // Live site CTA animations
+        const ctaTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".live-site-cta",
+                start: "top 80%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        ctaTl
+            .to(".cta-header", {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out"
+            })
+            .to(".live-site-button", {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "back.out(1.7)"
+            }, "-=0.3")
+            .to(".thank-you", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power2.out"
+            }, "-=0.2");
+
+        // Interactive button hover effects
+        const button = document.querySelector('.button-circle');
+        const floatingDots = document.querySelectorAll('.floating-dot');
+
+        button.addEventListener('mouseenter', () => {
+            gsap.to(floatingDots, {
+                scale: 1.5,
+                opacity: 0.8,
+                duration: 0.3,
+                stagger: 0.1,
+                ease: "power2.out"
+            });
+        });
+
+        button.addEventListener('mouseleave', () => {
+            gsap.to(floatingDots, {
+                scale: 1,
+                opacity: 0.6,
+                duration: 0.3,
+                stagger: 0.1,
+                ease: "power2.out"
+            });
+        });
+
+        // Enhanced floating animations for decorative elements
+        gsap.to(".live-site-cta::before", {
+            rotation: 360,
+            duration: 20,
+            ease: "none",
+            repeat: -1
+        });
+    </script>
+</body>
+</html>
