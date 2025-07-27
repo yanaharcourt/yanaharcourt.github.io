@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ghost of Tsushima: Jin Sakai's Journey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Preload images in HTML -->
+    <link rel="preload" href="img/Jin.png" as="image">
+    <link rel="preload" href="img/mountain.png" as="image">
+    <link rel="preload" href="img/mist.png" as="image">
+    <link rel="preload" href="img/tree-1.png" as="image">
+    <link rel="preload" href="img/tree-2.png" as="image">
+    <link rel="preload" href="img/tree-3.png" as="image">
+
+    
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-text">Dark Mode</span>
+    </button>
+
+    <!-- Navigation Dots -->
+    <nav class="nav">
+        <div class="nav-dot active" data-section="hero" data-tooltip="Hero"></div>
+        <div class="nav-dot" data-section="fall" data-tooltip="The Fall"></div>
+        <div class="nav-dot" data-section="ghost" data-tooltip="Birth of Ghost"></div>
+        <div class="nav-dot" data-section="techniques" data-tooltip="Shadow Techniques"></div>
+        <div class="nav-dot" data-section="legend" data-tooltip="The Legend"></div>
+    </nav>
+
+    <!-- ===============================
+    SECTION 1: HERO
+    =============================== -->
+    <section id="hero" class="section hero-section">
+        <!-- Background -->
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        
+        <!-- Decorative Japanese Characters -->
+        <div class="japanese-text" style="top: 10%; left: 5%;">侍</div>
+        <div class="japanese-text" style="bottom: 20%; right: 10%;">魂</div>
+        
+        <!-- Main Content -->
+        <div class="container hero-container">
+            <!-- Left Side: Text Content -->
+            <div class="hero-content">
+                <div class="hero-text fade-in">
+                    <div class="hero-subtitle">The Last Samurai of Tsushima</div>
+                    <h1 class="title-xl">JIN SAKAI</h1>
+                    <p class="subtitle">
+                        When honor becomes chains and traditions become a deadly trap, 
+                        a true warrior must choose between the code of ancestors and saving his homeland.
+                    </p>
+                    
+                    <!-- Character Stats -->
+                    <div class="hero-stats">
+                        <div class="stat-item fade-in" style="animation-delay: 0.3s;">
+                            <span class="stat-label">Clan</span>
+                            <span class="stat-value">Sakai</span>
+                        </div>
+                        <div class="stat-item fade-in" style="animation-delay: 0.5s;">
+                            <span class="stat-label">Weapon</span>
+                            <span class="stat-value">Sakai Katana</span>
+                        </div>
+                        <div class="stat-item fade-in" style="animation-delay: 0.7s;">
+                            <span class="stat-label">Status</span>
+                            <span class="stat-value">The Ghost</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Scroll Hint -->
+                    <div class="scroll-hint fade-in" style="animation-delay: 1s;">
+                        <span>Scroll down to discover his story</span>
+                        <div class="scroll-arrow">↓</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Side: Character Image -->
+            <div class="hero-character">
+                <img src="img/Jin.png" alt="Jin Sakai" class="character-img fade-in">
+                
+                <!-- Interactive Katana that follows mouse -->
+                <!-- <div class="interactive-katana" id="interactiveKatana">
+                    <div class="katana-blade"></div>
+                    <div class="katana-handle"></div>
+                    <div class="katana-trail"></div>
+                </div> -->
+                
+                <div class="interactive-katana" id="interactiveKatana">
+                    <div class="enso-circle"></div>
+                    <div class="smoke-trail"></div>
+                </div>
+                
+                <!-- Floating UI Elements around Character -->
+                <div class="floating-ui ui-honor fade-in" style="animation-delay: 1.2s;">
+                    <div class="ui-title">Honor</div>
+                    <div class="ui-bar">
+                        <div class="ui-progress honor-progress" style="width: 30%"></div>
+                    </div>
+                </div>
+                
+                <div class="floating-ui ui-ghost fade-in" style="animation-delay: 1.4s;">
+                    <div class="ui-title">Ghost Path</div>
+                    <div class="ui-bar">
+                        <div class="ui-progress ghost-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                
+                <div class="floating-ui ui-legend fade-in" style="animation-delay: 1.6s;">
+                    <div class="ui-title">Legend</div>
+                    <div class="ui-value">MAXIMUM</div>
+                </div>
+                
+                <!-- Particle System -->
+                <div class="particles-container" id="particlesContainer"></div>
+            </div>
+        </div>
+        
+        <!-- Animated Scroll that unfolds with page scroll -->
+        <div class="ancient-scroll" id="ancientScroll">
+            <div class="scroll-content">
+                <div class="scroll-text" id="scrollText"></div>
+            </div>
+        </div>
+        
+        <!-- Background Parallax Layers as HTML images -->
+        <img src="img/mountain.png" alt="Mountains" class="parallax-img layer-mountains" onerror="console.log('Failed to load mountain.png')">
+        <img src="img/mist.png" alt="Mist" class="parallax-img layer-mist" onerror="console.log('Failed to load mist.png'); this.style.display='none';">
+        <img src="img/tree-1.png" alt="Tree 1" class="parallax-img layer-trees-back-1">
+        <img src="img/tree-2.png" alt="Tree 2" class="parallax-img layer-trees-back-2">
+        <img src="img/tree-3.png" alt="Tree 3" class="parallax-img layer-trees-back-3">
+        <img src="img/tree-1.png" alt="Tree 1 Mid" class="parallax-img layer-trees-mid-1">
+        <img src="img/tree-3.png" alt="Tree 3 Mid" class="parallax-img layer-trees-mid-2">
+        <img src="img/tree-2.png" alt="Tree 2 Front" class="parallax-img layer-trees-front-1">
+        <img src="img/tree-3.png" alt="Tree 3 Front" class="parallax-img layer-trees-front-2">
+        <div class="sakura-container">
+            <div class="sakura-petal" style="left: 5%; animation-delay: 0s;"></div>
+            <div class="sakura-petal" style="left: 15%; animation-delay: 2s;"></div>
+            <div class="sakura-petal" style="left: 25%; animation-delay: 1s;"></div>
+            <div class="sakura-petal" style="left: 35%; animation-delay: 3s;"></div>
+            <div class="sakura-petal" style="left: 45%; animation-delay: 1.5s;"></div>
+            <div class="sakura-petal" style="left: 55%; animation-delay: 4s;"></div>
+            <div class="sakura-petal" style="left: 65%; animation-delay: 2.5s;"></div>
+            <div class="sakura-petal" style="left: 75%; animation-delay: 0.5s;"></div>
+            <div class="sakura-petal" style="left: 85%; animation-delay: 3.5s;"></div>
+            <div class="sakura-petal" style="left: 95%; animation-delay: 1.8s;"></div>
+        </div>
+    </section>
+
+    <!-- ===============================
+         SECTION 2: THE FALL
+         =============================== -->
+    <section id="fall" class="section">
+        <div class="container">
+            <h2>The Fall of Tsushima</h2>
+            <p>Content will be added in next part...</p>
+        </div>
+    </section>
+
+    <!-- ===============================
+         SECTION 3: BIRTH OF GHOST
+         =============================== -->
+    <section id="ghost" class="section">
+        <div class="container">
+            <h2>Birth of the Ghost</h2>
+            <p>Content will be added in next part...</p>
+        </div>
+    </section>
+
+    <!-- ===============================
+         SECTION 4: SHADOW TECHNIQUES
+         =============================== -->
+    <section id="techniques" class="section">
+        <div class="container">
+            <h2>Shadow Techniques</h2>
+            <p>Content will be added in next part...</p>
+        </div>
+    </section>
+
+    <!-- ===============================
+         SECTION 5: THE LEGEND
+         =============================== -->
+    <section id="legend" class="section">
+        <div class="container">
+            <h2>The Legend Lives On</h2>
+            <p>Content will be added in next part...</p>
+        </div>
+    </section>
+
+    <!-- Link to JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
