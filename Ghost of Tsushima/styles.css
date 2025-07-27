@@ -1434,7 +1434,7 @@ SCROLLBAR
         grid-template-columns: 1fr !important;
         display: flex !important;
         flex-direction: column !important;
-        justify-content: center !important;
+        justify-content: flex-start !important;
         align-items: center !important;
         text-align: center !important;
         padding: 1.5rem 20px !important;
@@ -1442,6 +1442,7 @@ SCROLLBAR
         gap: 1.2rem !important;
         position: relative !important;
         z-index: 10 !important;
+        padding-top: 4rem !important;
     }
     
     .hero-content {
@@ -1465,6 +1466,7 @@ SCROLLBAR
         align-items: center !important;
         z-index: 8 !important;
         position: relative !important;
+        margin-top: 2rem !important;
     }
     
     .character-img {
@@ -1475,7 +1477,6 @@ SCROLLBAR
         object-fit: contain !important;
         z-index: 8 !important;
         position: relative !important;
-        margin-top: 8rem !important;
     }
     
     .title-xl {
@@ -1567,7 +1568,7 @@ SCROLLBAR
 
     .layer-mountains {
         position: absolute !important;
-        top: 10% !important;
+        top: 25% !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         width: 100vw !important;
@@ -1576,11 +1577,13 @@ SCROLLBAR
         opacity: 0.4 !important;
         object-fit: cover !important;
         object-position: center bottom !important;
+        mask: linear-gradient(to bottom, white 0%, white 70%, transparent 100%) !important;
+        -webkit-mask: linear-gradient(to bottom, white 0%, white 70%, transparent 100%) !important;
     }
 
     .layer-mist {
         position: absolute !important;
-        top: 15% !important;
+        top: 30% !important;
         left: 50% !important;
         width: 120vw !important;
         height: 40vh !important;
@@ -1595,7 +1598,7 @@ SCROLLBAR
     .layer-trees-back-2,
     .layer-trees-back-3 {
         position: absolute !important;
-        bottom: 40vh !important;
+        bottom: 30vh !important;
         width: 150px !important;
         height: auto !important;
         max-height: 30vh !important;
@@ -1607,7 +1610,7 @@ SCROLLBAR
     .layer-trees-mid-1,
     .layer-trees-mid-2 {
         position: absolute !important;
-        bottom: 42vh !important;
+        bottom: 32vh !important;
         width: 120px !important;
         height: auto !important;
         max-height: 28vh !important;
@@ -1619,7 +1622,7 @@ SCROLLBAR
     .layer-trees-front-1,
     .layer-trees-front-2 {
         position: absolute !important;
-        bottom: 38vh !important;
+        bottom: 28vh !important;
         width: 180px !important;
         height: auto !important;
         max-height: 32vh !important;
