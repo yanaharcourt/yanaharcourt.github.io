@@ -1475,7 +1475,7 @@ SCROLLBAR
         object-fit: contain !important;
         z-index: 8 !important;
         position: relative !important;
-        margin-top: 2rem !important;
+        margin-top: 8rem !important;
     }
     
     .title-xl {
