@@ -1565,56 +1565,76 @@ SCROLLBAR
     }
 
     .layer-mountains {
-        opacity: 0.4 !important;
-        filter: brightness(0.6) !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100vw !important;
+        height: 50vh !important;
         z-index: 1 !important;
-        position: fixed !important;
-        min-height: 50vh !important;
+        opacity: 0.4 !important;
+        object-fit: cover !important;
+        object-position: center bottom !important;
     }
 
     .layer-mist {
-        opacity: 0.3 !important;
-        filter: brightness(0.7) !important;
+        position: absolute !important;
+        top: 10% !important;
+        left: 50% !important;
+        width: 120vw !important;
+        height: 40vh !important;
         z-index: 1 !important;
-        position: fixed !important;
+        opacity: 0.3 !important;
+        object-fit: cover !important;
+        object-position: center center !important;
+        animation: mistFloatMobile 25s ease-in-out infinite !important;
     }
 
     .layer-trees-back-1,
     .layer-trees-back-2,
     .layer-trees-back-3 {
-        opacity: 0.25 !important;
-        filter: brightness(0.4) !important;
+        position: absolute !important;
+        bottom: 40vh !important;
         width: 150px !important;
+        height: auto !important;
+        max-height: 30vh !important;
         z-index: 2 !important;
-        position: fixed !important;
+        opacity: 0.25 !important;
+        object-fit: contain !important;
     }
 
     .layer-trees-mid-1,
     .layer-trees-mid-2 {
-        opacity: 0.2 !important;
-        filter: brightness(0.35) !important;
+        position: absolute !important;
+        bottom: 42vh !important;
         width: 120px !important;
+        height: auto !important;
+        max-height: 28vh !important;
         z-index: 3 !important;
-        position: fixed !important;
+        opacity: 0.2 !important;
+        object-fit: contain !important;
     }
 
     .layer-trees-front-1,
     .layer-trees-front-2 {
-        opacity: 0.15 !important;
-        filter: brightness(0.3) !important;
+        position: absolute !important;
+        bottom: 38vh !important;
         width: 180px !important;
+        height: auto !important;
+        max-height: 32vh !important;
         z-index: 4 !important;
-        position: fixed !important;
+        opacity: 0.15 !important;
+        object-fit: contain !important;
     }
 
     .sakura-container {
-        opacity: 0.6 !important;
-        z-index: 5 !important;
-        position: fixed !important;
+        position: absolute !important;
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        height: 100% !important;
+        height: 60vh !important;
+        z-index: 5 !important;
+        opacity: 0.6 !important;
         pointer-events: none !important;
     }
 
@@ -1626,13 +1646,13 @@ SCROLLBAR
     }
 
     .particles-container {
-        opacity: 0.4 !important;
-        z-index: 5 !important;
         position: absolute !important;
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        height: 100% !important;
+        height: 50vh !important;
+        z-index: 5 !important;
+        opacity: 0.4 !important;
         pointer-events: none !important;
     }
 
@@ -1648,16 +1668,43 @@ SCROLLBAR
         animation: emberFloat 4s ease-out infinite !important;
     }
 
-    .japanese-text {
-        display: none !important;
-    }
-
-    .ancient-scroll {
-        display: none !important;
-    }
-
+    .japanese-text,
+    .ancient-scroll,
     .interactive-katana {
         display: none !important;
+    }
+
+    .hero-section {
+        position: relative !important;
+        overflow: hidden !important;
+    }
+
+    .hero-bg,
+    .hero-overlay {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    @keyframes mistFloatMobile {
+        0%, 100% { 
+            transform: translateX(-50%) translateY(0); 
+            opacity: 0.3;
+        }
+        25% { 
+            transform: translateX(-45%) translateY(-5px); 
+            opacity: 0.25;
+        }
+        50% { 
+            transform: translateX(-40%) translateY(0); 
+            opacity: 0.3;
+        }
+        75% { 
+            transform: translateX(-48%) translateY(5px); 
+            opacity: 0.25;
+        }
     }
 }
 
