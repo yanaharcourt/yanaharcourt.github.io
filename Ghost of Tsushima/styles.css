@@ -1438,11 +1438,12 @@ SCROLLBAR
         align-items: center !important;
         text-align: center !important;
         padding: 1.5rem 20px !important;
-        height: 100vh !important;
+        min-height: 100vh !important;
+        height: auto !important;
         gap: 1.2rem !important;
         position: relative !important;
         z-index: 10 !important;
-        padding-top: 4rem !important;
+        padding: 4rem 20px 3rem 20px !important;
     }
     
     .hero-content {
