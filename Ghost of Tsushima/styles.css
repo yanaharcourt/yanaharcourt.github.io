@@ -1468,13 +1468,14 @@ SCROLLBAR
     }
     
     .character-img {
-        max-width: 280px !important;
-        max-height: 35vh !important;
+        max-width: 320px !important;
+        max-height: 40vh !important;
         width: auto !important;
         height: auto !important;
         object-fit: contain !important;
         z-index: 8 !important;
         position: relative !important;
+        margin-top: 2rem !important;
     }
     
     .title-xl {
@@ -1566,7 +1567,7 @@ SCROLLBAR
 
     .layer-mountains {
         position: absolute !important;
-        top: 0 !important;
+        top: 10% !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         width: 100vw !important;
@@ -1579,7 +1580,7 @@ SCROLLBAR
 
     .layer-mist {
         position: absolute !important;
-        top: 10% !important;
+        top: 15% !important;
         left: 50% !important;
         width: 120vw !important;
         height: 40vh !important;
@@ -1708,6 +1709,83 @@ SCROLLBAR
     }
 }
 
+[data-theme="light"] {
+    @media (max-width: 480px) {
+        .hero-bg {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef) !important;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(248, 249, 250, 0.9) 0%, rgba(233, 236, 239, 0.8) 100%) !important;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef) !important;
+        }
+
+        .layer-mountains {
+            opacity: 0.3 !important;
+            filter: brightness(1.4) contrast(0.7) sepia(10%) !important;
+        }
+
+        .layer-mist {
+            opacity: 0.25 !important;
+            filter: brightness(1.6) contrast(0.6) !important;
+        }
+
+        .layer-trees-back-1,
+        .layer-trees-back-2,
+        .layer-trees-back-3,
+        .layer-trees-mid-1,
+        .layer-trees-mid-2,
+        .layer-trees-front-1,
+        .layer-trees-front-2 {
+            opacity: 0.15 !important;
+            filter: brightness(1.8) contrast(0.5) sepia(15%) !important;
+        }
+
+        .sakura-container {
+            opacity: 0.4 !important;
+        }
+
+        .particles-container {
+            opacity: 0.3 !important;
+        }
+
+        .title-xl,
+        .hero-subtitle,
+        .subtitle,
+        .stat-label,
+        .stat-value,
+        .scroll-hint {
+            color: #2c3e50 !important;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .hero-subtitle {
+            color: #8b7355 !important;
+        }
+
+        .stat-value {
+            color: #c9950a !important;
+        }
+        .layer-mountains {
+            position: absolute !important;
+            top: 10% !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 100vw !important;
+            height: 50vh !important;
+            z-index: 1 !important;
+            opacity: 0.4 !important;
+            object-fit: cover !important;
+            object-position: center bottom !important;
+            mask: linear-gradient(to bottom, white 0%, white 70%, transparent 100%) !important;
+            -webkit-mask: linear-gradient(to bottom, white 0%, white 70%, transparent 100%) !important;
+        }
+    }
+}
+
 /* ===============================
 ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ (до 390px)
 =============================== */
@@ -1720,7 +1798,7 @@ SCROLLBAR
     
     .character-img {
         max-width: 250px !important;
-        max-height: 32vh !important;
+        max-height: 50vh !important;
     }
     
     .title-xl {
@@ -1752,6 +1830,20 @@ SCROLLBAR
     .layer-mountains {
         opacity: 0.3 !important;
         min-height: 45vh !important;
+    }
+    .layer-mountains {
+        position: absolute !important;
+        top: 10% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100vw !important;
+        height: 50vh !important;
+        z-index: 1 !important;
+        opacity: 0.4 !important;
+        object-fit: cover !important;
+        object-position: center bottom !important;
+        mask: linear-gradient(to bottom, white 0%, white 70%, transparent 100%) !important;
+        -webkit-mask: linear-gradient(to bottom, white 0%, white 70%, transparent 100%) !important;
     }
 
     .layer-trees-back-1,
