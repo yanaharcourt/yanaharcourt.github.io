@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /* ===============================
-   THEME TOGGLE FUNCTIONALITY
-   =============================== */
+THEME TOGGLE FUNCTIONALITY
+=============================== */
 
 function initThemeToggle() {
     const themeToggle = document.getElementById('themeToggle');
@@ -62,15 +62,16 @@ function initThemeToggle() {
     document.documentElement.setAttribute('data-theme', currentTheme);
     
     updateThemeButton(currentTheme);
+    updateHeroImage(currentTheme); 
     
     themeToggle.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         
-        // Простое переключение без дополнительных эффектов
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeButton(newTheme);
+        updateHeroImage(newTheme); 
     });
     
     function updateThemeButton(theme) {
@@ -83,10 +84,26 @@ function initThemeToggle() {
         }
     }
 }
+/* ===============================
+HERO IMAGE THEME SWITCHING
+=============================== */
+
+function updateHeroImage(theme) {
+    const heroImage = document.querySelector('.character-img');
+    if (!heroImage) return;
+    
+    if (theme === 'light') {
+        heroImage.src = 'img/Jin-white.png';
+        heroImage.alt = 'Jin Sakai - Light Theme';
+    } else {
+        heroImage.src = 'img/Jin.png';
+        heroImage.alt = 'Jin Sakai - Dark Theme';
+    }
+}
 
 /* ===============================
-   NAVIGATION FUNCTIONALITY
-   =============================== */
+NAVIGATION FUNCTIONALITY
+=============================== */
 
 function initNavigation() {
     // Navigation between sections
@@ -133,8 +150,8 @@ function updateActiveNavDot() {
 }
 
 /* ===============================
-   ANIMATION SYSTEM
-   =============================== */
+ANIMATION SYSTEM
+=============================== */
 
 function initAnimations() {
     // Intersection Observer for fade-in animations
@@ -183,8 +200,8 @@ function animateProgressBar(progressBar) {
 }
 
 /* ===============================
-   VISUAL EFFECTS
-   =============================== */
+VISUAL EFFECTS
+=============================== */
 
 function initEffects() {
     initParallaxEffect();
@@ -196,8 +213,8 @@ function initEffects() {
 }
 
 /* ===============================
-   INTERACTIVE KATANA SYSTEM
-   =============================== */
+INTERACTIVE KATANA SYSTEM
+=============================== */
 
 /* function initInteractiveKatana() {
     const katana = document.getElementById('interactiveKatana');
@@ -350,8 +367,8 @@ trailStyle.textContent = `
 document.head.appendChild(trailStyle);
 
 /* ===============================
-   ANCIENT SCROLL SYSTEM
-   =============================== */
+ANCIENT SCROLL SYSTEM
+=============================== */
 
 function initAncientScroll() {
     const scroll = document.getElementById('ancientScroll');
@@ -400,8 +417,8 @@ function initAncientScroll() {
 }
 
 /* ===============================
-   PARTICLE SYSTEM
-   =============================== */
+PARTICLE SYSTEM
+=============================== */
 
 function initParticleSystem() {
     const container = document.getElementById('particlesContainer');
@@ -440,8 +457,8 @@ function createParticle() {
 }
 
 /* ===============================
-   ВОССТАНОВЛЕННЫЙ PARALLAX EFFECT
-   =============================== */
+PARALLAX EFFECT
+=============================== */
 
 function initParallaxEffect() {
     window.addEventListener('scroll', throttle(() => {
@@ -511,9 +528,10 @@ function initParallaxEffect() {
     }, 16));
 }
 
+
 /* ===============================
-   SAKURA PETALS
-   =============================== */
+SAKURA PETALS
+=============================== */
 
 function initSakuraPetals() {
     // Create additional dynamic ginkgo leaves
@@ -552,8 +570,8 @@ function createGinkgoLeaf() {
 }
 
 /* ===============================
-   MOUSE FOLLOW EFFECT
-   =============================== */
+MOUSE FOLLOW EFFECT
+=============================== */
 
 function initMouseFollowEffect() {
     // Subtle mouse follow effect for floating UI elements
@@ -571,8 +589,8 @@ function initMouseFollowEffect() {
 }
 
 /* ===============================
-   PAGE LOADING & PERFORMANCE
-   =============================== */
+PAGE LOADING & PERFORMANCE
+=============================== */
 
 function initPageLoad() {
     // Smooth page loading animation
@@ -624,8 +642,8 @@ function debugImageLoading() {
 }
 
 /* ===============================
-   UTILITY FUNCTIONS
-   =============================== */
+UTILITY FUNCTIONS
+=============================== */
 
 // Throttle function for performance optimization
 function throttle(func, limit) {
@@ -670,8 +688,8 @@ function scrollToElement(elementId, offset = 0) {
 }
 
 /* ===============================
-   KEYBOARD NAVIGATION
-   =============================== */
+KEYBOARD NAVIGATION
+=============================== */
 
 // Add keyboard navigation support
 document.addEventListener('keydown', (e) => {
@@ -729,8 +747,8 @@ function getCurrentSection() {
 }
 
 /* ===============================
-   ACCESSIBILITY ENHANCEMENTS
-   =============================== */
+ACCESSIBILITY ENHANCEMENTS
+=============================== */
 
 // Add focus indicators for keyboard navigation
 document.addEventListener('keydown', (e) => {
@@ -761,8 +779,8 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 }
 
 /* ===============================
-   ERROR HANDLING
-   =============================== */
+ERROR HANDLING
+=============================== */
 
 // Global error handler
 window.addEventListener('error', (e) => {
@@ -794,8 +812,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ===============================
-   PERFORMANCE MONITORING
-   =============================== */
+PERFORMANCE MONITORING
+=============================== */
 
 // Simple performance monitoring
 if ('performance' in window) {
@@ -807,3 +825,8 @@ if ('performance' in window) {
         }, 0);
     });
 }
+
+
+/* ===============================
+SECTION 2: THE FALL
+=============================== */
