@@ -17,7 +17,7 @@ GHOST OF TSUSHIMA: JIN SAKAI STYLES
     --text-muted: #a0a0a0;
     --shadow-color: rgba(0, 0, 0, 0.7);
     --gradient-sunset: linear-gradient(135deg, #ff6b6b, #ffa500, #ffeb3b);
-    --gradient-night: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    --gradient-night: linear-gradient(135deg, #1a1a1a, #2a2a2a, #000000);
     --card-bg: rgba(20, 20, 30, 0.9);
     --border-color: rgba(255, 255, 255, 0.1);
 }
