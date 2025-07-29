@@ -1587,7 +1587,7 @@ SCROLLBAR
 
     .layer-mist {
         position: absolute !important;
-        top: 30% !important;
+        top: 10% !important;
         left: 50% !important;
         width: 120vw !important;
         height: 40vh !important;
@@ -1663,7 +1663,7 @@ SCROLLBAR
     .sakura-petal:nth-child(8) { animation-delay: 0.4s !important; }
     .sakura-petal:nth-child(9) { animation-delay: 2.5s !important; }
     .sakura-petal:nth-child(10) { animation-delay: 1.3s !important; }
-    
+
     .particles-container {
         position: absolute !important;
         top: 0 !important;
