@@ -8,8 +8,24 @@ GHOST OF TSUSHIMA: JIN SAKAI STYLES
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'HanyiSentyPagoda Regular';
+    src: url('./HanyiSentyPagoda Regular/HanyiSentyPagoda Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0000-FFFF;
+}
+
+@font-face {
+    font-family: 'HanyiSentyPagoda Regular';
+    src: url("./HanyiSentyPagoda Regular/HanyiSentyPagoda Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
 :root {
-    --primary-color: #1a1a1a;
+    --primary-color: #0B0B13;
     --secondary-color: #2a2a2a;
     --accent-red: #cc2936;
     --accent-gold: #d4af37;
@@ -17,7 +33,7 @@ GHOST OF TSUSHIMA: JIN SAKAI STYLES
     --text-muted: #a0a0a0;
     --shadow-color: rgba(0, 0, 0, 0.7);
     --gradient-sunset: linear-gradient(135deg, #ff6b6b, #ffa500, #ffeb3b);
-    --gradient-night: linear-gradient(135deg, #1a1a1a, #2a2a2a, #000000);
+    --gradient-night: #0B0B13;
     --card-bg: rgba(20, 20, 30, 0.9);
     --border-color: rgba(255, 255, 255, 0.1);
 }
@@ -50,9 +66,64 @@ body.loaded {
     transition: opacity 0.5s ease;
 }
 
-body, * {
-    cursor: none !important;
+body {
+    cursor: none; 
 }
+
+/* КАСТОМНЫЙ КУРСОР - БОЛЬШОЙ КРУГ */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: 1px solid var(--accent-gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: transform 0.1s ease;
+    transform: translate(-50%, -50%);
+}
+
+/* МАЛЕНЬКИЙ ЦЕНТРАЛЬНЫЙ КРУГ */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transition: transform 0.05s ease;
+    transform: translate(-50%, -50%);
+}
+
+/* УКАЗАТЕЛЬНЫЙ КУРСОР ДЛЯ ИНТЕРАКТИВНЫХ ЭЛЕМЕНТОВ */
+button,
+.nav-dot,
+.theme-toggle,
+a,
+[role="button"],
+.floating-ui,
+input,
+textarea,
+select {
+    cursor: pointer !important;
+}
+
+/* АНИМАЦИИ ПРИ НАВЕДЕНИИ НА КНОПКИ */
+button:hover::after,
+.nav-dot:hover::after,
+.theme-toggle:hover::after {
+    transform: scale(1.5);
+}
+
 /* ===============================
 THEME TOGGLE
 =============================== */
@@ -265,7 +336,7 @@ DECORATIVE ELEMENTS
 =============================== */
 
 .japanese-text {
-    font-family: 'Chinese Cally TFB';
+    font-family: 'HanyiSentyPagoda', 'HanyiSentyPagoda Regular', 'Noto Sans JP', serif !important;
     position: absolute;
     font-size: 8rem;
     font-weight: 100;
@@ -331,6 +402,18 @@ HERO SECTION
     backface-visibility: hidden;
 }
 
+[data-theme="dark"] .hero-overlay,
+:root:not([data-theme="light"]) .hero-overlay {
+    display: none !important;
+}
+
+[data-theme="dark"] .hero-overlay,
+[data-theme="dark"] .hero-bg,
+:root:not([data-theme="light"]) .hero-overlay,
+:root:not([data-theme="light"]) .hero-bg {
+    display: none !important;
+}
+
 [data-theme="light"] .hero-overlay {
     background: rgba(255, 255, 255, 0.98) !important;
 }
@@ -363,8 +446,6 @@ HERO SECTION
     padding-right: 1rem;
     max-width: none;
 }
-
-
 
 .hero-character {
     position: relative;
@@ -2089,7 +2170,793 @@ SCROLLBAR
     z-index: 20 !important;
 }
 
+
 /* ===============================
 SECTION 2: THE FALL
 =============================== */
+.fall-section {
+    height: 100vh;
+    background: #0B0B13;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 8;
+}
 
+.fall-title-container {
+    text-align: center;
+    z-index: 100;
+}
+
+.fall-japanese-title {
+    font-family: 'HanyiSentyPagoda Regular', 'Noto Sans JP', serif;
+    font-size: 120px;
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 60px;
+    line-height: 1;
+}
+
+.japanese-char {
+    display: block;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fall-english-title {
+    font-family: 'Futura', 'Arial', sans-serif;
+    font-size: 60px;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: 4px;
+    position: relative;
+}
+
+.fall-english-title::before,
+.fall-english-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #ffffff;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fall-english-title::before {
+    top: -15px;
+}
+
+.fall-english-title::after {
+    bottom: -15px;
+}
+
+.fall-letter {
+    display: inline-block;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.petal-particle {
+    position: fixed;
+    width: 6px;
+    height: 10px;
+    background: linear-gradient(45deg, #ffffff 0%, #f8f8f8 50%, #f0f0f0 100%);
+    border-radius: 0 80% 0 80%;
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 200;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.petal-particle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 6px;
+    background: rgba(200, 200, 200, 0.3);
+    transform: translate(-50%, -50%);
+}
+
+@keyframes petalFlySmooth1 {
+    0% {
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(450px) translateY(-80px) rotate(720deg) scale(0.2);
+        opacity: 0;
+    }
+}
+
+@keyframes petalFlySmooth2 {
+    0% {
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(420px) translateY(-120px) rotate(680deg) scale(0.2);
+        opacity: 0;
+    }
+}
+
+@keyframes petalFlySmooth3 {
+    0% {
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(480px) translateY(-60px) rotate(750deg) scale(0.2);
+        opacity: 0;
+    }
+}
+
+@keyframes petalFlyWind1 {
+    0% {
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+        opacity: 0.9;
+    }
+    20% {
+        transform: translateX(60px) translateY(-15px) rotate(144deg) scale(0.95);
+        opacity: 0.8;
+    }
+    40% {
+        transform: translateX(140px) translateY(-5px) rotate(288deg) scale(0.85);
+        opacity: 0.6;
+    }
+    60% {
+        transform: translateX(240px) translateY(-40px) rotate(432deg) scale(0.7);
+        opacity: 0.4;
+    }
+    80% {
+        transform: translateX(360px) translateY(-20px) rotate(576deg) scale(0.5);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateX(500px) translateY(-80px) rotate(720deg) scale(0.2);
+        opacity: 0;
+    }
+}
+
+@keyframes petalFlyWind2 {
+    0% {
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+        opacity: 0.9;
+    }
+    25% {
+        transform: translateX(80px) translateY(-25px) rotate(180deg) scale(0.9);
+        opacity: 0.75;
+    }
+    50% {
+        transform: translateX(180px) translateY(-10px) rotate(360deg) scale(0.8);
+        opacity: 0.5;
+    }
+    75% {
+        transform: translateX(300px) translateY(-50px) rotate(540deg) scale(0.6);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateX(450px) translateY(-30px) rotate(720deg) scale(0.2);
+        opacity: 0;
+    }
+}
+
+@keyframes petalFlyWind3 {
+    0% {
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+        opacity: 0.9;
+    }
+    15% {
+        transform: translateX(45px) translateY(-30px) rotate(108deg) scale(0.95);
+        opacity: 0.8;
+    }
+    35% {
+        transform: translateX(120px) translateY(-8px) rotate(252deg) scale(0.85);
+        opacity: 0.65;
+    }
+    55% {
+        transform: translateX(220px) translateY(-45px) rotate(396deg) scale(0.75);
+        opacity: 0.45;
+    }
+    75% {
+        transform: translateX(340px) translateY(-25px) rotate(540deg) scale(0.55);
+        opacity: 0.25;
+    }
+    100% {
+        transform: translateX(480px) translateY(-70px) rotate(684deg) scale(0.2);
+        opacity: 0;
+    }
+}
+
+.fall-letter.scatter,
+.japanese-char.scatter {
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fall-english-title.scatter::before,
+.fall-english-title.scatter::after {
+    opacity: 0;
+}
+
+/* ===============================
+СТИЛИ ДЛЯ СВЕТЛОЙ ТЕМЫ - ДОБАВИТЬ В КОНЕЦ CSS
+=============================== */
+
+[data-theme="light"] .fall-section {
+    background: #ffffff;
+}
+
+[data-theme="light"] .fall-japanese-title {
+    color: #1a1a1a;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .japanese-char {
+    color: #1a1a1a;
+}
+
+[data-theme="light"] .fall-english-title {
+    color: #1a1a1a;
+}
+
+[data-theme="light"] .fall-english-title::before,
+[data-theme="light"] .fall-english-title::after {
+    background: #1a1a1a;
+}
+
+[data-theme="light"] .fall-letter {
+    color: #1a1a1a;
+}
+
+[data-theme="light"] .petal-particle {
+    background: linear-gradient(45deg, #2a2a2a 0%, #404040 50%, #555555 100%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+[data-theme="light"] .petal-particle::before {
+    background: rgba(100, 100, 100, 0.6);
+}
+
+/* ===============================
+АДАПТИВНЫЕ СТИЛИ ДЛЯ FALL СЕКЦИИ
+=============================== */
+
+/* Планшеты (768px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .fall-japanese-title {
+        font-size: 100px;
+        margin-bottom: 50px;
+    }
+    
+    .fall-english-title {
+        font-size: 50px;
+        letter-spacing: 3px;
+    }
+    
+    .fall-english-title::before {
+        top: -12px;
+    }
+    
+    .fall-english-title::after {
+        bottom: -12px;
+    }
+}
+
+/* Маленькие планшеты (481px - 768px) */
+@media (max-width: 768px) and (min-width: 481px) {
+    .fall-japanese-title {
+        font-size: 80px;
+        margin-bottom: 40px;
+        line-height: 0.9;
+    }
+    
+    .fall-english-title {
+        font-size: 40px;
+        letter-spacing: 2px;
+    }
+    
+    .fall-english-title::before {
+        top: -10px;
+    }
+    
+    .fall-english-title::after {
+        bottom: -10px;
+    }
+    
+    .petal-particle {
+        width: 5px;
+        height: 8px;
+    }
+}
+
+/* Мобильные устройства (320px - 480px) */
+@media (max-width: 480px) {
+    .fall-section {
+        padding: 20px;
+    }
+    
+    .fall-title-container {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+    
+    .fall-japanese-title {
+        font-size: clamp(50px, 15vw, 70px);
+        margin-bottom: 30px;
+        line-height: 0.9;
+    }
+    
+    .fall-english-title {
+        font-size: clamp(24px, 8vw, 32px);
+        letter-spacing: 1px;
+        line-height: 1.2;
+    }
+    
+    .fall-english-title::before {
+        top: -8px;
+    }
+    
+    .fall-english-title::after {
+        bottom: -8px;
+    }
+    
+    .petal-particle {
+        width: 4px;
+        height: 6px;
+    }
+    
+    .petal-particle::before {
+        width: 0.5px;
+        height: 4px;
+    }
+    
+    @keyframes petalFlySmooth1 {
+        0% {
+            transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+            opacity: 0.9;
+        }
+        100% {
+            transform: translateX(250px) translateY(-60px) rotate(720deg) scale(0.2);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes petalFlySmooth2 {
+        0% {
+            transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+            opacity: 0.9;
+        }
+        100% {
+            transform: translateX(220px) translateY(-80px) rotate(680deg) scale(0.2);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes petalFlySmooth3 {
+        0% {
+            transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+            opacity: 0.9;
+        }
+        100% {
+            transform: translateX(280px) translateY(-40px) rotate(750deg) scale(0.2);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes petalFlyWind1 {
+        0% {
+            transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+            opacity: 0.9;
+        }
+        20% {
+            transform: translateX(40px) translateY(-10px) rotate(144deg) scale(0.95);
+            opacity: 0.8;
+        }
+        40% {
+            transform: translateX(80px) translateY(-5px) rotate(288deg) scale(0.85);
+            opacity: 0.6;
+        }
+        60% {
+            transform: translateX(140px) translateY(-25px) rotate(432deg) scale(0.7);
+            opacity: 0.4;
+        }
+        80% {
+            transform: translateX(200px) translateY(-15px) rotate(576deg) scale(0.5);
+            opacity: 0.2;
+        }
+        100% {
+            transform: translateX(280px) translateY(-50px) rotate(720deg) scale(0.2);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes petalFlyWind2 {
+        0% {
+            transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+            opacity: 0.9;
+        }
+        25% {
+            transform: translateX(50px) translateY(-18px) rotate(180deg) scale(0.9);
+            opacity: 0.75;
+        }
+        50% {
+            transform: translateX(100px) translateY(-8px) rotate(360deg) scale(0.8);
+            opacity: 0.5;
+        }
+        75% {
+            transform: translateX(180px) translateY(-35px) rotate(540deg) scale(0.6);
+            opacity: 0.3;
+        }
+        100% {
+            transform: translateX(250px) translateY(-20px) rotate(720deg) scale(0.2);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes petalFlyWind3 {
+        0% {
+            transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+            opacity: 0.9;
+        }
+        15% {
+            transform: translateX(30px) translateY(-20px) rotate(108deg) scale(0.95);
+            opacity: 0.8;
+        }
+        35% {
+            transform: translateX(70px) translateY(-5px) rotate(252deg) scale(0.85);
+            opacity: 0.65;
+        }
+        55% {
+            transform: translateX(130px) translateY(-30px) rotate(396deg) scale(0.75);
+            opacity: 0.45;
+        }
+        75% {
+            transform: translateX(190px) translateY(-18px) rotate(540deg) scale(0.55);
+            opacity: 0.25;
+        }
+        100% {
+            transform: translateX(270px) translateY(-45px) rotate(684deg) scale(0.2);
+            opacity: 0;
+        }
+    }
+}
+
+/* Очень маленькие экраны (до 360px) */
+@media (max-width: 360px) {
+    .fall-section {
+        padding: 15px;
+    }
+    
+    .fall-title-container {
+        max-width: 280px;
+    }
+    
+    .fall-japanese-title {
+        font-size: clamp(40px, 18vw, 60px);
+        margin-bottom: 25px;
+    }
+    
+    .fall-english-title {
+        font-size: clamp(20px, 9vw, 28px);
+        letter-spacing: 0.5px;
+    }
+    
+    .fall-english-title::before {
+        top: -6px;
+    }
+    
+    .fall-english-title::after {
+        bottom: -6px;
+    }
+    
+    .petal-particle {
+        width: 3px;
+        height: 5px;
+    }
+    
+    .petal-particle::before {
+        display: none;
+    }
+}
+
+/* Горизонтальная ориентация мобильных */
+@media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
+    .fall-section {
+        padding: 10px;
+    }
+    
+    .fall-japanese-title {
+        font-size: clamp(35px, 12vw, 50px);
+        margin-bottom: 20px;
+    }
+    
+    .fall-english-title {
+        font-size: clamp(18px, 6vw, 25px);
+        letter-spacing: 1px;
+    }
+    
+    .fall-english-title::before {
+        top: -5px;
+    }
+    
+    .fall-english-title::after {
+        bottom: -5px;
+    }
+}
+
+/* ===============================
+SECTION 2-2: THE FALL
+=============================== */
+/* ===============================
+PHOTO STORY SECTION - ПОЛНЫЕ СТИЛИ
+=============================== */
+
+.photo-story-section {
+    height: 500vh;
+    position: relative;
+    background: var(--primary-color);
+    z-index: 10;
+    overflow: hidden;
+}
+
+/* Фиксированные изображения - ИСПРАВЛЯЕМ НАЕЗД */
+.story-images {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1; /* Низкий z-index чтобы не наезжать */
+}
+
+.story-image {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.02);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+    border-radius: 8px;
+}
+
+.story-image.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Читаемые заголовки позади фото */
+.story-titles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.story-title {
+    position: absolute;
+    font-size: 110px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.4);
+    text-align: left;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    pointer-events: none;
+    user-select: none;
+    text-shadow: 
+        3px 3px 15px rgba(0, 0, 0, 0.9),
+        0px 0px 30px rgba(0, 0, 0, 0.8),
+        0px 0px 50px rgba(0, 0, 0, 0.6);
+    mix-blend-mode: screen;
+    top: 0%;
+    left: 60px;
+}
+
+.story-title.visible {
+    opacity: 1;
+}
+
+/* Тексты поверх фото */
+.story-texts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.text-group {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.text-group.visible {
+    opacity: 1;
+}
+
+.story-text {
+    position: absolute;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 500;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-shadow: 
+        2px 2px 12px rgba(0, 0, 0, 0.9),
+        0px 0px 25px rgba(0, 0, 0, 0.8);
+}
+
+.story-text.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Прогресс бар */
+.scroll-progress {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1px;
+    z-index: 20;
+    opacity: 0.7;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--accent-gold);
+    border-radius: 1px;
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+/* Нежные лепестки для плавного создания фото */
+.create-petal {
+    position: fixed;
+    width: 4px;
+    height: 7px;
+    background: linear-gradient(45deg, #ffffff 0%, #f8f8f8 50%, #f0f0f0 100%);
+    border-radius: 0 60% 0 60%;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 50;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.create-petal::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.5px;
+    height: 3px;
+    background: rgba(200, 200, 200, 0.4);
+    transform: translate(-50%, -50%);
+    border-radius: 1px;
+}
+
+/* Светлая тема */
+[data-theme="light"] .photo-story-section {
+    background: #ffffff;
+}
+
+[data-theme="light"] .story-title {
+    color: rgba(0, 0, 0, 0.4);
+    text-shadow: 
+        2px 2px 15px rgba(255, 255, 255, 0.9),
+        0px 0px 25px rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="light"] .story-text {
+    color: #ffffff;
+    text-shadow: 
+        2px 2px 15px rgba(0, 0, 0, 0.9),
+        0px 0px 30px rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="light"] .create-petal {
+    background: linear-gradient(45deg, #2a2a2a 0%, #404040 50%, #555555 100%);
+}
+
+[data-theme="light"] .create-petal::before {
+    background: rgba(100, 100, 100, 0.7);
+}
+
+/* Адаптивные стили */
+@media (max-width: 1024px) {
+    .story-title {
+        font-size: 90px;
+        left: 40px;
+    }
+    
+    .story-text {
+        font-size: clamp(1.6rem, 5vw, 2.8rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .photo-story-section {
+        height: 400vh;
+    }
+    
+    .story-title {
+        font-size: 70px;
+        left: 30px;
+        line-height: 0.9;
+    }
+    
+    .story-text {
+        font-size: clamp(1.3rem, 6vw, 2.2rem);
+        padding: 0 1rem;
+    }
+    
+    .scroll-progress {
+        width: 150px;
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .story-title {
+        font-size: 50px;
+        left: 20px;
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .story-text {
+        font-size: clamp(1.1rem, 7vw, 1.8rem);
+        padding: 0 0.5rem;
+    }
+    
+    .scroll-progress {
+        width: 120px;
+        bottom: 15px;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
+    .story-title {
+        font-size: 40px;
+        left: 15px;
+    }
+    
+    .story-text {
+        font-size: clamp(1rem, 4vw, 1.5rem);
+    }
+    
+    .scroll-progress {
+        bottom: 10px;
+        width: 100px;
+    }
+}

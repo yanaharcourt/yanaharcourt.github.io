@@ -1,7 +1,7 @@
 /* ==================================================
-   GHOST OF TSUSHIMA: JIN SAKAI WEBSITE JAVASCRIPT
-   ФИНАЛЬНАЯ ИДЕАЛЬНАЯ ВЕРСИЯ С ВОССТАНОВЛЕННЫМ ПАРАЛЛАКСОМ
-   ================================================== */
+GHOST OF TSUSHIMA: JIN SAKAI WEBSITE JAVASCRIPT
+ФИНАЛЬНАЯ ИДЕАЛЬНАЯ ВЕРСИЯ С ВОССТАНОВЛЕННЫМ ПАРАЛЛАКСОМ
+================================================== */
 
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
@@ -213,57 +213,10 @@ function initEffects() {
 }
 
 /* ===============================
-INTERACTIVE KATANA SYSTEM
+CURSOR
 =============================== */
 
 /* function initInteractiveKatana() {
-    const katana = document.getElementById('interactiveKatana');
-    const heroSection = document.getElementById('hero');
-    
-    if (!katana || !heroSection) return;
-    
-    let isVisible = false;
-    
-    // Show katana when mouse enters hero section
-    heroSection.addEventListener('mouseenter', () => {
-        katana.classList.add('visible');
-        isVisible = true;
-    });
-    
-    heroSection.addEventListener('mouseleave', () => {
-        katana.classList.remove('visible');
-        isVisible = false;
-    });
-    
-    // Katana follows mouse with smooth animation
-    heroSection.addEventListener('mousemove', (e) => {
-        if (!isVisible) return;
-        
-        const rect = heroSection.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        // Calculate angle based on mouse movement
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const angle = Math.atan2(y - centerY, x - centerX) * (180 / Math.PI);
-        
-        // Position katana exactly at cursor
-        katana.style.left = x + 'px';
-        katana.style.top = y + 'px';
-        katana.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-        
-        // Change katana color based on scroll position
-        const scrollProgress = window.scrollY / window.innerHeight;
-        if (scrollProgress > 0.3) {
-            katana.classList.add('blood-mode');
-        } else {
-            katana.classList.remove('blood-mode');
-        }
-    });
-} */
-
-    function initInteractiveKatana() {
     const enso = document.getElementById('interactiveKatana');
     const heroSection = document.getElementById('hero');
     
@@ -364,7 +317,82 @@ trailStyle.textContent = `
         }
     }
 `;
-document.head.appendChild(trailStyle);
+document.head.appendChild(trailStyle); */
+
+function initCustomCursor() {
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    // Отслеживаем движение мыши
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Оба курсора двигаются вместе - БЕЗ ЗАДЕРЖКИ
+        document.documentElement.style.setProperty('--cursor-x', mouseX + 'px');
+        document.documentElement.style.setProperty('--cursor-y', mouseY + 'px');
+        document.documentElement.style.setProperty('--cursor-small-x', mouseX + 'px');
+        document.documentElement.style.setProperty('--cursor-small-y', mouseY + 'px');
+    });
+    
+    // Эффекты при клике
+    document.addEventListener('mousedown', () => {
+        document.body.classList.add('cursor-clicking');
+    });
+    
+    document.addEventListener('mouseup', () => {
+        document.body.classList.remove('cursor-clicking');
+    });
+    
+    // Скрываем курсор при покидании окна
+    document.addEventListener('mouseleave', () => {
+        document.body.classList.add('cursor-hidden');
+    });
+    
+    document.addEventListener('mouseenter', () => {
+        document.body.classList.remove('cursor-hidden');
+    });
+}
+
+// Добавляем CSS переменные для позиции курсора
+const cursorStyles = `
+    body::after {
+        left: var(--cursor-x, 0px);
+        top: var(--cursor-y, 0px);
+        transition: none !important; /* убираем плавность */
+    }
+    
+    body::before {
+        left: var(--cursor-small-x, 0px);
+        top: var(--cursor-small-y, 0px);
+        transition: none !important; /* убираем плавность */
+    }
+    
+    .cursor-clicking body::after {
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    
+    .cursor-hidden body::after,
+    .cursor-hidden body::before {
+        opacity: 0;
+    }
+    
+    /* Увеличение курсора на кнопках */
+    button:hover ~ body::after,
+    .nav-dot:hover ~ body::after,
+    .theme-toggle:hover ~ body::after {
+        transform: translate(-50%, -50%) scale(1.5);
+        border-color: var(--accent-red);
+    }
+`;
+
+// Добавляем стили
+const styleSheet = document.createElement('style');
+styleSheet.textContent = cursorStyles;
+document.head.appendChild(styleSheet);
+
+// Инициализируем после загрузки страницы
+document.addEventListener('DOMContentLoaded', initCustomCursor);
 
 /* ===============================
 ANCIENT SCROLL SYSTEM
@@ -460,7 +488,7 @@ function createParticle() {
 PARALLAX EFFECT
 =============================== */
 
-function initParallaxEffect() {
+/* function initParallaxEffect() {
     window.addEventListener('scroll', throttle(() => {
         const scrolled = window.pageYOffset;
         const scrollProgress = scrolled / window.innerHeight;
@@ -526,8 +554,70 @@ function initParallaxEffect() {
             ui.style.transform = baseTransform + ` translateY(${scrolled * speed}px)`;
         });
     }, 16));
-}
+} */
 
+function initParallaxEffect() {
+    window.addEventListener('scroll', throttle(() => {
+        const scrolled = window.pageYOffset;
+        const scrollProgress = scrolled / window.innerHeight;
+        
+        // ПАРАЛЛАКС ДЛЯ ОБЛАКОВ
+        const mist = document.querySelector('.layer-mist');
+        if (mist) {
+            const baseTransform = `translateX(-50%) translateY(${scrolled * 0.4}px)`;
+            mist.style.transform = baseTransform;
+            // НЕ МЕНЯЕМ OPACITY - пусть остается как есть
+        }
+        
+        // ДЕРЕВЬЯ 
+        const treesBack = document.querySelectorAll('[class*="layer-trees-back"]');
+        const treesMid = document.querySelectorAll('[class*="layer-trees-mid"]');
+        const treesFront = document.querySelectorAll('[class*="layer-trees-front"]');
+        
+        // Trees back layer
+        treesBack.forEach((tree, index) => {
+            if (tree) {
+                tree.style.transform = `translateY(${scrolled * (0.15 + index * 0.02)}px)`;
+            }
+        });
+        
+        // Trees mid layer
+        treesMid.forEach((tree, index) => {
+            if (tree) {
+                tree.style.transform = `translateY(${scrolled * (0.25 + index * 0.02)}px)`;
+            }
+        });
+        
+        // Trees front layer
+        treesFront.forEach((tree, index) => {
+            if (tree) {
+                tree.style.transform = `translateY(${scrolled * (0.35 + index * 0.02)}px)`;
+            }
+        });
+        
+        // Japanese characters parallax with rotation
+        const japaneseChars = document.querySelectorAll('.japanese-text');
+        japaneseChars.forEach((char, index) => {
+            const speed = 0.08 + (index * 0.03);
+            const rotation = scrolled * 0.01 * (index + 1);
+            char.style.transform = `translateY(${scrolled * speed}px) rotate(${rotation}deg)`;
+        });
+        
+        // Character image subtle movement
+        const characterImg = document.querySelector('.character-img');
+        if (characterImg) {
+            characterImg.style.transform = `translateY(${scrolled * -0.05}px)`;
+        }
+        
+        // Floating UI elements parallax
+        const floatingUIs = document.querySelectorAll('.floating-ui');
+        floatingUIs.forEach((ui, index) => {
+            const speed = 0.03 + (index * 0.01);
+            const baseTransform = ui.style.transform.replace(/translateY\([^)]*\)/g, '');
+            ui.style.transform = baseTransform + ` translateY(${scrolled * speed}px)`;
+        });
+    }, 16));
+}
 
 /* ===============================
 SAKURA PETALS
@@ -828,5 +918,667 @@ if ('performance' in window) {
 
 
 /* ===============================
-SECTION 2: THE FALL
+SECTION 2: THE FALL - transition screen
 =============================== */
+
+function initFallAnimation() {
+    const fallSection = document.getElementById('fall');
+    const titleContainer = document.querySelector('.fall-title-container');
+    const englishTitle = document.querySelector('.fall-english-title');
+    
+    if (!fallSection || !titleContainer) return;
+    
+    let hasScattered = false;
+    let scatterTimeout;
+    let resetTimeout;
+    let isAnimating = false; // Предотвращаем множественные анимации
+    
+    function createPetalsFromElement(element) {
+        const rect = element.getBoundingClientRect();
+        const petalCount = 10 + Math.random() * 8;
+        
+        for (let i = 0; i < petalCount; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'petal-particle';
+            
+            const startX = rect.left + Math.random() * rect.width;
+            const startY = rect.top + Math.random() * rect.height;
+            
+            petal.style.left = startX + 'px';
+            petal.style.top = startY + 'px';
+            
+            const windAnimations = ['petalFlyWind1', 'petalFlyWind2', 'petalFlyWind3'];
+            const smoothAnimations = ['petalFlySmooth1', 'petalFlySmooth2', 'petalFlySmooth3'];
+            
+            const useWind = Math.random() > 0.3;
+            const animationSet = useWind ? windAnimations : smoothAnimations;
+            const randomAnimation = animationSet[Math.floor(Math.random() * animationSet.length)];
+            
+            const duration = 2.2 + Math.random() * 0.6;
+            const delay = Math.random() * 0.3;
+            
+            petal.style.animation = `${randomAnimation} ${duration}s ease-out ${delay}s forwards`;
+            
+            const petalColors = [
+                'linear-gradient(45deg, #ffffff 0%, #f8f8f8 50%, #f0f0f0 100%)',
+                'linear-gradient(45deg, #f9f9f9 0%, #e8e8e8 50%, #ddd 100%)',
+                'linear-gradient(45deg, #fff 0%, #f5f5f5 50%, #eee 100%)',
+                'linear-gradient(45deg, #fafafa 0%, #f0f0f0 50%, #e5e5e5 100%)'
+            ];
+            petal.style.background = petalColors[Math.floor(Math.random() * petalColors.length)];
+            
+            const scale = 0.7 + Math.random() * 0.6;
+            petal.style.transform = `scale(${scale})`;
+            
+            document.body.appendChild(petal);
+            
+            setTimeout(() => {
+                if (petal.parentNode) {
+                    petal.parentNode.removeChild(petal);
+                }
+            }, 3500);
+        }
+    }
+    
+    function createPetalsFromLines() {
+        const rect = englishTitle.getBoundingClientRect();
+        
+        for (let line = 0; line < 2; line++) {
+            const yPos = line === 0 ? rect.top - 15 : rect.bottom + 15;
+            
+            for (let i = 0; i < 15; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal-particle';
+                
+                const startX = rect.left + (rect.width / 15) * i + Math.random() * 12;
+                const startY = yPos + Math.random() * 4 - 2;
+                
+                petal.style.left = startX + 'px';
+                petal.style.top = startY + 'px';
+                
+                const windAnimations = ['petalFlyWind1', 'petalFlyWind2', 'petalFlyWind3'];
+                const randomAnimation = windAnimations[Math.floor(Math.random() * windAnimations.length)];
+                
+                const duration = 2.4 + Math.random() * 0.4;
+                const delay = Math.random() * 0.4;
+                
+                petal.style.animation = `${randomAnimation} ${duration}s ease-out ${delay}s forwards`;
+                
+                const scale = 0.6 + Math.random() * 0.4;
+                petal.style.transform = `scale(${scale})`;
+                
+                document.body.appendChild(petal);
+                
+                setTimeout(() => {
+                    if (petal.parentNode) {
+                        petal.parentNode.removeChild(petal);
+                    }
+                }, 3500);
+            }
+        }
+    }
+    
+    function scatterTitle() {
+        if (hasScattered || isAnimating) return;
+        
+        isAnimating = true;
+        hasScattered = true;
+        
+        // Отменяем любой pending reset
+        if (resetTimeout) {
+            clearTimeout(resetTimeout);
+            resetTimeout = null;
+        }
+        
+        console.log('🌸 Title scattering...');
+        
+        scatterTimeout = setTimeout(() => {
+            const japaneseChars = document.querySelectorAll('.japanese-char');
+            japaneseChars.forEach((char, index) => {
+                setTimeout(() => {
+                    createPetalsFromElement(char);
+                    char.classList.add('scatter');
+                }, index * 250);
+            });
+            
+            setTimeout(() => {
+                createPetalsFromLines();
+                englishTitle.classList.add('scatter');
+            }, 500);
+            
+            const letters = document.querySelectorAll('.fall-letter');
+            letters.forEach((letter, index) => {
+                setTimeout(() => {
+                    createPetalsFromElement(letter);
+                    letter.classList.add('scatter');
+                }, 800 + index * 60);
+            });
+            
+            setTimeout(() => {
+                titleContainer.style.opacity = '0';
+                titleContainer.style.transition = 'opacity 0.6s ease';
+                
+                // Разрешаем новые анимации через некоторое время
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 1000);
+            }, 2800);
+        }, 1500);
+    }
+    
+    function resetTitle() {
+        if (!hasScattered || isAnimating) return;
+        
+        isAnimating = true;
+        
+        console.log('🔄 Resetting title...');
+        
+        // Останавливаем текущую анимацию рассыпания
+        if (scatterTimeout) {
+            clearTimeout(scatterTimeout);
+            scatterTimeout = null;
+        }
+        
+        // Плавно показываем контейнер сначала
+        titleContainer.style.transition = 'opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        titleContainer.style.opacity = '1';
+        
+        // Затем восстанавливаем элементы с задержкой
+        setTimeout(() => {
+            // Убираем классы рассыпания с плавной анимацией
+            const japaneseChars = document.querySelectorAll('.japanese-char');
+            const letters = document.querySelectorAll('.fall-letter');
+            
+            // Восстанавливаем японские символы
+            japaneseChars.forEach((char, index) => {
+                setTimeout(() => {
+                    char.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    char.classList.remove('scatter');
+                }, index * 100);
+            });
+            
+            // Восстанавливаем английский заголовок
+            setTimeout(() => {
+                englishTitle.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                englishTitle.classList.remove('scatter');
+                
+                // Восстанавливаем буквы
+                letters.forEach((letter, index) => {
+                    setTimeout(() => {
+                        letter.style.transition = 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                        letter.classList.remove('scatter');
+                    }, index * 50);
+                });
+            }, 300);
+            
+            // Убираем лепестки с плавным исчезновением
+            const petals = document.querySelectorAll('.petal-particle');
+            petals.forEach((petal, index) => {
+                setTimeout(() => {
+                    if (petal.parentNode) {
+                        petal.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                        petal.style.opacity = '0';
+                        petal.style.transform += ' scale(0)';
+                        
+                        setTimeout(() => {
+                            if (petal.parentNode) {
+                                petal.parentNode.removeChild(petal);
+                            }
+                        }, 500);
+                    }
+                }, index * 20);
+            });
+            
+            // Сбрасываем флаги
+            setTimeout(() => {
+                hasScattered = false;
+                isAnimating = false;
+            }, 1200);
+            
+        }, 200);
+    }
+    
+    function handleScroll() {
+        const scrolled = window.pageYOffset;
+        const fallSectionTop = fallSection.offsetTop;
+        const fallSectionBottom = fallSectionTop + fallSection.offsetHeight;
+        const windowHeight = window.innerHeight;
+        
+        // Зоны с гистерезисом (разные пороги для входа и выхода)
+        const scatterThreshold = fallSectionTop - windowHeight * 0.3; // Когда начинаем рассыпание
+        const resetThresholdUp = fallSectionTop - windowHeight * 0.7; // Когда сбрасываем при подъеме
+        const resetThresholdDown = fallSectionBottom - windowHeight * 0.3; // Когда сбрасываем при спуске
+        
+        // Логика рассыпания
+        if (scrolled >= scatterThreshold && scrolled <= resetThresholdDown && !hasScattered) {
+            // Отменяем любой pending reset
+            if (resetTimeout) {
+                clearTimeout(resetTimeout);
+                resetTimeout = null;
+            }
+            scatterTitle();
+        }
+        // Логика сброса - с задержкой для предотвращения мигания
+        else if ((scrolled < resetThresholdUp || scrolled > resetThresholdDown) && hasScattered) {
+            // Добавляем небольшую задержку перед сбросом
+            if (resetTimeout) {
+                clearTimeout(resetTimeout);
+            }
+            
+            resetTimeout = setTimeout(() => {
+                resetTitle();
+                resetTimeout = null;
+            }, 300); // 300ms задержка предотвращает мигание при небольших движениях
+        }
+    }
+    
+    // Добавляем обработчик клика для отладки
+    titleContainer.addEventListener('click', () => {
+        console.log('🖱️ Title clicked');
+        if (!hasScattered && !isAnimating) {
+            scatterTitle();
+        } else if (hasScattered && !isAnimating) {
+            resetTitle();
+        }
+    });
+    
+    // Оптимизированный обработчик скролла
+    let scrollTicking = false;
+    
+    function optimizedScrollHandler() {
+        if (!scrollTicking) {
+            requestAnimationFrame(() => {
+                handleScroll();
+                scrollTicking = false;
+            });
+            scrollTicking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
+    
+    // Проверяем состояние при загрузке
+    setTimeout(handleScroll, 500);
+    
+    // Добавляем обработчик изменения размера окна
+    window.addEventListener('resize', () => {
+        setTimeout(handleScroll, 100);
+    });
+}
+
+// Инициализация при загрузке DOM
+document.addEventListener('DOMContentLoaded', initFallAnimation);
+
+// Дополнительная проверка для случаев, когда DOM уже загружен
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFallAnimation);
+} else {
+    initFallAnimation();
+}
+
+// Добавляем стили для плавных переходов
+const fallAnimationStyles = document.createElement('style');
+fallAnimationStyles.textContent = `
+    .japanese-char,
+    .fall-letter {
+        transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .fall-english-title {
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .fall-title-container {
+        transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+`;
+document.head.appendChild(fallAnimationStyles);
+
+/* ===============================
+SECTION 2-2: THE FALL
+=============================== */
+function initPhotoStory() {
+    const photoSection = document.getElementById('photo-story');
+    const images = document.querySelectorAll('.story-image');
+    const titles = document.querySelectorAll('.story-title');
+    const textGroups = document.querySelectorAll('.text-group');
+    const progressBar = document.querySelector('.progress-bar');
+    
+    if (!photoSection) return;
+    
+    /* ===============================
+    Z-INDEX
+    =============================== */
+    const fixStyles = document.createElement('style');
+    fixStyles.textContent = `
+        .photo-story-section {
+            position: relative !important;
+            z-index: 8 !important;
+        }
+        .story-images { z-index: 1 !important; }
+        .story-titles { z-index: 2 !important; }
+        .story-texts { z-index: 3 !important; }
+        .scroll-progress { z-index: 4 !important; }
+        .visible-petal { z-index: 15 !important; }
+    `;
+    document.head.appendChild(fixStyles);
+    
+    /* ===============================
+    КОНФИГУРАЦИЯ СЦЕН
+    =============================== */
+    const scenes = [
+        {
+            id: 'mongol',
+            image: document.getElementById('story-mongol'),
+            title: document.getElementById('title-mongol'),
+            textGroup: document.querySelector('[data-scene="mongol"]'),
+            texts: document.querySelectorAll('[data-scene="mongol"] .story-text')
+        }
+    ];
+
+    let currentScene = -1;
+    let currentText = -1;
+    let isActive = false;
+
+    /* ===============================
+    МАЛЕНЬКИЕ ЛЕПЕСТКИ СОЗДАЮТ КОНТЕНТ 
+    =============================== */
+    function createVisiblePetalsFormingContent() {
+        const scene = scenes[currentScene];
+        if (!scene) return;
+        
+        const imageRect = scene.image.getBoundingClientRect();
+        const titleRect = scene.title.getBoundingClientRect();
+        const textRect = scene.textGroup.getBoundingClientRect();
+        
+        scene.image.style.opacity = '0';
+        scene.title.style.opacity = '0';
+        scene.textGroup.style.opacity = '0';
+        scene.image.style.visibility = 'hidden';
+        scene.title.style.visibility = 'hidden';
+        scene.textGroup.style.visibility = 'hidden';
+        
+        scene.image.classList.add('visible');
+        scene.title.classList.add('visible');
+        scene.textGroup.classList.add('visible');
+        
+        const totalPetals = 150; 
+        let formedPetals = 0;
+        
+        // Создаем маленькие лепестки
+        for (let i = 0; i < totalPetals; i++) {
+            setTimeout(() => {
+                let targetRect, elementType;
+                if (i < 75) { // 50% для фото
+                    targetRect = imageRect;
+                    elementType = 'image';
+                } else if (i < 112) { 
+                    targetRect = titleRect;
+                    elementType = 'title';
+                } else { 
+                    targetRect = textRect;
+                    elementType = 'text';
+                }
+                
+                createSmallPetal(targetRect, elementType, () => {
+                    formedPetals++;
+                    const progress = formedPetals / totalPetals;
+                    
+                    // Элементы становятся видимыми только после 20% прогресса
+                    if (progress > 0.2) {
+                        scene.image.style.visibility = 'visible';
+                        scene.title.style.visibility = 'visible';
+                        scene.textGroup.style.visibility = 'visible';
+                        
+                        const opacity = (progress - 0.2) * 1.25; // Плавное появление
+                        scene.image.style.opacity = Math.min(1, opacity);
+                        scene.title.style.opacity = Math.min(1, opacity);
+                        scene.textGroup.style.opacity = Math.min(1, opacity);
+                    }
+                });
+            }, i * 15); // Быстрее интервал
+        }
+    }
+
+    /* ===============================
+    СОЗДАНИЕ МАЛЕНЬКОГО ЛЕПЕСТКА БЕЗ МИГАНИЯ
+    =============================== */
+    function createSmallPetal(targetRect, elementType, onFormCallback) {
+        const petal = document.createElement('div');
+        petal.className = 'small-petal';
+        
+        // Лепестки прилетают слева
+        const startX = -120 - Math.random() * 80;
+        const startY = Math.random() * window.innerHeight;
+        
+        // Целевая точка
+        const targetX = targetRect.left + Math.random() * targetRect.width;
+        const targetY = targetRect.top + Math.random() * targetRect.height;
+        
+        // МАЛЕНЬКИЕ лепестки без мигания
+        petal.style.cssText = `
+            position: fixed;
+            left: ${startX}px;
+            top: ${startY}px;
+            width: 4px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 0 60% 0 60%;
+            pointer-events: none;
+            z-index: 15;
+            opacity: 0.9;
+            transform: rotate(${Math.random() * 360}deg) scale(${0.8 + Math.random() * 0.4});
+            box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+        `;
+        
+        document.body.appendChild(petal);
+        
+        // Простая быстрая анимация без мигания
+        setTimeout(() => {
+            const duration = 800 + Math.random() * 400;
+            
+            petal.style.transition = `all ${duration}ms ease-out`;
+            petal.style.left = targetX + 'px';
+            petal.style.top = targetY + 'px';
+            petal.style.transform = `rotate(${Math.random() * 360}deg) scale(0.2)`;
+            petal.style.opacity = '0.3';
+            
+            // Когда лепесток достигает цели
+            setTimeout(() => {
+                if (onFormCallback) onFormCallback();
+                
+                // Лепесток плавно исчезает
+                petal.style.transition = 'opacity 400ms ease';
+                petal.style.opacity = '0';
+                
+                setTimeout(() => {
+                    if (petal.parentNode) {
+                        petal.parentNode.removeChild(petal);
+                    }
+                }, 400);
+            }, duration * 0.8);
+            
+        }, 30);
+    }
+
+    /* ===============================
+    АКТИВАЦИЯ СЦЕНЫ
+    =============================== */
+    function activateScene(sceneIndex, textIndex, withPetals = false) {
+        if (sceneIndex < 0 || sceneIndex >= scenes.length) return;
+        
+        const scene = scenes[sceneIndex];
+        
+        if (withPetals && sceneIndex !== currentScene) {
+            // Скрываем предыдущее
+            images.forEach(img => {
+                img.classList.remove('visible');
+                img.style.opacity = '0';
+            });
+            titles.forEach(title => {
+                title.classList.remove('visible');
+                title.style.opacity = '0';
+            });
+            textGroups.forEach(group => {
+                group.classList.remove('visible');
+                group.style.opacity = '0';
+            });
+            
+            currentScene = sceneIndex;
+            activateText(sceneIndex, textIndex);
+            
+            // СРАЗУ запускаем видимые лепестки
+            createVisiblePetalsFormingContent();
+            
+        } else {
+            // Мгновенное переключение
+            images.forEach((img, index) => {
+                if (index === sceneIndex) {
+                    img.classList.add('visible');
+                    img.style.opacity = '1';
+                } else {
+                    img.classList.remove('visible');
+                }
+            });
+            
+            titles.forEach((title, index) => {
+                if (index === sceneIndex) {
+                    title.classList.add('visible');
+                    title.style.opacity = '1';
+                } else {
+                    title.classList.remove('visible');
+                }
+            });
+            
+            textGroups.forEach((group, index) => {
+                if (index === sceneIndex) {
+                    group.classList.add('visible');
+                    group.style.opacity = '1';
+                } else {
+                    group.classList.remove('visible');
+                }
+            });
+            
+            activateText(sceneIndex, textIndex);
+        }
+        
+        currentScene = sceneIndex;
+        currentText = textIndex;
+    }
+    
+    /* ===============================
+    АКТИВАЦИЯ ТЕКСТА
+    =============================== */
+    function activateText(sceneIndex, textIndex) {
+        scenes.forEach((scene, sIndex) => {
+            scene.texts.forEach((text, tIndex) => {
+                if (sIndex === sceneIndex && tIndex === textIndex) {
+                    text.classList.add('active');
+                } else {
+                    text.classList.remove('active');
+                }
+            });
+        });
+    }
+
+    /* ===============================
+    ОБНОВЛЕНИЕ ПРОГРЕССА
+    =============================== */
+    function updateProgress(progress) {
+        if (progressBar) {
+            progressBar.style.width = (progress * 100) + '%';
+        }
+    }
+
+    /* ===============================
+    ОБРАБОТЧИК СКРОЛЛА
+    =============================== */
+    function handleScroll() {
+        const scrolled = window.pageYOffset;
+        const sectionTop = photoSection.offsetTop;
+        const sectionHeight = photoSection.offsetHeight;
+        const windowHeight = window.innerHeight;
+        
+        const sectionStart = sectionTop - windowHeight * 0.3;
+        const sectionEnd = sectionTop + sectionHeight - windowHeight;
+        
+        if (scrolled >= sectionStart && scrolled <= sectionEnd) {
+            if (!isActive) {
+                isActive = true;
+                activateScene(0, 0, true);
+            }
+            
+            const sectionProgress = (scrolled - sectionStart) / (sectionEnd - sectionStart);
+            const clampedProgress = Math.max(0, Math.min(1, sectionProgress));
+            
+            updateProgress(clampedProgress);
+            
+            const totalTexts = scenes.reduce((sum, scene) => sum + scene.texts.length, 0);
+            const textProgress = clampedProgress * (totalTexts - 1);
+            const currentTextIndex = Math.floor(textProgress);
+            
+            let targetScene = 0;
+            let targetText = 0;
+            let textCounter = 0;
+            
+            for (let i = 0; i < scenes.length; i++) {
+                if (currentTextIndex < textCounter + scenes[i].texts.length) {
+                    targetScene = i;
+                    targetText = currentTextIndex - textCounter;
+                    break;
+                }
+                textCounter += scenes[i].texts.length;
+            }
+            
+            targetText = Math.max(0, Math.min(targetText, scenes[targetScene].texts.length - 1));
+            
+            if (targetScene !== currentScene || targetText !== currentText) {
+                if (targetScene !== currentScene && currentScene !== -1) {
+                    activateScene(targetScene, targetText, true);
+                } else {
+                    activateScene(targetScene, targetText, false);
+                }
+            }
+            
+        } else if (isActive && scrolled < sectionStart) {
+            isActive = false;
+            images.forEach(img => {
+                img.classList.remove('visible');
+                img.style.opacity = '0';
+            });
+            titles.forEach(title => {
+                title.classList.remove('visible');
+                title.style.opacity = '0';
+            });
+            textGroups.forEach(group => {
+                group.classList.remove('visible');
+                group.style.opacity = '0';
+            });
+            updateProgress(0);
+            currentScene = -1;
+            currentText = -1;
+        } else if (isActive && scrolled > sectionEnd) {
+            updateProgress(1);
+        }
+    }
+
+    /* ===============================
+    ИНИЦИАЛИЗАЦИЯ
+    =============================== */
+    window.addEventListener('scroll', throttle(handleScroll, 10));
+    updateProgress(0);
+    
+    console.log('✅ Visible Fast Petals initialized');
+}
+
+/* ===============================
+ДОБАВЛЕНИЕ В ОСНОВНУЮ ИНИЦИАЛИЗАЦИЮ
+=============================== */
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        initPhotoStory();
+        console.log('✅ Photo Story initialized');
+    } catch (e) {
+        console.error('❌ Photo Story error:', e);
+    }
+});
