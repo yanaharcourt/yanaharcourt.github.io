@@ -2703,27 +2703,26 @@ PHOTO STORY SECTION - ПОЛНЫЕ СТИЛИ
     overflow: hidden;
 }
 
-/* Фиксированные изображения - ИСПРАВЛЯЕМ НАЕЗД */
+/* Фиксированные изображения  */
 .story-images {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 1; /* Низкий z-index чтобы не наезжать */
+    z-index: 1; 
 }
 
 .story-image {
     position: absolute;
-    top: 5%;
-    left: 5%;
-    width: 90%;
-    height: 90%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     opacity: 0;
-    transform: scale(1.02);
     transition: opacity 1.5s ease, transform 1.5s ease;
-    border-radius: 8px;
+    border-radius: 0;
 }
 
 .story-image.visible {
@@ -2778,8 +2777,9 @@ PHOTO STORY SECTION - ПОЛНЫЕ СТИЛИ
     height: 100vh;
     z-index: 10;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    padding-top: 15vh;
     pointer-events: none;
 }
 
@@ -2960,3 +2960,4 @@ PHOTO STORY SECTION - ПОЛНЫЕ СТИЛИ
         width: 100px;
     }
 }
+

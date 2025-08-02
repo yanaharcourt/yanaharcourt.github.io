@@ -132,12 +132,38 @@ function updateActiveNavDot() {
     let current = '';
     const scrollPosition = window.scrollY + 300; // Offset for better UX
     
+    // Определяем пары секций: [разделительная, контентная]
+    const sectionPairs = {
+        'fall': 'fall',           // fall активирует nav-dot fall
+        'photo-story': 'fall',    // photo-story тоже активирует nav-dot fall
+        'survivor': 'survivor',   // и так далее...
+        'survivor-content': 'survivor',
+        'oath': 'oath',
+        'oath-content': 'oath',
+        'betrayal': 'betrayal',
+        'betrayal-content': 'betrayal',
+        'ghost': 'ghost',
+        'ghost-content': 'ghost',
+        'allies': 'allies',
+        'allies-content': 'allies',
+        'whispers': 'whispers',
+        'whispers-content': 'whispers',
+        'price': 'price',
+        'price-content': 'price',
+        'duel': 'duel',
+        'duel-content': 'duel',
+        'legend': 'legend',
+        'legend-content': 'legend'
+    };
+    
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
         
         if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            current = section.getAttribute('id');
+            const sectionId = section.getAttribute('id');
+            // Используем маппинг для определения какой nav-dot активировать
+            current = sectionPairs[sectionId] || sectionId;
         }
     });
 
@@ -783,7 +809,7 @@ KEYBOARD NAVIGATION
 
 // Add keyboard navigation support
 document.addEventListener('keydown', (e) => {
-    const sections = ['hero', 'fall', 'ghost', 'techniques', 'legend'];
+    const sections = ['hero', 'fall', 'survivor', 'oath', 'betrayal', 'ghost', 'allies', 'whispers', 'price', 'duel', 'legend'];
     const currentSection = getCurrentSection();
     const currentIndex = sections.indexOf(currentSection);
     
@@ -1494,73 +1520,57 @@ function initPhotoStory() {
     ОБРАБОТЧИК СКРОЛЛА
     =============================== */
     function handleScroll() {
-        const scrolled = window.pageYOffset;
-        const sectionTop = photoSection.offsetTop;
-        const sectionHeight = photoSection.offsetHeight;
-        const windowHeight = window.innerHeight;
-        
-        const sectionStart = sectionTop - windowHeight * 0.3;
-        const sectionEnd = sectionTop + sectionHeight - windowHeight;
-        
-        if (scrolled >= sectionStart && scrolled <= sectionEnd) {
-            if (!isActive) {
-                isActive = true;
-                activateScene(0, 0, true);
-            }
-            
-            const sectionProgress = (scrolled - sectionStart) / (sectionEnd - sectionStart);
-            const clampedProgress = Math.max(0, Math.min(1, sectionProgress));
-            
-            updateProgress(clampedProgress);
-            
-            const totalTexts = scenes.reduce((sum, scene) => sum + scene.texts.length, 0);
-            const textProgress = clampedProgress * (totalTexts - 1);
-            const currentTextIndex = Math.floor(textProgress);
-            
-            let targetScene = 0;
-            let targetText = 0;
-            let textCounter = 0;
-            
-            for (let i = 0; i < scenes.length; i++) {
-                if (currentTextIndex < textCounter + scenes[i].texts.length) {
-                    targetScene = i;
-                    targetText = currentTextIndex - textCounter;
-                    break;
-                }
-                textCounter += scenes[i].texts.length;
-            }
-            
-            targetText = Math.max(0, Math.min(targetText, scenes[targetScene].texts.length - 1));
-            
-            if (targetScene !== currentScene || targetText !== currentText) {
-                if (targetScene !== currentScene && currentScene !== -1) {
-                    activateScene(targetScene, targetText, true);
-                } else {
-                    activateScene(targetScene, targetText, false);
-                }
-            }
-            
-        } else if (isActive && scrolled < sectionStart) {
-            isActive = false;
-            images.forEach(img => {
-                img.classList.remove('visible');
-                img.style.opacity = '0';
-            });
-            titles.forEach(title => {
-                title.classList.remove('visible');
-                title.style.opacity = '0';
-            });
-            textGroups.forEach(group => {
-                group.classList.remove('visible');
-                group.style.opacity = '0';
-            });
-            updateProgress(0);
-            currentScene = -1;
-            currentText = -1;
-        } else if (isActive && scrolled > sectionEnd) {
-            updateProgress(1);
+    const scrolled = window.pageYOffset;
+    const sectionTop = photoSection.offsetTop;
+    const sectionHeight = photoSection.offsetHeight;
+    const windowHeight = window.innerHeight;
+    
+    const sectionStart = sectionTop - windowHeight * 0.3;
+    const sectionEnd = sectionTop + sectionHeight - windowHeight;
+    
+    if (scrolled >= sectionStart && scrolled <= sectionEnd) {
+        if (!isActive) {
+            isActive = true;
+            activateScene(0, 0, true);
         }
+        
+        const sectionProgress = (scrolled - sectionStart) / (sectionEnd - sectionStart);
+        const clampedProgress = Math.max(0, Math.min(1, sectionProgress));
+        
+        updateProgress(clampedProgress);
+        
+        // Простая логика для отображения всех 3 текстов
+        let targetTextIndex = Math.floor(clampedProgress * 3);
+        if (targetTextIndex >= 3) targetTextIndex = 2; // максимум index 2
+        
+        // Активируем только если текст изменился
+        if (targetTextIndex !== currentText) {
+            console.log(`🔄 Text switch: ${targetTextIndex}, progress: ${(clampedProgress * 100).toFixed(1)}%`);
+            activateText(0, targetTextIndex);
+            currentText = targetTextIndex;
+        }
+        
+    } else if (isActive && scrolled < sectionStart) {
+        isActive = false;
+        images.forEach(img => {
+            img.classList.remove('visible');
+            img.style.opacity = '0';
+        });
+        titles.forEach(title => {
+            title.classList.remove('visible');
+            title.style.opacity = '0';
+        });
+        textGroups.forEach(group => {
+            group.classList.remove('visible');
+            group.style.opacity = '0';
+        });
+        updateProgress(0);
+        currentScene = -1;
+        currentText = -1;
+    } else if (isActive && scrolled > sectionEnd) {
+        updateProgress(1);
     }
+}
 
     /* ===============================
     ИНИЦИАЛИЗАЦИЯ
@@ -1582,3 +1592,4 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('❌ Photo Story error:', e);
     }
 });
+

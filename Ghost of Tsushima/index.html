@@ -31,9 +31,15 @@
     <nav class="nav">
         <div class="nav-dot active" data-section="hero" data-tooltip="Hero"></div>
         <div class="nav-dot" data-section="fall" data-tooltip="The Fall"></div>
+        <div class="nav-dot" data-section="survivor" data-tooltip="Survivor"></div>
+        <div class="nav-dot" data-section="oath" data-tooltip="The Oath"></div>
+        <div class="nav-dot" data-section="betrayal" data-tooltip="Betrayal of Honor"></div>
         <div class="nav-dot" data-section="ghost" data-tooltip="Birth of Ghost"></div>
-        <div class="nav-dot" data-section="techniques" data-tooltip="Shadow Techniques"></div>
-        <div class="nav-dot" data-section="legend" data-tooltip="The Legend"></div>
+        <div class="nav-dot" data-section="allies" data-tooltip="Allies in Shadows"></div>
+        <div class="nav-dot" data-section="whispers" data-tooltip="Whispers of Fear"></div>
+        <div class="nav-dot" data-section="price" data-tooltip="The Price"></div>
+        <div class="nav-dot" data-section="duel" data-tooltip="Final Duel"></div>
+        <div class="nav-dot" data-section="legend" data-tooltip="Legacy"></div>
     </nav>
 
     <!-- ===============================
@@ -182,13 +188,13 @@
     <!-- ===============================
     SECTION 2-2
     =============================== -->
-    <section id="photo-story" class="photo-story-section">
+    <section id="photo-story" class="section photo-story-section">
         <div class="story-images">
-            <img src="img/Mongol invasion.png" alt="Mongol Invasion" class="story-image" id="story-mongol">
+            <img src="img/fight.png" alt="Mongol Invasion" class="story-image" id="story-mongol">
         </div>
         
         <div class="story-titles">
-            <h2 class="story-title" id="title-mongol">THE MONGOL<br>INVASION</h2>
+            <h2 class="story-title" id="title-mongol"></h2>
         </div>
         
         <div class="story-texts">
@@ -201,14 +207,41 @@
             </div>
         </div>
         
-        <div class="scroll-progress">
+        <!-- <div class="scroll-progress">
             <div class="progress-bar"></div>
-        </div>
+        </div> -->
     </section>
 
     <!-- ===============================
     SECTION 3: Survivor
     =============================== -->
+    <section id="fall" class="section fall-section">
+        <div class="fall-title-container">
+            <div class="fall-japanese-title">
+                <span class="japanese-char" data-char="敗">敗</span>
+                <span class="japanese-char" data-char="北">北</span>
+            </div>
+            <div class="fall-english-title">
+                <span class="fall-letter" data-letter="T">S</span>
+                <span class="fall-letter" data-letter="H">U</span>
+                <span class="fall-letter" data-letter="E">R</span>
+                <span class="fall-letter" data-letter="F">V</span>
+                <span class="fall-letter" data-letter="A">I</span>
+                <span class="fall-letter" data-letter="L">V</span>
+                <span class="fall-letter" data-letter="L">O</span>
+                <span class="fall-letter" data-letter="L">R</span>
+            </div>
+        </div>
+
+        <div class="particle-system" id="fallParticles"></div>
+       
+        <div class="fall-background-effects">
+            <div class="smoke-effect"></div>
+            <div class="ash-particles"></div>
+        </div>
+    </section>
+
+    
     <!-- 
     The sea claimed many.
     Fire claimed more.
