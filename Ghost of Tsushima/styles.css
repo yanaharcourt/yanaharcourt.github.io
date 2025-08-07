@@ -2779,7 +2779,6 @@ PHOTO STORY SECTION - ПОЛНЫЕ СТИЛИ
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding-top: 15vh;
     pointer-events: none;
 }
 
