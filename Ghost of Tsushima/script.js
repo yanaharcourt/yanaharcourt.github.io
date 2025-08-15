@@ -1,8 +1,3 @@
-/* ==================================================
-GHOST OF TSUSHIMA: JIN SAKAI WEBSITE JAVASCRIPT
-ФИНАЛЬНАЯ ИДЕАЛЬНАЯ ВЕРСИЯ С ВОССТАНОВЛЕННЫМ ПАРАЛЛАКСОМ
-================================================== */
-
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 Initializing Jin Sakai website...');

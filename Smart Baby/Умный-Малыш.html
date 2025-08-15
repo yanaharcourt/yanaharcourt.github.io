@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умный Малыш</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        @font-face {
+            font-family: 'Borsok';
+            src: url('assets/borsok.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+    Navigation
+    ============================================ -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Умный Малыш</a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Главная</a>
+                </li>
+                
+                <li class="nav-item has-dropdown">
+                    <a href="#" class="nav-link">О нас</a>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-link">Частный сад</a>
+                        <a href="#" class="dropdown-link">Педсостав</a>
+                        <a href="#" class="dropdown-link">Структура и органы управления</a>
+                    </div>
+                </li>
+                
+                <li class="nav-item has-dropdown">
+                    <a href="#" class="nav-link">Группы</a>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-link">Ясли (1–2 года)</a>
+                        <a href="#" class="dropdown-link">Средняя (3–4 года)</a>
+                        <a href="#" class="dropdown-link">Старшая (4–5 лет)</a>
+                        <a href="#" class="dropdown-link">Подготовительная группа<br><span style="font-size: 0.8rem; color: #6B6B6B; margin-left: 1.5rem;">(от 5.5 лет и до школы)</span></a>
+                    </div>
+                </li>
+                
+                <li class="nav-item has-dropdown">
+                    <a href="#" class="nav-link">Доп. занятия</a>
+                    <div class="mega-menu">
+                        <div class="mega-content">
+                            <div class="mega-section">
+                                <h4><!-- <span class="section-icon">🎯</span> -->Основные программы</h4>
+                                <ul class="mega-links">
+                                    <li><a href="#">Группа выходного дня</a></li>
+                                    <li><a href="#">Подготовка к школе</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-section">
+                                <h4><!-- <span class="section-icon">🧠</span> -->Развитие интеллекта</h4>
+                                <ul class="mega-links">
+                                    <li><a href="#">Ментальная арифметика</a></li>
+                                    <li><a href="#">Скорочтение</a></li>
+                                    <li><a href="#">Каллиграфия</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item has-dropdown">
+                    <a href="#" class="nav-link">Родителям</a>
+                    <div class="mega-menu">
+                        <div class="mega-content">
+                            <div class="mega-section">
+                                <h4><!-- <span class="section-icon">📅</span> -->Информация</h4>
+                                <ul class="mega-links">
+                                    <li><a href="#">Расписание</a></li>
+                                    <li><a href="#">Программы</a></li>
+                                    <li><a href="#">Прайс / оплата</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-section">
+                                <h4><!-- <span class="section-icon">📋</span> -->Документы</h4>
+                                <ul class="mega-links">
+                                    <li><a href="#">Основные сведения</a></li>
+                                    <li><a href="#">Образование</a></li>
+                                    <li><a href="#">Образовательные стандарты</a></li>
+                                    <li><a href="#">Педсостав</a></li>
+                                    <li><a href="#">Платные услуги</a></li>
+                                    <li><a href="#">Финансово‑хозяйственная деятельность</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-section">
+                                <h4><!-- <span class="section-icon">⚖️</span> -->Правовая информация</h4>
+                                <ul class="mega-links">
+                                    <li><a href="#">Политика конфиденциальности</a></li>
+                                    <li><a href="#">Правила и возврат</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Отзывы</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Контакты</a>
+                </li>
+            </ul>
+            
+            <a href="#" class="cta-button">Экскурсия</a>
+            
+            <div class="mobile-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <!-- Мобильное меню -->
+        <div class="mobile-menu">
+            <div class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link">Главная</a>
+            </div>
+            
+            <div class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link">О нас</a>
+                <div class="mobile-submenu">
+                    <a href="#" class="mobile-submenu-link">Частный сад</a>
+                    <a href="#" class="mobile-submenu-link">Педсостав</a>
+                    <a href="#" class="mobile-submenu-link">Структура и органы управления</a>
+                </div>
+            </div>
+            
+            <div class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link">Группы</a>
+                <div class="mobile-submenu">
+                    <a href="#" class="mobile-submenu-link">🍼 Ясли (1–2 года)</a>
+                    <a href="#" class="mobile-submenu-link">🎨 Средняя (3–4 года)</a>
+                    <a href="#" class="mobile-submenu-link">📚 Старшая (4–5 лет)</a>
+                    <a href="#" class="mobile-submenu-link">🎓 Подготовительная группа (от 5.5 лет и до школы)</a>
+                </div>
+            </div>
+            
+            <div class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link">Доп. занятия</a>
+                <div class="mobile-submenu">
+                    <a href="#" class="mobile-submenu-link">Группа выходного дня</a>
+                    <a href="#" class="mobile-submenu-link">Подготовка к школе</a>
+                    <a href="#" class="mobile-submenu-link">Ментальная арифметика</a>
+                    <a href="#" class="mobile-submenu-link">Скорочтение</a>
+                    <a href="#" class="mobile-submenu-link">Каллиграфия</a>
+                </div>
+            </div>
+            
+            <div class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link">Родителям</a>
+                <div class="mobile-submenu">
+                    <a href="#" class="mobile-submenu-link">Расписание</a>
+                    <a href="#" class="mobile-submenu-link">Программы</a>
+                    <a href="#" class="mobile-submenu-link">Прайс / оплата</a>
+                    <a href="#" class="mobile-submenu-link">FAQ</a>
+                    <a href="#" class="mobile-submenu-link">Основные сведения</a>
+                    <a href="#" class="mobile-submenu-link">Образование</a>
+                    <a href="#" class="mobile-submenu-link">Образовательные стандарты</a>
+                    <a href="#" class="mobile-submenu-link">Педсостав</a>
+                    <a href="#" class="mobile-submenu-link">Платные услуги</a>
+                    <a href="#" class="mobile-submenu-link">Политика конфиденциальности</a>
+                    <a href="#" class="mobile-submenu-link">Правила и возврат</a>
+                </div>
+            </div>
+            
+            <div class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link">Отзывы</a>
+            </div>
+            
+            <div class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link">Контакты</a>
+            </div>
+            
+            <div class="mobile-cta">
+                <a href="#" class="cta-button">Экскурсия</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================
+    Hero Section
+    ============================================ -->
+    <section class="hero">
+        <img src="./assets/img/Hero-home.png" alt="Счастливый ребёнок играет с игрушками" class="hero-bg-image" />
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Первые шаги к<br>большим мечтам</h1>
+                <p class="hero-text">Создаём атмосферу домашнего тепла, где ваш ребёнок будет расти уверенным и готовым покорять мир.</p>
+                <div class="hero-buttons">
+                    <a href="tel:+79616854547" class="hero-phone">+7 961 685 45 47</a>
+                    <a href="#" class="hero-cta">Записаться на экскурсию</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    Key Points Section
+    ============================================ -->
+    <section class="key-points">
+        <div class="key-points-container">
+            <div class="key-point-card">
+                <h3 class="key-point-title">Единственный сад с ИИ в образовании</h3>
+            </div>
+            
+            <div class="key-point-card">
+                <h3 class="key-point-title">В ТОП-100 садов РФ</h3>
+            </div>
+            
+            <div class="key-point-card">
+                <h3 class="key-point-title">Площадка 400 м²</h3>
+            </div>
+            
+            <div class="key-point-card">
+                <h3 class="key-point-title">Работаем 7:00-19:00</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    Why Choose Us Section
+    ============================================ -->
+    <section class="why-choose">
+        <div class="why-choose-container">
+            <div class="why-choose-left">
+                <img src="./assets/img/car.svg" alt="Car" class="car-icon">
+                <div class="main-photo-wrapper">
+                    <img src="./assets/img/img2.png" alt="Воспитатель с ребенком" class="main-photo">
+                </div>
+            </div>
+            
+            <div class="why-choose-right">
+                <div class="why-choose-header">
+                    <h2 class="why-choose-title">Почему родители выбирают нас:</h2>
+                    <p class="why-choose-subtitle">Мы создаём среду, в которой детям интересно, спокойно и безопасно.</p>
+                </div>
+                
+                <div class="bento-grid">
+                    <div class="bento-row-1">
+                        <div class="bento-card bento-1">
+                            <h3 class="bento-title">Развитие с любовью</h3>
+                            <p class="bento-text">Индивидуальный подход к каждому малышу</p>
+                        </div>
+                        
+                        <div class="bento-card bento-2">
+                            <h3 class="bento-title">Уютная атмосфера</h3>
+                            <p class="bento-text">Пространство, как вторая семья — с вниманием к деталям</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bento-row-2">
+                        <div class="bento-card bento-3">
+                            <h3 class="bento-title">Опытные воспитатели</h3>
+                            <p class="bento-text">Команда с педагогическим образованием и заботой в сердце</p>
+                        </div>
+                        
+                        <div class="bento-card bento-4">
+                            <h3 class="bento-title">Игры и обучение</h3>
+                            <p class="bento-text">Через творчество, движение и исследование мира</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-button">
+                    <img src="./assets/img/phone.svg" alt="Phone" class="phone-icon">
+                    <span>+7 961 685 45 47</span>
+                </div>
+                
+                <img src="./assets/img/house.svg" alt="House" class="house-icon">
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    Age Groups Section
+    ============================================ -->
+    <section class="age-groups-wrapper">
+        <svg width="1440" height="72" viewBox="0 0 1440 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M34.4264 10.5H0V72H1440V0C1440 0 1403.86 17.8196 1378.89 19C1353.33 20.2086 1317.11 5.03126 1307.94 0.979768C1306.55 0.365418 1304.98 0.386951 1303.61 1.03556C1295.82 4.7135 1268.52 17.0325 1248.67 19C1227.2 21.1274 1195.41 13.0366 1187.76 10.9697C1186.66 10.6716 1185.51 10.7328 1184.45 11.1609C1176.41 14.4111 1139.96 28.5425 1114.43 28.5C1090.11 28.4595 1055.84 15.5199 1046.03 11.6075C1044.34 10.9332 1042.45 11.1783 1040.98 12.2631C1031.55 19.2625 995.338 44.7234 967.179 45C947.474 45.1935 920.078 33.1686 912.248 29.5298C910.866 28.8876 909.311 28.8622 907.921 29.4863C896.919 34.425 846.241 56.1289 810.908 53.5C784.136 51.508 747.231 34.1367 737.958 29.587C736.493 28.8682 734.974 28.3125 733.385 27.9416L663.149 11.5515C660.291 10.8845 657.309 11.4891 654.891 13.1539C643.187 21.2148 606.426 44.8737 578.003 45C553.831 45.1074 523.616 28.2478 507.578 18.0608C500.671 13.6734 491.814 13.3282 484.564 17.1222C469.857 24.8186 444.222 36.3698 424.237 35.5C401.563 34.5132 371.469 16.9007 363.268 11.8459C361.903 11.0046 360.255 10.8346 358.748 11.3835C348.404 15.1525 306.551 29.6431 277.482 28.5C253.337 27.5506 219.25 15.0786 209.846 11.4711C208.276 10.869 206.542 11.0645 205.126 11.9707C198.2 16.4028 176.578 29.2807 160.278 28.5C146.634 27.8465 129.295 17.2667 122.32 12.639C120.456 11.4027 117.997 11.4424 116.176 12.7396C109.649 17.3874 93.8322 27.7152 81.1409 28.5C64.7486 29.5137 42.9313 15.2653 37.387 11.4347C36.5124 10.8305 35.4895 10.5 34.4264 10.5Z" fill="#F0F4F7"/>
+        </svg>
+
+        <div class="age-groups">
+            <div class="age-groups-container">
+                <img src="./assets/img/cloud.svg" alt="Cloud" class="cloud-decoration">
+                
+                <div class="age-groups-content">
+                    <h2 class="age-groups-title">Каждому возрасту - свой подхо</h2>
+                    <p class="age-groups-subtitle">Мы учитываем возрастные особенности каждого ребёнка, чтобы создать комфортные условия для роста, игры и обучения.</p>
+                    
+                    <div class="age-groups-grid">
+                        <div class="age-group-card">
+                            <div class="age-group-image-wrapper">
+                                <img src="./assets/img/Ясли.png" alt="Ясли" class="age-group-image">
+                                <div class="age-group-overlay">
+                                    <h3 class="age-group-title">Ясли</h3>
+                                    <p class="age-group-age">(от 1 года до 3 лет)</p>
+                                    <p class="age-group-description">У малыша начинается социализация и адаптация.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="age-group-card">
+                            <div class="age-group-image-wrapper">
+                                <img src="./assets/img/Средняя группа.png" alt="Средняя группа" class="age-group-image">
+                                <div class="age-group-overlay">
+                                    <h3 class="age-group-title">Средняя группа</h3>
+                                    <p class="age-group-age">(от 3 лет до 4,5 лет)</p>
+                                    <p class="age-group-description">Малыш уже адаптирован и готов учиться.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="age-group-card">
+                            <div class="age-group-image-wrapper">
+                                <img src="./assets/img/Старшая группа.png" alt="Старшая группа" class="age-group-image">
+                                <div class="age-group-overlay">
+                                    <h3 class="age-group-title">Старшая группа</h3>
+                                    <p class="age-group-age">(от 4.5 лет до 5.5 лет)</p>
+                                    <p class="age-group-description">Дети активно общаются друг с другом.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="age-group-card">
+                            <div class="age-group-image-wrapper">
+                                <img src="./assets/img/Подготовительная группа.png" alt="Подготовительная группа" class="age-group-image">
+                                <div class="age-group-overlay">
+                                    <h3 class="age-group-title">Подготовительная группа</h3>
+                                    <p class="age-group-age">(от 5.5 лет и до школы)</p>
+                                    <p class="age-group-description">Подготовка к школе</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <img src="./assets/img/pencil.png" alt="Pencil" class="pencil-decoration">
+            </div>
+        </div>
+
+        <svg width="1440" height="82" viewBox="0 0 1440 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M76.9921 62.5C60.2248 64.1883 54.8629 84.3151 38.2477 81.5C31.8472 80.4156 23.8226 75.2624 20.5813 73.0324C19.601 72.3581 18.5879 71.7337 17.5223 71.2044L11.1021 68.0151C4.30097 64.6366 0 57.6976 0 50.1035V0H1440V59.9694C1440 66.6137 1434.61 72 1427.97 72C1426.08 72 1424.25 71.5677 1422.54 70.7587C1412.5 65.994 1374.99 49.2757 1348.6 52C1329.26 53.9966 1306.33 67.4238 1291.74 77.2978C1283.21 83.0724 1271.56 82.3532 1263.3 76.1869C1254.75 69.7976 1243.5 63.0869 1233.36 62.5C1221.03 61.7858 1206.71 69.9307 1196.54 77.2014C1188.5 82.9445 1177.42 83.5467 1169.18 78.096C1154.6 68.45 1131.21 54.8366 1111.67 52C1086.75 48.3836 1052.55 60.0299 1034.87 67.0566C1027.69 69.911 1019.46 68.8605 1013.12 64.4529C1001.87 56.6418 983.25 45.3862 967.616 44C951.394 42.5616 930.274 51.0307 917.731 56.9887C911.033 60.1704 903.104 60.0336 896.609 56.4546C876.54 45.3948 831.571 23.5595 798.731 29.5C776.386 33.5418 750.213 52.1499 736.064 63.3605C729.675 68.4227 720.93 69.5934 713.248 66.8667C707.181 64.7131 699.92 62.6636 693.922 62.5C685.607 62.2733 674.997 65.5414 667.596 68.3056C661.867 70.4453 655.488 70.4194 649.907 67.9182C632.319 60.0362 591.795 43.5308 561.794 44C539.87 44.3429 510.195 53.9594 495.616 59.1885C489.987 61.2076 483.757 60.8275 478.343 58.2876C467.092 53.0097 446.634 44.5802 429.665 44C411.446 43.377 385.19 53.6323 372.506 59.1346C367.706 61.2168 362.336 61.5732 357.304 60.1376C341.732 55.6939 306.148 46.9722 281.642 52C256.199 57.22 248.008 81.4434 222.035 81.5C209.551 81.5272 194.131 74.7751 183.706 69.3137C176.406 65.489 167.467 65.6946 160.308 69.7771C151.336 74.8929 138.694 80.9256 128.155 81.5C106.873 82.6599 98.1983 60.3647 76.9921 62.5Z" fill="#F0F4F7"/>
+        </svg>
+    </section>
+
+    <!-- ============================================
+    Day Schedule Section
+    ============================================ -->
+    <section class="day-schedule">
+        <div class="day-schedule-container">
+            <img src="./assets/img/cubes.svg" alt="Cubes" class="cubes-decoration">
+            
+            <div class="day-schedule-content">
+                <h2 class="day-schedule-title">Как проходит день в нашем садике</h2>
+                <p class="day-schedule-subtitle">Улыбки, открытия и маленькие победы каждый день. Посмотрите, как уютно и радостно чувствуют себя наши малыши!</p>
+                
+                <div class="gallery-wrapper">
+                    <button class="gallery-nav gallery-prev" onclick="prevSlide()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    
+                    <div class="photo-gallery">
+                        <div class="photo-item active">
+                            <img src="./assets/img/Photo1.png" alt="Дети за занятиями" class="gallery-photo">
+                        </div>
+                        
+                        <div class="photo-item">
+                            <img src="./assets/img/Photo2.png" alt="Творческие занятия" class="gallery-photo">
+                        </div>
+                        
+                        <div class="photo-item">
+                            <img src="./assets/img/Photo3.png" alt="Игровая деятельность" class="gallery-photo">
+                        </div>
+                        
+                        <div class="photo-item">
+                            <img src="./assets/img/Photo4.png" alt="Обучение и развитие" class="gallery-photo">
+                        </div>
+                    </div>
+                    
+                    <button class="gallery-nav gallery-next" onclick="nextSlide()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="gallery-dots">
+                        <div class="gallery-dot active" onclick="goToSlide(0)"></div>
+                        <div class="gallery-dot" onclick="goToSlide(1)"></div>
+                        <div class="gallery-dot" onclick="goToSlide(2)"></div>
+                        <div class="gallery-dot" onclick="goToSlide(3)"></div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    Newsletter Section
+    ============================================ -->
+    <section class="newsletter">
+        <img src="./assets/img/newsletter.png" alt="Newsletter Background" class="newsletter-bg">
+        
+        <div class="newsletter-container">
+            <img src="./assets/img/dino.png" alt="Dinosaur" class="dino-decoration">
+            <img src="./assets/img/rocket.svg" alt="Rocket" class="rocket-decoration">
+            
+            <div class="newsletter-content">
+                <h2 class="newsletter-title">Будьте в курсе всех наших последних новостей!</h2>
+                <p class="newsletter-subtitle">Подпишитесь на наши обновления, чтобы быть в курсе важных новостей, событий и объявлений детского сада. Мы всегда рады держать вас в курсе событий!</p>
+                
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Ваша Почта" class="newsletter-input">
+                    <button type="submit" class="newsletter-button">Подписаться</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    Teachers Section
+    ============================================ -->
+    <section class="teachers">
+        <div class="teachers-container">
+            <div class="teachers-content">
+                <h2 class="teachers-title">Наши воспитатели — душа сада</h2>
+                <p class="teachers-subtitle">В нашем коллективе только внимательные, заботливые и профессиональные педагоги с большим опытом. Мы создаём атмосферу доверия и любви, чтобы дети раскрывались с радостью.</p>
+                
+                <div class="teachers-wrapper">
+                    <button class="teachers-nav teacher-prev" onclick="prevTeacher()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    
+                    <div class="teachers-grid">
+                        <div class="teacher-card active">
+                            <img src="./assets/img/teacher1.png" alt="Наталья" class="teacher-photo">
+                            <h3 class="teacher-name">Наталья</h3>
+                            <p class="teacher-role">Воспитатель</p>
+                        </div>
+                        
+                        <div class="teacher-card">
+                            <img src="./assets/img/teacher2.png" alt="Алексей" class="teacher-photo">
+                            <h3 class="teacher-name">Алексей</h3>
+                            <p class="teacher-role">Воспитатель</p>
+                        </div>
+                        
+                        <div class="teacher-card">
+                            <img src="./assets/img/teacher3.png" alt="Анастася" class="teacher-photo">
+                            <h3 class="teacher-name">Анастася</h3>
+                            <p class="teacher-role">Воспитатель</p>
+                        </div>
+                        
+                        <div class="teacher-card">
+                            <img src="./assets/img/teacher4.png" alt="Эльвира" class="teacher-photo">
+                            <h3 class="teacher-name">Эльвира</h3>
+                            <p class="teacher-role">Воспитатель</p>
+                        </div>
+                    </div>
+                    
+                    <button class="teachers-nav teacher-next" onclick="nextTeacher()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="teacher-dots">
+                    <div class="teacher-dot active" onclick="goToTeacher(0)"></div>
+                    <div class="teacher-dot" onclick="goToTeacher(1)"></div>
+                    <div class="teacher-dot" onclick="goToTeacher(2)"></div>
+                    <div class="teacher-dot" onclick="goToTeacher(3)"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    About Section
+    ============================================ -->
+    <section class="about">
+        <div class="about-container">
+            <div class="about-left">
+                <img src="./assets/img/img3.png" alt="Дети играют с пазлами" class="about-photo">
+            </div>
+            
+            <div class="about-right">
+                <h2 class="about-title">«Умный Малыш» - больше, чем детский сад</h2>
+                <p class="about-description">Наш сад работает по лицензированной программе, где обучение проходит через игру, творчество и заботу. Мы уделяем внимание каждому ребёнку и помогаем раскрывать его потенциал в комфортной и домашней атмосфере.</p>
+                
+                <h3 class="about-advantages-title">Преимущества:</h3>
+                <ul class="about-advantages-list">
+                    <li class="about-advantages-item">Уютная и доброжелательная обстановка</li>
+                    <li class="about-advantages-item">Индивидуальный подход к каждому ребёнку</li>
+                    <li class="about-advantages-item">Развивающие занятия и творческие мастерские</li>
+                    <li class="about-advantages-item">Сбалансированное питание</li>
+                    <li class="about-advantages-item">Удобный график работы: с 7:00 до 19:00</li>
+                    <li class="about-advantages-item">Лицензия и соответствие образовательным стандартам</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    Parents Section
+    ============================================ -->
+    <section class="parents-section">
+        <div class="parents-container">
+            <h2 class="parents-title">Всё, что нужно знать родителям</h2>
+            <p class="parents-subtitle">Мы ценим прозрачность и открытость. Здесь вы найдёте актуальную информацию: правила, документы, программу, стоимость, расписание и ответы на частые вопросы.</p>
+            
+            <div class="parents-cards">
+                <div class="parents-card">
+                    <img src="./assets/img/Программа  обучения.svg" alt="Программа обучения" class="parents-card-blob">
+                    <h3 class="parents-card-title">Программа обучения</h3>
+                </div>
+                
+                <div class="parents-card">
+                    <img src="./assets/img/Документы.svg" alt="Документы" class="parents-card-blob">
+                    <h3 class="parents-card-title">Документы</h3>
+                </div>
+                
+                <div class="parents-card">
+                    <img src="./assets/img/Оплата и возвраты.svg" alt="Оплата и возвраты" class="parents-card-blob">
+                    <h3 class="parents-card-title">Оплата и возвраты</h3>
+                </div>
+                
+                <div class="parents-card">
+                    <img src="./assets/img/Расписание.svg" alt="Расписание" class="parents-card-blob">
+                    <h3 class="parents-card-title">Расписание</h3>
+                </div>
+                
+                <div class="parents-card">
+                    <img src="./assets/img/FAQ.svg" alt="Часто задаваемые вопросы" class="parents-card-blob">
+                    <h3 class="parents-card-title">Часто задаваемые вопросы (FAQ)</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    Testimonials Section
+    ============================================ -->
+    <section class="testimonials">
+        <div class="testimonials-container">
+            <img src="./assets/img/cloud2.svg" alt="Cloud" class="cloud-decoration">
+            <img src="./assets/img/airballoon.svg" alt="Air Balloon" class="balloon-decoration">
+            
+            <div class="testimonials-content">
+                <h2 class="testimonials-title">Нам доверяют самое ценное</h2>
+                <p class="testimonials-subtitle">Мнения родителей, которые уже доверили нам воспитание своих малышей.</p>
+                
+                <div class="testimonials-wrapper">
+                    <button class="testimonials-nav testimonials-prev" onclick="prevTestimonial()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card active" data-testimonial="0">
+                            <div class="testimonial-header">
+                                <h3 class="testimonial-name">Екатерина К.</h3>
+                                <img src="./assets/img/quotes.svg" alt="Quotes" class="testimonial-quotes">
+                            </div>
+                            <div class="testimonial-stars">
+                                <img src="./assets/img/star.svg" alt="Star">
+                                <img src="./assets/img/star.svg" alt="Star">
+                                <img src="./assets/img/star.svg" alt="Star">
+                                <img src="./assets/img/star.svg" alt="Star">
+                                <img src="./assets/img/star.svg" alt="Star">
+                            </div>
+                            <p class="testimonial-text">Очень хочется скачать много добрых слов и слов благодарности в адрес этого садика!!! Директору Светлане Александровне, воспитателю ясельной группы Наталье Валерьевне...</p>
+                            <p class="testimonial-text-full" style="display: none;">Очень хочется скачать много добрых слов и слов благодарности в адрес этого садика!!! Директору Светлане Александровне, воспитателю ясельной группы Наталье Валерьевне, няне Марине и няне Татьяне. Они профессионалы с большой буквы своего дела, проводят много интересных занятий с детьми, придумывают разные конкурсы в которых обожает участвовать мой ребенок!!! В саду работает очень дружный и сложенный коллектив!!! Огромное вам спасибо, ведь не только от родителей зависит каким в жизни будет ребенок, но и вы очень многое закладываете в его воспитание!!!</p>
+                            <button class="testimonial-expand" onclick="toggleTestimonial(0)">Больше</button>
+                        </div>
+                        
+                        <div class="testimonial-card" data-testimonial="1">
+                            <div class="testimonial-header">
+                                <h3 class="testimonial-name">Елизавета Ховаева</h3>
+                                <img src="./assets/img/quotes.svg" alt="Quotes" class="testimonial-quotes">
+                            </div>
+                            <div class="testimonial-stars">
+                                <img src="./assets/img/star.svg" alt="Star">
+                                <img src="./assets/img/star.svg" alt="Star">
+                                <img src="./assets/img/star.svg" alt="Star">
+                                <img src="./assets/img/star.svg" alt="Star">
+                                <img src="./assets/img/star.svg" alt="Star">
+                            </div>
+                            <p class="testimonial-text">Мой ребенок каждый день с восторгом рассказывает мне о том, что они делали в саду. Нам очень повезло с группой — дружелюбные дети, а воспитатели отзывчивые и ответственные! Мы живем совсем рядом, и это очень удобно. Просто отличное место! 👏</p>
+                            <p class="testimonial-text-full" style="display: none;">Мой ребенок каждый день с восторгом рассказывает мне о том, что они делали в саду. Нам очень повезло с группой — дружелюбные дети, а воспитатели отзывчивые и ответственные! Мы живем совсем рядом, и это очень удобно. Просто отличное место! 👏</p>
+                            <button class="testimonial-expand" onclick="toggleTestimonial(1)">Больше</button>
+                        </div>
+                        
+                        <div class="testimonial-card" data-testimonial="2">
+                            <div class="testimonial-header">
+                                <h3 class="testimonial-name">Артур Иванов</h3>
+                                <img src="./assets/img/quotes.svg" alt="Quotes" class="testimonial-quotes">
+                            </div>
+                            <div class="testimonial-stars">
+                                <img src="./assets/img/star.svg" alt="Star">
+                                <img src="./assets/img/star.svg" alt="Star">
+                                <img src="./assets/img/star.svg" alt="Star">
+                                <img src="./assets/img/star.svg" alt="Star">
+                                <img src="./assets/img/star.svg" alt="Star">
+                            </div>
+                            <p class="testimonial-text">Недавно дочь перешла из ясельной группы в среднюю группу полного дня. Мы не радуемся ее успехам! В саду постоянно дети чем-то заняты: лепят, рисуют, играют, занимаются...</p>
+                            <p class="testimonial-text-full" style="display: none;">Недавно дочь перешла из ясельной группы в среднюю группу полного дня. Мы не радуемся ее успехам! В саду постоянно дети чем-то заняты: лепят, рисуют, играют, занимаются, гуляют. В общем, родители могут быть спокойны - дети в руках профессионалов! 👏</p>
+                            <button class="testimonial-expand" onclick="toggleTestimonial(2)">Больше</button>
+                        </div>
+                    </div>
+                    
+                    <button class="testimonials-nav testimonials-next" onclick="nextTestimonial()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="testimonials-dots">
+                    <div class="testimonial-dot active" onclick="goToTestimonial(0)"></div>
+                    <div class="testimonial-dot" onclick="goToTestimonial(1)"></div>
+                    <div class="testimonial-dot" onclick="goToTestimonial(2)"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    Newsletter Footer Section
+    ============================================ -->
+    <section class="newsletter-footer">
+        <div class="newsletter-footer-container">
+            <img src="./assets/img/dino.png" alt="Dinosaur" class="dino-footer-decoration">
+            <img src="./assets/img/airballoon.svg" alt="Air Balloon" class="balloon-footer-decoration">
+            
+            <div class="newsletter-footer-content">
+                <h2 class="newsletter-footer-title">Будьте в курсе всех наших последних новостей!</h2>
+                <p class="newsletter-footer-subtitle">Подпишитесь на наши обновления, чтобы быть в курсе важных новостей, событий и объявлений детского сада. Мы всегда рады держать вас в курсе событий!</p>
+                
+                <div class="newsletter-footer-form">
+                    <input type="email" placeholder="Ваша Почта" class="newsletter-footer-input">
+                    <button type="submit" class="newsletter-footer-button">Подписаться</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+Footer Section
+============================================ -->
+<div class="footer-wrapper">
+    <svg class="footer-wave" width="1923" height="153" viewBox="0 0 1923 153" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path opacity="0.2" d="M98 120.818C87 90.3177 39.5 73.3177 1 90.3177V143.318H1923V87.3177C1892 57.3164 1856.5 56.3164 1826.5 90.3164C1800 44.3164 1758 44.3164 1722 87.3177C1690 21.3164 1604.5 24.3164 1590 108.816C1561 68.8151 1510 64.3164 1463 97.3164C1427 33.8151 1357.5 29.8164 1305 87.3177C1278 21.8164 1209.5 7.31641 1166.5 60.8184C1128.5 -11.6836 1028 -26.1817 987 54.8177C951 33.822 918 43.3219 905 87.3177C868 17.3219 791 6.8232 726 72.8177C689 22.3234 633 18.8235 593 67.3177C531 16.8206 453 26.3208 434.5 103.818C414 68.8235 368 64.3235 337 98.8235C310.5 58.8293 267 53.3235 233 97.3177C198.5 38.819 123 25.3235 98 120.818Z" fill="#CEDDE0"/>
+        <path d="M96 152.854C123 68.855 199.5 68.352 231.5 135.854C265 91.3551 304.5 92.3551 337 135.854C371.5 101.855 415 106.855 434.5 141.354C456.5 59.8607 539 57.8583 593 105.354C637.5 50.862 699 63.8615 727.5 114.854C773 42.3659 870.5 52.8638 905.5 127.354C910 81.3658 958.5 71.8658 986 94.8543C1025 2.87308 1136.5 32.3661 1166 101.354C1201 44.3731 1278.5 59.3731 1305 124.854C1353.5 63.3731 1430 71.8731 1462.5 137.854C1505 100.373 1553 100.373 1589.5 145.354C1608.5 59.3731 1689 60.3731 1721.5 125.354C1753.5 80.3731 1805 82.3731 1823 128.354C1856.5 97.3731 1896.5 94.3731 1923 125.354V152.854H96H0V128.354C0 128.354 30.7226 117.216 50 121.354C71.2874 125.924 96 152.854 96 152.854Z" fill="#CEDDE0"/>
+    </svg>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Logo and Description -->
+                <div class="footer-logo-section">
+                    <a href="#" class="footer-logo">Умный Малыш</a>
+                    <p class="footer-description">
+                        Лицензия на осуществление образовательной деятельности № 7 от 26. 01. 2015 г.
+                    </p>
+                    <div class="footer-legal">
+                        ИП Некрасова Светлана Александровна<br>
+                        ОГРНИП 312774634200774<br>
+                        ИНН 773608033275 400117
+                    </div>
+                </div>
+
+                <!-- Menu -->
+                <div class="footer-section">
+                    <h4>Меню</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Главная</a></li>
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Группы</a></li>
+                        <li><a href="#">Доп. услуги</a></li>
+                        <li><a href="#">Родителям</a></li>
+                        <li><a href="#">Отзывы</a></li>
+                    </ul>
+                </div>
+
+                <!-- Programs -->
+                <div class="footer-section">
+                    <h4>Программы</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Основная</a></li>
+                        <li><a href="#">Дополнительная</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contacts -->
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <div class="contact-item">
+                        <img src="./assets/img/Phone Calling Rounded.svg" alt="Phone" class="contact-icon">
+                        <span>+7 961 685 45 47</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="./assets/img/Letter.svg" alt="Email" class="contact-icon">
+                        <span>support@развиваюшка.рф</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="./assets/img/Map Point.svg" alt="Address" class="contact-icon">
+                        <span>г. Волгоград Волгодонская 9а</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="./assets/img/Case.svg" alt="Working Hours" class="contact-icon">
+                        <span>Пн-Пт 7:00-19:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2025 Все Права Защищены
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+    <script src="./assets/script.js"></script>
+</body>
+</html>
