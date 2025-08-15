@@ -791,7 +791,7 @@ Responsive Design
     }
     
     .mobile-menu {
-        top: 95px;
+        top: 40px;
         max-height: calc(100vh - 95px);
     }
     
