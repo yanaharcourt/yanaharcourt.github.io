@@ -10,7 +10,6 @@
     <link href="./HanyiSentyPagoda Regular/HanyiSentyPagoda Regular.ttf" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     
-    <!-- Preload images in HTML -->
     <link rel="preload" href="img/Jin.png" as="image">
     <link rel="preload" href="img/mountain.png" as="image">
     <link rel="preload" href="img/mist.png" as="image">
@@ -18,9 +17,14 @@
     <link rel="preload" href="img/tree-2.png" as="image">
     <link rel="preload" href="img/tree-3.png" as="image"> -->
 
-    
+    <link rel="preload" href="OST.m4a" as="audio">
 </head>
 <body>
+    <audio id="backgroundMusic" loop preload="auto" autoplay>
+        <source src="OST.m4a" type="audio/mp4">
+        <source src="OST.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- Theme Toggle Button -->
     <button class="theme-toggle" id="themeToggle">
         <span class="theme-icon">🌙</span>
@@ -335,7 +339,9 @@
     the Ghost rides still —
     watching, guarding, unseen.
     -->
-
+    
     <script src="script.js"></script>
+    
+    
 </body>
 </html>

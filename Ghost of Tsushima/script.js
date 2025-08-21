@@ -101,7 +101,6 @@ NAVIGATION FUNCTIONALITY
 =============================== */
 
 function initNavigation() {
-    // Navigation between sections
     document.querySelectorAll('.nav-dot').forEach(dot => {
         dot.addEventListener('click', () => {
             const section = dot.dataset.section;
@@ -116,7 +115,6 @@ function initNavigation() {
         });
     });
 
-    // Update active navigation dot on scroll
     window.addEventListener('scroll', throttle(updateActiveNavDot, 100));
 }
 
@@ -129,9 +127,9 @@ function updateActiveNavDot() {
     
     // Определяем пары секций: [разделительная, контентная]
     const sectionPairs = {
-        'fall': 'fall',           // fall активирует nav-dot fall
-        'photo-story': 'fall',    // photo-story тоже активирует nav-dot fall
-        'survivor': 'survivor',   // и так далее...
+        'fall': 'fall',           
+        'photo-story': 'fall',   
+        'survivor': 'survivor', 
         'survivor-content': 'survivor',
         'oath': 'oath',
         'oath-content': 'oath',
@@ -175,7 +173,6 @@ ANIMATION SYSTEM
 =============================== */
 
 function initAnimations() {
-    // Intersection Observer for fade-in animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -186,25 +183,21 @@ function initAnimations() {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
                 
-                // Trigger any specific animations for this element
                 triggerElementAnimation(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe all fade-in elements
     document.querySelectorAll('.fade-in').forEach(el => {
         observer.observe(el);
     });
 }
 
 function triggerElementAnimation(element) {
-    // Animate progress bars when they come into view
     if (element.classList.contains('ui-progress')) {
         animateProgressBar(element);
     }
     
-    // Add floating animation to UI elements
     if (element.classList.contains('floating-ui')) {
         element.style.animation = 'float 6s ease-in-out infinite';
     }
@@ -227,7 +220,6 @@ VISUAL EFFECTS
 function initEffects() {
     initParallaxEffect();
     initSakuraPetals();
-    initInteractiveKatana();
     initAncientScroll();
     initParticleSystem();
     initMouseFollowEffect();
@@ -237,126 +229,20 @@ function initEffects() {
 CURSOR
 =============================== */
 
-/* function initInteractiveKatana() {
-    const enso = document.getElementById('interactiveKatana');
-    const heroSection = document.getElementById('hero');
-    
-    if (!enso || !heroSection) return;
-    
-    let isVisible = false;
-    let lastMoveTime = 0;
-    let moveTimeout;
-    
-    // Show enso when mouse enters hero section
-    heroSection.addEventListener('mouseenter', () => {
-        enso.classList.add('visible');
-        isVisible = true;
-    });
-    
-    heroSection.addEventListener('mouseleave', () => {
-        enso.classList.remove('visible');
-        enso.classList.remove('moving');
-        isVisible = false;
-    });
-    
-    // Enso follows mouse with smooth animation
-    heroSection.addEventListener('mousemove', (e) => {
-        if (!isVisible) return;
-        
-        // Используем глобальные координаты вместо относительных
-        const x = e.clientX; 
-        const y = e.clientY;
-        
-        // Position enso exactly at cursor
-        enso.style.left = (x - 20) + 'px'; 
-        enso.style.top = (y - 20) + 'px';
-        
-        // Add moving class for rotation
-        enso.classList.add('moving');
-        clearTimeout(moveTimeout);
-        
-        // Remove moving class after stop
-        moveTimeout = setTimeout(() => {
-            enso.classList.remove('moving');
-        }, 200);
-        
-        // Change color based on scroll position (Ghost mode)
-        const scrollProgress = window.scrollY / window.innerHeight;
-        if (scrollProgress > 0.3) {
-            enso.classList.add('blood-mode');
-        } else {
-            enso.classList.remove('blood-mode');
-        }
-        
-        // Create smoke trail effect
-        createSmokeTrail(x, y);
-    });
-    
-    // Create trailing smoke particles
-    function createSmokeTrail(x, y) {
-        const now = Date.now();
-        if (now - lastMoveTime < 50) return; // Throttle trail creation
-        lastMoveTime = now;
-        
-        const trail = document.createElement('div');
-        trail.className = 'enso-trail-particle';
-        trail.style.cssText = `
-            position: fixed; 
-            left: ${x - 10}px;
-            top: ${y - 10}px;
-            width: 30px;
-            height: 30px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 140;
-            animation: fadeTrail 1s ease-out forwards;
-        `;
-        
-        document.body.appendChild(trail);
-        
-        // Remove particle after animation
-        setTimeout(() => {
-            if (trail.parentNode) {
-                trail.parentNode.removeChild(trail);
-            }
-        }, 1000);
-    }
-}
-
-// Add CSS animation for trail particles
-const trailStyle = document.createElement('style');
-trailStyle.textContent = `
-    @keyframes fadeTrail {
-        0% { 
-            opacity: 0.4; 
-            transform: scale(1); 
-        }
-        100% { 
-            opacity: 0; 
-            transform: scale(2); 
-        }
-    }
-`;
-document.head.appendChild(trailStyle); */
-
 function initCustomCursor() {
     let mouseX = 0;
     let mouseY = 0;
     
-    // Отслеживаем движение мыши
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
         
-        // Оба курсора двигаются вместе - БЕЗ ЗАДЕРЖКИ
         document.documentElement.style.setProperty('--cursor-x', mouseX + 'px');
         document.documentElement.style.setProperty('--cursor-y', mouseY + 'px');
         document.documentElement.style.setProperty('--cursor-small-x', mouseX + 'px');
         document.documentElement.style.setProperty('--cursor-small-y', mouseY + 'px');
     });
     
-    // Эффекты при клике
     document.addEventListener('mousedown', () => {
         document.body.classList.add('cursor-clicking');
     });
@@ -365,7 +251,6 @@ function initCustomCursor() {
         document.body.classList.remove('cursor-clicking');
     });
     
-    // Скрываем курсор при покидании окна
     document.addEventListener('mouseleave', () => {
         document.body.classList.add('cursor-hidden');
     });
@@ -375,7 +260,6 @@ function initCustomCursor() {
     });
 }
 
-// Добавляем CSS переменные для позиции курсора
 const cursorStyles = `
     body::after {
         left: var(--cursor-x, 0px);
@@ -407,12 +291,10 @@ const cursorStyles = `
     }
 `;
 
-// Добавляем стили
 const styleSheet = document.createElement('style');
 styleSheet.textContent = cursorStyles;
 document.head.appendChild(styleSheet);
 
-// Инициализируем после загрузки страницы
 document.addEventListener('DOMContentLoaded', initCustomCursor);
 
 /* ===============================
@@ -439,14 +321,12 @@ function initAncientScroll() {
         const scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
         const messageIndex = Math.floor(scrollProgress * scrollMessages.length);
         
-        // Show scroll when user starts scrolling
         if (window.scrollY > 100) {
             scroll.classList.add('visible');
         } else {
             scroll.classList.remove('visible');
         }
         
-        // Update message based on scroll position
         if (messageIndex !== currentMessage && messageIndex < scrollMessages.length) {
             currentMessage = messageIndex;
             updateScrollMessage(scrollMessages[messageIndex]);
@@ -473,12 +353,10 @@ function initParticleSystem() {
     const container = document.getElementById('particlesContainer');
     if (!container) return;
     
-    // Create initial particles
     for (let i = 0; i < 15; i++) {
         setTimeout(() => createParticle(), i * 200);
     }
     
-    // Create particles periodically
     setInterval(createParticle, 800);
 }
 
@@ -587,10 +465,9 @@ function initParallaxEffect() {
         if (mist) {
             const baseTransform = `translateX(-50%) translateY(${scrolled * 0.4}px)`;
             mist.style.transform = baseTransform;
-            // НЕ МЕНЯЕМ OPACITY - пусть остается как есть
         }
         
-        // ДЕРЕВЬЯ 
+        // Trees  
         const treesBack = document.querySelectorAll('[class*="layer-trees-back"]');
         const treesMid = document.querySelectorAll('[class*="layer-trees-mid"]');
         const treesFront = document.querySelectorAll('[class*="layer-trees-front"]');
@@ -685,7 +562,6 @@ MOUSE FOLLOW EFFECT
 =============================== */
 
 function initMouseFollowEffect() {
-    // Subtle mouse follow effect for floating UI elements
     document.addEventListener('mousemove', throttle((e) => {
         const floatingElements = document.querySelectorAll('.floating-ui');
         
@@ -952,7 +828,7 @@ function initFallAnimation() {
     let hasScattered = false;
     let scatterTimeout;
     let resetTimeout;
-    let isAnimating = false; // Предотвращаем множественные анимации
+    let isAnimating = false; 
     
     function createPetalsFromElement(element) {
         const rect = element.getBoundingClientRect();
