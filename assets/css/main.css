@@ -464,7 +464,9 @@ h6 {
 .footer .credits a {
   color: var(--accent-color);
 } */
-
+/*--------------------------------------------------------------
+# Global Footer
+--------------------------------------------------------------*/
 .yanas-footer {
   position: relative;
   padding: 120px 0 80px 0;

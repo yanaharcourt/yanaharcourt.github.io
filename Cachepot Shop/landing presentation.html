@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,4681 +8,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* Основные цвета проекта */
-            --bg-color: #F5F2EB;
-            --line-color: #B6B8B1;
-            --body-text: #223129;
-            --accent-color: #D89736;
-            --card-bg: #2C3B33;
-            --text-light: #6B7280;
-            --text-medium: #374151;
-            
-            /* Шрифты */
-            --font-primary: 'Inter', sans-serif;
-            --font-secondary: 'Cormorant', serif;
-            --font-decorative: 'Miama Nueva', cursive;
-            
-            /* Размеры */
-            --font-size-hero: clamp(48px, 8vw, 72px);
-            --font-size-h1: clamp(40px, 6vw, 64px);
-            --font-size-h2: clamp(32px, 5vw, 48px);
-            --font-size-h3: clamp(24px, 4vw, 32px);
-            --font-size-body-large: clamp(16px, 2vw, 22px);
-            --font-size-body: clamp(14px, 1.5vw, 18px);
-            
-            /* Высота строк */
-            --line-height-tight: 1.2;
-            --line-height-normal: 1.5;
-            --line-height-relaxed: 1.7;
-        }
-
-        @font-face {
-            font-family: 'Miama Nueva';
-            src: url('./miamanueva.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-primary);
-            background-color: var(--bg-color);
-            color: var(--body-text);
-            line-height: var(--line-height-relaxed);
-            overflow-x: hidden;
-            cursor: none;
-        }
-
-        /* Custom Cursor */
-        .cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--accent-color);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: all 0.1s ease;
-            mix-blend-mode: difference;
-        }
-
-        .cursor.hover {
-            transform: translate(-50%, -50%) scale(2);
-            background-color: var(--accent-color);
-            border-color: transparent;
-        }
-
-        /* Side Navigation */
-        .side-nav {
-            position: fixed;
-            right: 40px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: transparent;
-            border: 2px solid var(--line-color);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-dot.active {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-            transform: scale(1.3);
-        }
-
-        .nav-dot::after {
-            content: '';
-            position: absolute;
-            left: -25px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 1px;
-            background-color: var(--accent-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-dot.active::after {
-            width: 20px;
-        }
-
-        /* Progress Bar */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--card-bg));
-            z-index: 1000;
-            transition: width 0.1s ease;
-        }
-
-        /* Sections */
-        .section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 0 60px;
-            overflow: hidden;
-        }
-
-        .section-content {
-            max-width: 1320px;
-            width: 100%;
-            margin: 0 auto;
-            opacity: 0;
-            transform: translateY(50px);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--bg-color) 0%, #f8f6f1 100%);
-            position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="%23D89736" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            pointer-events: none;
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 2;
-            position: relative;
-        }
-
-        .hero-title {
-            font-family: var(--font-decorative);
-            font-size: var(--font-size-hero);
-            color: var(--card-bg);
-            font-weight: 300;
-            font-style: italic;
-            margin-bottom: 30px;
-            line-height: var(--line-height-tight);
-            margin-top: 100px;
-        }
-
-        .hero-subtitle {
-            font-family: var(--font-primary);
-            font-size: var(--font-size-body-large);
-            color: var(--body-text);
-            font-weight: 300;
-            max-width: 600px;
-            margin: 0 auto 50px;
-            line-height: var(--line-height-relaxed);
-        }
-
-        .hero-image {
-            width: 100%;
-            max-width: 900px;
-            height: auto;
-            border-radius: 20px;
-            transform: translateY(50px);
-            opacity: 0;
-        }
-        /* =================================================================
-        HERO SECTION MOBILE ADAPTATIONS
-        ================================================================= */
-
-        /* Tablet styles (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .hero {
-                padding: 0 40px;
-            }
-            
-            .hero-title {
-                font-size: clamp(48px, 8vw, 64px);
-                margin-bottom: 25px;
-                margin-top: 80px;
-            }
-            
-            .hero-subtitle {
-                font-size: clamp(18px, 2.5vw, 22px);
-                max-width: 500px;
-                margin-bottom: 40px;
-            }
-            
-            .hero-image {
-                max-width: 700px;
-                transform: translateY(40px);
-            }
-            
-            /* Floating elements adjustments */
-            .floating-circle {
-                width: 80px;
-                height: 80px;
-                top: 15%;
-                right: 8%;
-            }
-            
-            .floating-line {
-                width: 150px;
-                top: 65%;
-                left: 8%;
-            }
-        }
-
-        /* Mobile Large (481px - 768px) */
-        @media (max-width: 768px) {
-            .section {
-                padding: 0 30px;
-                min-height: 100vh;
-            }
-            
-            .hero {
-                padding: 0 30px;
-                justify-content: center;
-                text-align: center;
-            }
-            
-            .hero-content {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 100vh;
-                padding: 20px 0;
-            }
-            
-            .hero-title {
-                font-size: clamp(36px, 10vw, 48px);
-                margin-bottom: 20px;
-                margin-top: 0;
-                line-height: 1.1;
-            }
-            
-            .hero-subtitle {
-                font-size: clamp(16px, 4vw, 20px);
-                max-width: 100%;
-                margin-bottom: 30px;
-                line-height: 1.6;
-            }
-            
-            .hero-image {
-                max-width: 100%;
-                width: 100%;
-                height: auto;
-                transform: translateY(20px);
-                border-radius: 15px;
-            }
-            
-            /* Hide floating elements on mobile */
-            .floating-element {
-                display: none;
-            }
-            
-            /* Side navigation adjustments */
-            .side-nav {
-                right: 20px;
-                gap: 15px;
-            }
-            
-            .nav-dot {
-                width: 10px;
-                height: 10px;
-            }
-            
-            .nav-dot::after {
-                display: none;
-            }
-            
-            /* Progress bar stays visible */
-            .progress-bar {
-                height: 2px;
-            }
-            
-            /* Scroll indicator adjustments */
-            .scroll-indicator {
-                bottom: 30px;
-                width: 25px;
-                height: 40px;
-            }
-        }
-
-        /* Mobile Medium (361px - 480px) */
-        @media (max-width: 480px) {
-            .section {
-                padding: 0 20px;
-            }
-            
-            .hero {
-                padding: 0 20px;
-            }
-            
-            .hero-content {
-                padding: 15px 0;
-            }
-            
-            .hero-title {
-                font-size: clamp(28px, 8vw, 36px);
-                margin-bottom: 15px;
-                line-height: 1.2;
-            }
-            
-            .hero-subtitle {
-                font-size: clamp(14px, 4vw, 18px);
-                margin-bottom: 25px;
-                line-height: 1.5;
-            }
-            
-            .hero-image {
-                transform: translateY(15px);
-                border-radius: 12px;
-            }
-            
-            /* Side navigation for small screens */
-            .side-nav {
-                right: 15px;
-                gap: 12px;
-            }
-            
-            .nav-dot {
-                width: 8px;
-                height: 8px;
-            }
-            
-            /* Scroll indicator for small screens */
-            .scroll-indicator {
-                bottom: 25px;
-                width: 20px;
-                height: 35px;
-            }
-            
-            .scroll-indicator::before {
-                width: 3px;
-                height: 6px;
-            }
-        }
-
-        /* Mobile Small (up to 360px) */
-        @media (max-width: 360px) {
-            .section {
-                padding: 0 15px;
-            }
-            
-            .hero {
-                padding: 0 15px;
-            }
-            
-            .hero-content {
-                padding: 10px 0;
-            }
-            
-            .hero-title {
-                font-size: clamp(24px, 7vw, 32px);
-                margin-bottom: 12px;
-            }
-            
-            .hero-subtitle {
-                font-size: clamp(13px, 3.5vw, 16px);
-                margin-bottom: 20px;
-            }
-            
-            .hero-image {
-                transform: translateY(10px);
-                border-radius: 10px;
-            }
-            
-            /* Minimal side navigation */
-            .side-nav {
-                right: 10px;
-                gap: 10px;
-            }
-            
-            .nav-dot {
-                width: 6px;
-                height: 6px;
-                border-width: 1px;
-            }
-            
-            /* Progress bar */
-            .progress-bar {
-                height: 1.5px;
-            }
-            
-            /* Hide scroll indicator on very small screens */
-            .scroll-indicator {
-                display: none;
-            }
-        }
-
-        /* Custom cursor hide on touch devices */
-        @media (hover: none) and (pointer: coarse) {
-            .cursor {
-                display: none;
-            }
-            
-            body {
-                cursor: auto;
-            }
-        }
-
-        /* Landscape orientation for mobile */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .hero {
-                min-height: 100vh;
-                padding: 20px 30px;
-            }
-            
-            .hero-content {
-                height: 100vh;
-                justify-content: center;
-            }
-            
-            .hero-title {
-                font-size: clamp(24px, 6vw, 36px);
-                margin-bottom: 15px;
-                margin-top: 0;
-            }
-            
-            .hero-subtitle {
-                font-size: clamp(14px, 3vw, 18px);
-                margin-bottom: 20px;
-            }
-            
-            .hero-image {
-                max-width: 60%;
-                transform: translateY(10px);
-            }
-        }
-
-        /* =================================================================
-        CHALLENGE SECTION 
-        ================================================================= */
-        .challenge {
-            background-color: var(--card-bg);
-            color: white;
-        }
-
-        .challenge-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .challenge-content h2 {
-            font-family: var(--font-decorative);
-            font-size: var(--font-size-h1);
-            font-weight: 300;
-            color: var(--accent-color);
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-
-        .challenge-content p {
-            font-size: var(--font-size-body-large);
-            line-height: var(--line-height-relaxed);
-            font-weight: 300;
-        }
-
-        .challenge-image {
-            width: 100%;
-            height: 400px;
-            background: var(--bg-color);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--body-text);
-            font-style: italic;
-        }
-
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 50px;
-            border: 2px solid var(--accent-color);
-            border-radius: 25px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding-top: 8px;
-            opacity: 0.7;
-            z-index: 100;
-        }
-
-        .scroll-indicator::before {
-            content: '';
-            width: 4px;
-            height: 8px;
-            background-color: var(--accent-color);
-            border-radius: 2px;
-            animation: scroll 2s infinite;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(20px); opacity: 0; }
-        }
-
-        /* Floating Elements */
-        .floating-element {
-            position: absolute;
-            pointer-events: none;
-            opacity: 0.6;
-        }
-
-        .floating-circle {
-            width: 100px;
-            height: 100px;
-            border: 1px solid var(--accent-color);
-            border-radius: 50%;
-            top: 20%;
-            right: 10%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .floating-line {
-            width: 200px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-            top: 70%;
-            left: 10%;
-            animation: float 8s ease-in-out infinite reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        /* =================================================================
-        CHALLENGE SECTION MOBILE ADAPTATIONS
-        ================================================================= */
-        /* Tablet styles (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .challenge {
-                padding: 80px 40px !important;
-            }
-            
-            .challenge-grid {
-                gap: 60px !important;
-                align-items: flex-start !important;
-            }
-            
-            .challenge-content h2,
-            .solution-content h2 {
-                font-size: clamp(32px, 5vw, 40px) !important;
-                margin-bottom: 25px !important;
-                line-height: 1.2 !important;
-                text-align: center !important;
-            }
-            
-            .challenge-content p,
-            .solution-content p {
-                font-size: clamp(16px, 2.2vw, 18px) !important;
-                line-height: 1.6 !important;
-                margin-bottom: 20px !important;
-                text-align: left !important;
-            }
-            
-            .solution-list li {
-                font-size: clamp(14px, 1.8vw, 16px) !important;
-                margin-bottom: 12px !important;
-                padding-left: 20px !important;
-                line-height: 1.5 !important;
-                text-align: left !important;
-            }
-        }
-
-        /* Mobile Large (481px - 768px) */
-        @media (max-width: 768px) {
-            .challenge {
-                padding: 60px 30px !important;
-            }
-            
-            .challenge-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 40px !important;
-                grid-template-columns: none !important;
-                align-items: stretch !important;
-            }
-            
-            .challenge-content {
-                order: 1 !important;
-                width: 100% !important;
-                margin-bottom: 0 !important;
-            }
-            
-            .solution-content {
-                order: 2 !important;
-                width: 100% !important;
-            }
-            
-            .challenge-content h2,
-            .solution-content h2 {
-                font-size: clamp(24px, 6vw, 32px) !important;
-                margin-bottom: 20px !important;
-                text-align: center !important;
-                line-height: 1.3 !important;
-            }
-            
-            .challenge-content p,
-            .solution-content p {
-                font-size: clamp(14px, 3.5vw, 16px) !important;
-                line-height: 1.7 !important;
-                margin-bottom: 20px !important;
-                text-align: left !important;
-            }
-            
-            .solution-list {
-                margin-top: 0 !important;
-                width: 100% !important;
-                padding-left: 0 !important;
-            }
-            
-            .solution-list li {
-                font-size: clamp(13px, 3vw, 15px) !important;
-                line-height: 1.6 !important;
-                margin-bottom: 15px !important;
-                padding-left: 25px !important;
-                width: 100% !important;
-                opacity: 1 !important;
-                transform: translateX(0) !important;
-                text-align: left !important;
-            }
-            
-            .solution-list li::before {
-                font-size: 14px !important;
-                left: 0 !important;
-                top: 0 !important;
-            }
-        }
-
-        /* Mobile Medium (361px - 480px) */
-        @media (max-width: 480px) {
-            .challenge {
-                padding: 50px 20px !important;
-            }
-            
-            .challenge-grid {
-                gap: 30px !important;
-            }
-            
-            .challenge-content h2,
-            .solution-content h2 {
-                font-size: clamp(20px, 5.5vw, 26px) !important;
-                margin-bottom: 15px !important;
-                line-height: 1.2 !important;
-                text-align: center !important;
-            }
-            
-            .challenge-content p,
-            .solution-content p {
-                font-size: clamp(13px, 3.2vw, 15px) !important;
-                line-height: 1.6 !important;
-                margin-bottom: 18px !important;
-                text-align: left !important;
-            }
-            
-            .solution-list li {
-                font-size: clamp(12px, 2.8vw, 14px) !important;
-                margin-bottom: 12px !important;
-                padding-left: 22px !important;
-                line-height: 1.5 !important;
-                text-align: left !important;
-            }
-            
-            .solution-list li::before {
-                font-size: 12px !important;
-            }
-        }
-
-        /* Mobile Small (up to 360px) */
-        @media (max-width: 360px) {
-            .challenge {
-                padding: 40px 15px !important;
-            }
-            
-            .challenge-grid {
-                gap: 25px !important;
-            }
-            
-            .challenge-content h2,
-            .solution-content h2 {
-                font-size: clamp(18px, 5vw, 22px) !important;
-                margin-bottom: 12px !important;
-                line-height: 1.2 !important;
-                text-align: center !important;
-            }
-            
-            .challenge-content p,
-            .solution-content p {
-                font-size: clamp(12px, 3vw, 14px) !important;
-                line-height: 1.5 !important;
-                margin-bottom: 15px !important;
-                text-align: left !important;
-            }
-            
-            .solution-list li {
-                font-size: clamp(11px, 2.5vw, 13px) !important;
-                margin-bottom: 10px !important;
-                padding-left: 20px !important;
-                line-height: 1.4 !important;
-                text-align: left !important;
-            }
-            
-            .solution-list li::before {
-                font-size: 11px !important;
-            }
-        }
-
-        /* Landscape orientation for mobile */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .challenge {
-                padding: 30px !important;
-            }
-            
-            .challenge-grid {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 30px !important;
-                align-items: flex-start !important;
-                flex-direction: row !important;
-            }
-            
-            .challenge-content {
-                order: 1 !important;
-            }
-            
-            .solution-content {
-                order: 2 !important;
-            }
-            
-            .challenge-content h2,
-            .solution-content h2 {
-                font-size: clamp(18px, 4vw, 24px) !important;
-                margin-bottom: 12px !important;
-                line-height: 1.2 !important;
-                text-align: center !important;
-            }
-            
-            .challenge-content p,
-            .solution-content p {
-                font-size: clamp(11px, 2.5vw, 14px) !important;
-                margin-bottom: 12px !important;
-                line-height: 1.5 !important;
-                text-align: left !important;
-            }
-            
-            .solution-list li {
-                font-size: clamp(10px, 2vw, 12px) !important;
-                margin-bottom: 6px !important;
-                padding-left: 15px !important;
-                line-height: 1.4 !important;
-                text-align: left !important;
-            }
-        }
-
-        /* Ensure proper text wrapping and sizing */
-        @media (max-width: 768px) {
-            .challenge-content,
-            .solution-content {
-                overflow-wrap: break-word !important;
-                word-wrap: break-word !important;
-                hyphens: auto !important;
-                box-sizing: border-box !important;
-            }
-            
-            .challenge-content *,
-            .solution-content * {
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-        }
-
-    /* =================================================================
-    Assessment Section
-    ================================================================= */
-        .assessment {
-            background: linear-gradient(135deg, var(--bg-color) 0%, #f0ede6 100%);
-        }
-
-        .assessment-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .assessment-content h2 {
-            font-family: var(--font-decorative);
-            font-size: var(--font-size-h1);
-            font-weight: 300;
-            color: var(--card-bg);
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-
-        .assessment-content p {
-            font-size: var(--font-size-body-large);
-            line-height: var(--line-height-relaxed);
-            font-weight: 300;
-            color: var(--body-text);
-        }
-
-        .assessment-image {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(44, 59, 51, 0.15);
-            transform: translateX(50px);
-            opacity: 0;
-        }
-        /* =================================================================
-ASSESSMENT SECTION MOBILE ADAPTATIONS
-================================================================= */
-
-/* Tablet styles (768px - 1024px) */
-@media (max-width: 1024px) {
-    .assessment {
-        padding: 80px 40px !important;
-    }
-    
-    .assessment-grid {
-        gap: 60px !important;
-        align-items: flex-start !important;
-    }
-    
-    .assessment-content h2 {
-        font-size: clamp(32px, 5vw, 40px) !important;
-        margin-bottom: 25px !important;
-        line-height: 1.2 !important;
-        text-align: center !important;
-    }
-    
-    .assessment-content p {
-        font-size: clamp(16px, 2.2vw, 18px) !important;
-        line-height: 1.6 !important;
-        margin-bottom: 20px !important;
-        text-align: left !important;
-    }
-    
-    .assessment-image {
-        max-width: 100% !important;
-        height: auto !important;
-        transform: translateX(0) !important;
-        opacity: 1 !important;
-    }
-}
-
-/* Mobile Large (481px - 768px) */
-@media (max-width: 768px) {
-    .assessment {
-        padding: 60px 30px !important;
-    }
-    
-    .assessment-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 40px !important;
-        grid-template-columns: none !important;
-        align-items: stretch !important;
-    }
-    
-    /* Image идет первым */
-    .assessment-image {
-        order: 1 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        height: auto !important;
-        transform: translateY(0) !important;
-        opacity: 1 !important;
-        border-radius: 15px !important;
-        box-shadow: 0 10px 30px rgba(44, 59, 51, 0.15) !important;
-        margin-bottom: 20px !important;
-    }
-    
-    /* Content идет вторым */
-    .assessment-content {
-        order: 2 !important;
-        width: 100% !important;
-    }
-    
-    .assessment-content h2 {
-        font-size: clamp(24px, 6vw, 32px) !important;
-        margin-bottom: 20px !important;
-        text-align: center !important;
-        line-height: 1.3 !important;
-    }
-    
-    .assessment-content p {
-        font-size: clamp(14px, 3.5vw, 16px) !important;
-        line-height: 1.7 !important;
-        margin-bottom: 20px !important;
-        text-align: left !important;
-    }
-}
-
-/* Mobile Medium (361px - 480px) */
-@media (max-width: 480px) {
-    .assessment {
-        padding: 50px 20px !important;
-    }
-    
-    .assessment-grid {
-        gap: 30px !important;
-    }
-    
-    .assessment-image {
-        margin-bottom: 15px !important;
-        border-radius: 12px !important;
-    }
-    
-    .assessment-content h2 {
-        font-size: clamp(20px, 5.5vw, 26px) !important;
-        margin-bottom: 15px !important;
-        line-height: 1.2 !important;
-        text-align: center !important;
-    }
-    
-    .assessment-content p {
-        font-size: clamp(13px, 3.2vw, 15px) !important;
-        line-height: 1.6 !important;
-        margin-bottom: 18px !important;
-        text-align: left !important;
-    }
-}
-
-/* Mobile Small (up to 360px) */
-@media (max-width: 360px) {
-    .assessment {
-        padding: 40px 15px !important;
-    }
-    
-    .assessment-grid {
-        gap: 25px !important;
-    }
-    
-    .assessment-image {
-        margin-bottom: 12px !important;
-        border-radius: 10px !important;
-    }
-    
-    .assessment-content h2 {
-        font-size: clamp(18px, 5vw, 22px) !important;
-        margin-bottom: 12px !important;
-        line-height: 1.2 !important;
-        text-align: center !important;
-    }
-    
-    .assessment-content p {
-        font-size: clamp(12px, 3vw, 14px) !important;
-        line-height: 1.5 !important;
-        margin-bottom: 15px !important;
-        text-align: left !important;
-    }
-}
-
-/* Landscape orientation for mobile */
-@media (max-width: 768px) and (orientation: landscape) {
-    .assessment {
-        padding: 30px !important;
-    }
-    
-    .assessment-grid {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 30px !important;
-        align-items: flex-start !important;
-        flex-direction: row !important;
-    }
-    
-    .assessment-image {
-        order: 1 !important;
-        margin-bottom: 0 !important;
-    }
-    
-    .assessment-content {
-        order: 2 !important;
-    }
-    
-    .assessment-content h2 {
-        font-size: clamp(18px, 4vw, 24px) !important;
-        margin-bottom: 12px !important;
-        line-height: 1.2 !important;
-        text-align: center !important;
-    }
-    
-    .assessment-content p {
-        font-size: clamp(11px, 2.5vw, 14px) !important;
-        margin-bottom: 12px !important;
-        line-height: 1.5 !important;
-        text-align: left !important;
-    }
-}
-
-/* Ensure proper text wrapping and sizing */
-@media (max-width: 768px) {
-    .assessment-content {
-        overflow-wrap: break-word !important;
-        word-wrap: break-word !important;
-        hyphens: auto !important;
-        box-sizing: border-box !important;
-    }
-    
-    .assessment-content * {
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-    }
-    
-    .assessment-image {
-        max-width: 100% !important;
-        width: 100% !important;
-        height: auto !important;
-        object-fit: cover !important;
-        display: block !important;
-    }
-}
-        /* =================================================================
-        Color Solution Section
-        ================================================================= */
-        .solution {
-            background-color: var(--card-bg);
-            color: white;
-        }
-
-        .solution-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .solution-content h2 {
-            font-family: var(--font-decorative);
-            font-size: var(--font-size-h1);
-            font-weight: 300;
-            color: var(--accent-color);
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-
-        .solution-content p {
-            font-size: var(--font-size-body-large);
-            line-height: var(--line-height-relaxed);
-            font-weight: 300;
-        }
-
-        .solution-list {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0 0 0;
-        }
-
-        .solution-list li {
-            font-size: var(--font-size-body);
-            line-height: var(--line-height-relaxed);
-            font-weight: 300;
-            margin-bottom: 15px;
-            padding-left: 25px;
-            position: relative;
-            opacity: 0;
-            transform: translateX(-20px);
-        }
-
-        .solution-list li::before {
-            content: "→";
-            color: var(--accent-color);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        /* Colour Solutions Section */
-        .colour-solutions {
-            background: linear-gradient(135deg, var(--bg-color) 0%, #f8f6f1 100%);
-        }
-
-        .colour-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .colour-content h2 {
-            font-family: var(--font-decorative);
-            font-size: var(--font-size-h1);
-            font-weight: 300;
-            color: var(--card-bg);
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-
-        .colour-content p {
-            font-size: var(--font-size-body-large);
-            line-height: var(--line-height-relaxed);
-            font-weight: 300;
-            color: var(--body-text);
-        }
-
-        .colour-images {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .colour-image {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            transform: translateY(30px);
-            opacity: 0;
-        }
-/* =================================================================
-COLOUR SOLUTIONS SECTION MOBILE ADAPTATIONS
-================================================================= */
-
-/* Tablet styles (768px - 1024px) */
-@media (max-width: 1024px) {
-    .colour-solutions {
-        padding: 80px 40px !important;
-    }
-    
-    .colour-grid {
-        gap: 60px !important;
-        align-items: flex-start !important;
-    }
-    
-    .colour-content h2 {
-        font-size: clamp(32px, 5vw, 40px) !important;
-        margin-bottom: 25px !important;
-        line-height: 1.2 !important;
-        text-align: center !important;
-    }
-    
-    .colour-content p {
-        font-size: clamp(16px, 2.2vw, 18px) !important;
-        line-height: 1.6 !important;
-        margin-bottom: 20px !important;
-        text-align: left !important;
-    }
-    
-    .colour-images {
-        gap: 15px !important;
-    }
-    
-    .colour-image {
-        transform: translateY(0) !important;
-        opacity: 1 !important;
-        border-radius: 12px !important;
-        max-width: 100% !important;
-        height: auto !important;
-    }
-}
-
-/* Mobile Large (481px - 768px) */
-@media (max-width: 768px) {
-    .colour-solutions {
-        padding: 60px 30px !important;
-    }
-    
-    .colour-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 40px !important;
-        grid-template-columns: none !important;
-        align-items: stretch !important;
-    }
-    
-    /* Content идет первым */
-    .colour-content {
-        order: 1 !important;
-        width: 100% !important;
-        margin-bottom: 20px !important;
-    }
-    
-    /* Images идут вторыми */
-    .colour-images {
-        order: 2 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 20px !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 auto !important;
-    }
-    
-    .colour-content h2 {
-        font-size: clamp(24px, 6vw, 32px) !important;
-        margin-bottom: 20px !important;
-        text-align: center !important;
-        line-height: 1.3 !important;
-    }
-    
-    .colour-content p {
-        font-size: clamp(14px, 3.5vw, 16px) !important;
-        line-height: 1.7 !important;
-        margin-bottom: 20px !important;
-        text-align: left !important;
-    }
-    
-    .colour-image {
-        width: 100% !important;
-        max-width: 100% !important;
-        height: auto !important;
-        transform: translateY(0) !important;
-        opacity: 1 !important;
-        border-radius: 15px !important;
-        object-fit: cover !important;
-        display: block !important;
-    }
-}
-
-/* Mobile Medium (361px - 480px) */
-@media (max-width: 480px) {
-    .colour-solutions {
-        padding: 50px 20px !important;
-    }
-    
-    .colour-grid {
-        gap: 30px !important;
-    }
-    
-    .colour-content {
-        margin-bottom: 15px !important;
-    }
-    
-    .colour-images {
-        gap: 15px !important;
-        max-width: 350px !important;
-    }
-    
-    .colour-content h2 {
-        font-size: clamp(20px, 5.5vw, 26px) !important;
-        margin-bottom: 15px !important;
-        line-height: 1.2 !important;
-        text-align: center !important;
-    }
-    
-    .colour-content p {
-        font-size: clamp(13px, 3.2vw, 15px) !important;
-        line-height: 1.6 !important;
-        margin-bottom: 18px !important;
-        text-align: left !important;
-    }
-    
-    .colour-image {
-        border-radius: 12px !important;
-    }
-}
-
-/* Mobile Small (up to 360px) */
-@media (max-width: 360px) {
-    .colour-solutions {
-        padding: 40px 15px !important;
-    }
-    
-    .colour-grid {
-        gap: 25px !important;
-    }
-    
-    .colour-content {
-        margin-bottom: 12px !important;
-    }
-    
-    .colour-images {
-        gap: 12px !important;
-        max-width: 300px !important;
-    }
-    
-    .colour-content h2 {
-        font-size: clamp(18px, 5vw, 22px) !important;
-        margin-bottom: 12px !important;
-        line-height: 1.2 !important;
-        text-align: center !important;
-    }
-    
-    .colour-content p {
-        font-size: clamp(12px, 3vw, 14px) !important;
-        line-height: 1.5 !important;
-        margin-bottom: 15px !important;
-        text-align: left !important;
-    }
-    
-    .colour-image {
-        border-radius: 10px !important;
-    }
-}
-
-/* Landscape orientation for mobile */
-@media (max-width: 768px) and (orientation: landscape) {
-    .colour-solutions {
-        padding: 30px !important;
-    }
-    
-    .colour-grid {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 30px !important;
-        align-items: flex-start !important;
-        flex-direction: row !important;
-    }
-    
-    .colour-content {
-        order: 1 !important;
-        margin-bottom: 0 !important;
-    }
-    
-    .colour-images {
-        order: 2 !important;
-        gap: 15px !important;
-        max-width: 100% !important;
-    }
-    
-    .colour-content h2 {
-        font-size: clamp(18px, 4vw, 24px) !important;
-        margin-bottom: 12px !important;
-        line-height: 1.2 !important;
-        text-align: center !important;
-    }
-    
-    .colour-content p {
-        font-size: clamp(11px, 2.5vw, 14px) !important;
-        margin-bottom: 12px !important;
-        line-height: 1.5 !important;
-        text-align: left !important;
-    }
-    
-    .colour-image {
-        border-radius: 8px !important;
-    }
-}
-
-/* Ensure proper text wrapping and sizing */
-@media (max-width: 768px) {
-    .colour-content {
-        overflow-wrap: break-word !important;
-        word-wrap: break-word !important;
-        hyphens: auto !important;
-        box-sizing: border-box !important;
-    }
-    
-    .colour-content * {
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-    }
-    
-    .colour-images {
-        box-sizing: border-box !important;
-    }
-    
-    .colour-image {
-        max-width: 100% !important;
-        width: 100% !important;
-        height: auto !important;
-        object-fit: cover !important;
-        display: block !important;
-    }
-}
-        /* Layout Innovation Section */
-        .layout-innovation {
-            background-color: var(--card-bg);
-            color: white;
-        }
-
-        .layout-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .layout-content h2 {
-            font-family: var(--font-decorative);
-            font-size: var(--font-size-h1);
-            font-weight: 300;
-            color: var(--accent-color);
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-
-        .layout-content p {
-            font-size: var(--font-size-body-large);
-            line-height: var(--line-height-relaxed);
-            font-weight: 300;
-            margin-bottom: 20px;
-        }
-
-        .layout-image {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            transform: translateX(-50px);
-            opacity: 0;
-        }
-/* =================================================================
-LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
-================================================================= */
-
-/* Tablet styles (768px - 1024px) */
-@media (max-width: 1024px) {
-    .layout-innovation {
-        padding: 80px 40px !important;
-    }
-    
-    .layout-grid {
-        gap: 60px !important;
-        align-items: flex-start !important;
-    }
-    
-    .layout-content h2 {
-        font-size: clamp(32px, 5vw, 40px) !important;
-        margin-bottom: 25px !important;
-        line-height: 1.2 !important;
-        text-align: center !important;
-    }
-    
-    .layout-content p {
-        font-size: clamp(16px, 2.2vw, 18px) !important;
-        line-height: 1.6 !important;
-        margin-bottom: 20px !important;
-        text-align: left !important;
-    }
-    
-    .layout-image {
-        transform: translateX(0) !important;
-        opacity: 1 !important;
-        max-width: 100% !important;
-        height: auto !important;
-        border-radius: 12px !important;
-    }
-}
-
-/* Mobile Large (481px - 768px) */
-@media (max-width: 768px) {
-    .layout-innovation {
-        padding: 60px 30px !important;
-    }
-    
-    .layout-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 40px !important;
-        grid-template-columns: none !important;
-        align-items: stretch !important;
-    }
-    
-    /* Content идет первым (заголовок + текст) */
-    .layout-content {
-        order: 1 !important;
-        width: 100% !important;
-        margin-bottom: 20px !important;
-    }
-    
-    /* Image идет вторым */
-    .layout-image {
-        order: 2 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        height: auto !important;
-        transform: translateX(0) !important;
-        opacity: 1 !important;
-        border-radius: 15px !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
-        object-fit: cover !important;
-        display: block !important;
-    }
-    
-    .layout-content h2 {
-        font-size: clamp(24px, 6vw, 32px) !important;
-        margin-bottom: 20px !important;
-        text-align: center !important;
-        line-height: 1.3 !important;
-    }
-    
-    .layout-content p {
-        font-size: clamp(14px, 3.5vw, 16px) !important;
-        line-height: 1.7 !important;
-        margin-bottom: 20px !important;
-        text-align: left !important;
-    }
-}
-
-/* Mobile Medium (361px - 480px) */
-@media (max-width: 480px) {
-    .layout-innovation {
-        padding: 50px 20px !important;
-    }
-    
-    .layout-grid {
-        gap: 30px !important;
-    }
-    
-    .layout-content {
-        margin-bottom: 15px !important;
-    }
-    
-    .layout-content h2 {
-        font-size: clamp(20px, 5.5vw, 26px) !important;
-        margin-bottom: 15px !important;
-        line-height: 1.2 !important;
-        text-align: center !important;
-    }
-    
-    .layout-content p {
-        font-size: clamp(13px, 3.2vw, 15px) !important;
-        line-height: 1.6 !important;
-        margin-bottom: 18px !important;
-        text-align: left !important;
-    }
-    
-    .layout-image {
-        border-radius: 12px !important;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
-    }
-}
-
-/* Mobile Small (up to 360px) */
-@media (max-width: 360px) {
-    .layout-innovation {
-        padding: 40px 15px !important;
-    }
-    
-    .layout-grid {
-        gap: 25px !important;
-    }
-    
-    .layout-content {
-        margin-bottom: 12px !important;
-    }
-    
-    .layout-content h2 {
-        font-size: clamp(18px, 5vw, 22px) !important;
-        margin-bottom: 12px !important;
-        line-height: 1.2 !important;
-        text-align: center !important;
-    }
-    
-    .layout-content p {
-        font-size: clamp(12px, 3vw, 14px) !important;
-        line-height: 1.5 !important;
-        margin-bottom: 15px !important;
-        text-align: left !important;
-    }
-    
-    .layout-image {
-        border-radius: 10px !important;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1) !important;
-    }
-}
-
-/* Landscape orientation for mobile */
-@media (max-width: 768px) and (orientation: landscape) {
-    .layout-innovation {
-        padding: 30px !important;
-    }
-    
-    .layout-grid {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 30px !important;
-        align-items: flex-start !important;
-        flex-direction: row !important;
-    }
-    
-    .layout-content {
-        order: 2 !important;
-        margin-bottom: 0 !important;
-    }
-    
-    .layout-image {
-        order: 1 !important;
-    }
-    
-    .layout-content h2 {
-        font-size: clamp(18px, 4vw, 24px) !important;
-        margin-bottom: 12px !important;
-        line-height: 1.2 !important;
-        text-align: center !important;
-    }
-    
-    .layout-content p {
-        font-size: clamp(11px, 2.5vw, 14px) !important;
-        margin-bottom: 12px !important;
-        line-height: 1.5 !important;
-        text-align: left !important;
-    }
-    
-    .layout-image {
-        border-radius: 8px !important;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15) !important;
-    }
-}
-
-/* Ensure proper text wrapping and sizing */
-@media (max-width: 768px) {
-    .layout-content {
-        overflow-wrap: break-word !important;
-        word-wrap: break-word !important;
-        hyphens: auto !important;
-        box-sizing: border-box !important;
-    }
-    
-    .layout-content * {
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-    }
-    
-    .layout-image {
-        max-width: 100% !important;
-        width: 100% !important;
-        height: auto !important;
-        object-fit: cover !important;
-        display: block !important;
-    }
-}
-        /* Benefits Section */
-        .benefits {
-            background: linear-gradient(135deg, var(--bg-color) 0%, #f0ede6 100%);
-        }
-
-        /* Catalog Section */
-        .catalog {
-            background-color: var(--card-bg);
-            color: white;
-        }
-
-        /* Delivery Section */
-        .delivery {
-            background: linear-gradient(135deg, var(--bg-color) 0%, #f8f6f1 100%);
-        }
-
-        .delivery-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .delivery-content h2 {
-            font-family: var(--font-decorative);
-            font-size: var(--font-size-h1);
-            font-weight: 300;
-            color: var(--card-bg);
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-
-        .delivery-content p {
-            font-size: var(--font-size-body-large);
-            line-height: var(--line-height-relaxed);
-            font-weight: 300;
-            color: var(--body-text);
-        }
-
-        .delivery-images {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .delivery-image {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            transform: translateY(30px);
-            opacity: 0;
-        }
-
-        /* Social Section */
-        .social {
-            background-color: var(--card-bg);
-            color: white;
-        }
-        /* =================================================================
-        BENEFITS SECTION MOBILE ADAPTATIONS - TEXT FIRST
-        ================================================================= */
-
-        /* Tablet styles (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .benefits {
-                padding: 80px 40px !important;
-            }
-            
-            .benefits .assessment-grid {
-                gap: 60px !important;
-                align-items: flex-start !important;
-            }
-            
-            .benefits .assessment-content h2 {
-                font-size: clamp(32px, 5vw, 40px) !important;
-                margin-bottom: 25px !important;
-                line-height: 1.2 !important;
-                text-align: center !important;
-            }
-            
-            .benefits .assessment-content p {
-                font-size: clamp(16px, 2.2vw, 18px) !important;
-                line-height: 1.6 !important;
-                margin-bottom: 20px !important;
-                text-align: left !important;
-            }
-            
-            .benefits .assessment-image {
-                max-width: 100% !important;
-                height: auto !important;
-                transform: translateX(0) !important;
-                opacity: 1 !important;
-            }
-        }
-
-        /* Mobile Large (481px - 768px) */
-        @media (max-width: 768px) {
-            .benefits {
-                padding: 60px 30px !important;
-            }
-            
-            .benefits .assessment-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 40px !important;
-                grid-template-columns: none !important;
-                align-items: stretch !important;
-            }
-            
-            /* Content идет первым - ТЕКСТ СНАЧАЛА */
-            .benefits .assessment-content {
-                order: 1 !important;
-                width: 100% !important;
-                margin-bottom: 20px !important;
-            }
-            
-            /* Image идет вторым - ФОТО ПОТОМ */
-            .benefits .assessment-image {
-                order: 2 !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                height: auto !important;
-                transform: translateY(0) !important;
-                opacity: 1 !important;
-                border-radius: 15px !important;
-                box-shadow: 0 10px 30px rgba(44, 59, 51, 0.15) !important;
-            }
-            
-            .benefits .assessment-content h2 {
-                font-size: clamp(24px, 6vw, 32px) !important;
-                margin-bottom: 20px !important;
-                text-align: center !important;
-                line-height: 1.3 !important;
-            }
-            
-            .benefits .assessment-content p {
-                font-size: clamp(14px, 3.5vw, 16px) !important;
-                line-height: 1.7 !important;
-                margin-bottom: 20px !important;
-                text-align: left !important;
-            }
-        }
-
-        /* =================================================================
-        CATALOG SECTION MOBILE ADAPTATIONS - TEXT FIRST
-        ================================================================= */
-
-        /* Tablet styles (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .catalog {
-                padding: 80px 40px !important;
-            }
-            
-            .catalog .solution-grid {
-                gap: 60px !important;
-                align-items: flex-start !important;
-            }
-            
-            .catalog .solution-content h2 {
-                font-size: clamp(32px, 5vw, 40px) !important;
-                margin-bottom: 25px !important;
-                line-height: 1.2 !important;
-                text-align: center !important;
-            }
-            
-            .catalog .solution-content p {
-                font-size: clamp(16px, 2.2vw, 18px) !important;
-                line-height: 1.6 !important;
-                margin-bottom: 20px !important;
-                text-align: left !important;
-            }
-            
-            .catalog .layout-image {
-                max-width: 100% !important;
-                height: auto !important;
-                transform: translateX(0) !important;
-                opacity: 1 !important;
-            }
-        }
-
-        /* Mobile Large (481px - 768px) */
-        @media (max-width: 768px) {
-            .catalog {
-                padding: 60px 30px !important;
-            }
-            
-            .catalog .solution-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 40px !important;
-                grid-template-columns: none !important;
-                align-items: stretch !important;
-            }
-            
-            /* Content идет первым - ТЕКСТ СНАЧАЛА */
-            .catalog .solution-content {
-                order: 1 !important;
-                width: 100% !important;
-                margin-bottom: 20px !important;
-            }
-            
-            /* Image идет вторым - ФОТО ПОТОМ */
-            .catalog .layout-image {
-                order: 2 !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                height: auto !important;
-                transform: translateX(0) !important;
-                opacity: 1 !important;
-                border-radius: 15px !important;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
-            }
-            
-            .catalog .solution-content h2 {
-                font-size: clamp(24px, 6vw, 32px) !important;
-                margin-bottom: 20px !important;
-                text-align: center !important;
-                line-height: 1.3 !important;
-            }
-            
-            .catalog .solution-content p {
-                font-size: clamp(14px, 3.5vw, 16px) !important;
-                line-height: 1.7 !important;
-                margin-bottom: 20px !important;
-                text-align: left !important;
-            }
-        }
-
-        /* =================================================================
-        DELIVERY SECTION MOBILE ADAPTATIONS - TEXT FIRST
-        ================================================================= */
-
-        /* Tablet styles (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .delivery {
-                padding: 80px 40px !important;
-            }
-            
-            .delivery-grid {
-                gap: 60px !important;
-                align-items: flex-start !important;
-            }
-            
-            .delivery-content h2 {
-                font-size: clamp(32px, 5vw, 40px) !important;
-                margin-bottom: 25px !important;
-                line-height: 1.2 !important;
-                text-align: center !important;
-            }
-            
-            .delivery-content p {
-                font-size: clamp(16px, 2.2vw, 18px) !important;
-                line-height: 1.6 !important;
-                margin-bottom: 20px !important;
-                text-align: left !important;
-            }
-            
-            .delivery-images {
-                gap: 15px !important;
-            }
-            
-            .delivery-image {
-                transform: translateY(0) !important;
-                opacity: 1 !important;
-                border-radius: 12px !important;
-            }
-        }
-
-        /* Mobile Large (481px - 768px) */
-        @media (max-width: 768px) {
-            .delivery {
-                padding: 60px 30px !important;
-            }
-            
-            .delivery-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 40px !important;
-                grid-template-columns: none !important;
-                align-items: stretch !important;
-            }
-            
-            /* Content идет первым - ТЕКСТ СНАЧАЛА */
-            .delivery-content {
-                order: 1 !important;
-                width: 100% !important;
-                margin-bottom: 20px !important;
-            }
-            
-            /* Images идут вторыми - ФОТО ПОТОМ */
-            .delivery-images {
-                order: 2 !important;
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 20px !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                margin: 0 auto !important;
-            }
-            
-            .delivery-content h2 {
-                font-size: clamp(24px, 6vw, 32px) !important;
-                margin-bottom: 20px !important;
-                text-align: center !important;
-                line-height: 1.3 !important;
-            }
-            
-            .delivery-content p {
-                font-size: clamp(14px, 3.5vw, 16px) !important;
-                line-height: 1.7 !important;
-                margin-bottom: 20px !important;
-                text-align: left !important;
-            }
-            
-            .delivery-image {
-                width: 100% !important;
-                max-width: 100% !important;
-                height: auto !important;
-                transform: translateY(0) !important;
-                opacity: 1 !important;
-                border-radius: 15px !important;
-            }
-        }
-
-        /* =================================================================
-        SOCIAL SECTION MOBILE ADAPTATIONS - TEXT FIRST
-        ================================================================= */
-
-        /* Tablet styles (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .social {
-                padding: 80px 40px !important;
-            }
-            
-            .social .solution-grid {
-                gap: 60px !important;
-                align-items: flex-start !important;
-            }
-            
-            .social .solution-content h2 {
-                font-size: clamp(32px, 5vw, 40px) !important;
-                margin-bottom: 25px !important;
-                line-height: 1.2 !important;
-                text-align: center !important;
-            }
-            
-            .social .solution-content p {
-                font-size: clamp(16px, 2.2vw, 18px) !important;
-                line-height: 1.6 !important;
-                margin-bottom: 20px !important;
-                text-align: left !important;
-            }
-            
-            .social .layout-image {
-                max-width: 100% !important;
-                height: auto !important;
-                transform: translateX(0) !important;
-                opacity: 1 !important;
-            }
-        }
-
-        /* Mobile Large (481px - 768px) */
-        @media (max-width: 768px) {
-            .social {
-                padding: 60px 30px !important;
-            }
-            
-            .social .solution-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 40px !important;
-                grid-template-columns: none !important;
-                align-items: stretch !important;
-            }
-            
-            /* Content идет первым - ТЕКСТ СНАЧАЛА */
-            .social .solution-content {
-                order: 1 !important;
-                width: 100% !important;
-                margin-bottom: 20px !important;
-            }
-            
-            /* Image идет вторым - ФОТО ПОТОМ */
-            .social .layout-image {
-                order: 2 !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                height: auto !important;
-                transform: translateX(0) !important;
-                opacity: 1 !important;
-                border-radius: 15px !important;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
-            }
-            
-            .social .solution-content h2 {
-                font-size: clamp(24px, 6vw, 32px) !important;
-                margin-bottom: 20px !important;
-                text-align: center !important;
-                line-height: 1.3 !important;
-            }
-            
-            .social .solution-content p {
-                font-size: clamp(14px, 3.5vw, 16px) !important;
-                line-height: 1.7 !important;
-                margin-bottom: 20px !important;
-                text-align: left !important;
-            }
-        }
-
-        /* =================================================================
-        MOBILE MEDIUM AND SMALL SIZES FOR ALL SECTIONS
-        ================================================================= */
-
-        @media (max-width: 480px) {
-            .benefits,
-            .catalog,
-            .delivery,
-            .social {
-                padding: 50px 20px !important;
-            }
-            
-            .benefits .assessment-content h2,
-            .catalog .solution-content h2,
-            .delivery-content h2,
-            .social .solution-content h2 {
-                font-size: clamp(20px, 5.5vw, 26px) !important;
-                margin-bottom: 15px !important;
-            }
-            
-            .benefits .assessment-content p,
-            .catalog .solution-content p,
-            .delivery-content p,
-            .social .solution-content p {
-                font-size: clamp(13px, 3.2vw, 15px) !important;
-                margin-bottom: 18px !important;
-            }
-            
-            .delivery-images {
-                gap: 15px !important;
-                max-width: 350px !important;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .benefits,
-            .catalog,
-            .delivery,
-            .social {
-                padding: 40px 15px !important;
-            }
-            
-            .benefits .assessment-content h2,
-            .catalog .solution-content h2,
-            .delivery-content h2,
-            .social .solution-content h2 {
-                font-size: clamp(18px, 5vw, 22px) !important;
-                margin-bottom: 12px !important;
-            }
-            
-            .benefits .assessment-content p,
-            .catalog .solution-content p,
-            .delivery-content p,
-            .social .solution-content p {
-                font-size: clamp(12px, 3vw, 14px) !important;
-                margin-bottom: 15px !important;
-            }
-            
-            .delivery-images {
-                gap: 12px !important;
-                max-width: 300px !important;
-            }
-        }
-
-        /* =================================================================
-        LANDSCAPE ORIENTATION FOR ALL SECTIONS
-        ================================================================= */
-
-        @media (max-width: 768px) and (orientation: landscape) {
-            .benefits,
-            .catalog,
-            .delivery,
-            .social {
-                padding: 30px !important;
-            }
-            
-            .benefits .assessment-grid,
-            .catalog .solution-grid,
-            .social .solution-grid {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 30px !important;
-                align-items: flex-start !important;
-                flex-direction: row !important;
-            }
-            
-            .delivery-grid {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 30px !important;
-                align-items: flex-start !important;
-            }
-            
-            /* В landscape режиме - контент слева, изображения справа */
-            .benefits .assessment-content,
-            .catalog .solution-content,
-            .delivery-content,
-            .social .solution-content {
-                order: 1 !important;
-            }
-            
-            .benefits .assessment-image,
-            .catalog .layout-image,
-            .delivery-images,
-            .social .layout-image {
-                order: 2 !important;
-            }
-            
-            /* Общие стили для заголовков в landscape */
-            .benefits .assessment-content h2,
-            .catalog .solution-content h2,
-            .delivery-content h2,
-            .social .solution-content h2 {
-                font-size: clamp(18px, 4vw, 24px) !important;
-                margin-bottom: 12px !important;
-                text-align: center !important;
-            }
-            
-            /* Общие стили для текста в landscape */
-            .benefits .assessment-content p,
-            .catalog .solution-content p,
-            .delivery-content p,
-            .social .solution-content p {
-                font-size: clamp(11px, 2.5vw, 14px) !important;
-                margin-bottom: 12px !important;
-                text-align: left !important;
-            }
-        }
-
-        /* =================================================================
-        ОБЩИЕ СТИЛИ ДЛЯ ВСЕХ СЕКЦИЙ
-        ================================================================= */
-
-        @media (max-width: 768px) {
-            .benefits .assessment-content,
-            .catalog .solution-content,
-            .delivery-content,
-            .social .solution-content {
-                overflow-wrap: break-word !important;
-                word-wrap: break-word !important;
-                hyphens: auto !important;
-                box-sizing: border-box !important;
-            }
-            
-            .benefits .assessment-content *,
-            .catalog .solution-content *,
-            .delivery-content *,
-            .social .solution-content * {
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-            
-            .benefits .assessment-image,
-            .catalog .layout-image,
-            .delivery-image,
-            .social .layout-image {
-                max-width: 100% !important;
-                width: 100% !important;
-                height: auto !important;
-                object-fit: cover !important;
-                display: block !important;
-            }
-        }
-
-    /* =================================================================
-    Product Card Section
-    ================================================================= */
-
-        .product-card {
-            background: linear-gradient(135deg, var(--bg-color) 0%, #f0ede6 100%);
-        }
-
-        .product-content {
-            text-align: center;
-            margin-bottom: 60px;
-            margin-top: 60px;
-        }
-
-        .product-content h2 {
-            font-family: var(--font-decorative);
-            font-size: var(--font-size-h1);
-            font-weight: 300;
-            color: var(--card-bg);
-            font-style: italic;
-            margin-bottom: 50px;
-        }
-
-        .product-text-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            margin-bottom: 60px;
-            text-align: left;
-        }
-
-        .product-text {
-            font-size: var(--font-size-body-large);
-            line-height: var(--line-height-relaxed);
-            font-weight: 300;
-            color: var(--body-text);
-            margin-bottom: 20px;
-        }
-
-        .product-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .product-list li {
-            font-size: var(--font-size-body);
-            line-height: var(--line-height-relaxed);
-            font-weight: 300;
-            color: var(--body-text);
-            margin-bottom: 15px;
-            padding-left: 25px;
-            position: relative;
-            opacity: 0;
-            transform: translateX(-20px);
-        }
-
-        .product-list li::before {
-            content: "•";
-            color: var(--card-bg);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        .product-images {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-
-        .product-image {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            transform: translateY(50px);
-            opacity: 0;
-        }
-
-        /* Enhanced Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .challenge-grid,
-            .assessment-grid,
-            .solution-grid,
-            .colour-grid,
-            .layout-grid,
-            .delivery-grid,
-            .product-text-grid,
-            .product-images {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                text-align: center;
-            }
-
-            .assessment-image,
-            .layout-image {
-                transform: translateY(30px);
-            }
-
-            .colour-images,
-            .delivery-images {
-                max-width: 400px;
-                margin: 0 auto;
-            }
-        }
-        /* =================================================================
-        PRODUCT CARD SECTION MOBILE ADAPTATIONS
-        ================================================================= */
-
-        /* Tablet styles (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .product-card {
-                padding: 80px 40px !important;
-            }
-            
-            .product-content {
-                text-align: center !important;
-                margin-bottom: 50px !important;
-                margin-top: 50px !important;
-            }
-            
-            .product-content h2 {
-                font-size: clamp(36px, 5vw, 44px) !important;
-                margin-bottom: 40px !important;
-                line-height: 1.2 !important;
-                text-align: center !important;
-            }
-            
-            .product-text-grid {
-                gap: 60px !important;
-                margin-bottom: 50px !important;
-            }
-            
-            .product-text {
-                font-size: clamp(16px, 2.2vw, 18px) !important;
-                line-height: 1.6 !important;
-                margin-bottom: 20px !important;
-                text-align: left !important;
-            }
-            
-            .product-list li {
-                font-size: clamp(14px, 1.8vw, 16px) !important;
-                margin-bottom: 12px !important;
-                padding-left: 20px !important;
-                line-height: 1.5 !important;
-                text-align: left !important;
-            }
-            
-            .product-images {
-                gap: 30px !important;
-            }
-            
-            .product-image {
-                transform: translateY(0) !important;
-                opacity: 1 !important;
-                border-radius: 12px !important;
-            }
-        }
-
-        /* Mobile Large (481px - 768px) */
-        @media (max-width: 768px) {
-            .product-card {
-                padding: 60px 30px !important;
-            }
-            
-            .product-content {
-                text-align: center !important;
-                margin-bottom: 40px !important;
-                margin-top: 40px !important;
-            }
-            
-            .product-content h2 {
-                font-size: clamp(24px, 6vw, 32px) !important;
-                margin-bottom: 30px !important;
-                text-align: center !important;
-                line-height: 1.3 !important;
-            }
-            
-            /* Text grid становится одной колонкой */
-            .product-text-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 30px !important;
-                grid-template-columns: none !important;
-                margin-bottom: 40px !important;
-                text-align: left !important;
-            }
-            
-            .product-text {
-                font-size: clamp(14px, 3.5vw, 16px) !important;
-                line-height: 1.7 !important;
-                margin-bottom: 15px !important;
-                text-align: left !important;
-                width: 100% !important;
-            }
-            
-            .product-list {
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-            
-            .product-list li {
-                font-size: clamp(13px, 3vw, 15px) !important;
-                line-height: 1.6 !important;
-                margin-bottom: 12px !important;
-                padding-left: 25px !important;
-                width: 100% !important;
-                opacity: 1 !important;
-                transform: translateX(0) !important;
-                text-align: left !important;
-            }
-            
-            .product-list li::before {
-                font-size: 14px !important;
-                left: 0 !important;
-                top: 0 !important;
-            }
-            
-            /* Images становятся одной колонкой */
-            .product-images {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 20px !important;
-                grid-template-columns: none !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                margin: 0 auto !important;
-            }
-            
-            .product-image {
-                width: 100% !important;
-                max-width: 100% !important;
-                height: auto !important;
-                transform: translateY(0) !important;
-                opacity: 1 !important;
-                border-radius: 15px !important;
-                object-fit: cover !important;
-                display: block !important;
-            }
-        }
-
-        /* Mobile Medium (361px - 480px) */
-        @media (max-width: 480px) {
-            .product-card {
-                padding: 50px 20px !important;
-            }
-            
-            .product-content {
-                margin-bottom: 30px !important;
-                margin-top: 30px !important;
-            }
-            
-            .product-content h2 {
-                font-size: clamp(20px, 5.5vw, 26px) !important;
-                margin-bottom: 25px !important;
-                line-height: 1.2 !important;
-            }
-            
-            .product-text-grid {
-                gap: 25px !important;
-                margin-bottom: 30px !important;
-            }
-            
-            .product-text {
-                font-size: clamp(13px, 3.2vw, 15px) !important;
-                line-height: 1.6 !important;
-                margin-bottom: 12px !important;
-            }
-            
-            .product-list li {
-                font-size: clamp(12px, 2.8vw, 14px) !important;
-                margin-bottom: 10px !important;
-                padding-left: 22px !important;
-                line-height: 1.5 !important;
-            }
-            
-            .product-list li::before {
-                font-size: 12px !important;
-            }
-            
-            .product-images {
-                gap: 15px !important;
-                max-width: 350px !important;
-            }
-            
-            .product-image {
-                border-radius: 12px !important;
-            }
-        }
-
-        /* Mobile Small (up to 360px) */
-        @media (max-width: 360px) {
-            .product-card {
-                padding: 40px 15px !important;
-            }
-            
-            .product-content {
-                margin-bottom: 25px !important;
-                margin-top: 25px !important;
-            }
-            
-            .product-content h2 {
-                font-size: clamp(18px, 5vw, 22px) !important;
-                margin-bottom: 20px !important;
-                line-height: 1.2 !important;
-            }
-            
-            .product-text-grid {
-                gap: 20px !important;
-                margin-bottom: 25px !important;
-            }
-            
-            .product-text {
-                font-size: clamp(12px, 3vw, 14px) !important;
-                line-height: 1.5 !important;
-                margin-bottom: 10px !important;
-            }
-            
-            .product-list li {
-                font-size: clamp(11px, 2.5vw, 13px) !important;
-                margin-bottom: 8px !important;
-                padding-left: 20px !important;
-                line-height: 1.4 !important;
-            }
-            
-            .product-list li::before {
-                font-size: 11px !important;
-            }
-            
-            .product-images {
-                gap: 12px !important;
-                max-width: 300px !important;
-            }
-            
-            .product-image {
-                border-radius: 10px !important;
-            }
-        }
-
-        /* Landscape orientation for mobile */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .product-card {
-                padding: 30px !important;
-            }
-            
-            .product-content {
-                margin-bottom: 25px !important;
-                margin-top: 25px !important;
-            }
-            
-            .product-content h2 {
-                font-size: clamp(18px, 4vw, 24px) !important;
-                margin-bottom: 20px !important;
-                line-height: 1.2 !important;
-            }
-            
-            /* В landscape - двухколоночная структура для текста */
-            .product-text-grid {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 25px !important;
-                margin-bottom: 25px !important;
-                text-align: left !important;
-                flex-direction: row !important;
-            }
-            
-            .product-text {
-                font-size: clamp(11px, 2.5vw, 14px) !important;
-                margin-bottom: 10px !important;
-                line-height: 1.5 !important;
-            }
-            
-            .product-list li {
-                font-size: clamp(10px, 2vw, 12px) !important;
-                margin-bottom: 6px !important;
-                padding-left: 15px !important;
-                line-height: 1.4 !important;
-            }
-            
-            /* В landscape - двухколоночная структура для изображений */
-            .product-images {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 15px !important;
-                max-width: 100% !important;
-                flex-direction: row !important;
-            }
-            
-            .product-image {
-                border-radius: 8px !important;
-            }
-        }
-
-        /* Ensure proper text wrapping and sizing */
-        @media (max-width: 768px) {
-            .product-content,
-            .product-text-grid,
-            .product-text {
-                overflow-wrap: break-word !important;
-                word-wrap: break-word !important;
-                hyphens: auto !important;
-                box-sizing: border-box !important;
-            }
-            
-            .product-content *,
-            .product-text-grid *,
-            .product-text * {
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-            
-            .product-list {
-                box-sizing: border-box !important;
-            }
-            
-            .product-list li {
-                overflow-wrap: break-word !important;
-                word-wrap: break-word !important;
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-            
-            .product-images {
-                box-sizing: border-box !important;
-            }
-            
-            .product-image {
-                max-width: 100% !important;
-                width: 100% !important;
-                height: auto !important;
-                object-fit: cover !important;
-                display: block !important;
-            }
-        }
-    /* =================================================================
-    Responsive Design Section 
-    ================================================================= */
-
-        .responsive-design {
-            background: linear-gradient(135deg, var(--bg-color) 0%, #f8f6f1 100%);
-            position: relative;
-            overflow: visible;
-            margin-bottom: 40px;
-        }
-
-        .responsive-content {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .responsive-content h2 {
-            font-family: var(--font-decorative);
-            font-size: var(--font-size-h1);
-            font-weight: 300;
-            color: var(--card-bg);
-            font-style: italic;
-            margin-bottom: 30px;
-            margin-top: 60px;
-        }
-
-        .responsive-description {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            max-width: 800px;
-            margin: 0 auto 80px;
-            text-align: left;
-        }
-
-        .responsive-text {
-            font-size: var(--font-size-body-large);
-            line-height: var(--line-height-relaxed);
-            font-weight: 300;
-            color: var(--body-text);
-        }
-
-        .phones-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 40px;
-            perspective: 1000px;
-            min-height: 600px;
-            position: relative;
-        }
-
-        .phone {
-            position: relative;
-            transform-style: preserve-3d;
-            opacity: 0;
-            transform: translateY(100px) rotateX(15deg);
-            transition: all 0.5s ease;
-        }
-
-        .phone-1 {
-            z-index: 3;
-            transform: translateY(100px) rotateX(15deg) rotateY(-10deg);
-        }
-
-        .phone-2 {
-            z-index: 4;
-            transform: translateY(100px) rotateX(15deg) scale(1.1);
-        }
-
-        .phone-3 {
-            z-index: 3;
-            transform: translateY(100px) rotateX(15deg) rotateY(10deg);
-        }
-
-        .phone img {
-            width: 280px;
-            height: auto;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-
-        .phone:hover {
-            transform: translateY(-10px) rotateX(0deg) rotateY(0deg) scale(1.05);
-        }
-
-        /* Phone Labels */
-        .phone-label {
-            position: absolute;
-            bottom: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: var(--font-primary);
-            font-size: var(--font-size-body-small);
-            color: var(--text-light);
-            font-weight: 300;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .phone:hover .phone-label {
-            opacity: 1;
-            bottom: -30px;
-        }
-
-        /* Floating geometric elements */
-        .responsive-design::before {
-            content: '';
-            position: absolute;
-            top: 10%;
-            left: 10%;
-            width: 60px;
-            height: 60px;
-            border: 2px solid var(--accent-color);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .responsive-design::after {
-            content: '';
-            position: absolute;
-            bottom: 20%;
-            right: 15%;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, var(--accent-color), transparent);
-            opacity: 0.2;
-            animation: float 6s ease-in-out infinite reverse;
-        }
-
-        /* Enhanced Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .responsive-description {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                text-align: center;
-                margin-bottom: 60px;
-            }
-
-            .phones-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 30px;
-                min-height: auto;
-            }
-
-            .phone {
-                transform: translateY(50px) !important;
-            }
-
-            .phone img {
-                width: 220px;
-            }
-
-            .phone:hover {
-                transform: translateY(40px) scale(1.02) !important;
-            }
-        }
-
-        /* =================================================================
-        RESPONSIVE DESIGN SECTION MOBILE ADAPTATIONS
-        ================================================================= */
-
-        /* Tablet styles (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .responsive-design {
-                padding: 80px 40px !important;
-                margin-bottom: 40px !important;
-            }
-            
-            .responsive-content {
-                margin-bottom: 60px !important;
-            }
-            
-            .responsive-content h2 {
-                font-size: clamp(32px, 5vw, 40px) !important;
-                margin-bottom: 25px !important;
-                line-height: 1.2 !important;
-                text-align: center !important;
-                margin-top: 40px !important;
-            }
-            
-            .responsive-description {
-                gap: 40px !important;
-                max-width: 600px !important;
-                margin-bottom: 60px !important;
-            }
-            
-            .responsive-text {
-                font-size: clamp(16px, 2.2vw, 18px) !important;
-                line-height: 1.6 !important;
-                text-align: left !important;
-            }
-            
-            .phones-container {
-                gap: 30px !important;
-                min-height: 500px !important;
-            }
-            
-            .phone img {
-                width: 220px !important;
-            }
-        }
-
-        /* Mobile Large (481px - 768px) */
-        @media (max-width: 768px) {
-            .responsive-design {
-                padding: 60px 30px !important;
-                margin-bottom: 30px !important;
-                overflow: visible !important;
-            }
-            
-            .responsive-content {
-                text-align: center !important;
-                margin-bottom: 50px !important;
-            }
-            
-            .responsive-content h2 {
-                font-size: clamp(24px, 6vw, 32px) !important;
-                margin-bottom: 20px !important;
-                text-align: center !important;
-                line-height: 1.3 !important;
-                margin-top: 20px !important;
-            }
-            
-            .responsive-description {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 25px !important;
-                max-width: 100% !important;
-                margin: 0 auto 40px !important;
-                text-align: left !important;
-            }
-            
-            .responsive-text {
-                font-size: clamp(14px, 3.5vw, 16px) !important;
-                line-height: 1.7 !important;
-                font-weight: 300 !important;
-                color: var(--body-text) !important;
-                text-align: left !important;
-                margin: 0 !important;
-            }
-            
-            .phones-container {
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-                gap: 30px !important;
-                perspective: none !important;
-                min-height: auto !important;
-                position: relative !important;
-            }
-            
-            .phone {
-                position: relative !important;
-                transform-style: preserve-3d !important;
-                opacity: 1 !important;
-                transform: translateY(0) !important;
-                transition: all 0.3s ease !important;
-            }
-            
-            .phone-1,
-            .phone-2,
-            .phone-3 {
-                z-index: 3 !important;
-                transform: translateY(0) !important;
-            }
-            
-            .phone img {
-                width: 200px !important;
-                height: auto !important;
-                border-radius: 20px !important;
-                transition: all 0.3s ease !important;
-            }
-            
-            .phone:hover {
-                transform: translateY(-5px) scale(1.02) !important;
-            }
-            
-            .phone-label {
-                position: absolute !important;
-                bottom: -30px !important;
-                left: 50% !important;
-                transform: translateX(-50%) !important;
-                font-family: var(--font-primary) !important;
-                font-size: 12px !important;
-                color: var(--text-light) !important;
-                font-weight: 300 !important;
-                opacity: 0.8 !important;
-                transition: all 0.3s ease !important;
-            }
-            
-            .phone:hover .phone-label {
-                opacity: 1 !important;
-                bottom: -25px !important;
-            }
-        }
-
-        /* Mobile Medium (361px - 480px) */
-        @media (max-width: 480px) {
-            .responsive-design {
-                padding: 50px 20px !important;
-                margin-bottom: 25px !important;
-            }
-            
-            .responsive-content {
-                margin-bottom: 40px !important;
-            }
-            
-            .responsive-content h2 {
-                font-size: clamp(20px, 5.5vw, 26px) !important;
-                margin-bottom: 18px !important;
-                text-align: center !important;
-                line-height: 1.2 !important;
-                margin-top: 15px !important;
-            }
-            
-            .responsive-description {
-                gap: 20px !important;
-                margin-bottom: 35px !important;
-            }
-            
-            .responsive-text {
-                font-size: clamp(13px, 3.2vw, 15px) !important;
-                line-height: 1.6 !important;
-                text-align: left !important;
-            }
-            
-            .phones-container {
-                gap: 25px !important;
-            }
-            
-            .phone img {
-                width: 180px !important;
-                border-radius: 18px !important;
-            }
-            
-            .phone:hover {
-                transform: translateY(-3px) scale(1.01) !important;
-            }
-            
-            .phone-label {
-                font-size: 11px !important;
-                bottom: -25px !important;
-            }
-            
-            .phone:hover .phone-label {
-                bottom: -20px !important;
-            }
-        }
-
-        /* Mobile Small (up to 360px) */
-        @media (max-width: 360px) {
-            .responsive-design {
-                padding: 40px 15px !important;
-                margin-bottom: 20px !important;
-            }
-            
-            .responsive-content {
-                margin-bottom: 35px !important;
-            }
-            
-            .responsive-content h2 {
-                font-size: clamp(18px, 5vw, 22px) !important;
-                margin-bottom: 15px !important;
-                text-align: center !important;
-                line-height: 1.2 !important;
-                margin-top: 10px !important;
-            }
-            
-            .responsive-description {
-                gap: 18px !important;
-                margin-bottom: 30px !important;
-            }
-            
-            .responsive-text {
-                font-size: clamp(12px, 3vw, 14px) !important;
-                line-height: 1.5 !important;
-                text-align: left !important;
-            }
-            
-            .phones-container {
-                gap: 20px !important;
-            }
-            
-            .phone img {
-                width: 160px !important;
-                border-radius: 15px !important;
-            }
-            
-            .phone:hover {
-                transform: translateY(-2px) scale(1.01) !important;
-            }
-            
-            .phone-label {
-                font-size: 10px !important;
-                bottom: -20px !important;
-            }
-            
-            .phone:hover .phone-label {
-                bottom: -18px !important;
-            }
-        }
-
-        /* Landscape orientation for mobile */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .responsive-design {
-                padding: 30px !important;
-                margin-bottom: 20px !important;
-            }
-            
-            .responsive-content {
-                margin-bottom: 30px !important;
-            }
-            
-            .responsive-content h2 {
-                font-size: clamp(18px, 4vw, 24px) !important;
-                margin-bottom: 15px !important;
-                text-align: center !important;
-                line-height: 1.2 !important;
-                margin-top: 10px !important;
-            }
-            
-            .responsive-description {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 20px !important;
-                max-width: 100% !important;
-                margin-bottom: 25px !important;
-            }
-            
-            .responsive-text {
-                font-size: clamp(11px, 2.5vw, 14px) !important;
-                line-height: 1.5 !important;
-                text-align: left !important;
-            }
-            
-            .phones-container {
-                display: flex !important;
-                flex-direction: row !important;
-                justify-content: center !important;
-                align-items: center !important;
-                gap: 20px !important;
-                min-height: auto !important;
-            }
-            
-            .phone img {
-                width: 120px !important;
-                border-radius: 12px !important;
-            }
-            
-            .phone:hover {
-                transform: translateY(-3px) scale(1.02) !important;
-            }
-            
-            .phone-label {
-                font-size: 9px !important;
-                bottom: -15px !important;
-            }
-        }
-
-        /* Hide floating elements on mobile */
-        @media (max-width: 768px) {
-            .responsive-design::before,
-            .responsive-design::after {
-                display: none !important;
-            }
-        }
-
-        /* Ensure proper text wrapping and sizing */
-        @media (max-width: 768px) {
-            .responsive-content {
-                overflow-wrap: break-word !important;
-                word-wrap: break-word !important;
-                hyphens: auto !important;
-                box-sizing: border-box !important;
-            }
-            
-            .responsive-content *,
-            .responsive-description *,
-            .responsive-text {
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-            
-            .phones-container {
-                box-sizing: border-box !important;
-                max-width: 100% !important;
-                width: 100% !important;
-            }
-            
-            .phone {
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-            
-            .phone img {
-                max-width: 100% !important;
-                height: auto !important;
-                object-fit: contain !important;
-                display: block !important;
-            }
-        }
-
-        /* Final Comparison Section - Updated Styles */
-        .final-comparison {
-            background: linear-gradient(135deg, var(--bg-color) 0%, #f0ede6 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 80px 60px;
-            overflow: hidden;
-        }
-
-        .final-comparison::before {
-            content: '';
-            position: absolute;
-            top: 15%;
-            left: 8%;
-            width: 80px;
-            height: 80px;
-            border: 2px solid var(--accent-color);
-            border-radius: 50%;
-            opacity: 0.2;
-            animation: float 12s ease-in-out infinite;
-        }
-
-        .final-comparison::after {
-            content: '';
-            position: absolute;
-            bottom: 20%;
-            right: 10%;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, var(--accent-color), transparent);
-            opacity: 0.15;
-            animation: float 8s ease-in-out infinite reverse;
-            border-radius: 50%;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(5deg); }
-        }
-
-        .comparison-container {
-            max-width: 1320px;
-            width: 100%;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .comparison-header {
-            text-align: center;
-            margin-bottom: 80px;
-            opacity: 0;
-            transform: translateY(50px);
-        }
-
-        .comparison-title {
-            font-family: var(--font-decorative);
-            font-size: var(--font-size-h1);
-            font-weight: 300;
-            color: var(--card-bg);
-            font-style: italic;
-            margin-bottom: 30px;
-            line-height: 1.2;
-            margin-top: 60px;
-        }
-
-        .comparison-subtitle {
-            font-size: var(--font-size-body-large);
-            line-height: var(--line-height-relaxed);
-            font-weight: 300;
-            color: var(--body-text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .comparison-main {
-            display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
-            gap: 40px;
-            margin-bottom: 80px;
-        }
-
-        .comparison-side {
-            position: relative;
-            opacity: 0;
-            display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
-        }
-
-        .comparison-side.before {
-            transform: translateX(-80px);
-            flex: 0.8;
-        }
-
-        .comparison-side.after {
-            transform: translateX(80px);
-            flex: 0.3;
-        }
-
-        /* Remove labels completely */
-        .comparison-label {
-            display: none;
-        }
-
-        .comparison-image {
-            width: 100%;
-            height: auto;
-            border-radius: 20px;
-            transition: transform 0.5s ease;
-            position: relative;
-            overflow: hidden;
-            background: none;
-            box-shadow: none;
-        }
-
-        .comparison-side.before .comparison-image {
-            width: 100%;
-            max-width: 100%;
-        }
-
-        .comparison-side.after .comparison-image {
-            width: 100%;
-            max-width: 100%;
-        }
-
-        .comparison-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.8s ease;
-        }
-
-        .comparison-side:hover .comparison-image {
-            transform: translateY(-5px) scale(1.02);
-        }
-
-        .comparison-side:hover .comparison-image::before {
-            transform: translateX(100%);
-        }
-
-        .transformation-arrow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            z-index: 5;
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0);
-            transition: all 0.5s ease;
-            box-shadow: 0 10px 30px rgba(216, 151, 54, 0.3);
-        }
-
-        .transformation-arrow.visible {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .transformation-arrow:hover {
-            transform: translate(-50%, -50%) scale(1.1);
-            box-shadow: 0 15px 40px rgba(216, 151, 54, 0.4);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .final-comparison {
-                padding: 60px 30px;
-            }
-
-            .comparison-main {
-                flex-direction: column;
-                gap: 40px;
-            }
-
-            .comparison-side.before,
-            .comparison-side.after {
-                transform: translateY(50px);
-                flex: 1;
-            }
-
-            .comparison-side.before .comparison-image {
-                width: 100%;
-                max-width: 100%;
-            }
-
-            .comparison-side.after .comparison-image {
-                width: 35%;
-                max-width: 35%;
-                margin: 0 auto;
-            }
-
-            .comparison-insights {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .transformation-arrow {
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            .insight-card {
-                padding: 25px;
-            }
-
-            .impact-summary {
-                padding: 30px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .final-comparison {
-                padding: 40px 20px;
-            }
-
-            .comparison-header {
-                margin-bottom: 50px;
-            }
-
-            .comparison-title {
-                font-size: 36px;
-            }
-
-            .comparison-subtitle {
-                font-size: 16px;
-            }
-
-            .comparison-main {
-                gap: 30px;
-            }
-
-            .comparison-side.after .comparison-image {
-                width: 30%;
-                max-width: 30%;
-            }
-        }
-
-        /* =================================================================
-        DESIGN EVOLUTION SECTION MOBILE ADAPTATIONS
-        ================================================================= */
-
-        /* Tablet styles (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .final-comparison {
-                padding: 60px 40px !important;
-            }
-            
-            .comparison-container {
-                max-width: 100% !important;
-                width: 100% !important;
-                margin: 0 auto !important;
-                position: relative !important;
-                z-index: 2 !important;
-            }
-            
-            .comparison-header {
-                text-align: center !important;
-                margin-bottom: 60px !important;
-                opacity: 1 !important;
-                transform: translateY(0) !important;
-            }
-            
-            .comparison-title {
-                font-size: clamp(32px, 5vw, 40px) !important;
-                margin-bottom: 25px !important;
-                line-height: 1.2 !important;
-                text-align: center !important;
-                margin-top: 40px !important;
-            }
-            
-            .comparison-subtitle {
-                font-size: clamp(16px, 2.2vw, 18px) !important;
-                line-height: 1.6 !important;
-                max-width: 600px !important;
-                margin: 0 auto !important;
-                text-align: left !important;
-            }
-            
-            .comparison-main {
-                display: flex !important;
-                justify-content: center !important;
-                align-items: flex-start !important;
-                gap: 40px !important;
-                margin-bottom: 60px !important;
-            }
-            
-            .comparison-side {
-                position: relative !important;
-                opacity: 1 !important;
-                display: flex !important;
-                justify-content: center !important;
-                align-items: flex-start !important;
-            }
-            
-            .comparison-side.before {
-                transform: translateX(0) !important;
-                flex: 0.7 !important;
-            }
-            
-            .comparison-side.after {
-                transform: translateX(0) !important;
-                flex: 0.3 !important;
-            }
-            
-            .comparison-image {
-                width: 100% !important;
-                height: auto !important;
-                border-radius: 15px !important;
-                max-width: 100% !important;
-            }
-            
-            .transformation-arrow {
-                width: 50px !important;
-                height: 50px !important;
-                font-size: 20px !important;
-            }
-        }
-
-        /* Mobile Large (481px - 768px) */
-        @media (max-width: 768px) {
-            .final-comparison {
-                padding: 50px 30px !important;
-                min-height: auto !important;
-            }
-            
-            .comparison-container {
-                max-width: 100% !important;
-                width: 100% !important;
-                padding: 0 !important;
-            }
-            
-            .comparison-header {
-                margin-bottom: 40px !important;
-                text-align: center !important;
-            }
-            
-            .comparison-title {
-                font-size: clamp(24px, 6vw, 32px) !important;
-                margin-bottom: 20px !important;
-                text-align: center !important;
-                line-height: 1.3 !important;
-                margin-top: 20px !important;
-            }
-            
-            .comparison-subtitle {
-                font-size: clamp(14px, 3.5vw, 16px) !important;
-                line-height: 1.7 !important;
-                max-width: 100% !important;
-                margin: 0 auto !important;
-                text-align: left !important;
-            }
-            
-            .comparison-main {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 30px !important;
-                margin-bottom: 40px !important;
-                align-items: center !important;
-                justify-content: center !important;
-            }
-            
-            /* Desktop image идет первым */
-            .comparison-side.before {
-                order: 1 !important;
-                transform: translateY(0) !important;
-                flex: 1 !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                display: flex !important;
-                justify-content: center !important;
-            }
-            
-            /* Mobile image идет вторым */
-            .comparison-side.after {
-                order: 2 !important;
-                transform: translateY(0) !important;
-                flex: 1 !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                display: flex !important;
-                justify-content: center !important;
-            }
-            
-            .comparison-side.before .comparison-image {
-                width: 100% !important;
-                max-width: 100% !important;
-                height: auto !important;
-                border-radius: 15px !important;
-            }
-            
-            .comparison-side.after .comparison-image {
-                width: 50% !important;
-                max-width: 250px !important;
-                height: auto !important;
-                border-radius: 15px !important;
-                margin: 0 auto !important;
-            }
-            
-            .transformation-arrow {
-                position: static !important;
-                top: auto !important;
-                left: auto !important;
-                transform: none !important;
-                width: 40px !important;
-                height: 40px !important;
-                background: var(--accent-color) !important;
-                border-radius: 50% !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                color: white !important;
-                font-size: 18px !important;
-                font-weight: bold !important;
-                z-index: 5 !important;
-                opacity: 1 !important;
-                transform: scale(1) !important;
-                margin: 0 auto !important;
-                order: 1.5 !important;
-                box-shadow: 0 5px 15px rgba(216, 151, 54, 0.3) !important;
-            }
-        }
-
-        /* Mobile Medium (361px - 480px) */
-        @media (max-width: 480px) {
-            .final-comparison {
-                padding: 40px 20px !important;
-            }
-            
-            .comparison-header {
-                margin-bottom: 30px !important;
-            }
-            
-            .comparison-title {
-                font-size: clamp(20px, 5.5vw, 26px) !important;
-                margin-bottom: 15px !important;
-                margin-top: 15px !important;
-            }
-            
-            .comparison-subtitle {
-                font-size: clamp(13px, 3.2vw, 15px) !important;
-                line-height: 1.6 !important;
-            }
-            
-            .comparison-main {
-                gap: 25px !important;
-                margin-bottom: 30px !important;
-            }
-            
-            .comparison-side.after .comparison-image {
-                width: 45% !important;
-                max-width: 200px !important;
-            }
-            
-            .transformation-arrow {
-                width: 35px !important;
-                height: 35px !important;
-                font-size: 16px !important;
-            }
-        }
-
-        /* Mobile Small (up to 360px) */
-        @media (max-width: 360px) {
-            .final-comparison {
-                padding: 30px 15px !important;
-            }
-            
-            .comparison-header {
-                margin-bottom: 25px !important;
-            }
-            
-            .comparison-title {
-                font-size: clamp(18px, 5vw, 22px) !important;
-                margin-bottom: 12px !important;
-                margin-top: 12px !important;
-            }
-            
-            .comparison-subtitle {
-                font-size: clamp(12px, 3vw, 14px) !important;
-                line-height: 1.5 !important;
-            }
-            
-            .comparison-main {
-                gap: 20px !important;
-                margin-bottom: 25px !important;
-            }
-            
-            .comparison-side.after .comparison-image {
-                width: 40% !important;
-                max-width: 150px !important;
-            }
-            
-            .transformation-arrow {
-                width: 30px !important;
-                height: 30px !important;
-                font-size: 14px !important;
-            }
-        }
-
-        /* Landscape orientation for mobile */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .final-comparison {
-                padding: 30px !important;
-                min-height: 100vh !important;
-            }
-            
-            .comparison-container {
-                height: 100% !important;
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: center !important;
-            }
-            
-            .comparison-header {
-                margin-bottom: 20px !important;
-            }
-            
-            .comparison-title {
-                font-size: clamp(18px, 4vw, 24px) !important;
-                margin-bottom: 10px !important;
-                margin-top: 10px !important;
-            }
-            
-            .comparison-subtitle {
-                font-size: clamp(11px, 2.5vw, 14px) !important;
-                margin-bottom: 15px !important;
-            }
-            
-            .comparison-main {
-                display: flex !important;
-                flex-direction: row !important;
-                gap: 20px !important;
-                margin-bottom: 20px !important;
-                align-items: center !important;
-                justify-content: center !important;
-            }
-            
-            .comparison-side.before {
-                order: 1 !important;
-                flex: 0.6 !important;
-            }
-            
-            .comparison-side.after {
-                order: 3 !important;
-                flex: 0.3 !important;
-            }
-            
-            .comparison-side.after .comparison-image {
-                width: 80% !important;
-                max-width: 150px !important;
-            }
-            
-            .transformation-arrow {
-                order: 2 !important;
-                position: static !important;
-                margin: 0 10px !important;
-                width: 30px !important;
-                height: 30px !important;
-                font-size: 14px !important;
-            }
-        }
-
-        /* Ensure proper image sizing and display */
-        @media (max-width: 768px) {
-            .comparison-container {
-                overflow-wrap: break-word !important;
-                word-wrap: break-word !important;
-                hyphens: auto !important;
-                box-sizing: border-box !important;
-            }
-            
-            .comparison-container * {
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-            
-            .comparison-image {
-                max-width: 100% !important;
-                height: auto !important;
-                object-fit: cover !important;
-                display: block !important;
-                border-radius: 15px !important;
-            }
-            
-            .comparison-side {
-                width: 100% !important;
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-            
-            /* Hide any decorative elements that might cause issues */
-            .final-comparison::before,
-            .final-comparison::after {
-                display: none !important;
-            }
-        }
-        /* Conclusion Section */
-        .conclusion {
-            background-color: var(--card-bg);
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 100px 60px;
-            overflow: hidden;
-        }
-
-        .conclusion::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(216, 151, 54, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(216, 151, 54, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .conclusion-container {
-            max-width: 1000px;
-            width: 100%;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-            text-align: center;
-        }
-
-        .conclusion-header {
-            margin-bottom: 60px;
-            opacity: 0;
-            transform: translateY(50px);
-        }
-
-        .conclusion-title {
-            font-family: var(--font-decorative);
-            font-size: var(--font-size-h1);
-            font-weight: 300;
-            color: var(--accent-color);
-            font-style: italic;
-            margin-bottom: 40px;
-            line-height: 1.2;
-        }
-
-        .conclusion-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            margin-bottom: 80px;
-            opacity: 0;
-            transform: translateY(50px);
-        }
-
-        .conclusion-paragraph {
-            font-size: var(--font-size-body-large);
-            line-height: var(--line-height-relaxed);
-            font-weight: 300;
-            text-align: left;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        /* Live Site CTA Section */
-        .live-site-cta {
-            background: linear-gradient(135deg, var(--bg-color) 0%, #f0ede6 100%);
-            min-height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 80px 60px;
-            overflow: hidden;
-        }
-
-        .live-site-cta::before {
-            content: '';
-            position: absolute;
-            top: 15%;
-            left: 10%;
-            width: 120px;
-            height: 120px;
-            border: 3px solid var(--accent-color);
-            border-radius: 50%;
-            opacity: 0.15;
-            animation: floatSlow 15s ease-in-out infinite;
-        }
-
-        .live-site-cta::after {
-            content: '';
-            position: absolute;
-            bottom: 20%;
-            right: 15%;
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, var(--accent-color), transparent);
-            opacity: 0.1;
-            animation: floatSlow 12s ease-in-out infinite reverse;
-            border-radius: 50%;
-        }
-
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-40px) rotate(10deg); }
-        }
-
-        .cta-container {
-            max-width: 800px;
-            width: 100%;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .cta-header {
-            margin-bottom: 50px;
-            opacity: 0;
-            transform: translateY(50px);
-        }
-
-        .cta-title {
-            font-family: var(--font-decorative);
-            font-size: var(--font-size-h2);
-            font-weight: 400;
-            color: var(--card-bg);
-            font-style: italic;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .cta-subtitle {
-            font-size: var(--font-size-body-large);
-            line-height: var(--line-height-relaxed);
-            font-weight: 300;
-            color: var(--body-text);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Interactive Button */
-        .live-site-button {
-            position: relative;
-            display: inline-block;
-            margin-top: 40px;
-            opacity: 0;
-            transform: translateY(50px);
-        }
-
-        .button-circle {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-color) 0%, #bf7b2f 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: white;
-            font-family: var(--font-primary);
-            font-size: 18px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 
-                0 20px 40px rgba(216, 151, 54, 0.3),
-                0 0 0 0 rgba(216, 151, 54, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .button-circle::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .button-circle:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 
-                0 30px 60px rgba(216, 151, 54, 0.4),
-                0 0 0 20px rgba(216, 151, 54, 0.1);
-        }
-
-        .button-circle:hover::before {
-            transform: translateX(100%);
-        }
-
-        .button-text {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .button-main-text {
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .button-sub-text {
-            font-size: 12px;
-            font-weight: 400;
-            opacity: 0.9;
-        }
-
-        /* Pulsing animation */
-        .button-circle {
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 
-                    0 20px 40px rgba(216, 151, 54, 0.3),
-                    0 0 0 0 rgba(216, 151, 54, 0.4);
-            }
-            50% {
-                box-shadow: 
-                    0 20px 40px rgba(216, 151, 54, 0.3),
-                    0 0 0 20px rgba(216, 151, 54, 0.1);
-            }
-        }
-
-        /* Floating elements around button */
-        .floating-elements {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
-            pointer-events: none;
-        }
-
-        .floating-dot {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            opacity: 0.6;
-        }
-
-        .dot-1 {
-            top: 10%;
-            left: 20%;
-            animation: floatDot 4s ease-in-out infinite;
-        }
-
-        .dot-2 {
-            top: 30%;
-            right: 15%;
-            animation: floatDot 5s ease-in-out infinite reverse;
-        }
-
-        .dot-3 {
-            bottom: 20%;
-            left: 25%;
-            animation: floatDot 6s ease-in-out infinite;
-        }
-
-        .dot-4 {
-            bottom: 15%;
-            right: 20%;
-            animation: floatDot 4.5s ease-in-out infinite reverse;
-        }
-
-        @keyframes floatDot {
-            0%, 100% { transform: translateY(0px); opacity: 0.6; }
-            50% { transform: translateY(-20px); opacity: 0.3; }
-        }
-
-        /* Thank you message */
-        .thank-you {
-            margin-top: 60px;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .thank-you-text {
-            font-family: var(--font-decorative);
-            font-size: 24px;
-            font-weight: 300;
-            color: var(--text-light);
-            font-style: italic;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .conclusion {
-                padding: 80px 30px;
-            }
-
-            .conclusion-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                text-align: center;
-            }
-
-            .conclusion-paragraph {
-                text-align: left;
-            }
-
-            .live-site-cta {
-                padding: 60px 30px;
-            }
-
-            .button-circle {
-                width: 160px;
-                height: 160px;
-            }
-
-            .button-main-text {
-                font-size: 14px;
-            }
-
-            .button-sub-text {
-                font-size: 11px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .conclusion {
-                padding: 60px 20px;
-            }
-
-            .live-site-cta {
-                padding: 50px 20px;
-            }
-
-            .conclusion-title {
-                font-size: 36px;
-            }
-
-            .cta-title {
-                font-size: 28px;
-            }
-
-            .button-circle {
-                width: 140px;
-                height: 140px;
-            }
-
-            .button-main-text {
-                font-size: 13px;
-            }
-        }
-        /* =================================================================
-        PRODUCT CARD SECTION MOBILE ADAPTATIONS
-        ================================================================= */
-
-        /* Tablet styles (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .product-card {
-                padding: 80px 40px !important;
-            }
-            
-            .product-content h2 {
-                font-size: clamp(32px, 5vw, 40px) !important;
-                margin-bottom: 40px !important;
-                line-height: 1.2 !important;
-                text-align: center !important;
-            }
-            
-            .product-text-grid {
-                gap: 60px !important;
-                margin-bottom: 50px !important;
-            }
-            
-            .product-text {
-                font-size: clamp(16px, 2.2vw, 18px) !important;
-                line-height: 1.6 !important;
-                margin-bottom: 20px !important;
-                text-align: left !important;
-            }
-            
-            .product-list li {
-                font-size: clamp(14px, 1.8vw, 16px) !important;
-                margin-bottom: 12px !important;
-                padding-left: 20px !important;
-                line-height: 1.5 !important;
-                text-align: left !important;
-            }
-            
-            .product-images {
-                gap: 30px !important;
-            }
-            
-            .product-image {
-                transform: translateY(0) !important;
-                opacity: 1 !important;
-                border-radius: 12px !important;
-                max-width: 100% !important;
-                height: auto !important;
-            }
-        }
-
-        /* Mobile Large (481px - 768px) */
-        @media (max-width: 768px) {
-            .product-card {
-                padding: 60px 30px !important;
-            }
-            
-            .product-content {
-                margin-bottom: 40px !important;
-            }
-            
-            .product-content h2 {
-                font-size: clamp(24px, 6vw, 32px) !important;
-                margin-bottom: 30px !important;
-                text-align: center !important;
-                line-height: 1.3 !important;
-            }
-            
-            /* Text grid становится одноколоночным */
-            .product-text-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 30px !important;
-                grid-template-columns: none !important;
-                margin-bottom: 40px !important;
-                text-align: left !important;
-            }
-            
-            .product-text {
-                font-size: clamp(14px, 3.5vw, 16px) !important;
-                line-height: 1.7 !important;
-                margin-bottom: 20px !important;
-                text-align: left !important;
-                width: 100% !important;
-            }
-            
-            .product-list {
-                width: 100% !important;
-                margin-top: 0 !important;
-            }
-            
-            .product-list li {
-                font-size: clamp(13px, 3vw, 15px) !important;
-                line-height: 1.6 !important;
-                margin-bottom: 15px !important;
-                padding-left: 25px !important;
-                width: 100% !important;
-                opacity: 1 !important;
-                transform: translateX(0) !important;
-                text-align: left !important;
-            }
-            
-            .product-list li::before {
-                font-size: 14px !important;
-                left: 0 !important;
-                top: 0 !important;
-            }
-            
-            /* Images grid становится одноколоночным */
-            .product-images {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 25px !important;
-                grid-template-columns: none !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                margin: 0 auto !important;
-            }
-            
-            .product-image {
-                width: 100% !important;
-                max-width: 100% !important;
-                height: auto !important;
-                transform: translateY(0) !important;
-                opacity: 1 !important;
-                border-radius: 15px !important;
-                object-fit: cover !important;
-                display: block !important;
-            }
-        }
-
-        /* Mobile Medium (361px - 480px) */
-        @media (max-width: 480px) {
-            .product-card {
-                padding: 50px 20px !important;
-            }
-            
-            .product-content {
-                margin-bottom: 30px !important;
-            }
-            
-            .product-content h2 {
-                font-size: clamp(20px, 5.5vw, 26px) !important;
-                margin-bottom: 25px !important;
-            }
-            
-            .product-text-grid {
-                gap: 25px !important;
-                margin-bottom: 30px !important;
-            }
-            
-            .product-text {
-                font-size: clamp(13px, 3.2vw, 15px) !important;
-                margin-bottom: 18px !important;
-            }
-            
-            .product-list li {
-                font-size: clamp(12px, 2.8vw, 14px) !important;
-                margin-bottom: 12px !important;
-                padding-left: 22px !important;
-            }
-            
-            .product-images {
-                gap: 20px !important;
-                max-width: 350px !important;
-            }
-            
-            .product-image {
-                border-radius: 12px !important;
-            }
-        }
-
-        /* Mobile Small (up to 360px) */
-        @media (max-width: 360px) {
-            .product-card {
-                padding: 40px 15px !important;
-            }
-            
-            .product-content {
-                margin-bottom: 25px !important;
-            }
-            
-            .product-content h2 {
-                font-size: clamp(18px, 5vw, 22px) !important;
-                margin-bottom: 20px !important;
-            }
-            
-            .product-text-grid {
-                gap: 20px !important;
-                margin-bottom: 25px !important;
-            }
-            
-            .product-text {
-                font-size: clamp(12px, 3vw, 14px) !important;
-                margin-bottom: 15px !important;
-            }
-            
-            .product-list li {
-                font-size: clamp(11px, 2.5vw, 13px) !important;
-                margin-bottom: 10px !important;
-                padding-left: 20px !important;
-            }
-            
-            .product-images {
-                gap: 15px !important;
-                max-width: 300px !important;
-            }
-            
-            .product-image {
-                border-radius: 10px !important;
-            }
-        }
-
-        /* =================================================================
-        RESPONSIVE DESIGN SECTION MOBILE ADAPTATIONS
-        ================================================================= */
-
-        /* Tablet styles (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .responsive-design {
-                padding: 80px 40px !important;
-                margin-bottom: 30px !important;
-            }
-            
-            .responsive-content h2 {
-                font-size: clamp(32px, 5vw, 40px) !important;
-                margin-bottom: 25px !important;
-                line-height: 1.2 !important;
-                text-align: center !important;
-                margin-top: 50px !important;
-            }
-            
-            .responsive-description {
-                gap: 50px !important;
-                max-width: 600px !important;
-                margin-bottom: 60px !important;
-            }
-            
-            .responsive-text {
-                font-size: clamp(16px, 2.2vw, 18px) !important;
-                line-height: 1.6 !important;
-                text-align: left !important;
-            }
-            
-            .phones-container {
-                gap: 30px !important;
-                min-height: 500px !important;
-            }
-            
-            .phone img {
-                width: 220px !important;
-            }
-        }
-
-        /* Mobile Large (481px - 768px) */
-        @media (max-width: 768px) {
-            .responsive-design {
-                padding: 60px 30px !important;
-                margin-bottom: 20px !important;
-            }
-            
-            .responsive-content {
-                margin-bottom: 50px !important;
-            }
-            
-            .responsive-content h2 {
-                font-size: clamp(24px, 6vw, 32px) !important;
-                margin-bottom: 20px !important;
-                text-align: center !important;
-                line-height: 1.3 !important;
-                margin-top: 40px !important;
-            }
-            
-            /* Description становится одноколоночным */
-            .responsive-description {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 25px !important;
-                grid-template-columns: none !important;
-                max-width: 100% !important;
-                margin: 0 auto 50px !important;
-                text-align: center !important;
-            }
-            
-            .responsive-text {
-                font-size: clamp(14px, 3.5vw, 16px) !important;
-                line-height: 1.7 !important;
-                text-align: left !important;
-                width: 100% !important;
-            }
-            
-            /* Phones container становится вертикальным */
-            .phones-container {
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-                gap: 30px !important;
-                min-height: auto !important;
-                perspective: none !important;
-            }
-            
-            .phone {
-                opacity: 1 !important;
-                transform: translateY(0) !important;
-                position: relative !important;
-            }
-            
-            .phone-1,
-            .phone-2,
-            .phone-3 {
-                transform: translateY(0) !important;
-                z-index: auto !important;
-            }
-            
-            .phone img {
-                width: 250px !important;
-                height: auto !important;
-                border-radius: 20px !important;
-            }
-            
-            .phone:hover {
-                transform: translateY(-5px) !important;
-            }
-            
-            .phone-label {
-                opacity: 1 !important;
-                bottom: -25px !important;
-                font-size: 14px !important;
-            }
-        }
-
-        /* Mobile Medium (361px - 480px) */
-        @media (max-width: 480px) {
-            .responsive-design {
-                padding: 50px 20px !important;
-            }
-            
-            .responsive-content h2 {
-                font-size: clamp(20px, 5.5vw, 26px) !important;
-                margin-bottom: 18px !important;
-                margin-top: 30px !important;
-            }
-            
-            .responsive-description {
-                gap: 20px !important;
-                margin-bottom: 40px !important;
-            }
-            
-            .responsive-text {
-                font-size: clamp(13px, 3.2vw, 15px) !important;
-                text-align: center !important;
-            }
-            
-            .phones-container {
-                gap: 25px !important;
-            }
-            
-            .phone img {
-                width: 200px !important;
-                border-radius: 15px !important;
-            }
-            
-            .phone-label {
-                font-size: 13px !important;
-                bottom: -20px !important;
-            }
-        }
-
-        /* Mobile Small (up to 360px) */
-        @media (max-width: 360px) {
-            .responsive-design {
-                padding: 40px 15px !important;
-            }
-            
-            .responsive-content h2 {
-                font-size: clamp(18px, 5vw, 22px) !important;
-                margin-bottom: 15px !important;
-                margin-top: 25px !important;
-            }
-            
-            .responsive-description {
-                gap: 18px !important;
-                margin-bottom: 30px !important;
-            }
-            
-            .responsive-text {
-                font-size: clamp(12px, 3vw, 14px) !important;
-            }
-            
-            .phones-container {
-                gap: 20px !important;
-            }
-            
-            .phone img {
-                width: 180px !important;
-                border-radius: 12px !important;
-            }
-            
-            .phone-label {
-                font-size: 12px !important;
-                bottom: -18px !important;
-            }
-        }
-
-        /* =================================================================
-        LANDSCAPE ORIENTATION FOR BOTH SECTIONS
-        ================================================================= */
-
-        @media (max-width: 768px) and (orientation: landscape) {
-            .product-card,
-            .responsive-design {
-                padding: 30px !important;
-            }
-            
-            /* Product Card в landscape */
-            .product-text-grid {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 30px !important;
-                flex-direction: row !important;
-                margin-bottom: 30px !important;
-            }
-            
-            .product-images {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 20px !important;
-                flex-direction: row !important;
-                max-width: 100% !important;
-            }
-            
-            /* Responsive Design в landscape */
-            .responsive-description {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 30px !important;
-                flex-direction: row !important;
-                text-align: left !important;
-                margin-bottom: 40px !important;
-            }
-            
-            .phones-container {
-                display: flex !important;
-                flex-direction: row !important;
-                gap: 20px !important;
-                justify-content: center !important;
-                align-items: flex-end !important;
-                min-height: 300px !important;
-            }
-            
-            .phone img {
-                width: 140px !important;
-            }
-            
-            /* Общие стили для заголовков в landscape */
-            .product-content h2,
-            .responsive-content h2 {
-                font-size: clamp(18px, 4vw, 24px) !important;
-                margin-bottom: 15px !important;
-                text-align: center !important;
-            }
-            
-            /* Общие стили для текста в landscape */
-            .product-text,
-            .responsive-text {
-                font-size: clamp(11px, 2.5vw, 14px) !important;
-                margin-bottom: 12px !important;
-                text-align: left !important;
-            }
-            
-            .product-list li {
-                font-size: clamp(10px, 2vw, 12px) !important;
-                margin-bottom: 8px !important;
-                padding-left: 15px !important;
-            }
-        }
-
-        /* =================================================================
-        ОБЩИЕ СТИЛИ ДЛЯ ОБЕИХ СЕКЦИЙ
-        ================================================================= */
-
-        @media (max-width: 768px) {
-            .product-content,
-            .responsive-content {
-                overflow-wrap: break-word !important;
-                word-wrap: break-word !important;
-                hyphens: auto !important;
-                box-sizing: border-box !important;
-            }
-            
-            .product-content *,
-            .responsive-content * {
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-            
-            .product-image,
-            .phone img {
-                max-width: 100% !important;
-                width: 100% !important;
-                height: auto !important;
-                object-fit: cover !important;
-                display: block !important;
-            }
-            
-            .product-list li {
-                opacity: 1 !important;
-                transform: translateX(0) !important;
-            }
-            
-            /* Hide floating elements on mobile for responsive design section */
-            .responsive-design::before,
-            .responsive-design::after {
-                display: none !important;
-            }
-        }
-    </style>
+    <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+      
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 
 <body>
@@ -4716,7 +47,7 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
     <section class="section hero" data-section="0">
         <div class="floating-element floating-circle"></div>
         <div class="floating-element floating-line"></div>
-        
+
         <div class="section-content hero-content">
             <img src="./Presentation/Mockup.png" alt="Delicate Weaves Website Mockup" class="hero-image">
         </div>
@@ -4724,8 +55,9 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
 
     <section class="section challenge" data-section="1">
         <div class="section-content">
-            <div class="challenge-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
-                
+            <div class="challenge-grid"
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
+
                 <!-- Challenge (слева) -->
                 <div class="challenge-content">
                     <h2>Challenge</h2>
@@ -4751,9 +83,11 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
                         and establish an emotional connection with the audience. I developed a concept based on:
                     </p>
                     <ul class="solution-list">
-                        <li>A deep, rich colour scheme where the dark green background creates a sense of premium quality</li>
+                        <li>A deep, rich colour scheme where the dark green background creates a sense of premium
+                            quality</li>
                         <li>A thoughtful typographic system combining three fonts to establish clear hierarchy</li>
-                        <li>An asymmetrical grid with authentic product photography showcasing items in interior contexts</li>
+                        <li>An asymmetrical grid with authentic product photography showcasing items in interior
+                            contexts</li>
                         <li>Carefully calculated proportions and spacing creating a sense of air and lightness</li>
                     </ul>
                 </div>
@@ -4768,10 +102,11 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
                 <div class="assessment-content">
                     <h2>Initial Assessment</h2>
                     <p>
-                        The initial review of the original Delicate Weaves website revealed several crucial 
-                        challenges. The light background and scattered colour accents created an impression 
-                        of a standard online shop, failing to reflect the true value of handcrafted pieces. 
-                        While charming, the decorative elephant illustration diverted attention from the actual products.
+                        The initial review of the original Delicate Weaves website revealed several crucial
+                        challenges. The light background and scattered colour accents created an impression
+                        of a standard online shop, failing to reflect the true value of handcrafted pieces.
+                        While charming, the decorative elephant illustration diverted attention from the actual
+                        products.
                     </p>
                 </div>
             </div>
@@ -4784,9 +119,9 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
                 <div class="colour-content">
                     <h2>Colour Solutions</h2>
                     <p>
-                        In my redesign approach, I decided to completely rethink the brand's presentation. 
-                        Deep green became the foundation of the new visual language – creating an immersive 
-                        natural aesthetic whilst emphasising the collection's premium quality. I introduced 
+                        In my redesign approach, I decided to completely rethink the brand's presentation.
+                        Deep green became the foundation of the new visual language – creating an immersive
+                        natural aesthetic whilst emphasising the collection's premium quality. I introduced
                         golden accents as a reference to the warmth and richness of rattan textures.
                     </p>
                 </div>
@@ -4805,11 +140,11 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
                 <div class="layout-content">
                     <h2>Layout Innovation</h2>
                     <p>
-                        I paid particular attention to the compositional solution. Instead of the original 
+                        I paid particular attention to the compositional solution. Instead of the original
                         website's static structure, I created an asymmetrical grid with photographs of actual products.
                     </p>
                     <p>
-                        Each image in a white frame works as a window into the world of refined interiors, 
+                        Each image in a white frame works as a window into the world of refined interiors,
                         showcasing the products in their natural environment.
                     </p>
                 </div>
@@ -4823,9 +158,9 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
                 <div class="assessment-content">
                     <h2>Benefits Reconstruction</h2>
                     <p>
-                        In my redesign, I transformed the standard three-column layout into a more dynamic 
-                        composition. I retained the three key benefits – versatility, sustainability, and 
-                        durability – but presented them in an artful, asymmetric arrangement. The integration 
+                        In my redesign, I transformed the standard three-column layout into a more dynamic
+                        composition. I retained the three key benefits – versatility, sustainability, and
+                        durability – but presented them in an artful, asymmetric arrangement. The integration
                         of a high-quality product photograph adds tangible value to the textual content.
                     </p>
                 </div>
@@ -4841,12 +176,12 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
                 <div class="solution-content">
                     <h2>Catalog Journey</h2>
                     <p>
-                        Instead of a conventional product grid, I created a guided category system that 
-                        helps clients make informed decisions about their planters. Each category features 
+                        Instead of a conventional product grid, I created a guided category system that
+                        helps clients make informed decisions about their planters. Each category features
                         an elegant combination of visual content and benefit description.
                     </p>
                     <p>
-                        The division into "with plastic insert" and "without" makes the choice intuitive, 
+                        The division into "with plastic insert" and "without" makes the choice intuitive,
                         whilst lifestyle photography helps buyers envision the pieces in their own space.
                     </p>
                 </div>
@@ -4860,10 +195,10 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
                 <div class="colour-content">
                     <h2>Delivery Enhancement</h2>
                     <p>
-                        Instead of a basic delivery information section, I created a visually engaging 
-                        element featuring a linear-style map of Russia. The transition from a flat green 
-                        image to an elegant outline solution adds premium feel and contemporary touch. 
-                        Accent words highlighted in gold and set in Miama Nueva font create a harmonious 
+                        Instead of a basic delivery information section, I created a visually engaging
+                        element featuring a linear-style map of Russia. The transition from a flat green
+                        image to an elegant outline solution adds premium feel and contemporary touch.
+                        Accent words highlighted in gold and set in Miama Nueva font create a harmonious
                         balance with the overall website aesthetics.
                     </p>
                 </div>
@@ -4882,14 +217,14 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
                 <div class="solution-content">
                     <h2>Social Engagement Journey</h2>
                     <p>
-                        In the redesign, I transformed the reviews section from a simple mobile display 
-                        into a more expressive typographic composition. Reviews became a central narrative 
+                        In the redesign, I transformed the reviews section from a simple mobile display
+                        into a more expressive typographic composition. Reviews became a central narrative
                         element, with each testimonial highlighted through elegant typography and golden accents.
                     </p>
                     <p>
-                        The contact section received a new structure with a clear division into two parts: 
-                        contact information and feedback form. The addition of business hours, physical address 
-                        and social media links makes brand interaction more accessible, whilst the minimalist 
+                        The contact section received a new structure with a clear division into two parts:
+                        contact information and feedback form. The addition of business hours, physical address
+                        and social media links makes brand interaction more accessible, whilst the minimalist
                         feedback form design simplifies the communication process.
                     </p>
                 </div>
@@ -4904,20 +239,22 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
                 <div class="product-text-grid">
                     <div>
                         <p class="product-text">
-                            After developing the overall website structure, I focused on the key element 
-                            of any e-commerce project — the product card. This component requires special 
+                            After developing the overall website structure, I focused on the key element
+                            of any e-commerce project — the product card. This component requires special
                             attention as it's where users make their purchasing decisions.
                         </p>
                         <p class="product-text">
-                            In redesigning the product card, I implemented several significant improvements 
+                            In redesigning the product card, I implemented several significant improvements
                             to create a more intuitive and informative interface:
                         </p>
                     </div>
                     <div>
                         <ul class="product-list">
                             <li>Added a breadcrumb trail to aid users in understanding how to navigate the website</li>
-                            <li>For "Description," "Characteristics," and "Reviews," basic tabs were changed into interactive buttons</li>
-                            <li>For better reading, the product description was organised by dividing the material into logical paragraphs</li>
+                            <li>For "Description," "Characteristics," and "Reviews," basic tabs were changed into
+                                interactive buttons</li>
+                            <li>For better reading, the product description was organised by dividing the material into
+                                logical paragraphs</li>
                             <li>A system for choosing pot sizes (15 cm, 20 cm, 25 cm, and 30 cm) was put into place</li>
                         </ul>
                     </div>
@@ -4937,14 +274,16 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
                 <h2>Responsive Design</h2>
                 <div class="responsive-description">
                     <div class="responsive-text">
-                        Mobile users represent over 60% of e-commerce traffic, making responsive design critical for Delicate Weaves' success.
+                        Mobile users represent over 60% of e-commerce traffic, making responsive design critical for
+                        Delicate Weaves' success.
                     </div>
                     <div class="responsive-text">
-                        The adaptation preserves the sophisticated aesthetic while optimizing for thumb-friendly interactions and faster loading times.
+                        The adaptation preserves the sophisticated aesthetic while optimizing for thumb-friendly
+                        interactions and faster loading times.
                     </div>
                 </div>
             </div>
-            
+
             <div class="phones-container">
                 <div class="phone phone-1">
                     <img src="./Presentation/Image 12.png" alt="Mobile Design - Home Page">
@@ -4968,7 +307,8 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
             <div class="comparison-header">
                 <h2 class="comparison-title">Design Evolution</h2>
                 <p class="comparison-subtitle">
-                    After completing the initial redesign, I created a second iteration to further refine the visual approach and explore alternative design solutions for the Delicate Weaves brand experience.
+                    After completing the initial redesign, I created a second iteration to further refine the visual
+                    approach and explore alternative design solutions for the Delicate Weaves brand experience.
                 </p>
             </div>
 
@@ -4996,10 +336,16 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
 
             <div class="conclusion-content">
                 <div class="conclusion-paragraph">
-                    I showed how many design philosophies can equally effectively communicate brand values and produce memorable user experiences with this redesign project. The second version emphasises organised harmony and a distinct visual hierarchy, whereas the first version celebrates fine typography and exquisite asymmetry.
+                    I showed how many design philosophies can equally effectively communicate brand values and produce
+                    memorable user experiences with this redesign project. The second version emphasises organised
+                    harmony and a distinct visual hierarchy, whereas the first version celebrates fine typography and
+                    exquisite asymmetry.
                 </div>
                 <div class="conclusion-paragraph">
-                    Both approaches effectively enhance the Delicate Weaves brand, demonstrating that high-end design can exist in a variety of ways while preserving the essential elements of the brand. This project demonstrates the value of adaptability in contemporary online design, when user requirements and aesthetic preferences are ever-changing.
+                    Both approaches effectively enhance the Delicate Weaves brand, demonstrating that high-end design
+                    can exist in a variety of ways while preserving the essential elements of the brand. This project
+                    demonstrates the value of adaptability in contemporary online design, when user requirements and
+                    aesthetic preferences are ever-changing.
                 </div>
             </div>
         </div>
@@ -5011,7 +357,7 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
             <div class="cta-header">
                 <h2 class="cta-title">Experience the Design</h2>
                 <p class="cta-subtitle">
-                    Ready to explore the live website? Discover how the redesigned Delicate Weaves 
+                    Ready to explore the live website? Discover how the redesigned Delicate Weaves
                     experience brings handcrafted rattan products to life through thoughtful design.
                 </p>
             </div>
@@ -5023,7 +369,7 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
                     <div class="floating-dot dot-3"></div>
                     <div class="floating-dot dot-4"></div>
                 </div>
-                
+
                 <a href="landing.html" class="button-circle" target="_blank">
                     <div class="button-text">
                         <span class="button-main-text">View Live Site</span>
@@ -5038,198 +384,355 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
         </div>
     </section>
 
+    <footer class="yanas-footer" id="contact">
+    <div class="yanas-bg-elements">
+      <div class="yanas-bg-element">
+        <i class="bi bi-code-slash"></i>
+      </div>
+      <div class="yanas-bg-element">
+        <i class="bi bi-palette"></i>
+      </div>
+      <div class="yanas-bg-element">
+        <i class="bi bi-layers"></i>
+      </div>
+      <div class="yanas-bg-element">
+        <i class="bi bi-terminal"></i>
+      </div>
+      <div class="yanas-bg-element">
+        <i class="bi bi-vector-pen"></i>
+      </div>
+      <div class="yanas-bg-element">
+        <i class="bi bi-grid-3x3"></i>
+      </div>
+      <div class="yanas-bg-element">
+        <i class="bi bi-bezier"></i>
+      </div>
+      <div class="yanas-bg-element">
+        <i class="bi bi-cpu"></i>
+      </div>
+    </div>
+
+    <div class="yanas-footer_wrapper">
+      <div class="yanas-footer_content">
+        <div class="yanas-footer_content-left">
+          <h3 class="yanas-title-140">Let's connect</h3>
+          <div class="yanas-footer_content-left-content">
+            <div class="yanas-text-32">Ready to bring your ideas to life through design & code</div>
+          </div>
+          <a href="mailto:yana.harcourt@gmail.com" class="yanas-button">
+            <div class="yanas-button-content">
+              <span>Send a mail</span>
+              <i class="bi bi-arrow-up-right"></i>
+            </div>
+            <div class="yanas-button-bg-hover"></div>
+          </a>
+        </div>
+
+        <div class="yanas-footer_content-right">
+          <div class="yanas-footer-form">
+            <form id="yanasContactForm" action="https://formspree.io/f/xnnqvwab" method="POST" class="yanas-form">
+              <div class="yanas-status-message" id="yanasStatusMessage"></div>
+
+              <div class="yanas-form_first-line">
+                <div class="yanas-form_first-line-title">
+                  <div class="yanas-text-40">Contact info*</div>
+                </div>
+                <div class="yanas-form-row">
+                  <input class="yanas-footer-field" name="name" placeholder="Your name*" type="text" required>
+                  <input class="yanas-footer-field" name="email" placeholder="Your e-mail*" type="email" required>
+                </div>
+              </div>
+
+              <div class="yanas-form_second-line">
+                <div class="yanas-form_first-line-title">
+                  <div class="yanas-text-40">You are interested in*</div>
+                </div>
+                <div class="yanas-services-grid">
+                  <div class="yanas-form-button_field" data-service="ux-ui-design">UX/UI Design</div>
+                  <div class="yanas-form-button_field" data-service="web-development">Web Development</div>
+                </div>
+                <input type="hidden" name="services" id="selectedServices">
+              </div>
+
+              <div class="yanas-form_second-line">
+                <div class="yanas-form_first-line-title">
+                  <div class="yanas-text-40">Your budget in EUR*</div>
+                </div>
+                <div class="yanas-budget-grid">
+                  <div class="yanas-form-button_field" data-budget="<5k">&lt;5K</div>
+                  <div class="yanas-form-button_field" data-budget="5-10k">5-10K</div>
+                  <div class="yanas-form-button_field" data-budget="10-20k">10-20K</div>
+                  <div class="yanas-form-button_field" data-budget=">20k">&gt;20K</div>
+                  <div class="yanas-form-button_field" data-budget="i-dont-know">I don't know yet</div>
+                </div>
+                <input type="hidden" name="budget" id="selectedBudget">
+              </div>
+
+              <div class="yanas-form_second-line">
+                <textarea name="message" class="yanas-message-field"
+                  placeholder="Tell me about your project..."></textarea>
+              </div>
+
+              <button type="submit" class="yanas-form_button">Start a journey</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="yanas-footer_links">
+        <div class="yanas-footer_links-left">
+          <div class="yanas-text-36">Keep in touch</div>
+          <div class="yanas-text-24">yana.harcourt@gmail.com</div>
+        </div>
+
+        <div class="yanas-footer_links-right">
+          <div class="yanas-footer_links-right-item">
+            <h5>Follow Us</h5>
+            <div class="yanas-footer_links-right-item-links">
+              <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank" class="yanas-rolling-text">
+                <span class="yanas-text-block">LinkedIn</span>
+                <span class="yanas-text-block">LinkedIn</span>
+              </a>
+              <a href="https://www.behance.net/yana_harcourt" target="_blank" class="yanas-rolling-text">
+                <span class="yanas-text-block">Behance</span>
+                <span class="yanas-text-block">Behance</span>
+              </a>
+              <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank" class="yanas-rolling-text">
+                <span class="yanas-text-block">Instagram</span>
+                <span class="yanas-text-block">Instagram</span>
+              </a>
+              <a href="https://github.com/yanaharcourt" target="_blank" class="yanas-rolling-text">
+                <span class="yanas-text-block">GitHub</span>
+                <span class="yanas-text-block">GitHub</span>
+              </a>
+            </div>
+          </div>
+          <div class="yanas-footer_links-right-item">
+            <h5>Menu</h5>
+            <div class="yanas-footer_links-right-item-links">
+              <a href="../index.html" class="yanas-rolling-text">
+                <span class="yanas-text-block">Home</span>
+                <span class="yanas-text-block">Home</span>
+              </a>
+              <a href="#about" class="yanas-rolling-text">
+                <span class="yanas-text-block">About</span>
+                <span class="yanas-text-block">About</span>
+              </a>
+              <a href="#portfolio" class="yanas-rolling-text">
+                <span class="yanas-text-block">Portfolio</span>
+                <span class="yanas-text-block">Portfolio</span>
+              </a>
+              <a href="#resume" class="yanas-rolling-text">
+                <span class="yanas-text-block">Resume</span>
+                <span class="yanas-text-block">Resume</span>
+              </a>
+              <a href="#contact" class="yanas-rolling-text">
+                <span class="yanas-text-block">Contact</span>
+                <span class="yanas-text-block">Contact</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="yanas-copyright">
+          2024 All Rights Reserved
+        </div>
+      </div>
+    </div>
+  </footer>
+
     <script>
-    // Register GSAP plugins
-    gsap.registerPlugin(ScrollTrigger);
+        // Register GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
 
-    // Custom Cursor
-    const cursor = document.querySelector('.cursor');
-    document.addEventListener('mousemove', (e) => {
-        gsap.to(cursor, {
-            x: e.clientX,
-            y: e.clientY,
-            duration: 0.1
-        });
-    });
-
-    // Cursor hover effects
-    document.querySelectorAll('a, button, .nav-dot').forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
-
-    // Progress Bar
-    ScrollTrigger.create({
-        trigger: "body",
-        start: "top top",
-        end: "bottom bottom",
-        onUpdate: self => {
-            gsap.to(".progress-bar", {
-                width: (self.progress * 100) + "%",
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, {
+                x: e.clientX,
+                y: e.clientY,
                 duration: 0.1
             });
-        }
-    });
-
-    // Function to animate phones
-    function animatePhones(section) {
-        const phones = section.querySelectorAll('.phone');
-        phones.forEach((phone, i) => {
-            gsap.to(phone, {
-                opacity: 1,
-                y: 0,
-                rotateX: 0,
-                rotateY: 0,
-                scale: phone.classList.contains('phone-2') ? 1.1 : 1,
-                duration: 1.2,
-                delay: 0.3 + (i * 0.2),
-                ease: "power2.out"
-            });
-        });
-    }
-
-    // Enhanced section-specific animations
-    function animateSectionElements(section, index) {
-        // Animate images
-        const images = section.querySelectorAll('.assessment-image, .layout-image, .colour-image, .delivery-image, .product-image');
-        images.forEach((img, i) => {
-            gsap.to(img, {
-                opacity: 1,
-                x: 0,
-                y: 0,
-                duration: 1.2,
-                delay: 0.3 + (i * 0.2),
-                ease: "power2.out"
-            });
         });
 
-        // Animate list items
-        const listItems = section.querySelectorAll('.solution-list li, .product-list li');
-        listItems.forEach((item, i) => {
-            gsap.to(item, {
-                opacity: 1,
-                x: 0,
-                duration: 0.8,
-                delay: 0.5 + (i * 0.1),
-                ease: "power2.out"
-            });
+        // Cursor hover effects
+        document.querySelectorAll('a, button, .nav-dot').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
         });
 
-        // Animate floating elements for hero
-        if (index === 0) {
-            gsap.to('.floating-circle', {
-                opacity: 0.6,
-                duration: 2,
-                delay: 1,
-                ease: "power2.out"
-            });
-            gsap.to('.floating-line', {
-                opacity: 0.6,
-                duration: 2,
-                delay: 1.5,
-                ease: "power2.out"
-            });
-        }
-
-        // Animate phones for responsive design section
-        if (index === 10) {
-            animatePhones(section);
-        }
-    }
-
-    // Section animations with enhanced effects
-    gsap.utils.toArray('.section').forEach((section, index) => {
-        const content = section.querySelector('.section-content');
-        
-        gsap.set(content, { opacity: 0, y: 50 });
-        
+        // Progress Bar
         ScrollTrigger.create({
-            trigger: section,
-            start: "top 80%",
-            end: "bottom 20%",
-            onEnter: () => {
-                gsap.to(content, {
+            trigger: "body",
+            start: "top top",
+            end: "bottom bottom",
+            onUpdate: self => {
+                gsap.to(".progress-bar", {
+                    width: (self.progress * 100) + "%",
+                    duration: 0.1
+                });
+            }
+        });
+
+        // Function to animate phones
+        function animatePhones(section) {
+            const phones = section.querySelectorAll('.phone');
+            phones.forEach((phone, i) => {
+                gsap.to(phone, {
                     opacity: 1,
                     y: 0,
-                    duration: 1,
+                    rotateX: 0,
+                    rotateY: 0,
+                    scale: phone.classList.contains('phone-2') ? 1.1 : 1,
+                    duration: 1.2,
+                    delay: 0.3 + (i * 0.2),
                     ease: "power2.out"
                 });
-                
-                // Animate specific elements within each section
-                animateSectionElements(section, index);
-                updateActiveNav(index);
-            },
-            onLeave: () => {
-                if (index < gsap.utils.toArray('.section').length - 1) {
-                    updateActiveNav(index + 1);
-                }
-            },
-            onEnterBack: () => {
-                updateActiveNav(index);
-            }
-        });
-    });
-
-    // Hero image animation
-    gsap.to('.hero-image', {
-        opacity: 1,
-        y: 0,
-        duration: 1.5,
-        delay: 0.5,
-        ease: "power2.out"
-    });
-
-    // Navigation
-    function updateActiveNav(index) {
-        document.querySelectorAll('.nav-dot').forEach((dot, i) => {
-            dot.classList.toggle('active', i === index);
-        });
-    }
-
-    // Nav dot clicks
-    document.querySelectorAll('.nav-dot').forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            const sections = gsap.utils.toArray('.section');
-            gsap.to(window, {
-                scrollTo: sections[index],
-                duration: 1,
-                ease: "power2.inOut"
             });
-        });
-    });
+        }
 
-    // Hide scroll indicator after first scroll
-    ScrollTrigger.create({
-        trigger: "body",
-        start: "top top",
-        end: "bottom bottom",
-        onUpdate: self => {
-            if (self.progress > 0.1) {
-                gsap.to('.scroll-indicator', {
-                    opacity: 0,
-                    duration: 0.3
+        // Enhanced section-specific animations
+        function animateSectionElements(section, index) {
+            // Animate images
+            const images = section.querySelectorAll('.assessment-image, .layout-image, .colour-image, .delivery-image, .product-image');
+            images.forEach((img, i) => {
+                gsap.to(img, {
+                    opacity: 1,
+                    x: 0,
+                    y: 0,
+                    duration: 1.2,
+                    delay: 0.3 + (i * 0.2),
+                    ease: "power2.out"
                 });
-            } else {
-                gsap.to('.scroll-indicator', {
-                    opacity: 0.7,
-                    duration: 0.3
+            });
+
+            // Animate list items
+            const listItems = section.querySelectorAll('.solution-list li, .product-list li');
+            listItems.forEach((item, i) => {
+                gsap.to(item, {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.8,
+                    delay: 0.5 + (i * 0.1),
+                    ease: "power2.out"
                 });
+            });
+
+            // Animate floating elements for hero
+            if (index === 0) {
+                gsap.to('.floating-circle', {
+                    opacity: 0.6,
+                    duration: 2,
+                    delay: 1,
+                    ease: "power2.out"
+                });
+                gsap.to('.floating-line', {
+                    opacity: 0.6,
+                    duration: 2,
+                    delay: 1.5,
+                    ease: "power2.out"
+                });
+            }
+
+            // Animate phones for responsive design section
+            if (index === 10) {
+                animatePhones(section);
             }
         }
-    });
 
-    // Smooth scroll
-    ScrollTrigger.normalizeScroll(true);
-    
-    // Initialize
-    gsap.set('.section-content', { opacity: 0, y: 50 });
-    gsap.to('.section:first-child .section-content', {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 0.3,
-        ease: "power2.out"
-    });
+        // Section animations with enhanced effects
+        gsap.utils.toArray('.section').forEach((section, index) => {
+            const content = section.querySelector('.section-content');
+
+            gsap.set(content, { opacity: 0, y: 50 });
+
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top 80%",
+                end: "bottom 20%",
+                onEnter: () => {
+                    gsap.to(content, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        ease: "power2.out"
+                    });
+
+                    // Animate specific elements within each section
+                    animateSectionElements(section, index);
+                    updateActiveNav(index);
+                },
+                onLeave: () => {
+                    if (index < gsap.utils.toArray('.section').length - 1) {
+                        updateActiveNav(index + 1);
+                    }
+                },
+                onEnterBack: () => {
+                    updateActiveNav(index);
+                }
+            });
+        });
+
+        // Hero image animation
+        gsap.to('.hero-image', {
+            opacity: 1,
+            y: 0,
+            duration: 1.5,
+            delay: 0.5,
+            ease: "power2.out"
+        });
+
+        // Navigation
+        function updateActiveNav(index) {
+            document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // Nav dot clicks
+        document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                const sections = gsap.utils.toArray('.section');
+                gsap.to(window, {
+                    scrollTo: sections[index],
+                    duration: 1,
+                    ease: "power2.inOut"
+                });
+            });
+        });
+
+        // Hide scroll indicator after first scroll
+        ScrollTrigger.create({
+            trigger: "body",
+            start: "top top",
+            end: "bottom bottom",
+            onUpdate: self => {
+                if (self.progress > 0.1) {
+                    gsap.to('.scroll-indicator', {
+                        opacity: 0,
+                        duration: 0.3
+                    });
+                } else {
+                    gsap.to('.scroll-indicator', {
+                        opacity: 0.7,
+                        duration: 0.3
+                    });
+                }
+            }
+        });
+
+        // Smooth scroll
+        ScrollTrigger.normalizeScroll(true);
+
+        // Initialize
+        gsap.set('.section-content', { opacity: 0, y: 50 });
+        gsap.to('.section:first-child .section-content', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.3,
+            ease: "power2.out"
+        });
     </script>
     <script>
         // Register GSAP plugins
@@ -5253,52 +756,52 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
             ease: "power2.out"
         })
 
-        // Before and After images animation
-        .to(".comparison-side.before", {
-            opacity: 1,
-            x: 0,
-            duration: 1.2,
-            ease: "power2.out"
-        }, "-=0.5")
-        .to(".comparison-side.after", {
-            opacity: 1,
-            x: 0,
-            duration: 1.2,
-            ease: "power2.out"
-        }, "-=1")
+            // Before and After images animation
+            .to(".comparison-side.before", {
+                opacity: 1,
+                x: 0,
+                duration: 1.2,
+                ease: "power2.out"
+            }, "-=0.5")
+            .to(".comparison-side.after", {
+                opacity: 1,
+                x: 0,
+                duration: 1.2,
+                ease: "power2.out"
+            }, "-=1")
 
-        // Transformation arrow
-        .to(".transformation-arrow", {
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            ease: "back.out(1.7)"
-        }, "-=0.3")
+            // Transformation arrow
+            .to(".transformation-arrow", {
+                opacity: 1,
+                scale: 1,
+                duration: 0.8,
+                ease: "back.out(1.7)"
+            }, "-=0.3")
 
-        // Insights cards
-        .to(".comparison-insights", {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power2.out"
-        }, "-=0.2")
+            // Insights cards
+            .to(".comparison-insights", {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out"
+            }, "-=0.2")
 
-        // Animate insight list items
-        .to(".insight-list li", {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: "power2.out"
-        }, "-=0.5")
+            // Animate insight list items
+            .to(".insight-list li", {
+                opacity: 1,
+                x: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: "power2.out"
+            }, "-=0.5")
 
-        // Impact summary
-        .to(".impact-summary", {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power2.out"
-        }, "-=0.3");
+            // Impact summary
+            .to(".impact-summary", {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out"
+            }, "-=0.3");
 
         // Hover effects for comparison images
         document.querySelectorAll('.comparison-side').forEach(side => {
@@ -5428,4 +931,5 @@ LAYOUT INNOVATION SECTION MOBILE ADAPTATIONS
         });
     </script>
 </body>
+
 </html>
