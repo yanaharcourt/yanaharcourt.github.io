@@ -249,3 +249,105 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+/* ====================================
+Footer
+==================================== */
+// Service selection (multiple)
+    document.querySelectorAll('[data-service]').forEach(service => {
+      service.addEventListener('click', function () {
+        this.classList.toggle('active');
+        updateSelectedServices();
+      });
+    });
+
+    // Budget selection (single)
+    document.querySelectorAll('[data-budget]').forEach(budget => {
+      budget.addEventListener('click', function () {
+        document.querySelectorAll('[data-budget]').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('selectedBudget').value = this.dataset.budget;
+      });
+    });
+
+    function updateSelectedServices() {
+      const selected = [];
+      document.querySelectorAll('[data-service].active').forEach(service => {
+        selected.push(service.dataset.service);
+      });
+      document.getElementById('selectedServices').value = selected.join(', ');
+    }
+
+    // Form submission
+    document.getElementById('yanasContactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const form = this;
+      const statusMessage = document.getElementById('yanasStatusMessage');
+      const submitBtn = form.querySelector('.yanas-form_button');
+
+      // Validation
+      const selectedServices = document.getElementById('selectedServices').value;
+      const selectedBudget = document.getElementById('selectedBudget').value;
+
+      if (!selectedServices) {
+        statusMessage.className = 'yanas-status-message yanas-error';
+        statusMessage.textContent = 'Please select at least one service.';
+        statusMessage.style.display = 'block';
+        return;
+      }
+
+      if (!selectedBudget) {
+        statusMessage.className = 'yanas-status-message yanas-error';
+        statusMessage.textContent = 'Please select your budget range.';
+        statusMessage.style.display = 'block';
+        return;
+      }
+
+      // Show loading
+      statusMessage.className = 'yanas-status-message yanas-loading';
+      statusMessage.textContent = 'Sending message...';
+      statusMessage.style.display = 'block';
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      // Submit
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          statusMessage.className = 'yanas-status-message yanas-success';
+          statusMessage.textContent = 'Thank you! Your message has been sent successfully.';
+          form.reset();
+          document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      }).catch(error => {
+        statusMessage.className = 'yanas-status-message yanas-error';
+        statusMessage.textContent = 'Oops! There was a problem sending your message. Please try again.';
+      }).finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Start a journey';
+
+        setTimeout(() => {
+          statusMessage.style.display = 'none';
+        }, 5000);
+      });
+    });
+
+    // Enhanced floating animation on load
+    window.addEventListener('load', function () {
+      document.querySelectorAll('.yanas-bg-element').forEach((element, index) => {
+        setTimeout(() => {
+          element.style.opacity = '0.06';
+          element.style.animation = `yanas-complex-float ${15 + index * 2}s ease-in-out infinite`;
+          element.style.animationDelay = `${index * 0.8}s`;
+        }, index * 200);
+      });
+    });
