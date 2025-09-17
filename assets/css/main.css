@@ -606,7 +606,6 @@ h6 {
   filter: blur(0.5px);
 }
 
-/* More realistic positioning like flowers in Ministry */
 .yanas-bg-element:nth-child(1) {
   top: 5%;
   left: 8%;
@@ -837,7 +836,7 @@ h6 {
   pointer-events: none;
 }
 
-/* Make form content above glass effect */
+/* Form content above glass effect */
 .yanas-form {
   position: relative;
   z-index: 2;
@@ -890,7 +889,7 @@ h6 {
   font-size: 12px;
 }
 
-/* Service Selection (Only UX/UI Design and Web Development) */
+/* Service Selection  */
 .yanas-services-grid {
   display: flex;
   flex-wrap: wrap;
@@ -990,7 +989,7 @@ h6 {
   box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
 }
 
-/* Bottom Section (Keep in touch higher) */
+/* Bottom Section (Keep in touch) */
 .yanas-footer_links {
   display: flex;
   justify-content: space-between;
