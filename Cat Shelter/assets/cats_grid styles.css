@@ -817,6 +817,7 @@ Modal Styles
 
 .image-thumbnails {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     overflow-x: auto;
     padding: 5px 0;
@@ -1253,6 +1254,11 @@ Responsives
     .modal-body {
         flex-direction: column;
     }
+
+    .image-thumbnails {
+        justify-content: flex-start;
+    }
+    
     .modal-images,
     .modal-info {
         padding: 15px;
@@ -1354,9 +1360,13 @@ Responsives
         border-radius: 15px;
     }
 
+    .image-thumbnails {
+        justify-content: flex-start;
+    }
+
     .thumbnail {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
         border-radius: 10px;
     }
 
@@ -1505,9 +1515,13 @@ Responsives
         border-radius: 12px;
     }
 
+    .image-thumbnails {
+        justify-content: flex-start;
+    }
+    
     .thumbnail {
-        width: 75px;
-        height: 75px;
+        width: 65px;
+        height: 65px;
         border-radius: 8px;
     }
 
