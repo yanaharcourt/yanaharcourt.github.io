@@ -1589,7 +1589,7 @@ section,
 
 .badges-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 40px;
@@ -1599,8 +1599,8 @@ section,
 }
 
 .badge-item {
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
