@@ -1925,3 +1925,72 @@ Responsives
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
+
+/* 1536px-1599px (для экранов 1920px со scale 125%) */
+@media (min-width: 1536px) and (max-width: 1599px) {
+    :root {
+        --font-hero-title: 3.6rem;
+        --font-section-title: 2.6rem;
+        --font-heading-h2: 2.1rem;
+        --font-heading-h3: 1.7rem;
+        --font-heading-h4: 1.25rem;
+        --font-subtitle: 1.15rem;
+        --font-text-body: 0.93rem;
+        --font-text-small: 0.83rem;
+        --font-button: 1.05rem;
+        --font-nav: 1.05rem;
+    }
+
+    .cats-container {
+        max-width: 1300px;
+        padding: 22px;
+    }
+
+    .header h1 {
+        font-size: 3rem;
+    }
+
+    .header p {
+        font-size: 1.2rem;
+    }
+
+    .cats-grid {
+        gap: 27px;
+        margin-bottom: 100px;
+    }
+
+    .cat-card {
+        flex: 1 1 calc(33.333% - 27px);
+        max-width: calc(33.333% - 27px);
+    }
+
+    .cat-image {
+        height: 265px;
+    }
+
+    .modal-content {
+        max-width: 1200px;
+    }
+
+    .main-image {
+        height: 550px;
+    }
+
+    .modal-cat-name {
+        font-size: 2.5rem;
+    }
+
+    .filter-header-inline {
+        padding: 17px 23px;
+    }
+
+    .category-btn {
+        padding: 7px 11px;
+        font-size: 0.88rem;
+        max-width: 150px;
+    }
+
+    .btn-selections {
+        max-width: 70px;
+    }
+}
