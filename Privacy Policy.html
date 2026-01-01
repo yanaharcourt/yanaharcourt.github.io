@@ -37,16 +37,20 @@
     }
 
     h1 {
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 700;
-      margin-bottom: 20px;
-      color: var(--heading-color);
+      margin-bottom: 10px;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
     }
 
     h2 {
       color: var(--heading-color);
-      font-size: 20px;
-      margin-top: 30px;
+      font-size: 22px;
+      margin-top: 35px;
+      margin-bottom: 15px;
       border-left: 4px solid var(--accent-color);
       padding-left: 15px;
     }
@@ -54,17 +58,46 @@
     p, li {
       font-size: 16px;
       color: var(--default-color);
+      margin-bottom: 12px;
+    }
+
+    ul {
+      padding-left: 20px;
+      list-style-type: none;
+    }
+
+    ul li::before {
+      content: "•";
+      color: var(--accent-color);
+      font-weight: bold;
+      display: inline-block; 
+      width: 1em;
+      margin-left: -1em;
     }
 
     .last-updated {
       font-weight: 600;
       color: var(--accent-color);
       margin-bottom: 40px;
+      display: block;
+    }
+
+    .highlight {
+      font-weight: 700;
+      color: var(--heading-color);
+    }
+
+    .contact-box {
+      margin-top: 40px;
+      padding: 25px;
+      background: var(--bg-section);
+      border-radius: 12px;
     }
 
     a {
       color: var(--accent-color);
       text-decoration: none;
+      font-weight: 500;
       transition: 0.3s;
     }
 
@@ -76,58 +109,75 @@
       margin-top: 40px;
       text-align: center;
     }
+
+    @media (max-width: 768px) {
+      .container { padding: 30px 20px; }
+      h1 { font-size: 28px; }
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
     <h1>Privacy Policy</h1>
-    <p class="last-updated">Last updated: 01 January 2026</p>
+    <span class="last-updated">Last updated: 01 January 2026</span>
 
     <div class="section">
-      <h2>1. Introduction</h2>
-      <p>This Privacy Policy explains how I collect, use, and protect any personal information you provide through the contact form on this website. I am committed to ensuring that your privacy is protected in accordance with the UK General Data Protection Regulation (UK GDPR).</p>
+      <h2>1. Overview</h2>
+      <p>This Privacy Policy explains how I collect, use, and protect any personal information you provide through this website. I am committed to ensuring that your privacy is protected in accordance with the <span class="highlight">EU General Data Protection Regulation (GDPR)</span>.</p>
     </div>
 
     <div class="section">
-      <h2>2. Data I Collect</h2>
-      <p>When you use the contact form, you voluntarily provide the following personal data:</p>
+      <h2>2. Data Collection</h2>
+      <p>I only collect personal information that you voluntarily provide via the contact form. This includes:</p>
       <ul>
-        <li>Your name;</li>
-        <li>Your email address;</li>
-        <li>Any information you choose to include in your message.</li>
+        <li><span class="highlight">Identity Data:</span> Your name.</li>
+        <li><span class="highlight">Contact Data:</span> Your email address.</li>
+        <li><span class="highlight">Project Details:</span> Your interests (Design/Development) and budget.</li>
+        <li><span class="highlight">Message Content:</span> Any information included in your enquiry.</li>
       </ul>
     </div>
 
     <div class="section">
       <h2>3. How I Use Your Data</h2>
-      <p>I require this information solely to understand your needs and provide you with a response to your enquiry. I will <strong>never</strong> sell, distribute, or lease your personal information to third parties unless required by law to do so.</p>
+      <p>Your data is used strictly for professional purposes, specifically to:</p>
+      <ul>
+        <li>Respond to your enquiries or feedback.</li>
+        <li>Discuss potential collaborations and project details.</li>
+      </ul>
+      <p>I do not share, sell, or lease your personal information to third parties unless required by law.</p>
     </div>
 
     <div class="section">
       <h2>4. Legal Basis for Processing</h2>
-      <p>By ticking the consent box on the contact form, you give me permission to process your data for the specific purpose of responding to your message.</p>
+      <p>Processing your data is based on your <span class="highlight">explicit consent</span>, given when you tick the agreement box and submit the form, and the necessity to take steps prior to entering into a potential contract.</p>
     </div>
 
     <div class="section">
-      <h2>5. Data Retention & Security</h2>
-      <p>I am committed to ensuring that your information is secure. I only retain your personal data for as long as necessary to fulfil the purposes for which it was collected. Once our communication has ended and there is no further need for the data, it will be securely deleted.</p>
+      <h2>5. Third-Party Processing</h2>
+      <p>I use <span class="highlight">Formspree</span> to facilitate the secure transmission of form submissions. Formspree acts as a data processor and is compliant with European data protection standards.</p>
     </div>
 
     <div class="section">
-      <h2>6. Your Rights</h2>
-      <p>You have the right to request details of the personal information I hold about you, to ask for it to be corrected, or to request its deletion. If you wish to exercise any of these rights, please contact me via email.</p>
+      <h2>6. Security and Retention</h2>
+      <p>I take reasonable technical and organisational measures to protect your data. Since I am based in <span class="highlight">France</span>, your data is handled within the EEA. It is only retained for as long as necessary to fulfil your request.</p>
     </div>
 
     <div class="section">
-      <h2>7. Contact</h2>
-      <p>If you have any questions regarding this policy, please reach out at:<br>
-      <strong>Email:</strong> <a href="mailto:yana.harcourt@gmail.com">yana.harcourt@gmail.com</a></p>
+      <h2>7. Your Rights</h2>
+      <p>Under the GDPR, you have the right to access, rectify, or request the deletion of your personal information. You can also withdraw your consent at any time.</p>
+    </div>
+
+    <div class="contact-box">
+      <p><strong>Contact Details</strong></p>
+      <p>If you have any questions regarding this policy or wish to exercise your rights, please contact me at:</p>
+      <p><strong>Email:</strong> <a href="mailto:yana.harcourt@gmail.com">yana.harcourt@gmail.com</a></p>
     </div>
 
     <div class="footer-link">
-      <a href="index.html">← Back to Home</a>
+      <a href="index.html">← Back to Portfolio</a>
     </div>
   </div>
 </body>
+
 </html>
