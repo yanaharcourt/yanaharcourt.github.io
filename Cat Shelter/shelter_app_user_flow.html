@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Flow - Shelter App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+            line-height: 1.4;
+        }
+        
+        .language-selector {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .lang-btn {
+            background: #8B5A5A;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-btn.active {
+            background: #E8B7A9;
+            color: #3C3C3C;
+        }
+        
+        .lang-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            display: none;
+            overflow-x: auto;
+        }
+        
+        .container.active {
+            display: block;
+        }
+        
+        .title {
+            text-align: center;
+            background: #8B5A5A;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        
+        .flow-diagram {
+            position: relative;
+            min-width: 1400px;
+            min-height: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Basic shapes */
+        .start-node {
+            position: absolute;
+            background: #A7C4BC;
+            border: 2px solid #7DA7B0;
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            color: #2D5A27;
+            min-width: 120px;
+        }
+        
+        .process-node {
+            position: absolute;
+            background: #fff;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 13px;
+            text-align: center;
+            min-width: 100px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .decision-node {
+            position: absolute;
+            background: #fff;
+            border: 2px solid #ccc;
+            transform: rotate(45deg);
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .decision-text {
+            transform: rotate(-45deg);
+            font-size: 12px;
+            text-align: center;
+            line-height: 1.2;
+            max-width: 80px;
+        }
+        
+        .end-node {
+            position: absolute;
+            background: #B8E6D3;
+            border: 2px solid #4CAF50;
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            color: #2D5A27;
+            min-width: 100px;
+        }
+        
+        .action-node {
+            position: absolute;
+            background: #FFF3E0;
+            border: 2px solid #FF8A50;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 12px;
+            text-align: center;
+            min-width: 90px;
+        }
+        
+        .yes-node {
+            position: absolute;
+            background: #C8E6C9;
+            border: 2px solid #4CAF50;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #2D5A27;
+        }
+        
+        .no-node {
+            position: absolute;
+            background: #FFCDD2;
+            border: 2px solid #F44336;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #C62828;
+        }
+        
+        /* Arrows */
+        .arrow {
+            position: absolute;
+            color: #666;
+            font-size: 18px;
+            pointer-events: none;
+        }
+        
+        .arrow-right { transform: rotate(0deg); }
+        .arrow-down { transform: rotate(90deg); }
+        .arrow-left { transform: rotate(180deg); }
+        .arrow-up { transform: rotate(-90deg); }
+        
+        /* Connection lines */
+        .line {
+            position: absolute;
+            background: #ccc;
+            pointer-events: none;
+        }
+        
+        .line-h { height: 2px; }
+        .line-v { width: 2px; }
+        
+        /* Labels */
+        .tap-label {
+            position: absolute;
+            font-size: 11px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .note {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f9f9f9;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <button class="lang-btn active" onclick="showLanguage('en')">🇬🇧 English</button>
+        <button class="lang-btn" onclick="showLanguage('pt')">🇵🇹 Português</button>
+    </div>
+
+    <!-- ENGLISH VERSION -->
+    <div id="en" class="container active">
+        <div class="title">Shelter App - User Flow: Finding and Adopting a Pet</div>
+        
+        <div class="flow-diagram">
+            <!-- Start -->
+            <div class="start-node" style="top: 20px; left: 50px;">
+                App Launch
+            </div>
+            
+            <!-- Main navigation decision -->
+            <div class="decision-node" style="top: 120px; left: 100px;">
+                <div class="decision-text">User wants to find a pet?</div>
+            </div>
+            
+            <!-- YES path -->
+            <div class="yes-node" style="top: 90px; left: 280px;">YES</div>
+            
+            <!-- Home screen -->
+            <div class="process-node" style="top: 80px; left: 380px;">
+                Home Screen<br>
+                (Animals List)
+            </div>
+            
+            <!-- Filter decision -->
+            <div class="decision-node" style="top: 200px; left: 430px;">
+                <div class="decision-text">Need to filter animals?</div>
+            </div>
+            
+            <!-- Filter YES -->
+            <div class="yes-node" style="top: 170px; left: 600px;">YES</div>
+            
+            <!-- Filter options -->
+            <div class="process-node" style="top: 160px; left: 700px;">
+                Filter Options<br>
+                (Dogs/Cats/Age/Size)
+            </div>
+            
+            <!-- Filtered results -->
+            <div class="process-node" style="top: 260px; left: 700px;">
+                Filtered<br>
+                Animal List
+            </div>
+            
+            <!-- Filter NO -->
+            <div class="no-node" style="top: 320px; left: 480px;">NO</div>
+            
+            <!-- Browse all animals -->
+            <div class="process-node" style="top: 400px; left: 430px;">
+                Browse All<br>
+                Animals
+            </div>
+            
+            <!-- Select animal -->
+            <div class="action-node" style="top: 350px; left: 580px;">
+                TAP on<br>
+                Animal Card
+            </div>
+            
+            <!-- Animal detail -->
+            <div class="process-node" style="top: 340px; left: 720px;">
+                Animal Detail<br>
+                Page
+            </div>
+            
+            <!-- Like decision -->
+            <div class="decision-node" style="top: 450px; left: 770px;">
+                <div class="decision-text">Interested in this pet?</div>
+            </div>
+            
+            <!-- Like YES -->
+            <div class="yes-node" style="top: 420px; left: 950px;">YES</div>
+            
+            <!-- Action buttons -->
+            <div class="process-node" style="top: 380px; left: 1050px;">
+                Action Buttons<br>
+                Available
+            </div>
+            
+            <!-- Add to favorites -->
+            <div class="action-node" style="top: 300px; left: 1050px;">
+                TAP "Add to<br>
+                Favorites"
+            </div>
+            
+            <!-- Contact shelter -->
+            <div class="action-node" style="top: 300px; left: 1200px;">
+                TAP "Contact<br>
+                Shelter"
+            </div>
+            
+            <!-- Schedule meeting -->
+            <div class="action-node" style="top: 460px; left: 1050px;">
+                TAP "Schedule<br>
+                Meeting"
+            </div>
+            
+            <!-- Share -->
+            <div class="action-node" style="top: 460px; left: 1200px;">
+                TAP<br>
+                "Share"
+            </div>
+            
+            <!-- End states -->
+            <div class="end-node" style="top: 240px; left: 1050px;">
+                Added to<br>
+                Favorites
+            </div>
+            
+            <div class="end-node" style="top: 240px; left: 1200px;">
+                Contact Form<br>
+                Opened
+            </div>
+            
+            <div class="end-node" style="top: 520px; left: 1050px;">
+                Meeting<br>
+                Scheduled
+            </div>
+            
+            <div class="end-node" style="top: 520px; left: 1200px;">
+                Share Dialog<br>
+                Opened
+            </div>
+            
+            <!-- Like NO -->
+            <div class="no-node" style="top: 580px; left: 720px;">NO</div>
+            
+            <!-- Back to list -->
+            <div class="process-node" style="top: 650px; left: 650px;">
+                Back to<br>
+                Animal List
+            </div>
+            
+            <!-- Main NO path -->
+            <div class="no-node" style="top: 250px; left: 100px;">NO</div>
+            
+            <!-- Other sections -->
+            <div class="process-node" style="top: 350px; left: 50px;">
+                Navigate to<br>
+                News/Profile/Donate
+            </div>
+            
+            <!-- Arrows -->
+            <div class="arrow arrow-down" style="top: 70px; left: 105px;">➤</div>
+            <div class="arrow arrow-right" style="top: 155px; left: 240px;">➤</div>
+            <div class="arrow arrow-right" style="top: 105px; left: 340px;">➤</div>
+            <div class="arrow arrow-down" style="top: 130px; left: 485px;">➤</div>
+            <div class="arrow arrow-right" style="top: 235px; left: 560px;">➤</div>
+            <div class="arrow arrow-down" style="top: 210px; left: 755px;">➤</div>
+            <div class="arrow arrow-down" style="top: 280px; left: 505px;">➤</div>
+            <div class="arrow arrow-right" style="top: 375px; left: 540px;">➤</div>
+            <div class="arrow arrow-down" style="top: 390px; left: 775px;">➤</div>
+            <div class="arrow arrow-right" style="top: 485px; left: 930px;">➤</div>
+            <div class="arrow arrow-up" style="top: 330px; left: 1105px;">➤</div>
+            <div class="arrow arrow-right" style="top: 325px; left: 1110px;">➤</div>
+            <div class="arrow arrow-down" style="top: 410px; left: 1105px;">➤</div>
+            <div class="arrow arrow-right" style="top: 485px; left: 1110px;">➤</div>
+            <div class="arrow arrow-up" style="top: 270px; left: 1105px;">➤</div>
+            <div class="arrow arrow-up" style="top: 270px; left: 1255px;">➤</div>
+            <div class="arrow arrow-up" style="top: 470px; left: 1105px;">➤</div>
+            <div class="arrow arrow-up" style="top: 470px; left: 1255px;">➤</div>
+            <div class="arrow arrow-down" style="top: 620px; left: 745px;">➤</div>
+            <div class="arrow arrow-down" style="top: 290px; left: 135px;">➤</div>
+            
+            <!-- TAP labels -->
+            <div class="tap-label" style="top: 360px; left: 540px;">TAP</div>
+            <div class="tap-label" style="top: 280px; left: 1000px;">TAP</div>
+            <div class="tap-label" style="top: 280px; left: 1150px;">TAP</div>
+            <div class="tap-label" style="top: 440px; left: 1000px;">TAP</div>
+            <div class="tap-label" style="top: 440px; left: 1150px;">TAP</div>
+            
+            <!-- Note -->
+            <div class="note">
+                User journey: Finding and adopting a shelter animal.<br>
+                Main path focuses on browsing, filtering, and taking action on pet profiles.
+            </div>
+        </div>
+    </div>
+
+    <!-- PORTUGUESE VERSION -->
+    <div id="pt" class="container">
+        <div class="title">App do Abrigo - Fluxo do Utilizador: Encontrar e Adotar um Animal</div>
+        
+        <div class="flow-diagram">
+            <!-- Start -->
+            <div class="start-node" style="top: 20px; left: 50px;">
+                Abertura da App
+            </div>
+            
+            <!-- Main navigation decision -->
+            <div class="decision-node" style="top: 120px; left: 100px;">
+                <div class="decision-text">Utilizador quer encontrar animal?</div>
+            </div>
+            
+            <!-- YES path -->
+            <div class="yes-node" style="top: 90px; left: 280px;">SIM</div>
+            
+            <!-- Home screen -->
+            <div class="process-node" style="top: 80px; left: 380px;">
+                Ecrã Inicial<br>
+                (Lista de Animais)
+            </div>
+            
+            <!-- Filter decision -->
+            <div class="decision-node" style="top: 200px; left: 430px;">
+                <div class="decision-text">Precisa filtrar animais?</div>
+            </div>
+            
+            <!-- Filter YES -->
+            <div class="yes-node" style="top: 170px; left: 600px;">SIM</div>
+            
+            <!-- Filter options -->
+            <div class="process-node" style="top: 160px; left: 700px;">
+                Opções de Filtro<br>
+                (Cães/Gatos/Idade/Tamanho)
+            </div>
+            
+            <!-- Filtered results -->
+            <div class="process-node" style="top: 260px; left: 700px;">
+                Lista Filtrada<br>
+                de Animais
+            </div>
+            
+            <!-- Filter NO -->
+            <div class="no-node" style="top: 320px; left: 480px;">NÃO</div>
+            
+            <!-- Browse all animals -->
+            <div class="process-node" style="top: 400px; left: 430px;">
+                Ver Todos<br>
+                os Animais
+            </div>
+            
+            <!-- Select animal -->
+            <div class="action-node" style="top: 350px; left: 580px;">
+                TOCAR no<br>
+                Cartão do Animal
+            </div>
+            
+            <!-- Animal detail -->
+            <div class="process-node" style="top: 340px; left: 720px;">
+                Página de Detalhes<br>
+                do Animal
+            </div>
+            
+            <!-- Like decision -->
+            <div class="decision-node" style="top: 450px; left: 770px;">
+                <div class="decision-text">Interessado neste animal?</div>
+            </div>
+            
+            <!-- Like YES -->
+            <div class="yes-node" style="top: 420px; left: 950px;">SIM</div>
+            
+            <!-- Action buttons -->
+            <div class="process-node" style="top: 380px; left: 1050px;">
+                Botões de Ação<br>
+                Disponíveis
+            </div>
+            
+            <!-- Add to favorites -->
+            <div class="action-node" style="top: 300px; left: 1050px;">
+                TOCAR "Adicionar<br>
+                aos Favoritos"
+            </div>
+            
+            <!-- Contact shelter -->
+            <div class="action-node" style="top: 300px; left: 1200px;">
+                TOCAR "Contactar<br>
+                Abrigo"
+            </div>
+            
+            <!-- Schedule meeting -->
+            <div class="action-node" style="top: 460px; left: 1050px;">
+                TOCAR "Agendar<br>
+                Encontro"
+            </div>
+            
+            <!-- Share -->
+            <div class="action-node" style="top: 460px; left: 1200px;">
+                TOCAR<br>
+                "Partilhar"
+            </div>
+            
+            <!-- End states -->
+            <div class="end-node" style="top: 240px; left: 1050px;">
+                Adicionado aos<br>
+                Favoritos
+            </div>
+            
+            <div class="end-node" style="top: 240px; left: 1200px;">
+                Formulário de<br>
+                Contacto Aberto
+            </div>
+            
+            <div class="end-node" style="top: 520px; left: 1050px;">
+                Encontro<br>
+                Agendado
+            </div>
+            
+            <div class="end-node" style="top: 520px; left: 1200px;">
+                Diálogo de Partilha<br>
+                Aberto
+            </div>
+            
+            <!-- Like NO -->
+            <div class="no-node" style="top: 580px; left: 720px;">NÃO</div>
+            
+            <!-- Back to list -->
+            <div class="process-node" style="top: 650px; left: 650px;">
+                Voltar à Lista<br>
+                de Animais
+            </div>
+            
+            <!-- Main NO path -->
+            <div class="no-node" style="top: 250px; left: 100px;">NÃO</div>
+            
+            <!-- Other sections -->
+            <div class="process-node" style="top: 350px; left: 50px;">
+                Navegar para<br>
+                Notícias/Perfil/Doar
+            </div>
+            
+            <!-- Arrows -->
+            <div class="arrow arrow-down" style="top: 70px; left: 105px;">➤</div>
+            <div class="arrow arrow-right" style="top: 155px; left: 240px;">➤</div>
+            <div class="arrow arrow-right" style="top: 105px; left: 340px;">➤</div>
+            <div class="arrow arrow-down" style="top: 130px; left: 485px;">➤</div>
+            <div class="arrow arrow-right" style="top: 235px; left: 560px;">➤</div>
+            <div class="arrow arrow-down" style="top: 210px; left: 755px;">➤</div>
+            <div class="arrow arrow-down" style="top: 280px; left: 505px;">➤</div>
+            <div class="arrow arrow-right" style="top: 375px; left: 540px;">➤</div>
+            <div class="arrow arrow-down" style="top: 390px; left: 775px;">➤</div>
+            <div class="arrow arrow-right" style="top: 485px; left: 930px;">➤</div>
+            <div class="arrow arrow-up" style="top: 330px; left: 1105px;">➤</div>
+            <div class="arrow arrow-right" style="top: 325px; left: 1110px;">➤</div>
+            <div class="arrow arrow-down" style="top: 410px; left: 1105px;">➤</div>
+            <div class="arrow arrow-right" style="top: 485px; left: 1110px;">➤</div>
+            <div class="arrow arrow-up" style="top: 270px; left: 1105px;">➤</div>
+            <div class="arrow arrow-up" style="top: 270px; left: 1255px;">➤</div>
+            <div class="arrow arrow-up" style="top: 470px; left: 1105px;">➤</div>
+            <div class="arrow arrow-up" style="top: 470px; left: 1255px;">➤</div>
+            <div class="arrow arrow-down" style="top: 620px; left: 745px;">➤</div>
+            <div class="arrow arrow-down" style="top: 290px; left: 135px;">➤</div>
+            
+            <!-- TAP labels -->
+            <div class="tap-label" style="top: 360px; left: 540px;">TOCAR</div>
+            <div class="tap-label" style="top: 280px; left: 1000px;">TOCAR</div>
+            <div class="tap-label" style="top: 280px; left: 1150px;">TOCAR</div>
+            <div class="tap-label" style="top: 440px; left: 1000px;">TOCAR</div>
+            <div class="tap-label" style="top: 440px; left: 1150px;">TOCAR</div>
+            
+            <!-- Note -->
+            <div class="note">
+                Jornada do utilizador: Encontrar e adotar um animal do abrigo.<br>
+                Caminho principal foca na navegação, filtragem e ações nos perfis dos animais.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showLanguage(lang) {
+            // Hide all containers
+            document.querySelectorAll('.container').forEach(container => {
+                container.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected container
+            document.getElementById(lang).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

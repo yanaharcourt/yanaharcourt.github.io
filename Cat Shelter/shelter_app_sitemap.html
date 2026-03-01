@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Map - Shelter App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #FEFEFE;
+            color: #2D2D2D;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .title {
+            text-align: center;
+            background: linear-gradient(135deg, #8B7CB8, #A29BCC);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        
+        .sitemap-tree {
+            margin-left: 20px;
+        }
+        
+        .level-1 {
+            background: #F8F7FC;
+            border-left: 4px solid #8B7CB8;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #8B7CB8;
+        }
+        
+        .level-2 {
+            background: #FDFCFF;
+            border-left: 3px solid #A29BCC;
+            padding: 12px 18px;
+            margin: 15px 0 15px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #2D2D2D;
+        }
+        
+        .level-3 {
+            background: white;
+            border-left: 2px solid #DFDCE8;
+            padding: 10px 15px;
+            margin: 10px 0 10px 50px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #6B6B6B;
+        }
+        
+        .level-4 {
+            padding: 8px 0 8px 70px;
+            font-size: 13px;
+            color: #8B8B8B;
+            border-left: 1px solid #EEEEF0;
+            margin-left: 20px;
+        }
+        
+        .app-root {
+            text-align: center;
+            background: linear-gradient(135deg, #8B7CB8, #A29BCC);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        .icon {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+        
+        .modal-section {
+            background: #FFF8F0;
+            border: 2px dashed #D4A574;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .modal-title {
+            font-weight: bold;
+            color: #D4A574;
+            margin-bottom: 10px;
+        }
+        
+        .external-section {
+            background: #F0F8FF;
+            border: 2px dashed #7B6BAF;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .external-title {
+            font-weight: bold;
+            color: #7B6BAF;
+            margin-bottom: 10px;
+        }
+        
+        .note {
+            background: #F0F4F7;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #6B6B6B;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">🐾 Shelter App - Site Map</div>
+        
+        <div class="app-root">
+            📱 SHELTER APP (Root)
+        </div>
+        
+        <div class="sitemap-tree">
+            <!-- ONBOARDING & AUTH -->
+            <div class="level-1">
+                <span class="icon">🚀</span>Onboarding & Authentication
+            </div>
+            <div class="level-2">Welcome Screen</div>
+            <div class="level-3">• App introduction slides</div>
+            <div class="level-3">• Permission requests (location, notifications)</div>
+            
+            <div class="level-2">Authentication</div>
+            <div class="level-3">• Login</div>
+            <div class="level-3">• Register</div>
+            <div class="level-3">• Password recovery</div>
+            <div class="level-3">• Guest mode option</div>
+            
+            <!-- MAIN NAVIGATION -->
+            <div class="level-1">
+                <span class="icon">🧭</span>Main Navigation (Bottom Tab Bar)
+            </div>
+            
+            <!-- DONATE TAB -->
+            <div class="level-2">
+                <span class="icon">❤️</span>1. DONATE Tab
+            </div>
+            <div class="level-3">Donate Home Screen</div>
+            <div class="level-4">• Financial donations section</div>
+            <div class="level-4">• Volunteer opportunities</div>
+            <div class="level-4">• Donate items section</div>
+            <div class="level-4">• Foster care program</div>
+            
+            <div class="level-3">Financial Donations</div>
+            <div class="level-4">• Choose donation amount</div>
+            <div class="level-4">• Payment methods</div>
+            <div class="level-4">• Recurring donations setup</div>
+            <div class="level-4">• Donation confirmation</div>
+            
+            <div class="level-3">Volunteer Program</div>
+            <div class="level-4">• Volunteer opportunities list</div>
+            <div class="level-4">• Application form</div>
+            <div class="level-4">• Requirements & training info</div>
+            <div class="level-4">• Schedule & availability</div>
+            
+            <div class="level-3">Donate Items</div>
+            <div class="level-4">• Needed items list</div>
+            <div class="level-4">• Drop-off locations</div>
+            <div class="level-4">• Item condition guidelines</div>
+            <div class="level-4">• Contact coordinator</div>
+            
+            <div class="level-3">Foster Care</div>
+            <div class="level-4">• Foster program info</div>
+            <div class="level-4">• Application process</div>
+            <div class="level-4">• Requirements checklist</div>
+            <div class="level-4">• Available animals for fostering</div>
+            
+            <!-- HOME TAB -->
+            <div class="level-2">
+                <span class="icon">🐾</span>2. HOME Tab (Main/Animals)
+            </div>
+            <div class="level-3">Animals Catalog</div>
+            <div class="level-4">• Location selector</div>
+            <div class="level-4">• Search by name</div>
+            <div class="level-4">• Filter categories (Dogs, Cats, Others)</div>
+            <div class="level-4">• Additional filters (Age, Size, Gender)</div>
+            <div class="level-4">• Sort options (Recent, Age, Name)</div>
+            <div class="level-4">• Animals grid/list view</div>
+            
+            <div class="level-3">Animal Card (Preview)</div>
+            <div class="level-4">• Animal photo</div>
+            <div class="level-4">• Name, age, breed</div>
+            <div class="level-4">• Gender indicator</div>
+            <div class="level-4">• Favorite heart button</div>
+            <div class="level-4">• Quick info badges</div>
+            
+            <div class="level-3">Animal Detail Page</div>
+            <div class="level-4">• Photo/video gallery</div>
+            <div class="level-4">• Basic information (age, breed, size, gender)</div>
+            <div class="level-4">• Personality description</div>
+            <div class="level-4">• Medical information</div>
+            <div class="level-4">• Animal's story/background</div>
+            <div class="level-4">• Special needs</div>
+            <div class="level-4">• Compatibility info (kids, pets)</div>
+            <div class="level-4">• Shelter contact info</div>
+            <div class="level-4">• Action buttons:</div>
+            <div style="margin-left: 90px; color: #8B8B8B; font-size: 12px;">
+                - Add to favorites<br>
+                - Share animal<br>
+                - Schedule meeting<br>
+                - Contact shelter<br>
+                - Apply for adoption
+            </div>
+            
+            <!-- NEWS TAB -->
+            <div class="level-2">
+                <span class="icon">📰</span>3. NEWS Tab
+            </div>
+            <div class="level-3">News Feed</div>
+            <div class="level-4">• Latest news list</div>
+            <div class="level-4">• Category filters</div>
+            <div class="level-4">• Search news</div>
+            <div class="level-4">• Popular/trending news</div>
+            
+            <div class="level-3">News Categories</div>
+            <div class="level-4">• Shelter updates</div>
+            <div class="level-4">• Rescue stories</div>
+            <div class="level-4">• Success adoptions</div>
+            <div class="level-4">• Events & fundraisers</div>
+            <div class="level-4">• Pet care tips</div>
+            <div class="level-4">• Training guides</div>
+            <div class="level-4">• Veterinary advice</div>
+            <div class="level-4">• Volunteer spotlights</div>
+            
+            <div class="level-3">News Detail Page</div>
+            <div class="level-4">• Article content</div>
+            <div class="level-4">• Publication date & author</div>
+            <div class="level-4">• Featured image/video</div>
+            <div class="level-4">• Share options</div>
+            <div class="level-4">• Related articles</div>
+            <div class="level-4">• Comments section</div>
+            
+            <!-- FAVOURITE TAB -->
+            <div class="level-2">
+                <span class="icon">💝</span>4. FAVOURITE Tab
+            </div>
+            <div class="level-3">Favorite Animals</div>
+            <div class="level-4">• Saved animals list</div>
+            <div class="level-4">• Filter by animal type</div>
+            <div class="level-4">• Sort by date added</div>
+            <div class="level-4">• Quick actions (remove, view details)</div>
+            
+            <div class="level-3">Viewing History</div>
+            <div class="level-4">• Recently viewed animals</div>
+            <div class="level-4">• Frequently viewed animals</div>
+            <div class="level-4">• Clear history option</div>
+            
+            <div class="level-3">My Applications</div>
+            <div class="level-4">• Adoption applications</div>
+            <div class="level-4">• Meeting requests</div>
+            <div class="level-4">• Application status tracking</div>
+            <div class="level-4">• Communication history</div>
+            
+            <div class="level-3">Notifications Center</div>
+            <div class="level-4">• New animal alerts</div>
+            <div class="level-4">• Status updates</div>
+            <div class="level-4">• Meeting reminders</div>
+            <div class="level-4">• News notifications</div>
+            
+            <!-- PROFILE TAB -->
+            <div class="level-2">
+                <span class="icon">👤</span>5. PROFILE Tab
+            </div>
+            <div class="level-3">Personal Information</div>
+            <div class="level-4">• View profile</div>
+            <div class="level-4">• Edit profile</div>
+            <div class="level-4">• Change password</div>
+            <div class="level-4">• Donation history</div>
+            <div class="level-4">• Volunteer activities</div>
+            
+            <div class="level-3">App Settings</div>
+            <div class="level-4">• Notification preferences</div>
+            <div class="level-4">• Language selection</div>
+            <div class="level-4">• Theme (Light/Dark)</div>
+            <div class="level-4">• Privacy settings</div>
+            <div class="level-4">• Data & storage</div>
+            
+            <div class="level-3">About Shelter</div>
+            <div class="level-4">• Shelter information</div>
+            <div class="level-4">• Contact details</div>
+            <div class="level-4">• Address & directions</div>
+            <div class="level-4">• Opening hours</div>
+            <div class="level-4">• Social media links</div>
+            <div class="level-4">• Mission & values</div>
+            
+            <div class="level-3">Support & Help</div>
+            <div class="level-4">• FAQ</div>
+            <div class="level-4">• Contact support</div>
+            <div class="level-4">• Report a problem</div>
+            <div class="level-4">• App feedback</div>
+            <div class="level-4">• Terms of service</div>
+            <div class="level-4">• Privacy policy</div>
+            <div class="level-4">• Rate app</div>
+        </div>
+        
+        <!-- MODAL SCREENS -->
+        <div class="modal-section">
+            <div class="modal-title">📋 Modal Screens & Overlays</div>
+            <div class="level-3">Search & Filters Modal</div>
+            <div class="level-3">Image/Video Viewer (Gallery)</div>
+            <div class="level-3">Share Options Modal</div>
+            <div class="level-3">Contact Shelter Modal</div>
+            <div class="level-3">Adoption Application Form</div>
+            <div class="level-3">Meeting Scheduler</div>
+            <div class="level-3">Payment Gateway</div>
+            <div class="level-3">Location Picker</div>
+            <div class="level-3">Notification Settings</div>
+            <div class="level-3">Profile Photo Editor</div>
+        </div>
+        
+        <!-- EXTERNAL LINKS -->
+        <div class="external-section">
+            <div class="external-title">🔗 External Links & Integrations</div>
+            <div class="level-3">Social Media Sharing (Instagram, Facebook, WhatsApp, Telegram)</div>
+            <div class="level-3">Maps Integration (Google Maps/Apple Maps for directions)</div>
+            <div class="level-3">Phone/Email/SMS for contact</div>
+            <div class="level-3">Payment gateways (PayPal, Stripe, etc.)</div>
+            <div class="level-3">Calendar integration for meeting scheduling</div>
+            <div class="level-3">Camera & photo library access</div>
+        </div>
+        
+        <!-- NOTES -->
+        <div class="note">
+            <strong>📝 Implementation Notes:</strong><br>
+            • All screens should support pull-to-refresh where applicable<br>
+            • Implement offline mode for viewing saved animals<br>
+            • Add loading states and error handling<br>
+            • Include accessibility features (VoiceOver, larger text)<br>
+            • Support multiple languages (EN, PT, RU based on your architecture)<br>
+            • Add deep linking for sharing specific animals<br>
+            • Implement push notifications for new animals and updates
+        </div>
+        
+        <div class="note">
+            <strong>🔄 User Flow Priority:</strong><br>
+            1. <strong>Core Flow:</strong> Browse → View Animal → Contact/Apply<br>
+            2. <strong>Engagement:</strong> Save favorites → Get notifications → Return to app<br>
+            3. <strong>Support:</strong> Donate → Volunteer → Foster<br>
+            4. <strong>Community:</strong> Read news → Share stories → Engage
+        </div>
+    </div>
+</body>
+</html>
