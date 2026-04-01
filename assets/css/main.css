@@ -1956,14 +1956,14 @@ section,
   font-weight: 500;
   color: var(--accent-color);
   letter-spacing: 1px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-transform: uppercase;
 }
 
 .contact-details {
   display: flex;
   gap: 20px;
-  margin-bottom: 25px;
+  margin-bottom:10px;
 }
 
 @media (max-width: 768px) {
