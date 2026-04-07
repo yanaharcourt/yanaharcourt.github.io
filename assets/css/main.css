@@ -470,7 +470,7 @@ h6 {
 .yanas-footer {
   position: relative;
   padding: 120px 0 80px 0;
-  background: linear-gradient(135deg, #0f1419 0%, #1a1f36 50%, #0f1419 100%);
+  background: var(--bg-light);
   color: #ffffff;
   overflow: hidden;
   min-height: 100vh;
@@ -603,7 +603,7 @@ h6 {
   position: absolute;
   opacity: 0.06;
   font-size: 4vw;
-  color: #6366f1;
+  color: var(--accent-color);
   animation: yanas-complex-float 15s ease-in-out infinite;
   filter: blur(0.5px);
 }
@@ -734,7 +734,7 @@ h6 {
   font-weight: 300;
   line-height: 0.9;
   margin-bottom: 40px;
-  color: #ffffff;
+  color: var(--default-color);
   letter-spacing: -2px;
 }
 
@@ -744,7 +744,7 @@ h6 {
 
 .yanas-text-32 {
   font-size: clamp(1.1rem, 2.2vw, 2rem);
-  color: #94a3b8;
+  color: var(--text-muted);
   text-transform: uppercase;
   font-weight: 400;
   letter-spacing: 1.5px;
@@ -753,7 +753,7 @@ h6 {
 
 .yanas-button {
   position: relative;
-  background: #ffffff;
+  background: var(--bg-card);
   color: #1e293b;
   border: none;
   padding: 18px 40px;
@@ -853,7 +853,7 @@ h6 {
 
 .yanas-text-40 {
   font-size: 18px;
-  color: #ffffff;
+  color: var(--default-color);
   text-transform: uppercase;
   font-weight: 500;
   letter-spacing: 1px;
@@ -866,10 +866,10 @@ h6 {
 
 .yanas-footer-field {
   flex: 1;
-  color: #ffffff;
+  color: var(--accent-color);
   text-transform: uppercase;
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--text-muted);
   border-radius: 12px;
   padding: 12px 16px;
   font-size: 13px;
@@ -886,7 +886,7 @@ h6 {
 }
 
 .yanas-footer-field::placeholder {
-  color: #94a3b8;
+  color: var(--text-muted);
   text-transform: uppercase;
   font-size: 12px;
 }
@@ -901,8 +901,8 @@ h6 {
 
 .yanas-form-button_field {
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  border: 1px solid var(--text-muted);
+  color: var(--default-color);
   padding: 10px 20px;
   border-radius: 20px;
   font-size: 12px;
@@ -931,9 +931,9 @@ h6 {
 .yanas-message-field {
   width: 100%;
   min-height: 100px;
-  color: #ffffff;
+  color: var(--default-color);
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--text-muted);
   border-radius: 12px;
   padding: 12px 16px;
   font-size: 13px;
@@ -945,19 +945,19 @@ h6 {
 
 .yanas-message-field:focus {
   outline: none;
-  border-color: rgba(99, 102, 241, 0.6);
+  border-color: var(--accent-color);
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
   background: rgba(255, 255, 255, 0.15);
 }
 
 .yanas-message-field::placeholder {
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .yanas-form_button {
   width: 100%;
-  background: #ffffff;
-  color: #1e293b;
+  background: var(--accent-color);
+  color: var(--bg-card);
   border: none;
   padding: 16px 30px;
   border-radius: 30px;
@@ -1010,13 +1010,13 @@ h6 {
 
 .yanas-text-36 {
   font-size: clamp(1.5rem, 3vw, 2.25rem);
-  color: #ffffff;
+  color: var(--default-color);
   font-weight: 500;
 }
 
 .yanas-text-24 {
   font-size: clamp(1rem, 1.5vw, 1.5rem);
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .yanas-footer_links-right {
@@ -1029,7 +1029,7 @@ h6 {
 
 .yanas-footer_links-right-item h5 {
   font-size: clamp(0.9rem, 1.2vw, 1.2rem);
-  color: #64748b;
+  color: var(--default-color);
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -1046,7 +1046,7 @@ h6 {
 .yanas-rolling-text {
   position: relative;
   display: inline-block;
-  color: #ffffff;
+  color: var(--default-color);
   text-decoration: none;
   font-size: clamp(0.9rem, 1.2vw, 1.2rem);
   transition: color 0.3s ease;
@@ -1109,7 +1109,7 @@ h6 {
 
 .yanas-loading {
   background: rgba(99, 102, 241, 0.15);
-  color: #6366f1;
+  color: var(--accent-color);
   border: 1px solid rgba(99, 102, 241, 0.3);
 }
 
@@ -3010,7 +3010,7 @@ section,
 .contact .php-email-form .error-message {
   display: none;
   background: var(--error-color);
-  color: #ffffff;
+  color: var(--default-color);
   text-align: left;
   padding: 15px;
   margin-bottom: 24px;
@@ -3020,7 +3020,7 @@ section,
 
 .contact .php-email-form .sent-message {
   display: none;
-  color: #ffffff;
+  color: var(--default-color);
   background: var(--success-color);
   text-align: center;
   padding: 15px;
