@@ -109,7 +109,7 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  --background-color: #ffffff;
+  --background-color: var(--bg-card);
   --default-color: var(--text-primary);
   --heading-color: var(--text-primary);
   color: var(--default-color);
@@ -1200,7 +1200,7 @@ h6 {
   position: fixed;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
-  border: 6px solid #ffffff;
+  border: 6px solid var(--bg-card);
   border-color: var(--accent-color) transparent var(--accent-secondary) transparent;
   border-radius: 50%;
   width: 60px;
@@ -2497,7 +2497,7 @@ section,
 # Stats Section
 --------------------------------------------------------------*/
 .stats {
-  --default-color: #ffffff;
+  --default-color: var(--bg-card);
   --background-color: var(--gradient-primary);
   position: relative;
   padding: 120px 0;
