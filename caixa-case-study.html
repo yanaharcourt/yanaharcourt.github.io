@@ -1,0 +1,2494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caixadirecta · Banking App Redesign — Yana Harcourt</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #F7F5F2;
+      --bg-warm: #EDE9E3;
+      --bg-dark: #1A1814;
+      --ink: #1A1814;
+      --ink-2: #4A4540;
+      --ink-3: #9A928A;
+      --ink-4: #C4BDB5;
+      --accent: #2B5CE6;
+      --accent-light: #EEF2FD;
+      --accent-mid: rgba(43,92,230,.12);
+      --gold: #C4973A;
+      --gold-light: #FDF6EA;
+      --border: rgba(26,24,20,.08);
+      --border-strong: rgba(26,24,20,.14);
+      --white: #fff;
+      --r-sm: 8px;
+      --r-md: 16px;
+      --r-lg: 24px;
+      --r-xl: 32px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CURSOR ── */
+    #cur { position:fixed; width:8px; height:8px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:99999; left:0; top:0; transition:transform .12s; }
+    #ctr { position:fixed; width:32px; height:32px; border:1.5px solid rgba(43,92,230,.4); border-radius:50%; pointer-events:none; z-index:99998; left:0; top:0; }
+    @media(hover:none),(max-width:768px){ #cur,#ctr{display:none!important;} body{cursor:auto;} }
+
+    /* ── SCROLL REVEAL ── */
+    .rv { opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease; }
+    .rv.in { opacity:1; transform:translateY(0); }
+    .rv.d1{transition-delay:.1s;} .rv.d2{transition-delay:.2s;} .rv.d3{transition-delay:.32s;} .rv.d4{transition-delay:.44s;}
+
+    /* ══════════════════════════
+    BREADCRUMB NAV
+    ══════════════════════════ */
+    .breadcrumb-nav {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: rgba(247,245,242,.92);
+      backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid var(--border);
+      padding: 0 60px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .breadcrumb-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-3);
+    }
+
+    .breadcrumb-left a {
+      color: var(--ink-3);
+      text-decoration: none;
+      transition: color .2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .breadcrumb-left a:hover { color: var(--accent); }
+
+    .breadcrumb-sep { color: var(--ink-4); font-size: 11px; }
+
+    .breadcrumb-current {
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .breadcrumb-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .bc-tags { display:flex; gap:8px; }
+
+    .bc-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid rgba(43,92,230,.15);
+    }
+
+    .bc-tag.gold {
+      background: var(--gold-light);
+      color: var(--gold);
+      border-color: rgba(196,151,58,.2);
+    }
+
+    @media(max-width:768px) {
+      .breadcrumb-nav { padding: 0 20px; }
+      .bc-tags { display: none; }
+    }
+
+    /* ══════════════════════════
+    HERO
+    ══════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      background: var(--bg);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 80px 80px 0;
+      gap: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -200px;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(43,92,230,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp .7s .1s ease forwards;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(56px, 6vw, 92px);
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.0;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp .7s .2s ease forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--ink-2);
+      max-width: 480px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp .7s .3s ease forwards;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 40px;
+      opacity: 0;
+      animation: fadeUp .7s .4s ease forwards;
+    }
+
+    .hero-meta-item {}
+    .hero-meta-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      margin-bottom: 4px;
+    }
+    .hero-meta-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      height: 100%;
+      min-height: 560px;
+      opacity: 0;
+      animation: fadeIn .9s .3s ease forwards;
+    }
+
+    .hero-phones-wrap {
+      position: relative;
+      width: 100%;
+      height: 560px;
+    }
+
+    .hero-phone {
+      position: absolute;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(26,24,20,.18), 0 4px 16px rgba(26,24,20,.08);
+    }
+
+    .hero-phone img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hp-main {
+      width: 240px; height: 490px;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      animation: phoneFloat 4s ease-in-out infinite;
+    }
+
+    .hp-left {
+      width: 200px; height: 410px;
+      bottom: 20px; left: 10%;
+      z-index: 2;
+      transform: rotate(-6deg);
+      opacity: .85;
+      animation: phoneFloat 4s ease-in-out 1s infinite;
+    }
+
+    .hp-right {
+      width: 200px; height: 410px;
+      bottom: 20px; right: 10%;
+      z-index: 2;
+      transform: rotate(6deg);
+      opacity: .85;
+      animation: phoneFloat 4s ease-in-out 2s infinite;
+    }
+
+    /* phone placeholder if no image */
+    .phone-mock {
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #f0ede8 0%, #e8e4de 100%);
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-3);
+      font-size: 13px;
+    }
+
+    @keyframes phoneFloat {
+      0%,100%{ transform:translateX(-50%) translateY(0); }
+      50%{ transform:translateX(-50%) translateY(-12px); }
+    }
+
+    .hp-left { animation: none!important; }
+    .hp-right { animation: none!important; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+
+    @media(max-width:900px){
+      .hero { grid-template-columns:1fr; min-height:auto; padding:80px 24px 60px; }
+      .hero-visual { min-height:320px; }
+      .hp-main { width:180px; height:360px; }
+      .hp-left, .hp-right { display:none; }
+    }
+
+    /* ══════════════════════════
+    OVERVIEW STRIP
+    ══════════════════════════ */
+    .overview-strip {
+      background: var(--ink);
+      padding: 60px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .os-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      margin-bottom: 10px;
+    }
+
+    .os-value {
+      font-size: 15px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .os-divider {
+      width: 1px;
+      height: 48px;
+      background: rgba(255,255,255,.12);
+    }
+
+    .os-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 400;
+      font-style: italic;
+      color: #fff;
+      max-width: 400px;
+      line-height: 1.3;
+    }
+
+    @media(max-width:768px){
+      .overview-strip { flex-direction:column; padding:40px 24px; align-items:flex-start; }
+      .os-divider { display:none; }
+    }
+
+    /* ══════════════════════════
+    SECTION BASE
+    ══════════════════════════ */
+    .section {
+      padding: 120px 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-lbl {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-lbl::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--accent);
+    }
+
+    .section-h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 5vw, 72px);
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .section-h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .section-lead {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--ink-2);
+      max-width: 640px;
+    }
+
+    @media(max-width:768px){
+      .section { padding:80px 24px; }
+    }
+
+    /* ══════════════════════════
+    CHALLENGE / GOAL
+    ══════════════════════════ */
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 64px;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+
+    .ch-card {
+      background: var(--white);
+      padding: 56px;
+      border: 1px solid var(--border);
+    }
+
+    .ch-card:first-child {
+      border-radius: var(--r-xl) 0 0 var(--r-xl);
+    }
+
+    .ch-card:last-child {
+      border-radius: 0 var(--r-xl) var(--r-xl) 0;
+      background: var(--accent);
+    }
+
+    .ch-card-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 24px;
+    }
+
+    .ch-card:last-child .ch-card-lbl { color: rgba(255,255,255,.5); }
+
+    .ch-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .ch-card:last-child .ch-card-title { color: #fff; }
+
+    .ch-card-text {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--ink-2);
+    }
+
+    .ch-card:last-child .ch-card-text { color: rgba(255,255,255,.7); }
+
+    .ch-list {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .ch-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-2);
+    }
+
+    .ch-card:last-child .ch-list-item { color: rgba(255,255,255,.75); }
+
+    .ch-list-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    .ch-card:last-child .ch-list-dot { background: rgba(255,255,255,.5); }
+
+    @media(max-width:768px){
+      .challenge-grid { grid-template-columns:1fr; }
+      .ch-card:first-child { border-radius: var(--r-xl) var(--r-xl) 0 0; }
+      .ch-card:last-child { border-radius: 0 0 var(--r-xl) var(--r-xl); }
+      .ch-card { padding:40px 28px; }
+    }
+
+    /* ══════════════════════════
+    PROCESS TIMELINE
+    ══════════════════════════ */
+    .process-wrap {
+      background: var(--white);
+      border-radius: var(--r-xl);
+      border: 1px solid var(--border);
+      padding: 64px;
+      margin-top: 64px;
+    }
+
+    .process-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .process-sub {
+      font-size: 15px;
+      color: var(--ink-3);
+      margin-bottom: 56px;
+    }
+
+    .timeline-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      position: relative;
+    }
+
+    .timeline-row::before {
+      content: '';
+      position: absolute;
+      top: 20px; left: 20px; right: 20px;
+      height: 1px;
+      background: linear-gradient(to right, var(--accent) 0%, var(--border-strong) 60%, transparent 100%);
+    }
+
+    .tl-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tl-orb {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      transition: transform .3s;
+    }
+
+    .tl-step:hover .tl-orb { transform: translateY(-4px); }
+
+    .tl-orb.active-step {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(43,92,230,.3);
+    }
+
+    .tl-orb.dim-step {
+      background: var(--bg-warm);
+      color: var(--ink-3);
+      border: 1px solid var(--border);
+    }
+
+    .tl-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink-2);
+      line-height: 1.4;
+    }
+
+    .tl-step.dimmed .tl-label { color: var(--ink-4); }
+
+    @media(max-width:768px){
+      .process-wrap { padding:32px 24px; }
+      .timeline-row { flex-direction:column; gap:24px; }
+      .timeline-row::before { display:none; }
+    }
+
+    /* ══════════════════════════
+    COMPETITOR ANALYSIS
+    ══════════════════════════ */
+    .competitors-section {
+      padding: 120px 80px;
+      background: var(--bg-warm);
+    }
+
+    .competitors-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 64px;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+
+    .comp-card {
+      background: var(--white);
+      padding: 48px 40px;
+      border: 1px solid var(--border);
+      transition: background .2s;
+    }
+
+    .comp-card:hover { background: var(--accent-light); }
+
+    .comp-card-logo {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .comp-card-logo img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: .7;
+      transition: filter .2s, opacity .2s;
+    }
+
+    .comp-card:hover .comp-card-logo img { filter:none; opacity:1; }
+
+    .comp-logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink-3);
+    }
+
+    .comp-card-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .comp-card-desc {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--ink-3);
+    }
+
+    .comp-insight {
+      margin-top: 40px;
+      padding: 32px 40px;
+      background: var(--accent);
+      border-radius: var(--r-lg);
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .comp-insight-icon {
+      font-size: 28px;
+      color: rgba(255,255,255,.6);
+      flex-shrink: 0;
+    }
+
+    .comp-insight-text {
+      font-size: 16px;
+      line-height: 1.65;
+      color: rgba(255,255,255,.85);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    @media(max-width:768px){
+      .competitors-section { padding:80px 24px; }
+      .comp-grid { grid-template-columns:1fr; }
+    }
+
+    /* ══════════════════════════
+    PERSONAS
+    ══════════════════════════ */
+    .personas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 64px;
+    }
+
+    .persona-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .persona-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(26,24,20,.1);
+    }
+
+    .persona-card-top {
+      padding: 40px 36px 28px;
+      background: var(--bg-warm);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .persona-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--white);
+      box-shadow: 0 4px 16px rgba(26,24,20,.12);
+    }
+
+    .persona-avatar-placeholder {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-light), var(--accent-mid));
+      border: 3px solid var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .persona-name-block {}
+    .persona-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -.5px;
+    }
+    .persona-role {
+      font-size: 12px;
+      color: var(--ink-3);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .persona-card-body { padding: 28px 36px 36px; }
+
+    .persona-trait {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--ink-2);
+    }
+
+    .persona-trait:last-child { border-bottom: none; }
+
+    .persona-trait-k {
+      font-weight: 600;
+      color: var(--ink);
+      min-width: 90px;
+      font-size: 12px;
+    }
+
+    .persona-pain-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .persona-pain {
+      font-size: 13px;
+      color: var(--ink-2);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+
+    .persona-pain::before {
+      content: '—';
+      color: var(--accent);
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+
+    @media(max-width:900px){
+      .personas-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:600px){
+      .personas-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════
+    CJM TABLE
+    ══════════════════════════ */
+    .cjm-section {
+      padding: 120px 80px;
+      background: var(--bg-warm);
+    }
+
+    .cjm-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .cjm-table-wrap {
+      margin-top: 64px;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .cjm-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .cjm-table thead tr {
+      background: var(--ink);
+    }
+
+    .cjm-table thead th {
+      padding: 18px 24px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      text-align: left;
+    }
+
+    .cjm-table thead th:first-child {
+      color: rgba(255,255,255,.25);
+    }
+
+    .cjm-table tbody tr:nth-child(even) { background: var(--bg); }
+    .cjm-table tbody tr:nth-child(odd) { background: var(--white); }
+
+    .cjm-table tbody td {
+      padding: 16px 24px;
+      vertical-align: top;
+      line-height: 1.55;
+      color: var(--ink-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cjm-table tbody td:first-child {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    @media(max-width:768px){
+      .cjm-section { padding:80px 24px; }
+      .cjm-table-wrap { overflow-x:auto; }
+    }
+
+    /* ══════════════════════════
+    SKETCHES
+    ══════════════════════════ */
+    .sketches-section {
+      padding: 120px 80px;
+    }
+
+    .sketches-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .sketches-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 64px;
+      align-items: center;
+    }
+
+    .sketch-image-wrap {
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    .sketch-image-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .sketch-image-placeholder {
+      height: 360px;
+      background: var(--bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--ink-4);
+    }
+
+    .sketch-content {}
+
+    .sketch-h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .sketch-text {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--ink-2);
+    }
+
+    .sketch-quotes {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sketch-quote {
+      padding: 20px 24px;
+      border-left: 3px solid var(--accent);
+      background: var(--accent-light);
+      border-radius: 0 var(--r-sm) var(--r-sm) 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    @media(max-width:768px){
+      .sketches-section { padding:80px 24px; }
+      .sketches-layout { grid-template-columns:1fr; }
+    }
+
+    /* ══════════════════════════
+    SCREENS SHOWCASE
+    ══════════════════════════ */
+    .screens-section {
+      padding: 0 80px 120px;
+    }
+
+    .screens-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .screens-fullwidth {
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .screens-fullwidth img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .screens-img-placeholder {
+      height: 400px;
+      background: linear-gradient(135deg, #E8E4DE 0%, #D8D3CC 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--ink-4);
+    }
+
+    /* ══════════════════════════
+    SCREEN DETAILS
+    ══════════════════════════ */
+    .screen-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 120px 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .screen-detail.reverse { direction: rtl; }
+    .screen-detail.reverse > * { direction: ltr; }
+
+    .screen-detail-image {
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .screen-detail-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .sdi-placeholder {
+      height: 480px;
+      background: var(--bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--ink-4);
+    }
+
+    .screen-detail-content {}
+
+    .sd-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      margin-bottom: 16px;
+    }
+
+    .sd-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -1.5px;
+      line-height: 1.08;
+      margin-bottom: 16px;
+    }
+
+    .sd-subtitle {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .sd-text {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--ink-2);
+      margin-bottom: 32px;
+    }
+
+    .sd-features {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .sd-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+    }
+
+    .sd-feature-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--r-sm);
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .sd-feature-text {}
+    .sd-feature-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+    .sd-feature-desc {
+      font-size: 12px;
+      color: var(--ink-3);
+      line-height: 1.5;
+    }
+
+    @media(max-width:900px){
+      .screen-detail { grid-template-columns:1fr; gap:40px; padding:80px 24px; }
+      .screen-detail.reverse { direction:ltr; }
+    }
+
+    /* ══════════════════════════
+    THEMES SECTION
+    ══════════════════════════ */
+    .themes-section {
+      padding: 120px 80px;
+      background: var(--bg-warm);
+    }
+
+    .themes-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .themes-statement {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 52px);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.3;
+      letter-spacing: -1px;
+      margin: 48px 0 64px;
+      max-width: 800px;
+    }
+
+    .themes-statement em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .themes-visual {
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 32px 80px rgba(26,24,20,.1);
+    }
+
+    .themes-visual img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .themes-visual-placeholder {
+      height: 400px;
+      background: linear-gradient(135deg, #1A1814 0%, #2B2720 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .theme-pill {
+      padding: 12px 28px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .theme-pill.light {
+      background: #f7f5f2;
+      color: #1a1814;
+    }
+
+    .theme-pill.dark {
+      background: rgba(255,255,255,.1);
+      color: rgba(255,255,255,.7);
+      border: 1px solid rgba(255,255,255,.15);
+    }
+
+    @media(max-width:768px){
+      .themes-section { padding:80px 24px; }
+    }
+
+    /* ══════════════════════════
+    UI KIT
+    ══════════════════════════ */
+    .uikit-section {
+      padding: 120px 80px;
+    }
+
+    .uikit-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .uikit-visual {
+      margin-top: 64px;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .uikit-visual img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @media(max-width:768px){
+      .uikit-section { padding:80px 24px; }
+    }
+
+    /* ══════════════════════════
+    SITEMAP
+    ══════════════════════════ */
+    .sitemap-section {
+      padding: 0 80px 120px;
+      background: var(--bg-warm);
+    }
+
+    .sitemap-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-top: 120px;
+    }
+
+    .sitemap-visual {
+      margin-top: 64px;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    .sitemap-visual img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @media(max-width:768px){
+      .sitemap-section { padding:0 24px 80px; }
+    }
+
+    /* ══════════════════════════
+    OUTCOME / CLOSE
+    ══════════════════════════ */
+    .outcome-section {
+      padding: 120px 80px;
+      background: var(--ink);
+      text-align: center;
+    }
+
+    .outcome-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .outcome-lbl {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .outcome-lbl::before, .outcome-lbl::after {
+      content: '';
+      width: 24px; height: 1px;
+      background: rgba(255,255,255,.2);
+    }
+
+    .outcome-h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 6vw, 88px);
+      font-weight: 400;
+      font-style: italic;
+      color: #fff;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 32px;
+    }
+
+    .outcome-text {
+      font-size: 17px;
+      line-height: 1.75;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 64px;
+    }
+
+    .outcome-stats {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .outcome-stat {}
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-num span {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+    }
+
+    @media(max-width:768px){
+      .outcome-section { padding:80px 24px; }
+      .outcome-stats { gap:32px; }
+    }
+
+    /* ══════════════════════════
+    FOOTER
+    ══════════════════════════ */
+    .yanas-footer {
+      background: #0F0E0C;
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .yanas-bg-elements {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .yanas-bg-element {
+      position: absolute;
+      opacity: .04;
+      font-size: 4vw;
+      color: #fff;
+      animation: floatEl 15s ease-in-out infinite;
+    }
+
+    .yanas-bg-element:nth-child(1){top:5%;left:8%;animation-delay:0s;}
+    .yanas-bg-element:nth-child(2){top:12%;right:15%;animation-delay:2s;}
+    .yanas-bg-element:nth-child(3){top:25%;left:25%;animation-delay:4s;}
+    .yanas-bg-element:nth-child(4){bottom:30%;right:8%;animation-delay:1s;}
+    .yanas-bg-element:nth-child(5){bottom:15%;left:18%;animation-delay:3s;}
+    .yanas-bg-element:nth-child(6){top:40%;right:35%;animation-delay:5s;}
+    .yanas-bg-element:nth-child(7){bottom:45%;left:45%;animation-delay:6s;}
+    .yanas-bg-element:nth-child(8){top:60%;left:65%;animation-delay:7s;}
+
+    @keyframes floatEl {
+      0%,100%{transform:translateY(0px) rotate(0deg);}
+      50%{transform:translateY(-20px) rotate(15deg);}
+    }
+
+    .yanas-footer_wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 80px;
+    }
+
+    .yanas-footer_content {
+      display: flex;
+      align-items: flex-start;
+      gap: 80px;
+      margin-bottom: 100px;
+    }
+
+    .yanas-footer_content-left {
+      flex: 1;
+      max-width: 560px;
+    }
+
+    .yanas-title-140 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: .9;
+      margin-bottom: 32px;
+      color: #fff;
+      letter-spacing: -3px;
+    }
+
+    .yanas-text-32 {
+      font-size: clamp(13px, 1.4vw, 16px);
+      color: #64748b;
+      text-transform: uppercase;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      line-height: 1.4;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .footer-content-spacer { margin-bottom: 40px; }
+
+    .yanas-button {
+      position: relative;
+      background: #fff;
+      color: #1e293b;
+      border: none;
+      padding: 18px 40px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      overflow: hidden;
+      transition: all .3s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .yanas-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(255,255,255,.15);
+    }
+
+    .yanas-button i { transition: transform .3s; }
+    .yanas-button:hover i { transform: rotate(45deg); }
+
+    .yanas-footer_content-right {
+      flex: 1;
+      max-width: 560px;
+    }
+
+    .yanas-footer-form {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(150,150,150,.3);
+      border-radius: 24px;
+      padding: 40px;
+    }
+
+    .yanas-text-40 {
+      font-size: 14px;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .yanas-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .yanas-form-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .yanas-footer-field {
+      flex: 1;
+      color: #fff;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .2s;
+      outline: none;
+    }
+
+    .yanas-footer-field:focus {
+      border-color: rgba(43,92,230,.6);
+      background: rgba(43,92,230,.08);
+    }
+
+    .yanas-footer-field::placeholder { color: #64748b; }
+
+    .yanas-services-grid, .yanas-budget-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .yanas-form-button_field {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .yanas-form-button_field:hover,
+    .yanas-form-button_field.active {
+      background: rgba(43,92,230,.2);
+      border-color: rgba(43,92,230,.5);
+    }
+
+    .yanas-message-field {
+      width: 100%;
+      min-height: 100px;
+      color: #fff;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      resize: vertical;
+      outline: none;
+      transition: all .2s;
+    }
+
+    .yanas-message-field:focus {
+      border-color: rgba(43,92,230,.6);
+    }
+
+    .yanas-message-field::placeholder { color: #64748b; }
+
+    .yanas-form_button {
+      width: 100%;
+      background: #fff;
+      color: #1e293b;
+      border: none;
+      padding: 16px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all .2s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .yanas-form_button:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(255,255,255,.15); }
+
+    .yanas-status-message {
+      padding: 12px 20px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      font-weight: 500;
+      display: none;
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .yanas-success{background:rgba(16,185,129,.15);color:#10b981;border:1px solid rgba(16,185,129,.3);}
+    .yanas-error{background:rgba(239,68,68,.15);color:#ef4444;border:1px solid rgba(239,68,68,.3);}
+
+    .yanas-footer_links {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 40px;
+      position: relative;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .yanas-footer_links-left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .yanas-text-36 {
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      color: #fff;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .yanas-text-24 {
+      font-size: clamp(.9rem, 1.3vw, 1.2rem);
+      color: #64748b;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .yanas-text-24 a { color: inherit; text-decoration: none; }
+    .yanas-text-24 a:hover { color: #fff; }
+
+    .yanas-footer_links-right {
+      display: flex;
+      gap: 60px;
+    }
+
+    .yanas-footer_links-right-item h5 {
+      font-size: 11px;
+      color: #64748b;
+      margin: 0 0 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .yanas-footer_links-right-item-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .yanas-rolling-text {
+      position: relative;
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      overflow: hidden;
+      height: 1.4em;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .yanas-text-block {
+      display: block;
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+    }
+
+    .yanas-text-block:nth-child(2) {
+      position: absolute;
+      top: 100%; left: 0;
+      color: var(--accent);
+    }
+
+    .yanas-rolling-text:hover .yanas-text-block:first-child { transform: translateY(-100%); }
+    .yanas-rolling-text:hover .yanas-text-block:nth-child(2) { transform: translateY(-100%); }
+
+    .yanas-copyright {
+      color: #64748b;
+      font-size: 12px;
+      margin-top: 24px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    @media(max-width:1024px){
+      .yanas-footer_content { flex-direction:column; gap:60px; }
+      .yanas-footer_wrapper { padding:0 40px; }
+    }
+    @media(max-width:768px){
+      .yanas-footer_wrapper { padding:0 24px; }
+      .yanas-footer-form { padding:28px 20px; }
+      .yanas-form-row { flex-direction:column; }
+      .yanas-footer_links { flex-direction:column; }
+      .yanas-footer_links-right { flex-direction:column; gap:32px; }
+    }
+
+    /* ══════════════════════════
+    SCROLL TOP
+    ══════════════════════════ */
+    .scroll-top {
+      position: fixed;
+      bottom: -20px;
+      right: 24px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      z-index: 800;
+      transition: all .3s;
+      visibility: hidden;
+      opacity: 0;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(43,92,230,.4);
+    }
+    .scroll-top.active { visibility:visible; opacity:1; bottom:24px; }
+    .scroll-top:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(43,92,230,.5); }
+
+  </style>
+</head>
+<body>
+
+  <div id="cur"></div>
+  <div id="ctr"></div>
+
+  <!-- ══════════════════════════
+  BREADCRUMB NAV
+  ══════════════════════════ -->
+  <nav class="breadcrumb-nav">
+    <div class="breadcrumb-left">
+      <a href="index.html">
+        <i class="bi bi-arrow-left"></i>
+        Portfolio
+      </a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Caixadirecta</span>
+    </div>
+    <div class="breadcrumb-right">
+      <div class="bc-tags">
+        <span class="bc-tag">UX/UI Design</span>
+        <span class="bc-tag">Mobile App</span>
+        <span class="bc-tag gold">Banking</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════
+  HERO
+  ══════════════════════════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Case Study · 2024</span>
+      <h1 class="hero-title">Caixa<em>directa</em><br>Redesign</h1>
+      <p class="hero-subtitle">A full UX process redesign of Portugal's leading banking application — from research and personas through to clickable prototype. Making banking feel intuitive for every generation.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Role</div>
+          <div class="hero-meta-value">UX/UI Designer</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Platform</div>
+          <div class="hero-meta-value">iOS / Android</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Year</div>
+          <div class="hero-meta-value">2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-phones-wrap">
+        <div class="hero-phone hp-left">
+          <img src="assets/img/portfolio/Caixa Directa/img/section 2 phone.png" alt="Caixadirecta Light Theme" onerror="this.parentElement.innerHTML='<div class=\'phone-mock\'>Light theme</div>'">
+        </div>
+        <div class="hero-phone hp-main">
+          <img src="assets/img/portfolio/Caixa Directa/img/header phones.png" alt="Caixadirecta App" onerror="this.parentElement.innerHTML='<div class=\'phone-mock\'>Home screen</div>'">
+        </div>
+        <div class="hero-phone hp-right">
+          <img src="assets/img/portfolio/Caixa Directa/img/Chat Screen.png" alt="Caixadirecta Dark Theme" onerror="this.parentElement.innerHTML='<div class=\'phone-mock\'>Dark theme</div>'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════
+  OVERVIEW STRIP
+  ══════════════════════════ -->
+  <div class="overview-strip rv">
+    <div>
+      <div class="os-label">Client</div>
+      <div class="os-value">Caixa Geral de Depósitos</div>
+    </div>
+    <div class="os-divider"></div>
+    <div>
+      <div class="os-label">Deliverables</div>
+      <div class="os-value">Research · Personas · CJM · Wireframes · UI · Prototype</div>
+    </div>
+    <div class="os-divider"></div>
+    <div>
+      <div class="os-label">Themes</div>
+      <div class="os-value">Light & Dark</div>
+    </div>
+    <div class="os-divider"></div>
+    <p class="os-title">"Banking made simpler and more efficient."</p>
+  </div>
+
+  <!-- ══════════════════════════
+  CHALLENGE & GOALS
+  ══════════════════════════ -->
+  <div class="section rv">
+    <div class="section-lbl">01 — The Brief</div>
+    <h2 class="section-h2">Challenge &<br><em>Goals</em></h2>
+    <p class="section-lead">The Caixadirecta app is used by millions of Portuguese citizens — but its outdated design was failing them. I took on a full redesign to bridge the gap between a trusted institution and modern expectations.</p>
+
+    <div class="challenge-grid rv">
+      <div class="ch-card">
+        <div class="ch-card-lbl">The Challenge</div>
+        <h3 class="ch-card-title">An outdated experience for a modern world</h3>
+        <p class="ch-card-text">The existing app suffered from a cluttered interface, poor navigation hierarchy, and accessibility gaps that made simple tasks unnecessarily complex — especially for older users.</p>
+        <div class="ch-list">
+          <div class="ch-list-item">
+            <div class="ch-list-dot"></div>
+            <span>Confusing navigation with no clear information hierarchy</span>
+          </div>
+          <div class="ch-list-item">
+            <div class="ch-list-dot"></div>
+            <span>Outdated visual language — failed to communicate trust and modernity</span>
+          </div>
+          <div class="ch-list-item">
+            <div class="ch-list-dot"></div>
+            <span>No chat or in-app support — users forced to call or visit branches</span>
+          </div>
+          <div class="ch-list-item">
+            <div class="ch-list-dot"></div>
+            <span>Poor accessibility for elderly users unfamiliar with digital banking</span>
+          </div>
+        </div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-card-lbl">Goals</div>
+        <h3 class="ch-card-title">Three clear outcomes to aim for</h3>
+        <p class="ch-card-text">Through modernising the design, simplifying navigation, improving accessibility, and enhancing security, the redesign was aimed at increasing user engagement and satisfaction.</p>
+        <div class="ch-list">
+          <div class="ch-list-item">
+            <div class="ch-list-dot"></div>
+            <span>Simplify navigation and increase app usability for all user groups</span>
+          </div>
+          <div class="ch-list-item">
+            <div class="ch-list-dot"></div>
+            <span>Revise the layout to conform to modern design standards while preserving trust</span>
+          </div>
+          <div class="ch-list-item">
+            <div class="ch-list-dot"></div>
+            <span>Boost dependability and security without sacrificing ease of use</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════
+  PROCESS TIMELINE
+  ══════════════════════════ -->
+  <div class="section rv" style="padding-top:0;">
+    <div class="process-wrap rv">
+      <p class="process-title">Design Process</p>
+      <p class="process-sub">A full end-to-end UX process — from discovery to prototype</p>
+      <div class="timeline-row">
+        <div class="tl-step">
+          <div class="tl-orb active-step">01</div>
+          <div class="tl-label">Competitor<br>Analysis</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-orb active-step">02</div>
+          <div class="tl-label">Surveys &<br>Reviews</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-orb active-step">03</div>
+          <div class="tl-label">Personas<br>& CJM</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-orb dim-step">04</div>
+          <div class="tl-label">Sketches &<br>Wireframes</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-orb active-step">05</div>
+          <div class="tl-label">UI<br>Design</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-orb dim-step">06</div>
+          <div class="tl-label">UI<br>Kit</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-orb active-step">07</div>
+          <div class="tl-label">Clickable<br>Prototype</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-orb dim-step">08</div>
+          <div class="tl-label">Analytics &<br>Edits</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════
+  COMPETITOR ANALYSIS
+  ══════════════════════════ -->
+  <section class="competitors-section">
+    <div class="competitors-inner">
+      <div class="section-lbl rv">02 — Research</div>
+      <h2 class="section-h2 rv">Competitor<br><em>Analysis</em></h2>
+      <p class="section-lead rv">I analysed three leading Portuguese banking apps to understand market standards, identify best practices, and find opportunities for differentiation.</p>
+
+      <div class="comp-grid rv">
+        <div class="comp-card">
+          <div class="comp-card-logo">
+            <img src="assets/img/portfolio/Caixa Directa/img/ActivoBank logo.svg" alt="ActivoBank" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="comp-logo-text" style="display:none">ActivoBank</span>
+          </div>
+          <div class="comp-card-name">ActivoBank</div>
+          <div class="comp-card-desc">Modern, clean UI with strong digital-first positioning. Excellent onboarding, clear transaction flow. Benchmark for youthful aesthetic.</div>
+        </div>
+        <div class="comp-card">
+          <div class="comp-card-logo">
+            <img src="assets/img/portfolio/Caixa Directa/img/Millenium bank logo.png" alt="Millennium bcp" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="comp-logo-text" style="display:none">Millennium</span>
+          </div>
+          <div class="comp-card-name">Millennium bcp</div>
+          <div class="comp-card-desc">Feature-rich with robust security flows. Strong business banking tools. Navigation complex but information dense — trusted by power users.</div>
+        </div>
+        <div class="comp-card">
+          <div class="comp-card-logo">
+            <img src="assets/img/portfolio/Caixa Directa/img/Santander Bank logo.png" alt="Santander" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="comp-logo-text" style="display:none">Santander</span>
+          </div>
+          <div class="comp-card-name">Santander</div>
+          <div class="comp-card-desc">International design standards, consistent visual system. Clear hierarchy and accessible typography — strong accessibility across age groups.</div>
+        </div>
+      </div>
+
+      <div class="comp-insight rv">
+        <div class="comp-insight-icon"><i class="bi bi-lightbulb"></i></div>
+        <p class="comp-insight-text">"All three competitors offered better accessibility and clearer navigation than Caixadirecta — confirming the opportunity to leapfrog with a truly user-centred redesign."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════
+  PERSONAS
+  ══════════════════════════ -->
+  <div class="section">
+    <div class="section-lbl rv">03 — User Research</div>
+    <h2 class="section-h2 rv">Prototype<br><em>Personas</em></h2>
+    <p class="section-lead rv">After conducting a survey and analysing App Store reviews, I developed three personas representing the core Caixadirecta user spectrum.</p>
+
+    <div class="personas-grid">
+      <div class="persona-card rv d1">
+        <div class="persona-card-top">
+          <img src="assets/img/portfolio/Caixa Directa/img/Maria.png" alt="Maria" class="persona-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="persona-avatar-placeholder" style="display:none">M</div>
+          <div class="persona-name-block">
+            <div class="persona-name">Maria</div>
+            <div class="persona-role">25 · Junior Marketing Specialist</div>
+          </div>
+        </div>
+        <div class="persona-card-body">
+          <div class="persona-trait">
+            <span class="persona-trait-k">Personality</span>
+            <span>Tech-savvy, active and social</span>
+          </div>
+          <div class="persona-trait">
+            <span class="persona-trait-k">Device</span>
+            <span>Mobile-first, always on the go</span>
+          </div>
+          <div class="persona-pain-list">
+            <div class="persona-pain">Difficulty navigating to transfers and bill payments</div>
+            <div class="persona-pain">Outdated design feels clunky and unappealing</div>
+            <div class="persona-pain">No quick access to transaction history</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-card rv d2">
+        <div class="persona-card-top">
+          <div class="persona-avatar-placeholder">J</div>
+          <div class="persona-name-block">
+            <div class="persona-name">João</div>
+            <div class="persona-role">42 · Small Business Owner</div>
+          </div>
+        </div>
+        <div class="persona-card-body">
+          <div class="persona-trait">
+            <span class="persona-trait-k">Personality</span>
+            <span>Detail-oriented, values efficiency</span>
+          </div>
+          <div class="persona-trait">
+            <span class="persona-trait-k">Device</span>
+            <span>Mobile & desktop, frequent user</span>
+          </div>
+          <div class="persona-pain-list">
+            <div class="persona-pain">Complex navigation wastes valuable time</div>
+            <div class="persona-pain">Authentication flow is frustrating under pressure</div>
+            <div class="persona-pain">Hidden features require extensive exploration</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-card rv d3">
+        <div class="persona-card-top">
+          <img src="assets/img/portfolio/Caixa Directa/img/Ana.png" alt="Ana" class="persona-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="persona-avatar-placeholder" style="display:none">A</div>
+          <div class="persona-name-block">
+            <div class="persona-name">Ana</div>
+            <div class="persona-role">65 · Retired Teacher</div>
+          </div>
+        </div>
+        <div class="persona-card-body">
+          <div class="persona-trait">
+            <span class="persona-trait-k">Personality</span>
+            <span>Cautious, prefers simplicity</span>
+          </div>
+          <div class="persona-trait">
+            <span class="persona-trait-k">Device</span>
+            <span>Mobile, family activities focus</span>
+          </div>
+          <div class="persona-pain-list">
+            <div class="persona-pain">Interface is overwhelming and hard to navigate</div>
+            <div class="persona-pain">Banking terminology is confusing and inaccessible</div>
+            <div class="persona-pain">Concerned about security of online banking</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════
+  CJM
+  ══════════════════════════ -->
+  <section class="cjm-section">
+    <div class="cjm-inner">
+      <div class="section-lbl rv">04 — Journey Mapping</div>
+      <h2 class="section-h2 rv">Customer<br><em>Journey Map</em></h2>
+      <p class="section-lead rv">Mapping the full experience of each persona revealed consistent pain points and clear opportunities across the app.</p>
+
+      <div class="cjm-table-wrap rv">
+        <table class="cjm-table">
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Maria · 25</th>
+              <th>João · 42</th>
+              <th>Ana · 65</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Discovery</td>
+              <td>Outdated design, difficult navigation</td>
+              <td>Complex navigation, security concerns</td>
+              <td>Overwhelming interface, complex terms</td>
+            </tr>
+            <tr>
+              <td>Emotions</td>
+              <td>Frustration, hope for improvement</td>
+              <td>Frustration, relief when security works</td>
+              <td>Confusion, seeking simplicity</td>
+            </tr>
+            <tr>
+              <td>Pain Points</td>
+              <td>Cluttered interface, slow loading</td>
+              <td>Hidden features, auth issues</td>
+              <td>Unclear instructions, scary errors</td>
+            </tr>
+            <tr>
+              <td>Touchpoints</td>
+              <td>Homepage, navigation menu</td>
+              <td>Security settings, transaction history</td>
+              <td>Dashboard, help section</td>
+            </tr>
+            <tr>
+              <td>Opportunities</td>
+              <td>Simplified navigation, clearer labels</td>
+              <td>Streamlined authentication, intuitive flow</td>
+              <td>Plain language, guided walkthroughs</td>
+            </tr>
+            <tr>
+              <td>Improvement Ideas</td>
+              <td>Transaction categorisation, quick actions</td>
+              <td>Advanced reporting, seamless integrations</td>
+              <td>Enhanced support, intuitive help resources</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════
+  SKETCHES
+  ══════════════════════════ -->
+  <section class="sketches-section">
+    <div class="sketches-inner">
+      <div class="section-lbl rv">05 — Ideation</div>
+      <h2 class="section-h2 rv">Sketches &<br><em>Wireframes</em></h2>
+
+      <div class="sketches-layout rv">
+        <div class="sketch-image-wrap">
+          <img src="assets/img/portfolio/Caixa Directa/img/Sketches.png" alt="Caixadirecta Sketches" onerror="this.parentElement.innerHTML='<div class=\'sketch-image-placeholder\'>Sketches image</div>'">
+        </div>
+        <div class="sketch-content">
+          <h3 class="sketch-h3">From idea to layout, fast</h3>
+          <p class="sketch-text">Hand-drawn sketches were essential for quickly exploring layout ideas and testing assumptions before committing to high-fidelity work. Each sketch represented a different approach to solving a user pain point.</p>
+          <div class="sketch-quotes">
+            <div class="sketch-quote">"Sketching revealed that the transfer flow needed to be collapsed from 5 steps to 3 — the original was unnecessarily complex."</div>
+            <div class="sketch-quote">"A bottom navigation bar emerged as the clear solution for accessibility — especially for Ana's one-handed usage pattern."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════
+  PHONES FULL WIDTH
+  ══════════════════════════ -->
+  <section class="screens-section rv">
+    <div class="screens-inner">
+      <div class="screens-fullwidth">
+        <img src="assets/img/portfolio/Caixa Directa/img/3phones.png" alt="Caixadirecta three screens" onerror="this.parentElement.innerHTML='<div class=\'screens-img-placeholder\'>Three phones mockup</div>'">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════
+  HOME SCREEN
+  ══════════════════════════ -->
+  <div class="screen-detail rv">
+    <div class="screen-detail-image">
+      <img src="assets/img/portfolio/Caixa Directa/img/Home Screen Description.png" alt="Home Screen" onerror="this.parentElement.innerHTML='<div class=\'sdi-placeholder\'>Home screen</div>'">
+    </div>
+    <div class="screen-detail-content">
+      <p class="sd-number">06 — Home Screen</p>
+      <h3 class="sd-title">Everything at a glance</h3>
+      <p class="sd-subtitle">Caixadirecta: All-in-One Banking Hub</p>
+      <p class="sd-text">The redesigned Home Screen puts everything users need at their fingertips — from quick actions to account overview, all accessible in seconds.</p>
+      <div class="sd-features">
+        <div class="sd-feature">
+          <div class="sd-feature-icon"><i class="bi bi-lightning-charge"></i></div>
+          <div class="sd-feature-text">
+            <div class="sd-feature-title">Quick Actions</div>
+            <div class="sd-feature-desc">Transfer, pay bills, top up — all accessible with a single tap from the home screen.</div>
+          </div>
+        </div>
+        <div class="sd-feature">
+          <div class="sd-feature-icon"><i class="bi bi-eye"></i></div>
+          <div class="sd-feature-text">
+            <div class="sd-feature-title">Finances at a Glance</div>
+            <div class="sd-feature-desc">Balances, recent transactions, and cards — all visible on one screen, no digging required.</div>
+          </div>
+        </div>
+        <div class="sd-feature">
+          <div class="sd-feature-icon"><i class="bi bi-chat-dots"></i></div>
+          <div class="sd-feature-text">
+            <div class="sd-feature-title">Instant Support</div>
+            <div class="sd-feature-desc">New in-app Chat feature means users can get help and even send money without leaving the app.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════
+  CHAT SCREEN
+  ══════════════════════════ -->
+  <div class="screen-detail reverse rv" style="background:var(--bg-warm); padding:120px 80px;">
+    <div class="screen-detail-image">
+      <img src="assets/img/portfolio/Caixa Directa/img/Chat Screen.png" alt="Chat Screen" onerror="this.parentElement.innerHTML='<div class=\'sdi-placeholder\'>Chat screen</div>'">
+    </div>
+    <div class="screen-detail-content" style="max-width:1400px;margin:0 auto;">
+      <p class="sd-number">07 — Chat Screen</p>
+      <h3 class="sd-title">Support built right in</h3>
+      <p class="sd-subtitle">Banking Made Easy: Chat at Your Fingertips</p>
+      <p class="sd-text">Traditional banking support means waiting on hold or visiting a branch. The new Chat feature eliminates both — users get real-time help and can even transfer money within the conversation.</p>
+      <div class="sd-features">
+        <div class="sd-feature">
+          <div class="sd-feature-icon"><i class="bi bi-clock"></i></div>
+          <div class="sd-feature-text">
+            <div class="sd-feature-title">Real-time Support</div>
+            <div class="sd-feature-desc">Connect with agents instantly — no hold music, no branch visits.</div>
+          </div>
+        </div>
+        <div class="sd-feature">
+          <div class="sd-feature-icon"><i class="bi bi-send"></i></div>
+          <div class="sd-feature-text">
+            <div class="sd-feature-title">Send Money in Chat</div>
+            <div class="sd-feature-desc">Transfer to friends and family directly from the conversation — no switching screens.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════
+  CHAT PHONES
+  ══════════════════════════ -->
+  <section class="screens-section rv" style="padding-top:0;">
+    <div class="screens-inner">
+      <div class="screens-fullwidth">
+        <img src="assets/img/portfolio/Caixa Directa/img/Chat phones.png" alt="Chat screens across themes" onerror="this.parentElement.innerHTML='<div class=\'screens-img-placeholder\'>Chat phones</div>'">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════
+  USER CENTRIC REDESIGN
+  ══════════════════════════ -->
+  <div class="screen-detail rv">
+    <div class="screen-detail-image">
+      <img src="assets/img/portfolio/Caixa Directa/img/user-centric-redesign.png" alt="User-Centric Redesign" onerror="this.parentElement.innerHTML='<div class=\'sdi-placeholder\'>Redesign detail</div>'">
+    </div>
+    <div class="screen-detail-content">
+      <p class="sd-number">08 — Design System</p>
+      <h3 class="sd-title">User-centred, top to bottom</h3>
+      <p class="sd-subtitle">Quick Access · Clear Actions · Effortless Management</p>
+      <p class="sd-text">The revised design puts user experience first with improved <strong>comfort</strong>, <strong>functionality</strong>, and <strong>button clarity</strong>. Every interaction was redesigned with purpose — from tap targets to visual hierarchy.</p>
+      <div class="sd-features">
+        <div class="sd-feature">
+          <div class="sd-feature-icon"><i class="bi bi-hand-index-thumb"></i></div>
+          <div class="sd-feature-text">
+            <div class="sd-feature-title">Accessible Tap Targets</div>
+            <div class="sd-feature-desc">All interactive elements meet WCAG AA touch target requirements — critical for Ana's use case.</div>
+          </div>
+        </div>
+        <div class="sd-feature">
+          <div class="sd-feature-icon"><i class="bi bi-grid-1x2"></i></div>
+          <div class="sd-feature-text">
+            <div class="sd-feature-title">Clear Visual Hierarchy</div>
+            <div class="sd-feature-desc">Self-explanatory icons and large transaction amounts reduce cognitive load for all users.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════
+  THEMES
+  ══════════════════════════ -->
+  <section class="themes-section">
+    <div class="themes-inner">
+      <div class="section-lbl rv">09 — Visual Identity</div>
+      <h2 class="section-h2 rv">Light &<br><em>Dark Theme</em></h2>
+
+      <p class="themes-statement rv">
+        The new design features both <em>light and dark themes</em>, incorporating the bank's signature colours for a sleek, modern, and cohesive look across every context.
+      </p>
+
+      <div class="themes-visual rv">
+        <img src="assets/img/portfolio/Caixa Directa/img/Theme design.png" alt="Light and Dark Themes" onerror="this.parentElement.innerHTML='<div class=\'themes-visual-placeholder\'><span class=\'theme-pill light\'>☀ Light Mode</span><span class=\'theme-pill dark\'>◑ Dark Mode</span></div>'">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════
+  UI KIT
+  ══════════════════════════ -->
+  <section class="uikit-section">
+    <div class="uikit-inner">
+      <div class="section-lbl rv">10 — Design System</div>
+      <h2 class="section-h2 rv">UI<br><em>Kit</em></h2>
+      <p class="section-lead rv">A full component library was built to ensure consistency across every screen — colours, typography, spacing, and interactive states all documented.</p>
+      <div class="uikit-visual rv">
+        <img src="assets/img/portfolio/Caixa Directa/img/UI Kit.png" alt="UI Kit" onerror="this.parentElement.innerHTML='<div class=\'sketch-image-placeholder\' style=\'height:320px;\'>UI Kit image</div>'">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════
+  SITEMAP
+  ══════════════════════════ -->
+  <section class="sitemap-section">
+    <div class="sitemap-inner">
+      <div class="section-lbl rv">11 — Information Architecture</div>
+      <h2 class="section-h2 rv">Site<br><em>Map</em></h2>
+      <p class="section-lead rv">The app's information architecture was completely redesigned around task frequency — the most common actions (transfers, bills, history) accessible in one tap from anywhere.</p>
+      <div class="sitemap-visual rv">
+        <img src="assets/img/portfolio/Caixa Directa/img/Site map.png" alt="App Sitemap" onerror="this.parentElement.innerHTML='<div class=\'sketch-image-placeholder\' style=\'height:320px;\'>Site map</div>'">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════
+  OUTCOME
+  ══════════════════════════ -->
+  <section class="outcome-section rv">
+    <div class="outcome-inner">
+      <p class="outcome-lbl">Outcome</p>
+      <h2 class="outcome-h2">A complete redesign. From research to prototype.</h2>
+      <p class="outcome-text">This project demonstrates how rigorous UX methodology — competitor research, user surveys, personas, journey mapping, sketches and iterative design — results in an experience that works for every generation of user.</p>
+      <div class="outcome-stats">
+        <div class="outcome-stat">
+          <div class="stat-num">3<span>×</span></div>
+          <div class="stat-label">User Groups Researched</div>
+        </div>
+        <div class="outcome-stat">
+          <div class="stat-num">8</div>
+          <div class="stat-label">Process Stages</div>
+        </div>
+        <div class="outcome-stat">
+          <div class="stat-num">2<span></span></div>
+          <div class="stat-label">Complete Themes</div>
+        </div>
+        <div class="outcome-stat">
+          <div class="stat-num">30<span>+</span></div>
+          <div class="stat-label">Screens Designed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════
+  FOOTER
+  ══════════════════════════ -->
+  <footer class="yanas-footer" id="contact">
+    <div class="yanas-bg-elements">
+      <div class="yanas-bg-element"><i class="bi bi-code-slash"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-palette"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-layers"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-terminal"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-vector-pen"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-grid-3x3"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-bezier"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-cpu"></i></div>
+    </div>
+
+    <div class="yanas-footer_wrapper">
+      <div class="yanas-footer_content">
+        <div class="yanas-footer_content-left">
+          <h3 class="yanas-title-140">Let's connect</h3>
+          <div class="footer-content-spacer">
+            <div class="yanas-text-32">Ready to bring your ideas to life through design & code</div>
+          </div>
+          <a href="mailto:hello@yanaharcourt.dev" class="yanas-button">
+            <span>Send an e-mail</span>
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+        </div>
+
+        <div class="yanas-footer_content-right">
+          <div class="yanas-footer-form">
+            <form id="yanasContactForm" action="https://formspree.io/f/xnnqvwab" method="POST" class="yanas-form">
+              <div class="yanas-status-message" id="yanasStatusMessage"></div>
+
+              <div>
+                <div class="yanas-text-40">Contact info*</div>
+                <div class="yanas-form-row">
+                  <input class="yanas-footer-field" name="name" placeholder="Your name*" type="text" required>
+                  <input class="yanas-footer-field" name="email" placeholder="Your e-mail*" type="email" required>
+                </div>
+              </div>
+
+              <div>
+                <div class="yanas-text-40">You are interested in*</div>
+                <div class="yanas-services-grid">
+                  <div class="yanas-form-button_field" data-service="ux-ui-design">UX/UI Design</div>
+                  <div class="yanas-form-button_field" data-service="web-development">Web Development</div>
+                </div>
+                <input type="hidden" name="services" id="selectedServices">
+              </div>
+
+              <div>
+                <div class="yanas-text-40">Your budget in EUR*</div>
+                <div class="yanas-budget-grid">
+                  <div class="yanas-form-button_field" data-budget="<5k">&lt;5K</div>
+                  <div class="yanas-form-button_field" data-budget="5-10k">5–10K</div>
+                  <div class="yanas-form-button_field" data-budget="10-20k">10–20K</div>
+                  <div class="yanas-form-button_field" data-budget=">20k">&gt;20K</div>
+                  <div class="yanas-form-button_field" data-budget="i-dont-know">I don't know yet</div>
+                </div>
+                <input type="hidden" name="budget" id="selectedBudget">
+              </div>
+
+              <div>
+                <textarea name="message" class="yanas-message-field" placeholder="Tell me about your project..."></textarea>
+              </div>
+
+              <button type="submit" class="yanas-form_button">Start a journey</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="yanas-footer_links">
+        <div class="yanas-footer_links-left">
+          <div class="yanas-text-36">Keep in touch</div>
+          <div class="yanas-text-24"><a href="mailto:hello@yanaharcourt.dev">hello@yanaharcourt.dev</a></div>
+        </div>
+        <div class="yanas-footer_links-right">
+          <div class="yanas-footer_links-right-item">
+            <h5>Follow</h5>
+            <div class="yanas-footer_links-right-item-links">
+              <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank" class="yanas-rolling-text">
+                <span class="yanas-text-block">LinkedIn</span><span class="yanas-text-block">LinkedIn</span>
+              </a>
+              <a href="https://www.behance.net/yana_harcourt" target="_blank" class="yanas-rolling-text">
+                <span class="yanas-text-block">Behance</span><span class="yanas-text-block">Behance</span>
+              </a>
+              <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank" class="yanas-rolling-text">
+                <span class="yanas-text-block">Instagram</span><span class="yanas-text-block">Instagram</span>
+              </a>
+              <a href="https://github.com/yanaharcourt" target="_blank" class="yanas-rolling-text">
+                <span class="yanas-text-block">GitHub</span><span class="yanas-text-block">GitHub</span>
+              </a>
+            </div>
+          </div>
+          <div class="yanas-footer_links-right-item">
+            <h5>Navigate</h5>
+            <div class="yanas-footer_links-right-item-links">
+              <a href="index.html" class="yanas-rolling-text"><span class="yanas-text-block">Home</span><span class="yanas-text-block">Home</span></a>
+              <a href="index.html#about" class="yanas-rolling-text"><span class="yanas-text-block">About</span><span class="yanas-text-block">About</span></a>
+              <a href="index.html#portfolio" class="yanas-rolling-text"><span class="yanas-text-block">Portfolio</span><span class="yanas-text-block">Portfolio</span></a>
+              <a href="#contact" class="yanas-rolling-text"><span class="yanas-text-block">Contact</span><span class="yanas-text-block">Contact</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="yanas-copyright">© 2024 Yana Harcourt — All Rights Reserved</div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+    /* Custom cursor */
+    const cur = document.getElementById('cur');
+    const ctr = document.getElementById('ctr');
+    let mx = window.innerWidth/2, my = window.innerHeight/2;
+    let tx = mx, ty = my;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function tick(){
+      cur.style.left = (mx-4)+'px'; cur.style.top = (my-4)+'px';
+      tx += (mx-tx)*.14; ty += (my-ty)*.14;
+      ctr.style.left = (tx-16)+'px'; ctr.style.top = (ty-16)+'px';
+      requestAnimationFrame(tick);
+    })();
+    document.addEventListener('mousedown', ()=>cur.style.transform='scale(2)');
+    document.addEventListener('mouseup', ()=>cur.style.transform='scale(1)');
+
+    /* Scroll reveal */
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+    /* Scroll top */
+    const st = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => {
+      window.scrollY > 300 ? st.classList.add('active') : st.classList.remove('active');
+    });
+    st.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); });
+
+    /* Form toggles */
+    document.querySelectorAll('.yanas-form-button_field').forEach(btn => {
+      btn.addEventListener('click', function(){
+        const type = this.dataset.service ? 'service' : 'budget';
+        const group = type === 'service' ? '.yanas-services-grid' : '.yanas-budget-grid';
+        document.querySelectorAll(group+' .yanas-form-button_field').forEach(b=>b.classList.remove('active'));
+        this.classList.add('active');
+        const inputId = type === 'service' ? 'selectedServices' : 'selectedBudget';
+        document.getElementById(inputId).value = this.dataset[type === 'service' ? 'service' : 'budget'];
+      });
+    });
+
+    /* Form submit */
+    const form = document.getElementById('yanasContactForm');
+    const msg = document.getElementById('yanasStatusMessage');
+    if(form){
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const btn = form.querySelector('.yanas-form_button');
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+        msg.style.display = 'block';
+        msg.className = 'yanas-status-message yanas-loading';
+        msg.textContent = 'Sending your message...';
+        try {
+          const res = await fetch(form.action, {method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
+          if(res.ok){
+            msg.className = 'yanas-status-message yanas-success';
+            msg.textContent = '✓ Message sent! I\'ll get back to you soon.';
+            form.reset();
+            document.querySelectorAll('.yanas-form-button_field').forEach(b=>b.classList.remove('active'));
+          } else {
+            throw new Error();
+          }
+        } catch {
+          msg.className = 'yanas-status-message yanas-error';
+          msg.textContent = 'Something went wrong. Please try emailing directly.';
+        }
+        btn.textContent = 'Start a journey';
+        btn.disabled = false;
+      });
+    }
+  </script>
+
+</body>
+</html>
