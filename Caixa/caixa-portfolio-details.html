@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixadirecta · Banking App Redesign — Yana Harcourt</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./assets/caixa-portfolio.css">
+</head>
+
+<body>
+
+    <div id="cur"></div>
+    <div id="ctr"></div>
+
+    <!-- BREADCRUMB -->
+    <nav class="bc-nav">
+        <div class="bc-left">
+            <a href="index.html"><i class="bi bi-arrow-left"></i> Portfolio</a>
+            <span class="bc-sep">›</span>
+            <span class="bc-cur">Caixadirecta</span>
+        </div>
+        <div class="bc-tags">
+            <span class="bc-tag blue">UX/UI Design</span>
+            <span class="bc-tag blue">Mobile App</span>
+            <span class="bc-tag gold">Banking</span>
+        </div>
+    </nav>
+
+    <!-- ═══════ 1. HERO ═══════ -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-eyebrow">Case Study · 2024</span>
+            <h1 class="hero-h1">Caixa<em>directa</em><br>Redesign</h1>
+            <p class="hero-sub">A full UX process redesign of Portugal's leading banking application — from research and
+                personas through to clickable prototype. Making banking feel intuitive for every generation.</p>
+            <div class="hero-meta">
+                <div>
+                    <div class="meta-lbl">Role</div>
+                    <div class="meta-val">UX/UI Designer</div>
+                </div>
+                <div>
+                    <div class="meta-lbl">Platform</div>
+                    <div class="meta-val">iOS / Android</div>
+                </div>
+                <div>
+                    <div class="meta-lbl">Year</div>
+                    <div class="meta-val">2024</div>
+                </div>
+            </div>
+        </div>
+        <!-- Single hero phone -->
+        <div class="hero-visual">
+            <div class="phone-wrap">
+                <div class="ph ph-main">
+                    <img src="./assets/img/header phones.png" alt="Caixadirecta home screen"
+                        onerror="this.parentElement.style.background='#2B5CE6';this.style.display='none'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OVERVIEW STRIP -->
+    <div class="ov-strip rv">
+        <div class="ov-item">
+            <div class="ov-lbl">Client</div>
+            <div class="ov-val">Caixa Geral de Depósitos</div>
+        </div>
+        <div class="ov-div"></div>
+        <div class="ov-item">
+            <div class="ov-lbl">Deliverables</div>
+            <div class="ov-val">Research · Personas · CJM · Wireframes · UI · Prototype</div>
+        </div>
+        <div class="ov-div"></div>
+        <div class="ov-item">
+            <div class="ov-lbl">Themes</div>
+            <div class="ov-val">Light &amp; Dark</div>
+        </div>
+        <div class="ov-div"></div>
+        <p class="ov-quote">"Banking made simpler and more efficient."</p>
+    </div>
+
+    <!-- ═══════ 2. CHALLENGE & GOALS ═══════ -->
+    <div class="sec">
+        <div class="sec-lbl rv">01 — The Brief</div>
+        <h2 class="sec-h2 rv">Challenge &amp;<br><em>Goals</em></h2>
+        <p class="sec-lead rv">The Caixadirecta app is used by millions of Portuguese citizens — but its outdated design
+            was failing them. A full redesign to bridge the gap between a trusted institution and modern expectations.
+        </p>
+
+        <div class="ch-grid rv">
+            <div class="ch-card">
+                <div class="ch-card-lbl">The Challenge</div>
+                <h3 class="ch-card-ttl">An outdated experience for a modern world</h3>
+                <p class="ch-card-p">The existing app suffered from a cluttered interface, poor navigation hierarchy,
+                    and accessibility gaps that made simple tasks unnecessarily complex — especially for older users.
+                </p>
+                <div class="ch-list">
+                    <div class="ch-li">
+                        <div class="ch-dot"></div><span>Confusing navigation with no clear information hierarchy</span>
+                    </div>
+                    <div class="ch-li">
+                        <div class="ch-dot"></div><span>Outdated visual language — failed to communicate trust and
+                            modernity</span>
+                    </div>
+                    <div class="ch-li">
+                        <div class="ch-dot"></div><span>No chat or in-app support — users forced to call or visit
+                            branches</span>
+                    </div>
+                    <div class="ch-li">
+                        <div class="ch-dot"></div><span>Poor accessibility for elderly users unfamiliar with digital
+                            banking</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ch-card">
+                <div class="ch-card-lbl">Goals</div>
+                <h3 class="ch-card-ttl">Three clear outcomes to aim for</h3>
+                <p class="ch-card-p">Through modernising the design, simplifying navigation, improving accessibility,
+                    and enhancing security, the redesign aimed at increasing user engagement and satisfaction.</p>
+                <div class="ch-list">
+                    <div class="ch-li">
+                        <div class="ch-dot"></div><span>Simplify navigation and increase app usability for all user
+                            groups</span>
+                    </div>
+                    <div class="ch-li">
+                        <div class="ch-dot"></div><span>Revise the layout to conform to modern design standards while
+                            preserving trust</span>
+                    </div>
+                    <div class="ch-li">
+                        <div class="ch-dot"></div><span>Boost dependability and security without sacrificing ease of
+                            use</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ DESIGN PROCESS — full-width dark section ═══════ -->
+    <section class="process-section rv">
+        <div class="process-section-inner">
+            <div class="sec-lbl">01 — Process</div>
+            <p class="tl-ttl">Design Process</p>
+            <p class="tl-sub">From discovery to prototype — every phase grounded in evidence, not assumption</p>
+
+            <div class="orbital">
+                <div class="planet">
+                    <div class="planet-num">01</div>
+                    <div class="orb orb-s orb-1">
+                        <div class="orb-glow"></div><span class="orb-label">Competitor<br>Analysis</span>
+                    </div>
+                    <div class="planet-desc"><strong>Market research</strong>ActivoBank · Millennium · Santander</div>
+                </div>
+                <div class="p-dash"></div>
+                <div class="planet">
+                    <div class="planet-num">02</div>
+                    <div class="orb orb-m orb-2">
+                        <div class="orb-glow"></div><span class="orb-label">Surveys &amp;<br>Reviews</span>
+                    </div>
+                    <div class="planet-desc"><strong>User voices</strong>App Store reviews · Real user surveys</div>
+                </div>
+                <div class="p-dash"></div>
+                <div class="planet">
+                    <div class="planet-num">03</div>
+                    <div class="orb orb-l orb-3">
+                        <div class="orb-glow"></div><span class="orb-label">Personas<br>&amp; CJM</span>
+                    </div>
+                    <div class="planet-desc"><strong>3 personas</strong>Maria · João · Ana · full journey maps</div>
+                </div>
+                <div class="p-dash"></div>
+                <div class="planet">
+                    <div class="planet-num">04</div>
+                    <div class="orb orb-xl orb-4">
+                        <div class="orb-glow"></div><span class="orb-label">UI<br>Design</span>
+                    </div>
+                    <div class="planet-desc"><strong>30+ screens</strong>Light &amp; Dark · iOS HIG · UI Kit · Prototype
+                    </div>
+                </div>
+                <div class="p-dash"></div>
+                <div class="planet">
+                    <div class="planet-num">05</div>
+                    <div class="orb orb-s orb-1 orb-dashed">
+                        <div class="orb-glow"></div><span class="orb-label orb-label--dim">Analytics<br>&amp;
+                            Edits</span>
+                    </div>
+                    <div class="planet-desc planet-desc--dim"><strong>Iteration</strong>Tests · feedback loop</div>
+                </div>
+            </div>
+
+            <div class="process-foot">
+                <div class="pfoot-item">
+                    <div class="pfoot-dot"></div>Role: <span>UX/UI Designer (Solo)</span>
+                </div>
+                <div class="pfoot-item">
+                    <div class="pfoot-dot"></div>Platform: <span>iOS &amp; Android</span>
+                </div>
+                <div class="pfoot-item">
+                    <div class="pfoot-dot"></div>Year: <span>2024</span>
+                </div>
+                <div class="pfoot-item">
+                    <div class="pfoot-dot"></div>Screens: <span>30+</span>
+                </div>
+                <div class="pfoot-item">
+                    <div class="pfoot-dot"></div>Themes: <span>Light &amp; Dark</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ 3. COMPETITOR ANALYSIS ═══════ -->
+    <section class="sec-full">
+        <div class="sec-full-inner">
+            <div class="sec-lbl rv">02 — Research</div>
+            <h2 class="sec-h2 rv">Competitor<br><em>Analysis</em></h2>
+            <p class="sec-lead rv">I analysed three leading Portuguese banking apps to understand market standards,
+                identify best practices, and find opportunities for differentiation.</p>
+
+            <div class="comp-grid rv">
+                <div class="comp-card">
+                    <div class="comp-logo">
+                        <img src="./assets/img/ActivoBank logo.svg" alt="ActivoBank"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                        <span class="comp-logo-txt" style="display:none">ActivoBank</span>
+                    </div>
+                    <div class="comp-name">ActivoBank</div>
+                    <div class="comp-desc">Modern, clean UI with strong digital-first positioning. Excellent onboarding,
+                        clear transaction flow. Benchmark for youthful aesthetic and streamlined experience.</div>
+                </div>
+                <div class="comp-card">
+                    <div class="comp-logo">
+                        <img src="./assets/img/Millenium bank logo.png" alt="Millennium bcp"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                        <span class="comp-logo-txt" style="display:none">Millennium bcp</span>
+                    </div>
+                    <div class="comp-name">Millennium bcp</div>
+                    <div class="comp-desc">Feature-rich with robust security flows. Strong business banking tools.
+                        Navigation complex but information dense — trusted by power users who need depth.</div>
+                </div>
+                <div class="comp-card">
+                    <div class="comp-logo">
+                        <img src="./assets/img/Santander Bank logo.png" alt="Santander"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                        <span class="comp-logo-txt" style="display:none">Santander</span>
+                    </div>
+                    <div class="comp-name">Santander</div>
+                    <div class="comp-desc">International design standards, consistent visual system. Clear hierarchy and
+                        accessible typography — strong accessibility benchmark across all age groups.</div>
+                </div>
+            </div>
+
+            <div class="comp-insight rv">
+                <div class="comp-ins-icon"><i class="bi bi-lightbulb"></i></div>
+                <p class="comp-ins-txt">"All three competitors offered better accessibility and clearer navigation than
+                    Caixadirecta — confirming the opportunity to leapfrog with a truly user-centred redesign."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ 4. APP STORE REVIEWS ═══════ -->
+    <div class="sec">
+        <div class="sec-lbl rv">03 — User Research</div>
+        <h2 class="sec-h2 rv">App Store<br><em>Reviews</em></h2>
+        <p class="sec-lead rv">In order to identify the typical problems Caixadirecta consumers encounter, I conducted a
+            survey among its users and analysed real user evaluations from the App Store.</p>
+
+        <div class="reviews-img-wrap rv">
+            <img src="./assets/img/Reviews.png" alt="Caixadirecta App Store reviews"
+                onerror="this.parentElement.style.height='200px';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.color='var(--ink-4)';this.parentElement.style.fontSize='14px';this.parentElement.innerHTML='App Store Reviews image'">
+        </div>
+        <div class="reviews-context rv">
+            <i class="bi bi-info-circle"></i>
+            <span>These are <strong>real App Store reviews</strong> from existing Caixadirecta users — not invented.
+                They directly informed the persona development and design priorities in the next phase.</span>
+        </div>
+    </div>
+
+    <!-- ═══════ 5. PERSONAS ═══════ -->
+    <section class="sec-full">
+        <div class="sec-full-inner">
+            <div class="sec-lbl rv">04 — Personas</div>
+            <h2 class="sec-h2 rv">Prototype<br><em>Personas</em></h2>
+            <p class="sec-lead rv">Upon evaluating the reviews, I developed three prototype personas representing the
+                full spectrum of Caixadirecta users.</p>
+
+            <div class="personas-grid">
+                <!-- Maria -->
+                <div class="persona-card rv d1">
+                    <div class="pcard-top">
+                        <img src="./assets/img/Maria.png" alt="Maria" class="pcard-avatar"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="pcard-avatar-ph" style="display:none">M</div>
+                        <div>
+                            <div class="pcard-name">Maria</div>
+                            <div class="pcard-role">25 · Junior Marketing Specialist</div>
+                        </div>
+                    </div>
+
+                    <div class="pcard-body">
+                        <div class="pcard-row"><span class="pcard-k">Personality</span><span class="pcard-v">Tech-savvy,
+                                active, and social</span></div>
+                        <div class="pcard-row"><span class="pcard-k">Occupation</span><span class="pcard-v">Junior
+                                Marketing Specialist</span></div>
+                        <div class="pcard-row"><span class="pcard-k">Lifestyle</span><span class="pcard-v">Busy
+                                schedule, uses phone for all banking tasks, values efficiency</span></div>
+                        <div class="pcard-list">
+                            <div class="pcard-list-ttl">Frustrations</div>
+                            <div class="pcard-li">Difficulty navigating to frequently used features like transfers and
+                                bill payments</div>
+                            <div class="pcard-li">Outdated design that feels clunky and not visually appealing</div>
+                            <div class="pcard-li">Lack of quick access to transaction history</div>
+                        </div>
+                        
+                        <div class="pcard-list">
+                            <div class="pcard-list-ttl">Goals</div>
+                            <div class="pcard-li">Effortlessly manage day-to-day banking activities</div>
+                            <div class="pcard-li">Quickly access financial information and transaction history</div>
+                            <div class="pcard-li">Use a modern, aesthetically pleasing app</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- João -->
+                <div class="persona-card rv d2">
+                    <div class="pcard-top">
+                        <img src="./assets/img/João.png" alt="João" class="pcard-avatar"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="pcard-avatar-ph" style="display:none">J</div>
+                        <div>
+                            <div class="pcard-name">João</div>
+                            <div class="pcard-role">40 · Small Business Owner</div>
+                        </div>
+                    </div>
+
+                    <div class="pcard-body">
+                        <div class="pcard-row"><span class="pcard-k">Personality</span><span class="pcard-v">Pragmatic,
+                                detail-oriented</span></div>
+                        <div class="pcard-row"><span class="pcard-k">Occupation</span><span class="pcard-v">Small
+                                Business Owner</span></div>
+                        <div class="pcard-row"><span class="pcard-k">Lifestyle</span><span class="pcard-v">Constantly on
+                                the go, prefers tools that save time, values security</span></div>
+                        <div class="pcard-list">
+                            <div class="pcard-list-ttl">Frustrations</div>
+                            <div class="pcard-li">Complex navigation and hidden features increase time on banking tasks
+                            </div>
+                            <div class="pcard-li">Lack of business-specific features like expense tracking</div>
+                            <div class="pcard-li">Security concerns with the current authentication methods</div>
+                        </div>
+                        <div class="pcard-list">
+                            <div class="pcard-list-ttl">Goals</div>
+                            <div class="pcard-li">Manage business finances efficiently and securely</div>
+                            <div class="pcard-li">Access detailed transaction records and expense reports</div>
+                            <div class="pcard-li">Have a reliable app that supports business banking needs</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ana -->
+                <div class="persona-card rv d3">
+                    <div class="pcard-top">
+                        <img src="./assets/img/Ana.png" alt="Ana" class="pcard-avatar"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="pcard-avatar-ph" style="display:none">A</div>
+                        <div>
+                            <div class="pcard-name">Ana</div>
+                            <div class="pcard-role">65 · Retired Teacher</div>
+                        </div>
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-row"><span class="pcard-k">Personality</span><span class="pcard-v">Cautious,
+                                prefers simplicity</span></div>
+                        <div class="pcard-row"><span class="pcard-k">Occupation</span><span class="pcard-v">Retired
+                                Teacher</span></div>
+                        <div class="pcard-row"><span class="pcard-k">Lifestyle</span><span
+                                class="pcard-v">Family-oriented, uses technology primarily to stay connected and for
+                                essential tasks</span></div>
+                        <div class="pcard-list">
+                            <div class="pcard-list-ttl">Frustrations</div>
+                            <div class="pcard-li">Finds the current app overwhelming and difficult to navigate</div>
+                            <div class="pcard-li">Struggles with understanding banking terminologies used</div>
+                            <div class="pcard-li">Concerned about the security of online banking</div>
+                        </div>
+                        <div class="pcard-list">
+                            <div class="pcard-list-ttl">Goals</div>
+                            <div class="pcard-li">Perform basic tasks like checking balances and transferring money
+                                easily</div>
+                            <div class="pcard-li">Have clear, simple instructions and a straightforward interface</div>
+                            <div class="pcard-li">Feel confident and secure using the app for banking</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ 6. CJM ═══════ -->
+    <div class="sec">
+        <div class="sec-lbl rv">05 — Journey Mapping</div>
+        <h2 class="sec-h2 rv">Customer<br><em>Journey Map</em></h2>
+        <p class="sec-lead rv">Mapping the full experience of all three personas across ten stages revealed consistent
+            pain points and clear opportunities for the redesign.</p>
+
+        <!-- Header row -->
+        <div class="cjm-header-row rv">
+            <div class="cjm-stage-col"></div>
+            <div class="cjm-persona-head">
+                <div class="cjm-ph-avatar">M</div>
+                <div class="cjm-ph-name">Maria <span>25 · Marketing</span></div>
+            </div>
+            <div class="cjm-persona-head">
+                <div class="cjm-ph-avatar" style="background:linear-gradient(135deg,#C4973A,#E6A830)">J</div>
+                <div class="cjm-ph-name">João <span>40 · Business Owner</span></div>
+            </div>
+            <div class="cjm-persona-head">
+                <div class="cjm-ph-avatar" style="background:linear-gradient(135deg,#10b981,#059669)">A</div>
+                <div class="cjm-ph-name">Ana <span>65 · Retired Teacher</span></div>
+            </div>
+        </div>
+
+        <div class="cjm-body rv">
+            <div class="cjm-row">
+                <div class="cjm-stage">
+                    <span class="cjm-icon"><img src="assets/icons/01.SVG" alt=""></span>Discovery
+                </div>
+                <div class="cjm-cell">Outdated design and difficult navigation made the app feel untrustworthy</div>
+                <div class="cjm-cell">Complex navigation and hidden security settings caused frustration</div>
+                <div class="cjm-cell">Overwhelming interface and unfamiliar banking terminology</div>
+            </div>
+            <div class="cjm-row cjm-row-alt">
+                <div class="cjm-stage">
+                    <span class="cjm-icon"><img src="assets/icons/02.SVG" alt=""></span>Emotions &amp; Thoughts
+                </div>
+                <div class="cjm-cell cjm-emotion">Frustration, hope for something better</div>
+                <div class="cjm-cell cjm-emotion">Frustration, relief only when security works</div>
+                <div class="cjm-cell cjm-emotion">Confusion, actively seeking simplicity</div>
+            </div>
+            <div class="cjm-row">
+                <div class="cjm-stage">
+                    <span class="cjm-icon"><img src="assets/icons/03.SVG" alt=""></span>Touchpoints
+                </div>
+                <div class="cjm-cell">Homepage, navigation menu, quick actions</div>
+                <div class="cjm-cell">Security settings, transaction history, business tools</div>
+                <div class="cjm-cell">Dashboard, help section, balance view</div>
+            </div>
+            <div class="cjm-row cjm-row-alt">
+                <div class="cjm-stage cjm-stage-pain">
+                    <span class="cjm-icon"><img src="assets/icons/04.SVG" alt=""></span>Pain Points
+                </div>
+                <div class="cjm-cell-pain">Cluttered interface, no quick access to history</div>
+                <div class="cjm-cell-pain">Hidden features, complex authentication flow</div>
+                <div class="cjm-cell-pain">Unclear instructions, scary error messages</div>
+            </div>
+            <div class="cjm-row">
+                <div class="cjm-stage">
+                    <span class="cjm-icon"><img src="assets/icons/05.SVG" alt=""></span>Opportunities
+                </div>
+                <div class="cjm-cell">Simplified navigation, clearer labels, quick shortcuts</div>
+                <div class="cjm-cell">Streamlined authentication, intuitive business tools</div>
+                <div class="cjm-cell">Plain language, guided walkthroughs, bigger tap targets</div>
+            </div>
+            <div class="cjm-row cjm-row-alt">
+                <div class="cjm-stage">
+                    <span class="cjm-icon"><img src="assets/icons/06.SVG" alt=""></span>Improvement Ideas
+                </div>
+                <div class="cjm-cell">Enhanced transaction categorisation, home shortcuts</div>
+                <div class="cjm-cell">Advanced reporting, seamless business integrations</div>
+                <div class="cjm-cell">Enhanced customer support, intuitive help resources</div>
+            </div>
+            <div class="cjm-row">
+                <div class="cjm-stage">
+                    <span class="cjm-icon"><img src="assets/icons/07.SVG" alt=""></span>Device / Environment
+                </div>
+                <div class="cjm-cell">Mobile-first, always on the go</div>
+                <div class="cjm-cell">Mobile + occasional desktop, on-the-go management</div>
+                <div class="cjm-cell">Mobile only, family-oriented, at home</div>
+            </div>
+            <div class="cjm-row cjm-row-alt">
+                <div class="cjm-stage">
+                    <span class="cjm-icon"><img src="assets/icons/08.SVG" alt=""></span>Competitive Analysis
+                </div>
+                <div class="cjm-cell">Compare with apps offering sleek design and easy navigation</div>
+                <div class="cjm-cell">Benchmark against apps with robust security and business tools</div>
+                <div class="cjm-cell">Evaluate against user-friendly apps with clear instructions</div>
+            </div>
+            <div class="cjm-row">
+                <div class="cjm-stage">
+                    <span class="cjm-icon"><img src="assets/icons/09.SVG" alt=""></span>Business Goals
+                </div>
+                <div class="cjm-cell">Improve efficiency and user satisfaction</div>
+                <div class="cjm-cell">Enhance security and business functionality</div>
+                <div class="cjm-cell">Provide simple and reliable banking experience</div>
+            </div>
+            <div class="cjm-row cjm-row-alt">
+                <div class="cjm-stage">
+                    <span class="cjm-icon"><img src="assets/icons/10.SVG" alt=""></span>Feedback Loop
+                </div>
+                <div class="cjm-cell">Regular surveys, user feedback forums</div>
+                <div class="cjm-cell">Business user focus groups</div>
+                <div class="cjm-cell">Community polls, customer satisfaction surveys</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ 7. SKETCHES ═══════ -->
+    <section class="sec-full">
+        <div class="sec-full-inner">
+            <div class="sec-lbl rv">06 — Ideation</div>
+            <h2 class="sec-h2 rv">Sketches &amp;<br><em>Wireframes</em></h2>
+
+            <div class="sketches-layout rv">
+                <div class="sk-img-wrap">
+                    <img src="./assets/img/Sketches.png" alt="Caixadirecta sketches"
+                        onerror="this.parentElement.style.height='280px';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.color='var(--ink-4)';this.parentElement.innerHTML='Sketches image'">
+                </div>
+                <div>
+                    <h3 class="sk-h3">From idea to layout, fast</h3>
+                    <p class="sk-p">Hand-drawn sketches were essential for quickly exploring layout ideas and testing
+                        assumptions before committing to high-fidelity work. Each sketch represented a different
+                        approach to solving a user pain point.</p>
+                    <div class="sk-quotes">
+                        <div class="sk-quote">"Sketching revealed that the transfer flow needed to be collapsed from 5
+                            steps to 3 — the original was unnecessarily complex."</div>
+                        <div class="sk-quote">"A bottom navigation bar emerged as the clear solution for accessibility —
+                            especially for Ana's one-handed usage pattern."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ 8. THREE PHONES ═══════ -->
+    <div class="fw-img rv" style="margin:80px 0">
+        <div class="fw-img-wrap">
+            <img src="./assets/img/3phones.png" alt="Caixadirecta three screens"
+                onerror="this.parentElement.style.height='220px';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.color='var(--ink-4)';this.parentElement.innerHTML='Three phones mockup'">
+        </div>
+    </div>
+
+    <!-- ═══════ 9. HOME SCREEN ═══════ -->
+    <div class="sd-wrap rv">
+        <div class="sd-img sd-img--home">
+            <img src="./assets/img/Home Screen Description.png" alt="Home Screen"
+                onerror="this.parentElement.style.height='360px';this.parentElement.style.background='var(--bg-warm)';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.color='var(--ink-4)';this.parentElement.innerHTML='Home screen'">
+        </div>
+        <div>
+            <p class="sd-num">07 — Home Screen</p>
+            <h3 class="sd-h3">Everything at a glance</h3>
+            <p class="sd-sub">Caixadirecta: All-in-One Banking Hub</p>
+            <p class="sd-p">The redesigned Home Screen puts everything users need at their fingertips — from quick
+                actions to account overview, all accessible in seconds.</p>
+            <div class="sd-features">
+                <div class="sd-feat">
+                    <div class="sd-feat-icon"><i class="bi bi-lightning-charge"></i></div>
+                    <div>
+                        <div class="sd-feat-ttl">Quick Actions</div>
+                        <div class="sd-feat-desc">Transfer, pay bills, top up — all accessible with a single tap.</div>
+                    </div>
+                </div>
+                <div class="sd-feat">
+                    <div class="sd-feat-icon"><i class="bi bi-eye"></i></div>
+                    <div>
+                        <div class="sd-feat-ttl">Finances at a Glance</div>
+                        <div class="sd-feat-desc">Balances, recent transactions and cards — all visible on one screen.
+                        </div>
+                    </div>
+                </div>
+                <div class="sd-feat">
+                    <div class="sd-feat-icon"><i class="bi bi-chat-dots"></i></div>
+                    <div>
+                        <div class="sd-feat-ttl">Instant Support</div>
+                        <div class="sd-feat-desc">New Chat feature — get help and send money without leaving the app.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ 10. CHAT SCREEN ═══════ -->
+    <div style="background:var(--bg-warm)">
+        <div class="sd-wrap rev rv">
+            <div class="sd-img sd-img--chat">
+                <img src="./assets/img/Chat Screen.png" alt="Chat Screen"
+                    onerror="this.parentElement.style.height='360px';this.parentElement.style.background='var(--bg)';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.color='var(--ink-4)';this.parentElement.innerHTML='Chat screen'">
+            </div>
+            <div>
+                <p class="sd-num">08 — Chat Screen</p>
+                <h3 class="sd-h3">Support built right in</h3>
+                <p class="sd-sub">Banking Made Easy: Chat at Your Fingertips</p>
+                <p class="sd-p">Traditional banking support means waiting on hold or visiting a branch. The new Chat
+                    feature eliminates both — real-time help and money transfers, all in conversation.</p>
+                <div class="sd-features">
+                    <div class="sd-feat">
+                        <div class="sd-feat-icon"><i class="bi bi-clock"></i></div>
+                        <div>
+                            <div class="sd-feat-ttl">Real-time Support</div>
+                            <div class="sd-feat-desc">Connect with agents instantly — no hold music, no branch visits.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sd-feat">
+                        <div class="sd-feat-icon"><i class="bi bi-send"></i></div>
+                        <div>
+                            <div class="sd-feat-ttl">Send Money in Chat</div>
+                            <div class="sd-feat-desc">Transfer to friends and family directly from the conversation.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat phones — TRUE FULL WIDTH (no padding, no border-radius) -->
+    <div class="fw-img-full rv">
+        <div class="fw-img-wrap">
+            <img src="./assets/img/Chat phones.png" alt="Chat across themes"
+                onerror="this.parentElement.style.height='200px';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.color='var(--ink-4)';this.parentElement.innerHTML='Chat phones'">
+        </div>
+    </div>
+
+    <!-- ═══════ 11. USER CENTRIC ═══════ -->
+    <div class="sd-wrap rv">
+        <div class="sd-img sd-img--redesign">
+            <img src="./assets/img/user-centric-redesign.png" alt="User-Centric Redesign"
+                onerror="this.parentElement.style.height='360px';this.parentElement.style.background='var(--bg-warm)';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.color='var(--ink-4)';this.parentElement.innerHTML='Redesign detail'">
+        </div>
+        <div>
+            <p class="sd-num">09 — Design System</p>
+            <h3 class="sd-h3">User-centred, top to bottom</h3>
+            <p class="sd-sub">Quick Access · Clear Actions · Effortless Management</p>
+            <p class="sd-p">The revised design puts user experience first with improved <strong>comfort</strong>,
+                <strong>functionality</strong>, and <strong>button clarity</strong>. Every interaction was redesigned
+                with purpose.
+            </p>
+            <div class="sd-features">
+                <div class="sd-feat">
+                    <div class="sd-feat-icon"><i class="bi bi-hand-index-thumb"></i></div>
+                    <div>
+                        <div class="sd-feat-ttl">Accessible Tap Targets</div>
+                        <div class="sd-feat-desc">All interactive elements meet WCAG AA touch target requirements —
+                            44×44pt minimum.</div>
+                    </div>
+                </div>
+                <div class="sd-feat">
+                    <div class="sd-feat-icon"><i class="bi bi-grid-1x2"></i></div>
+                    <div>
+                        <div class="sd-feat-ttl">Clear Visual Hierarchy</div>
+                        <div class="sd-feat-desc">Self-explanatory icons and large transaction amounts reduce cognitive
+                            load for all users.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ 12. THEMES ═══════ -->
+    <section class="sec-full">
+        <div class="sec-full-inner">
+            <div class="sec-lbl rv">10 — Visual Identity</div>
+            <h2 class="sec-h2 rv">Light &amp;<br><em>Dark Theme</em></h2>
+            <p class="themes-stmt rv">The new design features both <em>light and dark themes</em>, incorporating the
+                bank's signature colours for a sleek, modern, and cohesive look across every context.</p>
+            <div class="themes-vis rv">
+                <img src="./assets/img/Theme design.png" alt="Light and Dark Themes"
+                    onerror="this.parentElement.style.height='220px';this.parentElement.style.background='linear-gradient(135deg,#1a1814,#2b2720)';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.color='rgba(255,255,255,.4)';this.parentElement.style.fontSize='14px';this.parentElement.innerHTML='Light &amp; Dark Theme image'">
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ 13. SITE MAP — full-width with image ═══════ -->
+    <section class="sitemap-section">
+        <div class="sitemap-section-header rv">
+            <div class="sec-lbl">11 — Information Architecture</div>
+            <h2 class="sec-h2">App<br><em>Site Map</em></h2>
+            <p class="sec-lead">The app's information architecture was completely redesigned around task frequency — the
+                most common actions accessible in one tap from anywhere via the bottom navigation bar.</p>
+        </div>
+
+        <div class="sitemap-diagram rv">
+            <svg viewBox="0 0 1200 480" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+
+                <defs>
+                    <linearGradient id="gDark" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#2A2620" />
+                        <stop offset="100%" stop-color="#1A1814" />
+                    </linearGradient>
+                    <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#3D6BF5" />
+                        <stop offset="100%" stop-color="#2B5CE6" />
+                    </linearGradient>
+                    <linearGradient id="gSky" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#E8EFFE" />
+                        <stop offset="100%" stop-color="#DCE8FC" />
+                    </linearGradient>
+                    <linearGradient id="gPink" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#F3EFF9" />
+                        <stop offset="100%" stop-color="#EDE8F5" />
+                    </linearGradient>
+                    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(26,24,20,.12)" />
+                    </filter>
+                </defs>
+
+                <!-- Welcome Screen -->
+                <g filter="url(#shadow)">
+                    <rect x="490" y="16" width="160" height="44" rx="10" fill="url(#gDark)" />
+                </g>
+                <text x="570" y="43" text-anchor="middle" fill="#fff" font-size="13" font-weight="600"
+                    letter-spacing="-.2">Welcome Screen</text>
+
+                <!-- Welcome → Home -->
+                <line x1="570" y1="60" x2="570" y2="96" stroke="#C4BDB5" stroke-width="1.5" stroke-linecap="round" />
+                <polygon points="570,100 565,93 575,93" fill="#C4BDB5" />
+
+                <!-- Home Screen -->
+                <g filter="url(#shadow)">
+                    <rect x="490" y="100" width="160" height="44" rx="10" fill="url(#gBlue)" />
+                </g>
+                <text x="570" y="127" text-anchor="middle" fill="#fff" font-size="13" font-weight="600"
+                    letter-spacing="-.2">Home Screen</text>
+
+                <!-- Home → Nav rail -->
+                <line x1="570" y1="144" x2="570" y2="172" stroke="#C4BDB5" stroke-width="1.5" />
+
+                <!-- Navigation rail -->
+                <line x1="72" y1="172" x2="1080" y2="172" stroke="#C4BDB5" stroke-width="1.5" />
+                <text x="570" y="164" text-anchor="middle" fill="#8C857D" font-size="9.5" font-weight="700"
+                    letter-spacing="1.2">NAVIGATION (FOOTER MENU)</text>
+
+                <!-- vertical drops from rail to tabs -->
+                <line x1="72" y1="172" x2="72" y2="196" stroke="#C4BDB5" stroke-width="1.5" />
+                <line x1="215" y1="172" x2="215" y2="196" stroke="#C4BDB5" stroke-width="1.5" />
+                <line x1="358" y1="172" x2="358" y2="196" stroke="#C4BDB5" stroke-width="1.5" />
+                <line x1="570" y1="172" x2="570" y2="196" stroke="#C4BDB5" stroke-width="1.5" />
+                <line x1="782" y1="172" x2="782" y2="196" stroke="#C4BDB5" stroke-width="1.5" />
+                <line x1="924" y1="172" x2="924" y2="196" stroke="#C4BDB5" stroke-width="1.5" />
+                <line x1="1080" y1="172" x2="1080" y2="196" stroke="#C4BDB5" stroke-width="1.5" />
+
+                <!-- 1. Transfer -->
+                <g filter="url(#shadow)">
+                    <rect x="14" y="196" width="116" height="40" rx="8" fill="url(#gBlue)" />
+                </g>
+                <text x="72" y="221" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="600">Transfer</text>
+
+                <!-- 2. Bills -->
+                <g filter="url(#shadow)">
+                    <rect x="157" y="196" width="116" height="40" rx="8" fill="url(#gBlue)" />
+                </g>
+                <text x="215" y="221" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="600">Bills</text>
+
+                <!-- 3. More -->
+                <g filter="url(#shadow)">
+                    <rect x="300" y="196" width="116" height="40" rx="8" fill="url(#gBlue)" />
+                </g>
+                <text x="358" y="221" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="600">More</text>
+
+                <!-- 4. Card Screen -->
+                <g filter="url(#shadow)">
+                    <rect x="504" y="196" width="132" height="40" rx="8" fill="url(#gDark)" />
+                </g>
+                <text x="570" y="221" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="600">Card
+                    Screen</text>
+
+                <!-- 5. History -->
+                <g filter="url(#shadow)">
+                    <rect x="724" y="196" width="116" height="40" rx="8" fill="url(#gBlue)" />
+                </g>
+                <text x="782" y="221" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="600">History</text>
+
+                <!-- 6. Chat -->
+                <g filter="url(#shadow)">
+                    <rect x="866" y="196" width="116" height="40" rx="8" fill="url(#gBlue)" />
+                </g>
+                <text x="924" y="221" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="600">Chat</text>
+
+                <!-- 7. Profile -->
+                <g filter="url(#shadow)">
+                    <rect x="1022" y="196" width="116" height="40" rx="8" fill="url(#gBlue)" />
+                </g>
+                <text x="1080" y="221" text-anchor="middle" fill="#fff" font-size="11.5"
+                    font-weight="600">Profile</text>
+
+                <!-- ── Transfer children ── -->
+                <line x1="72" y1="236" x2="72" y2="280" stroke="#C4BDB5" stroke-width="1.2" />
+                <rect x="14" y="280" width="116" height="36" rx="7" fill="url(#gSky)" />
+                <text x="72" y="298" text-anchor="middle" fill="#2B5CE6" font-size="10"
+                    font-weight="600">Scheduled</text>
+                <text x="72" y="310" text-anchor="middle" fill="#2B5CE6" font-size="10"
+                    font-weight="600">Payments</text>
+                <line x1="72" y1="316" x2="72" y2="356" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
+                <rect x="14" y="356" width="116" height="36" rx="7" fill="url(#gPink)" />
+                <text x="72" y="374" text-anchor="middle" fill="#7856CC" font-size="10">Payment</text>
+                <text x="72" y="386" text-anchor="middle" fill="#7856CC" font-size="10">Confirmation</text>
+
+                <!-- ── Bills children ── -->
+                <line x1="215" y1="236" x2="215" y2="264" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="157" y1="264" x2="273" y2="264" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="157" y1="264" x2="157" y2="280" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="273" y1="264" x2="273" y2="280" stroke="#C4BDB5" stroke-width="1.2" />
+                <rect x="107" y="280" width="100" height="36" rx="7" fill="url(#gSky)" />
+                <text x="157" y="298" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Upcoming
+                    Bills</text>
+                <text x="157" y="310" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/ Pay
+                    Bill</text>
+                <rect x="223" y="280" width="100" height="36" rx="7" fill="url(#gSky)" />
+                <text x="273" y="298" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Bill
+                    History</text>
+                <text x="273" y="310" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/
+                    Reminders</text>
+                <line x1="157" y1="316" x2="157" y2="356" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
+                <rect x="107" y="356" width="100" height="36" rx="7" fill="url(#gPink)" />
+                <text x="157" y="374" text-anchor="middle" fill="#7856CC" font-size="10">Add New Biller</text>
+                <text x="157" y="386" text-anchor="middle" fill="#7856CC" font-size="10">/ Manage Billers</text>
+                <line x1="273" y1="316" x2="273" y2="356" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
+                <rect x="223" y="356" width="100" height="36" rx="7" fill="url(#gPink)" />
+                <text x="273" y="374" text-anchor="middle" fill="#7856CC" font-size="10">Bill Reminders</text>
+                <text x="273" y="386" text-anchor="middle" fill="#7856CC" font-size="10">/ Confirm.</text>
+
+                <!-- ── More children ── -->
+                <line x1="358" y1="236" x2="358" y2="264" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="300" y1="264" x2="416" y2="264" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="300" y1="264" x2="300" y2="280" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="416" y1="264" x2="416" y2="280" stroke="#C4BDB5" stroke-width="1.2" />
+                <rect x="250" y="280" width="100" height="36" rx="7" fill="url(#gSky)" />
+                <text x="300" y="298" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Help &amp;
+                    Support</text>
+                <text x="300" y="310" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/ Help
+                    Articles</text>
+                <rect x="366" y="280" width="100" height="36" rx="7" fill="url(#gSky)" />
+                <text x="416" y="298" text-anchor="middle" fill="#2B5CE6" font-size="10"
+                    font-weight="600">Contact</text>
+                <text x="416" y="310" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">phone &amp;
+                    email</text>
+                <path d="M300 316 Q300 340 924 340 L924 338" fill="none" stroke="#2B5CE6" stroke-width="1.2"
+                    stroke-dasharray="5,3" />
+                <text x="580" y="334" text-anchor="middle" fill="#2B5CE6" font-size="9">→ In-app Chat Support</text>
+                <line x1="300" y1="316" x2="300" y2="356" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
+                <rect x="250" y="356" width="100" height="36" rx="7" fill="url(#gPink)" />
+                <text x="300" y="374" text-anchor="middle" fill="#7856CC" font-size="10">In-app</text>
+                <text x="300" y="386" text-anchor="middle" fill="#7856CC" font-size="10">Chat Support</text>
+
+                <!-- ── Card Screen children ── -->
+                <line x1="570" y1="236" x2="570" y2="264" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="504" y1="264" x2="636" y2="264" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="504" y1="264" x2="504" y2="280" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="570" y1="264" x2="570" y2="280" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="636" y1="264" x2="636" y2="280" stroke="#C4BDB5" stroke-width="1.2" />
+                <rect x="454" y="280" width="100" height="36" rx="7" fill="url(#gSky)" />
+                <text x="504" y="298" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Card
+                    Details</text>
+                <text x="504" y="310" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/ Change
+                    PIN</text>
+                <rect x="520" y="280" width="100" height="36" rx="7" fill="url(#gSky)" />
+                <text x="570" y="298" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">View
+                    Statement</text>
+                <text x="570" y="310" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/
+                    Limits</text>
+                <rect x="586" y="280" width="100" height="36" rx="7" fill="url(#gSky)" />
+                <text x="636" y="298" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Block
+                    Card</text>
+                <text x="636" y="310" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/
+                    Request</text>
+                <line x1="570" y1="316" x2="570" y2="356" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
+                <rect x="520" y="356" width="100" height="36" rx="7" fill="url(#gPink)" />
+                <text x="570" y="374" text-anchor="middle" fill="#7856CC" font-size="10">Payment</text>
+                <text x="570" y="386" text-anchor="middle" fill="#7856CC" font-size="10">Confirmation</text>
+
+                <!-- ── History children ── -->
+                <line x1="782" y1="236" x2="782" y2="280" stroke="#C4BDB5" stroke-width="1.2" />
+                <rect x="724" y="280" width="116" height="36" rx="7" fill="url(#gSky)" />
+                <text x="782" y="298" text-anchor="middle" fill="#2B5CE6" font-size="10"
+                    font-weight="600">Transaction</text>
+                <text x="782" y="310" text-anchor="middle" fill="#2B5CE6" font-size="10"
+                    font-weight="600">History</text>
+                <line x1="782" y1="316" x2="782" y2="356" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
+                <rect x="724" y="356" width="116" height="36" rx="7" fill="url(#gPink)" />
+                <text x="782" y="374" text-anchor="middle" fill="#7856CC" font-size="10">Transaction</text>
+                <text x="782" y="386" text-anchor="middle" fill="#7856CC" font-size="10">Detail View</text>
+
+                <!-- ── Chat children ── -->
+                <line x1="924" y1="236" x2="924" y2="264" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="866" y1="264" x2="982" y2="264" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="866" y1="264" x2="866" y2="280" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="982" y1="264" x2="982" y2="280" stroke="#C4BDB5" stroke-width="1.2" />
+                <rect x="816" y="280" width="100" height="36" rx="7" fill="url(#gSky)" />
+                <text x="866" y="298" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Chat
+                    with</text>
+                <text x="866" y="310" text-anchor="middle" fill="#2B5CE6" font-size="10"
+                    font-weight="600">Support</text>
+                <rect x="932" y="280" width="100" height="36" rx="7" fill="url(#gSky)" />
+                <text x="982" y="298" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">New
+                    Message</text>
+                <text x="982" y="310" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/ Send
+                    Money</text>
+                <line x1="924" y1="316" x2="924" y2="356" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
+                <rect x="874" y="356" width="100" height="36" rx="7" fill="url(#gPink)" />
+                <text x="924" y="374" text-anchor="middle" fill="#7856CC" font-size="10">In-chat</text>
+                <text x="924" y="386" text-anchor="middle" fill="#7856CC" font-size="10">Money Transfer</text>
+
+                <!-- ── Profile children ── -->
+                <line x1="1080" y1="236" x2="1080" y2="264" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="1022" y1="264" x2="1138" y2="264" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="1022" y1="264" x2="1022" y2="280" stroke="#C4BDB5" stroke-width="1.2" />
+                <line x1="1138" y1="264" x2="1138" y2="280" stroke="#C4BDB5" stroke-width="1.2" />
+                <rect x="972" y="280" width="100" height="36" rx="7" fill="url(#gSky)" />
+                <text x="1022" y="298" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Login /
+                    Signup</text>
+                <text x="1022" y="310" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/ Update
+                    Info</text>
+                <rect x="1088" y="280" width="100" height="36" rx="7" fill="url(#gSky)" />
+                <text x="1138" y="298" text-anchor="middle" fill="#2B5CE6" font-size="10"
+                    font-weight="600">Security</text>
+                <text x="1138" y="310" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/
+                    Notifications</text>
+                <line x1="1080" y1="316" x2="1080" y2="356" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
+                <rect x="1030" y="356" width="100" height="36" rx="7" fill="url(#gPink)" />
+                <text x="1080" y="374" text-anchor="middle" fill="#7856CC" font-size="10">Change Password</text>
+                <text x="1080" y="386" text-anchor="middle" fill="#7856CC" font-size="10">/ Linked Accounts</text>
+
+                <!-- LEGEND -->
+                <g transform="translate(14,440)">
+                    <rect width="14" height="14" rx="4" fill="url(#gDark)" />
+                    <text x="20" y="11" fill="#8C857D" font-size="10">Entry / Key screen</text>
+                    <rect x="150" width="14" height="14" rx="4" fill="url(#gBlue)" />
+                    <text x="170" y="11" fill="#8C857D" font-size="10">Nav tab</text>
+                    <rect x="240" width="14" height="14" rx="4" fill="url(#gSky)" />
+                    <text x="260" y="11" fill="#8C857D" font-size="10">Feature page</text>
+                    <rect x="370" width="14" height="14" rx="4" fill="url(#gPink)" />
+                    <text x="390" y="11" fill="#8C857D" font-size="10">Sub-feature</text>
+                    <line x1="480" y1="7" x2="510" y2="7" stroke="#C4BDB5" stroke-width="1.5" stroke-dasharray="4,3" />
+                    <text x="516" y="11" fill="#8C857D" font-size="10">Optional / deeper flow</text>
+                    <line x1="680" y1="7" x2="710" y2="7" stroke="#2B5CE6" stroke-width="1.5" stroke-dasharray="4,3" />
+                    <text x="716" y="11" fill="#8C857D" font-size="10">Cross-screen link</text>
+                </g>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ═══════ 14. UI KIT ═══════ -->
+    <section class="sec-full">
+        <div class="sec-full-inner">
+            <div class="sec-lbl rv">12 — Design System</div>
+            <h2 class="sec-h2 rv">UI<br><em>Kit</em></h2>
+            <p class="sec-lead rv">A full component library was built to ensure consistency across every screen —
+                colours, typography, spacing, and interactive states all documented.</p>
+            <div class="uikit-vis rv">
+                <img src="./assets/img/UI Kit.png" alt="UI Kit"
+                    onerror="this.parentElement.style.height='220px';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.color='var(--ink-4)';this.parentElement.innerHTML='UI Kit image'">
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ OUTCOME ═══════ -->
+    <section class="outcome rv">
+        <div class="outcome-inner">
+            <p class="out-lbl">Outcome</p>
+            <h2 class="out-h2">A complete redesign. From research to prototype.</h2>
+            <p class="out-p">This project demonstrates how rigorous UX methodology — competitor research, user surveys,
+                personas, journey mapping, sketches and iterative design — results in an experience that works for every
+                generation of user.</p>
+            <div class="out-stats">
+                <div>
+                    <div class="stat-n">3<span>×</span></div>
+                    <div class="stat-lbl">User Groups Researched</div>
+                </div>
+                <div>
+                    <div class="stat-n">8</div>
+                    <div class="stat-lbl">Process Stages</div>
+                </div>
+                <div>
+                    <div class="stat-n">2<span></span></div>
+                    <div class="stat-lbl">Complete Themes</div>
+                </div>
+                <div>
+                    <div class="stat-n">30<span>+</span></div>
+                    <div class="stat-lbl">Screens Designed</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer class="yanas-footer" id="contact">
+        <div class="yanas-bg-elements">
+            <div class="yanas-bg-element"><i class="bi bi-code-slash"></i></div>
+            <div class="yanas-bg-element"><i class="bi bi-palette"></i></div>
+            <div class="yanas-bg-element"><i class="bi bi-layers"></i></div>
+            <div class="yanas-bg-element"><i class="bi bi-terminal"></i></div>
+            <div class="yanas-bg-element"><i class="bi bi-vector-pen"></i></div>
+            <div class="yanas-bg-element"><i class="bi bi-grid-3x3"></i></div>
+            <div class="yanas-bg-element"><i class="bi bi-bezier"></i></div>
+            <div class="yanas-bg-element"><i class="bi bi-cpu"></i></div>
+        </div>
+
+        <div class="yanas-footer_wrapper">
+            <div class="yanas-footer_content">
+                <div class="yanas-footer_content-left">
+                    <h3 class="yanas-title-140">Let's connect</h3>
+                    <div class="footer-spacer">
+                        <div class="yanas-text-32">Ready to bring your ideas to life through design &amp; code</div>
+                    </div>
+                    <a href="mailto:hello@yanaharcourt.com" class="yanas-button">
+                        <span>Send an e-mail</span>
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+                </div>
+
+                <div class="yanas-footer_content-right">
+                    <div class="yanas-footer-form">
+                        <form id="yanasContactForm" action="https://formspree.io/f/xnnqvwab" method="POST"
+                            class="yanas-form">
+                            <div class="yanas-status-message" id="yanasStatusMessage"></div>
+                            <div>
+                                <div class="yanas-text-40">Contact info*</div>
+                                <div class="yanas-form-row">
+                                    <input class="yanas-footer-field" name="name" placeholder="Your name*" type="text"
+                                        required>
+                                    <input class="yanas-footer-field" name="email" placeholder="Your e-mail*"
+                                        type="email" required>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="yanas-text-40">You are interested in*</div>
+                                <div class="yanas-services-grid">
+                                    <div class="yanas-form-button_field" data-service="ux-ui-design">UX/UI Design</div>
+                                    <div class="yanas-form-button_field" data-service="web-development">Web Development
+                                    </div>
+                                </div>
+                                <input type="hidden" name="services" id="selectedServices">
+                            </div>
+                            <div>
+                                <div class="yanas-text-40">Your budget in EUR*</div>
+                                <div class="yanas-budget-grid">
+                                    <div class="yanas-form-button_field" data-budget="<5k">&lt;5K</div>
+                                    <div class="yanas-form-button_field" data-budget="5-10k">5–10K</div>
+                                    <div class="yanas-form-button_field" data-budget="10-20k">10–20K</div>
+                                    <div class="yanas-form-button_field" data-budget=">20k">&gt;20K</div>
+                                    <div class="yanas-form-button_field" data-budget="i-dont-know">I don't know yet
+                                    </div>
+                                </div>
+                                <input type="hidden" name="budget" id="selectedBudget">
+                            </div>
+                            <div>
+                                <textarea name="message" class="yanas-message-field"
+                                    placeholder="Tell me about your project..."></textarea>
+                            </div>
+                            <button type="submit" class="yanas-form_button">Start a journey</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="yanas-footer_links">
+                <div class="yanas-footer_links-left">
+                    <div class="yanas-text-36">Keep in touch</div>
+                    <div class="yanas-text-24"><a href="mailto:hello@yanaharcourt.com">hello@yanaharcourt.com</a></div>
+                </div>
+                <div class="yanas-footer_links-right">
+                    <div class="yanas-footer_links-right-item">
+                        <h5>Follow</h5>
+                        <div class="yanas-footer_links-right-item-links">
+                            <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank"
+                                class="yanas-rolling-text"><span class="yanas-text-block">LinkedIn</span><span
+                                    class="yanas-text-block">LinkedIn</span></a>
+                            <a href="https://www.behance.net/yana_harcourt" target="_blank"
+                                class="yanas-rolling-text"><span class="yanas-text-block">Behance</span><span
+                                    class="yanas-text-block">Behance</span></a>
+                            <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank"
+                                class="yanas-rolling-text"><span class="yanas-text-block">Instagram</span><span
+                                    class="yanas-text-block">Instagram</span></a>
+                            <a href="https://github.com/yanaharcourt" target="_blank" class="yanas-rolling-text"><span
+                                    class="yanas-text-block">GitHub</span><span
+                                    class="yanas-text-block">GitHub</span></a>
+                        </div>
+                    </div>
+                    <div class="yanas-footer_links-right-item">
+                        <h5>Navigate</h5>
+                        <div class="yanas-footer_links-right-item-links">
+                            <a href="index.html" class="yanas-rolling-text"><span
+                                    class="yanas-text-block">Home</span><span class="yanas-text-block">Home</span></a>
+                            <a href="index.html#about" class="yanas-rolling-text"><span
+                                    class="yanas-text-block">About</span><span class="yanas-text-block">About</span></a>
+                            <a href="index.html#portfolio" class="yanas-rolling-text"><span
+                                    class="yanas-text-block">Portfolio</span><span
+                                    class="yanas-text-block">Portfolio</span></a>
+                            <a href="#contact" class="yanas-rolling-text"><span
+                                    class="yanas-text-block">Contact</span><span
+                                    class="yanas-text-block">Contact</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="yanas-copyright">© 2024 Yana Harcourt — All Rights Reserved</div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" id="scroll-top" class="scroll-top"><i class="bi bi-arrow-up-short"></i></a>
+
+    <script>
+        /* Cursor */
+        const cur = document.getElementById('cur'), ctr = document.getElementById('ctr');
+        let mx = innerWidth / 2, my = innerHeight / 2, tx = mx, ty = my;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY });
+        (function t() {
+            cur.style.left = (mx - 4) + 'px'; cur.style.top = (my - 4) + 'px';
+            tx += (mx - tx) * .13; ty += (my - ty) * .13;
+            ctr.style.left = (tx - 15) + 'px'; ctr.style.top = (ty - 15) + 'px';
+            requestAnimationFrame(t)
+        })();
+        document.addEventListener('mousedown', () => cur.style.transform = 'scale(2)');
+        document.addEventListener('mouseup', () => cur.style.transform = '');
+
+        /* Scroll reveal */
+        const io = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('in') }), { threshold: .06 });
+        document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+        /* Scroll top */
+        const st = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => scrollY > 300 ? st.classList.add('active') : st.classList.remove('active'));
+        st.addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }) });
+
+        /* Form toggles */
+        document.querySelectorAll('.yanas-form-button_field').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const isService = !!this.dataset.service;
+                const grid = isService ? '.yanas-services-grid' : '.yanas-budget-grid';
+                document.querySelectorAll(grid + ' .yanas-form-button_field').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(isService ? 'selectedServices' : 'selectedBudget').value = this.dataset[isService ? 'service' : 'budget'];
+            });
+        });
+
+        /* Form submit */
+        const form = document.getElementById('yanasContactForm'), msg = document.getElementById('yanasStatusMessage');
+        if (form) {
+            form.addEventListener('submit', async e => {
+                e.preventDefault();
+                const btn = form.querySelector('.yanas-form_button');
+                btn.textContent = 'Sending...'; btn.disabled = true;
+                msg.style.display = 'block'; msg.className = 'yanas-status-message'; msg.textContent = 'Sending...';
+                try {
+                    const r = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+                    if (r.ok) {
+                        msg.className = 'yanas-status-message yanas-success';
+                        msg.textContent = '✓ Message sent! I\'ll be in touch soon.';
+                        form.reset();
+                        document.querySelectorAll('.yanas-form-button_field').forEach(b => b.classList.remove('active'));
+                    } else {
+                        throw new Error();
+                    }
+                } catch {
+                    msg.className = 'yanas-status-message yanas-error';
+                    msg.textContent = '✗ Something went wrong. Please try again.';
+                } finally {
+                    btn.textContent = 'Start a journey'; btn.disabled = false;
+                }
+            });
+        }
+
+        /* Add extra CSS for dashed orb-5 and dim labels */
+        const style = document.createElement('style');
+        style.textContent = `
+            .orb-dashed { border-style: dashed !important; opacity: .55; }
+            .orb-label--dim { color: var(--ink-3) !important; }
+            .planet-desc--dim { color: var(--ink-4) !important; }
+            .planet-desc--dim strong { color: var(--ink-3) !important; }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+
+</html>
