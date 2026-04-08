@@ -1,7 +1,6 @@
 /* ═══════════════════════════════════════════════════
-   caixa-portfolio.css
-   All styles for caixa-portfolio-details.html
-   ═══════════════════════════════════════════════════ */
+caixa-portfolio.css
+═══════════════════════════════════════════════════ */
 
 *,
 *::before,
@@ -117,8 +116,8 @@ body {
 }
 
 /* ══════════════
-   BREADCRUMB
-   ══════════════ */
+BREADCRUMB
+══════════════ */
 .bc-nav {
     position: sticky;
     top: 0;
@@ -203,8 +202,8 @@ body {
 }
 
 /* ══════════════
-   HERO
-   ══════════════ */
+HERO
+══════════════ */
 .hero {
     min-height: 100vh;
     display: grid;
@@ -1032,7 +1031,6 @@ body {
     border-radius: var(--r-xl);
     overflow: hidden;
     border: 1px solid var(--border);
-    background: var(--white);
 }
 
 .reviews-img-wrap img {
@@ -1628,8 +1626,8 @@ body {
 }
 
 /* ══════════════
-   UI KIT
-   ══════════════ */
+UI KIT
+══════════════ */
 .uikit-vis {
     margin-top: 56px;
     border-radius: var(--r-xl);
@@ -1644,8 +1642,8 @@ body {
 }
 
 /* ══════════════
-   SITE MAP — SVG diagram (full-width rework)
-   ══════════════ */
+SITE MAP — SVG diagram
+══════════════ */
 .sitemap-section {
     padding: 100px 0;
     background: var(--bg);
