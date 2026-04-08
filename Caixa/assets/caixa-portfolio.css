@@ -1543,8 +1543,6 @@ HERO
 .sk-img-wrap {
     border-radius: var(--r-xl);
     overflow: hidden;
-    border: 1px solid var(--border);
-    background: var(--white)
 }
 
 .sk-img-wrap img {
