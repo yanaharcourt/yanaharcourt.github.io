@@ -1,76 +1,50 @@
-/* Fonts */
 :root {
   --default-font: "Raleway", sans-serif, "Open Sans", sans-serif;
   --heading-font: "Raleway", sans-serif;
   --nav-font: "Raleway", sans-serif;
 }
 
-/* Global Colors - Unified Tech Color Scheme */
 :root {
-  --background-color: #ffffff;
-  /* Clean white background */
-  --default-color: #4a5568;
-  /* Professional dark gray for text */
-  --heading-color: #2d3748;
-  /* Darker gray for headings */
-  --accent-color: #6366f1;
-  /* Primary tech purple */
-  --accent-secondary: #8b5cf6;
-  /* Secondary purple */
+  --background-color: #ffffff; 
+  --default-color: #4a5568; 
+  --heading-color: #2d3748; 
+  --accent-color: #6366f1; 
+  --accent-secondary: #8b5cf6; 
   --accent-tertiary: #3b82f6;
-  /* Tech blue for variety */
-  --contrast-color: #ffffff;
-  /* White for contrast */
-  --success-color: #10b981;
-  /* Green for success states */
-  --warning-color: #f59e0b;
-  /* Amber for warnings */
-  --error-color: #ef4444;
-  /* Red for errors */
+  --contrast-color: #ffffff; 
+  --success-color: #10b981; 
+  --warning-color: #f59e0b; 
+  --error-color: #ef4444; 
 }
 
-/* Background variations */
 :root {
-  --bg-light: #f8fafc;
-  /* Very light gray */
-  --bg-section: #f1f5f9;
-  /* Light section background */
-  --bg-card: #ffffff;
-  /* Card background */
-  --bg-hover: rgba(99, 102, 241, 0.05);
-  /* Subtle hover background */
+  --bg-light: #f8fafc; 
+  --bg-section: #f1f5f9; 
+  --bg-card: #ffffff; 
+  --bg-hover: rgba(99, 102, 241, 0.05); 
 }
 
-/* Text variations */
 :root {
-  --text-primary: #1e293b;
-  /* Primary text */
-  --text-secondary: #64748b;
-  /* Secondary text */
-  --text-muted: #94a3b8;
-  /* Muted text */
-  --text-light: #cbd5e1;
-  /* Light text */
+  --text-primary: #1e293b; 
+  --text-secondary: #64748b; 
+  --text-muted: #94a3b8; 
+  --text-light: #cbd5e1; 
 }
 
-/* Nav Menu Colors - Updated for tech theme */
 :root {
   --nav-color: #475569;
   --nav-hover-color: #6366f1;
-  /* Primary tech purple */
   --nav-dropdown-background-color: #ffffff;
   --nav-dropdown-color: #475569;
   --nav-dropdown-hover-color: #6366f1;
 }
 
-/* Template Custom Colors */
 :root {
   --alt-background-color: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   --gradient-primary: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
   --gradient-secondary: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
 }
 
-/* Smooth scroll */
 :root {
   scroll-behavior: smooth;
 }
@@ -415,55 +389,6 @@ h6 {
   }
 }
 
-/*--------------------------------------------------------------
-# Global Footer
---------------------------------------------------------------*/
-/* .footer {
-  background: var(--bg-section);
-  padding: 30px 0;
-  color: var(--text-secondary);
-  font-size: 14px;
-  text-align: center;
-}
-
-.footer .copyright p {
-  margin-bottom: 0;
-}
-
-.footer .social-links {
-  margin-top: 20px;
-}
-
-.footer .social-links a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  font-size: 16px;
-  color: var(--accent-color);
-  margin: 0 5px;
-  transition: 0.3s;
-}
-
-.footer .social-links a:hover {
-  color: var(--contrast-color);
-  background: var(--gradient-primary);
-  border-color: var(--accent-color);
-  transform: translateY(-2px);
-}
-
-.footer .credits {
-  margin-top: 10px;
-  font-size: 13px;
-  text-align: center;
-}
-
-.footer .credits a {
-  color: var(--accent-color);
-} */
 /*--------------------------------------------------------------
 # Global Footer
 --------------------------------------------------------------*/
