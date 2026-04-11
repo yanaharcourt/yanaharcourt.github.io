@@ -659,7 +659,7 @@
         </div>
     </div>
 
-    <!-- ═══════ 11. SITE MAP — full-width with image ═══════ -->
+    <!-- ═══════ 11. SITE MAP ═══════ -->
     <section class="sitemap-section">
         <div class="sitemap-section-header rv">
             <div class="sec-lbl">11 — Information Architecture</div>
@@ -667,236 +667,394 @@
             <p class="sec-lead">The app's information architecture was completely redesigned around task frequency — the
                 most common actions accessible in one tap from anywhere via the bottom navigation bar.</p>
         </div>
- 
+
         <div class="sitemap-diagram rv">
-            <svg viewBox="0 0 1400 540" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
- 
+            <div class="sm-scroll-hint">← Scroll to explore →</div>
+            <svg viewBox="0 0 860 1310" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+
                 <defs>
                     <linearGradient id="gDark" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stop-color="#2A2620" />
-                        <stop offset="100%" stop-color="#1A1814" />
+                        <stop offset="0%" stop-color="#2A2620"/>
+                        <stop offset="100%" stop-color="#1A1814"/>
                     </linearGradient>
                     <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stop-color="#3D6BF5" />
-                        <stop offset="100%" stop-color="#2B5CE6" />
+                        <stop offset="0%" stop-color="#3D6BF5"/>
+                        <stop offset="100%" stop-color="#2B5CE6"/>
                     </linearGradient>
                     <linearGradient id="gSky" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stop-color="#E8EFFE" />
-                        <stop offset="100%" stop-color="#DCE8FC" />
+                        <stop offset="0%" stop-color="#EEF2FD"/>
+                        <stop offset="100%" stop-color="#E0E8FB"/>
                     </linearGradient>
                     <linearGradient id="gPink" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stop-color="#F3EFF9" />
-                        <stop offset="100%" stop-color="#EDE8F5" />
+                        <stop offset="0%" stop-color="#F2EEFA"/>
+                        <stop offset="100%" stop-color="#E8E0F5"/>
                     </linearGradient>
-                    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(26,24,20,.12)" />
+                    <filter id="sh">
+                        <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="rgba(26,24,20,.08)"/>
                     </filter>
                 </defs>
- 
-                <!-- ══ Welcome Screen (center=700) ══ -->
-                <g filter="url(#shadow)">
-                    <rect x="620" y="16" width="160" height="44" rx="10" fill="url(#gDark)" />
+
+                <!-- ══════════════════════════════
+                    COLUMN X positions:
+                    Col 1 (Entry): x=20  w=120  center=80
+                    Col 2 (Nav):   x=180 w=120  center=240
+                    Col 3 (Page):  x=340 w=120  center=400
+                    Col 4 (Sub):   x=500 w=130  center=565
+                    Gap col1→2: 60px  col2→3: 60px  col3→4: 40px
+                ══════════════════════════════ -->
+
+                <!-- ── Welcome Screen ── -->
+                <g filter="url(#sh)">
+                    <rect x="20" y="20" width="120" height="36" rx="6" fill="url(#gDark)"/>
                 </g>
-                <text x="700" y="43" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Welcome Screen</text>
- 
-                <!-- Welcome → Home arrow -->
-                <line x1="700" y1="60" x2="700" y2="95" stroke="#C4BDB5" stroke-width="1.5" stroke-linecap="round" />
-                <polygon points="700,100 695,93 705,93" fill="#C4BDB5" />
- 
-                <!-- ══ Home Screen (center=700) ══ -->
-                <g filter="url(#shadow)">
-                    <rect x="620" y="100" width="160" height="44" rx="10" fill="url(#gBlue)" />
+                <text x="80" y="43" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">Welcome Screen</text>
+
+                <!-- Welcome → Home -->
+                <line x1="80" y1="56" x2="80" y2="76" stroke="#C4BDB5" stroke-width="1.2"/>
+                <polygon points="80,81 75.5,74 84.5,74" fill="#C4BDB5"/>
+
+                <!-- ── Home Screen ── -->
+                <g filter="url(#sh)">
+                    <rect x="20" y="81" width="120" height="36" rx="6" fill="url(#gBlue)"/>
                 </g>
-                <text x="700" y="127" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Home Screen</text>
- 
-                <!-- Home → nav rail -->
-                <line x1="700" y1="144" x2="700" y2="172" stroke="#C4BDB5" stroke-width="1.5" />
- 
-                <!-- ══ Navigation rail ══ -->
-                <line x1="100" y1="172" x2="1300" y2="172" stroke="#C4BDB5" stroke-width="1.5" />
-                <text x="700" y="163" text-anchor="middle" fill="#8C857D" font-size="9.5" font-weight="700" letter-spacing="1.2">NAVIGATION (FOOTER MENU)</text>
- 
-                <!-- Verticals from rail to each tab -->
-                <line x1="100"  y1="172" x2="100"  y2="196" stroke="#C4BDB5" stroke-width="1.5" />
-                <line x1="300"  y1="172" x2="300"  y2="196" stroke="#C4BDB5" stroke-width="1.5" />
-                <line x1="500"  y1="172" x2="500"  y2="196" stroke="#C4BDB5" stroke-width="1.5" />
-                <line x1="700"  y1="172" x2="700"  y2="196" stroke="#C4BDB5" stroke-width="1.5" />
-                <line x1="900"  y1="172" x2="900"  y2="196" stroke="#C4BDB5" stroke-width="1.5" />
-                <line x1="1100" y1="172" x2="1100" y2="196" stroke="#C4BDB5" stroke-width="1.5" />
-                <line x1="1300" y1="172" x2="1300" y2="196" stroke="#C4BDB5" stroke-width="1.5" />
- 
-                <!-- ══ Tab 1: Transfer (center=100) ══ -->
-                <g filter="url(#shadow)">
-                    <rect x="20" y="196" width="160" height="40" rx="8" fill="url(#gBlue)" />
+                <text x="80" y="104" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">Home Screen</text>
+
+                <!-- Home → Navigation -->
+                <line x1="80" y1="117" x2="80" y2="137" stroke="#C4BDB5" stroke-width="1.2"/>
+                <polygon points="80,142 75.5,135 84.5,135" fill="#C4BDB5"/>
+
+                <!-- ── Navigation block ── -->
+                <g filter="url(#sh)">
+                    <rect x="20" y="142" width="120" height="44" rx="6" fill="url(#gBlue)"/>
                 </g>
-                <text x="100" y="221" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Transfer</text>
- 
-                <!-- ══ Tab 2: Bills (center=300) ══ -->
-                <g filter="url(#shadow)">
-                    <rect x="220" y="196" width="160" height="40" rx="8" fill="url(#gBlue)" />
+                <text x="80" y="161" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">Navigation</text>
+                <text x="80" y="177" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="9">(footer menu)</text>
+
+                <!-- Vertical rail from nav block down -->
+                <line x1="80" y1="186" x2="80" y2="1218" stroke="#C4BDB5" stroke-width="1.2"/>
+
+                <!-- ══════════════════════════════
+                    BRANCH ROW Y centers:
+                    Transfer:         y=215
+                    Bills:            y=310  (spans ~195 height of features)
+                    More:             y=570  
+                    Card Screen:      y=740  
+                    History:          y=920  
+                    Chat:             y=1080 
+                    Profile:          y=1160 
+                ══════════════════════════════ -->
+
+                <!-- ═══ TRANSFER  y=215 ═══ -->
+                <line x1="80" y1="215" x2="180" y2="215" stroke="#C4BDB5" stroke-width="1.2"/>
+                <!-- Nav tab pill -->
+                <g filter="url(#sh)">
+                    <rect x="180" y="199" width="120" height="32" rx="16" fill="url(#gBlue)"/>
                 </g>
-                <text x="300" y="221" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Bills</text>
- 
-                <!-- ══ Tab 3: More (center=500) ══ -->
-                <g filter="url(#shadow)">
-                    <rect x="420" y="196" width="160" height="40" rx="8" fill="url(#gBlue)" />
+                <text x="240" y="220" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">Transfer</text>
+
+                <!-- Transfer → feature: Scheduled Payments -->
+                <line x1="300" y1="215" x2="340" y2="215" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)">
+                    <rect x="340" y="199" width="120" height="32" rx="5" fill="url(#gSky)"/>
                 </g>
-                <text x="500" y="221" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">More</text>
- 
-                <!-- ══ Tab 4: Card Screen (center=700) ══ -->
-                <g filter="url(#shadow)">
-                    <rect x="620" y="196" width="160" height="40" rx="8" fill="url(#gDark)" />
+                <text x="400" y="213" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Scheduled</text>
+                <text x="400" y="224" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Payments</text>
+
+                <!-- Scheduled → Payment Confirmation (sub) -->
+                <line x1="460" y1="215" x2="500" y2="215" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)">
+                    <rect x="500" y="199" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/>
                 </g>
-                <text x="700" y="221" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Card Screen</text>
- 
-                <!-- ══ Tab 5: History (center=900) ══ -->
-                <g filter="url(#shadow)">
-                    <rect x="820" y="196" width="160" height="40" rx="8" fill="url(#gBlue)" />
+                <text x="565" y="213" text-anchor="middle" fill="#7856CC" font-size="9">Payment</text>
+                <text x="565" y="224" text-anchor="middle" fill="#7856CC" font-size="9">Confirmation</text>
+
+
+                <!-- ═══ BILLS  center y=370, features span y=270..470 ═══ -->
+                <line x1="80" y1="370" x2="180" y2="370" stroke="#C4BDB5" stroke-width="1.2"/>
+                <g filter="url(#sh)">
+                    <rect x="180" y="354" width="120" height="32" rx="16" fill="url(#gBlue)"/>
                 </g>
-                <text x="900" y="221" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">History</text>
- 
-                <!-- ══ Tab 6: Chat (center=1100) ══ -->
-                <g filter="url(#shadow)">
-                    <rect x="1020" y="196" width="160" height="40" rx="8" fill="url(#gBlue)" />
+                <text x="240" y="375" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">Bills</text>
+
+                <!-- Bills vertical fork connector -->
+                <line x1="300" y1="370" x2="340" y2="370" stroke="#C4BDB5" stroke-width="1"/>
+                <line x1="340" y1="271" x2="340" y2="471" stroke="#C4BDB5" stroke-width="1"/>
+
+                <!-- Feature: Upcoming Bills y=271 -->
+                <line x1="340" y1="271" x2="360" y2="271" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="255" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="269" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Upcoming</text>
+                <text x="420" y="280" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Bills</text>
+                <!-- sub -->
+                <line x1="480" y1="271" x2="500" y2="271" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="255" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="269" text-anchor="middle" fill="#7856CC" font-size="9">Manage</text>
+                <text x="565" y="280" text-anchor="middle" fill="#7856CC" font-size="9">Billers</text>
+
+                <!-- Feature: Pay Bill y=321 -->
+                <line x1="340" y1="321" x2="360" y2="321" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="305" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="325" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Pay Bill</text>
+                <!-- sub -->
+                <line x1="480" y1="321" x2="500" y2="321" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="305" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="319" text-anchor="middle" fill="#7856CC" font-size="9">Add New</text>
+                <text x="565" y="330" text-anchor="middle" fill="#7856CC" font-size="9">Biller</text>
+
+                <!-- Feature: Bill History y=371 -->
+                <line x1="340" y1="371" x2="360" y2="371" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="355" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="375" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Bill History</text>
+                <!-- sub -->
+                <line x1="480" y1="371" x2="500" y2="371" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="355" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="369" text-anchor="middle" fill="#7856CC" font-size="9">Bill</text>
+                <text x="565" y="380" text-anchor="middle" fill="#7856CC" font-size="9">Reminders</text>
+
+                <!-- Feature: Bill Reminders y=421 -->
+                <line x1="340" y1="421" x2="360" y2="421" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="405" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="420" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Bill</text>
+                <text x="420" y="431" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Reminders</text>
+                <!-- sub -->
+                <line x1="480" y1="421" x2="500" y2="421" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="405" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="419" text-anchor="middle" fill="#7856CC" font-size="9">Payment</text>
+                <text x="565" y="430" text-anchor="middle" fill="#7856CC" font-size="9">Confirmation</text>
+
+                <!-- Feature: Add New Biller y=471 -->
+                <line x1="340" y1="471" x2="360" y2="471" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="455" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="469" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Add New</text>
+                <text x="420" y="480" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Biller</text>
+
+
+                <!-- ═══ MORE  center y=560, features y=510..610 ═══ -->
+                <line x1="80" y1="560" x2="180" y2="560" stroke="#C4BDB5" stroke-width="1.2"/>
+                <g filter="url(#sh)">
+                    <rect x="180" y="544" width="120" height="32" rx="16" fill="url(#gBlue)"/>
                 </g>
-                <text x="1100" y="221" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Chat</text>
- 
-                <!-- ══ Tab 7: Profile (center=1300) ══ -->
-                <g filter="url(#shadow)">
-                    <rect x="1220" y="196" width="160" height="40" rx="8" fill="url(#gBlue)" />
+                <text x="240" y="565" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">More</text>
+
+                <line x1="300" y1="560" x2="340" y2="560" stroke="#C4BDB5" stroke-width="1"/>
+                <line x1="340" y1="511" x2="340" y2="611" stroke="#C4BDB5" stroke-width="1"/>
+
+                <!-- Scheduled Payments (More) y=511 -->
+                <line x1="340" y1="511" x2="360" y2="511" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="495" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="509" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Scheduled</text>
+                <text x="420" y="520" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Payments</text>
+
+                <!-- Help & Support y=561 -->
+                <line x1="340" y1="561" x2="360" y2="561" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="545" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="559" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Help &amp;</text>
+                <text x="420" y="570" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Support</text>
+                <!-- sub: Help Articles -->
+                <line x1="480" y1="561" x2="500" y2="561" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="545" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="559" text-anchor="middle" fill="#7856CC" font-size="9">Help Articles</text>
+
+                <!-- Contact y=611 -->
+                <line x1="340" y1="611" x2="360" y2="611" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="595" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="609" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Contact</text>
+                <!-- sub: In-app Chat Support -->
+                <line x1="480" y1="611" x2="500" y2="611" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="595" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="609" text-anchor="middle" fill="#7856CC" font-size="9">In-app Chat</text>
+                <text x="565" y="620" text-anchor="middle" fill="#7856CC" font-size="9">Support</text>
+
+
+                <!-- ═══ CARD SCREEN  center y=730, features y=666..794 ═══ -->
+                <line x1="80" y1="730" x2="180" y2="730" stroke="#C4BDB5" stroke-width="1.2"/>
+                <g filter="url(#sh)">
+                    <rect x="180" y="714" width="120" height="32" rx="16" fill="url(#gDark)"/>
                 </g>
-                <text x="1300" y="221" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Profile</text>
- 
- 
-                <!-- ════ TRANSFER children (center=100) ════ -->
-                <line x1="100" y1="236" x2="100" y2="282" stroke="#C4BDB5" stroke-width="1.2" />
-                <rect x="20" y="282" width="160" height="36" rx="7" fill="url(#gSky)" />
-                <text x="100" y="300" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Scheduled</text>
-                <text x="100" y="313" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Payments</text>
-                <line x1="100" y1="318" x2="100" y2="360" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
-                <rect x="20" y="360" width="160" height="36" rx="7" fill="url(#gPink)" />
-                <text x="100" y="378" text-anchor="middle" fill="#7856CC" font-size="10">Payment</text>
-                <text x="100" y="391" text-anchor="middle" fill="#7856CC" font-size="10">Confirmation</text>
- 
- 
-                <!-- ════ BILLS children (centers 220, 380) ════ -->
-                <line x1="300" y1="236" x2="300" y2="260" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="220" y1="260" x2="380" y2="260" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="220" y1="260" x2="220" y2="282" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="380" y1="260" x2="380" y2="282" stroke="#C4BDB5" stroke-width="1.2" />
-                <rect x="152" y="282" width="136" height="36" rx="7" fill="url(#gSky)" />
-                <text x="220" y="300" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Upcoming Bills</text>
-                <text x="220" y="313" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/ Pay Bill</text>
-                <rect x="312" y="282" width="136" height="36" rx="7" fill="url(#gSky)" />
-                <text x="380" y="300" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Bill History</text>
-                <text x="380" y="313" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/ Reminders</text>
-                <line x1="220" y1="318" x2="220" y2="360" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
-                <rect x="152" y="360" width="136" height="36" rx="7" fill="url(#gPink)" />
-                <text x="220" y="378" text-anchor="middle" fill="#7856CC" font-size="10">Add New Biller</text>
-                <text x="220" y="391" text-anchor="middle" fill="#7856CC" font-size="10">/ Manage Billers</text>
-                <line x1="380" y1="318" x2="380" y2="360" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
-                <rect x="312" y="360" width="136" height="36" rx="7" fill="url(#gPink)" />
-                <text x="380" y="378" text-anchor="middle" fill="#7856CC" font-size="10">Bill Reminders</text>
-                <text x="380" y="391" text-anchor="middle" fill="#7856CC" font-size="10">/ Confirmation</text>
- 
- 
-                <!-- ════ MORE children (centers 432, 568) ════ -->
-                <line x1="500" y1="236" x2="500" y2="260" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="432" y1="260" x2="568" y2="260" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="432" y1="260" x2="432" y2="282" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="568" y1="260" x2="568" y2="282" stroke="#C4BDB5" stroke-width="1.2" />
-                <rect x="364" y="282" width="136" height="36" rx="7" fill="url(#gSky)" />
-                <text x="432" y="300" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Help &amp; Support</text>
-                <text x="432" y="313" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/ Help Articles</text>
-                <rect x="500" y="282" width="136" height="36" rx="7" fill="url(#gSky)" />
-                <text x="568" y="300" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Contact phone</text>
-                <text x="568" y="313" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">&amp; email</text>
-                <line x1="432" y1="318" x2="432" y2="360" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
-                <rect x="364" y="360" width="136" height="36" rx="7" fill="url(#gPink)" />
-                <text x="432" y="378" text-anchor="middle" fill="#7856CC" font-size="10">In-app</text>
-                <text x="432" y="391" text-anchor="middle" fill="#7856CC" font-size="10">Chat Support</text>
-                <!-- cross-screen: In-app Chat Support → Chat tab -->
-                <path d="M500 378 Q800 430 1100 378" fill="none" stroke="#2B5CE6" stroke-width="1.2" stroke-dasharray="5,3" />
-                <text x="800" y="426" text-anchor="middle" fill="#2B5CE6" font-size="9">In-app Chat Support</text>
- 
- 
-                <!-- ════ CARD SCREEN children (centers 620, 780) ════ -->
-                <line x1="700" y1="236" x2="700" y2="260" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="620" y1="260" x2="780" y2="260" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="620" y1="260" x2="620" y2="282" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="780" y1="260" x2="780" y2="282" stroke="#C4BDB5" stroke-width="1.2" />
-                <rect x="552" y="282" width="136" height="36" rx="7" fill="url(#gSky)" />
-                <text x="620" y="300" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Card Details</text>
-                <text x="620" y="313" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/ Change PIN</text>
-                <rect x="712" y="282" width="136" height="36" rx="7" fill="url(#gSky)" />
-                <text x="780" y="300" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Block Card</text>
-                <text x="780" y="313" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/ Request</text>
-                <line x1="700" y1="318" x2="700" y2="360" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
-                <rect x="632" y="360" width="136" height="36" rx="7" fill="url(#gPink)" />
-                <text x="700" y="378" text-anchor="middle" fill="#7856CC" font-size="10">Payment</text>
-                <text x="700" y="391" text-anchor="middle" fill="#7856CC" font-size="10">Confirmation</text>
- 
- 
-                <!-- ════ HISTORY children (center=900) ════ -->
-                <line x1="900" y1="236" x2="900" y2="282" stroke="#C4BDB5" stroke-width="1.2" />
-                <rect x="832" y="282" width="136" height="36" rx="7" fill="url(#gSky)" />
-                <text x="900" y="300" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Transaction</text>
-                <text x="900" y="313" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">History</text>
-                <line x1="900" y1="318" x2="900" y2="360" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
-                <rect x="832" y="360" width="136" height="36" rx="7" fill="url(#gPink)" />
-                <text x="900" y="378" text-anchor="middle" fill="#7856CC" font-size="10">Transaction</text>
-                <text x="900" y="391" text-anchor="middle" fill="#7856CC" font-size="10">Detail View</text>
- 
- 
-                <!-- ════ CHAT children (centers 1032, 1168) ════ -->
-                <line x1="1100" y1="236" x2="1100" y2="260" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="1032" y1="260" x2="1168" y2="260" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="1032" y1="260" x2="1032" y2="282" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="1168" y1="260" x2="1168" y2="282" stroke="#C4BDB5" stroke-width="1.2" />
-                <rect x="964" y="282" width="136" height="36" rx="7" fill="url(#gSky)" />
-                <text x="1032" y="300" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Chat with</text>
-                <text x="1032" y="313" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Support</text>
-                <rect x="1100" y="282" width="136" height="36" rx="7" fill="url(#gSky)" />
-                <text x="1168" y="300" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">New Message</text>
-                <text x="1168" y="313" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/ Send Money</text>
-                <line x1="1100" y1="318" x2="1100" y2="360" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
-                <rect x="1032" y="360" width="136" height="36" rx="7" fill="url(#gPink)" />
-                <text x="1100" y="378" text-anchor="middle" fill="#7856CC" font-size="10">In-chat</text>
-                <text x="1100" y="391" text-anchor="middle" fill="#7856CC" font-size="10">Money Transfer</text>
- 
- 
-                <!-- ════ PROFILE children (centers 1232, 1368) ════ -->
-                <line x1="1300" y1="236" x2="1300" y2="260" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="1232" y1="260" x2="1368" y2="260" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="1232" y1="260" x2="1232" y2="282" stroke="#C4BDB5" stroke-width="1.2" />
-                <line x1="1368" y1="260" x2="1368" y2="282" stroke="#C4BDB5" stroke-width="1.2" />
-                <rect x="1164" y="282" width="136" height="36" rx="7" fill="url(#gSky)" />
-                <text x="1232" y="300" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Login / Signup</text>
-                <text x="1232" y="313" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/ Update Info</text>
-                <rect x="1300" y="282" width="136" height="36" rx="7" fill="url(#gSky)" />
-                <text x="1368" y="300" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">Security</text>
-                <text x="1368" y="313" text-anchor="middle" fill="#2B5CE6" font-size="10" font-weight="600">/ Notifications</text>
-                <line x1="1300" y1="318" x2="1300" y2="360" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3" />
-                <rect x="1232" y="360" width="136" height="36" rx="7" fill="url(#gPink)" />
-                <text x="1300" y="378" text-anchor="middle" fill="#7856CC" font-size="10">Change Password</text>
-                <text x="1300" y="391" text-anchor="middle" fill="#7856CC" font-size="10">/ Linked Accounts</text>
- 
- 
+                <text x="240" y="735" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">Card Screen</text>
+
+                <line x1="300" y1="730" x2="340" y2="730" stroke="#C4BDB5" stroke-width="1"/>
+                <line x1="340" y1="666" x2="340" y2="794" stroke="#C4BDB5" stroke-width="1"/>
+
+                <!-- Card Details y=666 -->
+                <line x1="340" y1="666" x2="360" y2="666" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="650" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="670" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Card Details</text>
+                <!-- sub: Block Card -->
+                <line x1="480" y1="666" x2="500" y2="666" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="650" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="670" text-anchor="middle" fill="#7856CC" font-size="9">Block Card</text>
+
+                <!-- View Statement y=706 -->
+                <line x1="340" y1="706" x2="360" y2="706" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="690" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="704" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">View</text>
+                <text x="420" y="715" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Statement</text>
+
+                <!-- Change PIN y=746 -->
+                <line x1="340" y1="746" x2="360" y2="746" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="730" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="750" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Change PIN</text>
+                <!-- sub: Request New Card -->
+                <line x1="480" y1="746" x2="500" y2="746" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="730" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="744" text-anchor="middle" fill="#7856CC" font-size="9">Request</text>
+                <text x="565" y="755" text-anchor="middle" fill="#7856CC" font-size="9">New Card</text>
+
+                <!-- Limits y=786 -->
+                <line x1="340" y1="786" x2="360" y2="786" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="770" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="790" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Limits</text>
+                <!-- sub: Card Transactions -->
+                <line x1="480" y1="786" x2="500" y2="786" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="770" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="784" text-anchor="middle" fill="#7856CC" font-size="9">Card</text>
+                <text x="565" y="795" text-anchor="middle" fill="#7856CC" font-size="9">Transactions</text>
+
+
+                <!-- ═══ HISTORY  center y=900, features y=854..954 ═══ -->
+                <line x1="80" y1="900" x2="180" y2="900" stroke="#C4BDB5" stroke-width="1.2"/>
+                <g filter="url(#sh)">
+                    <rect x="180" y="876" width="120" height="48" rx="16" fill="url(#gBlue)"/>
+                </g>
+                <text x="240" y="897" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">Transaction</text>
+                <text x="240" y="912" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">History</text>
+
+                <line x1="300" y1="900" x2="340" y2="900" stroke="#C4BDB5" stroke-width="1"/>
+                <line x1="340" y1="854" x2="340" y2="954" stroke="#C4BDB5" stroke-width="1"/>
+
+                <!-- All y=854 -->
+                <line x1="340" y1="854" x2="360" y2="854" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="838" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="858" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">All</text>
+
+                <!-- Income y=894 -->
+                <line x1="340" y1="894" x2="360" y2="894" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="878" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="898" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Income</text>
+
+                <!-- Expenses y=934 -->
+                <line x1="340" y1="934" x2="360" y2="934" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="918" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="938" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Expenses</text>
+
+                <!-- Export Transactions y=954 — with Filters sub-group -->
+                <line x1="340" y1="954" x2="360" y2="954" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="938" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="952" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Export</text>
+                <text x="420" y="963" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Transactions</text>
+
+                <!-- Filters branch (from Expenses / Export area) -->
+                <line x1="480" y1="934" x2="500" y2="934" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <line x1="500" y1="904" x2="500" y2="964" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <line x1="500" y1="904" x2="520" y2="904" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="520" y="888" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="585" y="908" text-anchor="middle" fill="#7856CC" font-size="9">Amount Range</text>
+
+                <line x1="500" y1="934" x2="520" y2="934" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="520" y="918" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="585" y="932" text-anchor="middle" fill="#7856CC" font-size="9">Transaction</text>
+                <text x="585" y="943" text-anchor="middle" fill="#7856CC" font-size="9">Type</text>
+
+                <line x1="500" y1="964" x2="520" y2="964" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="520" y="948" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="585" y="962" text-anchor="middle" fill="#7856CC" font-size="9">Date Range</text>
+
+
+                <!-- ═══ CHAT  y=1050 ═══ -->
+                <line x1="80" y1="1050" x2="180" y2="1050" stroke="#C4BDB5" stroke-width="1.2"/>
+                <g filter="url(#sh)">
+                    <rect x="180" y="1034" width="120" height="32" rx="16" fill="url(#gBlue)"/>
+                </g>
+                <text x="240" y="1055" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">Chat</text>
+
+                <!-- Chat feature -->
+                <line x1="300" y1="1050" x2="340" y2="1050" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="340" y="1034" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="400" y="1048" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Chat with</text>
+                <text x="400" y="1059" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Support</text>
+                <!-- sub: In-chat Money Transfer -->
+                <line x1="460" y1="1050" x2="500" y2="1050" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="1034" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="1048" text-anchor="middle" fill="#7856CC" font-size="9">In-chat Money</text>
+                <text x="565" y="1059" text-anchor="middle" fill="#7856CC" font-size="9">Transfer</text>
+
+                <!-- cross-screen arrow: In-app Chat (More) → Chat tab -->
+                <path d="M630 611 Q700 640 700 700 Q700 800 700 1050 Q700 1056 660 1056" fill="none" stroke="#2B5CE6" stroke-width="1.2" stroke-dasharray="5,3"/>
+                <polygon points="660,1051 668,1056 660,1061" fill="#2B5CE6"/>
+
+
+                <!-- ═══ PROFILE  center y=1160, features span y=1100..1218 ═══ -->
+                <line x1="80" y1="1160" x2="180" y2="1160" stroke="#C4BDB5" stroke-width="1.2"/>
+                <g filter="url(#sh)">
+                    <rect x="180" y="1144" width="120" height="32" rx="16" fill="url(#gBlue)"/>
+                </g>
+                <text x="240" y="1165" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">Profile</text>
+
+                <line x1="300" y1="1160" x2="340" y2="1160" stroke="#C4BDB5" stroke-width="1"/>
+                <line x1="340" y1="1100" x2="340" y2="1218" stroke="#C4BDB5" stroke-width="1"/>
+
+                <!-- Login / Signup y=1100 -->
+                <line x1="340" y1="1100" x2="360" y2="1100" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="1084" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="1100" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Login / Signup</text>
+                <!-- sub: Forgot Password -->
+                <line x1="480" y1="1100" x2="500" y2="1100" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="1084" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="1100" text-anchor="middle" fill="#7856CC" font-size="9">Forgot Password</text>
+
+                <!-- Update Personal Info y=1140 -->
+                <line x1="340" y1="1140" x2="360" y2="1140" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="1124" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="1138" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Update</text>
+                <text x="420" y="1149" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Personal Info</text>
+                <!-- sub: Security Settings -->
+                <line x1="480" y1="1140" x2="500" y2="1140" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="1124" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="1138" text-anchor="middle" fill="#7856CC" font-size="9">Security</text>
+                <text x="565" y="1149" text-anchor="middle" fill="#7856CC" font-size="9">Settings</text>
+
+                <!-- Change Password y=1180 -->
+                <line x1="340" y1="1180" x2="360" y2="1180" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="1164" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="1178" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Change</text>
+                <text x="420" y="1189" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Password</text>
+                <!-- sub: Notifications -->
+                <line x1="480" y1="1180" x2="500" y2="1180" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="1164" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="1178" text-anchor="middle" fill="#7856CC" font-size="9">Notifications</text>
+
+                <!-- 2FA y=1218 -->
+                <line x1="340" y1="1218" x2="360" y2="1218" stroke="#C4BDB5" stroke-width="1"/>
+                <g filter="url(#sh)"><rect x="360" y="1202" width="120" height="32" rx="5" fill="url(#gSky)"/></g>
+                <text x="420" y="1218" text-anchor="middle" fill="#2B5CE6" font-size="9" font-weight="600">Two-Factor Auth</text>
+                <!-- sub: Linked Accounts -->
+                <line x1="480" y1="1218" x2="500" y2="1218" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="4,3"/>
+                <g filter="url(#sh)"><rect x="500" y="1202" width="130" height="32" rx="5" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/></g>
+                <text x="565" y="1218" text-anchor="middle" fill="#7856CC" font-size="9">Linked Accounts</text>
+
+
                 <!-- ════ LEGEND ════ -->
-                <g transform="translate(20,500)">
-                    <rect width="14" height="14" rx="4" fill="url(#gDark)" />
-                    <text x="20" y="11" fill="#8C857D" font-size="10">Entry / Key screen</text>
-                    <rect x="170" width="14" height="14" rx="4" fill="url(#gBlue)" />
-                    <text x="190" y="11" fill="#8C857D" font-size="10">Nav tab</text>
-                    <rect x="280" width="14" height="14" rx="4" fill="url(#gSky)" />
-                    <text x="300" y="11" fill="#8C857D" font-size="10">Feature page</text>
-                    <rect x="420" width="14" height="14" rx="4" fill="url(#gPink)" />
-                    <text x="440" y="11" fill="#8C857D" font-size="10">Sub-feature</text>
-                    <line x1="560" y1="7" x2="590" y2="7" stroke="#C4BDB5" stroke-width="1.5" stroke-dasharray="4,3" />
-                    <text x="596" y="11" fill="#8C857D" font-size="10">Optional / deeper flow</text>
-                    <line x1="790" y1="7" x2="820" y2="7" stroke="#2B5CE6" stroke-width="1.5" stroke-dasharray="4,3" />
-                    <text x="826" y="11" fill="#8C857D" font-size="10">Cross-screen link</text>
+                <g transform="translate(20,1260)">
+                    <rect width="12" height="12" rx="2" fill="url(#gDark)"/>
+                    <text x="18" y="10" fill="#8C857D" font-size="9">Entry / Key screen</text>
+
+                    <rect x="140" y="0" width="40" height="12" rx="6" fill="url(#gBlue)"/>
+                    <text x="186" y="10" fill="#8C857D" font-size="9">Nav tab</text>
+
+                    <rect x="252" y="0" width="12" height="12" rx="2" fill="url(#gSky)"/>
+                    <text x="270" y="10" fill="#8C857D" font-size="9">Screen / page</text>
+
+                    <rect x="380" y="0" width="12" height="12" rx="2" fill="url(#gPink)" stroke="#D0C4ED" stroke-width="0.7"/>
+                    <text x="398" y="10" fill="#8C857D" font-size="9">Sub-feature</text>
+
+                    <line x1="496" y1="6" x2="520" y2="6" stroke="#C4BDB5" stroke-width="1.2" stroke-dasharray="4,3"/>
+                    <text x="526" y="10" fill="#8C857D" font-size="9">Optional flow</text>
+
+                    <line x1="628" y1="6" x2="652" y2="6" stroke="#2B5CE6" stroke-width="1.2" stroke-dasharray="5,3"/>
+                    <text x="658" y="10" fill="#8C857D" font-size="9">Cross-screen</text>
                 </g>
+
             </svg>
         </div>
     </section>

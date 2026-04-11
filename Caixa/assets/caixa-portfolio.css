@@ -1660,14 +1660,31 @@ SITE MAP — SVG diagram
     border-bottom: 1px solid var(--border);
     padding: 48px 64px;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     width: 100%;
 }
 
 .sitemap-diagram svg {
-    width: 100%;
-    height: auto;
-    min-width: 900px;
     display: block;
+    width: 100%;
+    min-width: 700px;
+    height: auto;
+}
+
+.sm-scroll-hint {
+    display: none;
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+    .sitemap-section { padding: 72px 0 }
+    .sitemap-section-header { padding: 0 24px }
+    .sitemap-diagram { padding: 32px 20px }
+    .sm-scroll-hint { display: block }
 }
 
 /* SVG node text styles */
