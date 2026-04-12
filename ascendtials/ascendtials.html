@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASCENDtials - Case Study · Yana Harcourt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Noto+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cream:   #F5F0E8;
+      --warm:    #EDE5D5;
+      --sand:    #D4C4A8;
+      --terra:   #8B6347;
+      --forest:  #2C4A3E;
+      --dark:    #1A1A1A;
+      --mid:     #4A4A4A;
+      --light:   #7A7A7A;
+      --accent:  #C4975A;
+      --teal:    #34B7A7;
+      --white:   #FFFFFF;
+
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'DM Sans', system-ui, sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ──── CURSOR ──── */
+    #cur { position:fixed; width:8px; height:8px; background:var(--terra); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform .15s; }
+    #ctr { position:fixed; width:36px; height:36px; border:1.5px solid rgba(139,99,71,.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all .35s cubic-bezier(.23,1,.32,1); }
+
+    /* ──── REVEAL ──── */
+    .rv { opacity:0; transform:translateY(32px); transition:opacity .9s ease,transform .9s ease; }
+    .rv.in { opacity:1; transform:translateY(0); }
+    .rv.d1 { transition-delay:.12s; }
+    .rv.d2 { transition-delay:.24s; }
+    .rv.d3 { transition-delay:.36s; }
+    .rv.d4 { transition-delay:.48s; }
+
+    /* ──── LABEL ──── */
+    .lbl {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--terra);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    /* ──── NAV ──── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 22px 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(245,240,232,.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(139,99,71,.12);
+      transition: all .4s;
+    }
+    .nav-logo { font-family: var(--serif); font-size: 20px; color: var(--dark); text-decoration: none; font-weight: 300; letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-links a { font-size: 13px; color: var(--mid); text-decoration: none; letter-spacing: .5px; transition: color .3s; }
+    .nav-links a:hover { color: var(--terra); }
+    .nav-back { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--terra); text-decoration: none; transition: gap .3s; }
+    .nav-back:hover { gap: 12px; }
+
+    /* ──── HERO ──── */
+    .hero {
+      min-height: 100vh;
+      padding: 0 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 80px;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,151,90,.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: 'ASCENDtials';
+      position: absolute;
+      bottom: -60px; left: -10px;
+      font-family: var(--serif);
+      font-size: clamp(80px, 12vw, 180px);
+      font-weight: 300;
+      color: rgba(44,74,62,.05);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -4px;
+    }
+    .hero-left { padding-top: 100px; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+    .hero-eyebrow-line { width: 40px; height: 1px; background: var(--terra); }
+    .hero-eyebrow-text { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--terra); font-weight: 600; }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(52px, 6vw, 96px);
+      font-weight: 300;
+      line-height: 1.0;
+      color: var(--dark);
+      margin-bottom: 32px;
+      letter-spacing: -1px;
+    }
+    .hero-title em { font-style: italic; color: var(--terra); }
+    .hero-sub { font-size: 17px; color: var(--mid); line-height: 1.7; max-width: 480px; margin-bottom: 48px; font-weight: 300; }
+    .hero-meta { display: flex; gap: 48px; }
+    .hero-meta-item { }
+    .hero-meta-item .meta-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--light); margin-bottom: 6px; }
+    .hero-meta-item .meta-value { font-size: 14px; color: var(--dark); font-weight: 500; }
+    .hero-right { position: relative; padding-top: 100px; padding-left: 24px; overflow: visible; }
+    .hero-img-frame {
+      position: relative;
+      border-radius: 4px;
+    }
+    .hero-img-frame img { width: 100%; display: block; border-radius: 4px; }
+    .hero-img-badge {
+      position: absolute; bottom: -20px; left: -20px;
+      background: var(--forest);
+      color: var(--white);
+      padding: 20px 28px;
+      border-radius: 30px;
+      max-width: 240px;
+      z-index: 2;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2);
+    }
+    .hero-img-badge .badge-num { font-family: var(--serif); font-size: 48px; font-weight: 300; line-height: 1; color: var(--accent); }
+    .hero-img-badge .badge-text { font-size: 12px; color: rgba(255,255,255,.7); margin-top: 6px; line-height: 1.5; }
+    .hero-visit-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 32px;
+      border: 1.5px solid var(--terra);
+      color: var(--terra);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1px;
+      border-radius: 50px;
+      transition: all .3s;
+      margin-top: 40px;
+    }
+    .hero-visit-btn:hover { background: var(--terra); color: var(--white); }
+
+    /* ──── SECTION COMMON ──── */
+    section { padding: 120px 60px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-header { margin-bottom: 72px; }
+    .section-title { font-family: var(--serif); font-size: clamp(36px,4vw,64px); font-weight: 300; color: var(--dark); line-height: 1.1; letter-spacing: -.5px; }
+    .section-title em { color: var(--terra); font-style: italic; }
+    hr.section-rule { border: none; border-top: 1px solid var(--sand); margin: 24px 0; }
+
+    /* ──── DIVIDER ──── */
+    .divider { height: 1px; background: linear-gradient(to right, transparent, var(--sand) 20%, var(--sand) 80%, transparent); margin: 0 60px; }
+
+    /* ──── OVERVIEW BAND ──── */
+    .overview-band {
+      background: var(--forest);
+      color: var(--white);
+      padding: 80px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 0;
+    }
+    .ov-item { padding: 0 40px; border-right: 1px solid rgba(255,255,255,.12); }
+    .ov-item:first-child { padding-left: 0; }
+    .ov-item:last-child { border-right: none; }
+    .ov-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 12px; }
+    .ov-value { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--white); line-height: 1.4; }
+    .ov-accent { color: var(--accent); }
+
+    /* ──── CHALLENGE ──── */
+    .challenge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .challenge-card {
+      background: var(--warm);
+      padding: 56px;
+    }
+    .challenge-card.dark { background: var(--forest); color: var(--white); }
+    .challenge-card.accent-bg { background: var(--accent); }
+    .challenge-num { font-family: var(--serif); font-size: 96px; font-weight: 300; color: rgba(139,99,71,.15); line-height: 1; margin-bottom: 16px; }
+    .challenge-card.dark .challenge-num { color: rgba(255,255,255,.1); }
+    .challenge-card-title { font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 20px; color: var(--dark); line-height: 1.3; }
+    .challenge-card.dark .challenge-card-title { color: var(--white); }
+    .challenge-card-text { font-size: 15px; color: var(--mid); line-height: 1.75; font-weight: 300; }
+    .challenge-card.dark .challenge-card-text { color: rgba(255,255,255,.7); }
+    .pain-list { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .pain-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--mid); line-height: 1.6; }
+    .pain-list li::before { content: '-'; color: var(--terra); flex-shrink: 0; margin-top: 2px; }
+    .challenge-card.dark .pain-list li { color: rgba(255,255,255,.7); }
+    .challenge-card.dark .pain-list li::before { color: var(--accent); }
+
+    /* ──── PROCESS ORBITAL ──── */
+    .process-orbital {
+      background: var(--dark);
+      padding: 120px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .process-orbital::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      border: 1px solid rgba(196,151,90,.08);
+      pointer-events: none;
+    }
+    .process-orbital::after {
+      content: '';
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 1200px; height: 1200px;
+      border-radius: 50%;
+      border: 1px solid rgba(196,151,90,.04);
+      pointer-events: none;
+    }
+    .orbital-inner { max-width: 1200px; margin: 0 auto; }
+    .orbital-header { text-align: center; margin-bottom: 80px; }
+    .orbital-header .lbl { color: var(--accent); text-align: center; margin-bottom: 20px; }
+    .orbital-header .section-title { color: var(--white); }
+    .orbital-header .section-title em { color: var(--accent); }
+    .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .process-step {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      padding: 48px 40px;
+      position: relative;
+      transition: background .3s;
+      cursor: default;
+    }
+    .process-step:hover { background: rgba(196,151,90,.08); border-color: rgba(196,151,90,.2); }
+    .step-num {
+      font-family: var(--serif); font-size: 72px; font-weight: 300;
+      color: rgba(196,151,90,.15); line-height: 1;
+      position: absolute; top: 24px; right: 32px;
+    }
+    .step-icon { width: 44px; height: 44px; background: rgba(196,151,90,.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+    .step-icon i { color: var(--accent); font-size: 18px; }
+    .step-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--white); margin-bottom: 12px; }
+    .step-text { font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.7; font-weight: 300; }
+
+    /* ──── RESEARCH ──── */
+    .research-section { background: var(--warm); }
+    .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .research-findings { }
+    .finding-item { padding: 32px 0; border-bottom: 1px solid var(--sand); }
+    .finding-item:first-child { border-top: 1px solid var(--sand); }
+    .finding-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--terra); font-weight: 600; margin-bottom: 10px; }
+    .finding-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--dark); margin-bottom: 10px; }
+    .finding-text { font-size: 14px; color: var(--mid); line-height: 1.7; font-weight: 300; }
+    .research-quote-block {
+      background: var(--forest);
+      padding: 56px;
+      border-radius: 4px;
+      position: sticky; top: 120px;
+    }
+    .quote-mark { font-family: var(--serif); font-size: 96px; color: var(--accent); line-height: .6; margin-bottom: 24px; }
+    .quote-text { font-family: var(--serif); font-size: 24px; font-weight: 300; color: var(--white); line-height: 1.55; font-style: italic; margin-bottom: 32px; }
+    .quote-attribution { font-size: 12px; color: rgba(255,255,255,.5); letter-spacing: 2px; text-transform: uppercase; }
+    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 32px; }
+    .stat-box { background: rgba(255,255,255,.05); padding: 24px; }
+    .stat-big { font-family: var(--serif); font-size: 48px; font-weight: 300; color: var(--accent); line-height: 1; }
+    .stat-desc { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 6px; line-height: 1.5; }
+
+    /* ──── PERSONAS ──── */
+    .personas-section { background: var(--cream); }
+    .personas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .persona-card {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .persona-header { padding: 40px 40px 32px; background: var(--warm); border-bottom: 1px solid var(--sand); }
+    .persona-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--terra); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .persona-avatar i { color: var(--white); font-size: 28px; }
+    .persona-name { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--dark); }
+    .persona-role { font-size: 13px; color: var(--terra); font-weight: 500; margin-top: 4px; letter-spacing: .5px; }
+    .persona-body { padding: 40px; }
+    .persona-bio { font-size: 14px; color: var(--mid); line-height: 1.75; margin-bottom: 32px; font-weight: 300; }
+    .persona-section-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--terra); font-weight: 600; margin-bottom: 12px; }
+    .persona-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .persona-tag { padding: 6px 14px; background: var(--warm); border-radius: 50px; font-size: 12px; color: var(--mid); border: 1px solid var(--sand); }
+    .persona-pains { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .persona-pains li { display: flex; gap: 10px; font-size: 13px; color: var(--mid); line-height: 1.6; }
+    .persona-pains li::before { content: '↓'; color: #e07878; flex-shrink: 0; }
+    .persona-goals { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+    .persona-goals li { display: flex; gap: 10px; font-size: 13px; color: var(--mid); line-height: 1.6; }
+    .persona-goals li::before { content: '↑'; color: var(--teal); flex-shrink: 0; }
+
+    /* ──── CJM ──── */
+    .cjm-section { background: var(--dark); padding: 120px 60px; overflow-x: auto; }
+    .cjm-inner { max-width: 1400px; margin: 0 auto; }
+    .cjm-header { margin-bottom: 64px; }
+    .cjm-header .lbl { color: var(--accent); margin-bottom: 20px; }
+    .cjm-header .section-title { color: var(--white); }
+    .cjm-persona-switch { display: flex; gap: 0; margin-bottom: 48px; }
+    .cjm-tab { padding: 12px 28px; font-size: 13px; font-weight: 500; cursor: pointer; letter-spacing: .5px; border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.5); transition: all .3s; background: transparent; }
+    .cjm-tab:first-child { border-radius: 4px 0 0 4px; }
+    .cjm-tab:last-child { border-radius: 0 4px 4px 0; border-left: none; }
+    .cjm-tab.active { background: var(--accent); color: var(--dark); border-color: var(--accent); }
+    .cjm-table { width: 100%; border-collapse: collapse; min-width: 900px; }
+    .cjm-table th {
+      text-align: left; padding: 16px 20px;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,.35); font-weight: 600;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .cjm-table td { padding: 20px; vertical-align: top; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .cjm-stage { font-family: var(--serif); font-size: 16px; color: var(--accent); font-weight: 400; white-space: nowrap; }
+    .cjm-action { font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.6; max-width: 220px; }
+    .cjm-thought { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.6; font-style: italic; max-width: 220px; }
+    .emotion-dots { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.happy { background: var(--teal); }
+    .dot.neutral { background: rgba(255,255,255,.3); }
+    .dot.frustrated { background: #e07878; }
+    .emotion-label { font-size: 11px; color: rgba(255,255,255,.4); margin-left: 6px; }
+    .pain-chip { display: inline-block; padding: 5px 11px; background: rgba(220,80,80,.2); border: 1.5px solid rgba(220,80,80,.6); border-radius: 3px; font-size: 11px; color: #f08080; margin: 2px; font-weight: 500; }
+    .opp-chip { display: inline-block; padding: 5px 11px; background: rgba(52,183,167,.18); border: 1.5px solid rgba(52,183,167,.5); border-radius: 3px; font-size: 11px; color: #4dd4c8; margin: 2px; font-weight: 500; }
+
+    /* ──── USER FLOW ──── */
+    .flow-section { background: var(--warm); padding: 120px 60px; }
+    .flow-inner { max-width: 1200px; margin: 0 auto; }
+    .flow-diagram { margin-top: 64px; overflow-x: auto; }
+    .flow-row { display: flex; align-items: flex-start; gap: 0; margin-bottom: 2px; }
+    .flow-node {
+      min-width: 160px; padding: 16px 20px;
+      background: var(--white); border: 1px solid var(--sand);
+      font-size: 12px; color: var(--dark); line-height: 1.4;
+      position: relative; text-align: center; flex-shrink: 0;
+    }
+    .flow-node.start { background: var(--forest); color: var(--white); border-color: var(--forest); border-radius: 24px; }
+    .flow-node.end { background: var(--terra); color: var(--white); border-color: var(--terra); border-radius: 24px; }
+    .flow-node.decision { background: var(--accent); color: var(--dark); clip-path: polygon(50% 0%,100% 50%,50% 100%,0% 50%); min-width: 120px; min-height: 80px; display: flex; align-items: center; justify-content: center; border: none; font-weight: 600; font-size: 11px; }
+    .flow-node.problem { background: rgba(224,120,120,.12); border-color: rgba(224,120,120,.4); color: #c0504a; }
+    .flow-node.solution { background: rgba(52,183,167,.1); border-color: rgba(52,183,167,.35); color: var(--forest); }
+    .flow-arrow { display: flex; align-items: center; flex-shrink: 0; padding: 0 4px; color: var(--sand); font-size: 16px; }
+    .flow-connector { width: 40px; height: 2px; background: var(--sand); flex-shrink: 0; align-self: center; }
+    .flow-section-title { font-family: var(--serif); font-size: 16px; color: var(--terra); margin-bottom: 12px; font-weight: 400; }
+    .flow-group { display: flex; flex-direction: column; gap: 2px; align-items: center; }
+    .flow-label-row { display: flex; gap: 0; margin-bottom: 16px; }
+    .flow-phase { padding: 10px 20px; background: var(--forest); color: var(--white); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; flex: 1; text-align: center; }
+    .flow-phase:nth-child(even) { background: var(--terra); }
+
+    /* SVG Flow */
+    .flow-svg-wrap { width: 100%; overflow-x: auto; padding: 20px 0; }
+    .flow-svg-wrap svg { min-width: 1000px; }
+
+    /* ──── WIREFRAMES ──── */
+    .wireframe-section { background: var(--cream); }
+    .wf-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+    .wf-item { }
+    .wf-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--light); margin-bottom: 10px; }
+    .wf-frame {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: 4px;
+      padding: 24px;
+      min-height: 260px;
+      position: relative;
+      overflow: hidden;
+    }
+    .wf-mockup { width: 100%; }
+    /* Wireframe SVG placeholders */
+    .wf-bar { height: 8px; background: var(--sand); border-radius: 4px; margin-bottom: 8px; }
+    .wf-bar.short { width: 40%; }
+    .wf-bar.med { width: 65%; }
+    .wf-bar.full { width: 100%; }
+    .wf-block { background: var(--warm); border-radius: 4px; margin-bottom: 8px; }
+    .wf-nav { height: 32px; background: var(--warm); margin-bottom: 16px; border-radius: 3px; display: flex; gap: 6px; padding: 0 8px; align-items: center; }
+    .wf-nav-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sand); }
+    .wf-hero-block { height: 80px; background: linear-gradient(135deg, var(--forest) 0%, var(--terra) 100%); border-radius: 4px; margin-bottom: 10px; }
+    .wf-card-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+    .wf-card { height: 50px; background: var(--warm); border-radius: 3px; }
+    .wf-caption { font-size: 12px; color: var(--light); margin-top: 10px; line-height: 1.5; }
+
+    /* ──── FONTS SECTION ──── */
+    .fonts-section { background: var(--forest); padding: 120px 60px; }
+    .fonts-inner { max-width: 1200px; margin: 0 auto; }
+    .fonts-header .lbl { color: var(--accent); margin-bottom: 20px; }
+    .fonts-header .section-title { color: var(--white); margin-bottom: 64px; }
+    .fonts-header .section-title em { color: var(--accent); }
+    .fonts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .font-card { background: rgba(255,255,255,.04); padding: 56px; border: 1px solid rgba(255,255,255,.06); }
+    .font-pair-label { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,.35); margin-bottom: 32px; text-transform: uppercase; }
+    .font-display { margin-bottom: 24px; }
+    .font-display-heading { line-height: 1.0; }
+    .font-display-body { font-size: 15px; color: rgba(255,255,255,.55); line-height: 1.7; margin-top: 16px; max-width: 400px; }
+    .font-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); }
+    .font-meta-item { }
+    .font-meta-label { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,.3); text-transform: uppercase; margin-bottom: 4px; }
+    .font-meta-value { font-size: 13px; color: rgba(255,255,255,.7); }
+    .chosen-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--accent); color: var(--dark); border-radius: 50px; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
+    .chosen-badge i { font-size: 12px; }
+
+    /* ──── GALLERY / SCREENS ──── */
+    .screens-section { background: var(--cream); }
+    .screens-intro { max-width: 640px; margin-bottom: 64px; }
+    .screens-intro p { font-size: 16px; color: var(--mid); line-height: 1.75; font-weight: 300; }
+    .page-showcase { display: flex; flex-direction: column; gap: 120px; }
+    .showcase-item { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .showcase-item.reverse { direction: rtl; }
+    .showcase-item.reverse > * { direction: ltr; }
+    .showcase-info { }
+    .showcase-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--terra); font-weight: 600; margin-bottom: 16px; }
+    .showcase-title { font-family: var(--serif); font-size: 36px; font-weight: 300; color: var(--dark); margin-bottom: 20px; line-height: 1.2; }
+    .showcase-text { font-size: 15px; color: var(--mid); line-height: 1.75; font-weight: 300; margin-bottom: 28px; }
+    .showcase-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .showcase-features li { display: flex; gap: 12px; font-size: 13px; color: var(--mid); }
+    .showcase-features li::before { content: '✦'; color: var(--accent); font-size: 10px; margin-top: 2px; }
+    .showcase-img-wrap { border-radius: 4px; overflow: hidden; border: 1px solid var(--sand); }
+    .showcase-img-wrap img { width: 100%; display: block; }
+    .pages-mosaic { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; margin-top: 64px; }
+    .mosaic-item { position: relative; overflow: hidden; }
+    .mosaic-item img { width: 100%; display: block; transition: transform .5s ease; }
+    .mosaic-item:hover img { transform: scale(1.04); }
+    .mosaic-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(transparent, rgba(26,26,26,.8)); color: var(--white); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transform: translateY(4px); transition: transform .3s; }
+    .mosaic-item:hover .mosaic-label { transform: translateY(0); }
+
+    /* ──── SCREENSHOTS placeholder ──── */
+    .screen-placeholder {
+      background: var(--warm);
+      border: 1px solid var(--sand);
+      border-radius: 4px;
+      aspect-ratio: 16/10;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .sp-nav { height: 36px; background: var(--white); border-bottom: 1px solid var(--sand); display: flex; align-items: center; padding: 0 16px; gap: 12px; flex-shrink: 0; }
+    .sp-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .sp-logo-bar { flex: 1; height: 14px; background: var(--sand); border-radius: 2px; max-width: 80px; }
+    .sp-links { display: flex; gap: 8px; margin-left: auto; }
+    .sp-link { width: 40px; height: 8px; background: var(--warm); border-radius: 2px; }
+    .sp-body { flex: 1; padding: 20px; }
+    .sp-hero { height: 80px; background: linear-gradient(135deg, var(--forest) 0%, #3d6b5e 100%); border-radius: 4px; margin-bottom: 12px; display: flex; align-items: center; padding: 0 16px; gap: 12px; }
+    .sp-hero-title { height: 16px; background: rgba(255,255,255,.4); border-radius: 2px; width: 120px; }
+    .sp-hero-sub { height: 10px; background: rgba(255,255,255,.2); border-radius: 2px; width: 80px; }
+    .sp-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .sp-card { background: var(--white); border-radius: 4px; padding: 10px; }
+    .sp-card-img { height: 40px; background: var(--sand); border-radius: 3px; margin-bottom: 6px; }
+    .sp-card-line { height: 8px; background: var(--warm); border-radius: 2px; margin-bottom: 4px; }
+    .sp-card-line.short { width: 60%; }
+
+    /* About screen */
+    .sp-about-hero { height: 100px; background: linear-gradient(135deg, rgba(139,99,71,.2) 0%, rgba(44,74,62,.2) 100%); border-radius: 4px; margin-bottom: 12px; position: relative; overflow: hidden; }
+    .sp-about-photo { position: absolute; right: 10px; top: 10px; width: 60px; height: 80px; background: var(--sand); border-radius: 3px; }
+
+    /* Membership screen */
+    .sp-pricing { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .sp-price-card { background: var(--white); border-radius: 4px; padding: 10px; text-align: center; }
+    .sp-price-card.featured { background: var(--forest); }
+    .sp-price-num { height: 16px; background: var(--sand); border-radius: 2px; margin: 6px auto; width: 50%; }
+    .sp-price-card.featured .sp-price-num { background: var(--accent); }
+    .sp-price-btn { height: 12px; background: var(--warm); border-radius: 10px; margin-top: 8px; }
+    .sp-price-card.featured .sp-price-btn { background: rgba(255,255,255,.3); }
+
+    /* ──── IMPACT ──── */
+    .impact-section { background: var(--terra); color: var(--white); padding: 120px 60px; }
+    .impact-inner { max-width: 1200px; margin: 0 auto; }
+    .impact-header { margin-bottom: 80px; }
+    .impact-header .lbl { color: rgba(255,255,255,.6); margin-bottom: 20px; }
+    .impact-header .section-title { color: var(--white); }
+    .impact-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 2px; }
+    .impact-card { background: rgba(255,255,255,.08); padding: 48px 40px; }
+    .impact-num { font-family: var(--serif); font-size: 72px; font-weight: 300; color: var(--white); line-height: 1; margin-bottom: 8px; }
+    .impact-num sup { font-size: 32px; vertical-align: super; }
+    .impact-desc { font-size: 14px; color: rgba(255,255,255,.65); line-height: 1.6; margin-top: 8px; }
+    .impact-note { margin-top: 64px; font-size: 15px; color: rgba(255,255,255,.7); line-height: 1.75; max-width: 720px; font-weight: 300; }
+
+    /* ──── LEARNINGS ──── */
+    .learnings-section { background: var(--cream); }
+    .learnings-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+    .learning-item { padding: 48px 40px; background: var(--warm); border-radius: 4px; }
+    .learning-icon { width: 48px; height: 48px; border-radius: 50%; background: var(--forest); display: flex; align-items: center; justify-content: center; margin-bottom: 28px; }
+    .learning-icon i { color: var(--accent); font-size: 20px; }
+    .learning-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--dark); margin-bottom: 12px; }
+    .learning-text { font-size: 14px; color: var(--mid); line-height: 1.75; font-weight: 300; }
+
+    /* ──── FOOTER ──── */
+    footer {
+      background: var(--dark);
+      color: var(--white);
+      padding: 80px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .footer-brand { font-family: var(--serif); font-size: 48px; font-weight: 300; color: rgba(255,255,255,.12); }
+    .footer-center { text-align: center; }
+    .footer-center p { font-size: 13px; color: rgba(255,255,255,.4); margin-bottom: 20px; }
+    .footer-links { display: flex; gap: 32px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; letter-spacing: .5px; transition: color .3s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-social { display: flex; gap: 20px; }
+    .footer-social a { width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.5); text-decoration: none; transition: all .3s; font-size: 16px; }
+    .footer-social a:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ──── SCROLL TOP ──── */
+    #scrollTop {
+      position: fixed; bottom: 32px; right: 32px;
+      width: 48px; height: 48px;
+      background: var(--terra);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      opacity: 0; pointer-events: none;
+      transition: all .3s;
+      z-index: 999;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #scrollTop.show { opacity: 1; pointer-events: all; }
+    #scrollTop:hover { background: var(--forest); transform: translateY(-3px); }
+
+    /* ──── RESPONSIVE ──── */
+    @media (max-width: 1100px) {
+      nav { padding: 18px 32px; }
+      section, .process-orbital, .fonts-section, .impact-section, .learnings-section, .flow-section, .cjm-section { padding: 80px 32px; }
+      .hero { padding: 0 32px; gap: 40px; }
+      .overview-band { padding: 60px 32px; grid-template-columns: 1fr 1fr; gap: 2px; }
+      .ov-item { padding: 24px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .challenge-grid, .research-grid, .personas-grid, .showcase-item, .fonts-grid, .impact-grid, .learnings-grid { grid-template-columns: 1fr; }
+      .showcase-item.reverse { direction: ltr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; padding: 120px 24px 60px; }
+      .hero-right { display: none; }
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      section, .process-orbital, .fonts-section, .impact-section, .learnings-section, .flow-section, .cjm-section { padding: 60px 24px; }
+      .overview-band { padding: 40px 24px; grid-template-columns: 1fr; }
+      .wf-grid, .pages-mosaic { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .impact-grid { grid-template-columns: 1fr 1fr; }
+      .footer { padding: 48px 24px; flex-direction: column; }
+      .divider { margin: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="ctr"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-back">
+    <i class="bi bi-arrow-left"></i>
+    Back to Portfolio
+  </a>
+  <div class="nav-links">
+    <a href="#challenge">Challenge</a>
+    <a href="#process">Process</a>
+    <a href="#research">Research</a>
+    <a href="#personas">Personas</a>
+    <a href="#cjm">Journey</a>
+    <a href="#screens">Screens</a>
+    <a href="#impact">Impact</a>
+  </div>
+  <a href="https://ascendtials.org" target="_blank" class="nav-back" style="font-size:12px; color:var(--mid);">
+    Live Site <i class="bi bi-arrow-up-right" style="font-size:11px;"></i>
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow rv">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Case Study · Volunteer Project · 2024</span>
+    </div>
+    <h1 class="hero-title rv d1">
+      <em>Redesigning</em><br>
+      ASCENDtials
+    </h1>
+    <p class="hero-sub rv d2">
+      A full UX/UI overhaul and coded WordPress redesign for a nonprofit uplifting BIPOC communities across Southern California - transforming a cluttered, inaccessible experience into a living, breathing brand.
+    </p>
+    <div class="hero-meta rv d3">
+      <div class="hero-meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">UX/UI Designer & Developer</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="meta-label">Deliverable</div>
+        <div class="meta-value">15+ Pages, Full Code</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="meta-label">Year</div>
+        <div class="meta-value">2024</div>
+      </div>
+    </div>
+    <a href="https://ascendtials.org" target="_blank" class="hero-visit-btn rv d4">
+      Visit Live Site <i class="bi bi-arrow-up-right"></i>
+    </a>
+  </div>
+
+  <div class="hero-right rv d2">
+    <div class="hero-img-frame">
+      <img src="./assets/img/00.png" alt="ASCENDtials Homepage redesign" style="width:100%; display:block; border-radius:4px;">
+      <div class="hero-img-badge">
+        <div class="badge-num">15<sup style="font-size:24px;">+</sup></div>
+        <div class="badge-text">Pages fully designed & coded for WordPress</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW BAND -->
+<div class="overview-band">
+  <div class="ov-item rv">
+    <div class="ov-label">Organization</div>
+    <div class="ov-value">ASCENDtials<br><span style="font-size:14px; color:rgba(255,255,255,.4); font-family:var(--sans); font-weight:300;">Nonprofit · San Diego, CA</span></div>
+  </div>
+  <div class="ov-item rv d1">
+    <div class="ov-label">My Contribution</div>
+    <div class="ov-value">Full redesign + WordPress development from scratch across 15+ pages</div>
+  </div>
+  <div class="ov-item rv d2">
+    <div class="ov-label">Core Problem</div>
+    <div class="ov-value">Navigation so complex users <span class="ov-accent">couldn't find</span> what they came for</div>
+  </div>
+  <div class="ov-item rv d3">
+    <div class="ov-label">Outcome</div>
+    <div class="ov-value">↑ Membership signups &nbsp;|&nbsp; ↑ Engagement &nbsp;|&nbsp; Brand repositioned</div>
+  </div>
+</div>
+
+<!-- CHALLENGE -->
+<section id="challenge" style="background: var(--cream); padding-top:120px; padding-bottom:0;">
+  <div class="section-inner">
+    <div class="section-header rv">
+      <span class="lbl">01 - The Challenge</span>
+      <h2 class="section-title">A mission worth <em>fighting for</em>,<br>hidden behind a broken experience</h2>
+    </div>
+  </div>
+</section>
+<div class="challenge-grid">
+  <div class="challenge-card rv">
+    <div class="challenge-num">01</div>
+    <h3 class="challenge-card-title">The Situation</h3>
+    <p class="challenge-card-text">
+      ASCENDtials is a nonprofit founded in 2014, offering holistic educational tools, Kemetic yoga, farmers' markets, environmental cleanups and youth programs across Southern California's BIPOC community. Their work is genuinely impactful. But their digital presence told a completely different story.
+    </p>
+    <ul class="pain-list">
+      <li>The website felt overwhelming, heavy and hard to navigate</li>
+      <li>Key pages and programs were buried under layers of content</li>
+      <li>The brand didn't communicate the depth of what they actually do</li>
+      <li>Mobile experience was close to unusable</li>
+    </ul>
+  </div>
+  <div class="challenge-card dark rv d1">
+    <div class="challenge-num">02</div>
+    <h3 class="challenge-card-title">My Mandate</h3>
+    <p class="challenge-card-text">
+      I joined as a volunteer UX/UI designer and developer. The CEO had a clear vision for how she wanted the organization to be perceived - as a serious, culturally rooted, forward-thinking community institution. My job was to translate that vision into a site that reflected it, while solving real usability problems.
+    </p>
+    <ul class="pain-list">
+      <li>Maintain the brand's bold, individualistic identity</li>
+      <li>Make complex navigation actually work</li>
+      <li>Elevate the visual positioning to match the mission</li>
+      <li>Design and code 15+ pages for WordPress, end to end</li>
+    </ul>
+  </div>
+  <div class="challenge-card rv d1" style="background: var(--warm);">
+    <div class="challenge-num">03</div>
+    <h3 class="challenge-card-title">The Design Tension</h3>
+    <p class="challenge-card-text">
+      The original design was described internally as their style - heavy, layered, rich. The CEO loved the aesthetic boldness. My challenge was to honour that personality while eliminating the parts that actively hurt users: the information architecture, the text overload, the inconsistent interactive elements.
+    </p>
+    <p class="challenge-card-text" style="margin-top:16px;">This meant I couldn't do a clean-slate minimal redesign. I had to work with the brand's expressive DNA and make it <em>better</em>, not different.</p>
+  </div>
+  <div class="challenge-card rv d2" style="background: var(--forest);">
+    <div class="challenge-num" style="color: rgba(255,255,255,.1);">04</div>
+    <h3 class="challenge-card-title" style="color: var(--white);">Design Principles I Set</h3>
+    <ul class="pain-list">
+      <li style="color: rgba(255,255,255,.85);">Navigation must surface key sections within 2 clicks</li>
+      <li style="color: rgba(255,255,255,.85);">Every page needs a single clear purpose and CTA</li>
+      <li style="color: rgba(255,255,255,.85);">Community warmth over corporate polish</li>
+      <li style="color: rgba(255,255,255,.85);">Typography carries cultural identity - not just text</li>
+      <li style="color: rgba(255,255,255,.85);">Mobile-first on all new pages</li>
+      <li style="color: rgba(255,255,255,.85);">Performance-conscious animations only</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider" style="margin-top:0;"></div>
+
+<!-- PROCESS -->
+<div class="process-orbital" id="process">
+  <div class="orbital-inner">
+    <div class="orbital-header rv">
+      <span class="lbl">02 - Design Process</span>
+      <h2 class="section-title">How I <em>approached</em> it</h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step rv">
+        <div class="step-num">01</div>
+        <div class="step-icon"><i class="bi bi-search"></i></div>
+        <h3 class="step-title">Discovery & Audit</h3>
+        <p class="step-text">Reviewed all existing pages. Mapped every navigation path. Identified pattern breaks and accessibility failures. Interviewed the founder to understand positioning goals.</p>
+      </div>
+      <div class="process-step rv d1">
+        <div class="step-num">02</div>
+        <div class="step-icon"><i class="bi bi-people"></i></div>
+        <h3 class="step-title">User Research</h3>
+        <p class="step-text">Moderated usability testing sessions with community members and potential members. Identified 4 key failure points. Created 2 primary personas based on findings.</p>
+      </div>
+      <div class="process-step rv d2">
+        <div class="step-num">03</div>
+        <div class="step-icon"><i class="bi bi-graph-up-arrow"></i></div>
+        <h3 class="step-title">Competitive Analysis</h3>
+        <p class="step-text">Researched comparable nonprofits, BIPOC-led organisations, and community platforms to understand positioning opportunities and patterns that resonate with the audience.</p>
+      </div>
+      <div class="process-step rv">
+        <div class="step-num">04</div>
+        <div class="step-icon"><i class="bi bi-palette2"></i></div>
+        <h3 class="step-title">Visual Direction</h3>
+        <p class="step-text">Developed font pair candidates, refined the colour palette to feel warmer and more culturally expressive. Presented options to CEO - she chose what felt uniquely theirs.</p>
+      </div>
+      <div class="process-step rv d1">
+        <div class="step-num">05</div>
+        <div class="step-icon"><i class="bi bi-grid-1x2"></i></div>
+        <h3 class="step-title">Wireframes & IA</h3>
+        <p class="step-text">Restructured the information architecture from the ground up. Created low-fidelity wireframes for client sign-off before moving to high-fidelity design.</p>
+      </div>
+      <div class="process-step rv d2">
+        <div class="step-num">06</div>
+        <div class="step-icon"><i class="bi bi-code-slash"></i></div>
+        <h3 class="step-title">Design → Code</h3>
+        <p class="step-text">Designed and then hand-coded all 15+ pages in WordPress. Built custom animations, parallax effects, hover interactions, and a mobile-responsive layout throughout.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESEARCH -->
+<section class="research-section" id="research">
+  <div class="section-inner">
+    <div class="section-header rv">
+      <span class="lbl">03 - Research</span>
+      <h2 class="section-title">What the <em>testing</em> told me</h2>
+    </div>
+    <div class="research-grid">
+      <div class="research-findings">
+        <div class="finding-item rv">
+          <div class="finding-tag">Navigation</div>
+          <div class="finding-title">Users lost in the menu</div>
+          <div class="finding-text">During testing sessions, participants consistently couldn't distinguish between top-level navigation items. "Education" and "Programs" felt interchangeable. Users gave up before finding what they needed.</div>
+        </div>
+        <div class="finding-item rv d1">
+          <div class="finding-tag">Content Overload</div>
+          <div class="finding-title">Too much, all at once</div>
+          <div class="finding-text">Every page tried to do too many things. Long blocks of text, multiple competing CTAs, and dense imagery meant users couldn't identify a single clear action to take. Scanning was nearly impossible.</div>
+        </div>
+        <div class="finding-item rv d2">
+          <div class="finding-tag">Mobile Experience</div>
+          <div class="finding-title">Broken on the devices people actually use</div>
+          <div class="finding-text">The majority of the target audience accesses the internet via mobile. The site was not mobile-responsive in meaningful ways - layouts broke, text overflowed, buttons were unreachable.</div>
+        </div>
+        <div class="finding-item rv d3">
+          <div class="finding-tag">Brand Perception</div>
+          <div class="finding-title">The site didn't match the mission</div>
+          <div class="finding-text">When shown the site, several participants used words like "busy" and "confusing." The CEO wanted to be seen as serious, culturally rooted and trustworthy. The site communicated none of that.</div>
+        </div>
+      </div>
+
+      <div class="rv d1">
+        <div class="research-quote-block">
+          <div class="quote-mark">"</div>
+          <p class="quote-text">I wanted to sign up for yoga but I couldn't even find where to go. I gave up and looked for something else.</p>
+          <div class="quote-attribution">- Usability Test Participant</div>
+        </div>
+        <div class="stat-row" style="margin-top:24px;">
+          <div class="stat-box" style="background:var(--warm); border:1px solid var(--sand);">
+            <div class="stat-big" style="color:var(--terra);">4</div>
+            <div class="stat-desc" style="color:var(--mid);">Critical navigation failure points identified in testing</div>
+          </div>
+          <div class="stat-box" style="background:var(--warm); border:1px solid var(--sand);">
+            <div class="stat-big" style="color:var(--terra);">78%</div>
+            <div class="stat-desc" style="color:var(--mid);">Of participants couldn't complete a key task on first attempt</div>
+          </div>
+          <div class="stat-box" style="background:var(--warm); border:1px solid var(--sand);">
+            <div class="stat-big" style="color:var(--terra);">15+</div>
+            <div class="stat-desc" style="color:var(--mid);">Pages with inconsistent layouts, CTAs, or broken mobile views</div>
+          </div>
+          <div class="stat-box" style="background:var(--warm); border:1px solid var(--sand);">
+            <div class="stat-big" style="color:var(--terra);">2</div>
+            <div class="stat-desc" style="color:var(--mid);">Rounds of usability testing conducted pre- and mid-design</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAS -->
+<section class="personas-section" id="personas">
+  <div class="section-inner">
+    <div class="section-header rv">
+      <span class="lbl">04 - User Personas</span>
+      <h2 class="section-title">Who I was <em>designing for</em></h2>
+      <p style="margin-top:16px; font-size:16px; color:var(--mid); line-height:1.7; font-weight:300; max-width:640px;">Two primary user archetypes emerged from research. They differ in familiarity with ASCENDtials but share the same core need: to quickly understand what the organisation offers and how to get involved.</p>
+    </div>
+    <div class="personas-grid">
+
+      <div class="persona-card rv">
+        <div class="persona-header">
+          <div class="persona-avatar" style="background: var(--forest);">
+            <i class="bi bi-person-heart"></i>
+          </div>
+          <div class="persona-name">Amara</div>
+          <div class="persona-role">The Community Seeker · 28 · San Diego</div>
+        </div>
+        <div class="persona-body">
+          <p class="persona-bio">Amara is a Black woman who recently moved to San Diego. She's actively looking for community, cultural events, and wellness activities that feel authentic to her background. She heard about ASCENDtials through Instagram and is visiting the site for the first time.</p>
+          <div class="persona-section-label">Motivations</div>
+          <div class="persona-tags">
+            <span class="persona-tag">Finding community</span>
+            <span class="persona-tag">Kemetic yoga</span>
+            <span class="persona-tag">Cultural rootedness</span>
+            <span class="persona-tag">Safe spaces</span>
+          </div>
+          <div class="persona-section-label">Pain Points on the Site</div>
+          <ul class="persona-pains">
+            <li>Can't quickly understand what programs exist or when they happen</li>
+            <li>Doesn't know if the organisation is active and credible</li>
+            <li>Sign-up process is unclear - no obvious first step</li>
+          </ul>
+          <div class="persona-section-label" style="margin-top:20px;">Goals on This Visit</div>
+          <ul class="persona-goals">
+            <li>Find a yoga session she can attend this week</li>
+            <li>Understand the membership options and costs</li>
+            <li>Feel like this is a place she belongs</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="persona-card rv d1">
+        <div class="persona-header" style="background: var(--forest);">
+          <div class="persona-avatar" style="background: var(--terra);">
+            <i class="bi bi-briefcase"></i>
+          </div>
+          <div class="persona-name" style="color: var(--white);">Marcus</div>
+          <div class="persona-role" style="color: rgba(255,255,255,.65);">The Potential Partner · 45 · Los Angeles</div>
+        </div>
+        <div class="persona-body">
+          <p class="persona-bio">Marcus runs a small BIPOC-owned business and heard ASCENDtials has a farmers' market where he might be able to sell. He's evaluating whether the organisation is professional and trustworthy enough to partner with. He needs to see legitimacy fast.</p>
+          <div class="persona-section-label">Motivations</div>
+          <div class="persona-tags">
+            <span class="persona-tag">Vendor opportunities</span>
+            <span class="persona-tag">Legitimacy signals</span>
+            <span class="persona-tag">Community network</span>
+            <span class="persona-tag">Affordable exposure</span>
+          </div>
+          <div class="persona-section-label">Pain Points on the Site</div>
+          <ul class="persona-pains">
+            <li>Can't find the vendor application or market info quickly</li>
+            <li>Site looks amateur - raises doubts about professionalism</li>
+            <li>No clear contact path for business inquiries</li>
+          </ul>
+          <div class="persona-section-label" style="margin-top:20px;">Goals on This Visit</div>
+          <ul class="persona-goals">
+            <li>Find vendor membership pricing and what's included</li>
+            <li>Read about who runs the organisation and their track record</li>
+            <li>Contact the team easily if interested</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CJM -->
+<section class="cjm-section" id="cjm">
+  <div class="cjm-inner">
+    <div class="cjm-header rv">
+      <span class="lbl">05 - Customer Journey Map</span>
+      <h2 class="section-title" style="color:var(--white);">The experience, <em>mapped</em></h2>
+      <p style="margin-top:16px; font-size:15px; color:rgba(255,255,255,.5); line-height:1.7; max-width:640px; font-weight:300;">Tracing Amara's first visit to the site - from discovery to (attempted) signup - reveals exactly where and why the experience broke down, and where my redesign intervened.</p>
+    </div>
+
+    <div class="cjm-persona-switch rv d1">
+      <div class="cjm-tab active">Amara - Community Seeker</div>
+      <div class="cjm-tab">Marcus - Potential Partner</div>
+    </div>
+
+    <div class="rv d2" style="overflow-x:auto;">
+      <table class="cjm-table" id="cjm-table-amara">
+        <thead>
+          <tr>
+            <th style="width:120px;">Stage</th>
+            <th>Action</th>
+            <th>Thoughts</th>
+            <th>Emotion</th>
+            <th>Pain Points</th>
+            <th>Opportunities</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="cjm-stage">Discovery</span></td>
+            <td><span class="cjm-action">Sees ASCENDtials on Instagram. Clicks link in bio. Lands on homepage.</span></td>
+            <td><span class="cjm-thought">"This looks interesting. Let me see what they actually do."</span></td>
+            <td>
+              <div class="emotion-dots">
+                <div class="dot happy"></div><div class="dot happy"></div><div class="dot happy"></div>
+                <span class="emotion-label">Curious</span>
+              </div>
+            </td>
+            <td><span class="pain-chip">Homepage overwhelming</span><span class="pain-chip">No clear mission statement above fold</span></td>
+            <td><span class="opp-chip">Strong hero with mission + visual</span><span class="opp-chip">Personality-first layout</span></td>
+          </tr>
+          <tr>
+            <td><span class="cjm-stage">Explore</span></td>
+            <td><span class="cjm-action">Scrolls homepage. Tries to navigate via the menu. Clicks "Programs" dropdown.</span></td>
+            <td><span class="cjm-thought">"Wait, what's the difference between Programs and Education? There are so many options."</span></td>
+            <td>
+              <div class="emotion-dots">
+                <div class="dot neutral"></div><div class="dot frustrated"></div>
+                <span class="emotion-label">Confused</span>
+              </div>
+            </td>
+            <td><span class="pain-chip">8-item navigation with similar labels</span><span class="pain-chip">No visual hierarchy</span></td>
+            <td><span class="opp-chip">Simplified nav groupings</span><span class="opp-chip">Visual program tiles on homepage</span></td>
+          </tr>
+          <tr>
+            <td><span class="cjm-stage">Find Yoga</span></td>
+            <td><span class="cjm-action">Tries to find yoga sessions. Clicks multiple pages. Eventually finds Kemetic Yoga page.</span></td>
+            <td><span class="cjm-thought">"I had to click through 5 pages to find this. Hopefully it's still active..."</span></td>
+            <td>
+              <div class="emotion-dots">
+                <div class="dot frustrated"></div><div class="dot frustrated"></div>
+                <span class="emotion-label">Frustrated</span>
+              </div>
+            </td>
+            <td><span class="pain-chip">Yoga buried 3 levels deep</span><span class="pain-chip">Session schedule unclear</span><span class="pain-chip">Outdated event dates</span></td>
+            <td><span class="opp-chip">Yoga as featured section on Programs page</span><span class="opp-chip">Interactive session cards with hover info</span></td>
+          </tr>
+          <tr>
+            <td><span class="cjm-stage">Consider</span></td>
+            <td><span class="cjm-action">Reads about sessions. Wants to sign up. Looks for a button or form.</span></td>
+            <td><span class="cjm-thought">"How do I actually book? Do I need to be a member first?"</span></td>
+            <td>
+              <div class="emotion-dots">
+                <div class="dot neutral"></div><div class="dot frustrated"></div>
+                <span class="emotion-label">Uncertain</span>
+              </div>
+            </td>
+            <td><span class="pain-chip">No clear CTA on yoga page</span><span class="pain-chip">Membership vs. free access unclear</span></td>
+            <td><span class="opp-chip">Dedicated CTA per session type</span><span class="opp-chip">Membership comparison made visible</span></td>
+          </tr>
+          <tr>
+            <td><span class="cjm-stage">Membership</span></td>
+            <td><span class="cjm-action">Navigates to Membership page. Sees pricing. Tries to subscribe.</span></td>
+            <td><span class="cjm-thought">"$25 seems reasonable. But I don't understand what I actually get."</span></td>
+            <td>
+              <div class="emotion-dots">
+                <div class="dot neutral"></div><div class="dot neutral"></div>
+                <span class="emotion-label">Evaluating</span>
+              </div>
+            </td>
+            <td><span class="pain-chip">Tier benefits poorly explained</span><span class="pain-chip">No social proof or testimonials</span></td>
+            <td><span class="opp-chip">Clear benefit breakdown per tier</span><span class="opp-chip">Add member testimonials</span></td>
+          </tr>
+          <tr>
+            <td><span class="cjm-stage">Decision</span></td>
+            <td><span class="cjm-action">Clicks Subscribe. Navigates away. Doesn't complete.</span></td>
+            <td><span class="cjm-thought">"Let me think about this. I'll come back later." (She doesn't.)</span></td>
+            <td>
+              <div class="emotion-dots">
+                <div class="dot frustrated"></div><div class="dot neutral"></div>
+                <span class="emotion-label">Abandoned</span>
+              </div>
+            </td>
+            <td><span class="pain-chip">No urgency or motivation to act now</span><span class="pain-chip">Lost trust due to clunky experience</span></td>
+            <td><span class="opp-chip">Streamlined subscribe flow</span><span class="opp-chip">Add community photos for belonging signal</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="cjm-table" id="cjm-table-marcus" style="display:none;">
+        <thead>
+          <tr>
+            <th style="width:120px;">Stage</th>
+            <th>Action</th>
+            <th>Thoughts</th>
+            <th>Emotion</th>
+            <th>Pain Points</th>
+            <th>Opportunities</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="cjm-stage">Awareness</span></td>
+            <td><span class="cjm-action">Hears about ASCENDtials farmers' market from a colleague. Searches online and lands on site.</span></td>
+            <td><span class="cjm-thought">"Let's see if these people are legit."</span></td>
+            <td><div class="emotion-dots"><div class="dot neutral"></div><div class="dot neutral"></div><span class="emotion-label">Evaluating</span></div></td>
+            <td><span class="pain-chip">Homepage doesn't signal credibility</span></td>
+            <td><span class="opp-chip">Mission + track record front and centre</span></td>
+          </tr>
+          <tr>
+            <td><span class="cjm-stage">Assess</span></td>
+            <td><span class="cjm-action">Looks for About page, team info, history, and proof of impact.</span></td>
+            <td><span class="cjm-thought">"Who founded this? How long have they been around? Are they serious?"</span></td>
+            <td><div class="emotion-dots"><div class="dot neutral"></div><div class="dot frustrated"></div><span class="emotion-label">Skeptical</span></div></td>
+            <td><span class="pain-chip">Team page hard to find</span><span class="pain-chip">No impact numbers visible</span></td>
+            <td><span class="opp-chip">Founder story prominently placed</span><span class="opp-chip">Stats on homepage</span></td>
+          </tr>
+          <tr>
+            <td><span class="cjm-stage">Find Market</span></td>
+            <td><span class="cjm-action">Tries to find farmers' market vendor info. Navigates Clubs dropdown.</span></td>
+            <td><span class="cjm-thought">"Why is vendor info under 'Clubs'? That makes no sense."</span></td>
+            <td><div class="emotion-dots"><div class="dot frustrated"></div><div class="dot frustrated"></div><div class="dot frustrated"></div><span class="emotion-label">Frustrated</span></div></td>
+            <td><span class="pain-chip">Vendor section buried in wrong category</span><span class="pain-chip">Pricing not immediately visible</span></td>
+            <td><span class="opp-chip">Vendor CTA on Farmers' Market page</span><span class="opp-chip">Clearer nav label for market</span></td>
+          </tr>
+          <tr>
+            <td><span class="cjm-stage">Evaluate</span></td>
+            <td><span class="cjm-action">Reads vendor membership pricing. Compares Basic/Pro/Premium tiers.</span></td>
+            <td><span class="cjm-thought">"The prices seem reasonable but I still don't know what the booth setup is like."</span></td>
+            <td><div class="emotion-dots"><div class="dot neutral"></div><div class="dot neutral"></div><span class="emotion-label">Cautious</span></div></td>
+            <td><span class="pain-chip">No photos of the market environment</span><span class="pain-chip">Enrol button feels untrustworthy</span></td>
+            <td><span class="opp-chip">Market photos + testimonials from vendors</span></td>
+          </tr>
+          <tr>
+            <td><span class="cjm-stage">Contact</span></td>
+            <td><span class="cjm-action">Decides to reach out before committing. Looks for a contact form or email.</span></td>
+            <td><span class="cjm-thought">"I'll just email them. But I can't even find a direct email."</span></td>
+            <td><div class="emotion-dots"><div class="dot frustrated"></div><span class="emotion-label">Annoyed</span></div></td>
+            <td><span class="pain-chip">Contact info inconsistently placed</span><span class="pain-chip">No response time expectation set</span></td>
+            <td><span class="opp-chip">Contact form on every market-related page</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- USER FLOW -->
+<section class="flow-section" id="userflow">
+  <div class="flow-inner">
+    <div class="section-header rv">
+      <span class="lbl">06 - User Flow</span>
+      <h2 class="section-title">Redesigning the <em>path</em></h2>
+      <p style="margin-top:16px; font-size:15px; color:var(--mid); line-height:1.7; max-width:640px; font-weight:300;">The original site had no clear user flows - pages connected arbitrarily. Below is the redesigned path for Amara's primary goal: discovering yoga and signing up for membership.</p>
+    </div>
+
+    <div class="flow-svg-wrap rv d1">
+      <svg viewBox="0 0 1060 520" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; font-family:var(--sans);">
+        <!-- PHASE LABELS -->
+        <rect x="0" y="0" width="200" height="28" fill="#2C4A3E"/>
+        <text x="100" y="18" fill="white" font-size="9" font-weight="600" letter-spacing="2" text-anchor="middle" dominant-baseline="middle">ENTRY</text>
+        <rect x="202" y="0" width="200" height="28" fill="#8B6347"/>
+        <text x="302" y="18" fill="white" font-size="9" font-weight="600" letter-spacing="2" text-anchor="middle" dominant-baseline="middle">EXPLORE</text>
+        <rect x="404" y="0" width="200" height="28" fill="#2C4A3E"/>
+        <text x="504" y="18" fill="white" font-size="9" font-weight="600" letter-spacing="2" text-anchor="middle" dominant-baseline="middle">DECIDE</text>
+        <rect x="606" y="0" width="200" height="28" fill="#8B6347"/>
+        <text x="706" y="18" fill="white" font-size="9" font-weight="600" letter-spacing="2" text-anchor="middle" dominant-baseline="middle">CONVERT</text>
+        <rect x="808" y="0" width="252" height="28" fill="#2C4A3E"/>
+        <text x="934" y="18" fill="white" font-size="9" font-weight="600" letter-spacing="2" text-anchor="middle" dominant-baseline="middle">ENGAGE</text>
+
+        <!-- ROW 1 - MAIN HAPPY PATH -->
+        <!-- Instagram -->
+        <rect x="20" y="60" width="140" height="44" rx="22" fill="#2C4A3E"/>
+        <text x="90" y="86" fill="white" font-size="11" font-weight="500" text-anchor="middle" dominant-baseline="middle">Instagram / Word of Mouth</text>
+        <!-- Arrow -->
+        <line x1="160" y1="82" x2="202" y2="82" stroke="#D4C4A8" stroke-width="1.5" marker-end="url(#arr)"/>
+        <!-- Homepage -->
+        <rect x="202" y="60" width="140" height="44" rx="4" fill="white" stroke="#D4C4A8" stroke-width="1"/>
+        <text x="272" y="79" fill="#1A1A1A" font-size="11" font-weight="500" text-anchor="middle">Homepage</text>
+        <text x="272" y="93" fill="#7A7A7A" font-size="9" text-anchor="middle">Mission + Program tiles</text>
+        <!-- Arrow -->
+        <line x1="342" y1="82" x2="404" y2="82" stroke="#D4C4A8" stroke-width="1.5" marker-end="url(#arr)"/>
+        <!-- Programs page -->
+        <rect x="404" y="60" width="140" height="44" rx="4" fill="white" stroke="#D4C4A8" stroke-width="1"/>
+        <text x="474" y="79" fill="#1A1A1A" font-size="11" font-weight="500" text-anchor="middle">Programs Page</text>
+        <text x="474" y="93" fill="#7A7A7A" font-size="9" text-anchor="middle">Yoga tile visible</text>
+        <!-- Arrow -->
+        <line x1="544" y1="82" x2="606" y2="82" stroke="#D4C4A8" stroke-width="1.5" marker-end="url(#arr)"/>
+        <!-- Yoga page -->
+        <rect x="606" y="60" width="140" height="44" rx="4" fill="white" stroke="#D4C4A8" stroke-width="1"/>
+        <text x="676" y="79" fill="#1A1A1A" font-size="11" font-weight="500" text-anchor="middle">Kemetic Yoga Page</text>
+        <text x="676" y="93" fill="#7A7A7A" font-size="9" text-anchor="middle">Session cards, hover info</text>
+        <!-- Arrow -->
+        <line x1="746" y1="82" x2="808" y2="82" stroke="#D4C4A8" stroke-width="1.5" marker-end="url(#arr)"/>
+        <!-- Membership -->
+        <rect x="808" y="60" width="130" height="44" rx="4" fill="white" stroke="#D4C4A8" stroke-width="1"/>
+        <text x="873" y="79" fill="#1A1A1A" font-size="11" font-weight="500" text-anchor="middle">Membership</text>
+        <text x="873" y="93" fill="#7A7A7A" font-size="9" text-anchor="middle">Clear tier comparison</text>
+        <!-- Arrow -->
+        <line x1="938" y1="82" x2="990" y2="82" stroke="#D4C4A8" stroke-width="1.5" marker-end="url(#arr)"/>
+        <!-- Signed up -->
+        <rect x="990" y="60" width="55" height="44" rx="22" fill="#34B7A7"/>
+        <text x="1017" y="86" fill="white" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="middle">Signed Up</text>
+
+        <!-- LABELS row 1 -->
+        <text x="90" y="52" fill="#8B6347" font-size="9" font-weight="600" letter-spacing="1" text-anchor="middle">START</text>
+        <text x="1017" y="52" fill="#34B7A7" font-size="9" font-weight="600" letter-spacing="1" text-anchor="middle">SUCCESS</text>
+
+        <!-- ROW 2 - DECISION POINTS / BEFORE -->
+        <text x="30" y="168" fill="#8B6347" font-size="9" font-weight="600" letter-spacing="2">BEFORE REDESIGN</text>
+
+        <!-- Old navigation problem -->
+        <rect x="202" y="180" width="140" height="44" rx="4" fill="rgba(224,120,120,.15)" stroke="rgba(224,120,120,.5)" stroke-width="1"/>
+        <text x="272" y="199" fill="#c0504a" font-size="10" font-weight="500" text-anchor="middle">Complex Menu</text>
+        <text x="272" y="213" fill="#c0504a" font-size="9" text-anchor="middle">8 ambiguous items</text>
+
+        <rect x="404" y="180" width="140" height="44" rx="4" fill="rgba(224,120,120,.15)" stroke="rgba(224,120,120,.5)" stroke-width="1"/>
+        <text x="474" y="199" fill="#c0504a" font-size="10" font-weight="500" text-anchor="middle">Content Overload</text>
+        <text x="474" y="213" fill="#c0504a" font-size="9" text-anchor="middle">No clear CTA</text>
+
+        <rect x="606" y="180" width="140" height="44" rx="4" fill="rgba(224,120,120,.15)" stroke="rgba(224,120,120,.5)" stroke-width="1"/>
+        <text x="676" y="199" fill="#c0504a" font-size="10" font-weight="500" text-anchor="middle">Yoga buried deep</text>
+        <text x="676" y="213" fill="#c0504a" font-size="9" text-anchor="middle">5 clicks to find</text>
+
+        <rect x="808" y="180" width="130" height="44" rx="4" fill="rgba(224,120,120,.15)" stroke="rgba(224,120,120,.5)" stroke-width="1"/>
+        <text x="873" y="199" fill="#c0504a" font-size="10" font-weight="500" text-anchor="middle">Drop-off</text>
+        <text x="873" y="213" fill="#c0504a" font-size="9" text-anchor="middle">User abandons</text>
+
+        <!-- Connecting lines before → after -->
+        <line x1="272" y1="224" x2="272" y2="260" stroke="rgba(224,120,120,.4)" stroke-width="1" stroke-dasharray="3"/>
+        <line x1="474" y1="224" x2="474" y2="260" stroke="rgba(224,120,120,.4)" stroke-width="1" stroke-dasharray="3"/>
+        <line x1="676" y1="224" x2="676" y2="260" stroke="rgba(224,120,120,.4)" stroke-width="1" stroke-dasharray="3"/>
+        <line x1="873" y1="224" x2="873" y2="260" stroke="rgba(224,120,120,.4)" stroke-width="1" stroke-dasharray="3"/>
+
+        <!-- ROW 3 - AFTER / SOLUTION -->
+        <text x="30" y="252" fill="#34B7A7" font-size="9" font-weight="600" letter-spacing="2">REDESIGN SOLUTION</text>
+
+        <rect x="202" y="262" width="140" height="44" rx="4" fill="rgba(52,183,167,.1)" stroke="rgba(52,183,167,.4)" stroke-width="1"/>
+        <text x="272" y="281" fill="#2C4A3E" font-size="10" font-weight="500" text-anchor="middle">Restructured Nav</text>
+        <text x="272" y="295" fill="#2C4A3E" font-size="9" text-anchor="middle">5 clear groupings</text>
+
+        <rect x="404" y="262" width="140" height="44" rx="4" fill="rgba(52,183,167,.1)" stroke="rgba(52,183,167,.4)" stroke-width="1"/>
+        <text x="474" y="281" fill="#2C4A3E" font-size="10" font-weight="500" text-anchor="middle">Visual Program Tiles</text>
+        <text x="474" y="295" fill="#2C4A3E" font-size="9" text-anchor="middle">1 CTA per section</text>
+
+        <rect x="606" y="262" width="140" height="44" rx="4" fill="rgba(52,183,167,.1)" stroke="rgba(52,183,167,.4)" stroke-width="1"/>
+        <text x="676" y="281" fill="#2C4A3E" font-size="10" font-weight="500" text-anchor="middle">Yoga featured</text>
+        <text x="676" y="295" fill="#2C4A3E" font-size="9" text-anchor="middle">Hover cards, 2 clicks</text>
+
+        <rect x="808" y="262" width="130" height="44" rx="4" fill="rgba(52,183,167,.1)" stroke="rgba(52,183,167,.4)" stroke-width="1"/>
+        <text x="873" y="281" fill="#2C4A3E" font-size="10" font-weight="500" text-anchor="middle">Clear Membership</text>
+        <text x="873" y="295" fill="#2C4A3E" font-size="9" text-anchor="middle">Benefits explained</text>
+
+        <!-- SPECIAL INTERACTIONS ROW -->
+        <text x="30" y="348" fill="#7A7A7A" font-size="9" font-weight="600" letter-spacing="2">INTERACTIVE FEATURES BUILT</text>
+
+        <rect x="20" y="360" width="160" height="44" rx="4" fill="white" stroke="#D4C4A8" stroke-width="1"/>
+        <text x="100" y="379" fill="#1A1A1A" font-size="10" font-weight="500" text-anchor="middle">Parallax Hero Effect</text>
+        <text x="100" y="393" fill="#7A7A7A" font-size="9" text-anchor="middle">Mouse-driven depth</text>
+
+        <rect x="202" y="360" width="160" height="44" rx="4" fill="white" stroke="#D4C4A8" stroke-width="1"/>
+        <text x="282" y="379" fill="#1A1A1A" font-size="10" font-weight="500" text-anchor="middle">Hover Cards</text>
+        <text x="282" y="393" fill="#7A7A7A" font-size="9" text-anchor="middle">Yoga sessions expand</text>
+
+        <rect x="384" y="360" width="160" height="44" rx="4" fill="white" stroke="#D4C4A8" stroke-width="1"/>
+        <text x="464" y="379" fill="#1A1A1A" font-size="10" font-weight="500" text-anchor="middle">Font Carousel</text>
+        <text x="464" y="393" fill="#7A7A7A" font-size="9" text-anchor="middle">CEO brand selection</text>
+
+        <rect x="566" y="360" width="160" height="44" rx="4" fill="white" stroke="#D4C4A8" stroke-width="1"/>
+        <text x="646" y="379" fill="#1A1A1A" font-size="10" font-weight="500" text-anchor="middle">Pricing Toggle</text>
+        <text x="646" y="393" fill="#7A7A7A" font-size="9" text-anchor="middle">Membership comparison</text>
+
+        <rect x="748" y="360" width="160" height="44" rx="4" fill="white" stroke="#D4C4A8" stroke-width="1"/>
+        <text x="828" y="379" fill="#1A1A1A" font-size="10" font-weight="500" text-anchor="middle">Event Calendar</text>
+        <text x="828" y="393" fill="#7A7A7A" font-size="9" text-anchor="middle">Filter by program</text>
+
+        <rect x="930" y="360" width="110" height="44" rx="4" fill="white" stroke="#D4C4A8" stroke-width="1"/>
+        <text x="985" y="379" fill="#1A1A1A" font-size="10" font-weight="500" text-anchor="middle">Mobile Nav</text>
+        <text x="985" y="393" fill="#7A7A7A" font-size="9" text-anchor="middle">Hamburger menu</text>
+
+        <!-- LEGEND -->
+        <rect x="20" y="450" width="12" height="12" rx="2" fill="white" stroke="#D4C4A8"/>
+        <text x="38" y="460" fill="#7A7A7A" font-size="10" dominant-baseline="middle">Redesigned screens</text>
+        <rect x="200" y="450" width="12" height="12" rx="2" fill="rgba(224,120,120,.15)" stroke="rgba(224,120,120,.5)"/>
+        <text x="218" y="460" fill="#7A7A7A" font-size="10" dominant-baseline="middle">Original problems</text>
+        <rect x="380" y="450" width="12" height="12" rx="2" fill="rgba(52,183,167,.1)" stroke="rgba(52,183,167,.4)"/>
+        <text x="398" y="460" fill="#7A7A7A" font-size="10" dominant-baseline="middle">Solutions applied</text>
+        <rect x="560" y="450" width="12" height="12" rx="2" fill="#34B7A7"/>
+        <text x="578" y="460" fill="#7A7A7A" font-size="10" dominant-baseline="middle">Success state</text>
+
+        <!-- Arrow marker -->
+        <defs>
+          <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#D4C4A8"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- FONTS SECTION -->
+<div class="fonts-section" id="typography">
+  <div class="fonts-inner">
+    <div class="fonts-header rv">
+      <span class="lbl">07 - Typography</span>
+      <h2 class="section-title">Finding the <em>voice</em></h2>
+      <p style="color:rgba(255,255,255,.55); font-size:15px; line-height:1.75; max-width:620px; font-weight:300; margin-bottom:64px;">To find a visual style that reflects the unique identity of ASCENDtials, I began by selecting fonts. My options included Aesthetic Romance, Grotesk, Amoret Sans, Harmony Embrace, Quantify, and Satoshi. I tested each pairing and presented them to the CEO. She chose what felt genuinely theirs.</p>
+    </div>
+
+    <!-- Font candidates carousel - real images -->
+    <div style="position:relative; margin-bottom:64px;" class="rv d1">
+      <div id="font-carousel" style="overflow:hidden; border-radius:4px;">
+        <div id="font-track" style="display:flex; transition:transform .5s cubic-bezier(.23,1,.32,1);">
+          <div style="min-width:100%; flex-shrink:0;">
+            <img src="./assets/img/font1.png" alt="Font Option 1" style="width:100%; display:block; border-radius:4px;">
+          </div>
+          <div style="min-width:100%; flex-shrink:0;">
+            <img src="./assets/img/font2.png" alt="Font Option 2" style="width:100%; display:block; border-radius:4px;">
+          </div>
+          <div style="min-width:100%; flex-shrink:0;">
+            <img src="./assets/img/font3.png" alt="Font Option 3" style="width:100%; display:block; border-radius:4px;">
+          </div>
+          <div style="min-width:100%; flex-shrink:0;">
+            <img src="./assets/img/font4.png" alt="Font Option 4" style="width:100%; display:block; border-radius:4px;">
+          </div>
+          <div style="min-width:100%; flex-shrink:0;">
+            <img src="./assets/img/font5.png" alt="Font Option 5" style="width:100%; display:block; border-radius:4px;">
+          </div>
+          <div style="min-width:100%; flex-shrink:0;">
+            <img src="./assets/img/font6.png" alt="Font Option 6" style="width:100%; display:block; border-radius:4px;">
+          </div>
+        </div>
+      </div>
+      <!-- Controls -->
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-top:24px;">
+        <div style="display:flex; gap:8px;" id="font-dots"></div>
+        <div style="display:flex; gap:12px;">
+          <button id="fc-prev" style="width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,.2); background:transparent; color:rgba(255,255,255,.7); cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; transition:all .3s;">&#8592;</button>
+          <button id="fc-next" style="width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,.2); background:transparent; color:rgba(255,255,255,.7); cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; transition:all .3s;">&#8594;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result - chosen fonts -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;" class="rv d2">
+      <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:56px;">
+        <div class="chosen-badge"><i class="bi bi-check-circle-fill"></i> CEO's Choice - Display</div>
+        <div style="font-size:72px; color:var(--white); font-weight:300; line-height:1; margin:24px 0; letter-spacing:-1px; font-family:'Noto Sans',sans-serif; font-style:normal;">Amoret Sans</div>
+        <p style="font-size:15px; color:rgba(255,255,255,.55); line-height:1.75; font-weight:300; max-width:400px;">This font perfectly conveys the lightness and friendliness the company aims for. It avoids excessive formality and gives the site a modern, elegant look that feels uniquely theirs.</p>
+        <div style="margin-top:28px; padding-top:28px; border-top:1px solid rgba(255,255,255,.08); display:flex; gap:32px; flex-wrap:wrap;">
+          <div><div style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,.3); text-transform:uppercase; margin-bottom:4px;">Usage</div><div style="font-size:13px; color:rgba(255,255,255,.7);">All headings & titles</div></div>
+          <div><div style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,.3); text-transform:uppercase; margin-bottom:4px;">Weight</div><div style="font-size:13px; color:rgba(255,255,255,.7);">300 (Light)</div></div>
+          <div><div style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,.3); text-transform:uppercase; margin-bottom:4px;">Feel</div><div style="font-size:13px; color:rgba(255,255,255,.7);">Modern, individual, elegant</div></div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:56px;">
+        <div class="chosen-badge"><i class="bi bi-check-circle-fill"></i> CEO's Choice - Body</div>
+        <div style="font-size:72px; color:var(--white); font-weight:400; line-height:1; margin:24px 0; font-family:'Noto Sans',sans-serif;">Noto Sans</div>
+        <p style="font-size:15px; color:rgba(255,255,255,.55); line-height:1.75; font-weight:300; max-width:400px; font-family:'Noto Sans',sans-serif;">Selected for readability and harmony with Amoret Sans. Noto Sans creates a clean, balanced style that reinforces an approachable feel across all pages.</p>
+        <div style="margin-top:28px; padding-top:28px; border-top:1px solid rgba(255,255,255,.08); display:flex; gap:32px; flex-wrap:wrap;">
+          <div><div style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,.3); text-transform:uppercase; margin-bottom:4px;">Usage</div><div style="font-size:13px; color:rgba(255,255,255,.7);">Body text & UI labels</div></div>
+          <div><div style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,.3); text-transform:uppercase; margin-bottom:4px;">Weight</div><div style="font-size:13px; color:rgba(255,255,255,.7);">400 / 600</div></div>
+          <div><div style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,.3); text-transform:uppercase; margin-bottom:4px;">Feel</div><div style="font-size:13px; color:rgba(255,255,255,.7);">Clean, readable, accessible</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result image -->
+    <div style="margin-top:4px;" class="rv d3">
+      <img src="./assets/img/result.png" alt="Typography result" style="width:100%; display:block; border-radius:0 0 4px 4px;">
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const track = document.getElementById('font-track');
+    const slides = track ? track.children.length : 0;
+    let cur = 0;
+    const dotsEl = document.getElementById('font-dots');
+    const dots = [];
+    if (!track) return;
+    for (let i=0;i<slides;i++){
+      const d = document.createElement('div');
+      d.style.cssText = `width:8px;height:8px;border-radius:50%;background:${i===0?'var(--accent)':'rgba(255,255,255,.2)'};cursor:pointer;transition:background .3s;`;
+      d.addEventListener('click',()=>go(i));
+      dotsEl.appendChild(d);
+      dots.push(d);
+    }
+    function go(n){ cur=n; track.style.transform=`translateX(-${cur*100}%)`; dots.forEach((d,i)=>d.style.background=i===cur?'var(--accent)':'rgba(255,255,255,.2)'); }
+    document.getElementById('fc-prev').addEventListener('click',()=>go((cur-1+slides)%slides));
+    document.getElementById('fc-next').addEventListener('click',()=>go((cur+1)%slides));
+  })();
+</script>
+
+<!-- SCREENS / GALLERY -->
+<section class="screens-section" id="screens">
+  <div class="section-inner">
+    <div class="section-header rv">
+      <span class="lbl">08 - The Redesigned Site</span>
+      <h2 class="section-title">15+ pages, <em>every one</em> rebuilt</h2>
+    </div>
+    <div class="screens-intro rv d1">
+      <p>Each page was designed with a single primary purpose and one clear call to action. I eliminated the visual noise, created consistent interactive patterns, and rebuilt everything in WordPress from scratch - custom post types, animations, mobile breakpoints, and all.</p>
+    </div>
+
+    <!-- Page Showcases -->
+    <div class="page-showcase">
+
+      <!-- Homepage -->
+      <div class="showcase-item rv">
+        <div class="showcase-info">
+          <div class="showcase-tag">01 - Homepage</div>
+          <h3 class="showcase-title">First impression, reimagined</h3>
+          <p class="showcase-text">The homepage was the biggest offender - too much content, no hierarchy. I restructured it around a single editorial hero, followed by a clear program overview and a community-first visual language.</p>
+          <ul class="showcase-features">
+            <li>Bold hero with mission statement above the fold</li>
+            <li>Program tile grid with visual icons</li>
+            <li>Mouse-tracking parallax on the Programs & Events section</li>
+            <li>Featured Events with full-bleed image cards</li>
+            <li>Custom animations on scroll reveal</li>
+          </ul>
+        </div>
+        <div class="showcase-img-wrap">
+          <img src="./assets/img/Home Page.png" alt="Homepage redesign" style="width:100%; display:block;">
+        </div>
+      </div>
+
+      <!-- Kemetic Yoga -->
+      <div class="showcase-item reverse rv d1">
+        <div class="showcase-info">
+          <div class="showcase-tag">02 - Kemetic Yoga Page</div>
+          <h3 class="showcase-title">From static list to living experience</h3>
+          <p class="showcase-text">Previously, all yoga session types were listed as walls of text. I redesigned them as interactive cards - text is hidden by default and revealed on hover, creating visual breathing room while keeping all the detail available.</p>
+          <ul class="showcase-features">
+            <li>5 yoga types: Group, Youth, Private, Corporate, Full Moon</li>
+            <li>Hover-reveal card content with smooth CSS transitions</li>
+            <li>Hero section with bold editorial layout</li>
+            <li>Parallax layer effect on featured section</li>
+            <li>Event calendar integration below</li>
+          </ul>
+        </div>
+        <div class="showcase-img-wrap">
+          <img src="./assets/img/Kemetic Yoga Page.png" alt="Kemetic Yoga page redesign" style="width:100%; display:block;">
+        </div>
+      </div>
+
+      <!-- Membership -->
+      <div class="showcase-item rv d2">
+        <div class="showcase-info">
+          <div class="showcase-tag">03 - Membership Page</div>
+          <h3 class="showcase-title">Making the value crystal clear</h3>
+          <p class="showcase-text">The original membership page had pricing without clear benefit explanations. I redesigned it with a clean three-tier layout, explicit feature lists, and a secondary vendor membership section with its own pricing structure.</p>
+          <ul class="showcase-features">
+            <li>Three membership tiers: Basic $25 / Pro $45 / Premium $75</li>
+            <li>Vendor membership section for BIPOC-owned businesses</li>
+            <li>CHCDC partner discount integration</li>
+            <li>Feature comparison with visual check marks</li>
+            <li>Clear subscribe CTAs with no ambiguity</li>
+          </ul>
+        </div>
+        <div class="showcase-img-wrap">
+          <img src="./assets/img/Membership Page.png" alt="Membership page redesign" style="width:100%; display:block;">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Pages mosaic - real screenshots -->
+    <div style="margin-top: 80px;" class="rv">
+      <span class="lbl" style="margin-bottom: 32px; display:block;">All Pages Delivered</span>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;">
+        <div class="mosaic-item" style="overflow:hidden; position:relative;">
+          <img src="./assets/img/About Us Page.png" alt="About Us" style="width:100%; display:block; transition:transform .5s;">
+          <div class="mosaic-label">About Us</div>
+        </div>
+        <div class="mosaic-item" style="overflow:hidden; position:relative;">
+          <img src="./assets/img/Literacy Workshops Page.png" alt="Literacy Workshops" style="width:100%; display:block; transition:transform .5s;">
+          <div class="mosaic-label">Literacy Workshops</div>
+        </div>
+        <div class="mosaic-item" style="overflow:hidden; position:relative;">
+          <img src="./assets/img/Donation Page.png" alt="Donation" style="width:100%; display:block; transition:transform .5s;">
+          <div class="mosaic-label">Donation Page</div>
+        </div>
+        <div class="mosaic-item" style="overflow:hidden; position:relative;">
+          <img src="./assets/img/Kemetic Yoga Page.png" alt="Kemetic Yoga" style="width:100%; display:block; transition:transform .5s;">
+          <div class="mosaic-label">Kemetic Yoga</div>
+        </div>
+        <div class="mosaic-item" style="overflow:hidden; position:relative;">
+          <img src="./assets/img/Service Learning Programs Page.png" alt="Service Learning" style="width:100%; display:block; transition:transform .5s;">
+          <div class="mosaic-label">Service Learning</div>
+        </div>
+        <div class="mosaic-item" style="overflow:hidden; position:relative;">
+          <img src="./assets/img/Environmental Programs Page.png" alt="Environmental" style="width:100%; display:block; transition:transform .5s;">
+          <div class="mosaic-label">Environmental Programs</div>
+        </div>
+        <div class="mosaic-item" style="overflow:hidden; position:relative; grid-column: span 3;">
+          <img src="./assets/img/From Design to Code.png" alt="From Design to Code" style="width:100%; display:block; transition:transform .5s;">
+          <div class="mosaic-label">From Design to Code</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact-section" id="impact">
+  <div class="impact-inner">
+    <div class="impact-header rv">
+      <span class="lbl">09 - Outcomes</span>
+      <h2 class="section-title">Real results for a real community</h2>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-card rv">
+        <div class="impact-num">15<sup>+</sup></div>
+        <div class="impact-desc">Pages fully redesigned and hand-coded for WordPress, each with a clear purpose and CTA</div>
+      </div>
+      <div class="impact-card rv d1">
+        <div class="impact-num" style="font-size:56px;">↑ Mem-<br>berships</div>
+        <div class="impact-desc">Increased subscription signups following the redesign launch, attributed to clearer value communication</div>
+      </div>
+      <div class="impact-card rv d2">
+        <div class="impact-num">2×</div>
+        <div class="impact-desc">Rounds of usability testing - before and during design - to validate decisions with real users</div>
+      </div>
+      <div class="impact-card rv d3">
+        <div class="impact-num" style="font-size:52px;">100%</div>
+        <div class="impact-desc">Mobile-responsive pages - a complete shift from the previous desktop-only layout</div>
+      </div>
+    </div>
+    <p class="impact-note rv d2">
+      Note: This project was a volunteer engagement. After my departure, the site was partially modified by a subsequent developer which altered some of the coded interactions. The screenshots and documentation in this case study reflect the original designs as I delivered them.
+    </p>
+  </div>
+</section>
+
+<!-- LEARNINGS -->
+<section class="learnings-section">
+  <div class="section-inner">
+    <div class="section-header rv">
+      <span class="lbl">10 - Reflections</span>
+      <h2 class="section-title">What I <em>learned</em></h2>
+    </div>
+    <div class="learnings-grid">
+      <div class="learning-item rv">
+        <div class="learning-icon"><i class="bi bi-heart"></i></div>
+        <h3 class="learning-title">Design within constraints is the hardest skill</h3>
+        <p class="learning-text">Being told "keep the bold, heavy style we love" while also fixing navigation and usability forced me to deeply understand the difference between aesthetic preference and functional design debt. The answer was never "simplify everything" - it was "simplify the right things."</p>
+      </div>
+      <div class="learning-item rv d1">
+        <div class="learning-icon"><i class="bi bi-people-fill"></i></div>
+        <h3 class="learning-title">Testing with the actual community changes everything</h3>
+        <p class="learning-text">Testing with community members - not generic user profiles - revealed barriers I never would have anticipated. Cultural context, trust signals, and belonging cues mattered enormously to this audience, and wouldn't have surfaced in a standard usability session.</p>
+      </div>
+      <div class="learning-item rv d2">
+        <div class="learning-icon"><i class="bi bi-code-slash"></i></div>
+        <h3 class="learning-title">Being able to code your own designs is a superpower</h3>
+        <p class="learning-text">Designing and coding 15+ pages gave me real insight into what's possible in production, how animations behave at real sizes, and where assumptions break. The parallax effects, hover cards, and responsive layouts I built would have been lost in translation to any developer who didn't share the design intent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">YH</div>
+  <div class="footer-center">
+    <p>ASCENDtials · UX/UI & Development Case Study · 2024</p>
+    
+  </div>
+  <div class="footer-social">
+    <!-- <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank"><i class="bi bi-linkedin"></i></a>
+    <a href="https://www.behance.net/yana_harcourt" target="_blank"><i class="bi bi-behance"></i></a>
+    <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank"><i class="bi bi-instagram"></i></a>
+    <a href="https://github.com/yanaharcourt" target="_blank"><i class="bi bi-github"></i></a> -->
+  </div>
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<script>
+  // ── CURSOR
+  const cur = document.getElementById('cur');
+  const ctr = document.getElementById('ctr');
+  document.addEventListener('mousemove', e => {
+    cur.style.left = e.clientX + 'px';
+    cur.style.top = e.clientY + 'px';
+    ctr.style.left = e.clientX + 'px';
+    ctr.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a,button,[class*="card"],[class*="step"],[class*="item"]').forEach(el => {
+    el.addEventListener('mouseenter', () => { ctr.style.transform = 'translate(-50%,-50%) scale(1.6)'; ctr.style.borderColor = 'var(--terra)'; });
+    el.addEventListener('mouseleave', () => { ctr.style.transform = 'translate(-50%,-50%) scale(1)'; ctr.style.borderColor = 'rgba(139,99,71,.4)'; });
+  });
+
+  // ── SCROLL REVEAL
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+  // ── SCROLL TOP
+  const st = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => st.classList.toggle('show', window.scrollY > 500));
+
+  // ── NAV SHRINK
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.padding = window.scrollY > 60 ? '14px 60px' : '22px 60px';
+    nav.style.boxShadow = window.scrollY > 60 ? '0 2px 20px rgba(0,0,0,.08)' : 'none';
+  });
+
+  // ── CJM TABS
+  document.querySelectorAll('.cjm-tab').forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.cjm-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('cjm-table-amara').style.display = i === 0 ? 'table' : 'none';
+      document.getElementById('cjm-table-marcus').style.display = i === 1 ? 'table' : 'none';
+    });
+  });
+</script>
+</body>
+</html>

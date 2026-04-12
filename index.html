@@ -4,516 +4,1701 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Yana Harcourt</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords"> 
-
-  <!-- Favicons -->
+  <title>Yana Harcourt — UX/UI Designer</title>
+  <meta name="description" content="UX/UI Designer focused on Web & Product Design">
   <link href="assets/img/My Y logo.png" rel="icon">
-  <link href="assets/img/My Y logo.png" rel="apple-touch-icon">
-
-  <!-- Fonts -->
-  <!-- <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> -->
-
-  <!-- Google Fonts -->
   <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Raleway:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
+  <!-- Three.js globe shaders -->
+  <script type="x-shader/x-fragment" id="fragment-shader-map">
+    uniform sampler2D u_map_tex;
+    varying float vOpacity;
+    varying vec2 vUv;
+    void main() {
+        vec3 color = texture2D(u_map_tex, vUv).rgb;
+        color -= .2 * length(gl_PointCoord.xy - vec2(.5));
+        float dot = 1. - smoothstep(.38, .4, length(gl_PointCoord.xy - vec2(.5)));
+        if (dot < 0.5) discard;
+        gl_FragColor = vec4(color, dot * vOpacity);
+    }
+  </script>
+  <script type="x-shader/x-vertex" id="vertex-shader-map">
+    uniform sampler2D u_map_tex;
+    uniform float u_dot_size;
+    uniform float u_time_since_click;
+    uniform vec3 u_pointer;
+    #define PI 3.14159265359
+    varying float vOpacity;
+    varying vec2 vUv;
+    void main() {
+        vUv = uv;
+        float visibility = step(.2, texture2D(u_map_tex, uv).r);
+        gl_PointSize = visibility * u_dot_size;
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        vOpacity = (1. / length(mvPosition.xyz) - .7);
+        vOpacity = clamp(vOpacity, .03, 1.);
+        float t = u_time_since_click - .1;
+        t = max(0., t);
+        float max_amp = .15;
+        float dist = 1. - .5 * length(position - u_pointer);
+        float damping = 1. / (1. + 20. * t);
+        float delta = max_amp * damping * sin(5. * t * (1. + 2. * dist) - PI);
+        delta *= 1. - smoothstep(.8, 1., dist);
+        vec3 pos = position;
+        pos *= (1. + delta);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f5f3ef;
+      --text: #111;
+      --text-muted: #777;
+      --border: rgba(0, 0, 0, 0.08);
+      --gap: 12px;
+      --radius: 14px;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'Raleway', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* ================================================
+       NAV — full-width pill with glass effect (Stokt)
+    ================================================ */
+    .nav-wrap {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 1000;
+      transition: transform .4s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .nav-wrap.hide {
+      transform: translateY(-140%);
+    }
+
+    .nav-glass {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px 10px 22px;
+      background: rgba(20, 18, 16, 0.72);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+    }
+
+    .nav__logo {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-style: italic;
+      color: #fff;
+      flex-shrink: 0;
+      letter-spacing: -.01em;
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav__links a {
+      display: block;
+      padding: 7px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .55);
+      border-radius: 100px;
+      transition: color .2s, background .2s;
+    }
+
+    .nav__links a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .nav__right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: var(--sans);
+      white-space: nowrap;
+    }
+
+    .btn-ghost {
+      border: 1.5px solid rgba(255, 255, 255, .25);
+      color: rgba(255, 255, 255, .8);
+      background: transparent;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, .12);
+      color: #fff;
+      border-color: rgba(255, 255, 255, .4);
+    }
+
+    .btn-white {
+      border: 1.5px solid #fff;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .btn-white:hover {
+      opacity: .88;
+    }
+
+    /* Dark variants for light sections */
+    .btn-outline-dark {
+      border: 1.5px solid var(--text);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .btn-outline-dark:hover {
+      background: var(--text);
+      color: #fff;
+    }
+
+    .btn-solid-dark {
+      border: 1.5px solid var(--text);
+      background: var(--text);
+      color: #fff;
+    }
+
+    .btn-solid-dark:hover {
+      opacity: .8;
+    }
+
+    /* burger */
+    .nav__burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 6px;
+    }
+
+    .nav__burger span {
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: #fff;
+      transition: transform .3s, opacity .3s;
+    }
+
+    .nav__burger.open span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+
+    .nav__burger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav__burger.open span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    /* Drawer */
+    .nav-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: #0d0d0d;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 28px 40px;
+      transform: translateX(100%);
+      transition: transform .5s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .nav-drawer.open {
+      transform: translateX(0);
+    }
+
+    .nav-drawer ul {
+      list-style: none;
+    }
+
+    .nav-drawer ul li {
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      overflow: hidden;
+    }
+
+    .nav-drawer ul a {
+      display: block;
+      padding: 18px 0;
+      font-family: var(--serif);
+      font-size: 40px;
+      font-style: italic;
+      color: #fff;
+      transition: color .2s, padding-left .2s;
+    }
+
+    .nav-drawer ul a:hover {
+      color: rgba(255, 255, 255, .4);
+      padding-left: 10px;
+    }
+
+    .nav-drawer-social {
+      display: flex;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .nav-drawer-social a {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .4);
+      transition: color .2s;
+    }
+
+    .nav-drawer-social a:hover {
+      color: #fff;
+    }
+
+    /* ================================================
+       HERO
+    ================================================ */
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      padding: 0 var(--gap) 56px;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: none;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+      pointer-events: auto;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      background: rgba(255, 255, 255, .12);
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .8);
+      backdrop-filter: blur(8px);
+      margin-bottom: 20px;
+    }
+
+    .hero__dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .4
+      }
+    }
+
+    .hero__title {
+      font-family: var(--serif);
+      font-size: clamp(44px, 6.5vw, 90px);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.0;
+      color: #fff;
+      letter-spacing: -.02em;
+      margin-bottom: 28px;
+    }
+
+    .hero__btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero__scroll {
+      position: absolute;
+      right: var(--gap);
+      bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, .4);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      animation: floatY 2s ease-in-out infinite;
+    }
+
+    .hero__scroll-line {
+      width: 1px;
+      height: 36px;
+      background: rgba(255, 255, 255, .3);
+    }
+
+    @keyframes floatY {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(8px)
+      }
+    }
+
+    /* ================================================
+       SHARED SECTION
+    ================================================ */
+    .section {
+      padding: 80px 0;
+    }
+
+    .sec-head {
+      padding: 0 var(--gap);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .s-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .s-label::before {
+      content: '';
+      display: block;
+      width: 14px;
+      height: 1px;
+      background: var(--text-muted);
+    }
+
+    .s-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 52px);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -.02em;
+      line-height: 1.1;
+    }
+
+    /* ================================================
+       PORTFOLIO — STOKT GRID
+    ================================================ */
+    .portfolio {
+      background: var(--bg);
+    }
+
+    .pf-filters {
+      display: flex;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .pf-filters li {
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      cursor: pointer;
+      border: 1.5px solid var(--border);
+      color: var(--text-muted);
+      transition: all .2s;
+      text-transform: uppercase;
+    }
+
+    .pf-filters li.active,
+    .pf-filters li:hover {
+      background: var(--text);
+      border-color: var(--text);
+      color: #fff;
+    }
+
+    .pf-grid {
+      padding: 0 var(--gap);
+      display: grid;
+      gap: var(--gap);
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    /* Row 1: big 2/3 + small 1/3 */
+    .pf-item--1 {
+      grid-column: 1 / 9;
+      height: 450px;
+    }
+
+    .pf-item--2 {
+      grid-column: 9 / 13;
+      height: 450px;
+    }
+
+    /* Row 2: full width */
+    .pf-item--3 {
+      grid-column: 1 / 13;
+      height: 380px;
+    }
+
+    /* Row 3: 5 cases = 50/50. When 6th added change to 4+4+4 */
+    .pf-item--4 {
+      grid-column: 1 / 7;
+      height: 300px;
+    }
+
+    .pf-item--5 {
+      grid-column: 7 / 13;
+      height: 300px;
+    }
+
+    /* 6th: .pf-item--4{grid-column:1/5} .pf-item--5{grid-column:5/9} .pf-item--6{grid-column:9/13} */
+
+    .pf-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #d8d5d0;
+      cursor: pointer;
+    }
+
+    .pf-item.hidden {
+      display: none;
+    }
+
+    .pf-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .pf-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .pf-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0, 0, 0, .72) 0%, transparent 100%);
+    }
+
+    .pf-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-style: italic;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .pf-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .pf-tag {
+      padding: 3px 10px;
+      background: rgba(255, 255, 255, .14);
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .85);
+      letter-spacing: .04em;
+    }
+
+    .pf-see {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(.88);
+      opacity: 0;
+      transition: opacity .3s, transform .3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      background: rgba(255, 255, 255, .9);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .pf-item:hover .pf-see {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* ================================================
+       ABOUT DARK — BENTO with Three.js Globe
+    ================================================ */
+    .about-dark {
+      background: #0d0d0d;
+      color: #fff;
+      padding: 10px 0;
+    }
+
+    .about-dark .s-label {
+      color: rgba(255, 255, 255, .3);
+    }
+
+    .about-dark .s-label::before {
+      background: rgba(255, 255, 255, .3);
+    }
+
+    .bento {
+      padding: 0 var(--gap);
+      margin-top: 32px;
+      display: grid;
+      gap: var(--gap);
+      grid-template-columns: 200px 1fr 1fr;
+      grid-template-rows: auto auto auto;
+    }
+
+    .bc {
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: var(--radius);
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    /* Stats stacked in col 1 */
+    .bc-stat {
+      grid-column: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 108px;
+    }
+
+    .bc-stat .num {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-style: italic;
+      line-height: 1;
+      color: #fff;
+    }
+
+    .bc-stat .lbl {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .35);
+      font-weight: 500;
+    }
+
+    /* Middle badge card spans rows 1–3 */
+    .bc-badge {
+      grid-column: 2;
+      grid-row: 1 / 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: #111;
+      min-height: 330px;
+    }
+
+    .bc-badge-bg {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 36px;
+      line-height: 1.3;
+      color: rgba(255, 255, 255, .06);
+      margin-bottom: auto;
+    }
+
+    .bc-badge-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 16px;
+    }
+
+    .bc-badge-sub {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .3);
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Globe col 3 — spans all rows */
+    .bc-globe {
+      grid-column: 3;
+      grid-row: 1 / 4;
+      position: relative;
+      overflow: hidden;
+      background: #050505;
+      border-radius: var(--radius);
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+
+    .bc-globe-header {
+      padding: 20px 24px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .bc-globe-header h3 {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-style: italic;
+      color: #fff;
+    }
+
+    .bc-avail {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 5px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .4);
+    }
+
+    .bc-avail-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    /* Three.js globe wrapper — fills the card below the header */
+    .globe-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+      pointer-events: none;
+      /* we'll re-enable below */
+    }
+
+    .globe-wrapper canvas {
+      position: absolute;
+    }
+
+    #globe-3d {
+      bottom: -15%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #globe-2d-overlay {
+      pointer-events: none;
+      bottom: -15%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* ================================================
+       ABOUT PERSON — 3 columns
+    ================================================ */
+    .about-person {
+      padding: 80px 0;
+      background: var(--bg);
+    }
+
+    .ap-grid {
+      padding: 0 var(--gap);
+      display: grid;
+      grid-template-columns: 280px 1fr auto;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .ap-photo {
+      position: relative;
+    }
+
+    .ap-photo img {
+      width: 100%;
+      border-radius: var(--radius);
+      object-fit: cover;
+      display: block;
+    }
+
+    .ap-socials {
+      margin-top: 12px;
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .social-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 11px;
+      background: #fff;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      border: 1px solid var(--border);
+      transition: box-shadow .2s;
+    }
+
+    .social-pill:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+    }
+
+    .ap-social-dark {
+      background: rgba(255,255,255,.08) !important;
+      border-color: rgba(255,255,255,.12) !important;
+      color: rgba(255,255,255,.7) !important;
+    }
+
+    .ap-social-dark:hover {
+      background: rgba(255,255,255,.15) !important;
+    }
+
+    .social-pill i {
+      font-size: 12px;
+    }
+
+    .ap-content {}
+
+    .ap-bio {
+      font-size: 15px;
+      line-height: 1.75;
+      margin: 16px 0 24px;
+      color: #333;
+    }
+
+    .ap-ctas {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-tag {
+      padding: 5px 12px;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .ap-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ap-badge-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 14px;
+      transition: box-shadow .25s, transform .25s;
+      background: #fff;
+    }
+
+    .ap-badge-card:hover {
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .1);
+      transform: translateY(-3px);
+    }
+
+    .ap-badge-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* ================================================
+       MARQUEE
+    ================================================ */
+    .marquee-wrap {
+      background: #111;
+      padding: 20px 0;
+      overflow: hidden;
+      height: 72px;
+      display: flex;
+      align-items: center;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: scrollX 24s linear infinite;
+      align-items: center;
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes scrollX {
+      from {
+        transform: translateX(0)
+      }
+
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 20px;
+      white-space: nowrap;
+      font-family: var(--serif);
+      font-size: 20px;
+      font-style: italic;
+      color: rgba(255, 255, 255, .8);
+    }
+
+    .marquee-icon {
+      width: 24px;
+      height: 24px;
+      max-width: 24px;
+      max-height: 24px;
+      object-fit: contain;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .marquee-sep {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #6366f1;
+    }
+
+    /* scroll top */
+    .scroll-top-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 40px;
+      height: 40px;
+      background: var(--text);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .3s, transform .3s;
+      z-index: 500;
+      cursor: pointer;
+    }
+
+    .scroll-top-btn.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* reveal */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    [data-reveal].in {
+      opacity: 1;
+      transform: none;
+    }
+
+    [data-reveal-d="1"] {
+      transition-delay: .1s;
+    }
+
+    [data-reveal-d="2"] {
+      transition-delay: .2s;
+    }
+
+    [data-reveal-d="3"] {
+      transition-delay: .3s;
+    }
+
+    /* ================================================
+       ABOUT DARK — head & designer section
+    ================================================ */
+    .about-dark__head {
+      padding: 0 var(--gap);
+    }
+
+    .about-dark__title {
+      color: #fff;
+    }
+
+    .about-dark .s-label {
+      color: rgba(255, 255, 255, .3);
+    }
+
+    .about-dark .s-label::before {
+      background: rgba(255, 255, 255, .3);
+    }
+
+    .bc-check-icon {
+      color: #4ade80;
+      font-size: 13px;
+    }
+
+    /* THE DESIGNER head */
+    .designer-head {
+      padding: 60px var(--gap) 0;
+      margin-bottom: 24px;
+    }
+
+    .designer-label {
+      color: rgba(255, 255, 255, .35) !important;
+    }
+
+    .designer-label::before {
+      background: rgba(255, 255, 255, .35) !important;
+    }
+
+    .designer-title {
+      color: #fff;
+    }
+
+    /* Card wrapper — bordered like bento cards on reference */
+    .designer-card {
+      margin: 0 var(--gap);
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+
+    /* Grid inside card — photo | content | badges */
+    .designer-card .ap-grid {
+      padding: 0;
+      grid-template-columns: 364px 488px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Photo column — photo + socials stacked */
+    .ap-photo-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Photo wrapper */
+    .ap-photo-col .ap-photo {
+      position: relative;
+    }
+
+    .ap-photo-col .ap-photo img {
+      height: 380px;
+      width: 100%;
+      object-fit: cover;
+      object-position: top;
+      border-radius: var(--radius);
+      display: block;
+    }
+
+    /* Name overlay on photo — like reference */
+    .ap-photo-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 60px 18px 18px;
+      background: linear-gradient(to top, rgba(0,0,0,.75) 0%, transparent 100%);
+      border-radius: 0 0 var(--radius) var(--radius);
+      pointer-events: none;
+    }
+
+    .ap-photo-name {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-style: italic;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .ap-photo-role {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+      margin-top: 4px;
+    }
+
+    /* Socials below photo */
+    .ap-photo-col .ap-socials {
+      margin-top: 0;
+    }
+
+    /* Bio dark variant */
+    .ap-bio--dark {
+      color: rgba(255, 255, 255, .6);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* Badges column — single card wrapping all badges */
+    .ap-badges-col {
+      height: 100%;
+    }
+
+    .ap-badges-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius);
+      padding: 16px;
+      height: 100%;
+    }
+
+    /* CTA buttons dark */
+    .btn-dark-cv {
+      background: #fff;
+      color: #111;
+      border: 1.5px solid #fff;
+    }
+
+    .btn-dark-cv:hover {
+      opacity: .88;
+    }
+
+    .btn-dark-contact {
+      border: 1.5px solid rgba(255, 255, 255, .35);
+      color: rgba(255, 255, 255, .8);
+      background: transparent;
+    }
+
+    .btn-dark-contact:hover {
+      background: rgba(255, 255, 255, .08);
+      color: #fff;
+    }
+
+    /* Skill tags dark */
+    .skill-tag--dark {
+      background: rgba(255, 255, 255, .07);
+      border-color: rgba(255, 255, 255, .12);
+      color: rgba(255, 255, 255, .7);
+    }
+
+    /* Badge cards dark */
+    .ap-badge-card--dark {
+      background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .1);
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1;
+    }
+
+    /* Badges column — single card with 2-col auto grid */
+    .ap-badges-col {
+      height: 100%;
+    }
+
+    .ap-badges-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius);
+      padding: 16px;
+      height: 100%;
+      align-content: start;
+    }
+
+    /* ================================================
+       RESPONSIVE — designer card
+    ================================================ */
+    @media(max-width:1100px) {
+      .designer-card .ap-grid {
+        grid-template-columns: 240px 1fr;
+      }
+
+      .ap-badges-col {
+        grid-column: 1 / 3;
+      }
+
+      .ap-badges-card {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: auto;
+      }
+    }
+
+    @media(max-width:768px) {
+      .designer-card .ap-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ap-badges-col {
+        grid-column: 1;
+      }
+
+      .ap-photo-col .ap-photo img {
+        height: 280px;
+      }
+    }
+
+    /* ================================================
+    ================================================ */
+    .yanas-footer {
+      margin-top: 0 !important;
+    }
+
+    .container {
+      margin-top: 0;
+    }
+
+    /* ================================================
+       RESPONSIVE
+    ================================================ */
+    @media(max-width:1100px) {
+      .nav__links {
+        position: static;
+        transform: none;
+        display: none;
+      }
+
+      .nav__burger {
+        display: flex;
+      }
+
+      .bento {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .bc-stat {
+        grid-column: auto;
+      }
+
+      .bc-badge {
+        grid-column: 1;
+        grid-row: 4;
+        min-height: 160px;
+      }
+
+      .bc-globe {
+        grid-column: 2;
+        grid-row: 1 / 5;
+      }
+
+      .ap-grid {
+        grid-template-columns: 220px 1fr;
+      }
+
+      .ap-badges {
+        grid-column: 1 / 3;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 24px;
+      }
+
+      .ap-badge-card {
+        width: 88px;
+        height: 88px;
+      }
+    }
+
+    @media(max-width:768px) {
+      .pf-item--1 {
+        grid-column: 1 / 13;
+        height: 300px;
+      }
+
+      .pf-item--2 {
+        grid-column: 1 / 13;
+        height: 240px;
+      }
+
+      .pf-item--3 {
+        height: 260px;
+      }
+
+      .pf-item--4 {
+        grid-column: 1 / 13;
+        height: 240px;
+      }
+
+      .pf-item--5 {
+        grid-column: 1 / 13;
+        height: 240px;
+      }
+
+      .bento {
+        grid-template-columns: 1fr;
+      }
+
+      .bc-badge,
+      .bc-globe,
+      .bc-stat {
+        grid-column: 1;
+        grid-row: auto;
+      }
+
+      .bc-globe {
+        min-height: 300px;
+      }
+
+      .ap-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ap-badges {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .nav-glass {
+        padding: 10px 14px;
+      }
+    }
+  </style>
 </head>
 
-<body class="index-page">
+<body>
 
-  <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+  <!-- ================================================
+     FULL-WIDTH GLASS NAV — Stokt style
+================================================ -->
+  <div class="nav-wrap" id="navWrap">
+    <div class="nav-glass">
+      <a href="#hero" class="nav__logo">Yana Harcourt</a>
 
-      <a href="index.html" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/My logo.png" alt=""> -->
-        <h1 class="sitename">Yana</h1>
-      </a>
+      <ul class="nav__links">
+        <li><a href="#portfolio">Work</a></li>
+        <li><a href="#about-dark">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
 
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.html">Home<br></a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#portfolio">Portfolio</a></li>
-          <!-- <li><a href="service-details-landing page.html">Services</a></li> -->
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-
+      <div class="nav__right">
+        <a href="assets/cv/Yana-Harcourt-CV.pdf" class="btn btn-ghost" download>
+          CV <i class="bi bi-download"></i>
+        </a>
+        <a href="#contact" class="btn btn-white">Get in touch →</a>
+        <button class="nav__burger" id="navBurger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <main class="main">
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <ul>
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#about-dark">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-drawer-social">
+      <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank">LinkedIn</a>
+      <a href="https://www.behance.net/yana_harcourt" target="_blank">Behance</a>
+      <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank">Instagram</a>
+    </div>
+  </div>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section">
-
-      <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
-
-      <div class="container d-flex flex-column align-items-center justify-content-center text-center" data-aos="fade-up"
-        data-aos-delay="100">
-        <h2>Yana Harcourt</h2>
-        <p><span class="typed" data-typed-items="UX/UI Designer"></span></p>
+  <!-- ================================================
+     HERO
+================================================ -->
+  <section class="hero" id="hero">
+    <div class="hero__bg"><img src="assets/img/hero-bg.jpg" alt=""></div>
+    <div class="hero__content">
+      <div class="hero__badge"><span class="hero__dot"></span>Available for work</div>
+      <h1 class="hero__title">UX/UI Designer<br>&amp; Product Design</h1>
+      <div class="hero__btns">
+        <a href="#portfolio" class="btn btn-white">See Work <i class="bi bi-arrow-down"></i></a>
+        <a href="assets/cv/Yana-Harcourt-CV.pdf" class="btn btn-ghost" download>Download CV <i
+            class="bi bi-download"></i></a>
       </div>
-    </section>
-    <!-- /Hero Section -->
+    </div>
+    <div class="hero__scroll">
+      <div class="hero__scroll-line"></div>Scroll
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <div class="container" id="about" class="about section">
-      <div class="portfolio-header">
-        <div class="profile-image-container">
-          <img src="assets/img/profile-img.jpg" alt="Yana Harcourt" class="profile-image" />
-          <div class="profile-image-border"></div>
-        </div>
+  <!-- ================================================
+     PORTFOLIO
+================================================ -->
+  <section class="section portfolio" id="portfolio">
+    <div class="sec-head">
+      <div>
+        <div class="s-label">Selected Work</div>
+        <h2 class="s-title">Featured Projects ↓</h2>
+      </div>
+      <ul class="pf-filters" id="pfFilters">
+        <li class="active" data-f="*">All</li>
+        <li data-f="app">App</li>
+        <li data-f="web">Web</li>
+      </ul>
+    </div>
 
-        <div class="profile-info">
-          <h1 class="name">Yana Harcourt</h1>
-          <div class="title">UX/UI Designer focused on Web & Product Design</div>
-
-          <div class="contact-details">
-            <div class="contact-item">
-              <span>France | EU Work Authorized</span>
-            </div>
-            <div class="contact-item">
-              <span>Figma | UI/UX | HTML | CSS | JS</span>
-            </div>
-            <div class="contact-item">
-              <span>yana.harcourt@gmail.com</span>
-            </div>
-          </div>
-
-          <div class="bio">
-            UX/UI designer with 2+ years of experience building user-centered digital products across European and Asian
-            markets. Led the ASCENDtials platform redesign — achieving a 20% increase in subscription conversion.
-            Proficient in Figma, user research, prototyping, and responsive design. Fluent in English, Russian,
-            Ukrainian | Basic French
-          </div>
+    <div class="pf-grid" id="pfGrid">
+      <div class="pf-item pf-item--1" data-cat="app" data-reveal>
+        <img src="./Aura/Aura banner.png" alt="Aura">
+        <div class="pf-see">SEE PROJECT →</div>
+        <div class="pf-info">
+          <div class="pf-title">Aura</div>
+          <div class="pf-tags"><span class="pf-tag">App</span><span class="pf-tag">Wellness</span><span
+              class="pf-tag">iOS</span></div>
         </div>
       </div>
 
-      <div class="skills-section">
-        <div class="skills-card">
-          <h2>Hard Skills</h2>
-          <div class="skill-grid">
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>User Research</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Usability Testing</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>User Flows / User Journeys</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Information Architecture</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Interactive Prototypes</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Wireframing</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Responsive Design</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Accessibility (WCAG)</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Design Systems</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Visual Identity & Branding</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Web & Mobile Design</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Figma (Advanced)</span>
-              </span>
-            </div>
-          </div>
+      <div class="pf-item pf-item--2" data-cat="app" data-reveal data-reveal-d="2">
+        <img src="./Caixa/assets/img/banner.png" alt="CAIXA">
+        <div class="pf-see">SEE PROJECT →</div>
+        <div class="pf-info">
+          <div class="pf-title">CAIXA</div>
+          <div class="pf-tags"><span class="pf-tag">App</span><span class="pf-tag">Fintech</span></div>
         </div>
+      </div>
 
-        <div class="skills-card">
-          <h2>Approach</h2>
-          <div class="skill-grid">
+      <div class="pf-item pf-item--3" data-cat="web" data-reveal>
+        <img src="assets/img/portfolio/ASCENDtials/banner.jpg" alt="ASCENDtials">
+        <div class="pf-see">SEE PROJECT →</div>
+        <div class="pf-info">
+          <div class="pf-title">ASCENDtials</div>
+          <div class="pf-tags"><span class="pf-tag">Web</span><span class="pf-tag">Non-profit</span></div>
+        </div>
+      </div>
 
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Design Thinking</span>
-              </span>
-            </div>
+      <div class="pf-item pf-item--4" data-cat="web" data-reveal>
+        <img src="assets/img/portfolio/AllyLingua Banner.png" alt="Ally Lingua">
+        <div class="pf-see">SEE PROJECT →</div>
+        <div class="pf-info">
+          <div class="pf-title">Ally Lingua</div>
+          <div class="pf-tags"><span class="pf-tag">Web</span><span class="pf-tag">EdTech</span></div>
+        </div>
+      </div>
 
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Behavioral Psychology</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Cross-cultural UX</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Agile / Scrum</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>A/B Testing</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Data-driven Design</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Needs Identification</span>
-              </span>
-            </div>
-
-            <div class="skill-item" style="--width: 100%;">
-              <span class="skill-name">
-                <span>Strategic Thinking</span>
-              </span>
-            </div>
-
-          </div>
+      <div class="pf-item pf-item--5" data-cat="web" data-reveal data-reveal-d="2">
+        <img src="./Cachepot Shop/Cachepot-Shop-Banner.png" alt="Cachepot Shop">
+        <div class="pf-see">SEE PROJECT →</div>
+        <div class="pf-info">
+          <div class="pf-title">Cachepot Shop</div>
+          <div class="pf-tags"><span class="pf-tag">Web</span><span class="pf-tag">E-commerce</span></div>
         </div>
       </div>
     </div>
-    <!-- About Section -->
+  </section>
 
-    <!-- Tool section starts -->
-    <section id="tools" class="tools">
-      <div class="container" data-aos="fade-up">
-        <div class="section-title">
-          <h2>Tools</h2>
-          <p>These are the tools I use to bring ideas to life and collaborate with teams.</p>
-        </div>
+  <!-- ================================================
+     ABOUT DARK — BENTO + THREE.JS GLOBE
+================================================ -->
+  <section class="about-dark" id="about-dark">
+    <div class="about-dark__head">
+      <div class="s-label">About</div>
+      <h2 class="s-title about-dark__title">Based in Paris, France<br>designing worldwide</h2>
+    </div>
 
-        <div class="tools-grid">
-          <div class="tools-row">
-            <div class="tool-item" data-aos="fade-up" data-aos-delay="100">
-              <img src="assets/img/Tools logo/figma-logo.svg" alt="Figma logo">
-              <h6>Figma</h6>
-              <p>UI Design, prototyping</p>
-            </div>
-
-            <div class="tool-item" data-aos="fade-up" data-aos-delay="200">
-              <img src="assets/img/Tools logo/Adobe-XD-.svg.png" alt="Adobe XD logo">
-              <h6>Adobe XD</h6>
-              <p>Vector design</p>
-            </div>
-
-            <div class="tool-item" data-aos="fade-up" data-aos-delay="300">
-              <img src="assets/img/Tools logo/zeplin-logo.svg" alt="Zeplin logo">
-              <h6>Zeplin</h6>
-              <p>Design workspace</p>
-            </div>
-          </div>
-
-          <div class="tools-row">
-            <div class="tool-item" data-aos="fade-up" data-aos-delay="400">
-              <img src="assets/img/Tools logo/asana-logo.svg" alt="Asana logo">
-              <h6>Asana</h6>
-              <p>Work management</p>
-            </div>
-
-            <div class="tool-item" data-aos="fade-up" data-aos-delay="500">
-              <img src="assets/img/Tools logo/slack-logo.svg" alt="Slack logo">
-              <h6>Slack</h6>
-              <p>Team communication</p>
-            </div>
-
-            <div class="tool-item" data-aos="fade-up" data-aos-delay="600">
-              <img src="assets/img/Tools logo/VSCode.svg.png" alt="VS Code logo">
-              <h6>VS Code</h6>
-              <p>Code editor</p>
-            </div>
-
-            <div class="tool-item" data-aos="fade-up" data-aos-delay="700">
-              <img src="assets/img/Tools logo/Github-logo.svg.png" alt="GitHub logo">
-              <h6>GitHub</h6>
-              <p>Developer platform</p>
-            </div>
-
-            <div class="tool-item" data-aos="fade-up" data-aos-delay="800">
-              <img src="assets/img/Tools logo/Notion-logo.svg.png" alt="Notion logo">
-              <h6>Notion</h6>
-              <p>Project management</p>
-            </div>
-          </div>
-
-          <div class="tools-row">
-            <div class="tool-item" data-aos="fade-up" data-aos-delay="200">
-              <img src="assets/img/Tools logo/WebFlow.svg" alt="Webflow logo">
-              <h6>Webflow</h6>
-              <p>Vector design</p>
-            </div>
-
-            <div class="tool-item" data-aos="fade-up" data-aos-delay="300">
-              <img src="assets/img/Tools logo/Wordpress-Logo.svg" alt="Wordpress logo">
-              <h6>Wordpress</h6>
-              <p>Website builder</p>
-            </div>
-          </div>
-        </div>
+    <div class="bento">
+      <div class="bc bc-stat" data-reveal>
+        <div class="num">2+</div>
+        <div class="lbl">Years of Experience</div>
       </div>
-    </section>
-    <!-- Tool Section ends-->
-
-    <!-- Badges -->
-    <section class="badges-section">
-      <div class="container" data-aos="fade-up">
-        <div class="section-title">
-          <h2>Certifications</h2>
-        </div>
-        <div class="badges-container">
-          <div class="badge-item">
-            <a href="https://www.credly.com/badges/62118b07-ad3d-488d-bd03-070e28564846/public_url" target="_blank">
-              <img src="assets/img/google-ux-design.png" alt="Google UX Design Certificate">
-            </a>
-          </div>
-
-          <div class="badge-item">
-            <a href="https://www.credly.com/badges/6c5e6ad3-77c7-4175-92b0-62c54a1e2484/public_url" target="_blank">
-              <img src="assets/img/core-1.png" alt="Core 1 Certificate">
-            </a>
-          </div>
-
-          <div class="badge-item">
-            <a href="https://www.credly.com/badges/208df361-6cb7-49fb-a4b1-223372e50b40/public_url" target="_blank">
-              <img src="assets/img/core-2.png" alt="Core 2 Certificate">
-            </a>
-          </div>
-
-          <div class="badge-item">
-            <a href="https://www.credly.com/badges/8935efb8-8c23-41a0-9228-d5f63065fee6/public_url" target="_blank">
-              <img src="assets/img/introduction-to-agile-development-and-scrum.png" alt="Agile Certificate">
-            </a>
-          </div>
-
-          <div class="badge-item">
-            <a href="https://www.credly.com/badges/553b4740-ca9d-4520-9174-a02ce8fd079b/public_url" target="_blank">
-              <img src="assets/img/practice-exam-for-comptia.png" alt="CompTIA Certificate">
-            </a>
-          </div>
-
-        </div>
+      <div class="bc bc-stat" data-reveal data-reveal-d="1">
+        <div class="num">5+</div>
+        <div class="lbl">Projects Completed</div>
       </div>
-    </section>
-    <!-- /Badges -->
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Portfolio</h2>
+      <div class="bc bc-stat" data-reveal data-reveal-d="2">
+        <div class="num">20%</div>
+        <div class="lbl">Conversion Lift</div>
       </div>
 
-      <div class="container">
+      <div class="bc bc-badge" data-reveal>
+        <div class="bc-badge-bg">Figma · Webflow<br>· HTML · CSS<br>· JavaScript</div>
+        <div class="bc-badge-title">Google UX Design Certified</div>
+        <div class="bc-badge-sub">
+          <i class="bi bi-patch-check-fill bc-check-icon"></i>
+          Verified Professional
+        </div>
+      </div>
 
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-product">Web</li>
-          </ul>
-
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-            <!-- Aura -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="./Aura/Aura banner.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Aura</h4>
-                <p>Aura - Bipolar Disorder Management</p>
-                <a href="./Aura/Aura banner.png" title="BANKING APP"
-                  data-gallery="portfolio-gallery-app"
-                  class="glightbox preview-link"></a>
-                <a href="#" title="More Details" class="details-link"><i
-                    class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-            
-            <!-- Caixa -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="./Caixa/assets/img/banner.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>CAIXA </h4>
-                <p>Banking App</p>
-                <a href="./Caixa/assets/img/banner.png" title="BANKING APP"
-                  data-gallery="portfolio-gallery-app"
-                  class="glightbox preview-link"></a>
-                <a href="./Caixa/caixa-portfolio-details.html" title="More Details" class="details-link"><i
-                    class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-
-            <!-- ASCENDtials -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="assets/img/portfolio/ASCENDtials/banner.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>ASCENDtials</h4>
-                <p>Non-profit organization</p>
-                <a href="assets/img/portfolio/ASCENDtials/banner.jpg" title="Non-profit organization"
-                  data-gallery="portfolio-gallery-product"
-                  class="glightbox preview-link"></a>
-                <a href="ASCENDtials.html" title="More Details" class="details-link"><i
-                    class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-
-            <!--Ally Lingua -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="assets/img/portfolio/AllyLingua Banner.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Ally Lingua</h4>
-                <p>Online English School</p>
-                <a href="./assets/img/portfolio/AllyLingua Banner.png" title="Web"
-                  data-gallery="portfolio-gallery-product"
-                  class="glightbox preview-link"></a>
-                <a href="http://allylingua.com/" title="More Details" class="details-link"><i
-                    class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-
-            <!-- Cachepot Shop -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="./Cachepot Shop/Cachepot-Shop-Banner.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Cachepot Shop</h4>
-                <p>E-commerce Shop</p>
-                <a href="./Cachepot Shop/Cachepot-Shop-Banner.png" title="Web" data-gallery="portfolio-gallery-product"
-                  class="glightbox preview-link"></a>
-                <a href="./Cachepot Shop/delicate-weaves.html" title="More Details" class="details-link"><i
-                    class="bi bi-link-45deg"></i></a>
-              </div>
-            </div> 
-
+      <!-- Globe card with Three.js -->
+      <div class="bc bc-globe" data-reveal>
+        <div class="bc-globe-header">
+          <h3>Based in Paris, France</h3>
+          <div class="bc-avail">
+            <span class="bc-avail-dot"></span>
+            Available Worldwide · EU Work Authorized
           </div>
         </div>
-        <!-- End Portfolio Container -->
+        <!-- Three.js renders here -->
+        <div class="globe-wrapper" id="globeWrapper">
+          <canvas id="globe-3d"></canvas>
+          <canvas id="globe-2d-overlay"></canvas>
+        </div>
       </div>
+    </div>
+
+    <!-- THE DESIGNER — inside about-dark -->
+    <div class="designer-head">
+      <div class="s-label designer-label">The Designer</div>
+      <h2 class="s-title designer-title">Yana Harcourt</h2>
+    </div>
+
+    <div class="designer-card">
+      <div class="ap-grid">
+        <div class="ap-photo-col" data-reveal>
+          <div class="ap-photo">
+            <img src="assets/img/profile-img.jpg" alt="Yana Harcourt">
+            <div class="ap-photo-overlay">
+              <div class="ap-photo-name">Yana Harcourt</div>
+              <div class="ap-photo-role">UX/UI &amp; Product Designer</div>
+            </div>
+          </div>
+          <div class="ap-socials">
+            <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank" class="social-pill ap-social-dark"><i class="bi bi-linkedin"></i> LinkedIn</a>
+            <a href="https://www.behance.net/yana_harcourt" target="_blank" class="social-pill ap-social-dark"><i class="bi bi-behance"></i> Behance</a>
+            <a href="https://github.com/yanaharcourt" target="_blank" class="social-pill ap-social-dark"><i class="bi bi-github"></i> GitHub</a>
+            <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank" class="social-pill ap-social-dark"><i class="bi bi-instagram"></i> Instagram</a>
+          </div>
+        </div>
+
+        <div class="ap-content" data-reveal data-reveal-d="1">
+          <p class="ap-bio ap-bio--dark">UX/UI designer with 2+ years of experience building user-centered digital products across
+            European and Asian markets. Led the ASCENDtials platform redesign — achieving a 20% increase in subscription
+            conversion.<br><br>Proficient in Figma, user research, prototyping, and responsive design. Fluent in English,
+            Russian, Ukrainian · Basic French.</p>
+          <div class="ap-ctas">
+            <a href="assets/cv/Yana-Harcourt-CV.pdf" class="btn btn-dark-cv" download>Download CV <i class="bi bi-download"></i></a>
+            <a href="#contact" class="btn btn-dark-contact">Get in touch</a>
+          </div>
+          <div class="skills-tags">
+            <span class="skill-tag skill-tag--dark">User Research</span>
+            <span class="skill-tag skill-tag--dark">Figma (Advanced)</span>
+            <span class="skill-tag skill-tag--dark">Prototyping</span>
+            <span class="skill-tag skill-tag--dark">Design Systems</span>
+            <span class="skill-tag skill-tag--dark">Responsive Design</span>
+            <span class="skill-tag skill-tag--dark">WCAG Accessibility</span>
+            <span class="skill-tag skill-tag--dark">Usability Testing</span>
+            <span class="skill-tag skill-tag--dark">Information Architecture</span>
+            <span class="skill-tag skill-tag--dark">Visual Identity</span>
+            <span class="skill-tag skill-tag--dark">HTML &amp; CSS</span>
+            <span class="skill-tag skill-tag--dark">Agile / Scrum</span>
+            <span class="skill-tag skill-tag--dark">A/B Testing</span>
+            <span class="skill-tag skill-tag--dark">Design Thinking</span>
+            <span class="skill-tag skill-tag--dark">Cross-cultural UX</span>
+          </div>
+        </div>
+
+        <div class="ap-badges-col" data-reveal data-reveal-d="2">
+          <div class="ap-badges-card">
+            <div class="ap-badge-card ap-badge-card--dark"><a href="https://www.credly.com/badges/62118b07-ad3d-488d-bd03-070e28564846/public_url" target="_blank"><img src="assets/img/google-ux-design.png" alt="Google UX Design"></a></div>
+            <div class="ap-badge-card ap-badge-card--dark"><a href="https://www.credly.com/badges/6c5e6ad3-77c7-4175-92b0-62c54a1e2484/public_url" target="_blank"><img src="assets/img/core-1.png" alt="Core 1"></a></div>
+            <div class="ap-badge-card ap-badge-card--dark"><a href="https://www.credly.com/badges/208df361-6cb7-49fb-a4b1-223372e50b40/public_url" target="_blank"><img src="assets/img/core-2.png" alt="Core 2"></a></div>
+            <div class="ap-badge-card ap-badge-card--dark"><a href="https://www.credly.com/badges/8935efb8-8c23-41a0-9228-d5f63065fee6/public_url" target="_blank"><img src="assets/img/introduction-to-agile-development-and-scrum.png" alt="Agile"></a></div>
+            <div class="ap-badge-card ap-badge-card--dark"><a href="https://www.credly.com/badges/553b4740-ca9d-4520-9174-a02ce8fd079b/public_url" target="_blank"><img src="assets/img/practice-exam-for-comptia.png" alt="CompTIA"></a></div>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
 
-  </main>
+    <div class="about-dark__bottom"></div>
+  </section>
 
-  <!-- ============================================
-  Global Footer
-  ============================================ -->
+  <!-- ================================================
+    MARQUEE TOOLS
+  ================================================ -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/figma-logo.svg" alt="">Figma</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Adobe-XD-.svg.png" alt="">Adobe XD</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/WebFlow.svg" alt="">Webflow</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/zeplin-logo.svg" alt="">Zeplin</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/VSCode.svg.png" alt="">VS Code</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Github-logo.svg.png" alt="">GitHub</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Notion-logo.svg.png" alt="">Notion</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/asana-logo.svg" alt="">Asana</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/slack-logo.svg" alt="">Slack</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Wordpress-Logo.svg" alt="">WordPress</span>
+      <span class="marquee-item"><span class="marquee-sep"></span></span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/figma-logo.svg" alt="">Figma</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Adobe-XD-.svg.png" alt="">Adobe XD</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/WebFlow.svg" alt="">Webflow</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/zeplin-logo.svg" alt="">Zeplin</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/VSCode.svg.png" alt="">VS Code</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Github-logo.svg.png" alt="">GitHub</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Notion-logo.svg.png" alt="">Notion</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/asana-logo.svg" alt="">Asana</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/slack-logo.svg" alt="">Slack</span>
+      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Wordpress-Logo.svg" alt="">WordPress</span>
+    </div>
+  </div>
+
+  <!-- ================================================
+     ORIGINAL FOOTER
+================================================ -->
   <footer class="yanas-footer" id="contact">
     <div class="yanas-bg-elements">
-      <div class="yanas-bg-element">
-        <i class="bi bi-code-slash"></i>
-      </div>
-      <div class="yanas-bg-element">
-        <i class="bi bi-palette"></i>
-      </div>
-      <div class="yanas-bg-element">
-        <i class="bi bi-layers"></i>
-      </div>
-      <div class="yanas-bg-element">
-        <i class="bi bi-terminal"></i>
-      </div>
-      <div class="yanas-bg-element">
-        <i class="bi bi-vector-pen"></i>
-      </div>
-      <div class="yanas-bg-element">
-        <i class="bi bi-grid-3x3"></i>
-      </div>
-      <div class="yanas-bg-element">
-        <i class="bi bi-bezier"></i>
-      </div>
-      <div class="yanas-bg-element">
-        <i class="bi bi-cpu"></i>
-      </div>
+      <div class="yanas-bg-element"><i class="bi bi-code-slash"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-palette"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-layers"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-terminal"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-vector-pen"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-grid-3x3"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-bezier"></i></div>
+      <div class="yanas-bg-element"><i class="bi bi-cpu"></i></div>
     </div>
-
     <div class="yanas-footer_wrapper">
       <div class="yanas-footer_content">
         <div class="yanas-footer_content-left">
           <h3 class="yanas-title-140">Let's connect</h3>
           <div class="yanas-footer_content-left-content">
-            <div class="yanas-text-32">Ready to bring your ideas to life through design & code</div>
+            <div class="yanas-text-32">Ready to bring your ideas to life through design &amp; code</div>
           </div>
-          <a href="mailto:yana.harcourt@gmail.com" class="yanas-button">
-            <div class="yanas-button-content">
-              <span>Send an e-mail</span>
-              <i class="bi bi-arrow-up-right"></i>
-            </div>
+          <a href="/cdn-cgi/l/email-protection#fb829a959ad5939a8998948e898fbb9c969a9297d5989496" class="yanas-button">
+            <div class="yanas-button-content"><span>Send an e-mail</span><i class="bi bi-arrow-up-right"></i></div>
             <div class="yanas-button-bg-hover"></div>
           </a>
         </div>
-
         <div class="yanas-footer_content-right">
           <div class="yanas-footer-form">
             <form id="yanasContactForm" action="https://formspree.io/f/xnnqvwab" method="POST" class="yanas-form">
               <div class="yanas-status-message" id="yanasStatusMessage"></div>
-
               <div class="yanas-form_first-line">
                 <div class="yanas-form_first-line-title">
                   <div class="yanas-text-40">Contact info*</div>
@@ -523,7 +1708,6 @@
                   <input class="yanas-footer-field" name="email" placeholder="Your e-mail*" type="email" required>
                 </div>
               </div>
-
               <div class="yanas-form_second-line">
                 <div class="yanas-form_first-line-title">
                   <div class="yanas-text-40">You are interested in*</div>
@@ -534,7 +1718,6 @@
                 </div>
                 <input type="hidden" name="services" id="selectedServices">
               </div>
-
               <div class="yanas-form_second-line">
                 <div class="yanas-form_first-line-title">
                   <div class="yanas-text-40">Your budget in EUR*</div>
@@ -548,120 +1731,322 @@
                 </div>
                 <input type="hidden" name="budget" id="selectedBudget">
               </div>
-
               <div class="yanas-form_second-line">
                 <textarea name="message" class="yanas-message-field"
                   placeholder="Tell me about your project..."></textarea>
               </div>
-
               <button type="submit" class="yanas-form_button">Start a journey</button>
-
-              <div class="form-check">
+              <div class="form-check" style="margin-top:12px;">
                 <input class="form-check-input" type="checkbox" value="" id="privacyCheck" required>
-                <label class="form-check-label" for="privacyCheck" style="font-size: 14px; color: var(--text-muted);">
+                <label class="form-check-label" for="privacyCheck" style="font-size:13px;color:#64748b;">
                   I agree to the <a href="Privacy Policy.html" target="_blank"
-                    style="color: var(--accent-color); text-decoration: underline;">Privacy Policy</a> and consent to
-                  the processing of my data.
+                    style="color:#6366f1;text-decoration:underline;">Privacy Policy</a> and consent to the processing of
+                  my data.
                 </label>
-                <div class="invalid-feedback">
-                  You must agree before submitting.
-                </div>
               </div>
-
             </form>
           </div>
         </div>
       </div>
-
       <div class="yanas-footer_links">
         <div class="yanas-footer_links-left">
           <div class="yanas-text-36">Keep in touch</div>
-          <div class="yanas-text-24">yana.harcourt@gmail.com</div>
+          <div class="yanas-text-24"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4138202f206f292033222e34333501262c20282d6f222e2c">[email&#160;protected]</a></div>
         </div>
-
         <div class="yanas-footer_links-right">
           <div class="yanas-footer_links-right-item">
             <h5>Follow Us</h5>
             <div class="yanas-footer_links-right-item-links">
-              <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank" class="yanas-rolling-text">
-                <span class="yanas-text-block">LinkedIn</span>
-                <span class="yanas-text-block">LinkedIn</span>
-              </a>
-              <a href="https://www.behance.net/yana_harcourt" target="_blank" class="yanas-rolling-text">
-                <span class="yanas-text-block">Behance</span>
-                <span class="yanas-text-block">Behance</span>
-              </a>
-              <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank" class="yanas-rolling-text">
-                <span class="yanas-text-block">Instagram</span>
-                <span class="yanas-text-block">Instagram</span>
-              </a>
-              <a href="https://github.com/yanaharcourt" target="_blank" class="yanas-rolling-text">
-                <span class="yanas-text-block">GitHub</span>
-                <span class="yanas-text-block">GitHub</span>
-              </a>
+              <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank" class="yanas-rolling-text"><span
+                  class="yanas-text-block">LinkedIn</span><span class="yanas-text-block">LinkedIn</span></a>
+              <a href="https://www.behance.net/yana_harcourt" target="_blank" class="yanas-rolling-text"><span
+                  class="yanas-text-block">Behance</span><span class="yanas-text-block">Behance</span></a>
+              <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank" class="yanas-rolling-text"><span
+                  class="yanas-text-block">Instagram</span><span class="yanas-text-block">Instagram</span></a>
+              <a href="https://github.com/yanaharcourt" target="_blank" class="yanas-rolling-text"><span
+                  class="yanas-text-block">GitHub</span><span class="yanas-text-block">GitHub</span></a>
             </div>
           </div>
           <div class="yanas-footer_links-right-item">
             <h5>Menu</h5>
             <div class="yanas-footer_links-right-item-links">
-              <a href="#home" class="yanas-rolling-text">
-                <span class="yanas-text-block">Home</span>
-                <span class="yanas-text-block">Home</span>
-              </a>
-              <a href="#about" class="yanas-rolling-text">
-                <span class="yanas-text-block">About</span>
-                <span class="yanas-text-block">About</span>
-              </a>
-              <a href="#portfolio" class="yanas-rolling-text">
-                <span class="yanas-text-block">Portfolio</span>
-                <span class="yanas-text-block">Portfolio</span>
-              </a>
-              <a href="#contact" class="yanas-rolling-text">
-                <span class="yanas-text-block">Contact</span>
-                <span class="yanas-text-block">Contact</span>
-              </a>
+              <a href="#hero" class="yanas-rolling-text"><span class="yanas-text-block">Home</span><span
+                  class="yanas-text-block">Home</span></a>
+              <a href="#about-dark" class="yanas-rolling-text"><span class="yanas-text-block">About</span><span
+                  class="yanas-text-block">About</span></a>
+              <a href="#portfolio" class="yanas-rolling-text"><span class="yanas-text-block">Portfolio</span><span
+                  class="yanas-text-block">Portfolio</span></a>
+              <a href="#contact" class="yanas-rolling-text"><span class="yanas-text-block">Contact</span><span
+                  class="yanas-text-block">Contact</span></a>
             </div>
           </div>
         </div>
-
-        <div class="yanas-copyright"
-          style="display: flex; justify-content: space-between; align-items: center; width: 100%; border-top: 1px solid var(--text-light); padding-top: 20px; margin-top: 20px;">
-
-          <div class="yanas-text-16" style="color: var(--text-muted);">
-            2026 All Rights Reserved
-          </div>
-
-          <a href="Privacy Policy.html" target="_blank" class="yanas-rolling-text" style="text-decoration: none;">
-            <span class="yanas-text-block" style="color: var(--text-muted); font-size: 14px;">Privacy
-              Policy</span>
-            <span class="yanas-text-block" style="color: var(--text-muted); font-size: 14px;">Privacy Policy</span>
-          </a>
-        </div>
+        <div class="yanas-copyright">2026 All Rights Reserved</div>
       </div>
     </div>
   </footer>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" id="scrollTopBtn" class="scroll-top-btn"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <!-- Vendor scripts -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <!-- Three.js via ESM for the globe -->
+  <script type="module">
+    import * as THREE from "https://esm.sh/three@0.133.1/build/three.module.js";
+    import { OrbitControls } from "https://esm.sh/three@0.133.1/examples/jsm/controls/OrbitControls.js";
 
+    const containerEl = document.getElementById("globeWrapper");
+    const canvas3D = document.getElementById("globe-3d");
+    const canvas2D = document.getElementById("globe-2d-overlay");
+    const overlayCtx = canvas2D.getContext("2d");
+
+    let renderer, scene, camera, controls, globe, globeMesh, mapMaterial, pointer, clock, mouse;
+    let parisMarker;
+    let dragged = false;
+
+    init();
+    window.addEventListener("resize", updateSize);
+
+    function init() {
+      renderer = new THREE.WebGLRenderer({ canvas: canvas3D, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      scene = new THREE.Scene();
+      camera = new THREE.OrthographicCamera(-1.1, 1.1, 1.1, -1.1, 0, 3);
+      camera.position.z = 1.1;
+
+      clock = new THREE.Clock();
+      mouse = new THREE.Vector2(-1, -1);
+
+      controls = new OrbitControls(camera, canvas3D);
+      controls.enablePan = false;
+      controls.enableZoom = false;
+      controls.enableDamping = true;
+      controls.minPolarAngle = 0.35 * Math.PI;
+      controls.maxPolarAngle = 0.45 * Math.PI;
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.6;
+
+      let ts;
+      controls.addEventListener("start", () => { ts = Date.now(); });
+      controls.addEventListener("end", () => { dragged = (Date.now() - ts) > 600; });
+
+      // Load the world-map texture (coloured land/ocean dots)
+      new THREE.TextureLoader().load(
+        "https://ksenia-k.com/img/earth-map-colored.png",
+        (tex) => {
+          tex.repeat.set(1, 1);
+
+          const geo = new THREE.IcosahedronGeometry(1, 22);
+          mapMaterial = new THREE.ShaderMaterial({
+            vertexShader: document.getElementById("vertex-shader-map").textContent,
+            fragmentShader: document.getElementById("fragment-shader-map").textContent,
+            uniforms: {
+              u_map_tex: { type: "t", value: tex },
+              u_dot_size: { type: "f", value: 0 },
+              u_pointer: { type: "v3", value: new THREE.Vector3(0, 0, 1) },
+              u_time_since_click: { value: 0 },
+            },
+            alphaTest: false,
+            transparent: true,
+          });
+
+          globe = new THREE.Points(geo, mapMaterial);
+          scene.add(globe);
+
+          globeMesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({
+            color: 0x111111, transparent: true, opacity: 0.04
+          }));
+          scene.add(globeMesh);
+
+          // Pointer (hidden, used for click ripple)
+          pointer = new THREE.Mesh(
+            new THREE.SphereGeometry(0.04, 16, 16),
+            new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0 })
+          );
+          scene.add(pointer);
+
+          // Paris marker — green glowing dot
+          addParisMarker();
+
+          updateSize();
+          render();
+        }
+      );
+    }
+
+    function addParisMarker() {
+      // Paris: lat 48.86, lon 2.35
+      // Convert to 3D on unit sphere:
+      // x = cos(lat)*sin(lon), y = sin(lat), z = cos(lat)*cos(lon)
+      const lat = 48.86 * Math.PI / 180;
+      const lon = 2.35 * Math.PI / 180;
+      const x = Math.cos(lat) * Math.sin(lon);
+      const y = Math.sin(lat);
+      const z = Math.cos(lat) * Math.cos(lon);
+
+      // Outer glow ring
+      const ringGeo = new THREE.RingGeometry(0.025, 0.04, 32);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: 0x4ade80, transparent: true, opacity: 0.5, side: THREE.DoubleSide
+      });
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+
+      // Inner dot
+      const dotGeo = new THREE.SphereGeometry(0.018, 16, 16);
+      const dotMat = new THREE.MeshBasicMaterial({ color: 0x4ade80 });
+      const dot = new THREE.Mesh(dotGeo, dotMat);
+
+      parisMarker = new THREE.Group();
+      parisMarker.add(ring);
+      parisMarker.add(dot);
+
+      // Position on globe surface
+      parisMarker.position.set(x, y, z);
+      // Make it face outward (normal direction)
+      parisMarker.lookAt(new THREE.Vector3(0, 0, 0));
+      parisMarker.rotateX(Math.PI / 2);
+
+      scene.add(parisMarker);
+
+      // Pulsing animation
+      let scale = 1;
+      let growing = true;
+      function pulseMarker() {
+        if (growing) { scale += 0.01; if (scale > 1.4) growing = false; }
+        else { scale -= 0.01; if (scale < 0.8) growing = true; }
+        ring.material.opacity = 0.3 + 0.3 * ((scale - 0.8) / 0.6);
+        ring.scale.setScalar(scale);
+        requestAnimationFrame(pulseMarker);
+      }
+      pulseMarker();
+    }
+
+    function render() {
+      if (mapMaterial) {
+        mapMaterial.uniforms.u_time_since_click.value = clock.getElapsedTime();
+      }
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(render);
+    }
+
+    function updateSize() {
+      const card = containerEl.parentElement; // .bc-globe
+      const W = card.offsetWidth;
+      const H = card.offsetHeight;
+      // Globe size = diameter of card width, capped
+      const side = Math.min(W, H * 1.4, 600);
+      renderer.setSize(side, side);
+      canvas2D.width = canvas2D.height = side;
+      if (mapMaterial) mapMaterial.uniforms.u_dot_size.value = 0.04 * side;
+    }
+  </script>
+
+  <script>
+    /* === NAV: hide on scroll down, show on scroll up === */
+    (function () {
+      const nav = document.getElementById('navWrap');
+      let lastY = 0, ticking = false;
+      function tick() {
+        const y = window.scrollY;
+        if (y > lastY && y > 140) nav.classList.add('hide');
+        else nav.classList.remove('hide');
+        lastY = y; ticking = false;
+      }
+      window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(tick); ticking = true; } });
+
+      const burger = document.getElementById('navBurger');
+      const drawer = document.getElementById('navDrawer');
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('open');
+        drawer.classList.toggle('open');
+        document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+      });
+      drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        burger.classList.remove('open'); drawer.classList.remove('open'); document.body.style.overflow = '';
+      }));
+    })();
+
+    /* === REVEAL === */
+    (function () {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+      }, { threshold: .08 });
+      document.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
+    })();
+
+    /* === SCROLL TOP === */
+    (function () {
+      const btn = document.getElementById('scrollTopBtn');
+      window.addEventListener('scroll', () => btn.classList.toggle('active', window.scrollY > 300));
+      btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    })();
+
+    /* === PORTFOLIO FILTER === */
+    (function () {
+      document.querySelectorAll('#pfFilters li').forEach(f => f.addEventListener('click', function () {
+        document.querySelectorAll('#pfFilters li').forEach(x => x.classList.remove('active'));
+        this.classList.add('active');
+        const val = this.dataset.f;
+        document.querySelectorAll('#pfGrid .pf-item').forEach(item => {
+          item.classList.toggle('hidden', val !== '*' && item.dataset.cat !== val);
+        });
+      }));
+    })();
+
+    /* === GLIGHTBOX === */
+    if (typeof GLightbox !== 'undefined') GLightbox({ selector: '.pf-item', touchNavigation: true });
+
+    /* === ORIGINAL FOOTER LOGIC === */
+    document.querySelectorAll('[data-service]').forEach(service => {
+      service.addEventListener('click', function () {
+        this.classList.toggle('active');
+        updateSelectedServices();
+      });
+    });
+    document.querySelectorAll('[data-budget]').forEach(budget => {
+      budget.addEventListener('click', function () {
+        document.querySelectorAll('[data-budget]').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('selectedBudget').value = this.dataset.budget;
+      });
+    });
+    function updateSelectedServices() {
+      const selected = [];
+      document.querySelectorAll('[data-service].active').forEach(s => selected.push(s.dataset.service));
+      document.getElementById('selectedServices').value = selected.join(', ');
+    }
+    document.getElementById('yanasContactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const form = this;
+      const statusMessage = document.getElementById('yanasStatusMessage');
+      const submitBtn = form.querySelector('.yanas-form_button');
+      if (!document.getElementById('selectedServices').value) { show('error', 'Please select at least one service.'); return; }
+      if (!document.getElementById('selectedBudget').value) { show('error', 'Please select your budget range.'); return; }
+      show('loading', 'Sending message...');
+      submitBtn.disabled = true; submitBtn.textContent = 'Sending...';
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+        .then(r => {
+          if (r.ok) { show('success', 'Thank you! Message sent.'); form.reset(); document.querySelectorAll('.active').forEach(el => el.classList.remove('active')); }
+          else throw new Error();
+        })
+        .catch(() => show('error', 'Oops! Problem sending. Please try again.'))
+        .finally(() => { submitBtn.disabled = false; submitBtn.textContent = 'Start a journey'; setTimeout(() => { statusMessage.style.display = 'none'; }, 5000); });
+      function show(t, x) { statusMessage.className = 'yanas-status-message yanas-' + t; statusMessage.textContent = x; statusMessage.style.display = 'block'; }
+    });
+
+    window.addEventListener('load', function () {
+      document.querySelectorAll('.yanas-bg-element').forEach((el, i) => {
+        const delay = i * 0.3;
+        const size = 60 + Math.random() * 80;
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        el.style.cssText = `left:${x}%;top:${y}%;width:${size}px;height:${size}px;animation-delay:${delay}s;`;
+      });
+    });
+  </script>
 </body>
-
 </html>
