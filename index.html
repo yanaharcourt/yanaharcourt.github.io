@@ -77,6 +77,13 @@
       padding: 0;
     }
 
+    /* Custom scrollbar — no purple */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 100px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.32); }
+    * { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.18) transparent; }
+
     html {
       scroll-behavior: smooth;
     }
@@ -121,12 +128,13 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 16px 10px 22px;
-      background: rgba(20, 18, 16, 0.72);
+      background-color: rgba(48, 48, 48, 0.5);
       backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(15px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 100px;
       box-shadow: 0 4px 32px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+      opacity: 1;
     }
 
     .nav__logo {
@@ -327,14 +335,16 @@
        HERO
     ================================================ */
     .hero {
-      min-height: 100svh;
+      min-height: 92svh;
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       align-items: flex-start;
-      padding: 0 var(--gap) 56px;
+      padding: 0 40px 56px;
+      margin: 12px 12px 0;
+      border-radius: 20px;
     }
 
     .hero__bg {
@@ -443,6 +453,14 @@
       50% {
         transform: translateY(8px)
       }
+    }
+
+    /* ================================================
+       SITE CONTAINER — uniform width across all sections
+    ================================================ */
+    .site-wrap {
+      max-width: 1440px;
+      margin: 80px 40px 40px 40px;
     }
 
     /* ================================================
@@ -567,6 +585,8 @@
       border-radius: var(--radius);
       background: #d8d5d0;
       cursor: pointer;
+      display: block;
+      /* works as <a> tag */
     }
 
     .pf-item.hidden {
@@ -673,7 +693,6 @@
     }
 
     .bc {
-      background: rgba(255, 255, 255, .05);
       border: 1px solid rgba(255, 255, 255, .08);
       border-radius: var(--radius);
       padding: 24px;
@@ -710,7 +729,6 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      background: #111;
       min-height: 330px;
     }
 
@@ -871,13 +889,13 @@
     }
 
     .ap-social-dark {
-      background: rgba(255,255,255,.08) !important;
-      border-color: rgba(255,255,255,.12) !important;
-      color: rgba(255,255,255,.7) !important;
+      background: rgba(255, 255, 255, .08) !important;
+      border-color: rgba(255, 255, 255, .12) !important;
+      color: rgba(255, 255, 255, .7) !important;
     }
 
     .ap-social-dark:hover {
-      background: rgba(255,255,255,.15) !important;
+      background: rgba(255, 255, 255, .15) !important;
     }
 
     .social-pill i {
@@ -1002,7 +1020,7 @@
       width: 4px;
       height: 4px;
       border-radius: 50%;
-      background: #6366f1;
+      background: rgba(255, 255, 255, .2);
     }
 
     /* scroll top */
@@ -1101,17 +1119,17 @@
     .designer-card {
       margin: 0 var(--gap);
       margin-top: 10px;
-      background: rgba(255, 255, 255, .04);
       border: 1px solid rgba(255, 255, 255, .08);
       border-radius: var(--radius);
       padding: 32px;
+      overflow: hidden;
     }
 
-    /* Grid inside card — photo | content | badges */
+    /* Grid inside card — photo | content | badges — all side by side */
     .designer-card .ap-grid {
       padding: 0;
-      grid-template-columns: 364px 488px 1fr;
-      gap: 24px;
+      grid-template-columns: 320px 1fr 220px;
+      gap: 28px;
       align-items: start;
     }
 
@@ -1143,7 +1161,7 @@
       left: 0;
       right: 0;
       padding: 60px 18px 18px;
-      background: linear-gradient(to top, rgba(0,0,0,.75) 0%, transparent 100%);
+      background: linear-gradient(to top, rgba(0, 0, 0, .75) 0%, transparent 100%);
       border-radius: 0 0 var(--radius) var(--radius);
       pointer-events: none;
     }
@@ -1186,7 +1204,6 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      background: rgba(255, 255, 255, .04);
       border: 1px solid rgba(255, 255, 255, .1);
       border-radius: var(--radius);
       padding: 16px;
@@ -1238,9 +1255,8 @@
 
     .ap-badges-card {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 8px;
-      background: rgba(255, 255, 255, .04);
       border: 1px solid rgba(255, 255, 255, .1);
       border-radius: var(--radius);
       padding: 16px;
@@ -1261,6 +1277,7 @@
       }
 
       .ap-badges-card {
+        grid-template-columns: repeat(5, 1fr);
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
@@ -1280,11 +1297,51 @@
       .ap-photo-col .ap-photo img {
         height: 280px;
       }
+
+      .hero {
+        margin: 8px 8px 0;
+        border-radius: 14px;
+      }
+
+      .yf-footer {
+        margin: 24px 8px 8px;
+        border-radius: 14px;
+      }
+    }
+
+    /* ================================================
+       TOOLS STRIP — inside designer card
+    ================================================ */
+    .designer-tools {
+      margin-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, .07);
+      padding-top: 20px;
+      overflow: hidden;
+    }
+
+    .designer-tools .marquee-track {
+      animation: scrollX 24s linear infinite;
+    }
+
+    .designer-tools .marquee-item {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .5);
+      padding: 0 16px;
+      gap: 8px;
+    }
+
+    .designer-tools .marquee-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .designer-tools .marquee-sep {
+      background: rgba(255, 255, 255, .2);
     }
 
     /* ================================================
     ================================================ */
-    .yanas-footer {
+   .yanas-footer {
       margin-top: 0 !important;
     }
 
@@ -1396,6 +1453,353 @@
         padding: 10px 14px;
       }
     }
+
+    /* ================================================
+       NEW FOOTER — dark, matching site aesthetic
+    ================================================ */
+    .yf-footer {
+      background: #0d0d0d;
+      color: #f0ede8;
+      padding: 80px 0 0;
+      font-family: var(--sans);
+      overflow: hidden;
+      margin: 40px 12px 12px;
+      border-radius: 20px;
+    }
+
+    .yf-footer .site-wrap {
+      padding: 0 var(--gap);
+    }
+
+    /* Top section: headline left, form right */
+    .yf-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      padding-bottom: 72px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      margin-bottom: 48px;
+      align-items: start;
+    }
+
+    .yf-headline {
+      font-family: var(--serif);
+      font-size: clamp(56px, 8vw, 120px);
+      font-weight: 400;
+      line-height: .95;
+      letter-spacing: -.03em;
+      color: #f0ede8;
+      margin-bottom: 28px;
+    }
+
+    .yf-headline em {
+      font-style: italic;
+      color: rgba(255, 255, 255, .4);
+    }
+
+    .yf-sub {
+      font-size: 15px;
+      color: rgba(255, 255, 255, .4);
+      line-height: 1.6;
+      margin-bottom: 32px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      font-weight: 500;
+    }
+
+    .yf-email-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border: 1.5px solid rgba(255, 255, 255, .25);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: #f0ede8;
+      transition: all .25s;
+    }
+
+    .yf-email-btn:hover {
+      background: rgba(255, 255, 255, .08);
+      border-color: rgba(255, 255, 255, .5);
+    }
+
+    .yf-email-btn i {
+      transition: transform .25s;
+    }
+
+    .yf-email-btn:hover i {
+      transform: rotate(45deg);
+    }
+
+    /* Form */
+    .yf-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .yf-form-group {}
+
+    .yf-form-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .35);
+      margin-bottom: 10px;
+    }
+
+    .yf-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .yf-field {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 10px;
+      color: #f0ede8;
+      font-family: var(--sans);
+      font-size: 13px;
+      outline: none;
+      transition: border-color .2s, background .2s;
+    }
+
+    .yf-field::placeholder {
+      color: rgba(255, 255, 255, .2);
+    }
+
+    .yf-field:focus {
+      border-color: rgba(255, 255, 255, .25);
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .yf-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .yf-chip {
+      padding: 7px 16px;
+      border: 1.5px solid rgba(255, 255, 255, .12);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .45);
+      cursor: pointer;
+      transition: all .2s;
+      user-select: none;
+    }
+
+    .yf-chip:hover {
+      border-color: rgba(255, 255, 255, .3);
+      color: rgba(255, 255, 255, .8);
+    }
+
+    .yf-chip.active {
+      border-color: #f0ede8;
+      color: #f0ede8;
+    }
+
+    .yf-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 10px;
+      color: #f0ede8;
+      font-family: var(--sans);
+      font-size: 13px;
+      outline: none;
+      resize: vertical;
+      transition: border-color .2s;
+    }
+
+    .yf-textarea::placeholder {
+      color: rgba(255, 255, 255, .2);
+    }
+
+    .yf-textarea:focus {
+      border-color: rgba(255, 255, 255, .25);
+    }
+
+    .yf-form-bottom {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .yf-submit {
+      padding: 13px 28px;
+      background: #f0ede8;
+      color: #0d0d0d;
+      border: none;
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+
+    .yf-submit:hover {
+      opacity: .85;
+    }
+
+    .yf-submit:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .yf-privacy {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, .3);
+      cursor: pointer;
+    }
+
+    .yf-privacy a {
+      color: rgba(255, 255, 255, .55);
+      text-decoration: underline;
+    }
+
+    /* Bottom links bar */
+    .yf-bottom {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 64px;
+      align-items: start;
+      padding-bottom: 40px;
+    }
+
+    .yf-keep-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-style: italic;
+      color: #f0ede8;
+      margin-bottom: 6px;
+    }
+
+    .yf-keep-email {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .35);
+    }
+
+    .yf-nav-cols {
+      display: flex;
+      gap: 56px;
+    }
+
+    .yf-nav-col h5 {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .3);
+      margin-bottom: 16px;
+    }
+
+    .yf-nav-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Rolling link */
+    .yf-link {
+      display: inline-flex;
+      flex-direction: column;
+      height: 1.45em;
+      overflow: hidden;
+      font-size: 14px;
+      font-weight: 500;
+      color: #f0ede8;
+      margin-bottom: 10px;
+    }
+
+    .yf-link span {
+      display: block;
+      transition: transform .35s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .yf-link:hover span {
+      transform: translateY(-100%);
+    }
+
+    .yf-link:hover {
+      color: rgba(255, 255, 255, .55);
+    }
+
+    /* Copyright bar */
+    .yf-copy {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      padding: 20px 0 32px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, .25);
+    }
+
+    /* Status messages */
+    .yanas-status-message {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      display: none;
+      margin-bottom: 8px;
+    }
+
+    .yanas-success {
+      background: rgba(74, 222, 128, .1);
+      border: 1px solid rgba(74, 222, 128, .2);
+      color: #86efac;
+    }
+
+    .yanas-error {
+      background: rgba(239, 68, 68, .1);
+      border: 1px solid rgba(239, 68, 68, .2);
+      color: #fca5a5;
+    }
+
+    .yanas-loading {
+      background: rgba(255, 255, 255, .05);
+      color: rgba(255, 255, 255, .5);
+    }
+
+    /* Footer responsive */
+    @media(max-width:900px) {
+      .yf-top {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .yf-bottom {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .yf-nav-cols {
+        gap: 32px;
+      }
+
+      .yf-form-row {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
@@ -1463,328 +1867,337 @@
      PORTFOLIO
 ================================================ -->
   <section class="section portfolio" id="portfolio">
-    <div class="sec-head">
-      <div>
-        <div class="s-label">Selected Work</div>
-        <h2 class="s-title">Featured Projects ↓</h2>
-      </div>
-      <ul class="pf-filters" id="pfFilters">
-        <li class="active" data-f="*">All</li>
-        <li data-f="app">App</li>
-        <li data-f="web">Web</li>
-      </ul>
-    </div>
-
-    <div class="pf-grid" id="pfGrid">
-      <div class="pf-item pf-item--1" data-cat="app" data-reveal>
-        <img src="./Aura/Aura banner.png" alt="Aura">
-        <div class="pf-see">SEE PROJECT →</div>
-        <div class="pf-info">
-          <div class="pf-title">Aura</div>
-          <div class="pf-tags"><span class="pf-tag">App</span><span class="pf-tag">Wellness</span><span
-              class="pf-tag">iOS</span></div>
+    <div class="site-wrap">
+      <div class="sec-head">
+        <div>
+          <div class="s-label">Selected Work</div>
+          <h2 class="s-title">Featured Projects ↓</h2>
         </div>
+        <ul class="pf-filters" id="pfFilters">
+          <li class="active" data-f="*">All</li>
+          <li data-f="app">App</li>
+          <li data-f="web">Web</li>
+        </ul>
       </div>
 
-      <div class="pf-item pf-item--2" data-cat="app" data-reveal data-reveal-d="2">
-        <img src="./Caixa/assets/img/banner.png" alt="CAIXA">
-        <div class="pf-see">SEE PROJECT →</div>
-        <div class="pf-info">
-          <div class="pf-title">CAIXA</div>
-          <div class="pf-tags"><span class="pf-tag">App</span><span class="pf-tag">Fintech</span></div>
-        </div>
-      </div>
+      <div class="pf-grid" id="pfGrid">
+        <a class="pf-item pf-item--1" data-cat="app" data-reveal href="./Aura/index.html">
+          <img src="./Aura/Aura banner.png" alt="Aura">
+          <div class="pf-see">SEE PROJECT →</div>
+          <div class="pf-info">
+            <div class="pf-title">Aura</div>
+            <div class="pf-tags"><span class="pf-tag">App</span><span class="pf-tag">Wellness</span><span
+                class="pf-tag">iOS</span></div>
+          </div>
+        </a>
 
-      <div class="pf-item pf-item--3" data-cat="web" data-reveal>
-        <img src="assets/img/portfolio/ASCENDtials/banner.jpg" alt="ASCENDtials">
-        <div class="pf-see">SEE PROJECT →</div>
-        <div class="pf-info">
-          <div class="pf-title">ASCENDtials</div>
-          <div class="pf-tags"><span class="pf-tag">Web</span><span class="pf-tag">Non-profit</span></div>
-        </div>
-      </div>
+        <a class="pf-item pf-item--2" data-cat="app" data-reveal data-reveal-d="2"
+          href="./Caixa/caixa-portfolio-details.html">
+          <img src="./Caixa/assets/img/banner.png" alt="CAIXA">
+          <div class="pf-see">SEE PROJECT →</div>
+          <div class="pf-info">
+            <div class="pf-title">CAIXA</div>
+            <div class="pf-tags"><span class="pf-tag">App</span><span class="pf-tag">Fintech</span></div>
+          </div>
+        </a>
 
-      <div class="pf-item pf-item--4" data-cat="web" data-reveal>
-        <img src="assets/img/portfolio/AllyLingua Banner.png" alt="Ally Lingua">
-        <div class="pf-see">SEE PROJECT →</div>
-        <div class="pf-info">
-          <div class="pf-title">Ally Lingua</div>
-          <div class="pf-tags"><span class="pf-tag">Web</span><span class="pf-tag">EdTech</span></div>
-        </div>
-      </div>
+        <a class="pf-item pf-item--3" data-cat="web" data-reveal href="ASCENDtials.html">
+          <img src="assets/img/portfolio/ASCENDtials/banner.jpg" alt="ASCENDtials">
+          <div class="pf-see">SEE PROJECT →</div>
+          <div class="pf-info">
+            <div class="pf-title">ASCENDtials</div>
+            <div class="pf-tags"><span class="pf-tag">Web</span><span class="pf-tag">Non-profit</span></div>
+          </div>
+        </a>
 
-      <div class="pf-item pf-item--5" data-cat="web" data-reveal data-reveal-d="2">
-        <img src="./Cachepot Shop/Cachepot-Shop-Banner.png" alt="Cachepot Shop">
-        <div class="pf-see">SEE PROJECT →</div>
-        <div class="pf-info">
-          <div class="pf-title">Cachepot Shop</div>
-          <div class="pf-tags"><span class="pf-tag">Web</span><span class="pf-tag">E-commerce</span></div>
-        </div>
+        <a class="pf-item pf-item--4" data-cat="web" data-reveal href="http://allylingua.com/" target="_blank">
+          <img src="assets/img/portfolio/AllyLingua Banner.png" alt="Ally Lingua">
+          <div class="pf-see">SEE PROJECT →</div>
+          <div class="pf-info">
+            <div class="pf-title">Ally Lingua</div>
+            <div class="pf-tags"><span class="pf-tag">Web</span><span class="pf-tag">EdTech</span></div>
+          </div>
+        </a>
+
+        <a class="pf-item pf-item--5" data-cat="web" data-reveal data-reveal-d="2"
+          href="./Cachepot Shop/delicate-weaves.html">
+          <img src="./Cachepot Shop/Cachepot-Shop-Banner.png" alt="Cachepot Shop">
+          <div class="pf-see">SEE PROJECT →</div>
+          <div class="pf-info">
+            <div class="pf-title">Cachepot Shop</div>
+            <div class="pf-tags"><span class="pf-tag">Web</span><span class="pf-tag">E-commerce</span></div>
+          </div>
+        </a>
       </div>
-    </div>
   </section>
 
   <!-- ================================================
      ABOUT DARK — BENTO + THREE.JS GLOBE
 ================================================ -->
   <section class="about-dark" id="about-dark">
-    <div class="about-dark__head">
-      <div class="s-label">About</div>
-      <h2 class="s-title about-dark__title">Based in Paris, France<br>designing worldwide</h2>
-    </div>
-
-    <div class="bento">
-      <div class="bc bc-stat" data-reveal>
-        <div class="num">2+</div>
-        <div class="lbl">Years of Experience</div>
-      </div>
-      <div class="bc bc-stat" data-reveal data-reveal-d="1">
-        <div class="num">5+</div>
-        <div class="lbl">Projects Completed</div>
-      </div>
-      <div class="bc bc-stat" data-reveal data-reveal-d="2">
-        <div class="num">20%</div>
-        <div class="lbl">Conversion Lift</div>
+    <div class="site-wrap">
+      <div class="about-dark__head">
+        <div class="s-label">About</div>
+        <h2 class="s-title about-dark__title">Based in Paris, France<br>designing worldwide</h2>
       </div>
 
-      <div class="bc bc-badge" data-reveal>
-        <div class="bc-badge-bg">Figma · Webflow<br>· HTML · CSS<br>· JavaScript</div>
-        <div class="bc-badge-title">Google UX Design Certified</div>
-        <div class="bc-badge-sub">
-          <i class="bi bi-patch-check-fill bc-check-icon"></i>
-          Verified Professional
+      <div class="bento">
+        <div class="bc bc-stat" data-reveal>
+          <div class="num">2+</div>
+          <div class="lbl">Years of Experience</div>
         </div>
-      </div>
+        <div class="bc bc-stat" data-reveal data-reveal-d="1">
+          <div class="num">5+</div>
+          <div class="lbl">Projects Completed</div>
+        </div>
+        <div class="bc bc-stat" data-reveal data-reveal-d="2">
+          <div class="num">20%</div>
+          <div class="lbl">Conversion Lift</div>
+        </div>
 
-      <!-- Globe card with Three.js -->
-      <div class="bc bc-globe" data-reveal>
-        <div class="bc-globe-header">
-          <h3>Based in Paris, France</h3>
-          <div class="bc-avail">
-            <span class="bc-avail-dot"></span>
-            Available Worldwide · EU Work Authorized
+        <div class="bc bc-badge" data-reveal>
+          <div class="bc-badge-bg">Figma · Webflow<br>· HTML · CSS<br>· JavaScript</div>
+          <div class="bc-badge-title">Google UX Design Certified</div>
+          <div class="bc-badge-sub">
+            <i class="bi bi-patch-check-fill bc-check-icon"></i>
+            Verified Professional
           </div>
         </div>
-        <!-- Three.js renders here -->
-        <div class="globe-wrapper" id="globeWrapper">
-          <canvas id="globe-3d"></canvas>
-          <canvas id="globe-2d-overlay"></canvas>
-        </div>
-      </div>
-    </div>
 
-    <!-- THE DESIGNER  -->
-
-    <div class="designer-card">
-      <div class="ap-grid">
-        <div class="ap-photo-col" data-reveal>
-          <div class="ap-photo">
-            <img src="assets/img/profile-img.jpg" alt="Yana Harcourt">
-            <div class="ap-photo-overlay">
-              <div class="ap-photo-name">Yana Harcourt</div>
-              <div class="ap-photo-role">UX/UI &amp; Product Designer</div>
+        <!-- Globe card with Three.js -->
+        <div class="bc bc-globe" data-reveal>
+          <div class="bc-globe-header">
+            <h3>Based in Paris, France</h3>
+            <div class="bc-avail">
+              <span class="bc-avail-dot"></span>
+              Available Worldwide · EU Work Authorized
             </div>
           </div>
-          <div class="ap-socials">
-            <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank" class="social-pill ap-social-dark"><i class="bi bi-linkedin"></i> LinkedIn</a>
-            <a href="https://www.behance.net/yana_harcourt" target="_blank" class="social-pill ap-social-dark"><i class="bi bi-behance"></i> Behance</a>
-            <a href="https://github.com/yanaharcourt" target="_blank" class="social-pill ap-social-dark"><i class="bi bi-github"></i> GitHub</a>
-            <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank" class="social-pill ap-social-dark"><i class="bi bi-instagram"></i> Instagram</a>
-          </div>
-        </div>
-
-        <div class="ap-content" data-reveal data-reveal-d="1">
-          <p class="ap-bio ap-bio--dark">UX/UI designer with 2+ years of experience building user-centered digital products across
-            European and Asian markets. Led the ASCENDtials platform redesign — achieving a 20% increase in subscription
-            conversion.<br><br>Proficient in Figma, user research, prototyping, and responsive design. Fluent in English,
-            Russian, Ukrainian · Basic French.</p>
-          <div class="ap-ctas">
-            <a href="assets/cv/Yana-Harcourt-CV.pdf" class="btn btn-dark-cv" download>Download CV <i class="bi bi-download"></i></a>
-            <a href="#contact" class="btn btn-dark-contact">Get in touch</a>
-          </div>
-          <div class="skills-tags">
-            <span class="skill-tag skill-tag--dark">User Research</span>
-            <span class="skill-tag skill-tag--dark">Figma (Advanced)</span>
-            <span class="skill-tag skill-tag--dark">Prototyping</span>
-            <span class="skill-tag skill-tag--dark">Design Systems</span>
-            <span class="skill-tag skill-tag--dark">Responsive Design</span>
-            <span class="skill-tag skill-tag--dark">WCAG Accessibility</span>
-            <span class="skill-tag skill-tag--dark">Usability Testing</span>
-            <span class="skill-tag skill-tag--dark">Information Architecture</span>
-            <span class="skill-tag skill-tag--dark">Visual Identity</span>
-            <span class="skill-tag skill-tag--dark">HTML &amp; CSS</span>
-            <span class="skill-tag skill-tag--dark">Agile / Scrum</span>
-            <span class="skill-tag skill-tag--dark">A/B Testing</span>
-            <span class="skill-tag skill-tag--dark">Design Thinking</span>
-            <span class="skill-tag skill-tag--dark">Cross-cultural UX</span>
-          </div>
-        </div>
-
-        <div class="ap-badges-col" data-reveal data-reveal-d="2">
-          <div class="ap-badges-card">
-            <div class="ap-badge-card ap-badge-card--dark"><a href="https://www.credly.com/badges/62118b07-ad3d-488d-bd03-070e28564846/public_url" target="_blank"><img src="assets/img/google-ux-design.png" alt="Google UX Design"></a></div>
-            <div class="ap-badge-card ap-badge-card--dark"><a href="https://www.credly.com/badges/6c5e6ad3-77c7-4175-92b0-62c54a1e2484/public_url" target="_blank"><img src="assets/img/core-1.png" alt="Core 1"></a></div>
-            <div class="ap-badge-card ap-badge-card--dark"><a href="https://www.credly.com/badges/208df361-6cb7-49fb-a4b1-223372e50b40/public_url" target="_blank"><img src="assets/img/core-2.png" alt="Core 2"></a></div>
-            <div class="ap-badge-card ap-badge-card--dark"><a href="https://www.credly.com/badges/8935efb8-8c23-41a0-9228-d5f63065fee6/public_url" target="_blank"><img src="assets/img/introduction-to-agile-development-and-scrum.png" alt="Agile"></a></div>
-            <div class="ap-badge-card ap-badge-card--dark"><a href="https://www.credly.com/badges/553b4740-ca9d-4520-9174-a02ce8fd079b/public_url" target="_blank"><img src="assets/img/practice-exam-for-comptia.png" alt="CompTIA"></a></div>
+          <!-- Three.js renders here -->
+          <div class="globe-wrapper" id="globeWrapper">
+            <canvas id="globe-3d"></canvas>
+            <canvas id="globe-2d-overlay"></canvas>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="about-dark__bottom"></div>
+      <!-- THE DESIGNER  -->
+
+      <div class="designer-card">
+        <div class="ap-grid">
+          <div class="ap-photo-col" data-reveal>
+            <div class="ap-photo">
+              <img src="assets/img/profile-img.jpg" alt="Yana Harcourt">
+              <div class="ap-photo-overlay">
+                <div class="ap-photo-name">Yana Harcourt</div>
+                <div class="ap-photo-role">UX/UI &amp; Product Designer</div>
+              </div>
+            </div>
+            <div class="ap-socials">
+              <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank"
+                class="social-pill ap-social-dark"><i class="bi bi-linkedin"></i> LinkedIn</a>
+              <a href="https://www.behance.net/yana_harcourt" target="_blank" class="social-pill ap-social-dark"><i
+                  class="bi bi-behance"></i> Behance</a>
+              <a href="https://github.com/yanaharcourt" target="_blank" class="social-pill ap-social-dark"><i
+                  class="bi bi-github"></i> GitHub</a>
+              <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank" class="social-pill ap-social-dark"><i
+                  class="bi bi-instagram"></i> Instagram</a>
+            </div>
+          </div>
+
+          <div class="ap-content" data-reveal data-reveal-d="1">
+            <p class="ap-bio ap-bio--dark">UX/UI designer with 2+ years of experience building user-centered digital
+              products across
+              European and Asian markets. Led the ASCENDtials platform redesign — achieving a 20% increase in
+              subscription
+              conversion.<br><br>Proficient in Figma, user research, prototyping, and responsive design. Fluent in
+              English, Russian, Ukrainian · Basic French.</p>
+            <div class="ap-ctas">
+              <a href="assets/cv/Yana-Harcourt-CV.pdf" class="btn btn-dark-cv" download>Download CV <i
+                  class="bi bi-download"></i></a>
+              <a href="#contact" class="btn btn-dark-contact">Get in touch</a>
+            </div>
+
+            <div class="skills-tags">
+              <span class="skill-tag skill-tag--dark">User Research</span>
+              <span class="skill-tag skill-tag--dark">Figma (Advanced)</span>
+              <span class="skill-tag skill-tag--dark">Prototyping</span>
+              <span class="skill-tag skill-tag--dark">Design Systems</span>
+              <span class="skill-tag skill-tag--dark">Responsive Design</span>
+              <span class="skill-tag skill-tag--dark">WCAG Accessibility</span>
+              <span class="skill-tag skill-tag--dark">Usability Testing</span>
+              <span class="skill-tag skill-tag--dark">Information Architecture</span>
+              <span class="skill-tag skill-tag--dark">Visual Identity</span>
+              <span class="skill-tag skill-tag--dark">HTML &amp; CSS</span>
+              <span class="skill-tag skill-tag--dark">Agile / Scrum</span>
+              <span class="skill-tag skill-tag--dark">A/B Testing</span>
+              <span class="skill-tag skill-tag--dark">Design Thinking</span>
+              <span class="skill-tag skill-tag--dark">Cross-cultural UX</span>
+            </div>
+          </div>
+
+          <div class="ap-badges-col" data-reveal data-reveal-d="2">
+            <div class="ap-badges-card">
+              <div class="ap-badge-card ap-badge-card--dark"><a
+                  href="https://www.credly.com/badges/62118b07-ad3d-488d-bd03-070e28564846/public_url"
+                  target="_blank"><img src="assets/img/google-ux-design.png" alt="Google UX Design"></a></div>
+              <div class="ap-badge-card ap-badge-card--dark"><a
+                  href="https://www.credly.com/badges/6c5e6ad3-77c7-4175-92b0-62c54a1e2484/public_url"
+                  target="_blank"><img src="assets/img/core-1.png" alt="Core 1"></a></div>
+              <div class="ap-badge-card ap-badge-card--dark"><a
+                  href="https://www.credly.com/badges/208df361-6cb7-49fb-a4b1-223372e50b40/public_url"
+                  target="_blank"><img src="assets/img/core-2.png" alt="Core 2"></a></div>
+              <div class="ap-badge-card ap-badge-card--dark"><a
+                  href="https://www.credly.com/badges/8935efb8-8c23-41a0-9228-d5f63065fee6/public_url"
+                  target="_blank"><img src="assets/img/introduction-to-agile-development-and-scrum.png" alt="Agile"></a>
+              </div>
+              <div class="ap-badge-card ap-badge-card--dark"><a
+                  href="https://www.credly.com/badges/553b4740-ca9d-4520-9174-a02ce8fd079b/public_url"
+                  target="_blank"><img src="assets/img/practice-exam-for-comptia.png" alt="CompTIA"></a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools strip inside the card -->
+        <div class="designer-tools">
+          <div class="marquee-track">
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/figma-logo.svg" alt="">Figma</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Adobe-XD-.svg.png" alt="">Adobe XD</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/WebFlow.svg" alt="">Webflow</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/zeplin-logo.svg" alt="">Zeplin</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/VSCode.svg.png" alt="">VS Code</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Github-logo.svg.png" alt="">GitHub</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Notion-logo.svg.png" alt="">Notion</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/asana-logo.svg" alt="">Asana</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/slack-logo.svg" alt="">Slack</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Wordpress-Logo.svg" alt="">WordPress</span>
+            <span class="marquee-item"><span class="marquee-sep"></span></span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/figma-logo.svg" alt="">Figma</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Adobe-XD-.svg.png" alt="">Adobe XD</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/WebFlow.svg" alt="">Webflow</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/zeplin-logo.svg" alt="">Zeplin</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/VSCode.svg.png" alt="">VS Code</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Github-logo.svg.png" alt="">GitHub</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Notion-logo.svg.png" alt="">Notion</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/asana-logo.svg" alt="">Asana</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/slack-logo.svg" alt="">Slack</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Wordpress-Logo.svg" alt="">WordPress</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-dark__bottom"></div>
+    </div>
   </section>
 
   <!-- ================================================
-    MARQUEE TOOLS
-  ================================================ -->
-  <div class="marquee-wrap">
-    <div class="marquee-track">
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/figma-logo.svg" alt="">Figma</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Adobe-XD-.svg.png" alt="">Adobe XD</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/WebFlow.svg" alt="">Webflow</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/zeplin-logo.svg" alt="">Zeplin</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/VSCode.svg.png" alt="">VS Code</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Github-logo.svg.png" alt="">GitHub</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Notion-logo.svg.png" alt="">Notion</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/asana-logo.svg" alt="">Asana</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/slack-logo.svg" alt="">Slack</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Wordpress-Logo.svg" alt="">WordPress</span>
-      <span class="marquee-item"><span class="marquee-sep"></span></span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/figma-logo.svg" alt="">Figma</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Adobe-XD-.svg.png" alt="">Adobe XD</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/WebFlow.svg" alt="">Webflow</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/zeplin-logo.svg" alt="">Zeplin</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/VSCode.svg.png" alt="">VS Code</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Github-logo.svg.png" alt="">GitHub</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Notion-logo.svg.png" alt="">Notion</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/asana-logo.svg" alt="">Asana</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/slack-logo.svg" alt="">Slack</span>
-      <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Wordpress-Logo.svg" alt="">WordPress</span>
-    </div>
-  </div>
-
-  <!-- ================================================
-     ORIGINAL FOOTER
+     FOOTER — redesigned dark version
 ================================================ -->
-  <footer class="yanas-footer" id="contact">
-    <div class="yanas-bg-elements">
-      <div class="yanas-bg-element"><i class="bi bi-code-slash"></i></div>
-      <div class="yanas-bg-element"><i class="bi bi-palette"></i></div>
-      <div class="yanas-bg-element"><i class="bi bi-layers"></i></div>
-      <div class="yanas-bg-element"><i class="bi bi-terminal"></i></div>
-      <div class="yanas-bg-element"><i class="bi bi-vector-pen"></i></div>
-      <div class="yanas-bg-element"><i class="bi bi-grid-3x3"></i></div>
-      <div class="yanas-bg-element"><i class="bi bi-bezier"></i></div>
-      <div class="yanas-bg-element"><i class="bi bi-cpu"></i></div>
-    </div>
-    <div class="yanas-footer_wrapper">
-      <div class="yanas-footer_content">
-        <div class="yanas-footer_content-left">
-          <h3 class="yanas-title-140">Let's connect</h3>
-          <div class="yanas-footer_content-left-content">
-            <div class="yanas-text-32">Ready to bring your ideas to life through design &amp; code</div>
-          </div>
-          <a href="/cdn-cgi/l/email-protection#fb829a959ad5939a8998948e898fbb9c969a9297d5989496" class="yanas-button">
-            <div class="yanas-button-content"><span>Send an e-mail</span><i class="bi bi-arrow-up-right"></i></div>
-            <div class="yanas-button-bg-hover"></div>
+  <footer class="yf-footer" id="contact">
+    <div class="site-wrap">
+
+      <!-- TOP: big headline + form -->
+      <div class="yf-top">
+        <div class="yf-left">
+          <h2 class="yf-headline">Let's<br><em>connect</em></h2>
+          <p class="yf-sub">Ready to bring your ideas to life<br>through design &amp; code</p>
+          <a href="/cdn-cgi/l/email-protection#146d757a753a7c7566777b616660547379757d783a777b79" class="yf-email-btn">
+            <span>Send an e-mail</span>
+            <i class="bi bi-arrow-up-right"></i>
           </a>
         </div>
-        <div class="yanas-footer_content-right">
-          <div class="yanas-footer-form">
-            <form id="yanasContactForm" action="https://formspree.io/f/xnnqvwab" method="POST" class="yanas-form">
-              <div class="yanas-status-message" id="yanasStatusMessage"></div>
-              <div class="yanas-form_first-line">
-                <div class="yanas-form_first-line-title">
-                  <div class="yanas-text-40">Contact info*</div>
-                </div>
-                <div class="yanas-form-row">
-                  <input class="yanas-footer-field" name="name" placeholder="Your name*" type="text" required>
-                  <input class="yanas-footer-field" name="email" placeholder="Your e-mail*" type="email" required>
-                </div>
+
+        <div class="yf-right">
+          <form id="yanasContactForm" action="https://formspree.io/f/xnnqvwab" method="POST" class="yf-form">
+            <div class="yanas-status-message" id="yanasStatusMessage"></div>
+
+            <div class="yf-form-group">
+              <p class="yf-form-label">Contact info*</p>
+              <div class="yf-form-row">
+                <input class="yf-field" name="name" placeholder="Your name*" type="text" required>
+                <input class="yf-field" name="email" placeholder="Your e-mail*" type="email" required>
               </div>
-              <div class="yanas-form_second-line">
-                <div class="yanas-form_first-line-title">
-                  <div class="yanas-text-40">You are interested in*</div>
-                </div>
-                <div class="yanas-services-grid">
-                  <div class="yanas-form-button_field" data-service="ux-ui-design">UX/UI Design</div>
-                  <div class="yanas-form-button_field" data-service="web-development">Web Development</div>
-                </div>
-                <input type="hidden" name="services" id="selectedServices">
+            </div>
+
+            <div class="yf-form-group">
+              <p class="yf-form-label">You are interested in*</p>
+              <div class="yf-chips">
+                <div class="yf-chip" data-service="ux-ui-design">UX/UI Design</div>
+                <div class="yf-chip" data-service="web-development">Web Development</div>
               </div>
-              <div class="yanas-form_second-line">
-                <div class="yanas-form_first-line-title">
-                  <div class="yanas-text-40">Your budget in EUR*</div>
-                </div>
-                <div class="yanas-budget-grid">
-                  <div class="yanas-form-button_field" data-budget="<5k">&lt;5K</div>
-                  <div class="yanas-form-button_field" data-budget="5-10k">5-10K</div>
-                  <div class="yanas-form-button_field" data-budget="10-20k">10-20K</div>
-                  <div class="yanas-form-button_field" data-budget=">20k">&gt;20K</div>
-                  <div class="yanas-form-button_field" data-budget="i-dont-know">I don't know yet</div>
-                </div>
-                <input type="hidden" name="budget" id="selectedBudget">
+              <input type="hidden" name="services" id="selectedServices">
+            </div>
+
+            <div class="yf-form-group">
+              <p class="yf-form-label">Your budget in EUR*</p>
+              <div class="yf-chips">
+                <div class="yf-chip" data-budget="<5k">&lt;5K</div>
+                <div class="yf-chip" data-budget="5-10k">5–10K</div>
+                <div class="yf-chip" data-budget="10-20k">10–20K</div>
+                <div class="yf-chip" data-budget=">20k">&gt;20K</div>
+                <div class="yf-chip" data-budget="i-dont-know">I don't know yet</div>
               </div>
-              <div class="yanas-form_second-line">
-                <textarea name="message" class="yanas-message-field"
-                  placeholder="Tell me about your project..."></textarea>
-              </div>
-              <button type="submit" class="yanas-form_button">Start a journey</button>
-              <div class="form-check" style="margin-top:12px;">
-                <input class="form-check-input" type="checkbox" value="" id="privacyCheck" required>
-                <label class="form-check-label" for="privacyCheck" style="font-size:13px;color:#64748b;">
-                  I agree to the <a href="Privacy Policy.html" target="_blank"
-                    style="color:#6366f1;text-decoration:underline;">Privacy Policy</a> and consent to the processing of
-                  my data.
-                </label>
-              </div>
-            </form>
-          </div>
+              <input type="hidden" name="budget" id="selectedBudget">
+            </div>
+
+            <div class="yf-form-group">
+              <textarea name="message" class="yf-textarea" placeholder="Tell me about your project..."></textarea>
+            </div>
+
+            <div class="yf-form-bottom">
+              <button type="submit" class="yf-submit">Start a journey →</button>
+              <label class="yf-privacy">
+                <input type="checkbox" id="privacyCheck" required>
+                <span>I agree to the <a href="Privacy Policy.html" target="_blank">Privacy Policy</a></span>
+              </label>
+            </div>
+          </form>
         </div>
       </div>
-      <div class="yanas-footer_links">
-        <div class="yanas-footer_links-left">
-          <div class="yanas-text-36">Keep in touch</div>
-          <div class="yanas-text-24"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4138202f206f292033222e34333501262c20282d6f222e2c">[email&#160;protected]</a></div>
+
+      <!-- BOTTOM: links bar -->
+      <div class="yf-bottom">
+        <div class="yf-bottom-left">
+          <div class="yf-keep-title">Keep in touch</div>
+          <div class="yf-keep-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="80f9e1eee1aee8e1f2e3eff5f2f4c0e7ede1e9ecaee3efed">[email&#160;protected]</a></div>
         </div>
-        <div class="yanas-footer_links-right">
-          <div class="yanas-footer_links-right-item">
-            <h5>Follow Us</h5>
-            <div class="yanas-footer_links-right-item-links">
-              <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank" class="yanas-rolling-text"><span
-                  class="yanas-text-block">LinkedIn</span><span class="yanas-text-block">LinkedIn</span></a>
-              <a href="https://www.behance.net/yana_harcourt" target="_blank" class="yanas-rolling-text"><span
-                  class="yanas-text-block">Behance</span><span class="yanas-text-block">Behance</span></a>
-              <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank" class="yanas-rolling-text"><span
-                  class="yanas-text-block">Instagram</span><span class="yanas-text-block">Instagram</span></a>
-              <a href="https://github.com/yanaharcourt" target="_blank" class="yanas-rolling-text"><span
-                  class="yanas-text-block">GitHub</span><span class="yanas-text-block">GitHub</span></a>
-            </div>
+
+        <div class="yf-nav-cols">
+          <div class="yf-nav-col">
+            <h5>Follow</h5>
+            <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank"
+              class="yf-link"><span>LinkedIn</span><span>LinkedIn</span></a>
+            <a href="https://www.behance.net/yana_harcourt" target="_blank"
+              class="yf-link"><span>Behance</span><span>Behance</span></a>
+            <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank"
+              class="yf-link"><span>Instagram</span><span>Instagram</span></a>
+            <a href="https://github.com/yanaharcourt" target="_blank"
+              class="yf-link"><span>GitHub</span><span>GitHub</span></a>
           </div>
-          <div class="yanas-footer_links-right-item">
+          <div class="yf-nav-col">
             <h5>Menu</h5>
-            <div class="yanas-footer_links-right-item-links">
-              <a href="#hero" class="yanas-rolling-text"><span class="yanas-text-block">Home</span><span
-                  class="yanas-text-block">Home</span></a>
-              <a href="#about-dark" class="yanas-rolling-text"><span class="yanas-text-block">About</span><span
-                  class="yanas-text-block">About</span></a>
-              <a href="#portfolio" class="yanas-rolling-text"><span class="yanas-text-block">Portfolio</span><span
-                  class="yanas-text-block">Portfolio</span></a>
-              <a href="#contact" class="yanas-rolling-text"><span class="yanas-text-block">Contact</span><span
-                  class="yanas-text-block">Contact</span></a>
-            </div>
+            <a href="#hero" class="yf-link"><span>Home</span><span>Home</span></a>
+            <a href="#portfolio" class="yf-link"><span>Work</span><span>Work</span></a>
+            <a href="#about-dark" class="yf-link"><span>About</span><span>About</span></a>
+            <a href="#contact" class="yf-link"><span>Contact</span><span>Contact</span></a>
           </div>
         </div>
-        <div class="yanas-copyright">2026 All Rights Reserved</div>
       </div>
+
+      <div class="yf-copy">
+        <span>© 2026 Yana Harcourt. All Rights Reserved</span>
+        <a href="Privacy Policy.html" target="_blank" class="yf-link"
+          style="color:rgba(255,255,255,.3);font-size:13px;"><span>Privacy Policy</span><span>Privacy Policy</span></a>
+      </div>
+
     </div>
   </footer>
 
   <a href="#" id="scrollTopBtn" class="scroll-top-btn"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor scripts -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
 
   <!-- Three.js via ESM for the globe -->
@@ -1992,10 +2405,10 @@
       }));
     })();
 
-    /* === GLIGHTBOX === */
-    if (typeof GLightbox !== 'undefined') GLightbox({ selector: '.pf-item', touchNavigation: true });
+    /* === GLIGHTBOX — disabled since items are now links === */
+    // GLightbox removed so clicks navigate to case pages
 
-    /* === ORIGINAL FOOTER LOGIC === */
+    /* === FOOTER FORM === */
     document.querySelectorAll('[data-service]').forEach(service => {
       service.addEventListener('click', function () {
         this.classList.toggle('active');
@@ -2018,30 +2431,27 @@
       e.preventDefault();
       const form = this;
       const statusMessage = document.getElementById('yanasStatusMessage');
-      const submitBtn = form.querySelector('.yanas-form_button');
+      const submitBtn = form.querySelector('.yf-submit');
       if (!document.getElementById('selectedServices').value) { show('error', 'Please select at least one service.'); return; }
       if (!document.getElementById('selectedBudget').value) { show('error', 'Please select your budget range.'); return; }
       show('loading', 'Sending message...');
       submitBtn.disabled = true; submitBtn.textContent = 'Sending...';
       fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
         .then(r => {
-          if (r.ok) { show('success', 'Thank you! Message sent.'); form.reset(); document.querySelectorAll('.active').forEach(el => el.classList.remove('active')); }
+          if (r.ok) { show('success', 'Thank you! Message sent.'); form.reset(); document.querySelectorAll('.yf-chip.active').forEach(el => el.classList.remove('active')); }
           else throw new Error();
         })
         .catch(() => show('error', 'Oops! Problem sending. Please try again.'))
-        .finally(() => { submitBtn.disabled = false; submitBtn.textContent = 'Start a journey'; setTimeout(() => { statusMessage.style.display = 'none'; }, 5000); });
-      function show(t, x) { statusMessage.className = 'yanas-status-message yanas-' + t; statusMessage.textContent = x; statusMessage.style.display = 'block'; }
-    });
+        .finally(() => { submitBtn.disabled = false; submitBtn.textContent = 'Start a journey →'; }); });
 
-    window.addEventListener('load', function () {
-      document.querySelectorAll('.yanas-bg-element').forEach((el, i) => {
-        const delay = i * 0.3;
-        const size = 60 + Math.random() * 80;
-        const x = Math.random() * 100;
-        const y = Math.random() * 100;
-        el.style.cssText = `left:${x}%;top:${y}%;width:${size}px;height:${size}px;animation-delay:${delay}s;`;
-      });
-    });
+    function show(type, msg) {
+      const el = document.getElementById('yanasStatusMessage');
+      el.className = 'yanas-status-message yanas-' + type;
+      el.textContent = msg;
+      el.style.display = 'block';
+      if (type === 'success') setTimeout(() => { el.style.display = 'none'; }, 5000);
+    }
   </script>
+
 </body>
 </html>
