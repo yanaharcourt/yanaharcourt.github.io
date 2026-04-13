@@ -78,14 +78,31 @@
     }
 
     /* Custom scrollbar — no purple */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 100px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.32); }
-    * { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.18) transparent; }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.18);
+      border-radius: 100px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.32);
+    }
+
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+    }
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     body {
@@ -345,6 +362,8 @@
       padding: 0 40px 56px;
       margin: 16px 16px 0;
       border-radius: 20px;
+      width: calc(100% - 32px);
+      box-sizing: border-box;
     }
 
     .hero__bg {
@@ -393,15 +412,8 @@
     }
 
     @keyframes blink {
-
-      0%,
-      100% {
-        opacity: 1
-      }
-
-      50% {
-        opacity: .4
-      }
+      0%, 100% { opacity: 1 }
+      50% { opacity: .4 }
     }
 
     .hero__title {
@@ -444,15 +456,8 @@
     }
 
     @keyframes floatY {
-
-      0%,
-      100% {
-        transform: translateY(0)
-      }
-
-      50% {
-        transform: translateY(8px)
-      }
+      0%, 100% { transform: translateY(0) }
+      50% { transform: translateY(8px) }
     }
 
     .site-wrap {
@@ -545,7 +550,6 @@
       grid-template-columns: repeat(12, 1fr);
     }
 
-    /* Row 1: big 2/3 + small 1/3 */
     .pf-item--1 {
       grid-column: 1 / 9;
       height: 450px;
@@ -556,13 +560,11 @@
       height: 450px;
     }
 
-    /* Row 2: full width */
     .pf-item--3 {
       grid-column: 1 / 13;
       height: 380px;
     }
 
-    /* Row 3: 5 cases = 50/50. When 6th added change to 4+4+4 */
     .pf-item--4 {
       grid-column: 1 / 7;
       height: 300px;
@@ -573,8 +575,6 @@
       height: 300px;
     }
 
-    /* 6th: .pf-item--4{grid-column:1/5} .pf-item--5{grid-column:5/9} .pf-item--6{grid-column:9/13} */
-
     .pf-item {
       position: relative;
       overflow: hidden;
@@ -582,7 +582,6 @@
       background: #d8d5d0;
       cursor: pointer;
       display: block;
-      /* works as <a> tag */
     }
 
     .pf-item.hidden {
@@ -671,6 +670,9 @@
       padding: 60px 40px 40px;
       margin: 0 16px;
       border-radius: 20px;
+      width: calc(100% - 32px);
+      box-sizing: border-box;
+      overflow: visible;
     }
 
     .about-dark .s-label {
@@ -697,7 +699,6 @@
       overflow: hidden;
     }
 
-    /* Stats stacked in col 1 */
     .bc-stat {
       grid-column: 1;
       display: flex;
@@ -720,7 +721,6 @@
       font-weight: 500;
     }
 
-    /* Middle badge card spans rows 1–3 */
     .bc-badge {
       grid-column: 2;
       grid-row: 1 / 4;
@@ -735,7 +735,7 @@
       font-style: italic;
       font-size: 36px;
       line-height: 1.3;
-      color: rgba(255, 255, 255, .45);
+      color: rgba(255, 255, 255, .06);
       margin-bottom: auto;
     }
 
@@ -755,7 +755,6 @@
       gap: 6px;
     }
 
-    /* Globe col 3 — spans all rows */
     .bc-globe {
       grid-column: 3;
       grid-row: 1 / 4;
@@ -802,7 +801,6 @@
       animation: blink 2s ease-in-out infinite;
     }
 
-    /* Three.js globe wrapper — fills the card below the header */
     .globe-wrapper {
       position: absolute;
       bottom: 0;
@@ -814,7 +812,6 @@
       justify-content: center;
       overflow: hidden;
       pointer-events: none;
-      /* we'll re-enable below */
     }
 
     .globe-wrapper canvas {
@@ -984,13 +981,8 @@
     }
 
     @keyframes scrollX {
-      from {
-        transform: translateX(0)
-      }
-
-      to {
-        transform: translateX(-50%)
-      }
+      from { transform: translateX(0) }
+      to { transform: translateX(-50%) }
     }
 
     .marquee-item {
@@ -1060,17 +1052,9 @@
       transform: none;
     }
 
-    [data-reveal-d="1"] {
-      transition-delay: .1s;
-    }
-
-    [data-reveal-d="2"] {
-      transition-delay: .2s;
-    }
-
-    [data-reveal-d="3"] {
-      transition-delay: .3s;
-    }
+    [data-reveal-d="1"] { transition-delay: .1s; }
+    [data-reveal-d="2"] { transition-delay: .2s; }
+    [data-reveal-d="3"] { transition-delay: .3s; }
 
     /* ================================================
        ABOUT DARK — head & designer section
@@ -1114,31 +1098,34 @@
       color: #fff;
     }
 
-    /* Card wrapper — bordered like bento cards on reference */
+    /* Card wrapper */
     .designer-card {
       margin-top: 10px;
       border: 1px solid rgba(255, 255, 255, .08);
       border-radius: var(--radius);
       padding: 32px;
-      overflow: hidden;
+      overflow: visible; /* FIX: было hidden — вызывало обрезку контента */
+      box-sizing: border-box;
+      width: 100%;
     }
 
-    /* Grid inside card — photo | content | badges — all side by side */
+    /* Grid inside card — photo | content | badges */
     .designer-card .ap-grid {
       padding: 0;
       grid-template-columns: 320px 1fr 220px;
       gap: 28px;
       align-items: start;
+      width: 100%;
     }
 
-    /* Photo column — photo + socials stacked */
+    /* Photo column */
     .ap-photo-col {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      min-width: 0; 
     }
 
-    /* Photo wrapper */
     .ap-photo-col .ap-photo {
       position: relative;
     }
@@ -1152,7 +1139,7 @@
       display: block;
     }
 
-    /* Name overlay on photo — like reference */
+    /* Name overlay on photo */
     .ap-photo-overlay {
       position: absolute;
       bottom: 0;
@@ -1181,9 +1168,13 @@
       margin-top: 4px;
     }
 
-    /* Socials below photo */
     .ap-photo-col .ap-socials {
       margin-top: 0;
+    }
+
+    /* Content column */
+    .ap-content-col {
+      min-width: 0; 
     }
 
     /* Bio dark variant */
@@ -1193,19 +1184,22 @@
       line-height: 1.7;
     }
 
-    /* Badges column — single card wrapping all badges */
+    /* Badges column */
     .ap-badges-col {
       height: 100%;
+      min-width: 0; /* FIX: предотвращает переполнение грида */
     }
 
     .ap-badges-card {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 8px;
       border: 1px solid rgba(255, 255, 255, .1);
       border-radius: var(--radius);
       padding: 16px;
       height: 100%;
+      align-content: start;
+      box-sizing: border-box;
     }
 
     /* CTA buttons dark */
@@ -1246,81 +1240,13 @@
       aspect-ratio: 1;
     }
 
-    /* Badges column — single card with 2-col auto grid */
-    .ap-badges-col {
-      height: 100%;
-    }
-
-    .ap-badges-card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      border: 1px solid rgba(255, 255, 255, .1);
-      border-radius: var(--radius);
-      padding: 16px;
-      height: 100%;
-      align-content: start;
-    }
-
-    /* ================================================
-       RESPONSIVE — designer card
-    ================================================ */
-    @media(max-width:1100px) {
-      .designer-card .ap-grid {
-        grid-template-columns: 240px 1fr;
-      }
-
-      .ap-badges-col {
-        grid-column: 1 / 3;
-      }
-
-      .ap-badges-card {
-        grid-template-columns: repeat(5, 1fr);
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        height: auto;
-      }
-    }
-
-    @media(max-width:768px) {
-      .designer-card .ap-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .ap-badges-col {
-        grid-column: 1;
-      }
-
-      .ap-photo-col .ap-photo img {
-        height: 280px;
-      }
-
-      .hero {
-        margin: 8px 8px 0;
-        border-radius: 14px;
-      }
-
-      .about-dark {
-        margin: 0 8px;
-        border-radius: 14px;
-        padding: 40px 20px 32px;
-      }
-
-      .yf-footer {
-        margin: 24px 8px 8px;
-        border-radius: 14px;
-      }
-    }
-
     /* ================================================
        TOOLS STRIP — inside designer card
     ================================================ */
     .designer-tools {
       margin-top: 24px;
-      border: 1px solid rgba(255, 255, 255, .07);
-      border-radius: 10px;
-      padding: 40px;
+      border-top: 1px solid rgba(255, 255, 255, .07);
+      padding-top: 20px;
       overflow: hidden;
     }
 
@@ -1353,115 +1279,6 @@
     }
 
     /* ================================================
-       RESPONSIVE
-    ================================================ */
-    @media(max-width:1100px) {
-      .nav__links {
-        position: static;
-        transform: none;
-        display: none;
-      }
-
-      .nav__burger {
-        display: flex;
-      }
-
-      .bento {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .bc-stat {
-        grid-column: auto;
-      }
-
-      .bc-badge {
-        grid-column: 1;
-        grid-row: 4;
-        min-height: 160px;
-      }
-
-      .bc-globe {
-        grid-column: 2;
-        grid-row: 1 / 5;
-      }
-
-      .ap-grid {
-        grid-template-columns: 220px 1fr;
-      }
-
-      .ap-badges {
-        grid-column: 1 / 3;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 24px;
-      }
-
-      .ap-badge-card {
-        width: 88px;
-        height: 88px;
-      }
-    }
-
-    @media(max-width:768px) {
-      /* Hide nav buttons on mobile — only logo + burger */
-      .nav__right .btn {
-        display: none;
-      }
-      .pf-item--1 {
-        grid-column: 1 / 13;
-        height: 300px;
-      }
-
-      .pf-item--2 {
-        grid-column: 1 / 13;
-        height: 240px;
-      }
-
-      .pf-item--3 {
-        height: 260px;
-      }
-
-      .pf-item--4 {
-        grid-column: 1 / 13;
-        height: 240px;
-      }
-
-      .pf-item--5 {
-        grid-column: 1 / 13;
-        height: 240px;
-      }
-
-      .bento {
-        grid-template-columns: 1fr;
-      }
-
-      .bc-badge,
-      .bc-globe,
-      .bc-stat {
-        grid-column: 1;
-        grid-row: auto;
-      }
-
-      .bc-globe {
-        min-height: 300px;
-      }
-
-      .ap-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .ap-badges {
-        flex-direction: row;
-        flex-wrap: wrap;
-      }
-
-      .nav-glass {
-        padding: 10px 14px;
-      }
-    }
-
-    /* ================================================
        NEW FOOTER — dark, matching site aesthetic
     ================================================ */
     .yf-footer {
@@ -1478,7 +1295,6 @@
       padding: 0 40px;
     }
 
-    /* Top section: headline left, form right */
     .yf-top {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1542,7 +1358,6 @@
       transform: rotate(45deg);
     }
 
-    /* Form */
     .yf-form {
       display: flex;
       flex-direction: column;
@@ -1684,7 +1499,6 @@
       text-decoration: underline;
     }
 
-    /* Bottom links bar */
     .yf-bottom {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -1725,7 +1539,6 @@
       flex-direction: column;
     }
 
-    /* Rolling link */
     .yf-link {
       display: inline-flex;
       flex-direction: column;
@@ -1750,7 +1563,6 @@
       color: rgba(255, 255, 255, .55);
     }
 
-    /* Copyright bar */
     .yf-copy {
       display: flex;
       justify-content: space-between;
@@ -1761,7 +1573,6 @@
       color: rgba(255, 255, 255, .25);
     }
 
-    /* Status messages */
     .yanas-status-message {
       padding: 12px 16px;
       border-radius: 8px;
@@ -1787,8 +1598,203 @@
       color: rgba(255, 255, 255, .5);
     }
 
-    /* Footer responsive */
-    @media(max-width:900px) {
+    /* ================================================
+       RESPONSIVE — все брейкпоинты
+    ================================================ */
+    @media (max-width: 1100px) {
+      .nav__links {
+        position: static;
+        transform: none;
+        display: none;
+      }
+
+      .nav__burger {
+        display: flex;
+      }
+
+      .bento {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .bc-stat {
+        grid-column: auto;
+      }
+
+      .bc-badge {
+        grid-column: 1;
+        grid-row: 4;
+        min-height: 160px;
+      }
+
+      .bc-globe {
+        grid-column: 2;
+        grid-row: 1 / 5;
+      }
+
+      .ap-grid {
+        grid-template-columns: 220px 1fr;
+      }
+
+      .ap-badges {
+        grid-column: 1 / 3;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 24px;
+      }
+
+      .ap-badge-card {
+        width: 88px;
+        height: 88px;
+      }
+
+      /* Designer card 1100px */
+      .designer-card .ap-grid {
+        grid-template-columns: 240px 1fr;
+      }
+
+      .ap-badges-col {
+        grid-column: 1 / 3;
+      }
+
+      .ap-badges-card {
+        grid-template-columns: repeat(5, 1fr);
+        height: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav__right .btn {
+        display: none;
+      }
+
+      .nav-glass {
+        padding: 10px 14px;
+      }
+
+      .hero {
+        margin: 8px 8px 0;
+        border-radius: 14px;
+        width: calc(100% - 16px);
+        padding: 0 20px 48px;
+        box-sizing: border-box;
+      }
+
+      .about-dark {
+        margin: 0 8px;
+        border-radius: 14px;
+        padding: 40px 20px 32px;
+        width: calc(100% - 16px);
+        box-sizing: border-box;
+        overflow: visible;
+      }
+
+      .pf-item--1 {
+        grid-column: 1 / 13;
+        height: 300px;
+      }
+
+      .pf-item--2 {
+        grid-column: 1 / 13;
+        height: 240px;
+      }
+
+      .pf-item--3 {
+        height: 260px;
+      }
+
+      .pf-item--4 {
+        grid-column: 1 / 13;
+        height: 240px;
+      }
+
+      .pf-item--5 {
+        grid-column: 1 / 13;
+        height: 240px;
+      }
+
+      .bento {
+        grid-template-columns: 1fr;
+      }
+
+      .bc-badge,
+      .bc-globe,
+      .bc-stat {
+        grid-column: 1;
+        grid-row: auto;
+      }
+
+      .bc-globe {
+        min-height: 300px;
+      }
+
+      .ap-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ap-badges {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      /* Designer card 768px */
+      .designer-card {
+        padding: 20px;
+        overflow: visible;
+      }
+
+      .designer-card .ap-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        width: 100%;
+      }
+
+      .ap-photo-col {
+        width: 100%;
+      }
+
+      .ap-photo-col .ap-photo img {
+        height: 300px;
+        object-position: top;
+      }
+
+      .ap-content-col {
+        width: 100%;
+      }
+
+      .ap-badges-col {
+        grid-column: 1;
+        width: 100%;
+      }
+
+      .ap-badges-card {
+        grid-template-columns: repeat(3, 1fr);
+        height: auto;
+      }
+
+      .ap-badge-card--dark {
+        aspect-ratio: 1;
+        height: auto;
+      }
+
+      .skills-tags {
+        gap: 6px;
+      }
+
+      .skill-tag {
+        font-size: 10px;
+        padding: 4px 10px;
+      }
+
+      .ap-ctas {
+        flex-wrap: wrap;
+      }
+
+      .yf-footer {
+        margin: 24px 8px 8px;
+        border-radius: 14px;
+      }
+
       .yf-top {
         grid-template-columns: 1fr;
         gap: 48px;
@@ -1805,6 +1811,29 @@
 
       .yf-form-row {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .designer-card {
+        padding: 16px;
+      }
+
+      .ap-photo-col .ap-photo img {
+        height: 260px;
+      }
+
+      .ap-badges-card {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .ap-socials {
+        gap: 4px;
+      }
+
+      .social-pill {
+        font-size: 10px;
+        padding: 4px 9px;
       }
     }
   </style>
@@ -1845,7 +1874,8 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div style="display:flex;gap:12px;margin-top:32px;">
-      <a href="assets/cv/Yana-Harcourt-CV.pdf" class="btn btn-ghost" download style="font-size:13px;padding:10px 22px;">CV <i class="bi bi-download"></i></a>
+      <a href="assets/cv/Yana-Harcourt-CV.pdf" class="btn btn-ghost" download
+        style="font-size:13px;padding:10px 22px;">CV <i class="bi bi-download"></i></a>
       <a href="#contact" class="btn btn-white" style="font-size:13px;padding:10px 22px;">Get in touch →</a>
     </div>
     <div class="nav-drawer-social">
@@ -2009,8 +2039,7 @@
                 class="social-pill ap-social-dark"><i class="bi bi-linkedin"></i> LinkedIn</a>
               <a href="https://www.behance.net/yana_harcourt" target="_blank" class="social-pill ap-social-dark"><i
                   class="bi bi-behance"></i> Behance</a>
-              <!-- <a href="https://github.com/yanaharcourt" target="_blank" class="social-pill ap-social-dark"><i
-                  class="bi bi-github"></i> GitHub</a> -->
+        
               <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank" class="social-pill ap-social-dark"><i
                   class="bi bi-instagram"></i> Instagram</a>
             </div>
@@ -2072,27 +2101,47 @@
         <!-- Tools strip inside the card -->
         <div class="designer-tools">
           <div class="marquee-track">
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/figma-logo.svg" alt="">Figma</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Adobe-XD-.svg.png" alt="">Adobe XD</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/WebFlow.svg" alt="">Webflow</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/zeplin-logo.svg" alt="">Zeplin</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/VSCode.svg.png" alt="">VS Code</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Github-logo.svg.png" alt="">GitHub</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Notion-logo.svg.png" alt="">Notion</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/asana-logo.svg" alt="">Asana</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/slack-logo.svg" alt="">Slack</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Wordpress-Logo.svg" alt="">WordPress</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/figma-logo.svg"
+                alt="">Figma</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Adobe-XD-.svg.png"
+                alt="">Adobe XD</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/WebFlow.svg"
+                alt="">Webflow</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/zeplin-logo.svg"
+                alt="">Zeplin</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/VSCode.svg.png" alt="">VS
+              Code</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Github-logo.svg.png"
+                alt="">GitHub</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Notion-logo.svg.png"
+                alt="">Notion</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/asana-logo.svg"
+                alt="">Asana</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/slack-logo.svg"
+                alt="">Slack</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Wordpress-Logo.svg"
+                alt="">WordPress</span>
             <span class="marquee-item"><span class="marquee-sep"></span></span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/figma-logo.svg" alt="">Figma</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Adobe-XD-.svg.png" alt="">Adobe XD</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/WebFlow.svg" alt="">Webflow</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/zeplin-logo.svg" alt="">Zeplin</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/VSCode.svg.png" alt="">VS Code</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Github-logo.svg.png" alt="">GitHub</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Notion-logo.svg.png" alt="">Notion</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/asana-logo.svg" alt="">Asana</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/slack-logo.svg" alt="">Slack</span>
-            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Wordpress-Logo.svg" alt="">WordPress</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/figma-logo.svg"
+                alt="">Figma</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Adobe-XD-.svg.png"
+                alt="">Adobe XD</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/WebFlow.svg"
+                alt="">Webflow</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/zeplin-logo.svg"
+                alt="">Zeplin</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/VSCode.svg.png" alt="">VS
+              Code</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Github-logo.svg.png"
+                alt="">GitHub</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Notion-logo.svg.png"
+                alt="">Notion</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/asana-logo.svg"
+                alt="">Asana</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/slack-logo.svg"
+                alt="">Slack</span>
+            <span class="marquee-item"><img class="marquee-icon" src="assets/img/Tools logo/Wordpress-Logo.svg"
+                alt="">WordPress</span>
           </div>
         </div>
       </div>
@@ -2170,7 +2219,8 @@
       <div class="yf-bottom">
         <div class="yf-bottom-left">
           <div class="yf-keep-title">Keep in touch</div>
-          <div class="yf-keep-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="80f9e1eee1aee8e1f2e3eff5f2f4c0e7ede1e9ecaee3efed">[email&#160;protected]</a></div>
+          <div class="yf-keep-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+              data-cfemail="80f9e1eee1aee8e1f2e3eff5f2f4c0e7ede1e9ecaee3efed">[email&#160;protected]</a></div>
         </div>
 
         <div class="yf-nav-cols">
@@ -2207,7 +2257,8 @@
   <a href="#" id="scrollTopBtn" class="scroll-top-btn"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor scripts -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
 
@@ -2453,7 +2504,8 @@
           else throw new Error();
         })
         .catch(() => show('error', 'Oops! Problem sending. Please try again.'))
-        .finally(() => { submitBtn.disabled = false; submitBtn.textContent = 'Start a journey →'; }); });
+        .finally(() => { submitBtn.disabled = false; submitBtn.textContent = 'Start a journey →'; });
+    });
 
     function show(type, msg) {
       const el = document.getElementById('yanasStatusMessage');
@@ -2465,4 +2517,5 @@
   </script>
 
 </body>
+
 </html>
