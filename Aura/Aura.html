@@ -1,0 +1,2928 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura - Bipolar Companion · Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0B0B10;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ─── CURSOR ─── */
+    #cur,
+    #ctr {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      border-radius: 50%;
+      left: 0;
+      top: 0;
+    }
+
+    #cur {
+      width: 12px;
+      height: 12px;
+      background: #667EEA;
+      transition: transform .15s;
+    }
+
+    #ctr {
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(102, 126, 234, .5);
+      z-index: 99998;
+    }
+
+    /* ─── SHARED ─── */
+    .lbl {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #667EEA;
+      display: block;
+    }
+
+    .rv {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .rv.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .rv.d1 {
+      transition-delay: .12s;
+    }
+
+    .rv.d2 {
+      transition-delay: .24s;
+    }
+
+    .rv.d3 {
+      transition-delay: .38s;
+    }
+
+    /* ══════════════════════════════════════
+   01 - HERO  (dark)
+══════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      background: #0B0B10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(102, 126, 234, .13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-label {
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp .8s ease .1s forwards;
+    }
+
+    .hero-h1 {
+      font-size: clamp(80px, 14vw, 200px);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -6px;
+      line-height: .9;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp .9s ease .25s forwards;
+    }
+
+    .hero-h1 em {
+      font-style: normal;
+      color: #667EEA;
+    }
+
+    .hero-desc {
+      font-size: 19px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, .42);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 56px;
+      opacity: 0;
+      animation: fadeUp .9s ease .4s forwards;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp .9s ease .55s forwards;
+    }
+
+    .hero-chip {
+      padding: 9px 20px;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .45);
+      background: rgba(255, 255, 255, .04);
+      transition: border-color .2s, color .2s;
+    }
+
+    .hero-chip:hover {
+      border-color: #667EEA;
+      color: #667EEA;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .2);
+      opacity: 0;
+      animation: fadeUp 1s ease .9s both;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(180deg, rgba(102, 126, 234, .6), transparent);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ══════════════════════════════════════
+    02 - ABOUT  (dark)
+    ══════════════════════════════════════ */
+    .about {
+      background: #0B0B10;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      padding: 120px 80px;
+    }
+
+    .about-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      margin-bottom: 80px;
+      align-items: start;
+    }
+
+    .about-h2 {
+      font-size: clamp(56px, 7vw, 100px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -3px;
+      line-height: .95;
+      margin-bottom: 36px;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .about-tag {
+      padding: 8px 18px;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, .13);
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .4);
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .about-desc {
+      font-size: 18px;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, .42);
+      margin-bottom: 40px;
+    }
+
+    .about-desc strong {
+      color: rgba(255, 255, 255, .82);
+      font-weight: 600;
+    }
+
+    .about-mission {
+      font-size: clamp(26px, 2.8vw, 38px);
+      line-height: 1.45;
+      color: rgba(255, 255, 255, .28);
+      font-weight: 400;
+    }
+
+    .about-mission strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .about-details {
+      border-top: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    /* ══════════════════════════════════════════════════════
+   SECTION A - DESIGN PROCESS
+   Insert after .about, before .ch
+══════════════════════════════════════════════════════ */
+    .process {
+      background: #0B0B10;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      padding: 140px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle radial glow top-right */
+    .process::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(102, 126, 234, .07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .process-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .process-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 96px;
+      gap: 40px;
+    }
+
+    .process-h2 {
+      font-size: clamp(52px, 6vw, 86px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -2.5px;
+      line-height: 1.0;
+    }
+
+    .process-h2 em {
+      font-style: normal;
+      color: #667EEA;
+    }
+
+    .process-sub {
+      max-width: 380px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, .35);
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ── Orbital timeline ── */
+    .orbital {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 0 40px;
+    }
+
+    /* connecting line */
+    .orbital::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(to right,
+          transparent,
+          rgba(102, 126, 234, .2) 10%,
+          rgba(102, 126, 234, .2) 90%,
+          transparent);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    /* each planet step */
+    .planet {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      z-index: 2;
+    }
+
+    /* number badge above */
+    .planet-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: rgba(102, 126, 234, .5);
+      margin-bottom: 20px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* the orb */
+    .orb {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform .5s cubic-bezier(.34, 1.56, .64, 1);
+      cursor: default;
+    }
+
+    .planet:hover .orb {
+      transform: translateY(-8px);
+    }
+
+    /* ring on hover */
+    .orb::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(102, 126, 234, 0);
+      transition: border-color .3s, inset .3s;
+    }
+
+    .planet:hover .orb::after {
+      border-color: rgba(102, 126, 234, .35);
+      inset: -10px;
+    }
+
+    /* size variants */
+    .orb-s {
+      width: 100px;
+      height: 100px;
+    }
+
+    .orb-m {
+      width: 148px;
+      height: 148px;
+    }
+
+    .orb-l {
+      width: 210px;
+      height: 210px;
+    }
+
+    .orb-xl {
+      width: 290px;
+      height: 290px;
+    }
+
+    /* colour fills */
+    .orb-1 {
+      background: radial-gradient(135deg at 30% 30%, rgba(102, 126, 234, .18), rgba(102, 126, 234, .04));
+      border: 1px solid rgba(102, 126, 234, .18);
+    }
+
+    .orb-2 {
+      background: radial-gradient(135deg at 30% 30%, rgba(102, 126, 234, .26), rgba(102, 126, 234, .06));
+      border: 1px solid rgba(102, 126, 234, .25);
+    }
+
+    .orb-3 {
+      background: radial-gradient(135deg at 30% 30%, rgba(102, 126, 234, .38), rgba(102, 126, 234, .10));
+      border: 1px solid rgba(102, 126, 234, .35);
+    }
+
+    .orb-4 {
+      background: radial-gradient(135deg at 30% 30%, rgba(102, 126, 234, .58), rgba(118, 75, 162, .25));
+      border: 1px solid rgba(102, 126, 234, .5);
+    }
+
+    /* inner glow dot */
+    .orb-glow {
+      position: absolute;
+      width: 30%;
+      height: 30%;
+      border-radius: 50%;
+      top: 20%;
+      left: 22%;
+      background: rgba(255, 255, 255, .12);
+      filter: blur(4px);
+    }
+
+    .orb-label {
+      font-size: clamp(12px, 1.1vw, 15px);
+      font-weight: 600;
+      color: #fff;
+      text-align: center;
+      letter-spacing: -.3px;
+      position: relative;
+      z-index: 1;
+      padding: 0 16px;
+      line-height: 1.3;
+    }
+
+    /* label below orb */
+    .planet-desc {
+      margin-top: 28px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, .3);
+      text-align: center;
+      line-height: 1.6;
+      max-width: 160px;
+    }
+
+    .planet-desc strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 4px;
+      letter-spacing: .3px;
+    }
+
+    /* dashed connectors between planets */
+    .p-dash {
+      flex: 1;
+      height: 1px;
+      border-top: 1px dashed rgba(102, 126, 234, .15);
+      margin-top: -80px;
+      /* align with orb centre roughly */
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── bottom footnote strip ── */
+    .process-foot {
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .pfoot-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: rgba(255, 255, 255, .3);
+    }
+
+    .pfoot-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #667EEA;
+      flex-shrink: 0;
+    }
+
+    .pfoot-item span {
+      color: rgba(255, 255, 255, .6);
+      font-weight: 500;
+    }
+
+    .drow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 26px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .drow-k {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #667EEA;
+    }
+
+    .drow-v {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .45);
+    }
+
+    /* ══════════════════════════════════════
+   CHALLENGE WRAPPER  (dark)
+══════════════════════════════════════ */
+    .ch {
+      background: #0B0B10;
+    }
+
+    /* Challenge intro */
+    .ch-intro {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 80px;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ch-intro::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 0%, rgba(102, 126, 234, .12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .ch-intro-inner {
+      max-width: 900px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ch-h2 {
+      font-size: clamp(52px, 6.5vw, 90px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.04;
+      letter-spacing: -2.5px;
+      margin-bottom: 32px;
+    }
+
+    .ch-h2 em {
+      font-style: normal;
+      color: #667EEA;
+    }
+
+    .ch-p {
+      font-size: 19px;
+      color: rgba(255, 255, 255, .38);
+      line-height: 1.65;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* Stat strip */
+    /* Override the old 4-column grid */
+    .ch-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 2px;
+      background: rgba(255, 255, 255, .04);
+      border-top: 1px solid rgba(255, 255, 255, .05);
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .ch-stat {
+      padding: 64px 72px;
+      border-right: none;
+      background: #0B0B10;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+    }
+
+    /* kill old pseudo-line */
+    .ch-stat::after {
+      display: none;
+    }
+
+    /* accent strip left */
+    .ch-stat::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20%;
+      bottom: 20%;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, #667EEA, transparent);
+      opacity: 0;
+      transition: opacity .8s ease .3s;
+    }
+
+    .ch-stat.in::before {
+      opacity: 1;
+    }
+
+    .ch-stat-n {
+      font-size: clamp(72px, 8vw, 108px);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -4px;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .ch-stat-n sup {
+      font-size: .38em;
+      color: #667EEA;
+      font-weight: 700;
+      vertical-align: super;
+      letter-spacing: 0;
+    }
+
+    .ch-stat-d {
+      font-size: 15px;
+      color: rgba(255, 255, 255, .38);
+      line-height: 1.6;
+      max-width: 260px;
+    }
+
+    /* visual side - gauge arc */
+    .ch-stat-vis {
+      width: 120px;
+      height: 120px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .ch-stat-vis svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .gauge-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, .05);
+      stroke-width: 8;
+    }
+
+    .gauge-fg {
+      fill: none;
+      stroke: #667EEA;
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 300;
+      stroke-dashoffset: 300;
+      transition: stroke-dashoffset 1.4s cubic-bezier(.4, 0, .2, 1) .5s;
+    }
+
+    .ch-stat.in .gauge-fg {
+      stroke-dashoffset: var(--offset);
+    }
+
+    /* tick marks inside gauge */
+    .gauge-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gauge-pct {
+      font-size: 20px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .6);
+      letter-spacing: -.5px;
+      line-height: 1;
+    }
+
+    .gauge-lbl {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(102, 126, 234, .6);
+      margin-top: 3px;
+    }
+
+    /* stat 3 and 4 - bottom row slightly tinted */
+    .ch-stat.tint {
+      background: #0D0D14;
+    }
+
+    /* separator between cols */
+    .ch-stat:nth-child(odd) {
+      border-right: 1px solid rgba(255, 255, 255, .04);
+    }
+
+    /* separator between rows */
+    .ch-stat:nth-child(1),
+    .ch-stat:nth-child(2) {
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+    }
+
+    /* Pain rows */
+    .pain {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 85vh;
+      border-top: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .pain.flip {
+      direction: rtl;
+    }
+
+    .pain.flip>* {
+      direction: ltr;
+    }
+
+    .pain-text {
+      padding: 100px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .pain.flip .pain-text {
+      border-right: none;
+      border-left: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .pain-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .18);
+      margin-bottom: 36px;
+    }
+
+    .pain-h3 {
+      font-size: clamp(32px, 3.2vw, 50px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -1.3px;
+      margin-bottom: 22px;
+    }
+
+    .pain-h3 em {
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(255, 255, 255, .32);
+    }
+
+    .pain-body {
+      font-size: 16px;
+      color: rgba(255, 255, 255, .4);
+      line-height: 1.78;
+      max-width: 460px;
+      margin-bottom: 44px;
+    }
+
+    .pain-qt p {
+      font-size: 21px;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(255, 255, 255, .62);
+      line-height: 1.52;
+      margin-bottom: 12px;
+    }
+
+    .pain-qt cite {
+      font-size: 11px;
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(102, 126, 234, .75);
+    }
+
+    .pain-vis {
+      padding: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, .015);
+    }
+
+    .pain-vis-inner {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    /* Bar chart */
+    .bars {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .bar-item {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .bar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .bar-lbl {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .45);
+    }
+
+    .bar-pct {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -.5px;
+    }
+
+    .bar-track {
+      height: 6px;
+      background: rgba(255, 255, 255, .07);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      width: 0;
+      transition: width 1.3s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .bf-blue {
+      background: #667EEA;
+    }
+
+    .bf-dim {
+      background: rgba(255, 255, 255, .18);
+    }
+
+    .bf-red {
+      background: #EF4444;
+    }
+
+    .bar-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, .06);
+      margin: 4px 0;
+    }
+
+    /* Donut */
+    .donut-wrap {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .donut-wrap svg {
+      transform: rotate(-90deg);
+    }
+
+    .donut-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .donut-big {
+      font-size: 52px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+
+    .donut-note {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .32);
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    .donut-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .leg-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, .42);
+    }
+
+    .leg-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* App grid (fragmentation) */
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .app-tile {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+
+      border-radius: 20px;
+
+      background: rgba(255, 255, 255, 0.06);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border: 1px solid rgba(255, 255, 255, 0.18);
+
+      box-shadow:
+        0 10px 34px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      transition:
+        background .25s,
+        border-color .25s,
+        box-shadow .25s,
+        transform .25s;
+    }
+
+    .app-tile::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+
+      background: linear-gradient(120deg,
+          rgba(255, 255, 255, 0.35),
+          rgba(255, 255, 255, 0.05));
+
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    .app-tile:hover {
+      background: rgba(102, 126, 234, 0.10);
+      border-color: rgba(102, 126, 234, 0.38);
+
+      transform: translateY(-4px);
+
+      box-shadow:
+        0 16px 44px rgba(102, 126, 234, 0.26),
+        inset 0 1px 0 rgba(255, 255, 255, 0.32);
+    }
+
+    .app-tile svg {
+      width: 26px;
+      height: 26px;
+      opacity: .65;
+    }
+
+    .app-tile span {
+      font-size: 11px;
+      color: rgba(255, 255, 255, .52);
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .app-banner {
+      grid-column: span 3;
+      padding: 14px 18px;
+      background: rgba(102, 126, 234, .07);
+      border: 1px dashed rgba(102, 126, 234, .28);
+      border-radius: 14px;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(102, 126, 234, .68);
+    }
+
+    /* Crisis steps */
+    .crisis-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .c-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 22px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      background: rgba(255, 255, 255, .05);
+    }
+
+    .c-step.hot {
+      background: rgba(239, 68, 68, .06);
+      border-color: rgba(239, 68, 68, .28);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      box-shadow:
+        0 8px 28px rgba(239, 68, 68, .18),
+        inset 0 1px 0 rgba(255, 255, 255, .25);
+    }
+
+    .c-step.dim {
+      opacity: .38;
+    }
+
+    .c-ico {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+
+      background: rgba(255, 255, 255, .10);
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      border: 1px solid rgba(255, 255, 255, .18);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      font-size: 14px;
+
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .35),
+        0 4px 12px rgba(0, 0, 0, .25);
+    }
+
+    .c-step.hot .c-ico {
+      background: rgba(239, 68, 68, .14);
+      border-color: rgba(239, 68, 68, .35);
+    }
+
+    .c-txt strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .85);
+      margin-bottom: 3px;
+    }
+
+    .c-txt p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .50);
+      line-height: 1.5;
+    }
+
+    .c-note {
+      padding: 14px 18px;
+
+      background: rgba(255, 255, 255, .05);
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 12px;
+
+      font-size: 12px;
+      color: rgba(255, 255, 255, .55);
+
+      text-align: center;
+      line-height: 1.6;
+
+      box-shadow:
+        0 6px 24px rgba(0, 0, 0, .25),
+        inset 0 1px 0 rgba(255, 255, 255, .25);
+    }
+
+    /* ══════════════════════════════════════
+   PERSONAS  (light)
+══════════════════════════════════════ */
+    .personas {
+      background: #F8F9FF;
+      padding: 140px 0;
+    }
+
+    .personas-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 80px;
+    }
+
+    .personas-hdr {
+      margin-bottom: 80px;
+    }
+
+    .personas-h2 {
+      font-size: clamp(48px, 6vw, 80px);
+      font-weight: 700;
+      color: #2C3E50;
+      letter-spacing: -2px;
+      line-height: 1.05;
+    }
+
+    .personas-h2 em {
+      font-style: italic;
+      font-weight: 300;
+      color: #7F8C8D;
+    }
+
+    .personas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: #E8ECFF;
+    }
+
+    .pcard {
+      background: #fff;
+      padding: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pcard::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #667EEA;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .9s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .pcard.in::before {
+      transform: scaleX(1);
+    }
+
+    .pcard-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 16px;
+      border-radius: 99px;
+      border: 1px solid #E8ECFF;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #667EEA;
+      margin-bottom: 32px;
+    }
+
+    .pcard-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #667EEA;
+    }
+
+    .pcard-name {
+      font-size: 34px;
+      font-weight: 700;
+      color: #2C3E50;
+      letter-spacing: -1px;
+      margin-bottom: 5px;
+    }
+
+    .pcard-role {
+      font-size: 15px;
+      color: #7F8C8D;
+      margin-bottom: 40px;
+    }
+
+    .pcard-attrs {
+      margin-bottom: 40px;
+    }
+
+    .pattr {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 13px 0;
+      border-bottom: 1px solid #E8ECFF;
+      gap: 20px;
+    }
+
+    .pattr-k {
+      font-size: 13px;
+      color: #7F8C8D;
+      flex-shrink: 0;
+    }
+
+    .pattr-v {
+      font-size: 14px;
+      font-weight: 500;
+      color: #2C3E50;
+      text-align: right;
+    }
+
+    .ppains-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #7F8C8D;
+      margin-bottom: 14px;
+    }
+
+    .ppains {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 40px;
+    }
+
+    .ppain {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 14px;
+      color: #2C3E50;
+      line-height: 1.5;
+    }
+
+    .ppain-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #667EEA;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .pquote p {
+      font-size: 21px;
+      font-style: italic;
+      font-weight: 300;
+      color: #2C3E50;
+      line-height: 1.5;
+      margin-bottom: 11px;
+    }
+
+    .pquote cite {
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #667EEA;
+    }
+
+    /* ══════════════════════════════════════
+   USER FLOW  (light, SVG diagram)
+══════════════════════════════════════ */
+    .flow {
+      background: #fff;
+      padding: 140px 0;
+    }
+
+    .flow-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 80px;
+    }
+
+    .flow-hdr {
+      margin-bottom: 80px;
+    }
+
+    .flow-h2 {
+      font-size: clamp(48px, 6vw, 76px);
+      font-weight: 700;
+      color: #2C3E50;
+      letter-spacing: -2px;
+      line-height: 1.05;
+    }
+
+    .flow-h2 em {
+      font-style: italic;
+      font-weight: 300;
+      color: #7F8C8D;
+    }
+
+    .flow-desc {
+      font-size: 17px;
+      color: #7F8C8D;
+      line-height: 1.65;
+      max-width: 580px;
+      margin-top: 16px;
+    }
+
+    .flow-svg-wrap {
+      overflow-x: auto;
+      padding-bottom: 20px;
+    }
+
+    .flow-svg-wrap>div {
+      min-width: 1200px;
+    }
+
+    /* ══════════════════════════════════════
+   CJM  (light, table)
+══════════════════════════════════════ */
+    .cjm {
+      background: #F8F9FF;
+      padding: 140px 0;
+    }
+
+    .cjm-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 80px;
+    }
+
+    .cjm-hdr {
+      margin-bottom: 64px;
+    }
+
+    .cjm-h2 {
+      font-size: clamp(44px, 5.5vw, 72px);
+      font-weight: 700;
+      color: #2C3E50;
+      letter-spacing: -2px;
+      line-height: 1.05;
+    }
+
+    .cjm-h2 em {
+      font-style: italic;
+      font-weight: 300;
+      color: #7F8C8D;
+    }
+
+    .cjm-desc {
+      font-size: 17px;
+      color: #7F8C8D;
+      margin-top: 16px;
+      max-width: 560px;
+      line-height: 1.65;
+    }
+
+    .cjm-scroll {
+      overflow-x: auto;
+      padding-bottom: 16px;
+    }
+
+    table.cjm {
+      width: 100%;
+      min-width: 1100px;
+      border-collapse: collapse;
+      border: 1px solid #E8ECFF;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .cjm thead th {
+      padding: 0;
+      border-right: 1px solid rgba(255, 255, 255, .18);
+    }
+
+    .cjm thead th:first-child {
+      border-right: 1px solid #E8ECFF;
+      min-width: 160px;
+    }
+
+    .cjm thead th:last-child {
+      border-right: none;
+    }
+
+    .cjm-ph {
+      background: #667EEA;
+      padding: 20px 22px;
+      text-align: center;
+    }
+
+    .cjm-ph .ph-n {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: .3px;
+    }
+
+    .cjm-ph .ph-s {
+      font-size: 10px;
+      color: rgba(255, 255, 255, .58);
+      margin-top: 3px;
+    }
+
+    .cjm-empty {
+      height: 62px;
+      background: #F8F9FF;
+    }
+
+    table.cjm td {
+      padding: 18px 22px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: #2C3E50;
+      border-bottom: 1px solid #E8ECFF;
+      border-right: 1px solid #E8ECFF;
+      vertical-align: top;
+    }
+
+    table.cjm td:last-child {
+      border-right: none;
+    }
+
+    .cjm-rlbl {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: #667EEA;
+      background: #F8F9FF !important;
+      border-right: 1px solid #E8ECFF !important;
+      white-space: nowrap;
+    }
+
+    .cjm-pain {
+      color: #DC2626 !important;
+      background: #FFF8F8 !important;
+    }
+
+    .cjm-opp {
+      background: #F0FDF4 !important;
+    }
+
+    .cjm-resp {
+      color: #667EEA !important;
+      background: rgba(102, 126, 234, .04) !important;
+    }
+
+    .emo-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 500;
+      margin: 2px;
+    }
+
+    .cjm-opp-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      color: #667EEA;
+      background: rgba(102, 126, 234, .08);
+      border-radius: 99px;
+      padding: 3px 10px;
+      margin: 2px;
+    }
+
+    .mood-curve-cell {
+      padding: 12px 20px !important;
+      background: #F8F9FF !important;
+    }
+
+    /* ══════════════════════════════════════
+   SOLUTION  (light → mixed)
+══════════════════════════════════════ */
+    .sol {
+      background: #F8F9FF;
+    }
+
+    .sol-intro {
+      padding: 140px 80px;
+      text-align: center;
+      border-top: 1px solid #E8ECFF;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sol-intro::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(102, 126, 234, .06) 0%, transparent 70%);
+    }
+
+    .sol-intro-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .sol-h2 {
+      font-size: clamp(48px, 6vw, 76px);
+      font-weight: 700;
+      color: #2C3E50;
+      letter-spacing: -2.5px;
+      line-height: 1.06;
+      margin-bottom: 24px;
+    }
+
+    .sol-h2 em {
+      font-style: normal;
+      color: #667EEA;
+    }
+
+    .sol-desc {
+      font-size: 19px;
+      color: #7F8C8D;
+      line-height: 1.65;
+    }
+
+    /* Feature row */
+    .sol-feat {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+      border-top: 1px solid #E8ECFF;
+      background: #fff;
+    }
+
+    .sol-feat.flip {
+      direction: rtl;
+    }
+
+    .sol-feat.flip>* {
+      direction: ltr;
+    }
+
+    .sol-feat-text {
+      padding: 100px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid #E8ECFF;
+    }
+
+    .sol-feat.flip .sol-feat-text {
+      border-right: none;
+      border-left: 1px solid #E8ECFF;
+    }
+
+    .sol-feat-n {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(102, 126, 234, .4);
+      margin-bottom: 18px;
+    }
+
+    .sol-feat-h3 {
+      font-size: clamp(28px, 2.8vw, 42px);
+      font-weight: 700;
+      color: #2C3E50;
+      line-height: 1.15;
+      letter-spacing: -1.2px;
+      margin-bottom: 20px;
+    }
+
+    .sol-feat-body {
+      font-size: 16px;
+      color: #7F8C8D;
+      line-height: 1.78;
+      max-width: 460px;
+      margin-bottom: 40px;
+    }
+
+    .sol-stats {
+      display: flex;
+      gap: 44px;
+      margin-bottom: 40px;
+    }
+
+    .sol-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sol-stat-v {
+      font-size: 40px;
+      font-weight: 800;
+      color: #2C3E50;
+      letter-spacing: -1.2px;
+      line-height: 1;
+    }
+
+    .sol-stat-l {
+      font-size: 13px;
+      color: #7F8C8D;
+    }
+
+    .sol-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .sol-chip {
+      padding: 8px 16px;
+      border-radius: 99px;
+      border: 1px solid #E8ECFF;
+      font-size: 12px;
+      font-weight: 500;
+      color: #7F8C8D;
+      transition: border-color .2s, color .2s;
+    }
+
+    .sol-chip:hover {
+      border-color: #667EEA;
+      color: #667EEA;
+    }
+
+    .sol-feat-vis {
+      padding: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F8F9FF;
+    }
+
+    /* Mockup frames */
+    .mf-group {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .mf {
+      width: 240px;
+      height: 480px;
+      background: #fff;
+      border-radius: 36px;
+      border: 1px solid #E8ECFF;
+      box-shadow: 0 24px 64px rgba(102, 126, 234, .1), 0 0 0 1px rgba(255, 255, 255, .7) inset;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .mf.offset {
+      margin-top: 44px;
+    }
+
+    .mf img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .mf-ph {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #F8F9FF;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .mf-ph svg {
+      width: 40px;
+      height: 40px;
+      color: #9BA5D9;
+    }
+
+    .mf-ph span {
+      font-size: 11px;
+      color: #7F8C8D;
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════════════
+   OUTRO  (dark)
+══════════════════════════════════════ */
+    .outro {
+      background: #0B0B10;
+      padding: 160px 80px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .outro-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .outro-h2 {
+      font-size: clamp(44px, 6vw, 76px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -2.5px;
+      line-height: 1.05;
+      margin-bottom: 64px;
+    }
+
+    .outro-h2 em {
+      font-style: normal;
+      color: #667EEA;
+    }
+
+    .outro-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 24px;
+      overflow: hidden;
+      margin-bottom: 64px;
+    }
+
+    .outro-stat {
+      background: #0A0A0F;
+      padding: 52px 28px;
+      text-align: center;
+    }
+
+    .outro-num {
+      font-size: 60px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .outro-lbl {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .32);
+      line-height: 1.5;
+    }
+
+    .outro-body {
+      font-size: 18px;
+      color: rgba(255, 255, 255, .38);
+      line-height: 1.75;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="cur"></div>
+  <div id="ctr"></div>
+
+  <!-- ══════════════════════════════════════
+  01 - HERO
+  ══════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <span class="lbl hero-label">Case Study</span>
+    <h1 class="hero-h1">AURA<em>.</em></h1>
+    <p class="hero-desc">A predictive iOS companion for people living with Bipolar Disorder - built to act before
+      episodes escalate.</p>
+    <div class="hero-chips">
+      <span class="hero-chip">UX Design</span>
+      <span class="hero-chip">UI Design</span>
+      <span class="hero-chip">iOS</span>
+      <span class="hero-chip">Mental Health</span>
+      <span class="hero-chip">Mood Tracking</span>
+      <span class="hero-chip">CBT Techniques</span>
+      <span class="hero-chip">Healthcare</span>
+      <span class="hero-chip">Bipolar Disorder</span>
+      <span class="hero-chip">UX Research</span>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>Scroll
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+  02 - ABOUT
+  ══════════════════════════════════════ -->
+  <section class="about">
+    <div class="about-inner">
+      <div class="about-grid rv">
+        <div>
+          <h2 class="about-h2">About</h2>
+          <div class="about-tags">
+            <span class="about-tag">UX Design</span>
+            <span class="about-tag">UI Design</span>
+            <span class="about-tag">Mental Health App</span>
+            <span class="about-tag">Mood Tracking</span>
+            <span class="about-tag">CBT Techniques</span>
+            <span class="about-tag">iOS Mobile Design</span>
+            <span class="about-tag">Bipolar Disorder Support</span>
+          </div>
+        </div>
+        <div>
+          <p class="about-desc">Aura is a comprehensive mobile application designed for individuals living with Bipolar
+            Disorder. Our core mission was to move beyond simple retroactive tracking to deliver <strong>proactive
+              stability</strong> and <strong>empowered control</strong>. It eliminates the user burden of managing
+            multiple applications by centralising key therapeutic and predictive tools.</p>
+          <p class="about-mission">Aura is built to help users <strong>understand their specific patterns, mitigate episode onset</strong>, and <strong>maintain a stable, predictable daily rhythm</strong>.</p>
+        </div>
+      </div>
+      
+      <div class="about-details rv d1">
+        <div class="drow"><span class="drow-k">Project Name</span><span class="drow-v">Aura - Bipolar Disorder
+            Management App</span></div>
+        <div class="drow"><span class="drow-k">Industries</span><span class="drow-v">Healthcare, Mental Health &amp;
+            Wellness, Digital Health</span></div>
+        <div class="drow"><span class="drow-k">Location</span><span class="drow-v">Global</span></div>
+        <div class="drow"><span class="drow-k">Year</span><span class="drow-v">2025</span></div>
+        <div class="drow"><span class="drow-k">Platform</span><span class="drow-v">iOS</span></div>
+        <div class="drow"><span class="drow-k">Screens</span><span class="drow-v">70+</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="process">
+    <div class="process-inner">
+
+      <div class="process-head rv">
+        <div>
+          <span class="lbl" style="margin-bottom:28px;">Design Process</span>
+          <h2 class="process-h2">How Aura<br>came to <em>life.</em></h2>
+        </div>
+        <p class="process-sub">From a single observed problem to 70+ screens - every phase grounded in evidence, not
+          assumption.</p>
+      </div>
+
+      <div class="orbital rv d1">
+
+        <!-- Step 01 - Problem Discovery -->
+        <div class="planet">
+          <div class="planet-num">01</div>
+          <div class="orb orb-s orb-1">
+            <div class="orb-glow"></div>
+            <span class="orb-label">Briefing</span>
+          </div>
+          <div class="planet-desc">
+            <strong>Problem Space</strong>
+            People with Bipolar Disorder lack tools that work on their worst days
+          </div>
+        </div>
+
+        <div class="p-dash"></div>
+
+        <!-- Step 02 - Research -->
+        <div class="planet">
+          <div class="planet-num">02</div>
+          <div class="orb orb-m orb-2">
+            <div class="orb-glow"></div>
+            <span class="orb-label">Research</span>
+          </div>
+          <div class="planet-desc">
+            <strong>Evidence-based</strong>
+            CREST.BD · NIMH · Harvard · PolarUs · Reddit r/bipolar · App Store reviews
+          </div>
+        </div>
+
+        <div class="p-dash"></div>
+
+        <!-- Step 03 - UX Design -->
+        <div class="planet">
+          <div class="planet-num">03</div>
+          <div class="orb orb-l orb-3">
+            <div class="orb-glow"></div>
+            <span class="orb-label">UX Design</span>
+          </div>
+          <div class="planet-desc">
+            <strong>Architecture first</strong>
+            IA · User flows · Jobs to Be Done · 8 pain points · CJM
+          </div>
+        </div>
+
+        <div class="p-dash"></div>
+
+        <!-- Step 04 - UI Design -->
+        <div class="planet">
+          <div class="planet-num">04</div>
+          <div class="orb orb-xl orb-4">
+            <div class="orb-glow"></div>
+            <span class="orb-label">UI Design</span>
+          </div>
+          <div class="planet-desc">
+            <strong>70+ screens</strong>
+            iOS HIG · 5 tabs · Onboarding · Safety · Insights
+          </div>
+        </div>
+
+        <div class="p-dash"></div>
+
+        <!-- Step 05 - Development -->
+        <div class="planet">
+          <div class="planet-num">05</div>
+          <div class="orb orb-m orb-2" style="border-style:dashed;opacity:.65;">
+            <div class="orb-glow"></div>
+            <span class="orb-label" style="color:rgba(255,255,255,.5);">Swift<br>Dev</span>
+          </div>
+          <div class="planet-desc" style="color:rgba(255,255,255,.18);">
+            <strong style="color:rgba(255,255,255,.25);">Coming next</strong>
+            Native iOS development in Swift
+          </div>
+        </div>
+
+      </div><!-- /orbital -->
+
+      <div class="process-foot rv d2">
+        <div class="pfoot-item">
+          <div class="pfoot-dot"></div>Grounded in <span>academic research</span> - NIMH, Harvard, CREST.BD
+        </div>
+        <div class="pfoot-item">
+          <div class="pfoot-dot"></div>Validated against <span>real community voices</span> - r/bipolar, App Store
+          reviews
+        </div>
+        <div class="pfoot-item">
+          <div class="pfoot-dot"></div>Designed to <span>iOS Human Interface Guidelines</span>
+        </div>
+        <div class="pfoot-item">
+          <div class="pfoot-dot"></div><span>5 core tabs</span> - Zero redundant navigation
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- ══════════════════════════════════════
+     03 - THE CHALLENGE
+══════════════════════════════════════ -->
+  <div class="ch">
+
+    <!-- Intro -->
+    <div class="ch-intro">
+      <div class="ch-intro-inner">
+        <span class="lbl rv" style="margin-bottom:36px;">02 - The Challenge</span>
+        <h2 class="ch-h2 rv d1">Living with Bipolar Disorder is a full-time job - but tools haven't <em>kept up</em>
+        </h2>
+        <p class="ch-p rv d2">73% of individuals miss early warning signs. Apps demand too much, deliver too little, and
+          fail exactly when people need them most.</p>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="ch-stats">
+
+      <!-- Stat 1 -->
+      <div class="ch-stat rv" style="--offset:76.5;"><!-- 300 * (1 - 0.745) = 76.5 -->
+        <div class="ch-stat-text">
+          <div class="ch-stat-n"><span class="cu" data-t="73" data-s="%">0%</span></div>
+          <p class="ch-stat-d">of people with Bipolar Disorder miss early warning signs before an episode begins - they
+            physically cannot see it in themselves</p>
+        </div>
+        <div class="ch-stat-vis">
+          <svg viewBox="0 0 100 100">
+            <circle class="gauge-bg" cx="50" cy="50" r="42" />
+            <circle class="gauge-fg" cx="50" cy="50" r="42" style="stroke:#EF4444;" />
+          </svg>
+          <div class="gauge-center">
+            <div class="gauge-pct">73%</div>
+            <div class="gauge-lbl">miss signs</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat 2 -->
+      <div class="ch-stat rv d1" style="--offset:231;"><!-- 300 * (1 - 0.23) = 231 -->
+        <div class="ch-stat-text">
+          <div class="ch-stat-n"><span class="cu" data-t="23" data-s="%">0%</span></div>
+          <p class="ch-stat-d">maintain tracking beyond 3 weeks on existing apps - abandonment spikes to 92% during
+            depressive episodes, when data is needed most</p>
+        </div>
+        <div class="ch-stat-vis">
+          <svg viewBox="0 0 100 100">
+            <circle class="gauge-bg" cx="50" cy="50" r="42" />
+            <circle class="gauge-fg" cx="50" cy="50" r="42" />
+          </svg>
+          <div class="gauge-center">
+            <div class="gauge-pct">23%</div>
+            <div class="gauge-lbl">stay active</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat 3 -->
+      <div class="ch-stat tint rv d2" style="--offset:150;"><!-- mid-range -->
+        <div class="ch-stat-text">
+          <div class="ch-stat-n"><span class="cu" data-t="4">0</span><sup>–6</sup></div>
+          <p class="ch-stat-d">separate apps required to track a complete health picture - sleep, mood, medication,
+            caffeine, journalling, and tasks all fragmented</p>
+        </div>
+        <div class="ch-stat-vis">
+          <svg viewBox="0 0 100 100">
+            <circle class="gauge-bg" cx="50" cy="50" r="42" />
+            <circle class="gauge-fg" cx="50" cy="50" r="42"
+              style="stroke:rgba(102,126,234,.55);stroke-dashoffset:150;" />
+          </svg>
+          <div class="gauge-center">
+            <div class="gauge-pct">4–6</div>
+            <div class="gauge-lbl">apps used</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat 4 -->
+      <div class="ch-stat tint rv d3" style="--offset:250;">
+        <div class="ch-stat-text">
+          <div class="ch-stat-n"><span class="cu" data-t="15" data-s="min">0min</span></div>
+          <p class="ch-stat-d">average monthly face time with a psychiatrist - the only clinician who sees the full
+            picture sees almost nothing of the actual lived experience</p>
+        </div>
+        <div class="ch-stat-vis">
+          <svg viewBox="0 0 100 100">
+            <circle class="gauge-bg" cx="50" cy="50" r="42" />
+            <circle class="gauge-fg" cx="50" cy="50" r="42" style="stroke:rgba(251,191,36,.7);stroke-dashoffset:270;" />
+          </svg>
+          <div class="gauge-center">
+            <div class="gauge-pct">15m</div>
+            <div class="gauge-lbl">per month</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Pain 02 -->
+    <div class="pain flip">
+      <div class="pain-text rv">
+        <p class="pain-num">Pain 02 - Highest Priority</p>
+        <h3 class="pain-h3">I always abandon <em>tracking</em> after a week</h3>
+        <p class="pain-body">During depression there's no energy to open an app. During mania - it doesn't feel
+          necessary. Complex forms with 10+ fields are impossible during acute episodes, precisely when data is most
+          critical. Apps built for good days fail on bad ones.</p>
+        <div class="pain-qt">
+          <p>"I've tried every tracking app. I always stop. The effort required just isn't there when I'm struggling the
+            most."</p>
+          <cite>- r/bipolar community · PolarUs Research, 2025</cite>
+        </div>
+      </div>
+      <div class="pain-vis rv d1">
+        <div class="pain-vis-inner" style="display:flex;flex-direction:column;align-items:center;gap:28px;">
+          <div class="donut-wrap">
+            <svg width="200" height="200" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="78" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="18" />
+              <circle class="donut-arc" cx="100" cy="100" r="78" fill="none" stroke="#667EEA" stroke-width="18"
+                stroke-dasharray="490" stroke-dashoffset="490" stroke-linecap="round"
+                style="transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1);" />
+            </svg>
+            <div class="donut-center">
+              <div class="donut-big"><span class="cu" data-t="23" data-s="%">0%</span></div>
+              <div class="donut-note">continue<br>past 3 weeks</div>
+            </div>
+          </div>
+          <div class="donut-legend">
+            <div class="leg-row">
+              <div class="leg-dot" style="background:#667EEA"></div>Continue tracking - 23%
+            </div>
+            <div class="leg-row">
+              <div class="leg-dot" style="background:rgba(255,255,255,.18)"></div>Abandon before 3 weeks - 77%
+            </div>
+            <div class="leg-row">
+              <div class="leg-dot" style="background:#EF4444"></div>During depression - drops to 8%
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pain 03 -->
+    <div class="pain">
+      <div class="pain-text rv">
+        <p class="pain-num">Pain 03 - High Priority</p>
+        <h3 class="pain-h3">My data is <em>scattered</em> across 4–6 apps</h3>
+        <p class="pain-body">Sleep patterns, caffeine, medication, mood - all in separate apps. Correlating data across
+          applications is cognitively impossible during acute episodes. Without synthesis, patterns remain invisible.
+        </p>
+        <div class="pain-qt">
+          <p>"I have a sleep app, a mood app, a medication reminder, and a journal. None of them talk to each other."
+          </p>
+        </div>
+      </div>
+      <div class="pain-vis rv d1">
+        <div class="app-grid">
+          <div class="app-tile"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1.5">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 8v4l3 3" />
+            </svg><span>Sleep App</span></div>
+          <div class="app-tile"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1.5">
+              <path
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg><span>Mood Tracker</span></div>
+          <div class="app-tile"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1.5">
+              <path
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg><span>Med Reminder</span></div>
+          <div class="app-tile"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1.5">
+              <path
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg><span>Journal</span></div>
+          <div class="app-tile"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1.5">
+              <path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z" />
+            </svg><span>Caffeine Log</span></div>
+          <div class="app-tile"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1.5">
+              <path d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg><span>Calendar</span></div>
+          <div class="app-banner">Zero data sharing between apps</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pain 04 -->
+    <div class="pain flip">
+      <div class="pain-text rv">
+        <p class="pain-num">Pain 04 - High Priority</p>
+        <h3 class="pain-h3">In a crisis, I don't know <em>what to do</em></h3>
+        <p class="pain-body">Even with a written crisis plan, recalling emergency contacts, action steps, and
+          stabilising techniques during an acute episode is near-impossible. The critical 24-hour intervention window
+          closes while people search through apps.</p>
+        <div class="pain-qt">
+          <p>"I wrote out my whole crisis plan with my therapist. When I needed it, I couldn't find it or remember what
+            it said."</p>
+        </div>
+      </div>
+      <div class="pain-vis rv d1">
+        <div class="crisis-steps">
+          <div class="c-step hot">
+            <div class="c-ico">⚠️</div>
+            <div class="c-txt"><strong>Episode begins</strong>
+              <p>Early signs: irritability, reduced sleep, racing thoughts</p>
+            </div>
+          </div>
+          <div class="c-step hot">
+            <div class="c-ico">😰</div>
+            <div class="c-txt"><strong>Cognitive impairment activates</strong>
+              <p>Can't think clearly. Memory of the plan is inaccessible.</p>
+            </div>
+          </div>
+          <div class="c-step">
+            <div class="c-ico">📱</div>
+            <div class="c-txt"><strong>Searching across multiple apps</strong>
+              <p>Contacts in one app. Plan in another. No quick path.</p>
+            </div>
+          </div>
+          <div class="c-step dim">
+            <div class="c-ico">🚨</div>
+            <div class="c-txt"><strong>Critical window missed</strong>
+              <p>Episode escalates. Intervention opportunity passed.</p>
+            </div>
+          </div>
+          <div class="c-note">Early intervention reduces severity by up to 60%</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /challenge -->
+
+  <!-- ══════════════════════════════════════
+     04 - PERSONAS
+══════════════════════════════════════ -->
+  <div class="personas">
+    <div class="personas-inner">
+      <div class="personas-hdr rv">
+        <span class="lbl" style="color:#667EEA;margin-bottom:24px;">03 - User Research · Personas</span>
+        <h2 class="personas-h2">Two people.<br><em>One shared struggle.</em></h2>
+      </div>
+      <div class="personas-grid">
+        <!-- Card A -->
+        <div class="pcard rv">
+          <div class="pcard-badge">
+            <div class="pcard-dot"></div>Profile A
+          </div>
+          <h3 class="pcard-name">The Stabiliser</h3>
+          <p class="pcard-role">Bipolar I or II · Living with diagnosis 3+ years</p>
+          <div class="pcard-attrs">
+            <div class="pattr"><span class="pattr-k">Primary goal</span><span class="pattr-v">Maintain stability between
+                episodes</span></div>
+            <div class="pattr"><span class="pattr-k">Trigger moment</span><span class="pattr-v">Previous episode - "I
+                need to take control"</span></div>
+            <div class="pattr"><span class="pattr-k">Biggest fear</span><span class="pattr-v">Not noticing the next
+                episode starting</span></div>
+            <div class="pattr"><span class="pattr-k">Doctor visits</span><span class="pattr-v">15 min/month - can't show
+                full picture</span></div>
+          </div>
+          <p class="ppains-lbl">Core pain points</p>
+          <div class="ppains">
+            <div class="ppain">
+              <div class="ppain-dot"></div><span>Can't see episode onset - impaired self-insight</span>
+            </div>
+            <div class="ppain">
+              <div class="ppain-dot"></div><span>Loses tracking habits during depressive phases</span>
+            </div>
+            <div class="ppain">
+              <div class="ppain-dot"></div><span>Forgets everything at the 15-minute appointment</span>
+            </div>
+          </div>
+          <div class="pquote">
+            <p>"I've been managing this for 6 years. I should know my patterns - but I still can't see it coming."</p>
+            <cite>- Profile A · Composite voice</cite>
+          </div>
+        </div>
+        <!-- Card B -->
+        <div class="pcard rv d2">
+          <div class="pcard-badge">
+            <div class="pcard-dot"></div>Profile B
+          </div>
+          <h3 class="pcard-name">The Newly Diagnosed</h3>
+          <p class="pcard-role">Any BD type · Diagnosed less than 1 year ago</p>
+          <div class="pcard-attrs">
+            <div class="pattr"><span class="pattr-k">Primary goal</span><span class="pattr-v">Understand the disorder,
+                learn to live with it</span></div>
+            <div class="pattr"><span class="pattr-k">Trigger moment</span><span class="pattr-v">Shock of diagnosis +
+                dissatisfaction with treatment</span></div>
+            <div class="pattr"><span class="pattr-k">Biggest fear</span><span class="pattr-v">"Am I feeling this, or is
+                it the disorder?"</span></div>
+            <div class="pattr"><span class="pattr-k">Doctor visits</span><span class="pattr-v">Still establishing trust
+                - overwhelmed by info</span></div>
+          </div>
+          <p class="ppains-lbl">Core pain points</p>
+          <div class="ppains">
+            <div class="ppain">
+              <div class="ppain-dot"></div><span>Can't trust own perception - "Is this real or mania?"</span>
+            </div>
+            <div class="ppain">
+              <div class="ppain-dot"></div><span>Overwhelmed by complex apps with 10+ field forms</span>
+            </div>
+            <div class="ppain">
+              <div class="ppain-dot"></div><span>Family doesn't understand - feels isolated</span>
+            </div>
+          </div>
+          <div class="pquote">
+            <p>"I was diagnosed three months ago. I don't know what 'normal' feels like for me yet - how do I notice
+              when it's off?"</p>
+            <cite>- Profile B · Composite voice</cite>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+     05 - USER FLOW
+══════════════════════════════════════ -->
+  <div class="flow">
+    <div class="flow-inner">
+      <div class="flow-hdr rv">
+        <span class="lbl" style="color:#667EEA;margin-bottom:24px;">04 - User Flow</span>
+        <h2 class="flow-h2">Designed for the <em>worst day.</em></h2>
+        <p class="flow-desc">Every flow stress-tested for the moment when cognitive load is highest and motivation is
+          lowest.</p>
+      </div>
+      <div class="flow-svg-wrap rv d1">
+        <div>
+          <svg viewBox="0 0 1280 940" xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;">
+            <defs>
+              <marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#D4DBFA" />
+              </marker>
+              <marker id="ag" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#10B981" />
+              </marker>
+              <marker id="aa" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#F59E0B" />
+              </marker>
+              <marker id="ard" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#EF4444" />
+              </marker>
+            </defs>
+            <!-- A - DAILY CHECK-IN -->
+            <text x="24" y="22" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#667EEA"
+              letter-spacing="2">A - DAILY CHECK-IN</text>
+            <rect x="24" y="32" width="130" height="40" rx="20" fill="#667EEA" />
+            <text x="89" y="52" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#fff"
+              text-anchor="middle" dominant-baseline="central">Push notification</text>
+            <line x1="155" y1="52" x2="178" y2="52" stroke="#D4DBFA" stroke-width="1.5" marker-end="url(#ar)" />
+            <rect x="178" y="28" width="130" height="48" rx="12" fill="#fff" stroke="#E8ECFF" stroke-width="1.5" />
+            <text x="243" y="48" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#2C3E50"
+              text-anchor="middle" dominant-baseline="central">App opens</text>
+            <text x="243" y="66" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D" text-anchor="middle">Home
+              screen</text>
+            <line x1="308" y1="52" x2="332" y2="52" stroke="#D4DBFA" stroke-width="1.5" marker-end="url(#ar)" />
+            <rect x="332" y="26" width="148" height="52" rx="12" fill="#F8F9FF" stroke="#E8ECFF" stroke-width="1.5" />
+            <text x="406" y="45" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#2C3E50"
+              text-anchor="middle">Quick Check-in</text>
+            <text x="406" y="61" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D" text-anchor="middle">mood
+              · sleep · meds · &lt;60s</text>
+            <line x1="480" y1="52" x2="506" y2="52" stroke="#D4DBFA" stroke-width="1.5" marker-end="url(#ar)" />
+            <!-- Decision diamond -->
+            <polygon points="564,26 630,52 564,78 498,52" fill="#FFF8E7" stroke="#F59E0B" stroke-width="1.5" />
+            <text x="564" y="47" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#92400E"
+              text-anchor="middle">All fields</text>
+            <text x="564" y="61" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#92400E"
+              text-anchor="middle">filled?</text>
+            <!-- Yes path down -->
+            <line x1="564" y1="78" x2="564" y2="106" stroke="#10B981" stroke-width="1.5" marker-end="url(#ag)" />
+            <text x="572" y="97" font-family="Inter,sans-serif" font-size="10" font-weight="700"
+              fill="#059669">Yes</text>
+            <rect x="492" y="106" width="144" height="40" rx="12" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5" />
+            <text x="564" y="126" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#166534"
+              text-anchor="middle" dominant-baseline="central">Entry saved · Dashboard updates</text>
+            <!-- No path right -->
+            <line x1="630" y1="52" x2="660" y2="52" stroke="#D4DBFA" stroke-width="1.5" marker-end="url(#ar)" />
+            <text x="638" y="45" font-family="Inter,sans-serif" font-size="10" font-weight="700"
+              fill="#EF4444">No</text>
+            <rect x="660" y="26" width="148" height="52" rx="12" fill="#F8F9FF" stroke="#E8ECFF" stroke-width="1.5" />
+            <text x="734" y="45" font-family="Inter,sans-serif" font-size="11" font-weight="500" fill="#2C3E50"
+              text-anchor="middle">Full Check-in modal</text>
+            <text x="734" y="61" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D"
+              text-anchor="middle">emotions · triggers · notes</text>
+            <line x1="808" y1="52" x2="836" y2="52" stroke="#10B981" stroke-width="1.5" marker-end="url(#ag)" />
+            <rect x="836" y="26" width="130" height="52" rx="20" fill="#667EEA" />
+            <text x="901" y="52" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#fff"
+              text-anchor="middle" dominant-baseline="central">Saved to Journal</text>
+
+            <!-- B - SELF-CHECK & CRISIS -->
+            <line x1="0" y1="168" x2="1280" y2="168" stroke="#E8ECFF" stroke-width="1" />
+            <text x="24" y="188" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#667EEA"
+              letter-spacing="2">B - SELF-CHECK &amp; CRISIS ACCESS</text>
+            <rect x="24" y="200" width="124" height="40" rx="12" fill="#fff" stroke="#E8ECFF" stroke-width="1.5" />
+            <text x="86" y="220" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#2C3E50"
+              text-anchor="middle" dominant-baseline="central">Home screen</text>
+            <line x1="148" y1="220" x2="174" y2="220" stroke="#D4DBFA" stroke-width="1.5" marker-end="url(#ar)" />
+            <rect x="174" y="196" width="148" height="48" rx="12" fill="#F8F9FF" stroke="#E8ECFF" stroke-width="1.5" />
+            <text x="248" y="214" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#2C3E50"
+              text-anchor="middle">User sets own level</text>
+            <text x="248" y="230" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D" text-anchor="middle">no
+              auto-diagnosis</text>
+            <line x1="322" y1="220" x2="354" y2="220" stroke="#D4DBFA" stroke-width="1.5" marker-end="url(#ar)" />
+            <rect x="354" y="196" width="118" height="36" rx="12" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5" />
+            <text x="413" y="214" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#166534"
+              text-anchor="middle" dominant-baseline="central">🟢 Calm - no action</text>
+            <line x1="413" y1="232" x2="413" y2="248" stroke="#E8ECFF" stroke-width="1" stroke-dasharray="3 3" />
+            <rect x="354" y="248" width="118" height="36" rx="12" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5" />
+            <text x="413" y="266" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#92400E"
+              text-anchor="middle" dominant-baseline="central">🟡 Watch out</text>
+            <line x1="413" y1="284" x2="413" y2="300" stroke="#E8ECFF" stroke-width="1" stroke-dasharray="3 3" />
+            <rect x="354" y="300" width="118" height="36" rx="12" fill="#FFF5F5" stroke="#FECACA" stroke-width="1.5" />
+            <text x="413" y="318" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#991B1B"
+              text-anchor="middle" dominant-baseline="central">🔴 Act now</text>
+            <line x1="472" y1="318" x2="504" y2="318" stroke="#EF4444" stroke-width="1.5" marker-end="url(#ard)" />
+            <rect x="504" y="298" width="132" height="44" rx="12" fill="#FFF5F5" stroke="#FECACA" stroke-width="1.5" />
+            <text x="570" y="316" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#991B1B"
+              text-anchor="middle">Safety tab</text>
+            <text x="570" y="332" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D"
+              text-anchor="middle">crisis plan · contacts</text>
+            <line x1="636" y1="320" x2="668" y2="320" stroke="#10B981" stroke-width="1.5" marker-end="url(#ag)" />
+            <rect x="668" y="300" width="120" height="40" rx="20" fill="#667EEA" />
+            <text x="728" y="320" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#fff"
+              text-anchor="middle" dominant-baseline="central">1-tap call</text>
+            <rect x="874" y="196" width="194" height="72" rx="14" fill="#FFF5F5" stroke="#FECACA" stroke-width="1.5" />
+            <text x="971" y="222" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#991B1B"
+              text-anchor="middle">Floating SOS button</text>
+            <text x="971" y="240" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D"
+              text-anchor="middle">persistent on every screen</text>
+            <text x="971" y="256" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D"
+              text-anchor="middle">bypasses all navigation</text>
+
+            <!-- C - MEDICATION LOG -->
+            <line x1="0" y1="366" x2="1280" y2="366" stroke="#E8ECFF" stroke-width="1" />
+            <text x="24" y="386" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#667EEA"
+              letter-spacing="2">C - MEDICATION LOG</text>
+            <rect x="24" y="398" width="124" height="40" rx="20" fill="#667EEA" />
+            <text x="86" y="418" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#fff"
+              text-anchor="middle" dominant-baseline="central">Reminder push</text>
+            <line x1="148" y1="418" x2="174" y2="418" stroke="#D4DBFA" stroke-width="1.5" marker-end="url(#ar)" />
+            <rect x="174" y="394" width="132" height="48" rx="12" fill="#fff" stroke="#E8ECFF" stroke-width="1.5" />
+            <text x="240" y="412" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#2C3E50"
+              text-anchor="middle">Med status block</text>
+            <text x="240" y="430" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D"
+              text-anchor="middle">today's medications</text>
+            <line x1="306" y1="418" x2="332" y2="418" stroke="#D4DBFA" stroke-width="1.5" marker-end="url(#ar)" />
+            <rect x="332" y="394" width="128" height="48" rx="12" fill="#fff" stroke="#667EEA" stroke-width="1.5"
+              stroke-dasharray="4 3" />
+            <text x="396" y="412" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#667EEA"
+              text-anchor="middle">Tap "Taken"?</text>
+            <text x="396" y="430" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D"
+              text-anchor="middle">1-tap confirmation</text>
+            <line x1="460" y1="418" x2="490" y2="418" stroke="#10B981" stroke-width="1.5" marker-end="url(#ag)" />
+            <text x="470" y="411" font-family="Inter,sans-serif" font-size="10" font-weight="700"
+              fill="#059669">Yes</text>
+            <rect x="490" y="394" width="150" height="48" rx="12" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5" />
+            <text x="565" y="412" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#166534"
+              text-anchor="middle">Marked ✓</text>
+            <text x="565" y="430" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D"
+              text-anchor="middle">7-day adherence updates</text>
+            <line x1="396" y1="442" x2="396" y2="468" stroke="#F59E0B" stroke-width="1.5" marker-end="url(#aa)" />
+            <text x="403" y="459" font-family="Inter,sans-serif" font-size="10" font-weight="700"
+              fill="#D97706">No</text>
+            <rect x="332" y="468" width="128" height="48" rx="12" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5" />
+            <text x="396" y="486" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#92400E"
+              text-anchor="middle">Skip logged</text>
+            <text x="396" y="504" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D"
+              text-anchor="middle">reason optional</text>
+            <line x1="460" y1="492" x2="490" y2="492" stroke="#D4DBFA" stroke-width="1.5" marker-end="url(#ar)" />
+            <rect x="490" y="468" width="150" height="48" rx="12" fill="#F8F9FF" stroke="#E8ECFF" stroke-width="1.5" />
+            <text x="565" y="486" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#2C3E50"
+              text-anchor="middle">Doctor's report</text>
+            <text x="565" y="504" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D"
+              text-anchor="middle">included automatically</text>
+
+            <!-- D - DOCTOR'S REPORT -->
+            <line x1="0" y1="545" x2="1280" y2="545" stroke="#E8ECFF" stroke-width="1" />
+            <text x="24" y="565" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#667EEA"
+              letter-spacing="2">D - DOCTOR'S REPORT</text>
+            <rect x="24" y="577" width="116" height="40" rx="12" fill="#fff" stroke="#E8ECFF" stroke-width="1.5" />
+            <text x="82" y="597" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#2C3E50"
+              text-anchor="middle" dominant-baseline="central">Insights tab</text>
+            <line x1="140" y1="597" x2="166" y2="597" stroke="#D4DBFA" stroke-width="1.5" marker-end="url(#ar)" />
+            <rect x="166" y="573" width="130" height="48" rx="12" fill="#F8F9FF" stroke="#E8ECFF" stroke-width="1.5" />
+            <text x="231" y="591" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#2C3E50"
+              text-anchor="middle">Doctor's Report</text>
+            <text x="231" y="609" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D" text-anchor="middle">tap
+              in Insights</text>
+            <line x1="296" y1="597" x2="322" y2="597" stroke="#D4DBFA" stroke-width="1.5" marker-end="url(#ar)" />
+            <rect x="322" y="573" width="130" height="48" rx="12" fill="#F8F9FF" stroke="#E8ECFF" stroke-width="1.5" />
+            <text x="387" y="591" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#2C3E50"
+              text-anchor="middle">Select period</text>
+            <text x="387" y="609" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D" text-anchor="middle">7 /
+              30 / 90 days</text>
+            <line x1="452" y1="597" x2="478" y2="597" stroke="#D4DBFA" stroke-width="1.5" marker-end="url(#ar)" />
+            <rect x="478" y="573" width="130" height="48" rx="12" fill="#F8F9FF" stroke="#E8ECFF" stroke-width="1.5" />
+            <text x="543" y="591" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#2C3E50"
+              text-anchor="middle">PDF generates</text>
+            <text x="543" y="609" font-family="Inter,sans-serif" font-size="10" fill="#7F8C8D"
+              text-anchor="middle">preview before export</text>
+            <line x1="608" y1="597" x2="634" y2="597" stroke="#D4DBFA" stroke-width="1.5" marker-end="url(#ar)" />
+            <!-- Share outputs stacked -->
+            <rect x="634" y="573" width="110" height="34" rx="10" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5" />
+            <text x="689" y="590" font-family="Inter,sans-serif" font-size="11" font-weight="500" fill="#166534"
+              text-anchor="middle" dominant-baseline="central">Email to doctor</text>
+            <line x1="689" y1="607" x2="689" y2="617" stroke="#D4DBFA" stroke-width="1" stroke-dasharray="2 2" />
+            <rect x="634" y="617" width="110" height="34" rx="10" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5" />
+            <text x="689" y="634" font-family="Inter,sans-serif" font-size="11" font-weight="500" fill="#166534"
+              text-anchor="middle" dominant-baseline="central">AirDrop / Share</text>
+            <line x1="689" y1="651" x2="689" y2="661" stroke="#D4DBFA" stroke-width="1" stroke-dasharray="2 2" />
+            <rect x="634" y="661" width="110" height="34" rx="10" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5" />
+            <text x="689" y="678" font-family="Inter,sans-serif" font-size="11" font-weight="500" fill="#166534"
+              text-anchor="middle" dominant-baseline="central">Print</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+     06 - CJM
+══════════════════════════════════════ -->
+  <div class="cjm">
+    <div class="cjm-inner">
+      <div class="cjm-hdr rv">
+        <span class="lbl" style="color:#667EEA;margin-bottom:24px;">05 - Customer Journey Map</span>
+        <h2 class="cjm-h2">From diagnosis<br>to <em>daily stability.</em></h2>
+        <p class="cjm-desc">Mapping every touchpoint, emotion, and opportunity - and where Aura intervenes at each
+          critical moment.</p>
+      </div>
+      <div class="cjm-scroll rv d1">
+        <table class="cjm">
+          <thead>
+            <tr>
+              <th>
+                <div class="cjm-empty"></div>
+              </th>
+              <th>
+                <div class="cjm-ph">
+                  <div class="ph-n">Awareness</div>
+                  <div class="ph-s">Realising help is needed</div>
+                </div>
+              </th>
+              <th>
+                <div class="cjm-ph">
+                  <div class="ph-n">Onboarding</div>
+                  <div class="ph-s">First 3 minutes</div>
+                </div>
+              </th>
+              <th>
+                <div class="cjm-ph">
+                  <div class="ph-n">Daily Use</div>
+                  <div class="ph-s">Regular check-ins</div>
+                </div>
+              </th>
+              <th>
+                <div class="cjm-ph" style="background:#5B72D4;">
+                  <div class="ph-n">Crisis</div>
+                  <div class="ph-s">Episode begins</div>
+                </div>
+              </th>
+              <th>
+                <div class="cjm-ph">
+                  <div class="ph-n">Long-term</div>
+                  <div class="ph-s">Ongoing stability</div>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cjm-rlbl">Actions</td>
+              <td>Reads App Store reviews · checks screenshots · asks in r/bipolar</td>
+              <td>Selects BD type · optionally adds meds · sets check-in time</td>
+              <td>Daily mood + sleep + meds check-in · marks meals · logs caffeine</td>
+              <td>Taps SOS → opens Crisis Plan → uses breathing → calls psychiatrist</td>
+              <td>Generates PDF for doctor · reviews 90-day Insights · shares data with care team</td>
+            </tr>
+            <tr>
+              <td class="cjm-rlbl">Touchpoints</td>
+              <td>App Store listing · peer recommendation · psychiatrist referral</td>
+              <td>Welcome → Profile → Meds (optional) → Reminders → Triggers</td>
+              <td>Push notification → Quick check-in → Home EWS → Care tab</td>
+              <td>Floating SOS button → Safety tab → Crisis plan / CBT / 1-tap call</td>
+              <td>Insights tab → Doctor's Report → PDF → Email / AirDrop / Print</td>
+            </tr>
+            <tr>
+              <td class="cjm-rlbl">Thinking</td>
+              <td style="font-style:italic;">"Will this be different to other apps I've tried and abandoned?"</td>
+              <td style="font-style:italic;">"This is actually short. I can skip what I don't know yet."</td>
+              <td style="font-style:italic;">"The alert makes sense - I didn't sleep well 3 nights in a row."</td>
+              <td style="font-style:italic;">"I can't think clearly but the button is right there. I just follow steps."
+              </td>
+              <td style="font-style:italic;">"My doctor finally has the full picture for the first time."</td>
+            </tr>
+            <tr>
+              <td class="cjm-rlbl">Emotions</td>
+              <td><span class="emo-pill" style="background:#FEE2E2;color:#991B1B;">Sceptical</span><span
+                  class="emo-pill" style="background:#FEF3C7;color:#92400E;">Hopeful</span></td>
+              <td><span class="emo-pill" style="background:#FEF3C7;color:#92400E;">Cautious</span><span class="emo-pill"
+                  style="background:#D1FAE5;color:#065F46;">Relieved</span></td>
+              <td><span class="emo-pill" style="background:#D1FAE5;color:#065F46;">In control</span><span
+                  class="emo-pill" style="background:#D1FAE5;color:#065F46;">Seen</span></td>
+              <td><span class="emo-pill" style="background:#FEE2E2;color:#991B1B;">Scared</span><span class="emo-pill"
+                  style="background:#D1FAE5;color:#065F46;">Less alone</span></td>
+              <td><span class="emo-pill" style="background:#EDE9FE;color:#5B21B6;">Confident</span><span
+                  class="emo-pill" style="background:#EDE9FE;color:#5B21B6;">Empowered</span></td>
+            </tr>
+            <tr>
+              <td class="cjm-rlbl">Experience</td>
+              <td colspan="5" class="mood-curve-cell">
+                <svg viewBox="0 0 900 48" style="display:block;width:100%;height:48px;" fill="none">
+                  <defs>
+                    <linearGradient id="cg" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#EF4444" />
+                      <stop offset="35%" stop-color="#F59E0B" />
+                      <stop offset="60%" stop-color="#22C55E" />
+                      <stop offset="78%" stop-color="#F59E0B" />
+                      <stop offset="100%" stop-color="#667EEA" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M0,42 C80,40 130,30 200,24 C270,18 320,14 400,12 C470,10 510,16 580,36 C620,44 650,44 720,22 C770,9 840,6 900,7"
+                    stroke="url(#cg)" stroke-width="2.5" stroke-linecap="round" />
+                  <line x1="180" y1="0" x2="180" y2="48" stroke="#E8ECFF" stroke-width="1" stroke-dasharray="3,3" />
+                  <line x1="360" y1="0" x2="360" y2="48" stroke="#E8ECFF" stroke-width="1" stroke-dasharray="3,3" />
+                  <line x1="540" y1="0" x2="540" y2="48" stroke="#E8ECFF" stroke-width="1" stroke-dasharray="3,3" />
+                  <line x1="720" y1="0" x2="720" y2="48" stroke="#E8ECFF" stroke-width="1" stroke-dasharray="3,3" />
+                  <circle cx="90" cy="33" r="4" fill="#EF4444" />
+                  <circle cx="270" cy="16" r="4" fill="#F59E0B" />
+                  <circle cx="450" cy="12" r="4" fill="#22C55E" />
+                  <circle cx="630" cy="40" r="4" fill="#F59E0B" />
+                  <circle cx="810" cy="7" r="4" fill="#667EEA" />
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="cjm-rlbl cjm-pain" style="color:#DC2626;">Pain Points</td>
+              <td class="cjm-pain">Complex app comparisons · fear of abandonment · stigma around tracking</td>
+              <td class="cjm-pain">Long onboarding · mandatory fields feel intrusive</td>
+              <td>Form fatigue · missing check-ins · no visible insight payoff</td>
+              <td class="cjm-pain">Can't find crisis plan · multiple taps · cognitive overload</td>
+              <td>Doctor doesn't understand day-to-day experience</td>
+            </tr>
+            <tr>
+              <td class="cjm-rlbl cjm-opp" style="color:#16A34A;">Opportunities</td>
+              <td class="cjm-opp"><span class="cjm-opp-tag">↑ Lead with simplicity</span><span class="cjm-opp-tag">↑
+                  Peer social proof</span></td>
+              <td class="cjm-opp"><span class="cjm-opp-tag">↑ &lt;3 min onboarding</span><span class="cjm-opp-tag">↑
+                  Skip-everything</span></td>
+              <td class="cjm-opp"><span class="cjm-opp-tag">↑ EWS hero feature</span><span class="cjm-opp-tag">↑ &lt;60s
+                  check-in</span></td>
+              <td class="cjm-opp"><span class="cjm-opp-tag">↑ 1-tap SOS</span><span class="cjm-opp-tag">↑ Pre-written
+                  plan</span></td>
+              <td class="cjm-opp"><span class="cjm-opp-tag">↑ PDF Doctor's Report</span><span class="cjm-opp-tag">↑
+                  90-day Insights</span></td>
+            </tr>
+            <tr>
+              <td class="cjm-rlbl cjm-resp" style="color:#667EEA;">Aura Response</td>
+              <td class="cjm-resp">Clean App Store presence · clear value proposition · &lt;3 min promise</td>
+              <td class="cjm-resp">5-step onboarding · all optional except BD type · no guilt messaging</td>
+              <td class="cjm-resp">Quick Check-in &lt;60s · EWS on Home · auto-pattern analysis</td>
+              <td class="cjm-resp">Persistent SOS button · Safety tab opens instantly · pre-written plan</td>
+              <td class="cjm-resp">PDF report generator · Insights 7/30/90d · export &amp; share with care team</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+     07 - THE SOLUTION
+══════════════════════════════════════ -->
+  <div class="sol">
+    <div class="sol-intro">
+      <div class="sol-intro-inner">
+        <span class="lbl rv" style="margin-bottom:32px;">06 - The Solution</span>
+        <h2 class="sol-h2 rv d1">Not just a tracker. A system that <em>acts before you do.</em></h2>
+        <p class="sol-desc rv d2">Three interlocking answers to four interconnected problems. Built around the hardest
+          days, not the easiest.</p>
+      </div>
+    </div>
+
+    <!-- Solution 01 -->
+    <div class="sol-feat">
+      <div class="sol-feat-text rv">
+        <p class="sol-feat-n">Solution 01</p>
+        <h3 class="sol-feat-h3">Predictive Early Warning System</h3>
+        <p class="sol-feat-body">Aura cross-references mood logs with sleep debt, medication adherence, meal regularity,
+          and caffeine. When multiple risk factors converge, the system surfaces a time-sensitive alert on the main
+          dashboard - 24–48 hours before episodes typically escalate.</p>
+        <div class="sol-stats">
+          <div class="sol-stat">
+            <div class="sol-stat-v">24h</div>
+            <div class="sol-stat-l">Earlier detection</div>
+          </div>
+          <div class="sol-stat">
+            <div class="sol-stat-v">60%</div>
+            <div class="sol-stat-l">Severity reduction</div>
+          </div>
+        </div>
+        <div class="sol-chips">
+          <span class="sol-chip">Sleep monitoring</span>
+          <span class="sol-chip">Medication tracking</span>
+          <span class="sol-chip">Caffeine logger</span>
+          <span class="sol-chip">Risk scoring</span>
+          <span class="sol-chip">Personalised thresholds</span>
+        </div>
+      </div>
+      <div class="sol-feat-vis rv d1">
+        <div class="mf-group">
+          <div class="mf">
+            <div class="mf-ph">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M24 6L4 42h40L24 6z" />
+                <path d="M24 28v-8M24 34v2" />
+              </svg>
+              <span>Dashboard with EWS alert</span>
+            </div>
+          </div>
+          <div class="mf offset">
+            <div class="mf-ph">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M6 36L12 22l8 8 10-18 8 10 6-6" />
+              </svg>
+              <span>Insights correlation chart</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Solution 02 -->
+    <div class="sol-feat flip">
+      <div class="sol-feat-text rv">
+        <p class="sol-feat-n">Solution 02</p>
+        <h3 class="sol-feat-h3">Unified Routine &amp; Stability Hub</h3>
+        <p class="sol-feat-body">Rather than splitting mood tracking from daily management, Aura integrates everything
+          into one frictionless interface. Medication reminders, sleep tracking, meals, caffeine, tasks - all alongside
+          mood. Eliminates 4–6 separate apps. Daily check-in takes under 60 seconds.</p>
+        <div class="sol-stats">
+          <div class="sol-stat">
+            <div class="sol-stat-v">4–6</div>
+            <div class="sol-stat-l">Apps eliminated</div>
+          </div>
+          <div class="sol-stat">
+            <div class="sol-stat-v">&lt;60s</div>
+            <div class="sol-stat-l">Daily check-in</div>
+          </div>
+        </div>
+        <div class="sol-chips">
+          <span class="sol-chip">Quick check-in</span>
+          <span class="sol-chip">Medication manager</span>
+          <span class="sol-chip">Sleep tracker</span>
+          <span class="sol-chip">Meal logging</span>
+          <span class="sol-chip">To-do list</span>
+        </div>
+      </div>
+      <div class="sol-feat-vis rv d1">
+        <div class="mf-group">
+          <div class="mf">
+            <div class="mf-ph">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="8" y="8" width="32" height="32" rx="6" />
+                <path d="M16 24h16M16 32h10" />
+              </svg>
+              <span>Home dashboard</span>
+            </div>
+          </div>
+          <div class="mf offset">
+            <div class="mf-ph">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M24 8a16 16 0 100 32A16 16 0 0024 8z" />
+                <path d="M24 16v8l6 4" />
+              </svg>
+              <span>Quick check-in modal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Solution 03 -->
+    <div class="sol-feat">
+      <div class="sol-feat-text rv">
+        <p class="sol-feat-n">Solution 03</p>
+        <h3 class="sol-feat-h3">Immediate Crisis Intervention Toolkit</h3>
+        <p class="sol-feat-body">Written on a good day. Accessible on the worst one. Personalised crisis plans, one-tap
+          emergency calls, CBT techniques, breathing exercises, and grounding tools - all behind a persistent floating
+          button reachable from anywhere in the app. No navigation. No menus. Instant.</p>
+        <div class="sol-stats">
+          <div class="sol-stat">
+            <div class="sol-stat-v">1 tap</div>
+            <div class="sol-stat-l">Crisis access</div>
+          </div>
+          <div class="sol-stat">
+            <div class="sol-stat-v">5–10m</div>
+            <div class="sol-stat-l">De-escalation</div>
+          </div>
+        </div>
+        <div class="sol-chips">
+          <span class="sol-chip">1-tap crisis access</span>
+          <span class="sol-chip">Personalised action plan</span>
+          <span class="sol-chip">Emergency contacts</span>
+          <span class="sol-chip">CBT cards</span>
+          <span class="sol-chip">Breathing exercises</span>
+          <span class="sol-chip">Grounding techniques</span>
+        </div>
+      </div>
+      <div class="sol-feat-vis rv d1">
+        <div class="mf-group">
+          <div class="mf">
+            <div class="mf-ph">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="24" cy="24" r="16" />
+                <path d="M18 24l4 4 8-8" />
+              </svg>
+              <span>Safety tab · crisis plan</span>
+            </div>
+          </div>
+          <div class="mf offset">
+            <div class="mf-ph">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="24" cy="24" r="10" />
+                <circle cx="24" cy="24" r="18" stroke-dasharray="4 4" />
+              </svg>
+              <span>Breathing bubble exercise</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+     08 - OUTRO
+══════════════════════════════════════ -->
+  <div class="outro">
+    <div class="outro-inner">
+      <span class="lbl rv" style="margin-bottom:36px;">07 - Design Impact</span>
+      <h2 class="outro-h2 rv d1">Designed to close the gap between episode and <em>insight.</em></h2>
+      <div class="outro-grid rv d2">
+        <div class="outro-stat">
+          <div class="outro-num"><span class="cu" data-t="70" data-s="+">0+</span></div>
+          <div class="outro-lbl">screens across 5 tabs, onboarding &amp; settings</div>
+        </div>
+        <div class="outro-stat">
+          <div class="outro-num">&lt;60s</div>
+          <div class="outro-lbl">daily check-in completable during depressive episodes</div>
+        </div>
+        <div class="outro-stat">
+          <div class="outro-num"><span class="cu" data-t="1">0</span></div>
+          <div class="outro-lbl">tap to access crisis support from anywhere in the app</div>
+        </div>
+      </div>
+      <p class="outro-body rv d3">Every decision, every flow, every interaction was designed for your hardest day - not
+        just your best one.</p>
+    </div>
+  </div>
+
+  <script>
+    /* ── Custom cursor ── */
+    const cur = document.getElementById('cur'), ctr = document.getElementById('ctr');
+    let cx = innerWidth / 2, cy = innerHeight / 2, tx = cx, ty = cy;
+    document.head.appendChild(Object.assign(document.createElement('style'), { textContent: '*{cursor:none!important}' }));
+    document.addEventListener('mousemove', e => { cx = e.clientX; cy = e.clientY; });
+    document.addEventListener('mousedown', () => cur.style.transform = 'scale(1.8)');
+    document.addEventListener('mouseup', () => cur.style.transform = 'scale(1)');
+    (function loop() {
+      cur.style.left = (cx - 6) + 'px'; cur.style.top = (cy - 6) + 'px';
+      tx += (cx - tx) * .15; ty += (cy - ty) * .15;
+      ctr.style.left = (tx - 20) + 'px'; ctr.style.top = (ty - 20) + 'px';
+      requestAnimationFrame(loop);
+    })();
+
+    /* ── Scroll reveal ── */
+    const ro = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('in');
+    }), { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.rv, .pcard, .ch-stat').forEach(el => ro.observe(el));
+
+    /* ── Bar fills + donut ── */
+    const bo = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('.bar-fill').forEach(f => {
+        if (f.dataset.w) setTimeout(() => f.style.width = f.dataset.w + '%', 300);
+      });
+      const arc = e.target.querySelector('.donut-arc');
+      if (arc) setTimeout(() => { arc.style.strokeDashoffset = 490 * (1 - .23); }, 450);
+    }), { threshold: .18 });
+    document.querySelectorAll('.pain').forEach(el => bo.observe(el));
+
+    /* ── Count-up ── */
+    const cu = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('.cu').forEach(el => {
+        if (el._d) return; el._d = 1;
+        const t = +el.dataset.t, s = el.dataset.s || '', steps = 50, dur = 1100;
+        let c = 0;
+        const ti = setInterval(() => {
+          c = Math.min(c + t / steps, t);
+          el.textContent = Math.floor(c) + s;
+          if (c >= t) clearInterval(ti);
+        }, dur / steps);
+      });
+    }), { threshold: .25 });
+    document.querySelectorAll('.ch-stats, .outro-grid').forEach(el => cu.observe(el));
+
+    /* ── Persona card reveal ── */
+    const pc = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('in');
+    }), { threshold: .15 });
+    document.querySelectorAll('.pcard').forEach(el => pc.observe(el));
+  </script>
+
+</body>
+
+</html>
