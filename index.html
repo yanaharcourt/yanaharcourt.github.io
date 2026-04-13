@@ -112,9 +112,9 @@
     ================================================ */
     .nav-wrap {
       position: fixed;
-      top: 12px;
-      left: 12px;
-      right: 12px;
+      top: 16px;
+      left: 16px;
+      right: 16px;
       z-index: 1000;
       transition: transform .4s cubic-bezier(.16, 1, .3, 1);
     }
@@ -343,7 +343,7 @@
       justify-content: flex-end;
       align-items: flex-start;
       padding: 0 40px 56px;
-      margin: 12px 12px 0;
+      margin: 16px 16px 0;
       border-radius: 20px;
     }
 
@@ -455,23 +455,19 @@
       }
     }
 
-    /* ================================================
-       SITE CONTAINER — uniform width across all sections
-    ================================================ */
     .site-wrap {
-      max-width: 1440px;
-      margin: 80px 40px 40px 40px;
+      padding: 0;
     }
 
     /* ================================================
        SHARED SECTION
     ================================================ */
     .section {
-      padding: 80px 0;
+      padding: 80px 16px;
     }
 
     .sec-head {
-      padding: 0 var(--gap);
+      padding: 0;
       margin-bottom: 20px;
       display: flex;
       align-items: flex-end;
@@ -543,7 +539,7 @@
     }
 
     .pf-grid {
-      padding: 0 var(--gap);
+      padding: 0;
       display: grid;
       gap: var(--gap);
       grid-template-columns: repeat(12, 1fr);
@@ -672,7 +668,9 @@
     .about-dark {
       background: #0d0d0d;
       color: #fff;
-      padding: 10px 0;
+      padding: 60px 40px 40px;
+      margin: 0 16px;
+      border-radius: 20px;
     }
 
     .about-dark .s-label {
@@ -684,7 +682,7 @@
     }
 
     .bento {
-      padding: 0 var(--gap);
+      padding: 0;
       margin-top: 32px;
       display: grid;
       gap: var(--gap);
@@ -845,7 +843,7 @@
     }
 
     .ap-grid {
-      padding: 0 var(--gap);
+      padding: 0;
       display: grid;
       grid-template-columns: 280px 1fr auto;
       gap: 48px;
@@ -1077,7 +1075,7 @@
        ABOUT DARK — head & designer section
     ================================================ */
     .about-dark__head {
-      padding: 0 var(--gap);
+      padding: 0;
     }
 
     .about-dark__title {
@@ -1099,7 +1097,7 @@
 
     /* THE DESIGNER head */
     .designer-head {
-      padding: 60px var(--gap) 0;
+      padding: 60px 0 0;
       margin-bottom: 24px;
     }
 
@@ -1117,7 +1115,6 @@
 
     /* Card wrapper — bordered like bento cards on reference */
     .designer-card {
-      margin: 0 var(--gap);
       margin-top: 10px;
       border: 1px solid rgba(255, 255, 255, .08);
       border-radius: var(--radius);
@@ -1303,6 +1300,12 @@
         border-radius: 14px;
       }
 
+      .about-dark {
+        margin: 0 8px;
+        border-radius: 14px;
+        padding: 40px 20px 32px;
+      }
+
       .yf-footer {
         margin: 24px 8px 8px;
         border-radius: 14px;
@@ -1339,9 +1342,7 @@
       background: rgba(255, 255, 255, .2);
     }
 
-    /* ================================================
-    ================================================ */
-   .yanas-footer {
+    .yanas-footer {
       margin-top: 0 !important;
     }
 
@@ -1401,6 +1402,10 @@
     }
 
     @media(max-width:768px) {
+      /* Hide nav buttons on mobile — only logo + burger */
+      .nav__right .btn {
+        display: none;
+      }
       .pf-item--1 {
         grid-column: 1 / 13;
         height: 300px;
@@ -1463,12 +1468,12 @@
       padding: 80px 0 0;
       font-family: var(--sans);
       overflow: hidden;
-      margin: 40px 12px 12px;
+      margin: 32px 16px 16px;
       border-radius: 20px;
     }
 
     .yf-footer .site-wrap {
-      padding: 0 var(--gap);
+      padding: 0 40px;
     }
 
     /* Top section: headline left, form right */
@@ -1837,6 +1842,10 @@
       <li><a href="#about-dark">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <div style="display:flex;gap:12px;margin-top:32px;">
+      <a href="assets/cv/Yana-Harcourt-CV.pdf" class="btn btn-ghost" download style="font-size:13px;padding:10px 22px;">CV <i class="bi bi-download"></i></a>
+      <a href="#contact" class="btn btn-white" style="font-size:13px;padding:10px 22px;">Get in touch →</a>
+    </div>
     <div class="nav-drawer-social">
       <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank">LinkedIn</a>
       <a href="https://www.behance.net/yana_harcourt" target="_blank">Behance</a>
