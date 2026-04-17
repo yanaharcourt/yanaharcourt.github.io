@@ -367,10 +367,24 @@
     }
 
     .hero__bg {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.15) 40%,
+    rgba(0, 0, 0, 0.0) 70%
+  );
+  border-radius: inherit;
+}
+
 
     .hero__bg img {
       width: 100%;
@@ -1942,7 +1956,7 @@
           </div>
         </a>
 
-        <a class="pf-item pf-item--3" data-cat="web" data-reveal href="ASCENDtials.html">
+        <a class="pf-item pf-item--3" data-cat="web" data-reveal href="ascendtials/ascendtials.html">
           <img src="assets/img/portfolio/ASCENDtials/banner.jpg" alt="ASCENDtials">
           <div class="pf-see">SEE PROJECT →</div>
           <div class="pf-info">
