@@ -1,0 +1,3474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnglishPlay · Case Study — Yana Harcourt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg: #0f0f1a;
+      --bg-mid: #13132a;
+      --card: #1a1b2e;
+      --stroke: rgba(255, 255, 255, .07);
+      --accent: #7c7ff5;
+      --accent2: #818cf8;
+      --gold: #f5c842;
+      --glow: rgba(124, 127, 245, .22);
+      --h: #eef0ff;
+      --b1: #e2e5f8;
+      --b2: #9197b8;
+      --b3: #565b7a;
+      --ok: #34d399;
+      --err: #f87171;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--b2);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    @media (hover:none) and (pointer:coarse) {
+      body {
+        cursor: auto;
+      }
+
+      #cur,
+      #ctr {
+        display: none !important;
+      }
+    }
+
+    /* CURSOR */
+    #cur,
+    #ctr {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      border-radius: 50%;
+      left: 0;
+      top: 0;
+    }
+
+    #cur {
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      transition: transform .15s;
+      box-shadow: 0 0 8px var(--glow);
+    }
+
+    #ctr {
+      width: 38px;
+      height: 38px;
+      border: 1.5px solid rgba(124, 127, 245, .4);
+      z-index: 99998;
+    }
+
+    /* PROGRESS BAR */
+    #pbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      z-index: 9999;
+      width: 0%;
+      transition: width .1s linear;
+    }
+
+    /* REVEAL */
+    .rv {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .85s cubic-bezier(.16, 1, .3, 1), transform .85s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .rv.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .rv.d1 {
+      transition-delay: .12s;
+    }
+
+    .rv.d2 {
+      transition-delay: .26s;
+    }
+
+    .rv.d3 {
+      transition-delay: .42s;
+    }
+
+    .rv.d4 {
+      transition-delay: .58s;
+    }
+
+    /* SHARED */
+    .lbl {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+    }
+
+    .sec {
+      padding: 120px 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .sec-full {
+      padding: 120px 0;
+      background: var(--bg-mid);
+      border-top: 1px solid var(--stroke);
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .sec-full-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 80px;
+    }
+
+    .sec-h2 {
+      font-size: clamp(44px, 6vw, 88px);
+      font-weight: 800;
+      color: var(--h);
+      letter-spacing: -3px;
+      line-height: .95;
+      margin-bottom: 32px;
+    }
+
+    .sec-h2 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .sec-lead {
+      font-size: 17px;
+      color: var(--b2);
+      line-height: 1.75;
+      max-width: 640px;
+      margin-bottom: 64px;
+    }
+
+    @media (max-width:768px) {
+      .sec {
+        padding: 72px 24px;
+      }
+
+      .sec-full-inner {
+        padding: 0 24px;
+      }
+
+      .sec-full {
+        padding: 72px 0;
+      }
+    }
+
+    /* BREADCRUMB */
+    .bc {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      padding: 18px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(15, 15, 26, .88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .bc-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .bc-back {
+      color: var(--b3);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color .2s;
+    }
+
+    .bc-back:hover {
+      color: var(--accent);
+    }
+
+    .bc-sep {
+      color: var(--b3);
+      opacity: .4;
+    }
+
+    .bc-cur {
+      color: var(--b2);
+      font-weight: 500;
+    }
+
+    .bc-tags {
+      display: flex;
+      gap: 8px;
+    }
+
+    .bc-tag {
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .bc-purple {
+      background: rgba(124, 127, 245, .12);
+      color: var(--accent);
+      border: 1px solid rgba(124, 127, 245, .25);
+    }
+
+    .bc-gold {
+      background: rgba(245, 200, 66, .1);
+      color: var(--gold);
+      border: 1px solid rgba(245, 200, 66, .2);
+    }
+
+    @media (max-width:768px) {
+      .bc {
+        padding: 14px 20px;
+      }
+
+      .bc-tags {
+        display: none;
+      }
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      padding: 120px 80px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 50%, rgba(124, 127, 245, .1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp .8s ease .1s forwards;
+    }
+
+    .hero-h1 {
+      font-size: clamp(72px, 12vw, 180px);
+      font-weight: 800;
+      color: var(--h);
+      letter-spacing: -5px;
+      line-height: .9;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp .9s ease .25s forwards;
+    }
+
+    .hero-h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      color: var(--b3);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 48px;
+      opacity: 0;
+      animation: fadeUp .9s ease .4s forwards;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp .9s ease .55s forwards;
+      margin-bottom: 40px;
+    }
+
+    .hero-chip {
+      padding: 9px 20px;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--b3);
+      background: rgba(255, 255, 255, .03);
+      transition: all .2s;
+    }
+
+    .hero-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp .9s ease .7s forwards;
+    }
+
+    .hero-btn-p {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px var(--glow);
+      transition: all .25s;
+      font-family: inherit;
+    }
+
+    .hero-btn-p:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px var(--glow);
+    }
+
+    .hero-btn-g {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: rgba(255, 255, 255, .04);
+      color: var(--b2);
+      font-weight: 600;
+      font-size: 15px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, .1);
+      transition: all .25s;
+      font-family: inherit;
+    }
+
+    .hero-btn-g:hover {
+      border-color: rgba(124, 127, 245, .4);
+      color: var(--accent);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--b3);
+      opacity: 0;
+      animation: fadeUp 1s ease .9s forwards;
+      z-index: 1;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(180deg, var(--accent), transparent);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(22px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @media (max-width:768px) {
+      .hero {
+        padding: 100px 24px 80px;
+      }
+
+      .hero-h1 {
+        letter-spacing: -3px;
+      }
+    }
+
+    /* META STRIP */
+    .meta-strip {
+      border-top: 1px solid var(--stroke);
+      border-bottom: 1px solid var(--stroke);
+      background: var(--bg-mid);
+    }
+
+    .meta-strip-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .meta-item {
+      padding: 36px 32px;
+      border-right: 1px solid var(--stroke);
+    }
+
+    .meta-item:last-child {
+      border-right: none;
+    }
+
+    .meta-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--b3);
+      margin-bottom: 10px;
+    }
+
+    .meta-val {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--b1);
+      line-height: 1.4;
+    }
+
+    .meta-val em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    @media (max-width:900px) {
+      .meta-strip-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .meta-item {
+        border-right: 1px solid var(--stroke);
+        border-bottom: 1px solid var(--stroke);
+      }
+    }
+
+    @media (max-width:480px) {
+      .meta-strip-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* PROBLEM */
+    .prob-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .prob-card {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s;
+    }
+
+    .prob-card:hover {
+      border-color: rgba(124, 127, 245, .25);
+    }
+
+    .prob-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .prob-card.solution::before {
+      background: linear-gradient(90deg, var(--ok), transparent);
+    }
+
+    .prob-n {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--b3);
+      margin-bottom: 16px;
+    }
+
+    .prob-n.ok {
+      color: var(--ok);
+    }
+
+    .prob-card h3 {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--h);
+      margin-bottom: 12px;
+      letter-spacing: -.02em;
+    }
+
+    .prob-card p {
+      font-size: 13px;
+      color: var(--b2);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .prob-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .prob-li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--b2);
+      line-height: 1.5;
+    }
+
+    .prob-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .prob-dot.ok {
+      background: var(--ok);
+    }
+
+    .pain-wrap {
+      margin-top: 64px;
+    }
+
+    .pain-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--b3);
+      margin-bottom: 28px;
+    }
+
+    .pain-row {
+      margin-bottom: 22px;
+    }
+
+    .pain-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--b2);
+      margin-bottom: 8px;
+    }
+
+    .pain-meta span:last-child {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .pain-track {
+      height: 5px;
+      background: rgba(255, 255, 255, .05);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .pain-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      width: 0%;
+      transition: width 1.2s cubic-bezier(.16, 1, .3, 1) .3s;
+    }
+
+    @media (max-width:900px) {
+      .prob-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* PROCESS — ORBITAL (like Aura) */
+    .process-wrap {
+      background: var(--bg-mid);
+      border-top: 1px solid var(--stroke);
+      border-bottom: 1px solid var(--stroke);
+      padding: 120px 80px;
+    }
+
+    .process-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .process-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 96px;
+      gap: 40px;
+    }
+
+    .process-h2 {
+      font-size: clamp(52px, 6vw, 86px);
+      font-weight: 800;
+      color: var(--h);
+      letter-spacing: -2.5px;
+      line-height: 1;
+    }
+
+    .process-h2 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .process-sub {
+      max-width: 380px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--b3);
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .orbital {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 0 40px;
+    }
+
+    .orbital::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(124, 127, 245, .2) 10%, rgba(124, 127, 245, .2) 90%, transparent);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .planet {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .planet-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: rgba(124, 127, 245, .5);
+      margin-bottom: 20px;
+    }
+
+    .orb {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform .5s cubic-bezier(.34, 1.56, .64, 1);
+      cursor: default;
+    }
+
+    .planet:hover .orb {
+      transform: translateY(-8px);
+    }
+
+    .orb::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(124, 127, 245, 0);
+      transition: border-color .3s, inset .3s;
+    }
+
+    .planet:hover .orb::after {
+      border-color: rgba(124, 127, 245, .35);
+      inset: -10px;
+    }
+
+    .orb-s {
+      width: 100px;
+      height: 100px;
+    }
+
+    .orb-m {
+      width: 148px;
+      height: 148px;
+    }
+
+    .orb-l {
+      width: 210px;
+      height: 210px;
+    }
+
+    .orb-xl {
+      width: 280px;
+      height: 280px;
+    }
+
+    .orb-1 {
+      background: radial-gradient(135deg at 30% 30%, rgba(124, 127, 245, .18), rgba(124, 127, 245, .04));
+      border: 1px solid rgba(124, 127, 245, .18);
+    }
+
+    .orb-2 {
+      background: radial-gradient(135deg at 30% 30%, rgba(124, 127, 245, .28), rgba(124, 127, 245, .06));
+      border: 1px solid rgba(124, 127, 245, .26);
+    }
+
+    .orb-3 {
+      background: radial-gradient(135deg at 30% 30%, rgba(124, 127, 245, .40), rgba(124, 127, 245, .12));
+      border: 1px solid rgba(124, 127, 245, .36);
+    }
+
+    .orb-4 {
+      background: radial-gradient(135deg at 30% 30%, rgba(124, 127, 245, .58), rgba(129, 140, 248, .28));
+      border: 1px solid rgba(124, 127, 245, .52);
+    }
+
+    .orb-5 {
+      background: radial-gradient(135deg at 30% 30%, rgba(245, 200, 66, .28), rgba(245, 200, 66, .08));
+      border: 1px solid rgba(245, 200, 66, .3);
+    }
+
+    .orb-glow {
+      position: absolute;
+      width: 30%;
+      height: 30%;
+      border-radius: 50%;
+      top: 20%;
+      left: 22%;
+      background: rgba(255, 255, 255, .12);
+      filter: blur(4px);
+    }
+
+    .orb-label {
+      font-size: clamp(11px, 1vw, 14px);
+      font-weight: 600;
+      color: #fff;
+      text-align: center;
+      letter-spacing: -.3px;
+      position: relative;
+      z-index: 1;
+      padding: 0 14px;
+      line-height: 1.3;
+    }
+
+    .planet-desc {
+      margin-top: 28px;
+      font-size: 12px;
+      color: var(--b3);
+      text-align: center;
+      line-height: 1.6;
+      max-width: 150px;
+    }
+
+    .planet-desc strong {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--b2);
+      margin-bottom: 4px;
+      letter-spacing: .3px;
+    }
+
+    .p-dash {
+      flex: 1;
+      height: 1px;
+      border-top: 1px dashed rgba(124, 127, 245, .15);
+      margin-top: -80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .process-foot {
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid var(--stroke);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pfoot-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--b3);
+    }
+
+    .pfoot-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .pfoot-item span {
+      color: var(--b1);
+      font-weight: 600;
+    }
+
+    @media (max-width:900px) {
+      .orbital {
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .orbital::before {
+        display: none;
+      }
+
+      .p-dash {
+        display: none;
+      }
+
+      .process-head {
+        flex-direction: column;
+      }
+
+      .process-sub {
+        text-align: left;
+      }
+
+      .process-wrap {
+        padding: 72px 24px;
+      }
+    }
+
+    /* PERSONAS */
+    .personas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pcard {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 36px;
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .85s cubic-bezier(.16, 1, .3, 1), transform .85s cubic-bezier(.16, 1, .3, 1), border-color .25s;
+    }
+
+    .pcard.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .pcard:hover {
+      border-color: rgba(124, 127, 245, .25);
+    }
+
+    .pcard:nth-child(1) {
+      transition-delay: .08s;
+    }
+
+    .pcard:nth-child(2) {
+      transition-delay: .22s;
+    }
+
+    .pcard:nth-child(3) {
+      transition-delay: .36s;
+    }
+
+    .pcard-av {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .pcard-av-p {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+
+    .pcard-av-g {
+      background: linear-gradient(135deg, var(--gold), #e0a84a);
+    }
+
+    .pcard-av-t {
+      background: linear-gradient(135deg, var(--ok), #059669);
+    }
+
+    .pcard-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--h);
+      margin-bottom: 4px;
+    }
+
+    .pcard-role {
+      font-size: 12px;
+      color: var(--b3);
+      margin-bottom: 18px;
+    }
+
+    .pcard-quote {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--b2);
+      line-height: 1.65;
+      border-left: 2px solid var(--accent);
+      padding-left: 14px;
+      margin-bottom: 22px;
+    }
+
+    .pcard-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 22px;
+    }
+
+    .pcard-tag {
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(124, 127, 245, .1);
+      color: var(--accent);
+      border: 1px solid rgba(124, 127, 245, .2);
+    }
+
+    .pcard-sec {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--b3);
+      margin-bottom: 10px;
+    }
+
+    .pcard-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pcard-li {
+      font-size: 13px;
+      color: var(--b2);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+
+    .pcard-li::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+      font-size: 12px;
+      margin-top: 1px;
+    }
+
+    .pcard-div {
+      height: 1px;
+      background: var(--stroke);
+      margin: 18px 0;
+    }
+
+    @media (max-width:1024px) {
+      .personas-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width:640px) {
+      .personas-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* IA */
+    .ia-tree {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 48px;
+    }
+
+    .ia-root-node {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 36px;
+      border-radius: 99px;
+      box-shadow: 0 4px 20px var(--glow);
+      display: inline-block;
+      margin: 0 auto 0;
+    }
+
+    .ia-stem {
+      width: 2px;
+      height: 32px;
+      background: var(--stroke);
+      margin: 0 auto;
+    }
+
+    .ia-branches {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .ia-branch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .ia-branch::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 28px;
+      background: var(--stroke);
+      transform: translateX(-50%);
+    }
+
+    .ia-branch-body {
+      padding-top: 28px;
+      width: 100%;
+    }
+
+    .ia-node {
+      background: var(--bg-mid);
+      border: 1px solid rgba(124, 127, 245, .25);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--h);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .ia-leaves {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ia-leaf {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--stroke);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 11px;
+      color: var(--b3);
+      text-align: center;
+    }
+
+    .ia-leaf.hi {
+      border-color: rgba(124, 127, 245, .2);
+      color: var(--accent);
+    }
+
+    .ia-center {
+      text-align: center;
+    }
+
+    @media (max-width:900px) {
+      .ia-branches {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .ia-tree {
+        padding: 28px 20px;
+      }
+    }
+
+    @media (max-width:540px) {
+      .ia-branches {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* USER FLOW */
+    .flow-scroll {
+      overflow-x: auto;
+      padding-bottom: 16px;
+    }
+
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      min-width: 960px;
+    }
+
+    .flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      padding: 0 6px;
+    }
+
+    .flow-node {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid rgba(124, 127, 245, .25);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+
+    .flow-node-h {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--h);
+      margin-bottom: 4px;
+    }
+
+    .flow-node-s {
+      font-size: 11px;
+      color: var(--b3);
+    }
+
+    .flow-node.start {
+      border-color: rgba(52, 211, 153, .35);
+      background: rgba(52, 211, 153, .06);
+    }
+
+    .flow-node.start .flow-node-h {
+      color: var(--ok);
+    }
+
+    .flow-node.end {
+      border-color: rgba(245, 200, 66, .35);
+      background: rgba(245, 200, 66, .06);
+    }
+
+    .flow-node.end .flow-node-h {
+      color: var(--gold);
+    }
+
+    .flow-arr {
+      color: var(--b3);
+      font-size: 18px;
+      flex-shrink: 0;
+      padding: 0 2px;
+    }
+
+    .flow-badge {
+      background: rgba(124, 127, 245, .1);
+      border: 1px dashed rgba(124, 127, 245, .3);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      text-align: center;
+    }
+
+    /* CJM */
+    .cjm-scroll {
+      overflow-x: auto;
+    }
+
+    .cjm {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 960px;
+    }
+
+    .cjm th {
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--b3);
+      border-bottom: 1px solid var(--stroke);
+      background: var(--bg);
+    }
+
+    .cjm td {
+      padding: 18px;
+      border-bottom: 1px solid var(--stroke);
+      font-size: 13px;
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    .cjm-rlbl {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .cjm-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      margin: 2px;
+    }
+
+    .ct-b {
+      background: rgba(124, 127, 245, .12);
+      color: var(--accent);
+    }
+
+    .ct-r {
+      background: rgba(248, 113, 113, .1);
+      color: var(--err);
+    }
+
+    .ct-g {
+      background: rgba(52, 211, 153, .1);
+      color: var(--ok);
+    }
+
+    .ct-y {
+      background: rgba(245, 200, 66, .1);
+      color: var(--gold);
+    }
+
+    .cjm-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .cjm-phase {
+      font-weight: 700;
+      color: var(--h);
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    .cjm-emotion {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .emotion-bar {
+      height: 4px;
+      border-radius: 99px;
+      background: var(--stroke);
+      flex: 1;
+      margin-top: 2px;
+    }
+
+    .emotion-fill {
+      height: 100%;
+      border-radius: 99px;
+    }
+
+    /* TECH DECISIONS */
+    .tech-bento {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 20px;
+    }
+
+    .tcard {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 32px;
+      transition: border-color .25s, transform .25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tcard:hover {
+      border-color: rgba(124, 127, 245, .3);
+      transform: translateY(-3px);
+    }
+
+    .tcard.span2 {
+      grid-column: span 2;
+    }
+
+    .tcard-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(124, 127, 245, .1);
+      border: 1px solid rgba(124, 127, 245, .2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .tcard-cat {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .tcard h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--h);
+      margin-bottom: 10px;
+      letter-spacing: -.02em;
+    }
+
+    .tcard p {
+      font-size: 13px;
+      color: var(--b2);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .tcard-verdict {
+      display: flex;
+      gap: 10px;
+    }
+
+    .tv-item {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .tv-yes {
+      background: rgba(52, 211, 153, .08);
+      border: 1px solid rgba(52, 211, 153, .2);
+      color: var(--ok);
+    }
+
+    .tv-no {
+      background: rgba(248, 113, 113, .06);
+      border: 1px solid rgba(248, 113, 113, .15);
+      color: var(--err);
+    }
+
+    .tv-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: .7;
+      margin-bottom: 6px;
+    }
+
+    .tcard-accent-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    @media (max-width:900px) {
+      .tech-bento {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .tcard.span2 {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width:600px) {
+      .tech-bento {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* DESIGN SYSTEM */
+    .ds-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .ds-layout-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .ds-card {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .ds-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--h);
+      margin-bottom: 20px;
+      letter-spacing: -.01em;
+    }
+
+    .ds-swatches {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .ds-sw-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ds-sw {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--stroke);
+    }
+
+    .ds-sw-lbl {
+      font-size: 9px;
+      color: var(--b3);
+      font-family: monospace;
+      text-align: center;
+    }
+
+    .ds-type-row {
+      margin-bottom: 16px;
+    }
+
+    .ds-type-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--b3);
+      margin-bottom: 6px;
+    }
+
+    .ds-t-display {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--h);
+      letter-spacing: -.03em;
+      line-height: 1;
+    }
+
+    .ds-t-body {
+      font-size: 14px;
+      color: var(--b2);
+      line-height: 1.7;
+    }
+
+    .ds-t-lbl {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .ds-comp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .ds-btn-p {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 16px var(--glow);
+      font-family: inherit;
+    }
+
+    .ds-btn-g {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      background: transparent;
+      color: var(--b2);
+      border: 1px solid var(--stroke);
+      font-family: inherit;
+    }
+
+    .ds-feedback-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .ds-chip {
+      padding: 6px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .ds-chip-ok {
+      background: rgba(52, 211, 153, .1);
+      color: var(--ok);
+      border: 1px solid rgba(52, 211, 153, .25);
+    }
+
+    .ds-chip-err {
+      background: rgba(248, 113, 113, .1);
+      color: var(--err);
+      border: 1px solid rgba(248, 113, 113, .25);
+    }
+
+    .ds-chip-lvl {
+      background: rgba(245, 200, 66, .1);
+      color: var(--gold);
+      border: 1px solid rgba(245, 200, 66, .25);
+    }
+
+    .ds-spacing-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ds-sp-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ds-sp-bar {
+      height: 4px;
+      border-radius: 99px;
+      background: var(--accent);
+      opacity: .6;
+    }
+
+    .ds-sp-lbl {
+      font-size: 12px;
+      color: var(--b3);
+      font-family: monospace;
+      white-space: nowrap;
+    }
+
+    .ds-note {
+      font-size: 12px;
+      color: var(--b3);
+      line-height: 1.6;
+      margin-top: 14px;
+    }
+
+    @media (max-width:900px) {
+      .ds-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .ds-layout-3 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width:600px) {
+      .ds-layout-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* SCREENSHOTS */
+    .shots-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .shots-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .shot-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--b3);
+      margin-bottom: 10px;
+    }
+
+    .shot-box {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+    }
+
+    .shot-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .shot-box-light {
+      background: #edf0ff;
+      border-color: rgba(124, 127, 245, .15);
+    }
+
+    @media (max-width:768px) {
+
+      .shots-2,
+      .shots-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* CONTENT ARCHITECTURE */
+    .code-wrap {
+      background: #0a0a16;
+      border: 1px solid rgba(124, 127, 245, .2);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .code-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .code-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .code-fn {
+      margin-left: 12px;
+      font-size: 11px;
+      color: var(--b3);
+      font-family: monospace;
+    }
+
+    .code-body {
+      padding: 28px;
+      font-size: 13px;
+      line-height: 1.8;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      color: #c8c8f0;
+    }
+
+    .ck {
+      color: #7c7ff5;
+    }
+
+    .cv {
+      color: #f5c842;
+    }
+
+    .cs {
+      color: #f87171;
+    }
+
+    .cn {
+      color: #818cf8;
+    }
+
+    .ce {
+      color: #34d399;
+    }
+
+    .cc {
+      color: #565b7a;
+    }
+
+    .insight {
+      background: rgba(124, 127, 245, .06);
+      border: 1px solid rgba(124, 127, 245, .15);
+      border-radius: 16px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .insight-ico {
+      font-size: 20px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .insight-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--h);
+      margin-bottom: 8px;
+    }
+
+    .insight p {
+      font-size: 13px;
+      color: var(--b2);
+      line-height: 1.7;
+    }
+
+    /* KEY CHALLENGES */
+    .ch-items {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ch-item {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      overflow: hidden;
+      transition: border-color .25s;
+    }
+
+    .ch-item:first-child {
+      border-radius: 20px 20px 0 0;
+    }
+
+    .ch-item:last-child {
+      border-radius: 0 0 20px 20px;
+    }
+
+    .ch-item:only-child {
+      border-radius: 20px;
+    }
+
+    .ch-item:hover {
+      border-color: rgba(124, 127, 245, .25);
+    }
+
+    .ch-header {
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      align-items: center;
+      gap: 28px;
+      padding: 32px 36px;
+    }
+
+    .ch-num {
+      font-size: 13px;
+      font-weight: 800;
+      color: rgba(124, 127, 245, .3);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .ch-cat {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .ch-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--h);
+      letter-spacing: -.02em;
+      line-height: 1.3;
+    }
+
+    .ch-expand-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid var(--stroke);
+      background: rgba(255, 255, 255, .03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--b3);
+      font-size: 16px;
+      cursor: pointer;
+      transition: all .2s;
+      flex-shrink: 0;
+    }
+
+    .ch-expand-btn:hover {
+      border-color: rgba(124, 127, 245, .35);
+      color: var(--accent);
+    }
+
+    .ch-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .5s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .ch-body.open {
+      max-height: 600px;
+    }
+
+    .ch-body-inner {
+      padding: 0 36px 36px 136px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .ch-box-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .ch-box-lbl.prob {
+      color: var(--err);
+    }
+
+    .ch-box-lbl.sol {
+      color: var(--ok);
+    }
+
+    .ch-box-p {
+      font-size: 13px;
+      color: var(--b2);
+      line-height: 1.7;
+    }
+
+    .ch-sol-box {
+      background: rgba(52, 211, 153, .05);
+      border: 1px solid rgba(52, 211, 153, .15);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    @media (max-width:768px) {
+      .ch-header {
+        grid-template-columns: auto 1fr auto;
+        gap: 16px;
+        padding: 24px;
+      }
+
+      .ch-body-inner {
+        padding: 0 24px 24px;
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* OUTCOMES */
+    .outro {
+      background: var(--bg);
+      border-top: 1px solid var(--stroke);
+      padding: 120px 80px;
+      text-align: center;
+    }
+
+    .outro-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .outro-h2 {
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 800;
+      color: var(--h);
+      letter-spacing: -3px;
+      line-height: .95;
+      margin-bottom: 64px;
+    }
+
+    .outro-h2 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .outro-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-bottom: 64px;
+    }
+
+    .outro-num {
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--h);
+      letter-spacing: -3px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .outro-num em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .outro-lbl {
+      font-size: 13px;
+      color: var(--b3);
+      line-height: 1.5;
+    }
+
+    .outro-body {
+      font-size: 16px;
+      color: var(--b3);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 48px;
+    }
+
+    .outro-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .outro-tag {
+      padding: 10px 22px;
+      border-radius: 99px;
+      border: 1px solid var(--stroke);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--b2);
+      background: rgba(255, 255, 255, .03);
+      transition: all .2s;
+    }
+
+    .outro-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    @media (max-width:768px) {
+      .outro {
+        padding: 72px 24px;
+      }
+
+      .outro-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width:480px) {
+      .outro-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* REFLECTION */
+    .refl {
+      background: var(--bg-mid);
+      border-top: 1px solid var(--stroke);
+      padding: 120px 80px;
+    }
+
+    .refl-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .refl-quote-wrap {
+      border-left: 3px solid var(--accent);
+      padding-left: 36px;
+      margin-bottom: 80px;
+    }
+
+    .refl-quote {
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 700;
+      color: var(--h);
+      line-height: 1.35;
+      letter-spacing: -.02em;
+      margin-bottom: 16px;
+    }
+
+    .refl-quote em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .refl-quote-attr {
+      font-size: 13px;
+      color: var(--b3);
+    }
+
+    .refl-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .refl-card {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .refl-card-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .refl-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(124, 127, 245, .1);
+      border: 1px solid rgba(124, 127, 245, .2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .refl-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--h);
+      line-height: 1.3;
+    }
+
+    .refl-card p {
+      font-size: 13px;
+      color: var(--b2);
+      line-height: 1.7;
+    }
+
+    .refl-next {
+      margin-top: 64px;
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .refl-next h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--h);
+      margin-bottom: 16px;
+      letter-spacing: -.02em;
+    }
+
+    .refl-next p {
+      font-size: 14px;
+      color: var(--b2);
+      line-height: 1.7;
+    }
+
+    .refl-next-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .refl-next-li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--b2);
+      line-height: 1.5;
+    }
+
+    .refl-next-li i {
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    @media (max-width:900px) {
+      .refl-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .refl-next {
+        grid-template-columns: 1fr;
+      }
+
+      .refl {
+        padding: 72px 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="cur"></div>
+  <div id="ctr"></div>
+  <div id="pbar"></div>
+
+  <!-- BREADCRUMB -->
+  <nav class="bc">
+    <div class="bc-left">
+      <a href="index.html" class="bc-back"><i class="bi bi-arrow-left"></i> Portfolio</a>
+      <span class="bc-sep">›</span>
+      <span class="bc-cur">EnglishPlay</span>
+    </div>
+    <div class="bc-tags">
+      <span class="bc-tag bc-purple">Full-Stack Development</span>
+      <span class="bc-tag bc-purple">UX/UI Design</span>
+      <span class="bc-tag bc-gold">EdTech</span>
+    </div>
+  </nav>
+
+  <!-- ══ 01 HERO ══ -->
+  <section class="hero">
+    <span class="hero-eyebrow">Case Study · 2023–2025</span>
+    <h1 class="hero-h1">English<em>Play</em></h1>
+    <p class="hero-desc">A grammar drill engine built from scratch — because no existing platform could do what my
+      students actually needed.</p>
+    <div class="hero-chips">
+      <span class="hero-chip">Vanilla JS</span>
+      <span class="hero-chip">Supabase</span>
+      <span class="hero-chip">Netlify</span>
+      <span class="hero-chip">GitHub CI/CD</span>
+      <span class="hero-chip">40,000+ Exercises</span>
+      <span class="hero-chip">CEFR A1–C2</span>
+      <span class="hero-chip">Solo Project</span>
+    </div>
+    <div class="hero-ctas">
+      <a href="https://englishplay.org" target="_blank" rel="noopener" class="hero-btn-p">
+        <i class="bi bi-globe2"></i> View Live Site
+      </a>
+<!--       <a href="https://github.com/yanaharcourt/EnglishPlay" target="_blank" rel="noopener" class="hero-btn-g">
+        <i class="bi bi-github"></i> GitHub Repo
+      </a> -->
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      scroll
+    </div>
+  </section>
+
+  <!-- META STRIP -->
+  <div class="meta-strip rv">
+    <div class="meta-strip-inner">
+      <div class="meta-item">
+        <div class="meta-lbl">Role</div>
+        <div class="meta-val">Designer · Developer · <em>Content Author</em></div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-lbl">Platform</div>
+        <div class="meta-val">Web · Dark &amp; Light</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-lbl">Duration</div>
+        <div class="meta-val">1+ Year · Ongoing</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-lbl">Stack</div>
+        <div class="meta-val">JS · Supabase · <em>Netlify</em> · GitHub</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-lbl">Scale</div>
+        <div class="meta-val"><em>40,000+</em> exercises · A1–C2</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 02 THE PROBLEM ══ -->
+  <div class="sec" id="s-problem">
+    <span class="lbl rv" style="margin-bottom:24px;">01 — The Problem</span>
+    <h2 class="sec-h2 rv">The gap that <em>no platform</em><br>was filling.</h2>
+    <p class="sec-lead rv">After years of teaching English, I kept watching the same pattern: students understood
+      grammar rules perfectly — then made the exact same mistakes a week later. The problem was not comprehension. It
+      was the absence of structured, high-volume, bilingual repetition.</p>
+    <div class="prob-grid rv">
+      <div class="prob-card">
+        <div class="prob-n">The Market Gap</div>
+        <h3>Existing platforms fragment the experience</h3>
+        <p>Students needed three or four different tools to cover grammar, vocabulary, phrasal verbs, and sentence
+          structure. No single platform provided drilling at depth — all prioritised variety over repetition volume.</p>
+        <div class="prob-list">
+          <div class="prob-li">
+            <div class="prob-dot"></div><span>Grammar on one tool, vocabulary on another</span>
+          </div>
+          <div class="prob-li">
+            <div class="prob-dot"></div><span>Phrasal verbs never covered systematically</span>
+          </div>
+          <div class="prob-li">
+            <div class="prob-dot"></div><span>Feedback in English only — unusable for beginners</span>
+          </div>
+          <div class="prob-li">
+            <div class="prob-dot"></div><span>5–10 exercises per topic instead of 100</span>
+          </div>
+        </div>
+      </div>
+      <div class="prob-card solution">
+        <div class="prob-n ok">The Teaching Insight</div>
+        <h3>Exposure to rules is not the same as automating them</h3>
+        <p>My students knew the rules. They could explain them. But under pressure the wrong pattern fired
+          automatically. The solution was not more theory — it was a system designed around controlled, high-density
+          repetition.</p>
+        <div class="prob-list">
+          <div class="prob-li">
+            <div class="prob-dot ok"></div><span>Students repeated errors despite knowing the rule</span>
+          </div>
+          <div class="prob-li">
+            <div class="prob-dot ok"></div><span>No tool offered bilingual EN+RU grammatical feedback</span>
+          </div>
+          <div class="prob-li">
+            <div class="prob-dot ok"></div><span>Sentence construction underrepresented everywhere</span>
+          </div>
+          <div class="prob-li">
+            <div class="prob-dot ok"></div><span>Constant app-switching killed momentum and focus</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pain-wrap rv" id="pain-bars">
+      <div class="pain-lbl">Problem severity — from 8 years of direct teaching observation</div>
+      <div class="pain-row">
+        <div class="pain-meta"><span>Repetition volume deficit</span><span>95%</span></div>
+        <div class="pain-track">
+          <div class="pain-fill" data-w="95"></div>
+        </div>
+      </div>
+      <div class="pain-row">
+        <div class="pain-meta"><span>Fragmented multi-platform experience</span><span>88%</span></div>
+        <div class="pain-track">
+          <div class="pain-fill" data-w="88"></div>
+        </div>
+      </div>
+      <div class="pain-row">
+        <div class="pain-meta"><span>Absence of bilingual EN+RU feedback</span><span>82%</span></div>
+        <div class="pain-track">
+          <div class="pain-fill" data-w="82"></div>
+        </div>
+      </div>
+      <div class="pain-row">
+        <div class="pain-meta"><span>Lack of sentence construction training</span><span>76%</span></div>
+        <div class="pain-track">
+          <div class="pain-fill" data-w="76"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 03 PROCESS (ORBITAL) ══ -->
+  <div class="process-wrap" id="s-process">
+    <div class="process-inner">
+      <div class="process-head rv">
+        <h2 class="process-h2">From classroom<br><em>insight</em> to<br>production.</h2>
+        <p class="process-sub">No formal research agency. No handed-over brief. The research was 8 years of teaching —
+          every mistake my students made was a data point that informed architecture, content, and UX.</p>
+      </div>
+      <div class="orbital rv">
+        <div class="planet">
+          <div class="planet-num">01</div>
+          <div class="orb orb-s orb-1">
+            <div class="orb-glow"></div><span class="orb-label">Teaching<br>Research</span>
+          </div>
+          <div class="planet-desc"><strong>8 years</strong>Error patterns · Level mapping · Real students</div>
+        </div>
+        <div class="p-dash"></div>
+        <div class="planet">
+          <div class="planet-num">02</div>
+          <div class="orb orb-m orb-2">
+            <div class="orb-glow"></div><span class="orb-label">Product<br>Strategy</span>
+          </div>
+          <div class="planet-desc"><strong>Architecture</strong>Exercise taxonomy · Platform decision</div>
+        </div>
+        <div class="p-dash"></div>
+        <div class="planet">
+          <div class="planet-num">03</div>
+          <div class="orb orb-l orb-3">
+            <div class="orb-glow"></div><span class="orb-label">UX + IA<br>Design</span>
+          </div>
+          <div class="planet-desc"><strong>Personas · Flows</strong>Information architecture · CJM</div>
+        </div>
+        <div class="p-dash"></div>
+        <div class="planet">
+          <div class="planet-num">04</div>
+          <div class="orb orb-xl orb-4">
+            <div class="orb-glow"></div><span class="orb-label">UI Design<br>System</span>
+          </div>
+          <div class="planet-desc"><strong>Dark + Light</strong>Tokens · Components · Responsive</div>
+        </div>
+        <div class="p-dash"></div>
+        <div class="planet">
+          <div class="planet-num">05</div>
+          <div class="orb orb-m orb-2">
+            <div class="orb-glow"></div><span class="orb-label">Development</span>
+          </div>
+          <div class="planet-desc"><strong>JS · Supabase</strong>Netlify · GitHub CI/CD · Auth</div>
+        </div>
+        <div class="p-dash"></div>
+        <div class="planet">
+          <div class="planet-num">06</div>
+          <div class="orb orb-s orb-5">
+            <div class="orb-glow"></div><span class="orb-label">Content<br>at Scale</span>
+          </div>
+          <div class="planet-desc"><strong>40,000+</strong>CEFR A1–C2 · Bilingual feedback</div>
+        </div>
+      </div>
+      <div class="process-foot rv">
+        <div class="pfoot-item">
+          <div class="pfoot-dot"></div>Role: <span>Solo — all disciplines</span>
+        </div>
+        <div class="pfoot-item">
+          <div class="pfoot-dot"></div>Platform: <span>Web · Desktop + Mobile</span>
+        </div>
+        <div class="pfoot-item">
+          <div class="pfoot-dot"></div>Duration: <span>1+ year</span>
+        </div>
+        <div class="pfoot-item">
+          <div class="pfoot-dot"></div>Users: <span>Real students + public</span>
+        </div>
+        <div class="pfoot-item">
+          <div class="pfoot-dot"></div>Themes: <span>Dark &amp; Light</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 04 PERSONAS ══ -->
+  <div class="sec" id="s-personas">
+    <span class="lbl rv" style="margin-bottom:24px;">03 — Personas</span>
+    <h2 class="sec-h2 rv">Three learners.<br><em>One system.</em></h2>
+    <p class="sec-lead rv">Derived from direct teaching experience across multiple countries and student profiles. Not
+      hypothetical — composite portraits of real people I taught.</p>
+    <div class="personas-grid">
+      <div class="pcard">
+        <div class="pcard-av pcard-av-p">A</div>
+        <div class="pcard-name">Alina</div>
+        <div class="pcard-role">24 · University Student · B1</div>
+        <div class="pcard-quote">"I understand grammar when someone explains it, but I still make the same mistakes when
+          writing on my own."</div>
+        <div class="pcard-tags"><span class="pcard-tag">B1</span><span class="pcard-tag">Russian native</span><span
+            class="pcard-tag">Self-study</span></div>
+        <div class="pcard-sec">Frustrations</div>
+        <div class="pcard-list">
+          <div class="pcard-li">Platforms explain rules but offer only 5–8 exercises</div>
+          <div class="pcard-li">Feedback in English — hard to understand when unsure</div>
+          <div class="pcard-li">Jumps between apps and loses momentum</div>
+        </div>
+        <div class="pcard-div"></div>
+        <div class="pcard-sec">What she needs</div>
+        <div class="pcard-list">
+          <div class="pcard-li">100 exercises per topic to build procedural memory</div>
+          <div class="pcard-li">Bilingual feedback that explains why she was wrong</div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-av pcard-av-g">M</div>
+        <div class="pcard-name">Mikhail</div>
+        <div class="pcard-role">38 · Engineer · A2–B1</div>
+        <div class="pcard-quote">"I need practical English for my job. I want grammar, sentence structure, and clear
+          explanations — not songs and games."</div>
+        <div class="pcard-tags"><span class="pcard-tag">A2–B1</span><span class="pcard-tag">Professional</span><span
+            class="pcard-tag">Goal-driven</span></div>
+        <div class="pcard-sec">Frustrations</div>
+        <div class="pcard-list">
+          <div class="pcard-li">Gamified apps feel childish and waste limited time</div>
+          <div class="pcard-li">Can't find structured phrasal verb practice anywhere</div>
+          <div class="pcard-li">Needs explanations to reference — not just right/wrong</div>
+        </div>
+        <div class="pcard-div"></div>
+        <div class="pcard-sec">What he needs</div>
+        <div class="pcard-list">
+          <div class="pcard-li">Serious, professional interface without distractions</div>
+          <div class="pcard-li">Dense, systematic exercises he can work through linearly</div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-av pcard-av-t">S</div>
+        <div class="pcard-name">Sofia</div>
+        <div class="pcard-role">16 · Secondary School · A1–A2</div>
+        <div class="pcard-quote">"My teacher told me to practise grammar at home but I don't know where to start or if
+          I'm doing it right."</div>
+        <div class="pcard-tags"><span class="pcard-tag">A1–A2</span><span class="pcard-tag">Teen learner</span><span
+            class="pcard-tag">Teacher-assigned</span></div>
+        <div class="pcard-sec">Frustrations</div>
+        <div class="pcard-list">
+          <div class="pcard-li">Overwhelmed by complex platforms not built for beginners</div>
+          <div class="pcard-li">Needs clear visual feedback — right/wrong is not enough</div>
+          <div class="pcard-li">No bilingual support when she genuinely doesn't understand</div>
+        </div>
+        <div class="pcard-div"></div>
+        <div class="pcard-sec">What she needs</div>
+        <div class="pcard-list">
+          <div class="pcard-li">Simple focused interface with no cognitive overload</div>
+          <div class="pcard-li">Clear progress indicators and bilingual explanations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 05 IA ══ -->
+  <div class="sec-full" id="s-ia">
+    <div class="sec-full-inner">
+      <span class="lbl rv" style="margin-bottom:24px;">04 — Information Architecture</span>
+      <h2 class="sec-h2 rv">Every path leads<br>to <em>practice.</em></h2>
+      <p class="sec-lead rv">The architecture is designed around one principle: minimise the distance between landing
+        and drilling. The exercise is always one or two clicks away.</p>
+      <div class="ia-tree rv">
+        <div class="ia-center" style="margin-bottom:0;">
+          <div class="ia-root-node">EnglishPlay</div>
+        </div>
+        <div class="ia-stem"></div>
+        <div class="ia-branches">
+          <div class="ia-branch">
+            <div class="ia-branch-body">
+              <div class="ia-node"><i class="bi bi-house"></i> Homepage</div>
+              <div class="ia-leaves">
+                <div class="ia-leaf">Hero — value prop</div>
+                <div class="ia-leaf">Module navigation</div>
+                <div class="ia-leaf hi">CTA — Get Started</div>
+              </div>
+            </div>
+          </div>
+          <div class="ia-branch">
+            <div class="ia-branch-body">
+              <div class="ia-node"><i class="bi bi-book"></i> Grammar Practice</div>
+              <div class="ia-leaves">
+                <div class="ia-leaf">Level select A1–C2</div>
+                <div class="ia-leaf">Topic select</div>
+                <div class="ia-leaf hi">Multiple Choice</div>
+                <div class="ia-leaf hi">Fill in the Gaps</div>
+                <div class="ia-leaf hi">Make a Sentence</div>
+              </div>
+            </div>
+          </div>
+          <div class="ia-branch">
+            <div class="ia-branch-body">
+              <div class="ia-node"><i class="bi bi-lightning"></i> Phrasal Verbs</div>
+              <div class="ia-leaves">
+                <div class="ia-leaf hi">Match Pictures</div>
+                <div class="ia-leaf hi">Write Definitions</div>
+                <div class="ia-leaf hi">Fill in Gaps</div>
+                <div class="ia-leaf hi">Choose Meaning</div>
+                <div class="ia-leaf hi">True / False</div>
+                <div class="ia-leaf hi">Find the Mistake</div>
+              </div>
+            </div>
+          </div>
+          <div class="ia-branch">
+            <div class="ia-branch-body">
+              <div class="ia-node"><i class="bi bi-person-circle"></i> Auth System</div>
+              <div class="ia-leaves">
+                <div class="ia-leaf">Sign In / Sign Up</div>
+                <div class="ia-leaf">Reset Password</div>
+                <div class="ia-leaf hi">Dashboard</div>
+                <div class="ia-leaf">Progress tracking</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 06 USER FLOW ══ -->
+  <div class="sec" id="s-flow">
+    <span class="lbl rv" style="margin-bottom:24px;">05 — User Flow</span>
+    <h2 class="sec-h2 rv">From landing to <em>drilling</em><br>in under 60 seconds.</h2>
+    <p class="sec-lead rv">The primary flow was designed to eliminate friction at every step. A new user should be able
+      to start their first exercise without creating an account — and sign up only when they feel the value.</p>
+    <div class="flow-scroll rv">
+      <div class="flow-row">
+        <div class="flow-step">
+          <div class="flow-node start">
+            <div class="flow-node-h">Land on Site</div>
+            <div class="flow-node-s">Homepage</div>
+          </div>
+        </div>
+        <div class="flow-arr"><i class="bi bi-arrow-right"></i></div>
+        <div class="flow-step">
+          <div class="flow-node">
+            <div class="flow-node-h">Choose Module</div>
+            <div class="flow-node-s">Grammar or Phrasal Verbs</div>
+          </div>
+        </div>
+        <div class="flow-arr"><i class="bi bi-arrow-right"></i></div>
+        <div class="flow-step">
+          <div class="flow-node">
+            <div class="flow-node-h">Select Level</div>
+            <div class="flow-node-s">A1 to C2</div>
+          </div>
+        </div>
+        <div class="flow-arr"><i class="bi bi-arrow-right"></i></div>
+        <div class="flow-step">
+          <div class="flow-node">
+            <div class="flow-node-h">Select Topic</div>
+            <div class="flow-node-s">Grammar category</div>
+          </div>
+        </div>
+        <div class="flow-arr"><i class="bi bi-arrow-right"></i></div>
+        <div class="flow-step">
+          <div class="flow-node">
+            <div class="flow-node-h">Choose Type</div>
+            <div class="flow-node-s">MC · Fill · Sentence</div>
+          </div>
+        </div>
+        <div class="flow-arr"><i class="bi bi-arrow-right"></i></div>
+        <div class="flow-step">
+          <div class="flow-node" style="border-color:rgba(124,127,245,.4);background:rgba(124,127,245,.05);">
+            <div class="flow-node-h" style="color:var(--accent);">Modal Opens</div>
+            <div class="flow-node-s">Zero page reload</div>
+          </div>
+          <div class="flow-badge">Answer → Instant bilingual feedback</div>
+        </div>
+        <div class="flow-arr"><i class="bi bi-arrow-right"></i></div>
+        <div class="flow-step">
+          <div class="flow-node end">
+            <div class="flow-node-h">Save Progress</div>
+            <div class="flow-node-s">Auth after value</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 07 CJM ══ -->
+  <div class="sec-full" id="s-cjm">
+    <div class="sec-full-inner">
+      <span class="lbl rv" style="margin-bottom:24px;">06 — Customer Journey Map</span>
+      <h2 class="sec-h2 rv">Alina's first <em>session.</em></h2>
+      <p class="sec-lead rv">B1 student, Russian native, first time trying EnglishPlay to practise relative clauses
+        before an exam. Mapped across the full emotional arc — from search to return.</p>
+      <div class="cjm-scroll rv">
+        <table class="cjm">
+          <thead>
+            <tr>
+              <th style="width:110px;"></th>
+              <th><i class="bi bi-search" style="color:var(--accent);margin-right:6px;"></i>Discovery</th>
+              <th><i class="bi bi-door-open" style="color:var(--accent);margin-right:6px;"></i>Arrival</th>
+              <th><i class="bi bi-pencil" style="color:var(--accent);margin-right:6px;"></i>First Exercise</th>
+              <th><i class="bi bi-chat-square-text" style="color:var(--accent);margin-right:6px;"></i>Feedback Moment
+              </th>
+              <th><i class="bi bi-arrow-repeat" style="color:var(--accent);margin-right:6px;"></i>Return Decision</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cjm-rlbl" style="color:var(--b2);">Action</td>
+              <td>Googles "relative clauses exercises" in Russian</td>
+              <td>Lands on homepage, sees grammar module</td>
+              <td>Selects B1 → Relative Clauses → Fill in the Gaps</td>
+              <td>Answers incorrectly, reads bilingual explanation</td>
+              <td>Completes 12 exercises, bookmarks the site</td>
+            </tr>
+            <tr>
+              <td class="cjm-rlbl" style="color:var(--accent);">Thinking</td>
+              <td>"I need something serious, not games"</td>
+              <td>"This looks clean. Let me try."</td>
+              <td>"Finally — a real B1 exercise, not beginner stuff"</td>
+              <td>"Oh! That's why it's wrong — I finally get it"</td>
+              <td>"I want to come back and finish all 100"</td>
+            </tr>
+            <tr>
+              <td class="cjm-rlbl" style="color:var(--gold);">Feeling</td>
+              <td>
+                <div class="cjm-emotion">
+                  <i class="bi bi-emoji-frown" style="color:var(--err);font-size:20px;"></i>
+                  <div style="flex:1;">
+                    <div class="emotion-bar">
+                      <div class="emotion-fill" style="width:20%;background:var(--err);"></div>
+                    </div>
+                  </div>
+                </div>
+                <div style="font-size:12px;color:var(--b3);margin-top:6px;">Frustrated</div>
+              </td>
+              <td>
+                <div class="cjm-emotion">
+                  <i class="bi bi-emoji-neutral" style="color:var(--gold);font-size:20px;"></i>
+                  <div style="flex:1;">
+                    <div class="emotion-bar">
+                      <div class="emotion-fill" style="width:50%;background:var(--gold);"></div>
+                    </div>
+                  </div>
+                </div>
+                <div style="font-size:12px;color:var(--b3);margin-top:6px;">Curious</div>
+              </td>
+              <td>
+                <div class="cjm-emotion">
+                  <i class="bi bi-emoji-smile" style="color:var(--accent);font-size:20px;"></i>
+                  <div style="flex:1;">
+                    <div class="emotion-bar">
+                      <div class="emotion-fill" style="width:70%;background:var(--accent);"></div>
+                    </div>
+                  </div>
+                </div>
+                <div style="font-size:12px;color:var(--b3);margin-top:6px;">Focused</div>
+              </td>
+              <td>
+                <div class="cjm-emotion">
+                  <i class="bi bi-lightbulb" style="color:var(--ok);font-size:20px;"></i>
+                  <div style="flex:1;">
+                    <div class="emotion-bar">
+                      <div class="emotion-fill" style="width:90%;background:var(--ok);"></div>
+                    </div>
+                  </div>
+                </div>
+                <div style="font-size:12px;color:var(--b3);margin-top:6px;">Clarity</div>
+              </td>
+              <td>
+                <div class="cjm-emotion">
+                  <i class="bi bi-emoji-laughing" style="color:var(--ok);font-size:20px;"></i>
+                  <div style="flex:1;">
+                    <div class="emotion-bar">
+                      <div class="emotion-fill" style="width:100%;background:var(--ok);"></div>
+                    </div>
+                  </div>
+                </div>
+                <div style="font-size:12px;color:var(--b3);margin-top:6px;">Satisfied</div>
+              </td>
+            </tr>
+            <tr>
+              <td class="cjm-rlbl" style="color:var(--err);">Pain Points</td>
+              <td><span class="cjm-tag ct-r">English-only results</span><span class="cjm-tag ct-r">Too many ads</span>
+              </td>
+              <td><span class="cjm-tag ct-r">Slow load = bounce</span></td>
+              <td><span class="cjm-tag ct-r">Page reload = friction</span></td>
+              <td><span class="cjm-tag ct-r">EN-only feedback unusable at B1</span></td>
+              <td><span class="cjm-tag ct-r">No account = no saved progress</span></td>
+            </tr>
+            <tr>
+              <td class="cjm-rlbl" style="color:var(--b3);">Opportunities</td>
+              <td><span class="cjm-tag ct-b">RU-searchable content</span></td>
+              <td><span class="cjm-tag ct-b">Fast minimal homepage</span></td>
+              <td><span class="cjm-tag ct-b">Modal — zero reload</span></td>
+              <td><span class="cjm-tag ct-b">Bilingual EN+RU feedback</span></td>
+              <td><span class="cjm-tag ct-b">Supabase auth + progress save</span></td>
+            </tr>
+            <tr>
+              <td class="cjm-rlbl" style="color:var(--ok);">EP Response</td>
+              <td><span class="cjm-tag ct-g">Content indexed bilingually</span></td>
+              <td><span class="cjm-tag ct-g">Lightweight fast load</span></td>
+              <td><span class="cjm-tag ct-g">Modal-based drill engine</span></td>
+              <td><span class="cjm-tag ct-g">feedbackEN + feedbackRU on every item</span></td>
+              <td><span class="cjm-tag ct-g">Dashboard with progress counter</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 08 INTERFACE / SCREENSHOTS ══ -->
+  <div class="sec" id="s-shots">
+    <span class="lbl rv" style="margin-bottom:24px;">07 — Interface</span>
+    <h2 class="sec-h2 rv">Dark &amp; Light.<br><em>Every screen.</em></h2>
+    <p class="sec-lead rv">Both themes are fully independent systems — separate HTML, CSS, and JS files. No variable
+      toggle, no cascading conflicts. Complete visual parity across every page and every state.</p>
+
+    <div class="shots-2 rv">
+      <div>
+        <div class="shot-lbl">Homepage — Dark Theme</div>
+        <div class="shot-box"><img src="assets/img/home-dark.png" alt="Homepage dark theme"></div>
+      </div>
+      <div>
+        <div class="shot-lbl">Homepage — Light Theme</div>
+        <div class="shot-box shot-box-light"><img src="assets/img/home-light.png" alt="Homepage light theme"></div>
+      </div>
+    </div>
+
+    <div class="shots-3 rv">
+      <div>
+        <div class="shot-lbl">Grammar Practice</div>
+        <div class="shot-box"><img src="assets/img/grammar.png" alt="Grammar Practice"></div>
+      </div>
+      <div>
+        <div class="shot-lbl">Exercise Modal</div>
+        <div class="shot-box"><img src="assets/img/grammar-2.png" alt="Exercise modal"></div>
+      </div>
+      <div>
+        <div class="shot-lbl">Phrasal Verbs</div>
+        <div class="shot-box"><img src="assets/img/phrasal-verbs.png" alt="Phrasal Verbs"></div>
+      </div>
+    </div>
+
+    <div class="shots-2 rv">
+      <div>
+        <div class="shot-lbl">Auth Flow</div>
+        <div class="shot-box"><img src="assets/img/auth.png" alt="Auth screen"></div>
+      </div>
+      <div>
+        <div class="shot-lbl">Dashboard &amp; Progress</div>
+        <div class="shot-box"><img src="assets/img/dashboard.png" alt="Dashboard"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 09 TECH DECISIONS — BENTO ══ -->
+  <div class="sec-full" id="s-tech">
+    <div class="sec-full-inner">
+      <span class="lbl rv" style="margin-bottom:24px;">08 — Technical Decisions</span>
+      <h2 class="sec-h2 rv">Every choice was a<br><em>deliberate</em> tradeoff.</h2>
+      <p class="sec-lead rv">Building solo means choosing carefully. Each decision below was made after evaluating
+        alternatives — not by default or convenience.</p>
+      <div class="tech-bento rv">
+
+        <div class="tcard span2">
+          <div class="tcard-accent-line"></div>
+          <div class="tcard-icon"><i class="bi bi-shield-lock"></i></div>
+          <div class="tcard-cat">Auth Architecture</div>
+          <h3>Supabase over Firebase</h3>
+          <p>Needed production-grade auth with email/password, magic links, and password reset — without managing a
+            backend. Supabase provided Postgres, real-time subscriptions, and a publishable key model that works in a
+            static JS context. The reset-password flow parses access_token from the URL hash, calls setSession()
+            client-side, and conditionally renders one of three states: form, success, or expired link.</p>
+          <div class="tcard-verdict">
+            <div class="tv-item tv-yes">
+              <div class="tv-lbl">Chose</div>Supabase — SQL, open source, built-in auth flow, reset link handling out of
+              the box
+            </div>
+            <div class="tv-item tv-no">
+              <div class="tv-lbl">Passed</div>Firebase — NoSQL lock-in, complex rules, overkill for this architecture
+            </div>
+          </div>
+        </div>
+
+        <div class="tcard">
+          <div class="tcard-accent-line"></div>
+          <div class="tcard-icon"><i class="bi bi-rocket-takeoff"></i></div>
+          <div class="tcard-cat">Deployment</div>
+          <h3>GitHub → Netlify</h3>
+          <p>Every push to main triggers an automatic build and live deploy to englishplay.org. Zero manual FTP, zero
+            config. Automatic HTTPS, instant rollbacks.</p>
+          <div class="tcard-verdict">
+            <div class="tv-item tv-yes">
+              <div class="tv-lbl">Chose</div>Netlify — git-connected, custom domain, zero config CI/CD
+            </div>
+            <div class="tv-item tv-no">
+              <div class="tv-lbl">Passed</div>Self-hosted — unnecessary maintenance for a static-first site
+            </div>
+          </div>
+        </div>
+
+        <div class="tcard">
+          <div class="tcard-accent-line"></div>
+          <div class="tcard-icon"><i class="bi bi-moon-stars"></i></div>
+          <div class="tcard-cat">Theme System</div>
+          <h3>File Duplication over CSS Toggle</h3>
+          <p>Separate -light HTML/CSS/JS files with hardcoded redirect. Isolated CSS, no specificity conflicts, fully
+            predictable rendering across every page.</p>
+          <div class="tcard-verdict">
+            <div class="tv-item tv-yes">
+              <div class="tv-lbl">Chose</div>Separate files — zero conflicts, total isolation
+            </div>
+            <div class="tv-item tv-no">
+              <div class="tv-lbl">Avoided</div>CSS variable toggle — caused shared/page-specific conflicts
+            </div>
+          </div>
+        </div>
+
+        <div class="tcard">
+          <div class="tcard-accent-line"></div>
+          <div class="tcard-icon"><i class="bi bi-window-stack"></i></div>
+          <div class="tcard-cat">Exercise UX</div>
+          <h3>Modal-Based Flow</h3>
+          <p>All exercises run inside modals. Zero page navigation mid-session. History API pushState manages
+            back-button behaviour so users exit cleanly without losing context.</p>
+          <div class="tcard-verdict">
+            <div class="tv-item tv-yes">
+              <div class="tv-lbl">Chose</div>Modal — continuous flow, no reload, maintained state
+            </div>
+            <div class="tv-item tv-no">
+              <div class="tv-lbl">Avoided</div>Page-per-exercise routing — breaks focus, adds load time
+            </div>
+          </div>
+        </div>
+
+        <div class="tcard">
+          <div class="tcard-accent-line"></div>
+          <div class="tcard-icon"><i class="bi bi-file-earmark-code"></i></div>
+          <div class="tcard-cat">Framework Choice</div>
+          <h3>Vanilla JS</h3>
+          <p>Zero build step, zero bundle complexity. The exercise rendering engine is completely transparent and
+            debuggable. Fast, deployable as static files, maintainable by one person.</p>
+          <div class="tcard-verdict">
+            <div class="tv-item tv-yes">
+              <div class="tv-lbl">Chose</div>Vanilla JS — full control, zero overhead, instant deploy
+            </div>
+            <div class="tv-item tv-no">
+              <div class="tv-lbl">Passed</div>React/Vue — overkill for a content-heavy static site
+            </div>
+          </div>
+        </div>
+
+        <div class="tcard span2">
+          <div class="tcard-accent-line" style="background:linear-gradient(90deg,var(--gold),transparent);"></div>
+          <div class="tcard-icon"
+            style="background:rgba(245,200,66,.1);border-color:rgba(245,200,66,.2);color:var(--gold);"><i
+              class="bi bi-database"></i></div>
+          <div class="tcard-cat" style="color:var(--gold);">Content Architecture</div>
+          <h3>Structured JS Files as the Content Layer</h3>
+          <p>40,000+ exercises stored in JS files with strict data contracts: correctAnswer always index 0 (shuffled at
+            render time), exactly four underscores for gap markers, mandatory feedbackEN and feedbackRU strings on every
+            object. Validation scripts check every file against the contract before commit. Hosted on GitHub —
+            versioned, diff-able, and deployable as part of the same CI/CD pipeline as the UI.</p>
+          <div class="tcard-verdict">
+            <div class="tv-item tv-yes">
+              <div class="tv-lbl">Chose</div>JS files on GitHub — versioned, validated, zero database overhead, same
+              pipeline
+            </div>
+            <div class="tv-item tv-no">
+              <div class="tv-lbl">Passed</div>CMS or database — added cost and latency for zero functional gain on
+              static content
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 10 DESIGN SYSTEM ══ -->
+  <div class="sec" id="s-ds">
+    <span class="lbl rv" style="margin-bottom:24px;">09 — Design System</span>
+    <h2 class="sec-h2 rv">A system built to<br><em>scale</em> with content.</h2>
+    <p class="sec-lead rv">Token-based from day one. Every colour, spacing value, and component is defined in CSS custom
+      properties — making dark and light themes structural, not cosmetic.</p>
+
+    <div class="ds-layout rv">
+      <div class="ds-card">
+        <h3><i class="bi bi-palette" style="color:var(--accent);margin-right:8px;"></i>Colour Tokens</h3>
+        <div class="ds-swatches">
+          <div class="ds-sw-wrap">
+            <div class="ds-sw" style="background:#0f0f1a;"></div>
+            <div class="ds-sw-lbl">--bg</div>
+          </div>
+          <div class="ds-sw-wrap">
+            <div class="ds-sw" style="background:#1a1b2e;border-color:rgba(255,255,255,.1);"></div>
+            <div class="ds-sw-lbl">--card</div>
+          </div>
+          <div class="ds-sw-wrap">
+            <div class="ds-sw" style="background:#7c7ff5;"></div>
+            <div class="ds-sw-lbl">--accent</div>
+          </div>
+          <div class="ds-sw-wrap">
+            <div class="ds-sw" style="background:#f5c842;"></div>
+            <div class="ds-sw-lbl">--gold</div>
+          </div>
+          <div class="ds-sw-wrap">
+            <div class="ds-sw" style="background:#34d399;"></div>
+            <div class="ds-sw-lbl">--ok</div>
+          </div>
+          <div class="ds-sw-wrap">
+            <div class="ds-sw" style="background:#f87171;"></div>
+            <div class="ds-sw-lbl">--err</div>
+          </div>
+          <div class="ds-sw-wrap">
+            <div class="ds-sw" style="background:#9197b8;"></div>
+            <div class="ds-sw-lbl">--b2</div>
+          </div>
+          <div class="ds-sw-wrap">
+            <div class="ds-sw" style="background:#565b7a;"></div>
+            <div class="ds-sw-lbl">--b3</div>
+          </div>
+        </div>
+        <p class="ds-note">Semantic tokens map across both themes. Correct/danger states use colour + icon — never
+          colour alone. Accessibility: contrast ratios verified for all text combinations.</p>
+      </div>
+      <div class="ds-card">
+        <h3><i class="bi bi-type" style="color:var(--accent);margin-right:8px;"></i>Typography</h3>
+        <div class="ds-type-row">
+          <div class="ds-type-label">Display — 800</div>
+          <div class="ds-t-display">Practice.</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-label">Label — 700 uppercase</div>
+          <div class="ds-t-lbl">Grammar Practice</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-label">Body — 400</div>
+          <div class="ds-t-body">Plus Jakarta Sans — chosen for clean legibility at small sizes during exercise sessions
+            and strong numeric rendering for level indicators.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-layout-3 rv">
+      <div class="ds-card">
+        <h3><i class="bi bi-ui-checks" style="color:var(--accent);margin-right:8px;"></i>Buttons</h3>
+        <div class="ds-comp-list">
+          <button class="ds-btn-p"><i class="bi bi-play-fill"></i> Start Practising</button>
+          <button class="ds-btn-g"><i class="bi bi-grid"></i> View All Topics</button>
+          <p class="ds-note">Primary uses gradient + glow shadow. Ghost uses 1px stroke. Hover states shift Y-2px for
+            both — consistent micro-interaction.</p>
+        </div>
+      </div>
+      <div class="ds-card">
+        <h3><i class="bi bi-chat-square-dots" style="color:var(--accent);margin-right:8px;"></i>Feedback Chips</h3>
+        <div class="ds-feedback-row" style="margin-bottom:14px;">
+          <span class="ds-chip ds-chip-ok"><i class="bi bi-check-circle-fill"></i> Correct</span>
+          <span class="ds-chip ds-chip-err"><i class="bi bi-x-circle-fill"></i> Try again</span>
+          <span class="ds-chip ds-chip-lvl">B2 Level</span>
+        </div>
+        <p class="ds-note">Every feedback state uses icon + colour. Never colour alone. Critical for accessibility and
+          for learners who may be colour-vision deficient.</p>
+      </div>
+      <div class="ds-card">
+        <h3><i class="bi bi-rulers" style="color:var(--accent);margin-right:8px;"></i>Spacing Scale</h3>
+        <div class="ds-spacing-row">
+          <div class="ds-sp-item">
+            <div class="ds-sp-bar" style="width:8px;"></div><span class="ds-sp-lbl">4px — micro gap</span>
+          </div>
+          <div class="ds-sp-item">
+            <div class="ds-sp-bar" style="width:20px;"></div><span class="ds-sp-lbl">8px — tight</span>
+          </div>
+          <div class="ds-sp-item">
+            <div class="ds-sp-bar" style="width:40px;"></div><span class="ds-sp-lbl">16px — element</span>
+          </div>
+          <div class="ds-sp-item">
+            <div class="ds-sp-bar" style="width:80px;"></div><span class="ds-sp-lbl">32px — component</span>
+          </div>
+          <div class="ds-sp-item">
+            <div class="ds-sp-bar" style="width:120px;"></div><span class="ds-sp-lbl">64px — section</span>
+          </div>
+          <div class="ds-sp-item">
+            <div class="ds-sp-bar" style="width:180px;opacity:.4;"></div><span class="ds-sp-lbl">120px — page</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 11 CONTENT ARCHITECTURE + CODE ══ -->
+  <div class="sec-full" id="s-ca">
+    <div class="sec-full-inner">
+      <span class="lbl rv" style="margin-bottom:24px;">10 — Content Architecture</span>
+      <h2 class="sec-h2 rv">40,000 exercises.<br><em>One strict contract.</em></h2>
+      <p class="sec-lead rv">The biggest challenge wasn't writing the exercises — it was building a system where every
+        file could be authored consistently, validated automatically, and rendered without any edge-case handling in the
+        engine.</p>
+
+      <div class="prob-grid rv" style="margin-bottom:32px;">
+        <div class="prob-card">
+          <div class="prob-n">The Scale Problem</div>
+          <h3>Volume and consistency — the hardest constraint</h3>
+          <p>Creating 40,000+ exercises across grammar topics, 3 exercise formats, and 6 CEFR levels — without a CMS,
+            without a team — required treating content authoring as an engineering problem.</p>
+          <div class="prob-list">
+            <div class="prob-li">
+              <div class="prob-dot"></div><span>Where to host 40k+ exercises without database overhead</span>
+            </div>
+            <div class="prob-li">
+              <div class="prob-dot"></div><span>How to enforce bilingual feedback on every single item</span>
+            </div>
+            <div class="prob-li">
+              <div class="prob-dot"></div><span>How to prevent silent rendering failures from malformed data</span>
+            </div>
+            <div class="prob-li">
+              <div class="prob-dot"></div><span>How to scale authoring without slowing UI iteration</span>
+            </div>
+          </div>
+        </div>
+        <div class="prob-card solution">
+          <div class="prob-n ok">The Solution</div>
+          <h3>Structured JS files with enforced data contracts</h3>
+          <p>Every topic lives in its own JS file. The render engine reads these files and trusts the contract — it
+            never needs to handle missing fields or unpredictable structures.</p>
+          <div class="prob-list">
+            <div class="prob-li">
+              <div class="prob-dot ok"></div><span>Hosted on GitHub — versioned, diff-able, deployable in same
+                CI/CD</span>
+            </div>
+            <div class="prob-li">
+              <div class="prob-dot ok"></div><span>correctAnswer always index 0 — shuffled at render time</span>
+            </div>
+            <div class="prob-li">
+              <div class="prob-dot ok"></div><span>Exactly 4 underscores as gap marker — machine-parseable</span>
+            </div>
+            <div class="prob-li">
+              <div class="prob-dot ok"></div><span>Mandatory feedbackEN and feedbackRU on every object</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv">
+        <div class="shot-lbl" style="margin-bottom:16px;">Exercise file structure — actual data contract</div>
+        <div class="code-wrap">
+          <div class="code-bar">
+            <div class="code-dot" style="background:#f87171;"></div>
+            <div class="code-dot" style="background:#f5c842;"></div>
+            <div class="code-dot" style="background:#34d399;"></div>
+            <span class="code-fn">relative-clauses-b1.js</span>
+          </div>
+          <div class="code-body"><span class="ck">const</span> <span class="cv">exercises</span> = [
+            {
+            <span class="ce">id</span>: <span class="cs">"rc_b1_001"</span>,
+            <span class="ce">sentence</span>: <span class="cs">"The woman ____ called yesterday is my teacher."</span>,
+            <span class="ce">options</span>: [
+            <span class="cs">"who"</span>, <span class="cc">// index 0 — always the correct answer</span>
+            <span class="cs">"which"</span>,
+            <span class="cs">"whom"</span>,
+            <span class="cs">"whose"</span>
+            ],
+            <span class="ce">correctAnswer</span>: <span class="cn">0</span>, <span class="cc">// enforced contract:
+              always 0</span>
+            <span class="ce">feedbackEN</span>: <span class="cs">"Use WHO for people in defining relative
+              clauses."</span>,
+            <span class="ce">feedbackRU</span>: <span class="cs">"WHO используется для людей в определительных
+              придаточных."</span>,
+            <span class="ce">level</span>: <span class="cs">"B1"</span>,
+            <span class="ce">topic</span>: <span class="cs">"defining-relative-clauses"</span>
+            }
+            <span class="cc">// ... 99 more objects in this file</span>
+            ];
+
+            <span class="ck">export default</span> exercises;
+          </div>
+        </div>
+        <div class="insight">
+          <i class="bi bi-lightbulb insight-ico"></i>
+          <div>
+            <div class="insight-title">Why GitHub, not a database?</div>
+            <p>Exercise content is static — it doesn't change per-user, doesn't need querying, and doesn't benefit from
+              a relational structure. Storing 40k+ exercises in JS files on GitHub means they are versioned, diff-able,
+              and deployable as part of the same Netlify CI/CD pipeline as the UI. A database would have added cost,
+              latency, and infrastructure complexity for zero functional gain.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 12 KEY CHALLENGES — ACCORDION ══ -->
+  <div class="sec" id="s-ch">
+    <span class="lbl rv" style="margin-bottom:24px;">11 — Key Challenges</span>
+    <h2 class="sec-h2 rv">What I solved that<br><em>wasn't</em> in the brief.</h2>
+    <p class="sec-lead rv">The hardest problems were not design problems or coding problems in isolation — they were
+      where design, code, and content architecture collided.</p>
+
+    <div class="ch-items rv">
+
+      <div class="ch-item">
+        <div class="ch-header" onclick="toggleCh(this)">
+          <div class="ch-num">01</div>
+          <div class="ch-hd-left">
+            <div class="ch-cat">Auth System</div>
+            <div class="ch-title">Supabase session management and password reset flow</div>
+          </div>
+          <button class="ch-expand-btn" aria-label="Expand"><i class="bi bi-plus-lg"></i></button>
+        </div>
+        <div class="ch-body">
+          <div class="ch-body-inner">
+            <div class="ch-problem-box">
+              <div class="ch-box-lbl prob"><i class="bi bi-exclamation-circle" style="margin-right:6px;"></i>The Problem
+              </div>
+              <p class="ch-box-p">Supabase password reset sends a link containing access_token and refresh_token in the
+                URL hash fragment. The challenge: parsing these tokens correctly client-side, calling setSession()
+                before the user interacts with the form, and handling the expired-link edge case — all without a backend
+                server to manage state.</p>
+            </div>
+            <div class="ch-sol-box">
+              <div class="ch-box-lbl sol"><i class="bi bi-check2-circle" style="margin-right:6px;"></i>The Solution
+              </div>
+              <p class="ch-box-p">Built a client-side token parser that reads window.location.hash, extracts
+                access_token and type, calls supabase.auth.setSession() before form render, and conditionally shows the
+                form, success, or expired-link state. Three fully self-contained visual states driven entirely by token
+                presence — no backend required.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ch-item">
+        <div class="ch-header" onclick="toggleCh(this)">
+          <div class="ch-num">02</div>
+          <div class="ch-hd-left">
+            <div class="ch-cat">CSS Architecture</div>
+            <div class="ch-title">Specificity conflicts between shared and page-specific stylesheets</div>
+          </div>
+          <button class="ch-expand-btn" aria-label="Expand"><i class="bi bi-plus-lg"></i></button>
+        </div>
+        <div class="ch-body">
+          <div class="ch-body-inner">
+            <div class="ch-problem-box">
+              <div class="ch-box-lbl prob"><i class="bi bi-exclamation-circle" style="margin-right:6px;"></i>The Problem
+              </div>
+              <p class="ch-box-p">The site uses a shared base stylesheet plus page-specific CSS files. As the design
+                system grew, specificity conflicts began breaking component styles — a shared button style would be
+                overridden by a page-specific rule, or a modal style would leak into adjacent components. The CSS
+                variable toggle approach amplified these conflicts.</p>
+            </div>
+            <div class="ch-sol-box">
+              <div class="ch-box-lbl sol"><i class="bi bi-check2-circle" style="margin-right:6px;"></i>The Solution
+              </div>
+              <p class="ch-box-p">Adopted a file-duplication architecture for themes: separate -light HTML/CSS/JS files
+                with a hardcoded redirect script. This isolated each theme entirely, eliminating cross-contamination.
+                Shared styles were refactored with explicit scope prefixes. Result: zero specificity conflicts, fully
+                predictable rendering across both themes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ch-item">
+        <div class="ch-header" onclick="toggleCh(this)">
+          <div class="ch-num">03</div>
+          <div class="ch-hd-left">
+            <div class="ch-cat">Content at Scale</div>
+            <div class="ch-title">Authoring 40,000+ exercises with zero CMS and zero errors</div>
+          </div>
+          <button class="ch-expand-btn" aria-label="Expand"><i class="bi bi-plus-lg"></i></button>
+        </div>
+        <div class="ch-body">
+          <div class="ch-body-inner">
+            <div class="ch-problem-box">
+              <div class="ch-box-lbl prob"><i class="bi bi-exclamation-circle" style="margin-right:6px;"></i>The Problem
+              </div>
+              <p class="ch-box-p">Creating 40,000+ exercises manually without a database or CMS meant the content
+                structure itself had to enforce correctness. Any inconsistency — wrong index for the correct answer,
+                wrong number of gap underscores, missing bilingual feedback — would break the rendering engine silently
+                without throwing an error.</p>
+            </div>
+            <div class="ch-sol-box">
+              <div class="ch-box-lbl sol"><i class="bi bi-check2-circle" style="margin-right:6px;"></i>The Solution
+              </div>
+              <p class="ch-box-p">Established strict data contracts in every JS file: correctAnswer always at index 0,
+                exactly four underscores as gap marker, mandatory EN and RU feedback strings. Built a validation script
+                that checks every file against these contracts before commit. The content pipeline became systematic and
+                reliable rather than error-prone.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ch-item">
+        <div class="ch-header" onclick="toggleCh(this)">
+          <div class="ch-num">04</div>
+          <div class="ch-hd-left">
+            <div class="ch-cat">UX Architecture</div>
+            <div class="ch-title">Modal flow without breaking the browser back button</div>
+          </div>
+          <button class="ch-expand-btn" aria-label="Expand"><i class="bi bi-plus-lg"></i></button>
+        </div>
+        <div class="ch-body">
+          <div class="ch-body-inner">
+            <div class="ch-problem-box">
+              <div class="ch-box-lbl prob"><i class="bi bi-exclamation-circle" style="margin-right:6px;"></i>The Problem
+              </div>
+              <p class="ch-box-p">Delivering 100 consecutive exercises inside a modal without any page navigation
+                created a UX tension: the browser back button would exit the entire page rather than close the modal —
+                breaking the expected navigation model and frustrating users mid-session.</p>
+            </div>
+            <div class="ch-sol-box">
+              <div class="ch-box-lbl sol"><i class="bi bi-check2-circle" style="margin-right:6px;"></i>The Solution
+              </div>
+              <p class="ch-box-p">Implemented History API pushState to add modal open/close states to the browser
+                history stack. Back button now closes the modal and returns to topic selection. Combined with a progress
+                counter inside the modal, users always know where they are in a 100-exercise session and can exit
+                cleanly without losing context.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ 13 OUTCOMES ══ -->
+  <div class="outro" id="s-outro">
+    <div class="outro-inner">
+      <span class="lbl rv" style="margin-bottom:32px;display:block;text-align:center;">12 — Outcomes</span>
+      <h2 class="outro-h2 rv">Built to <em>last.</em><br>Designed to drill.</h2>
+      <div class="outro-grid rv">
+        <div>
+          <div class="outro-num"><em class="cu" data-t="40" data-s="k+">0</em></div>
+          <div class="outro-lbl">structured exercises across A1–C2 grammar and phrasal verbs</div>
+        </div>
+        <div>
+          <div class="outro-num">9</div>
+          <div class="outro-lbl">exercise types across Grammar Practice and Phrasal Verbs modules</div>
+        </div>
+        <div>
+          <div class="outro-num">2</div>
+          <div class="outro-lbl">fully independent theme systems — dark and light — complete parity</div>
+        </div>
+        <div>
+          <div class="outro-num">1+</div>
+          <div class="outro-lbl">year in production with real students and external users</div>
+        </div>
+      </div>
+      <p class="outro-body rv">EnglishPlay proves that a solo developer-designer with deep domain knowledge can
+        outperform generic platforms in a specific niche — not by having more features, but by making the right ones
+        work with surgical precision.</p>
+      <div class="outro-tags rv">
+        <span class="outro-tag">Vanilla JS</span>
+        <span class="outro-tag">Supabase Auth</span>
+        <span class="outro-tag">Netlify CI/CD</span>
+        <span class="outro-tag">GitHub</span>
+        <span class="outro-tag">CEFR A1–C2</span>
+        <span class="outro-tag">Bilingual EN+RU</span>
+        <span class="outro-tag">Modal UX</span>
+        <span class="outro-tag">Design System</span>
+        <span class="outro-tag">Solo Project</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 14 REFLECTION ══ -->
+  <div class="refl" id="s-refl">
+    <div class="refl-inner">
+      <span class="lbl rv" style="margin-bottom:32px;">13 — Reflection</span>
+      <div class="refl-quote-wrap rv">
+        <div class="refl-quote">Scaling content is significantly harder than<br><em>scaling code.</em> Domain expertise
+          is not<br>separable from the product — it is the product.</div>
+        <div class="refl-quote-attr">— Yana Harcourt, after 1+ year building EnglishPlay</div>
+      </div>
+      <div class="refl-grid rv">
+        <div class="refl-card">
+          <div class="refl-card-top">
+            <div class="refl-icon-wrap"><i class="bi bi-stack"></i></div>
+            <h3>Content volume is the real engineering challenge</h3>
+          </div>
+          <p>The technical architecture took weeks. Creating 40,000+ exercises with consistent quality, bilingual depth,
+            and pedagogical accuracy took months. No amount of good UI compensates for shallow content — and no amount
+            of content compensates for a broken system to deliver it.</p>
+        </div>
+        <div class="refl-card">
+          <div class="refl-card-top">
+            <div class="refl-icon-wrap"><i class="bi bi-diagram-3"></i></div>
+            <h3>UX complexity compounds with exercise variety</h3>
+          </div>
+          <p>Each new exercise type multiplied the number of interaction states, feedback scenarios, and edge cases to
+            handle. The modular JS architecture was not a nice-to-have — it was what made iteration possible without
+            regression breaking existing exercises.</p>
+        </div>
+        <div class="refl-card">
+          <div class="refl-card-top">
+            <div class="refl-icon-wrap"><i class="bi bi-activity"></i></div>
+            <h3>Repetition needs UX balance at scale</h3>
+          </div>
+          <p>100 exercises per topic is the right number for automatisation — but only if the UX doesn't fatigue the
+            user. Every micro-interaction decision (instant feedback, zero reload, progress counter) was in service of
+            keeping students in flow long enough for the repetition to actually work.</p>
+        </div>
+      </div>
+      <div class="refl-next rv">
+        <div>
+          <h3>What I would do differently</h3>
+          <p>With the benefit of a full year of production use, there are three structural decisions I would revisit
+            from the start.</p>
+        </div>
+        <div class="refl-next-list">
+          <div class="refl-next-li"><i class="bi bi-arrow-right-circle"></i><span>Build the CSS variable token system
+              correctly from day one — avoiding the duplication architecture that solved the problem but created
+              maintenance overhead</span></div>
+          <div class="refl-next-li"><i class="bi bi-arrow-right-circle"></i><span>Implement a lightweight CMS or
+              structured data layer for exercises earlier — authoring at this volume in raw JS files is powerful but
+              brittle at the edges</span></div>
+          <div class="refl-next-li"><i class="bi bi-arrow-right-circle"></i><span>Add progress analytics from the start
+              — understanding which topics users abandon versus complete would directly improve content
+              prioritisation</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* cursor */
+    const cur = document.getElementById('cur'), ctr = document.getElementById('ctr');
+    let cx = innerWidth / 2, cy = innerHeight / 2, tx = cx, ty = cy;
+    document.addEventListener('mousemove', e => { cx = e.clientX; cy = e.clientY; });
+    document.addEventListener('mousedown', () => cur.style.transform = 'scale(1.8)');
+    document.addEventListener('mouseup', () => cur.style.transform = 'scale(1)');
+    (function loop() {
+      cur.style.left = (cx - 5) + 'px'; cur.style.top = (cy - 5) + 'px';
+      tx += (cx - tx) * .15; ty += (cy - ty) * .15;
+      ctr.style.left = (tx - 19) + 'px'; ctr.style.top = (ty - 19) + 'px';
+      requestAnimationFrame(loop);
+    })();
+
+    /* scroll progress */
+    window.addEventListener('scroll', () => {
+      var h = document.documentElement;
+      document.getElementById('pbar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+    });
+
+    /* scroll reveal */
+    var ro = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.rv, .pcard').forEach(function (el) { ro.observe(el); });
+
+    /* pain bars */
+    var po = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.querySelectorAll('.pain-fill').forEach(function (f) {
+          if (f.dataset.w) setTimeout(function () { f.style.width = f.dataset.w + '%'; }, 200);
+        });
+      });
+    }, { threshold: .2 });
+    var pb = document.getElementById('pain-bars');
+    if (pb) po.observe(pb);
+
+    /* count up */
+    var co = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.querySelectorAll('.cu').forEach(function (el) {
+          if (el._d) return; el._d = true;
+          var t = +el.dataset.t, s = el.dataset.s || '', steps = 50, dur = 1200, c = 0;
+          var iv = setInterval(function () {
+            c = Math.min(c + t / steps, t);
+            el.textContent = Math.floor(c) + s;
+            if (c >= t) clearInterval(iv);
+          }, dur / steps);
+        });
+      });
+    }, { threshold: .25 });
+    document.querySelectorAll('.outro-grid').forEach(function (el) { co.observe(el); });
+
+    /* accordion */
+    function toggleCh(header) {
+      var body = header.nextElementSibling;
+      var btn = header.querySelector('.ch-expand-btn i');
+      var isOpen = body.classList.contains('open');
+      document.querySelectorAll('.ch-body.open').forEach(function (b) {
+        b.classList.remove('open');
+        var bi = b.previousElementSibling.querySelector('.ch-expand-btn i');
+        if (bi) { bi.className = 'bi bi-plus-lg'; }
+      });
+      if (!isOpen) {
+        body.classList.add('open');
+        if (btn) btn.className = 'bi bi-dash-lg';
+      }
+    }
+  </script>
+</body>
+
+</html>
