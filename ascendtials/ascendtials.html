@@ -2034,7 +2034,7 @@
     .portfolio-parallax-demo .homepage-image {
       width: 500px;
       height: 832px;
-      object-fit: cover;
+      object-fit: contain;
     }
 
     .portfolio-parallax-demo .parallax-section {
@@ -2253,8 +2253,7 @@
     .portfolio-yoga-demo .homepage-image {
       width: 556px;
       height: 832px;
-      object-fit: cover;
-      margin-right: 55px;
+      object-fit: contain;
     }
 
     .portfolio-yoga-demo .demo-section {
@@ -2418,7 +2417,6 @@
     .portfolio-donation-demo {
       display: flex;
       position: relative;
-      padding: 40px;
       gap: 60px;
       margin-bottom: 120px;
     }
@@ -2426,7 +2424,7 @@
     .portfolio-donation-demo .homepage-image {
       width: 500px;
       height: 541px;
-      object-fit: cover;
+      object-fit: contain;
     }
 
     .portfolio-donation-demo .demo-section {
@@ -2565,7 +2563,6 @@
       width: 500px;
       height: 1400px;
       object-fit: cover;
-      margin-right: 55px;
     }
 
     .portfolio-service-demo .demo-section {
@@ -3833,26 +3830,181 @@
         </div>
         </div>
 
+
+        <!-- ═══ 02 — KEMETIC YOGA ════════════════════════════════════ -->
         <div class="showcase-item reverse rv d1">
-          <div class="showcase-info">
-            <div class="showcase-tag">02 - Kemetic Yoga Page</div>
-            <h3 class="showcase-title">From static list to living experience</h3>
-            <p class="showcase-text">Previously, all yoga session types were listed as walls of text. I redesigned them
-              as interactive cards - text is hidden by default and revealed on hover, creating visual breathing room
-              while keeping all the detail available.</p>
-            <ul class="showcase-features">
-              <li>5 yoga types: Group, Youth, Private, Corporate, Full Moon</li>
-              <li>Hover-reveal card content with smooth CSS transitions</li>
-              <li>Hero section with bold editorial layout</li>
-              <li>Parallax layer effect on featured section</li>
-              <li>Event calendar integration below</li>
-            </ul>
-          </div>
-          <div class="showcase-img-wrap">
-            <img src="./assets/img/Kemetic Yoga Page.png" alt="Kemetic Yoga page redesign"
-              style="width:100%; display:block;">
+          <div class="portfolio-yoga-demo">
+            <img src="assets/img/Kemetic Yoga Page.png" alt="Kemetic Yoga Page" class="homepage-image">
+        
+            <div class="demo-section">
+              <div class="showcase-info" style="margin-right: 70px;">
+                <div class="showcase-tag">02 - Kemetic Yoga Page</div>
+                <h3 class="showcase-title">From static list to living experience</h3>
+                <p class="showcase-text">Previously, all yoga session types were listed as walls of text. I redesigned them
+                  as interactive cards - text is hidden by default and revealed on hover, creating visual breathing room
+                  while keeping all the detail available.</p>
+                <ul class="showcase-features">
+                  <li>5 yoga types: Group, Youth, Private, Corporate, Full Moon</li>
+                  <li>Hover-reveal card content with smooth CSS transitions</li>
+                  <li>Hero section with bold editorial layout</li>
+                  <li>Parallax layer effect on featured section</li>
+                  <li>Event calendar integration below</li>
+                </ul>
+              </div>
+        
+              <div class="parallax-box">
+                <div class="interactive-hint">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 13.5C11.0376 13.5 13.5 11.0376 13.5 8C13.5 4.96243 11.0376 2.5 8 2.5C4.96243 2.5 2.5 4.96243 2.5 8C2.5 11.0376 4.96243 13.5 8 13.5Z" stroke="#666666" stroke-width="1.5" />
+                    <path d="M8 5.5V8.5" stroke="#666666" stroke-width="1.5" stroke-linecap="round" />
+                    <circle cx="8" cy="10.5" r="0.5" fill="#666666" />
+                  </svg>
+                  Hover the cards
+                </div>
+                <main class="yoga-page-content">
+                  <!-- Cards injected by JS -->
+                </main>
+              </div>
+            </div>
+        
+            <script>
+              (function () {
+                const cards = [
+                  { title: 'Group Yoga', copy: 'We offer community sessions a few times a week. Open to all members, held at local parks and events. Check out our event calendar to find the next available session!', button: '<a href="https://ascendtials.org/contact-us/" target="_blank" style="color:inherit;text-decoration:none;">Contact Us</a>', image: 'assets/img/Group Yoga.jpg' },
+                  { title: 'Youth Yoga', copy: 'Kemetic yoga sessions for youngsters through our Build My Spirit after-school program. Kids ages 5-17 aided by experienced teachers.', button: '<a href="https://ascendtials.org/contact-us/" target="_blank" style="color:inherit;text-decoration:none;">Contact Us</a>', image: 'assets/img/Youth Yoga.jpg' },
+                  { title: 'Private Yoga', copy: 'Private sessions for special events or parties at your preferred location. We especially love being outdoors.', button: '<a href="https://ascendtials.org/contact-us/" target="_blank" style="color:inherit;text-decoration:none;">Contact Us</a>', image: 'assets/img/Private Yoga.jpg' },
+                  { title: 'Corporate Yoga', copy: 'Great team-building or a fabulous way to start your company retreat. Feel re-energized and better connected with your coworkers.', button: '<a href="https://ascendtials.org/contact-us/" target="_blank" style="color:inherit;text-decoration:none;">Contact Us</a>', image: 'assets/img/Corporate Yoga.jpg' },
+                  { title: 'Full Moon Yoga', copy: 'We celebrate the full moon each month with a Kemetic yoga session, honoring our ancestors. Stick around for a bonfire!', button: '<a href="https://ascendtials.org/contact-us/" target="_blank" style="color:inherit;text-decoration:none;">Contact Us</a>', image: 'assets/img/Full Moon Yoga.jpg' }
+                ];
+                document.addEventListener('DOMContentLoaded', function () {
+                  const pageContent = document.querySelector('.yoga-page-content');
+                  if (!pageContent) return;
+                  cards.forEach(card => {
+                    const el = document.createElement('div');
+                    el.className = 'yoga-card';
+                    el.innerHTML = `
+                      <img src="${card.image}" alt="${card.title}">
+                      <div class="yoga-card-content">
+                        <div class="yoga-card-title-container"><h2 class="yoga-card-title">${card.title}</h2></div>
+                        <p class="yoga-card-copy">${card.copy}</p>
+                        <button class="yoga-card-btn">${card.button}</button>
+                      </div>`;
+                    pageContent.appendChild(el);
+                  });
+                });
+              })();
+            </script>
           </div>
         </div>
+        
+        
+        <!-- ═══ 04 — DONATION PAGE ═══════════════════════════════════ -->
+        <div class="showcase-item rv d2">
+          <div class="portfolio-donation-demo">
+            <img src="assets/img/Donation Page.png" alt="Donation Page" class="homepage-image">
+        
+            <div class="demo-section">
+              <div class="showcase-info" style="margin-left: 70px;">
+                <div class="showcase-tag">04 - Donation Page</div>
+                <h3 class="showcase-title">Unique shapes, memorable design</h3>
+                <p class="showcase-text">The Donation page needed to inspire action, not just list options. I designed a set
+                  of distinct organic card shapes — each representing a different cause — giving the page an editorial
+                  identity unlike any other on the site.</p>
+                <ul class="showcase-features">
+                  <li>Five custom shape components with unique rounded geometry</li>
+                  <li>Photo-filled shapes for emotional storytelling</li>
+                  <li>Direct Stripe-linked CTAs on each card</li>
+                  <li>Hover micro-interactions on all interactive elements</li>
+                </ul>
+              </div>
+        
+              <div class="donation-box">
+                <div class="interactive-hint">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 13.5C11.0376 13.5 13.5 11.0376 13.5 8C13.5 4.96243 11.0376 2.5 8 2.5C4.96243 2.5 2.5 4.96243 2.5 8C2.5 11.0376 4.96243 13.5 8 13.5Z" stroke="#666666" stroke-width="1.5" />
+                    <path d="M8 5.5V8.5" stroke="#666666" stroke-width="1.5" stroke-linecap="round" />
+                    <circle cx="8" cy="10.5" r="0.5" fill="#666666" />
+                  </svg>
+                  Hover the shapes
+                </div>
+                <div class="figures-container">
+                  <div class="figure first-figure-container">
+                    <svg width="250" height="530" viewBox="0 0 250 530" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g class="main-figure">
+                        <path d="M0 344V40C0 17.9086 17.9086 0 40 0H116.775C124.288 0 131.341 3.61569 135.727 9.71505C140.113 15.8144 147.167 19.4301 154.679 19.4301H209C231.091 19.4301 249 37.3387 249 59.43V344C249 366.091 231.091 384 209 384H40C17.9086 384 0 366.091 0 344Z" fill="#193E2F" />
+                        <foreignObject x="12" y="160" width="250" height="100"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:24px;font-family:'Noto Sans',sans-serif;font-weight:600;color:white;text-align:left;">Different Ways You<br>Can Save<br>Our Planet</div></foreignObject>
+                        <foreignObject x="10" y="-10" width="100" height="140"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:140px;font-family:'Noto Sans',sans-serif;font-weight:700;color:white;text-align:center;">7</div></foreignObject>
+                        <rect class="rect-figure" x="9" y="299" width="230" height="75" rx="30" fill="#2B5043" />
+                        <foreignObject x="24" y="324" width="230" height="75"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:18px;font-family:'Noto Sans',sans-serif;font-weight:600;color:white;text-align:left;">Donate Once</div></foreignObject>
+                        <a href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1" target="_blank">
+                          <circle class="circle-button" cx="203" cy="336" r="20" fill="#D1EE7B" />
+                          <path class="arrow-path" d="M196.6 342.401L209.4 329.601M209.4 329.601H199.8M209.4 329.601V339.201" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                        </a>
+                      </g>
+                      <g class="bottom-rect">
+                        <rect y="394" width="250" height="136" rx="40" fill="#E6E6E6" />
+                        <path d="M47.9733 433.947L34.6666 438.96C31.5999 440.107 29.0933 443.734 29.0933 446.987V466.8C29.0933 469.947 31.1733 474.08 33.7066 475.974L45.1733 484.534C48.9333 487.36 55.1199 487.36 58.8799 484.534L70.3466 475.974C72.8799 474.08 74.9599 469.947 74.9599 466.8V446.987C74.9599 443.707 72.4533 440.08 69.3866 438.934L56.0799 433.947C53.8133 433.12 50.1866 433.12 47.9733 433.947Z" stroke="#274353" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M44.1333 459.654L48.4266 463.947L59.8933 452.48" stroke="#274353" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <foreignObject x="85" y="416" width="250" height="100"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:20px;font-family:'Noto Sans',sans-serif;font-weight:600;color:#222222;text-align:left;">Support Our<br>Environmental<br>Programs</div></foreignObject>
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="figure second-figure-container">
+                    <svg width="263" height="530" viewBox="0 0 263 530" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs><pattern id="imageFill" patternUnits="userSpaceOnUse" width="249" height="384"><image href="assets/img/a boy.jpg" x="0" y="0" width="249" height="384" preserveAspectRatio="xMidYMid slice" /></pattern></defs>
+                      <path class="second-figure" d="M0 344V40C0 17.9086 17.9086 0 40 0H116.775C124.288 0 131.341 3.61569 135.727 9.71505C140.113 15.8144 147.167 19.4301 154.679 19.4301H209C231.091 19.4301 249 37.3387 249 59.43V344C249 366.091 231.091 384 209 384H40C17.9086 384 0 366.091 0 344Z" fill="url(#imageFill)" fill-opacity="1" />
+                      <foreignObject x="0" y="100" width="263" height="100" transform="translate(4, 180)"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:24px;font-family:'Noto Sans',sans-serif;font-weight:600;color:white;text-align:left;">Strengthen Our<br>Children's Programs</div></foreignObject>
+                    </svg>
+                  </div>
+                  <div class="figure third-figure-container">
+                    <svg width="250" height="275" viewBox="0 0 250 275" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="250" height="275" rx="40" fill="#D3DCDA" />
+                      <rect x="10" y="190" width="230" height="75" rx="30" fill="#BBC1C0" />
+                      <foreignObject x="0" y="100" width="250" height="100" transform="translate(0, -35)"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:24px;font-family:'Noto Sans',sans-serif;font-weight:700;color:#222222;text-align:center;">Support Small Businesses</div></foreignObject>
+                      <foreignObject x="10" y="190" width="230" height="75" transform="translate(20, 24)"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:20px;font-family:'Noto Sans',sans-serif;font-weight:600;color:#222222;text-align:left;">Our Vendors</div></foreignObject>
+                      <a href="https://ascendtials.org/contact-us/" target="_blank">
+                        <circle class="circle-button" cx="204" cy="227" r="20" fill="#274353" />
+                        <path class="arrow-path" d="M197.6 233.401L210.4 220.601M210.4 220.601H200.8M210.4 220.601V230.201" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                      </a>
+                    </svg>
+                  </div>
+                  <div class="figure fourth-figure-container">
+                    <svg width="249" height="384" viewBox="0 0 249 384" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs><pattern id="imageFill2" patternUnits="userSpaceOnUse" width="249" height="384"><image href="assets/img/education-kids.png" x="0" y="0" width="249" height="384" preserveAspectRatio="xMidYMid slice" /></pattern></defs>
+                      <path d="M249 344V40C249 17.9086 231.091 0 209 0H132.225C124.712 0 117.659 3.61569 113.273 9.71505C108.887 15.8144 101.833 19.4301 94.3205 19.4301H40C17.9086 19.4301 0 37.3387 0 59.43V344C0 366.091 17.9086 384 40 384H209C231.091 384 249 366.091 249 344Z" fill="url(#imageFill2)" />
+                      <foreignObject x="0" y="60" width="249" height="100" transform="translate(0, 260)"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:24px;font-family:'Noto Sans',sans-serif;font-weight:700;color:white;text-align:center;">BIPOC Communities</div></foreignObject>
+                    </svg>
+                  </div>
+                  <div class="figure fifth-figure-container">
+                    <svg width="250" height="530" viewBox="0 0 250 530" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_887_1871)" class="main-figure">
+                        <path d="M250 344V40C250 17.9086 232.091 0 210 0H133.225C125.712 0 118.659 3.61569 114.273 9.71505C109.887 15.8144 102.833 19.4301 95.3205 19.4301H41C18.9086 19.4301 1 37.3387 1 59.43V344C1 366.091 18.9086 384 41 384H210C232.091 384 250 366.091 250 344Z" fill="#D1EE7B" />
+                        <path d="M116.288 51.6592L293.504 62.8703L132.352 134.292L-44.8631 123.081L116.288 51.6592Z" fill="#AACA6B" />
+                        <path d="M133.278 123.365L373.774 107.25L143.305 174.942L-97.1908 191.056L133.278 123.365Z" fill="#AACA6B" />
+                        <path d="M137.301 172.184L377.818 156.177L147.37 223.977L-93.1469 239.984L137.301 172.184Z" fill="#AACA6B" />
+                        <path d="M141.325 221.003L380.836 199.823L149.382 262.449L-90.1292 283.629L141.325 221.003Z" fill="#AACA6B" />
+                        <rect x="10" y="299" width="230" height="75" rx="30" fill="#AFC969" class="rect-figure" />
+                        <foreignObject x="10" y="299" width="230" height="75" transform="translate(-10, 25)"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:18px;font-family:'Noto Sans',sans-serif;font-weight:600;color:#222222;text-align:center;width:190px;">Invest Monthly</div></foreignObject>
+                        <a href="https://buy.stripe.com/7sI29U62R5D23iocNd" target="_blank">
+                          <circle class="circle-button" cx="204" cy="336" r="20" fill="#274353" />
+                          <path class="arrow-path" d="M197.6 342.401L210.4 329.601M210.4 329.601H200.8M210.4 329.601V339.201" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                        </a>
+                        <foreignObject x="0" y="0" width="250" height="530" transform="translate(0, -110)" style="pointer-events:none;"><img src="assets/img/hands.png" width="250" height="530" /></foreignObject>
+                      </g>
+                      <g class="bottom-rect">
+                        <rect y="394" width="250" height="136" rx="40" fill="#D9D9D9" />
+                        <path d="M47.6535 488.493C46.7468 488.813 45.2535 488.813 44.3468 488.493C36.6135 485.853 19.3335 474.84 19.3335 456.173C19.3335 447.933 25.9735 441.267 34.1602 441.267C39.0135 441.267 43.3068 443.613 46.0002 447.24C48.6935 443.613 53.0135 441.267 57.8402 441.267C66.0268 441.267 72.6668 447.933 72.6668 456.173C72.6668 474.84 55.3868 485.853 47.6535 488.493Z" stroke="#274353" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <foreignObject x="20" y="400" width="210" height="80" transform="translate(70, 34)"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:20px;font-family:'Noto Sans',sans-serif;font-weight:600;color:#222222;text-align:left;">Join the<br>Movement</div></foreignObject>
+                      </g>
+                      <defs><clipPath id="clip0_887_1871"><rect width="249" height="384" fill="white" transform="translate(1)" /></clipPath></defs>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
       </div>
 
       <!-- Pages mosaic - real screenshots -->
