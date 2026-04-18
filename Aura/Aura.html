@@ -1833,7 +1833,14 @@
       line-height: 1.75;
     }
 
-    /* ────────────────────────────────────────────────────────────────
+   /* ================================================================
+   AURA Case Study — Mobile & Tablet Responsive Styles
+   Breakpoints: 1024px · 768px · 414px · 375px · 360px · 320px
+   Paste this <style> block (or <link> tag) AFTER the main styles
+   in Aura.html, just before </head>
+   ================================================================ */
+
+/* ────────────────────────────────────────────────────────────────
    SHARED: hide cursor on touch / mobile devices
    ──────────────────────────────────────────────────────────────── */
 @media (hover: none) and (pointer: coarse) {
@@ -2005,52 +2012,46 @@
     max-width: 100%;
   }
 
-  /* Orbital → vertical stack */
+  /* Orbital → centered vertical stack (number → orb → title → desc) */
   .orbital {
     flex-direction: column;
     align-items: center;
     padding: 40px 0;
-    gap: 24px;
+    gap: 0;
   }
   .orbital::before {
-    left: 50%;
-    right: auto;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    height: 100%;
-    transform: none;
-    background: linear-gradient(to bottom,
-        transparent,
-        rgba(102, 126, 234, .2) 10%,
-        rgba(102, 126, 234, .2) 90%,
-        transparent);
-  }
-  .planet {
-    flex-direction: row;
-    align-items: center;
-    gap: 24px;
-    width: 100%;
-    max-width: 480px;
-  }
-  .planet-num {
-    margin-bottom: 0;
-    position: absolute;
-    top: -18px;
-    left: 0;
-  }
-  .planet-desc {
-    margin-top: 0;
-    text-align: left;
-    max-width: none;
-  }
-  .p-dash {
     display: none;
   }
-  .orb-xl { width: 120px; height: 120px; }
-  .orb-l  { width: 100px; height: 100px; }
-  .orb-m  { width: 88px;  height: 88px;  }
-  .orb-s  { width: 72px;  height: 72px;  }
+  .p-dash {
+    display: block;
+    flex: none;
+    width: 1px;
+    height: 40px;
+    border-top: none;
+    border-left: 1px dashed rgba(102, 126, 234, .25);
+    margin: 0;
+  }
+  .planet {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 360px;
+    position: relative;
+  }
+  .planet-num {
+    margin-bottom: 16px;
+    position: static;
+  }
+  .planet-desc {
+    margin-top: 20px;
+    text-align: center;
+    max-width: 260px;
+  }
+  .orb-xl { width: 140px; height: 140px; }
+  .orb-l  { width: 120px; height: 120px; }
+  .orb-m  { width: 100px; height: 100px; }
+  .orb-s  { width: 84px;  height: 84px;  }
 
   .process-foot {
     flex-direction: column;
@@ -2270,21 +2271,22 @@
     font-size: clamp(36px, 10vw, 52px);
     letter-spacing: -1.5px;
   }
-  .planet {
-    gap: 16px;
-  }
-  .orb-xl { width: 90px;  height: 90px;  }
-  .orb-l  { width: 80px;  height: 80px;  }
-  .orb-m  { width: 70px;  height: 70px;  }
-  .orb-s  { width: 60px;  height: 60px;  }
+  .orb-xl { width: 110px; height: 110px; }
+  .orb-l  { width: 96px;  height: 96px;  }
+  .orb-m  { width: 84px;  height: 84px;  }
+  .orb-s  { width: 72px;  height: 72px;  }
   .orb-label {
     font-size: 11px;
   }
   .planet-desc {
     font-size: 12px;
+    max-width: 220px;
   }
   .planet-desc strong {
     font-size: 11px;
+  }
+  .p-dash {
+    height: 32px;
   }
   .pfoot-item {
     font-size: 10px;
@@ -2571,11 +2573,12 @@
   .process {
     padding: 56px 20px;
   }
-  .orb-xl { width: 82px;  height: 82px;  }
-  .orb-l  { width: 72px;  height: 72px;  }
-  .orb-m  { width: 64px;  height: 64px;  }
-  .orb-s  { width: 54px;  height: 54px;  }
+  .orb-xl { width: 100px; height: 100px; }
+  .orb-l  { width: 88px;  height: 88px;  }
+  .orb-m  { width: 76px;  height: 76px;  }
+  .orb-s  { width: 64px;  height: 64px;  }
   .orb-label { font-size: 10px; padding: 0 8px; }
+  .p-dash { height: 28px; }
 
   .ch-intro {
     padding: 56px 20px;
@@ -2701,20 +2704,22 @@
     font-size: 32px;
     letter-spacing: -1px;
   }
-  .orb-xl { width: 72px;  height: 72px;  }
-  .orb-l  { width: 64px;  height: 64px;  }
-  .orb-m  { width: 56px;  height: 56px;  }
-  .orb-s  { width: 48px;  height: 48px;  }
+  .orb-xl { width: 90px;  height: 90px;  }
+  .orb-l  { width: 80px;  height: 80px;  }
+  .orb-m  { width: 70px;  height: 70px;  }
+  .orb-s  { width: 60px;  height: 60px;  }
   .orb-label {
     font-size: 9px;
     padding: 0 6px;
   }
   .planet-desc {
     font-size: 11px;
+    max-width: 200px;
   }
   .planet-desc strong {
     font-size: 10px;
   }
+  .p-dash { height: 24px; }
 
   .ch-intro {
     padding: 48px 16px;
