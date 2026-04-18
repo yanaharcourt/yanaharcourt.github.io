@@ -1832,6 +1832,1088 @@
       color: rgba(255, 255, 255, .38);
       line-height: 1.75;
     }
+
+    /* ────────────────────────────────────────────────────────────────
+   SHARED: hide cursor on touch / mobile devices
+   ──────────────────────────────────────────────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+  #cur,
+  #ctr {
+    display: none !important;
+  }
+  * {
+    cursor: auto !important;
+  }
+}
+
+/* ================================================================
+   1024px — Tablet Landscape / Small Desktop
+   ================================================================ */
+@media (max-width: 1024px) {
+
+  /* ── HERO ── */
+  .hero {
+    padding: 0 48px;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 100px 48px;
+  }
+  .about-grid {
+    gap: 60px;
+  }
+
+  /* ── PROCESS ── */
+  .process {
+    padding: 100px 48px;
+  }
+  .process-head {
+    margin-bottom: 64px;
+  }
+  .orb-xl {
+    width: 220px;
+    height: 220px;
+  }
+  .orb-l {
+    width: 160px;
+    height: 160px;
+  }
+  .orb-m {
+    width: 110px;
+    height: 110px;
+  }
+  .orb-s {
+    width: 80px;
+    height: 80px;
+  }
+  .process-foot {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* ── CHALLENGE ── */
+  .ch-intro {
+    padding: 100px 48px;
+  }
+  .ch-stat {
+    padding: 48px 48px;
+  }
+
+  /* ── PAIN ── */
+  .pain-text {
+    padding: 80px 48px;
+  }
+  .pain-vis {
+    padding: 48px;
+  }
+
+  /* ── PERSONAS ── */
+  .personas {
+    padding: 100px 0;
+  }
+  .personas-inner {
+    padding: 0 48px;
+  }
+  .pcard {
+    padding: 48px;
+  }
+
+  /* ── FLOW ── */
+  .flow {
+    padding: 100px 0;
+  }
+  .flow-inner {
+    padding: 0 48px;
+  }
+
+  /* ── CJM ── */
+  .cjm {
+    padding: 100px 0;
+  }
+  .cjm-inner {
+    padding: 0 48px;
+  }
+
+  /* ── SOLUTION ── */
+  .sol-intro {
+    padding: 100px 48px;
+  }
+  .sol-feat-text {
+    padding: 80px 48px;
+  }
+  .sol-feat-vis {
+    padding: 48px;
+  }
+  .mf {
+    width: 190px;
+    height: 380px;
+  }
+
+  /* ── OUTRO ── */
+  .outro {
+    padding: 120px 48px;
+  }
+}
+
+/* ================================================================
+   768px — Tablet Portrait
+   ================================================================ */
+@media (max-width: 768px) {
+
+  /* ── HERO ── */
+  .hero {
+    padding: 100px 32px 80px;
+    min-height: 100svh;
+  }
+  .hero-h1 {
+    font-size: clamp(64px, 18vw, 110px);
+    letter-spacing: -4px;
+  }
+  .hero-desc {
+    font-size: 17px;
+  }
+  .hero-label {
+    margin-bottom: 28px;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 80px 32px;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    margin-bottom: 56px;
+  }
+  .about-h2 {
+    margin-bottom: 24px;
+  }
+
+  /* ── PROCESS ── */
+  .process {
+    padding: 80px 32px;
+  }
+  .process-head {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 48px;
+    gap: 24px;
+  }
+  .process-sub {
+    text-align: left;
+    max-width: 100%;
+  }
+
+  /* Orbital → vertical stack */
+  .orbital {
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+    gap: 24px;
+  }
+  .orbital::before {
+    left: 50%;
+    right: auto;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    height: 100%;
+    transform: none;
+    background: linear-gradient(to bottom,
+        transparent,
+        rgba(102, 126, 234, .2) 10%,
+        rgba(102, 126, 234, .2) 90%,
+        transparent);
+  }
+  .planet {
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    max-width: 480px;
+  }
+  .planet-num {
+    margin-bottom: 0;
+    position: absolute;
+    top: -18px;
+    left: 0;
+  }
+  .planet-desc {
+    margin-top: 0;
+    text-align: left;
+    max-width: none;
+  }
+  .p-dash {
+    display: none;
+  }
+  .orb-xl { width: 120px; height: 120px; }
+  .orb-l  { width: 100px; height: 100px; }
+  .orb-m  { width: 88px;  height: 88px;  }
+  .orb-s  { width: 72px;  height: 72px;  }
+
+  .process-foot {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* ── CHALLENGE ── */
+  .ch-intro {
+    padding: 80px 32px;
+    min-height: auto;
+  }
+  .ch-h2 {
+    font-size: clamp(36px, 7vw, 56px);
+  }
+  .ch-p {
+    font-size: 17px;
+  }
+  .ch-stats {
+    grid-template-columns: 1fr;
+  }
+  .ch-stat {
+    padding: 40px 32px;
+    gap: 24px;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, .04) !important;
+  }
+  .ch-stat:nth-child(odd) {
+    border-right: none;
+  }
+  .ch-stat:nth-child(1),
+  .ch-stat:nth-child(2) {
+    border-bottom: 1px solid rgba(255, 255, 255, .04);
+  }
+  .ch-stat-n {
+    font-size: clamp(56px, 12vw, 80px);
+  }
+  .ch-stat-vis {
+    width: 96px;
+    height: 96px;
+    flex-shrink: 0;
+  }
+
+  /* ── PAIN ── */
+  .pain {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .pain.flip {
+    direction: ltr;
+  }
+  .pain-text {
+    padding: 60px 32px;
+    border-right: none !important;
+    border-left: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, .05);
+  }
+  .pain-vis {
+    padding: 48px 32px;
+  }
+  .pain-vis-inner {
+    max-width: 100%;
+  }
+
+  /* ── PERSONAS ── */
+  .personas {
+    padding: 80px 0;
+  }
+  .personas-inner {
+    padding: 0 32px;
+  }
+  .personas-h2 {
+    font-size: clamp(36px, 8vw, 60px);
+  }
+  .personas-grid {
+    grid-template-columns: 1fr;
+  }
+  .pcard {
+    padding: 40px 32px;
+  }
+  .pcard-name {
+    font-size: 28px;
+  }
+  .pquote p {
+    font-size: 18px;
+  }
+
+  /* ── FLOW ── */
+  .flow {
+    padding: 80px 0;
+  }
+  .flow-inner {
+    padding: 0 32px;
+  }
+  .flow-h2 {
+    font-size: clamp(36px, 8vw, 56px);
+  }
+
+  /* ── CJM ── */
+  .cjm-section {
+    padding: 80px 0;
+  }
+  .cjm-inner {
+    padding: 0 32px;
+  }
+  .cjm-h2 {
+    font-size: clamp(32px, 7vw, 52px);
+  }
+
+  /* ── SOLUTION ── */
+  .sol-intro {
+    padding: 80px 32px;
+  }
+  .sol-h2 {
+    font-size: clamp(36px, 7vw, 56px);
+  }
+  .sol-desc {
+    font-size: 17px;
+  }
+  .sol-feat {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .sol-feat.flip {
+    direction: ltr;
+  }
+  .sol-feat-text {
+    padding: 60px 32px;
+    border-right: none !important;
+    border-left: none !important;
+    border-bottom: 1px solid #E8ECFF;
+  }
+  .sol-feat-vis {
+    padding: 48px 32px;
+  }
+  .mf {
+    width: 180px;
+    height: 360px;
+  }
+
+  /* ── OUTRO ── */
+  .outro {
+    padding: 100px 32px;
+  }
+  .outro-h2 {
+    font-size: clamp(32px, 7vw, 56px);
+    margin-bottom: 48px;
+  }
+  .outro-grid {
+    grid-template-columns: 1fr;
+  }
+  .outro-stat {
+    padding: 40px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+  }
+  .outro-num {
+    font-size: 48px;
+  }
+  .outro-body {
+    font-size: 16px;
+  }
+}
+
+/* ================================================================
+   414px — iPhone Plus / Pro Max
+   ================================================================ */
+@media (max-width: 414px) {
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 24px 72px;
+  }
+  .hero-h1 {
+    font-size: clamp(72px, 22vw, 96px);
+    letter-spacing: -3px;
+    margin-bottom: 28px;
+  }
+  .hero-desc {
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+  .hero-chips {
+    gap: 8px;
+  }
+  .hero-chip {
+    padding: 8px 14px;
+    font-size: 11px;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 64px 24px;
+  }
+  .about-h2 {
+    font-size: clamp(40px, 12vw, 64px);
+    letter-spacing: -2px;
+  }
+  .about-desc {
+    font-size: 16px;
+  }
+  .about-mission {
+    font-size: clamp(20px, 5.5vw, 28px);
+  }
+  .drow {
+    flex-direction: column;
+    gap: 6px;
+    padding: 18px 0;
+  }
+  .drow-v {
+    font-size: 13px;
+  }
+
+  /* ── PROCESS ── */
+  .process {
+    padding: 64px 24px;
+  }
+  .process-h2 {
+    font-size: clamp(36px, 10vw, 52px);
+    letter-spacing: -1.5px;
+  }
+  .planet {
+    gap: 16px;
+  }
+  .orb-xl { width: 90px;  height: 90px;  }
+  .orb-l  { width: 80px;  height: 80px;  }
+  .orb-m  { width: 70px;  height: 70px;  }
+  .orb-s  { width: 60px;  height: 60px;  }
+  .orb-label {
+    font-size: 11px;
+  }
+  .planet-desc {
+    font-size: 12px;
+  }
+  .planet-desc strong {
+    font-size: 11px;
+  }
+  .pfoot-item {
+    font-size: 10px;
+  }
+
+  /* ── CHALLENGE ── */
+  .ch-intro {
+    padding: 64px 24px;
+  }
+  .ch-h2 {
+    font-size: clamp(30px, 9vw, 44px);
+    letter-spacing: -1.5px;
+  }
+  .ch-p {
+    font-size: 15px;
+  }
+  .ch-stat {
+    padding: 36px 24px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .ch-stat-vis {
+    width: 80px;
+    height: 80px;
+  }
+  .ch-stat-n {
+    font-size: clamp(48px, 14vw, 72px);
+    letter-spacing: -3px;
+    margin-bottom: 10px;
+  }
+  .ch-stat-d {
+    font-size: 14px;
+  }
+
+  /* ── PAIN ── */
+  .pain-text {
+    padding: 48px 24px;
+  }
+  .pain-vis {
+    padding: 40px 24px;
+  }
+  .pain-h3 {
+    font-size: clamp(26px, 8vw, 38px);
+  }
+  .pain-body {
+    font-size: 15px;
+  }
+  .pain-qt p {
+    font-size: 18px;
+  }
+  .bars { gap: 20px; }
+  .bar-pct { font-size: 18px; }
+  .bar-lbl { font-size: 12px; }
+  .donut-wrap {
+    width: 160px;
+    height: 160px;
+  }
+  .donut-big {
+    font-size: 40px;
+  }
+  .app-grid {
+    max-width: 300px;
+  }
+  .crisis-steps { gap: 8px; }
+
+  /* ── PERSONAS ── */
+  .personas {
+    padding: 64px 0;
+  }
+  .personas-inner {
+    padding: 0 24px;
+  }
+  .personas-h2 {
+    font-size: clamp(30px, 9vw, 48px);
+    letter-spacing: -1.5px;
+  }
+  .personas-hdr {
+    margin-bottom: 48px;
+  }
+  .pcard {
+    padding: 32px 24px;
+  }
+  .pcard-name {
+    font-size: 24px;
+  }
+  .pcard-role {
+    font-size: 13px;
+    margin-bottom: 28px;
+  }
+  .pquote p {
+    font-size: 16px;
+  }
+  .pattr-k { font-size: 12px; }
+  .pattr-v { font-size: 13px; }
+
+  /* ── FLOW ── */
+  .flow {
+    padding: 64px 0;
+  }
+  .flow-inner {
+    padding: 0 24px;
+  }
+  .flow-h2 {
+    font-size: clamp(28px, 9vw, 44px);
+    letter-spacing: -1.5px;
+  }
+  .flow-desc {
+    font-size: 15px;
+  }
+
+  /* ── CJM ── */
+  .cjm {
+    padding: 64px 0;
+  }
+  .cjm-inner {
+    padding: 0 24px;
+  }
+  .cjm-h2 {
+    font-size: clamp(26px, 8vw, 40px);
+    letter-spacing: -1.5px;
+  }
+  .cjm-desc {
+    font-size: 15px;
+  }
+
+  /* ── SOLUTION ── */
+  .sol-intro {
+    padding: 64px 24px;
+  }
+  .sol-h2 {
+    font-size: clamp(28px, 9vw, 44px);
+    letter-spacing: -1.5px;
+  }
+  .sol-desc {
+    font-size: 16px;
+  }
+  .sol-feat-text {
+    padding: 48px 24px;
+  }
+  .sol-feat-h3 {
+    font-size: clamp(22px, 7vw, 32px);
+  }
+  .sol-feat-body {
+    font-size: 15px;
+  }
+  .sol-stats {
+    gap: 28px;
+  }
+  .sol-stat-v {
+    font-size: 32px;
+  }
+  .sol-feat-vis {
+    padding: 40px 24px;
+  }
+  .mf-group {
+    gap: 12px;
+    justify-content: center;
+  }
+  .mf {
+    width: 150px;
+    height: 300px;
+    border-radius: 24px;
+  }
+  .mf.offset {
+    margin-top: 28px;
+  }
+
+  /* ── OUTRO ── */
+  .outro {
+    padding: 80px 24px;
+  }
+  .outro-h2 {
+    font-size: clamp(28px, 8vw, 44px);
+    letter-spacing: -1.5px;
+    margin-bottom: 40px;
+  }
+  .outro-num {
+    font-size: 44px;
+  }
+  .outro-lbl {
+    font-size: 13px;
+  }
+  .outro-body {
+    font-size: 15px;
+  }
+}
+
+/* ================================================================
+   375px — iPhone standard (14, SE 3rd gen)
+   ================================================================ */
+@media (max-width: 375px) {
+
+  .hero-h1 {
+    font-size: 80px;
+    letter-spacing: -3px;
+  }
+  .hero-desc {
+    font-size: 15px;
+  }
+
+  .about-h2 {
+    font-size: clamp(36px, 11.5vw, 52px);
+  }
+  .about-mission {
+    font-size: clamp(18px, 5.5vw, 24px);
+  }
+
+  .process-h2 {
+    font-size: clamp(32px, 10.5vw, 46px);
+  }
+
+  .ch-h2 {
+    font-size: clamp(28px, 9vw, 40px);
+  }
+
+  .ch-stat {
+    padding: 32px 20px;
+  }
+
+  .pain-text {
+    padding: 44px 20px;
+  }
+  .pain-vis {
+    padding: 36px 20px;
+  }
+
+  .personas-inner {
+    padding: 0 20px;
+  }
+  .pcard {
+    padding: 28px 20px;
+  }
+
+  .flow-inner {
+    padding: 0 20px;
+  }
+  .cjm-inner {
+    padding: 0 20px;
+  }
+
+  .sol-intro {
+    padding: 56px 20px;
+  }
+  .sol-feat-text {
+    padding: 44px 20px;
+  }
+  .sol-feat-vis {
+    padding: 36px 20px;
+  }
+  .mf {
+    width: 138px;
+    height: 276px;
+  }
+
+  .outro {
+    padding: 72px 20px;
+  }
+  .outro-stat {
+    padding: 32px 16px;
+  }
+}
+
+/* ================================================================
+   360px — Android standard (Samsung, Pixel, etc.)
+   ================================================================ */
+@media (max-width: 360px) {
+
+  .hero {
+    padding: 72px 20px 64px;
+  }
+  .hero-h1 {
+    font-size: 72px;
+    letter-spacing: -2px;
+  }
+  .hero-chip {
+    padding: 7px 12px;
+    font-size: 10.5px;
+  }
+
+  .about {
+    padding: 56px 20px;
+  }
+
+  .process {
+    padding: 56px 20px;
+  }
+  .orb-xl { width: 82px;  height: 82px;  }
+  .orb-l  { width: 72px;  height: 72px;  }
+  .orb-m  { width: 64px;  height: 64px;  }
+  .orb-s  { width: 54px;  height: 54px;  }
+  .orb-label { font-size: 10px; padding: 0 8px; }
+
+  .ch-intro {
+    padding: 56px 20px;
+  }
+  .ch-stat-n {
+    font-size: clamp(44px, 14vw, 64px);
+    letter-spacing: -2px;
+  }
+
+  .pain-text {
+    padding: 40px 20px;
+  }
+  .pain-vis {
+    padding: 32px 20px;
+  }
+  .app-grid {
+    max-width: 260px;
+    gap: 10px;
+  }
+
+  .personas {
+    padding: 56px 0;
+  }
+  .personas-inner {
+    padding: 0 20px;
+  }
+
+  .flow {
+    padding: 56px 0;
+  }
+  .flow-inner {
+    padding: 0 20px;
+  }
+
+  .cjm {
+    padding: 56px 0;
+  }
+  .cjm-inner {
+    padding: 0 20px;
+  }
+
+  .sol-intro {
+    padding: 56px 20px;
+  }
+  .sol-feat-text {
+    padding: 40px 20px;
+  }
+  .sol-feat-vis {
+    padding: 32px 20px;
+  }
+  .mf {
+    width: 130px;
+    height: 260px;
+    border-radius: 20px;
+  }
+  .mf.offset {
+    margin-top: 20px;
+  }
+  .sol-stats {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .outro {
+    padding: 64px 20px;
+  }
+  .outro-num {
+    font-size: 40px;
+    letter-spacing: -1.5px;
+  }
+}
+
+/* ================================================================
+   320px — iPhone SE 1st gen / smallest Android
+   ================================================================ */
+@media (max-width: 320px) {
+
+  .hero {
+    padding: 64px 16px 56px;
+  }
+  .hero-h1 {
+    font-size: 64px;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+  }
+  .hero-desc {
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+  .hero-chip {
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+  .hero-chips {
+    gap: 6px;
+  }
+
+  .about {
+    padding: 48px 16px;
+  }
+  .about-h2 {
+    font-size: 38px;
+    letter-spacing: -1.5px;
+  }
+  .about-desc {
+    font-size: 14px;
+  }
+  .about-mission {
+    font-size: 17px;
+  }
+  .drow-k {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+  .drow-v {
+    font-size: 12px;
+  }
+
+  .process {
+    padding: 48px 16px;
+  }
+  .process-h2 {
+    font-size: 32px;
+    letter-spacing: -1px;
+  }
+  .orb-xl { width: 72px;  height: 72px;  }
+  .orb-l  { width: 64px;  height: 64px;  }
+  .orb-m  { width: 56px;  height: 56px;  }
+  .orb-s  { width: 48px;  height: 48px;  }
+  .orb-label {
+    font-size: 9px;
+    padding: 0 6px;
+  }
+  .planet-desc {
+    font-size: 11px;
+  }
+  .planet-desc strong {
+    font-size: 10px;
+  }
+
+  .ch-intro {
+    padding: 48px 16px;
+  }
+  .ch-h2 {
+    font-size: 28px;
+    letter-spacing: -1px;
+  }
+  .ch-p {
+    font-size: 14px;
+  }
+  .ch-stat {
+    padding: 28px 16px;
+  }
+  .ch-stat-n {
+    font-size: 52px;
+    letter-spacing: -2px;
+    margin-bottom: 8px;
+  }
+  .ch-stat-d {
+    font-size: 13px;
+  }
+  .ch-stat-vis {
+    width: 70px;
+    height: 70px;
+  }
+  .gauge-pct {
+    font-size: 15px;
+  }
+
+  .pain-text {
+    padding: 36px 16px;
+  }
+  .pain-vis {
+    padding: 28px 16px;
+  }
+  .pain-h3 {
+    font-size: 24px;
+    letter-spacing: -0.8px;
+  }
+  .pain-body {
+    font-size: 14px;
+  }
+  .pain-qt p {
+    font-size: 15px;
+  }
+  .bar-pct { font-size: 16px; }
+  .bar-lbl { font-size: 11px; }
+  .donut-wrap {
+    width: 140px;
+    height: 140px;
+  }
+  .donut-big { font-size: 32px; }
+  .donut-note { font-size: 10px; }
+  .app-grid {
+    max-width: 240px;
+    gap: 8px;
+  }
+  .app-tile span {
+    font-size: 10px;
+  }
+
+  .personas {
+    padding: 48px 0;
+  }
+  .personas-inner {
+    padding: 0 16px;
+  }
+  .personas-h2 {
+    font-size: 28px;
+    letter-spacing: -1px;
+  }
+  .personas-hdr {
+    margin-bottom: 36px;
+  }
+  .pcard {
+    padding: 24px 16px;
+  }
+  .pcard-badge {
+    font-size: 9px;
+    margin-bottom: 24px;
+  }
+  .pcard-name {
+    font-size: 22px;
+    letter-spacing: -0.5px;
+  }
+  .pcard-role {
+    font-size: 12px;
+    margin-bottom: 24px;
+  }
+  .pattr { padding: 10px 0; }
+  .pattr-k { font-size: 11px; }
+  .pattr-v { font-size: 12px; }
+  .ppains-lbl { font-size: 9px; }
+  .ppain { font-size: 13px; }
+  .pquote p {
+    font-size: 14px;
+  }
+
+  .flow {
+    padding: 48px 0;
+  }
+  .flow-inner {
+    padding: 0 16px;
+  }
+  .flow-h2 {
+    font-size: 26px;
+    letter-spacing: -1px;
+  }
+  .flow-desc { font-size: 13px; }
+
+  .cjm {
+    padding: 48px 0;
+  }
+  .cjm-inner {
+    padding: 0 16px;
+  }
+  .cjm-h2 {
+    font-size: 24px;
+    letter-spacing: -0.8px;
+  }
+  .cjm-desc { font-size: 13px; }
+
+  .sol-intro {
+    padding: 48px 16px;
+  }
+  .sol-h2 {
+    font-size: 26px;
+    letter-spacing: -1px;
+  }
+  .sol-desc {
+    font-size: 14px;
+  }
+  .sol-feat-text {
+    padding: 36px 16px;
+  }
+  .sol-feat-h3 {
+    font-size: 20px;
+    letter-spacing: -0.5px;
+  }
+  .sol-feat-body {
+    font-size: 14px;
+  }
+  .sol-stats {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .sol-stat-v {
+    font-size: 28px;
+    letter-spacing: -0.8px;
+  }
+  .sol-stat-l {
+    font-size: 11px;
+  }
+  .sol-chips {
+    gap: 6px;
+  }
+  .sol-chip {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+  .sol-feat-vis {
+    padding: 28px 16px;
+  }
+  .mf-group {
+    gap: 8px;
+  }
+  .mf {
+    width: 118px;
+    height: 236px;
+    border-radius: 18px;
+  }
+  .mf.offset {
+    margin-top: 16px;
+  }
+
+  .outro {
+    padding: 56px 16px;
+  }
+  .outro-h2 {
+    font-size: 26px;
+    letter-spacing: -1px;
+    margin-bottom: 32px;
+  }
+  .outro-num {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+  .outro-lbl {
+    font-size: 12px;
+  }
+  .outro-stat {
+    padding: 28px 16px;
+  }
+  .outro-body {
+    font-size: 14px;
+  }
+}
+
   </style>
 </head>
 
