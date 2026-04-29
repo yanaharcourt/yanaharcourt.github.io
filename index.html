@@ -531,12 +531,32 @@
       background: var(--bg);
     }
 
+    .pf-filters-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+ 
+    .all-work-link {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color .2s;
+      white-space: nowrap;
+    }
+ 
+    .all-work-link:hover {
+      color: var(--text);
+    }
+ 
     .pf-filters {
       display: flex;
       gap: 6px;
       list-style: none;
     }
-
+ 
     .pf-filters li {
       padding: 5px 14px;
       border-radius: 100px;
@@ -549,7 +569,7 @@
       transition: all .2s;
       text-transform: uppercase;
     }
-
+ 
     .pf-filters li.active,
     .pf-filters li:hover {
       background: var(--text);
@@ -1293,7 +1313,7 @@
     }
 
     /* ================================================
-       NEW FOOTER — dark, matching site aesthetic
+    NEW FOOTER 
     ================================================ */
     .yf-footer {
       background: #0d0d0d;
@@ -1611,7 +1631,7 @@
     }
 
     /* ================================================
-       RESPONSIVE — все брейкпоинты
+       RESPONSIVE 
     ================================================ */
     @media (max-width: 1100px) {
       .nav__links {
@@ -1926,11 +1946,15 @@
           <div class="s-label">Selected Work</div>
           <h2 class="s-title">Featured Projects ↓</h2>
         </div>
-        <ul class="pf-filters" id="pfFilters">
-          <li class="active" data-f="*">All</li>
-          <li data-f="app">App</li>
-          <li data-f="web">Web</li>
-        </ul>
+        <div class="pf-filters-wrap">
+          
+          <ul class="pf-filters" id="pfFilters">
+            <li class="active" data-f="*">All</li>
+            <li data-f="app">App</li>
+            <li data-f="web">Web</li>
+          </ul>
+          <a href="all-work.html" class="all-work-link">All Work →</a>
+        </div>
       </div>
 
       <div class="pf-grid" id="pfGrid">
@@ -1955,7 +1979,7 @@
         </a>
 
         <a class="pf-item pf-item--3" data-cat="web" data-reveal href="./EnglishPlay/englishplay.html">
-          <img src="./EnglishPlay/assets/img/banner.png" alt="EnglishPlay">
+          <img src="./EnglishPlay/assets/img/banner 1.png" alt="EnglishPlay">
           <div class="pf-see">SEE PROJECT →</div>
           <div class="pf-info">
             <div class="pf-title">EnglishPlay</div>
@@ -2162,8 +2186,8 @@
     </div>
   </section>
 
-  <!-- ================================================
-     FOOTER — redesigned dark version
+<!-- ================================================
+FOOTER — redesigned dark version
 ================================================ -->
   <footer class="yf-footer" id="contact">
     <div class="site-wrap">

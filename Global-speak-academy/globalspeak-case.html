@@ -1,0 +1,2066 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Speak Academy · Full Website Redesign - Yana Harcourt</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    /* ══════════ RESET & BASE ══════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:       #C4AA6C;
+      --gold-light: #E8DFC8;
+      --gold-dark:  #9A8247;
+      --ink-1:      #1A1A1A;
+      --ink-2:      #3D3730;
+      --ink-3:      #6B6258;
+      --ink-4:      #A09890;
+      --ink-5:      #D4CEC8;
+      --bg:         #FAFAF8;
+      --bg-2:       #F3F0EB;
+      --bg-3:       #EDEAE4;
+      --white:      #FFFFFF;
+      --red:        #E05C5C;
+      --green:      #3DB87A;
+
+      --radius:     16px;
+      --radius-sm:  10px;
+      --section-px: 120px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink-1);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    em { font-family: 'Playfair Display', serif; font-style: italic; }
+
+    /* ══════════ CURSOR ══════════ */
+    #cur {
+      position: fixed; width: 8px; height: 8px;
+      background: var(--gold); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transition: transform .15s ease;
+    }
+    #ctr {
+      position: fixed; width: 30px; height: 30px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%; pointer-events: none; z-index: 9998;
+      opacity: .5; transition: opacity .3s;
+    }
+
+    /* ══════════ SCROLL REVEAL ══════════ */
+    .rv {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .rv.in { opacity: 1; transform: none; }
+
+    /* ══════════ BREADCRUMB ══════════ */
+    .bc-nav {
+      position: sticky; top: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px var(--section-px);
+      background: rgba(250,250,248,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--ink-5);
+    }
+    .bc-left { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-3); }
+    .bc-left a { display: flex; align-items: center; gap: 6px; color: var(--ink-3); transition: color .2s; }
+    .bc-left a:hover { color: var(--gold-dark); }
+    .bc-sep { color: var(--ink-5); }
+    .bc-cur { color: var(--ink-1); font-weight: 500; }
+    .bc-tags { display: flex; gap: 8px; }
+    .bc-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: .05em;
+      padding: 4px 12px; border-radius: 100px;
+    }
+    .bc-tag.gold { background: var(--gold-light); color: var(--gold-dark); }
+    .bc-tag.blue { background: #E8EDF8; color: #3A5BA0; }
+
+    /* ══════════ HERO ══════════ */
+    .hero {
+      padding: 80px var(--section-px) 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+      background: var(--white);
+      border-bottom: 1px solid var(--ink-5);
+      padding-bottom: 64px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .hero-h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700; line-height: 1.05;
+      letter-spacing: -.03em;
+      color: var(--ink-1);
+      margin-bottom: 24px;
+    }
+    .hero-h1 em { color: var(--gold); }
+    .hero-sub {
+      font-size: 1.05rem; color: var(--ink-3);
+      line-height: 1.7; max-width: 480px;
+      margin-bottom: 36px;
+    }
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      padding-top: 32px;
+      border-top: 1px solid var(--ink-5);
+    }
+    .hero-meta > div {
+      padding-right: 24px;
+      border-right: 1px solid var(--ink-5);
+      padding-left: 24px;
+    }
+    .hero-meta > div:first-child { padding-left: 0; }
+    .hero-meta > div:last-child { border-right: none; }
+    .meta-lbl { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+    .meta-val { font-size: 14px; color: var(--ink-2); font-weight: 500; }
+
+    .hero-visual {
+      padding-left: 64px;
+      border-left: 1px solid var(--ink-5);
+    }
+    .hero-img-wrap {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg-2);
+      aspect-ratio: 10/10;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ══════════ OVERVIEW STRIP ══════════ */
+    .ov-strip {
+      display: flex; align-items: center; gap: 0;
+      padding: 36px var(--section-px);
+      background: var(--ink-1);
+      flex-wrap: wrap;
+    }
+    .ov-item { flex: 1; min-width: 140px; }
+    .ov-lbl { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .ov-val { font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.5; }
+    .ov-div { width: 1px; height: 40px; background: rgba(255,255,255,.12); margin: 0 32px; flex-shrink: 0; }
+    .ov-quote {
+      flex: 1.5; font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 1.1rem; color: rgba(255,255,255,.55);
+      border-left: 2px solid var(--gold); padding-left: 24px;
+      min-width: 240px;
+    }
+
+    /* ══════════ GENERIC SECTION ══════════ */
+    .sec {
+      padding: 96px var(--section-px);
+      background: var(--white);
+    }
+    .sec + .sec { border-top: 1px solid var(--bg-3); }
+    .sec-full {
+      padding: 96px 0;
+      background: var(--bg-2);
+      overflow: hidden;
+    }
+    .sec-full-inner { padding: 0 var(--section-px); }
+
+    .sec-lbl {
+      font-size: 10px; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .sec-h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700; line-height: 1.08;
+      letter-spacing: -.03em; color: var(--ink-1);
+      margin-bottom: 20px;
+    }
+    .sec-h2 em { color: var(--gold); }
+    .sec-lead {
+      font-size: 1.05rem; color: var(--ink-3);
+      line-height: 1.7; max-width: 680px;
+      margin-bottom: 56px;
+    }
+
+    /* ══════════ 01. THE CONTEXT ══════════ */
+    .context-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+      margin-bottom: 56px;
+    }
+    .ctx-card {
+      background: var(--bg); border-radius: var(--radius);
+      padding: 36px 32px;
+      border: 1px solid var(--bg-3);
+    }
+    .ctx-card-top {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+    }
+    .ctx-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--gold-light);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 18px;
+    }
+    .ctx-card-lbl {
+      font-size: 10px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 2px;
+    }
+    .ctx-card h3 {
+      font-size: 1.1rem; font-weight: 700; color: var(--ink-1);
+      margin-bottom: 12px;
+    }
+    .ctx-card p { font-size: 14px; color: var(--ink-3); line-height: 1.65; }
+
+    .context-roles {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .role-pill {
+      flex: 1; min-width: 160px; justify-content: center;
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 20px; border-radius: var(--radius-sm);
+      background: var(--bg-2); border: 1px solid var(--bg-3);
+      font-size: 13px; color: var(--ink-2); font-weight: 500;
+    }
+    .role-pill i { color: var(--gold); font-size: 16px; }
+
+    /* ══════════ 02. UX AUDIT ══════════ */
+    .audit-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .audit-card {
+      background: var(--bg-2); border-radius: var(--radius);
+      padding: 28px 24px; position: relative;
+      border: 1px solid var(--bg-3);
+      transition: box-shadow .25s ease, transform .25s ease;
+    }
+    .audit-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.07); transform: translateY(-2px); }
+    .audit-num {
+      font-size: 32px; font-weight: 700; line-height: 1;
+      color: var(--gold-light); margin-bottom: 14px;
+      font-family: 'Playfair Display', serif;
+    }
+    .audit-card h3 { font-size: .9rem; font-weight: 700; color: var(--ink-1); margin-bottom: 8px; }
+    .audit-card p { font-size: 13px; color: var(--ink-3); line-height: 1.55; margin-bottom: 14px; }
+    .audit-impact {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; color: var(--red);
+    }
+    .audit-impact i { font-size: 12px; }
+    .audit-impact.low { color: var(--gold-dark); }
+
+    /* ══════════ 03. PROCESS ══════════ */
+    .process-timeline {
+      display: flex; flex-direction: column; gap: 0;
+      margin-bottom: 56px;
+    }
+    .pt-item {
+      display: grid; grid-template-columns: 48px 1fr;
+      gap: 0; position: relative;
+    }
+    .pt-item:not(:last-child) .pt-body { border-bottom: 1px solid var(--bg-3); }
+    .pt-num-col {
+      display: flex; flex-direction: column; align-items: center;
+      padding-top: 32px;
+    }
+    .pt-num {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--gold); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; flex-shrink: 0;
+    }
+    .pt-line {
+      width: 1px; flex: 1;
+      background: var(--bg-3);
+      margin-top: 8px;
+    }
+    .pt-body {
+      padding: 28px 0 28px 32px;
+    }
+    .pt-phase {
+      font-size: 10px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
+    }
+    .pt-body h3 { font-size: 1.05rem; font-weight: 700; color: var(--ink-1); margin-bottom: 8px; }
+    .pt-body p { font-size: 14px; color: var(--ink-3); line-height: 1.6; max-width: 620px; }
+    .pt-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .pt-tag {
+      font-size: 11px; font-weight: 600;
+      padding: 4px 12px; border-radius: 100px;
+      background: var(--white); border: 1px solid var(--bg-3);
+      color: var(--ink-3);
+    }
+
+    /* ══════════ 04. TARGET USERS ══════════ */
+    .users-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .user-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 28px 24px; border: 1px solid var(--bg-3);
+      transition: box-shadow .25s ease;
+    }
+    .user-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.08); }
+    .user-avatar {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: var(--gold-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 16px;
+    }
+    .user-card h3 { font-size: .95rem; font-weight: 700; color: var(--ink-1); margin-bottom: 6px; }
+    .user-card p { font-size: 13px; color: var(--ink-3); line-height: 1.55; margin-bottom: 16px; }
+    .user-goals { display: flex; flex-direction: column; gap: 6px; }
+    .user-goal {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 12px; color: var(--ink-2);
+    }
+    .user-goal::before {
+      content: '';
+      display: block; flex-shrink: 0;
+      width: 14px; height: 14px; margin-top: 1px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C4AA6C' fill-opacity='.18'/%3E%3Cpath d='M6 10l3 3 5-5' stroke='%23C4AA6C' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+
+    /* ══════════ 05. INFORMATION ARCHITECTURE ══════════ */
+    .ia-compare {
+      display: grid; grid-template-columns: 1fr 64px 1fr; gap: 0;
+      align-items: start; margin-bottom: 48px;
+    }
+    .ia-col-lbl {
+      font-size: 11px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; padding-bottom: 16px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid;
+    }
+    .ia-col-lbl.before { color: var(--red); border-color: var(--red); }
+    .ia-col-lbl.after { color: var(--green); border-color: var(--green); }
+    .ia-arrow-col {
+      display: flex; align-items: flex-start; justify-content: center;
+      padding-top: 50px;
+    }
+    .ia-arrow {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--gold); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .ia-node {
+      padding: 10px 16px; border-radius: var(--radius-sm);
+      font-size: 13px; font-weight: 500; margin-bottom: 8px;
+      color: var(--ink-2);
+    }
+    .ia-node.main { background: var(--ink-1); color: var(--white); font-weight: 700; margin-bottom: 16px; }
+    .ia-node.before-node { background: #FEF0F0; border: 1px solid #FCCFCF; color: var(--red); }
+    .ia-node.after-node { background: #F0FEF6; border: 1px solid #B8EDD1; color: #1E6B46; }
+    .ia-node.sub { margin-left: 20px; font-size: 12px; padding: 8px 14px; }
+    .ia-node.new-badge::after {
+      content: 'NEW';
+      font-size: 9px; font-weight: 700; letter-spacing: .1em;
+      background: var(--green); color: var(--white);
+      padding: 2px 6px; border-radius: 4px; margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ══════════ 06. BEFORE / AFTER ══════════ */
+    .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+    .ba-col-head {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px;
+    }
+    .ba-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+    }
+    .ba-badge.before { background: #FEF0F0; color: var(--red); }
+    .ba-badge.after { background: #F0FEF6; color: #1E6B46; }
+    .ba-img {
+      border-radius: var(--radius); overflow: hidden;
+      background: var(--bg-2); border: 1px solid var(--bg-3);
+      aspect-ratio: 16/10; position: relative;
+    }
+    .ba-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .ba-caption { font-size: 12px; color: var(--ink-4); margin-top: 10px; }
+
+    .ba-problems {
+      display: flex; flex-direction: column; gap: 8px; margin-top: 16px;
+    }
+    .ba-prob {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: var(--ink-3); line-height: 1.5;
+    }
+    .ba-prob i { color: var(--red); font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+    .ba-win i { color: var(--green); }
+
+    /* ══════════ 07. DESIGN SYSTEM ══════════ */
+    .ds-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .ds-card {
+      background: var(--bg); border-radius: var(--radius);
+      padding: 32px 28px; border: 1px solid var(--bg-3);
+    }
+    .ds-card-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--ink-1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--gold); margin-bottom: 18px;
+    }
+    .ds-card h3 { font-size: 1rem; font-weight: 700; color: var(--ink-1); margin-bottom: 10px; }
+    .ds-card p { font-size: 13px; color: var(--ink-3); line-height: 1.6; margin-bottom: 18px; }
+    .ds-list { display: flex; flex-direction: column; gap: 6px; }
+    .ds-li {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--ink-2);
+    }
+    .ds-li::before {
+      content: ''; display: block; flex-shrink: 0;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold);
+    }
+
+    /* Color swatches */
+    .color-swatches {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px;
+    }
+    .swatch {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .swatch-dot {
+      width: 40px; height: 40px; border-radius: 10px;
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .swatch-label { font-size: 10px; color: var(--ink-4); font-weight: 500; }
+
+    /* Typography scale */
+    .typo-scale { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+    .typo-row { display: flex; align-items: baseline; gap: 14px; }
+    .typo-size { font-size: 10px; color: var(--ink-4); min-width: 40px; }
+    .typo-sample { color: var(--ink-1); font-weight: 600; }
+
+    /* ══════════ 08. KEY PAGES ══════════ */
+    .pages-grid { display: flex; flex-direction: column; gap: 64px; }
+    .page-showcase {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      align-items: start;
+    }
+    .page-showcase.reverse { direction: rtl; }
+    .page-showcase.reverse > * { direction: ltr; }
+    .page-desc-lbl {
+      font-size: 10px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+    }
+    .page-desc h3 { font-size: 1.5rem; font-weight: 700; color: var(--ink-1); margin-bottom: 14px; letter-spacing: -.02em; }
+    .page-desc p { font-size: 14px; color: var(--ink-3); line-height: 1.7; margin-bottom: 20px; }
+    .page-wins { display: flex; flex-direction: column; gap: 10px; }
+    .page-win {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: var(--ink-2); line-height: 1.5;
+    }
+    .page-win i { color: var(--green); font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+    .page-img {
+      border-radius: var(--radius); overflow: hidden;
+      background: var(--bg-3); border: 1px solid var(--bg-3);
+      aspect-ratio: 4/3;
+    }
+    .page-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+    /* ══════════ 09. FRONTEND IMPL ══════════ */
+    .fe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .fe-card {
+      background: var(--ink-1); border-radius: var(--radius);
+      padding: 28px 24px;
+    }
+    .fe-card-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(196,170,108,.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--gold); margin-bottom: 16px;
+    }
+    .fe-card h3 { font-size: .9rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .fe-card p { font-size: 12px; color: rgba(255,255,255,.5); line-height: 1.55; }
+
+    /* Code snippet */
+    .code-snippet {
+      background: #0D0D0D; border-radius: var(--radius);
+      padding: 28px 32px; margin-top: 40px;
+      font-family: 'Courier New', monospace; font-size: 12.5px;
+      line-height: 1.8; overflow-x: auto;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .cs-comment { color: #6B7280; }
+    .cs-prop { color: #C4AA6C; }
+    .cs-val { color: #93C5FD; }
+    .cs-tag { color: #F9A8D4; }
+    .cs-indent { padding-left: 24px; }
+
+    /* ══════════ 10. RESPONSIVE STRATEGY ══════════ */
+    .resp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .resp-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 28px 24px; border: 1px solid var(--bg-3);
+      text-align: center;
+    }
+    .resp-device {
+      font-size: 40px; margin-bottom: 14px; display: block;
+      color: var(--gold);
+    }
+    .resp-card h3 { font-size: .95rem; font-weight: 700; color: var(--ink-1); margin-bottom: 8px; }
+    .resp-bp {
+      display: inline-block;
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 100px;
+      background: var(--gold-light); color: var(--gold-dark);
+      margin-bottom: 12px;
+    }
+    .resp-card p { font-size: 12px; color: var(--ink-3); line-height: 1.55; }
+
+    /* ══════════ 11. CHALLENGES ══════════ */
+    .ch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .ch-card {
+      background: var(--bg-2); border-radius: var(--radius);
+      padding: 36px 32px; border: 1px solid var(--bg-3);
+    }
+    .ch-card-lbl {
+      font-size: 10px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .ch-card.challenge .ch-card-lbl { color: var(--red); }
+    .ch-card.solution .ch-card-lbl { color: var(--green); }
+    .ch-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--ink-1); margin-bottom: 12px; }
+    .ch-card p { font-size: 13px; color: var(--ink-3); line-height: 1.65; }
+
+    /* ══════════ OUTCOME ══════════ */
+    .outcome {
+      padding: 96px var(--section-px);
+      background: var(--ink-1);
+    }
+    .outcome-inner { max-width: 100%; }
+    .out-lbl {
+      font-size: 10px; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+    }
+    .out-h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.08;
+      letter-spacing: -.03em; color: var(--white);
+      margin-bottom: 20px;
+    }
+    .out-h2 em { color: var(--gold); }
+    .out-p { font-size: 1rem; color: rgba(255,255,255,.55); line-height: 1.7; max-width: 640px; margin-bottom: 56px; }
+    .out-h2-wrap { max-width: 900px; }
+    .out-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 32px; padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .stat-n {
+      font-size: 3rem; font-weight: 700; line-height: 1;
+      color: var(--gold); margin-bottom: 8px;
+      font-family: 'Playfair Display', serif;
+    }
+    .stat-n span { font-size: 1.5rem; }
+    .stat-lbl { font-size: 12px; color: rgba(255,255,255,.45); line-height: 1.4; }
+
+    /* Note on delivery */
+    .delivery-note {
+      display: flex; align-items: flex-start; gap: 16px;
+      background: rgba(196,170,108,.08); border: 1px solid rgba(196,170,108,.2);
+      border-radius: var(--radius); padding: 24px 28px;
+      margin-top: 40px;
+    }
+    .delivery-note i { color: var(--gold); font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .delivery-note p { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.65; }
+    .delivery-note strong { color: rgba(255,255,255,.75); }
+
+    /* ══════════ FOOTER ══════════ */
+    .yanas-footer {
+      background: #111;
+      padding: 80px var(--section-px) 48px;
+      position: relative; overflow: hidden;
+    }
+    .yanas-footer-inner { max-width: 800px; }
+    .yanas-footer h3 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700; color: var(--white);
+      letter-spacing: -.03em; line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .yanas-footer h3 em { color: var(--gold); }
+    .yanas-footer p { font-size: 1rem; color: rgba(255,255,255,.45); margin-bottom: 36px; }
+    .footer-cta-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-bottom: 72px; }
+    .footer-btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; background: var(--gold); color: var(--white);
+      border-radius: var(--radius-sm); font-weight: 600; font-size: 14px;
+      transition: opacity .2s;
+    }
+    .footer-btn-primary:hover { opacity: .85; }
+    .footer-btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border: 1.5px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.7); border-radius: var(--radius-sm);
+      font-size: 14px; transition: border-color .2s, color .2s;
+    }
+    .footer-btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+    .footer-divider { height: 1px; background: rgba(255,255,255,.07); margin-bottom: 36px; }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,.25); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a {
+      font-size: 12px; color: rgba(255,255,255,.35);
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* Scroll top */
+    .scroll-top {
+      position: fixed; bottom: 28px; right: 28px;
+      width: 44px; height: 44px;
+      background: var(--gold); color: var(--white);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 20px; z-index: 500;
+      opacity: 0; pointer-events: none; transition: opacity .3s;
+      box-shadow: 0 4px 20px rgba(196,170,108,.4);
+    }
+    .scroll-top.active { opacity: 1; pointer-events: auto; }
+
+    /* ══════════ DIVIDER ══════════ */
+    .section-divider {
+      height: 1px; background: var(--bg-3);
+      margin: 0 var(--section-px);
+    }
+
+    /* ══════════ INSIGHT BOX ══════════ */
+    .insight-box {
+      display: flex; align-items: flex-start; gap: 16px;
+      background: var(--gold-light); border-radius: var(--radius);
+      padding: 24px 28px; margin-top: 40px;
+    }
+    .insight-box i { color: var(--gold-dark); font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .insight-box p { font-size: 14px; color: var(--ink-2); line-height: 1.65; font-style: italic; }
+
+    /* ══════════ RESPONSIVE ══════════ */
+
+    /* ── 1280px: tighten padding ── */
+    @media (max-width: 1280px) {
+      :root { --section-px: 64px; }
+    }
+
+    /* ── 1024px: tablet ── */
+    @media (max-width: 1024px) {
+      :root { --section-px: 40px; }
+
+      /* Hero */
+      .hero { grid-template-columns: 1fr; gap: 40px; padding-bottom: 48px; }
+      .hero-visual { padding-left: 0; border-left: none; border-top: 1px solid var(--ink-5); padding-top: 40px; }
+      .hero-meta { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .hero-meta > div { border-right: none; padding-left: 0; padding-right: 0; }
+
+      /* Grids */
+      .context-grid, .ba-grid, .ch-grid { grid-template-columns: 1fr; }
+      .ia-compare { grid-template-columns: 1fr; gap: 24px; }
+      .ia-arrow-col { display: none; }
+      .audit-grid { grid-template-columns: 1fr 1fr; }
+      .fe-grid { grid-template-columns: 1fr 1fr; }
+      .resp-grid { grid-template-columns: 1fr 1fr; }
+      .users-grid { grid-template-columns: 1fr 1fr; }
+      .out-stats { grid-template-columns: 1fr 1fr; }
+
+      /* Page showcase */
+      .page-showcase, .page-showcase.reverse { grid-template-columns: 1fr; direction: ltr; }
+
+      /* Role pills */
+      .role-pill { flex: none; width: calc(50% - 6px); }
+
+      /* Overview strip */
+      .ov-strip { flex-wrap: wrap; gap: 0; }
+      .ov-item { flex: 0 0 calc(50% - 1px); padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .ov-div { display: none; }
+      .ov-quote { flex: 0 0 100%; border-left: none; border-top: 1px solid rgba(255,255,255,.08); padding: 20px 0 0; margin-top: 4px; }
+    }
+
+    /* ── 768px: mobile ── */
+    @media (max-width: 768px) {
+      :root { --section-px: 20px; }
+
+      /* Nav */
+      .bc-tags { display: none; }
+      .bc-nav { padding: 12px 20px; }
+
+      /* Sections */
+      .sec { padding: 60px var(--section-px); }
+      .sec-full { padding: 60px 0; }
+      .outcome { padding: 60px var(--section-px); }
+
+      /* Hero */
+      .hero { padding: 48px var(--section-px) 40px; gap: 32px; }
+      .hero-h1 { font-size: 2.2rem; }
+      .hero-sub { font-size: .95rem; }
+      .hero-meta { grid-template-columns: 1fr 1fr; gap: 16px; padding-top: 24px; }
+      .hero-meta > div { padding: 0; border-right: none; }
+      .meta-lbl { font-size: 10px; }
+      .meta-val { font-size: 13px; }
+
+      /* Overview strip */
+      .ov-strip { flex-direction: column; gap: 0; padding: 0; }
+      .ov-item { flex: none; width: 100%; padding: 20px var(--section-px); border-bottom: 1px solid rgba(255,255,255,.08); }
+      .ov-quote { flex: none; width: 100%; padding: 20px var(--section-px); border-left: none; border-top: 1px solid rgba(255,255,255,.08); font-size: .95rem; }
+      .ov-div { display: none; }
+
+      /* Section headings */
+      .sec-h2 { font-size: 1.9rem; }
+      .sec-lead { font-size: .95rem; margin-bottom: 36px; }
+
+      /* Grids → single column */
+      .audit-grid { grid-template-columns: 1fr; }
+      .fe-grid { grid-template-columns: 1fr; }
+      .resp-grid { grid-template-columns: 1fr; }
+      .users-grid { grid-template-columns: 1fr; }
+      .out-stats { grid-template-columns: 1fr 1fr; gap: 20px; }
+
+      /* Audit card #10 full-width override on mobile */
+      .audit-card--wide {
+        display: block !important;
+        grid-column: auto !important;
+      }
+      .audit-card--wide .audit-num {
+        font-size: 32px !important;
+        margin-bottom: 12px !important;
+      }
+
+      /* Context roles */
+      .context-roles { flex-direction: column; gap: 10px; }
+      .role-pill { width: 100%; flex: none; justify-content: flex-start; }
+
+      /* IA compare */
+      .ia-compare { grid-template-columns: 1fr; gap: 20px; }
+      .ia-arrow-col { display: none; }
+
+      /* Before/after grid */
+      .ba-grid { grid-template-columns: 1fr; }
+
+      /* Page showcase */
+      .page-showcase, .page-showcase.reverse { grid-template-columns: 1fr; direction: ltr; gap: 28px; }
+
+      /* Challenges */
+      .ch-grid { grid-template-columns: 1fr; }
+
+      /* Design system dark panel - stack vertically */
+      .ds-dark-panel { grid-template-columns: 1fr !important; padding: 28px 20px !important; gap: 32px !important; }
+      .ds-dark-divider { display: none !important; }
+      .ds-bottom-grid { grid-template-columns: 1fr !important; }
+
+      /* Outcome section */
+      .outcome { padding: 60px var(--section-px); }
+      .out-h2-wrap { max-width: 100%; }
+      .out-h2 { font-size: 2rem; }
+      .out-p { font-size: .95rem; margin-bottom: 36px; }
+      .out-stats { padding-top: 32px; gap: 20px; }
+
+      /* CJM - hide desktop table, show mobile cards */
+      .cjm-table-wrap { display: none !important; }
+      .cjm-mobile { display: flex !important; }
+
+      /* Persona strip mobile */
+      .cjm-persona { flex-direction: column; gap: 16px; }
+      .cjm-persona-stats { margin-left: 0 !important; justify-content: flex-start; gap: 16px; }
+
+      /* Emotion curve mobile */
+      .emotion-curve-box { padding: 24px 20px !important; }
+
+      /* Stats */
+      .stat-n { font-size: 2.2rem; }
+
+      /* Footer */
+      .yanas-footer { padding: 56px var(--section-px) 36px; }
+      .footer-bottom { flex-direction: column; gap: 12px; }
+      .footer-cta-row { flex-direction: column; }
+      .footer-btn-primary, .footer-btn-ghost { text-align: center; justify-content: center; }
+
+      /* Insight box */
+      .insight-box { flex-direction: column; gap: 12px; }
+      .insight-box i { margin-top: 0; }
+
+      /* Delivery note */
+      .delivery-note { flex-direction: column; gap: 12px; }
+      .delivery-note i { margin-top: 0; }
+    }
+
+    /* ── 480px: small phones ── */
+    @media (max-width: 480px) {
+      :root { --section-px: 16px; }
+
+      .hero-h1 { font-size: 1.9rem; }
+      .hero-meta { grid-template-columns: 1fr 1fr; gap: 16px; }
+
+      .out-stats { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .stat-n { font-size: 2rem; }
+
+      .fe-card, .resp-card, .user-card, .audit-card, .ctx-card, .ch-card { padding: 22px 18px; }
+
+      .bc-left { font-size: 12px; }
+
+      .ov-lbl { font-size: 9px; }
+      .ov-val { font-size: 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="cur"></div>
+  <div id="ctr"></div>
+
+  <!-- ══════ BREADCRUMB ══════ -->
+  <nav class="bc-nav">
+    <div class="bc-left">
+      <a href="../index.html"><i class="bi bi-arrow-left"></i> Portfolio</a>
+      <span class="bc-sep">›</span>
+      <span class="bc-cur">Global Speak Academy</span>
+    </div>
+    <div class="bc-tags">
+      <span class="bc-tag blue">UX/UI Design</span>
+      <span class="bc-tag blue">Frontend Dev</span>
+      <span class="bc-tag gold">EdTech · Web</span>
+    </div>
+  </nav>
+
+  <!-- ══════ HERO ══════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Case Study · 2025-2026</span>
+      <h1 class="hero-h1">Global Speak<br><em>Academy</em><br>Redesign</h1>
+      <p class="hero-sub">A full-cycle UX redesign and frontend implementation of an international online English school - from heuristic audit to a live, responsive codebase. Self-initiated while working as QA Manager.</p>
+      <div class="hero-meta">
+        <div>
+          <div class="meta-lbl">Role</div>
+          <div class="meta-val">UX/UI Designer · Frontend Dev</div>
+        </div>
+        <div>
+          <div class="meta-lbl">Platform</div>
+          <div class="meta-val">Web (Desktop & Mobile)</div>
+        </div>
+        <div>
+          <div class="meta-lbl">Stack</div>
+          <div class="meta-val">HTML · CSS · JavaScript</div>
+        </div>
+        <div>
+          <div class="meta-lbl">Status</div>
+          <div class="meta-val">Completed, not deployed</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-wrap">
+        <img src="./img/hero.png" alt="Global Speak Academy redesigned homepage" onerror="this.parentElement.style.background='#1A1A1A';this.style.display='none'">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ OVERVIEW STRIP ══════ -->
+  <div class="ov-strip">
+    <div class="ov-item">
+      <div class="ov-lbl">Client</div>
+      <div class="ov-val">Global Speak Academy</div>
+    </div>
+    <div class="ov-div"></div>
+    <div class="ov-item">
+      <div class="ov-lbl">Deliverables</div>
+      <div class="ov-val">UX Audit · IA · UI System · 6 Pages · Frontend Code</div>
+    </div>
+    <div class="ov-div"></div>
+    <div class="ov-item">
+      <div class="ov-lbl">Pages rebuilt</div>
+      <div class="ov-val">Home · Programs · Pricing · Trial · Resources · Careers</div>
+    </div>
+    <div class="ov-div"></div>
+    <p class="ov-quote">"A website that didn't match the school's ambition - until it did."</p>
+  </div>
+
+  <!-- ══════ 01. CONTEXT & BACKGROUND ══════ -->
+  <div class="sec">
+    <div class="sec-lbl rv">01 - Context</div>
+    <h2 class="sec-h2 rv">Project<br><em>Background</em></h2>
+    <p class="sec-lead rv">Global Speak Academy is an international online English school with a global student base. Despite having strong teaching quality and genuine student results, its website was actively harming growth - low trust signals, poor navigation, and no clear conversion path. I identified this as QA Manager and proposed a complete redesign.</p>
+
+    <div class="context-grid">
+      <div class="ctx-card rv">
+        <div class="ctx-card-top">
+          <div class="ctx-icon"><i class="bi bi-exclamation-triangle" style="color:var(--gold-dark)"></i></div>
+          <div>
+            <div class="ctx-card-lbl">The Problem</div>
+          </div>
+        </div>
+        <h3>A mismatch between service quality and digital presence</h3>
+        <p>The school had genuine results and loyal students, but its website communicated the opposite. The visual quality, navigation logic, and content structure did not align with user expectations for a modern international education platform - directly harming student acquisition.</p>
+      </div>
+      <div class="ctx-card rv" style="transition-delay:.1s">
+        <div class="ctx-card-top">
+          <div class="ctx-icon"><i class="bi bi-flag" style="color:var(--gold-dark)"></i></div>
+          <div>
+            <div class="ctx-card-lbl">The Initiative</div>
+          </div>
+        </div>
+        <h3>Self-initiated redesign, approved by the founder</h3>
+        <p>This was a self-initiated project - not assigned. I proposed the redesign, designed the full system in Figma, and then implemented it as a complete responsive codebase. The founder, Brandi Stephens, reviewed the redesigned structure and provided positive feedback on the navigation and visual clarity.</p>
+      </div>
+    </div>
+
+    <div class="context-roles rv">
+      <div class="role-pill"><i class="bi bi-search"></i> UX Researcher</div>
+      <div class="role-pill"><i class="bi bi-grid-1x2"></i> Information Architect</div>
+      <div class="role-pill"><i class="bi bi-palette"></i> UI Designer</div>
+      <div class="role-pill"><i class="bi bi-code-slash"></i> Frontend Developer</div>
+      <div class="role-pill"><i class="bi bi-shield-check"></i> QA Manager (official role)</div>
+    </div>
+  </div>
+
+  <!-- ══════ 02. ORIGINAL SITE REVIEW ══════ -->
+  <section class="sec-full">
+    <div class="sec-full-inner">
+      <div class="sec-lbl rv">02 - Original Site Analysis</div>
+      <h2 class="sec-h2 rv">What the Old<br><em>Website Had</em></h2>
+      <p class="sec-lead rv">Before touching Figma, I conducted a full heuristic evaluation of the existing site. The screenshots below show the original globalspeak academy website - a Wix-built site with heavy stock imagery, flat navigation, and no clear conversion hierarchy.</p>
+
+      <div class="ba-grid rv">
+        <div>
+          <div class="ba-col-head">
+            <span class="ba-badge before">Before - Original Site</span>
+          </div>
+          <div class="ba-img">
+            <img src="./img/old/01.png" alt="Original Global Speak Academy website" onerror="this.parentElement.style.background='#F3F0EB'">
+          </div>
+          <p class="ba-caption">Original homepage - stock imagery as hero, flat nav, no clear CTA hierarchy</p>
+          <div class="ba-problems" style="margin-top:20px">
+            <div class="ba-prob"><i class="bi bi-x-circle-fill"></i> Hero is decorative only - no value proposition above the fold</div>
+            <div class="ba-prob"><i class="bi bi-x-circle-fill"></i> Navigation lists all program types as equal top-level items</div>
+            <div class="ba-prob"><i class="bi bi-x-circle-fill"></i> Testimonials shown as plain text blocks - no visual trust signals</div>
+            <div class="ba-prob"><i class="bi bi-x-circle-fill"></i> "Who We Are" section uses circular stock photos - generic and cold</div>
+            <div class="ba-prob"><i class="bi bi-x-circle-fill"></i> No design system - every section is visually isolated</div>
+          </div>
+        </div>
+        <div>
+          <div class="ba-col-head">
+            <span class="ba-badge after">After - Redesign</span>
+          </div>
+          <div class="ba-img">
+            <img src="./img/hero1.png" alt="Redesigned Global Speak Academy homepage" onerror="this.parentElement.style.background='#F3F0EB'">
+          </div>
+          <p class="ba-caption">Redesigned homepage - editorial layout, clear hierarchy, $10 trial CTA as primary action</p>
+          <div class="ba-problems" style="margin-top:20px">
+            <div class="ba-prob ba-win"><i class="bi bi-check-circle-fill"></i> Clear headline + sub + primary CTA visible without scrolling</div>
+            <div class="ba-prob ba-win"><i class="bi bi-check-circle-fill"></i> Navigation grouped logically - Programs dropdown, More dropdown</div>
+            <div class="ba-prob ba-win"><i class="bi bi-check-circle-fill"></i> Testimonials with names, structured cards, visual separation</div>
+            <div class="ba-prob ba-win"><i class="bi bi-check-circle-fill"></i> Consistent design system - typography, spacing, color tokens</div>
+            <div class="ba-prob ba-win"><i class="bi bi-check-circle-fill"></i> Each page connected to the next through natural conversion flow</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-box rv">
+        <i class="bi bi-lightbulb-fill"></i>
+        <p>"The original site had the right content - programs, testimonials, pricing, about - but no structure to carry users through it. Every section felt like a separate page. The redesign's primary job was to create one coherent journey."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ 03. UX AUDIT ══════ -->
+  <div class="sec">
+    <div class="sec-lbl rv">03 - Heuristic Evaluation</div>
+    <h2 class="sec-h2 rv">10 Critical UX<br><em>Problems Found</em></h2>
+    <p class="sec-lead rv">I conducted a full heuristic evaluation against Nielsen's 10 principles, extended with conversion-focused analysis. These were the issues with measurable impact on business outcomes.</p>
+
+    <div class="audit-grid">
+      <div class="audit-card rv">
+        <div class="audit-num">01</div>
+        <h3>No Visual Hierarchy</h3>
+        <p>All elements had equal visual weight. Users couldn't identify what to read first or what action to take.</p>
+        <div class="audit-impact"><i class="bi bi-arrow-up-circle-fill"></i> High impact - cognitive overload</div>
+      </div>
+      <div class="audit-card rv" style="transition-delay:.06s">
+        <div class="audit-num">02</div>
+        <h3>Broken Navigation Logic</h3>
+        <p>All program types listed as top-level nav items. No grouping, no hierarchy, no logical progression for users.</p>
+        <div class="audit-impact"><i class="bi bi-arrow-up-circle-fill"></i> High impact - drop-off at nav</div>
+      </div>
+      <div class="audit-card rv" style="transition-delay:.12s">
+        <div class="audit-num">03</div>
+        <h3>Weak CTA Placement</h3>
+        <p>No consistent primary conversion action. "Book trial" was buried, competing with decorative elements.</p>
+        <div class="audit-impact"><i class="bi bi-arrow-up-circle-fill"></i> High impact - lost conversions</div>
+      </div>
+      <div class="audit-card rv" style="transition-delay:.06s">
+        <div class="audit-num">04</div>
+        <h3>Inconsistent Typography</h3>
+        <p>Multiple font sizes with no scale system. Dense text blocks, low contrast, reduced readability.</p>
+        <div class="audit-impact audit-impact.low"><i class="bi bi-arrow-up-circle-fill"></i> Medium impact - trust & read time</div>
+      </div>
+      <div class="audit-card rv" style="transition-delay:.12s">
+        <div class="audit-num">05</div>
+        <h3>No Design System</h3>
+        <p>Buttons, cards, and sections all styled independently. Zero visual consistency across pages.</p>
+        <div class="audit-impact"><i class="bi bi-arrow-up-circle-fill"></i> High impact - brand perception</div>
+      </div>
+      <div class="audit-card rv" style="transition-delay:.18s">
+        <div class="audit-num">06</div>
+        <h3>Fragmented Programs Structure</h3>
+        <p>Courses listed without comparison logic. Users couldn't determine which program fit their level or need.</p>
+        <div class="audit-impact"><i class="bi bi-arrow-up-circle-fill"></i> High impact - decision paralysis</div>
+      </div>
+      <div class="audit-card rv">
+        <div class="audit-num">07</div>
+        <h3>Content Overload</h3>
+        <p>Large uninterrupted text blocks with no visual breathing room. High cognitive load, low engagement.</p>
+        <div class="audit-impact audit-impact.low"><i class="bi bi-arrow-up-circle-fill"></i> Medium impact - bounce rate</div>
+      </div>
+      <div class="audit-card rv" style="transition-delay:.06s">
+        <div class="audit-num">08</div>
+        <h3>Weak Brand Identity</h3>
+        <p>Inconsistent color usage, no visual rhythm. The site didn't visually communicate premium education.</p>
+        <div class="audit-impact"><i class="bi bi-arrow-up-circle-fill"></i> High impact - first impressions</div>
+      </div>
+      <div class="audit-card rv" style="transition-delay:.12s">
+        <div class="audit-num">09</div>
+        <h3>No Analytics Infrastructure</h3>
+        <p>No Google Analytics, no tracking events, no conversion measurement. Zero visibility into user behavior.</p>
+        <div class="audit-impact audit-impact.low"><i class="bi bi-arrow-up-circle-fill"></i> Medium impact - growth blindness</div>
+      </div>
+      <div class="audit-card audit-card--wide rv" style="transition-delay:.18s; grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr; column-gap: 40px; align-items: center;">
+        <div class="audit-num" style="font-size: 48px; margin-bottom: 0;">10</div>
+        <div>
+          <h3>Poor Mobile Optimization</h3>
+          <p style="max-width: 720px;">Dense content, complex navigation, poor readability on small screens - critical for a global student base.</p>
+          <div class="audit-impact"><i class="bi bi-arrow-up-circle-fill"></i> High impact - mobile users</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ 04. TARGET USERS ══════ -->
+  <section class="sec-full">
+    <div class="sec-full-inner">
+      <div class="sec-lbl rv">04 - User Analysis</div>
+      <h2 class="sec-h2 rv">Who Was I<br><em>Designing For?</em></h2>
+      <p class="sec-lead rv">The school serves a genuinely diverse international audience. Understanding each user type shaped every structural and visual decision in the redesign.</p>
+
+      <div class="users-grid">
+        <div class="user-card rv">
+          <!-- <div class="user-avatar">🌍</div> -->
+          <h3>Adult English Learners</h3>
+          <p>Professionals and adults learning English online. Motivated but time-poor - they need clear information fast and zero friction to book a trial.</p>
+          <div class="user-goals">
+            <div class="user-goal">Understand what they'll get before committing</div>
+            <div class="user-goal">See pricing clearly and compare plans</div>
+            <div class="user-goal">Book a trial in under 2 minutes</div>
+          </div>
+        </div>
+        <div class="user-card rv" style="transition-delay:.08s">
+          <!-- <div class="user-avatar">👨‍👩‍👧</div> -->
+          <h3>Parents of Young Learners</h3>
+          <p>Parents researching English programs for their children (ages 4-12). High trust threshold - they need reassurance about teacher quality and structure.</p>
+          <div class="user-goals">
+            <div class="user-goal">Find age-appropriate program info quickly</div>
+            <div class="user-goal">Trust signals: teacher credentials, reviews</div>
+            <div class="user-goal">Understand how classes work for kids</div>
+          </div>
+        </div>
+        <div class="user-card rv" style="transition-delay:.16s">
+          <!-- <div class="user-avatar">✈️</div> -->
+          <h3>International Students</h3>
+          <p>Non-English speakers from various countries comparing platforms. Language clarity and visual structure matter more than long text - they skim heavily.</p>
+          <div class="user-goals">
+            <div class="user-goal">Quickly distinguish program types</div>
+            <div class="user-goal">See pricing without ambiguity</div>
+            <div class="user-goal">Low-risk entry point (trial lesson)</div>
+          </div>
+        </div>
+        <div class="user-card rv" style="transition-delay:.04s">
+          <!-- <div class="user-avatar">🔍</div> -->
+          <h3>First-Time Visitors</h3>
+          <p>Cold traffic landing from search or social. No prior knowledge of the school. Need to understand the offering within the first 5-8 seconds.</p>
+          <div class="user-goals">
+            <div class="user-goal">Instant value proposition above the fold</div>
+            <div class="user-goal">Social proof visible early</div>
+            <div class="user-goal">One clear next step</div>
+          </div>
+        </div>
+        <div class="user-card rv" style="transition-delay:.12s">
+          <!-- <div class="user-avatar">⚖️</div> -->
+          <h3>Platform Comparers</h3>
+          <p>Users evaluating multiple English learning services. Decision-driven - they need clear differentiation, structured pricing, and a reason to choose GSA.</p>
+          <div class="user-goals">
+            <div class="user-goal">Structured comparison between plan tiers</div>
+            <div class="user-goal">What makes GSA different from competitors</div>
+            <div class="user-goal">FAQ answers without having to contact</div>
+          </div>
+        </div>
+        <div class="user-card rv" style="transition-delay:.20s">
+          <!-- <div class="user-avatar">💼</div> -->
+          <h3>Corporate Decision-Makers</h3>
+          <p>HR or L&D managers exploring corporate English training. Need a professional presentation of business solutions with scalability information.</p>
+          <div class="user-goals">
+            <div class="user-goal">Find corporate training program details</div>
+            <div class="user-goal">Perceive GSA as credible B2B provider</div>
+            <div class="user-goal">Easy path to contact / custom quote</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ 05. INFORMATION ARCHITECTURE ══════ -->
+  <div class="sec">
+    <div class="sec-lbl rv">05 - Information Architecture</div>
+    <h2 class="sec-h2 rv">Rebuilding the<br><em>Navigation Structure</em></h2>
+    <p class="sec-lead rv">The original site had no navigational logic - program types were listed as individual top-level items. I rebuilt the entire IA around user decision stages, creating a predictable progression from awareness to conversion.</p>
+
+    <div class="ia-compare rv">
+      <div>
+        <div class="ia-col-lbl before">Before - Original Structure</div>
+        <div class="ia-node main">Global Speak Academy</div>
+        <div class="ia-node before-node">Home</div>
+        <div class="ia-node before-node">Pricing (dropdown)</div>
+        <div class="ia-node before-node sub">Plans</div>
+        <div class="ia-node before-node sub">Pay As You Go</div>
+        <div class="ia-node before-node">Trial Lesson</div>
+        <div class="ia-node before-node">Adult Lessons</div>
+        <div class="ia-node before-node">Kids Lessons</div>
+        <div class="ia-node before-node">Group Classes</div>
+        <div class="ia-node before-node">Self Guided Lessons</div>
+        <div class="ia-node before-node">Corporate Training</div>
+        <p style="font-size:12px;color:var(--red);margin-top:16px">⚠ All programs as equal top-level nav items - no hierarchy or grouping</p>
+      </div>
+
+      <div class="ia-arrow-col">
+        <div class="ia-arrow"><i class="bi bi-arrow-right"></i></div>
+      </div>
+
+      <div>
+        <div class="ia-col-lbl after">After - Redesigned Structure</div>
+        <div class="ia-node main">Global Speak Academy</div>
+        <div class="ia-node after-node">Programs (grouped dropdown)</div>
+        <div class="ia-node after-node sub">Adult Lessons</div>
+        <div class="ia-node after-node sub">Kids Lessons</div>
+        <div class="ia-node after-node sub">Group Classes</div>
+        <div class="ia-node after-node sub">Self-Guided Lessons</div>
+        <div class="ia-node after-node sub">Corporate Training</div>
+        <div class="ia-node after-node">Pricing</div>
+        <div class="ia-node after-node">$10 Trial</div>
+        <div class="ia-node after-node">More (dropdown) <span class="new-badge" style="font-size:9px;background:var(--green);color:#fff;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:700;letter-spacing:.06em">NEW</span></div>
+        <div class="ia-node after-node sub">Careers</div>
+        <div class="ia-node after-node sub">English Resources</div>
+        <div class="ia-node after-node sub">Contact</div>
+        <p style="font-size:12px;color:#1E6B46;margin-top:16px">✓ Logical grouping → clear journey: Programs → Pricing → Trial</p>
+      </div>
+    </div>
+
+    <div class="insight-box rv">
+      <i class="bi bi-lightbulb-fill"></i>
+      <p>"The redesigned navigation created a natural user journey: <strong>Discover programs → Compare pricing → Book a trial.</strong> This sequence mirrors how users actually make decisions about online education, and every page now hands off to the next step."</p>
+    </div>
+  </div>
+
+  <!-- ══════ 05.5. CUSTOMER JOURNEY MAP ══════ -->
+  <div class="sec" style="background:var(--bg-2);">
+    <div class="sec-lbl rv">05.5 - Customer Journey Map</div>
+    <h2 class="sec-h2 rv">How Users Move<br><em>Through the Site</em></h2>
+    <p class="sec-lead rv">Mapping the end-to-end journey of a first-time visitor - from initial awareness through post-trial conversion - revealed critical drop-off points in the original site and informed every structural decision in the redesign.</p>
+
+    <!-- Persona strip -->
+    <div class="rv cjm-persona" style="display:flex;align-items:center;gap:20px;background:var(--white);border-radius:var(--radius);padding:24px 28px;border:1px solid var(--bg-3);margin-bottom:40px;">
+      <div style="width:52px;height:52px;border-radius:14px;background:var(--gold-light);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🌍</div>
+      <div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:2px;">Primary Persona</div>
+        <div style="font-size:.95rem;font-weight:700;color:var(--ink-1);">Marcos, 31 - Working Professional, Brazil</div>
+        <div style="font-size:13px;color:var(--ink-3);margin-top:4px;">Wants to improve business English for career growth. Comparing 3–4 platforms before committing. Mobile-first, time-poor, high trust threshold.</div>
+      </div>
+      <div class="cjm-persona-stats" style="margin-left:auto;display:flex;gap:24px;flex-shrink:0;">
+        <div style="text-align:center;">
+          <div style="font-size:18px;font-weight:700;color:var(--ink-1);">Mobile</div>
+          <div style="font-size:11px;color:var(--ink-4);">Primary device</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:18px;font-weight:700;color:var(--ink-1);">B2</div>
+          <div style="font-size:11px;color:var(--ink-4);">English level</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:18px;font-weight:700;color:var(--ink-1);">Google</div>
+          <div style="font-size:11px;color:var(--ink-4);">Acquisition</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CJM Table - desktop -->
+    <div class="rv cjm-table-wrap" style="overflow-x:auto;margin-bottom:40px;">
+      <table style="width:100%;border-collapse:collapse;min-width:900px;">
+        <!-- Stage headers -->
+        <thead>
+          <tr>
+            <td style="width:120px;padding:0;"></td>
+            <th style="padding:0 0px 0 0;">
+              <div style="background:var(--ink-1);border-radius:10px 10px 0 0;padding:14px 20px;text-align:center;">
+                <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:2px;">Stage 1</div>
+                <div style="font-size:.85rem;font-weight:700;color:var(--white);">Awareness</div>
+              </div>
+            </th>
+            <th style="padding:0 6px;">
+              <div style="background:var(--ink-1);border-radius:10px 10px 0 0;padding:14px 20px;text-align:center;">
+                <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:2px;">Stage 2</div>
+                <div style="font-size:.85rem;font-weight:700;color:var(--white);">Consideration</div>
+              </div>
+            </th>
+            <th style="padding:0 6px;">
+              <div style="background:var(--ink-1);border-radius:10px 10px 0 0;padding:14px 20px;text-align:center;">
+                <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:2px;">Stage 3</div>
+                <div style="font-size:.85rem;font-weight:700;color:var(--white);">Evaluation</div>
+              </div>
+            </th>
+            <th style="padding:0 6px;">
+              <div style="background:var(--ink-1);border-radius:10px 10px 0 0;padding:14px 20px;text-align:center;">
+                <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:2px;">Stage 4</div>
+                <div style="font-size:.85rem;font-weight:700;color:var(--white);">Decision</div>
+              </div>
+            </th>
+            <th style="padding:0 0 0 6px;">
+              <div style="background:var(--ink-1);border-radius:10px 10px 0 0;padding:14px 20px;text-align:center;">
+                <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:2px;">Stage 5</div>
+                <div style="font-size:.85rem;font-weight:700;color:var(--white);">Post-Trial</div>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- User Actions -->
+          <tr>
+            <td style="padding:16px 16px 16px 0;vertical-align:top;">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);">Actions</div>
+            </td>
+            <td style="padding:6px 0 6px 0;vertical-align:top;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:0 0 8px 8px;padding:16px 18px;height:100%;">
+                <div style="font-size:13px;color:var(--ink-2);line-height:1.55;">Searches "online English school" · Sees Google result · Lands on homepage</div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:0 0 8px 8px;padding:16px 18px;height:100%;">
+                <div style="font-size:13px;color:var(--ink-2);line-height:1.55;">Scrolls homepage · Clicks into Programs · Reads program descriptions</div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:0 0 8px 8px;padding:16px 18px;height:100%;">
+                <div style="font-size:13px;color:var(--ink-2);line-height:1.55;">Opens Pricing page · Compares plans · Reads FAQ · Checks reviews</div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:0 0 8px 8px;padding:16px 18px;height:100%;">
+                <div style="font-size:13px;color:var(--ink-2);line-height:1.55;">Clicks $10 Trial · Reads what's included · Completes booking form</div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:0 0 8px 8px;padding:16px 18px;height:100%;">
+                <div style="font-size:13px;color:var(--ink-2);line-height:1.55;">Attends trial · Receives follow-up · Converts to paid plan</div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Touchpoints -->
+          <tr>
+            <td style="padding:16px 16px 16px 0;vertical-align:top;">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);">Touchpoints</div>
+            </td>
+            <td style="padding:6px 0 6px 0;vertical-align:top;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:6px;">
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Google SERP</span>
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Homepage hero</span>
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Nav bar</span>
+                </div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:6px;">
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Programs page</span>
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Program tabs</span>
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Testimonials</span>
+                </div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:6px;">
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Pricing page</span>
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">FAQ accordion</span>
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Trust badges</span>
+                </div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:6px;">
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Trial page</span>
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Booking form</span>
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Price clarity</span>
+                </div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:6px;">
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Email follow-up</span>
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Trial session</span>
+                  <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);display:inline-block;">Upsell offer</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Emotion row -->
+          <tr>
+            <td style="padding:16px 16px 16px 0;vertical-align:middle;">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);">Emotion</div>
+            </td>
+            <td style="padding:6px 0 6px 0;vertical-align:middle;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:8px;padding:16px 18px;text-align:center;">
+                <div style="font-size:24px;margin-bottom:6px;">😐</div>
+                <div style="font-size:12px;font-weight:600;color:var(--ink-2);">Neutral curiosity</div>
+                <div style="font-size:11px;color:var(--ink-4);margin-top:2px;">Just looking</div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:middle;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:8px;padding:16px 18px;text-align:center;">
+                <div style="font-size:24px;margin-bottom:6px;">🤔</div>
+                <div style="font-size:12px;font-weight:600;color:var(--ink-2);">Interested but unsure</div>
+                <div style="font-size:11px;color:var(--ink-4);margin-top:2px;">Building understanding</div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:middle;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:8px;padding:16px 18px;text-align:center;">
+                <div style="font-size:24px;margin-bottom:6px;">😟</div>
+                <div style="font-size:12px;font-weight:600;color:var(--ink-2);">Anxious about cost</div>
+                <div style="font-size:11px;color:var(--ink-4);margin-top:2px;">Comparing options</div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:middle;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:8px;padding:16px 18px;text-align:center;">
+                <div style="font-size:24px;margin-bottom:6px;">😌</div>
+                <div style="font-size:12px;font-weight:600;color:var(--ink-2);">Reassured, ready</div>
+                <div style="font-size:11px;color:var(--ink-4);margin-top:2px;">Low-risk commitment</div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:middle;">
+              <div style="background:var(--white);border:1px solid var(--bg-3);border-radius:8px;padding:16px 18px;text-align:center;">
+                <div style="font-size:24px;margin-bottom:6px;">😊</div>
+                <div style="font-size:12px;font-weight:600;color:var(--ink-2);">Satisfied, converting</div>
+                <div style="font-size:11px;color:var(--ink-4);margin-top:2px;">Ready for full plan</div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Pain Points - BEFORE redesign -->
+          <tr>
+            <td style="padding:16px 16px 16px 0;vertical-align:top;">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);">Pain Points<br><span style="color:var(--ink-4);font-weight:500;text-transform:none;letter-spacing:0;font-size:10px;">Before redesign</span></div>
+            </td>
+            <td style="padding:6px 0 6px 0;vertical-align:top;">
+              <div style="background:#FEF0F0;border:1px solid #FCCFCF;border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#C0392B;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✕</span>Stock photo hero - no value prop visible</div>
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#C0392B;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✕</span>No clear "what this site is" within 5 seconds</div>
+                </div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:#FEF0F0;border:1px solid #FCCFCF;border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#C0392B;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✕</span>All 5 programs as flat nav items - overwhelming</div>
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#C0392B;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✕</span>No comparison logic between program types</div>
+                </div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:#FEF0F0;border:1px solid #FCCFCF;border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#C0392B;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✕</span>15+ plans with no structure - decision paralysis</div>
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#C0392B;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✕</span>No FAQ - objections unresolved on page</div>
+                </div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:#FEF0F0;border:1px solid #FCCFCF;border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#C0392B;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✕</span>Trial page buried - no dedicated high-trust page</div>
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#C0392B;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✕</span>Price not prominent - anxiety unresolved</div>
+                </div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:#FEF0F0;border:1px solid #FCCFCF;border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#C0392B;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✕</span>No post-trial email flow or upsell path</div>
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#C0392B;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✕</span>No analytics to measure any of this</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Design solutions - AFTER -->
+          <tr>
+            <td style="padding:16px 16px 16px 0;vertical-align:top;">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);">Solutions<br><span style="color:var(--ink-4);font-weight:500;text-transform:none;letter-spacing:0;font-size:10px;">After redesign</span></div>
+            </td>
+            <td style="padding:6px 0 6px 0;vertical-align:top;">
+              <div style="background:#F0FEF6;border:1px solid #B8EDD1;border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#1E6B46;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✓</span>Editorial hero: headline + sub + primary CTA above fold</div>
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#1E6B46;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✓</span>Trust signals (4.9★, student count) visible instantly</div>
+                </div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:#F0FEF6;border:1px solid #B8EDD1;border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#1E6B46;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✓</span>Programs grouped in dropdown - one decision at a time</div>
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#1E6B46;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✓</span>Tab layout with "who it's for" per program</div>
+                </div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:#F0FEF6;border:1px solid #B8EDD1;border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#1E6B46;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✓</span>Tab switcher isolates plan categories - 2–5 cards at a time</div>
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#1E6B46;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✓</span>FAQ accordion resolves objections on-page</div>
+                </div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:#F0FEF6;border:1px solid #B8EDD1;border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#1E6B46;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✓</span>Dedicated trial page: $10 price hero + what's included grid</div>
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#1E6B46;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✓</span>Lesson schedule timeline removes pre-purchase anxiety</div>
+                </div>
+              </div>
+            </td>
+            <td style="padding:6px;vertical-align:top;">
+              <div style="background:#F0FEF6;border:1px solid #B8EDD1;border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#1E6B46;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✓</span>GA4 infrastructure recommended + conversion tracking spec</div>
+                  <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#1E6B46;line-height:1.4;"><span style="flex-shrink:0;margin-top:1px;">✓</span>Clear path from trial → paid plan in Pricing page</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CJM Mobile Cards - shown only on mobile via CSS -->
+    <div class="cjm-mobile" style="display:none;flex-direction:column;gap:16px;margin-bottom:40px;">
+
+      <!-- Stage 1 -->
+      <div style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--bg-3);">
+        <div style="background:var(--ink-1);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);">Stage 1</div>
+            <div style="font-size:.9rem;font-weight:700;color:var(--white);margin-top:2px;">Awareness</div>
+          </div>
+          <div style="font-size:24px;">😐</div>
+        </div>
+        <div style="background:var(--white);padding:18px 20px;display:flex;flex-direction:column;gap:14px;">
+          <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px;">Action</div><div style="font-size:13px;color:var(--ink-2);line-height:1.5;">Searches "online English school" · Lands on homepage</div></div>
+          <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px;">Touchpoints</div><div style="display:flex;gap:6px;flex-wrap:wrap;"><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Google SERP</span><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Homepage hero</span><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Nav bar</span></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div style="background:#FEF0F0;border-radius:8px;padding:12px;"><div style="font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Before</div><div style="font-size:12px;color:#C0392B;line-height:1.4;">✕ Stock photo hero, no value prop<br>✕ No clear identity in 5 sec</div></div>
+            <div style="background:#F0FEF6;border-radius:8px;padding:12px;"><div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">After</div><div style="font-size:12px;color:#1E6B46;line-height:1.4;">✓ Editorial hero + CTA above fold<br>✓ Trust signals visible instantly</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 2 -->
+      <div style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--bg-3);">
+        <div style="background:var(--ink-1);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);">Stage 2</div>
+            <div style="font-size:.9rem;font-weight:700;color:var(--white);margin-top:2px;">Consideration</div>
+          </div>
+          <div style="font-size:24px;">🤔</div>
+        </div>
+        <div style="background:var(--white);padding:18px 20px;display:flex;flex-direction:column;gap:14px;">
+          <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px;">Action</div><div style="font-size:13px;color:var(--ink-2);line-height:1.5;">Scrolls homepage · Clicks into Programs · Reads descriptions</div></div>
+          <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px;">Touchpoints</div><div style="display:flex;gap:6px;flex-wrap:wrap;"><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Programs page</span><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Program tabs</span><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Testimonials</span></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div style="background:#FEF0F0;border-radius:8px;padding:12px;"><div style="font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Before</div><div style="font-size:12px;color:#C0392B;line-height:1.4;">✕ 5 programs as flat nav items<br>✕ No comparison logic</div></div>
+            <div style="background:#F0FEF6;border-radius:8px;padding:12px;"><div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">After</div><div style="font-size:12px;color:#1E6B46;line-height:1.4;">✓ Programs grouped in dropdown<br>✓ Tab layout: "who it's for"</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 3 -->
+      <div style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--bg-3);">
+        <div style="background:var(--ink-1);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);">Stage 3</div>
+            <div style="font-size:.9rem;font-weight:700;color:var(--white);margin-top:2px;">Evaluation</div>
+          </div>
+          <div style="font-size:24px;">😟</div>
+        </div>
+        <div style="background:var(--white);padding:18px 20px;display:flex;flex-direction:column;gap:14px;">
+          <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px;">Action</div><div style="font-size:13px;color:var(--ink-2);line-height:1.5;">Opens Pricing · Compares plans · Reads FAQ · Checks reviews</div></div>
+          <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px;">Touchpoints</div><div style="display:flex;gap:6px;flex-wrap:wrap;"><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Pricing page</span><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">FAQ accordion</span><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Trust badges</span></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div style="background:#FEF0F0;border-radius:8px;padding:12px;"><div style="font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Before</div><div style="font-size:12px;color:#C0392B;line-height:1.4;">✕ 15+ plans, no structure<br>✕ No FAQ, objections unresolved</div></div>
+            <div style="background:#F0FEF6;border-radius:8px;padding:12px;"><div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">After</div><div style="font-size:12px;color:#1E6B46;line-height:1.4;">✓ Tab switcher, 2–5 cards at once<br>✓ FAQ resolves objections on-page</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 4 -->
+      <div style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--bg-3);">
+        <div style="background:var(--ink-1);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);">Stage 4</div>
+            <div style="font-size:.9rem;font-weight:700;color:var(--white);margin-top:2px;">Decision</div>
+          </div>
+          <div style="font-size:24px;">😌</div>
+        </div>
+        <div style="background:var(--white);padding:18px 20px;display:flex;flex-direction:column;gap:14px;">
+          <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px;">Action</div><div style="font-size:13px;color:var(--ink-2);line-height:1.5;">Clicks $10 Trial · Reads what's included · Completes booking form</div></div>
+          <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px;">Touchpoints</div><div style="display:flex;gap:6px;flex-wrap:wrap;"><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Trial page</span><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Booking form</span><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Price clarity</span></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div style="background:#FEF0F0;border-radius:8px;padding:12px;"><div style="font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Before</div><div style="font-size:12px;color:#C0392B;line-height:1.4;">✕ Trial page buried<br>✕ Price not prominent</div></div>
+            <div style="background:#F0FEF6;border-radius:8px;padding:12px;"><div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">After</div><div style="font-size:12px;color:#1E6B46;line-height:1.4;">✓ $10 price hero, dedicated page<br>✓ Lesson timeline removes anxiety</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 5 -->
+      <div style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--bg-3);">
+        <div style="background:var(--ink-1);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);">Stage 5</div>
+            <div style="font-size:.9rem;font-weight:700;color:var(--white);margin-top:2px;">Post-Trial</div>
+          </div>
+          <div style="font-size:24px;">😊</div>
+        </div>
+        <div style="background:var(--white);padding:18px 20px;display:flex;flex-direction:column;gap:14px;">
+          <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px;">Action</div><div style="font-size:13px;color:var(--ink-2);line-height:1.5;">Attends trial · Receives follow-up · Converts to paid plan</div></div>
+          <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px;">Touchpoints</div><div style="display:flex;gap:6px;flex-wrap:wrap;"><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Email follow-up</span><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Trial session</span><span style="font-size:12px;padding:3px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-3);">Upsell offer</span></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div style="background:#FEF0F0;border-radius:8px;padding:12px;"><div style="font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Before</div><div style="font-size:12px;color:#C0392B;line-height:1.4;">✕ No post-trial email flow<br>✕ No analytics infrastructure</div></div>
+            <div style="background:#F0FEF6;border-radius:8px;padding:12px;"><div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">After</div><div style="font-size:12px;color:#1E6B46;line-height:1.4;">✓ GA4 tracking spec delivered<br>✓ Clear path trial → paid plan</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Emotion curve -->
+    <div class="rv emotion-curve-box" style="background:var(--white);border-radius:var(--radius);border:1px solid var(--bg-3);padding:36px 40px;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;">Emotion Curve - Before vs After Redesign</div>
+      <div style="position:relative;height:120px;margin-bottom:16px;">
+        <!-- Grid lines -->
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none;">
+          <div style="height:1px;background:var(--bg-3);"></div>
+          <div style="height:1px;background:var(--bg-3);"></div>
+          <div style="height:1px;background:var(--bg-3);"></div>
+        </div>
+        <!-- BEFORE line (red, dashed) - SVG -->
+        <svg style="position:absolute;top:0;left:0;width:100%;height:100%;" viewBox="0 0 800 120" preserveAspectRatio="none">
+          <!-- BEFORE path: starts neutral, drops at consideration, craters at evaluation, slight recovery -->
+          <polyline points="0,60 200,70 400,100 600,95 800,80"
+            fill="none" stroke="#E05C5C" stroke-width="2.5" stroke-dasharray="8 5" opacity="0.7"/>
+          <!-- AFTER path: starts neutral, holds steady, slight dip evaluation, strong recovery -->
+          <polyline points="0,60 200,50 400,65 600,35 800,20"
+            fill="none" stroke="#3DB87A" stroke-width="2.5"/>
+          <!-- AFTER area fill -->
+          <polygon points="0,60 200,50 400,65 600,35 800,20 800,120 0,120"
+            fill="#3DB87A" fill-opacity="0.06"/>
+        </svg>
+        <!-- Stage markers -->
+        <div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;">
+          <div style="flex:1;border-right:1px dashed var(--bg-3);"></div>
+          <div style="flex:1;border-right:1px dashed var(--bg-3);"></div>
+          <div style="flex:1;border-right:1px dashed var(--bg-3);"></div>
+          <div style="flex:1;border-right:1px dashed var(--bg-3);"></div>
+          <div style="flex:1;"></div>
+        </div>
+      </div>
+      <!-- X axis labels -->
+      <div style="display:flex;margin-bottom:20px;">
+        <div style="flex:1;text-align:center;font-size:11px;color:var(--ink-4);">Awareness</div>
+        <div style="flex:1;text-align:center;font-size:11px;color:var(--ink-4);">Consideration</div>
+        <div style="flex:1;text-align:center;font-size:11px;color:var(--ink-4);">Evaluation</div>
+        <div style="flex:1;text-align:center;font-size:11px;color:var(--ink-4);">Decision</div>
+        <div style="flex:1;text-align:center;font-size:11px;color:var(--ink-4);">Post-Trial</div>
+      </div>
+      <!-- Legend -->
+      <div style="display:flex;gap:24px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <svg width="28" height="8"><line x1="0" y1="4" x2="28" y2="4" stroke="#E05C5C" stroke-width="2" stroke-dasharray="6 4"/></svg>
+          <span style="font-size:12px;color:var(--ink-3);">Original site</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <svg width="28" height="8"><line x1="0" y1="4" x2="28" y2="4" stroke="#3DB87A" stroke-width="2.5"/></svg>
+          <span style="font-size:12px;color:var(--ink-3);">Redesign</span>
+        </div>
+        <div style="margin-left:auto;font-size:11px;color:var(--ink-4);font-style:italic;">Higher = more positive user experience</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ 06. KEY PAGES ══════ -->
+  <section class="sec-full">
+    <div class="sec-full-inner">
+      <div class="sec-lbl rv">06 - Page-by-Page Redesign</div>
+      <h2 class="sec-h2 rv">Six Pages.<br><em>One Coherent System.</em></h2>
+      <p class="sec-lead rv">Each page was rebuilt from scratch with a clear role in the user journey. Here are the most strategically important ones.</p>
+
+      <div class="pages-grid">
+
+        <!-- Programs -->
+        <div class="page-showcase rv">
+          <div class="page-img">
+            <img src="./img/Our Programs.png" alt="Programs page redesign" onerror="this.parentElement.style.background='#EDEAE4'">
+          </div>
+          <div class="page-desc">
+            <div class="page-desc-lbl">Programs Page</div>
+            <h3>From a list to a structured comparison</h3>
+            <p>The original programs page displayed fragmented information. The redesign introduces a tab-based structure - one tab per program type - with consistent card layouts, skill breakdowns, and direct CTAs. Users can now compare options without cognitive overload.</p>
+            <div class="page-wins">
+              <div class="page-win"><i class="bi bi-check-circle-fill"></i> Tab navigation for 5 program types - sticky on scroll</div>
+              <div class="page-win"><i class="bi bi-check-circle-fill"></i> Consistent overview + skills + "who it's for" pattern per tab</div>
+              <div class="page-win"><i class="bi bi-check-circle-fill"></i> CTA strip at bottom of each section linking to trial or pricing</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing -->
+        <div class="page-showcase reverse rv">
+          <div class="page-img">
+            <img src="./img/Pricing.png" alt="Pricing page redesign" onerror="this.parentElement.style.background='#EDEAE4'">
+          </div>
+          <div class="page-desc">
+            <div class="page-desc-lbl">Subscription Plans (Most Complex Page)</div>
+            <h3>Clear pricing that drives decisions</h3>
+            <p>The pricing page required the most structural work. It now uses a tab-based plan switcher (Adult Monthly, Kids, Group, Pay-As-You-Go, etc.), featured card highlighting for the recommended plan, structured feature comparison lists, and a persistent "Not sure?" trial banner - all in a responsive grid.</p>
+            <div class="page-wins">
+              <div class="page-win"><i class="bi bi-check-circle-fill"></i> Tab system for 6 plan categories - no page reload</div>
+              <div class="page-win"><i class="bi bi-check-circle-fill"></i> "Most Popular" badge on featured plan, gold border highlight</div>
+              <div class="page-win"><i class="bi bi-check-circle-fill"></i> FAQ accordion below plans - removes purchase objections on-page</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trial -->
+        <div class="page-showcase rv">
+          <div class="page-img">
+            <img src="./img/Trial.png" alt="Trial lesson page redesign" onerror="this.parentElement.style.background='#EDEAE4'">
+          </div>
+          <div class="page-desc">
+            <div class="page-desc-lbl">$10 Trial Lesson</div>
+            <h3>The highest-converting page in the flow</h3>
+            <p>The trial page is the primary conversion point. The redesign uses a split hero with the $10 price prominent left and an image right, a 6-card "What's included" grid, and a timeline schedule of the 90-minute lesson - so users know exactly what they're getting before they pay.</p>
+            <div class="page-wins">
+              <div class="page-win"><i class="bi bi-check-circle-fill"></i> Price shown in hero without scrolling - immediate value clarity</div>
+              <div class="page-win"><i class="bi bi-check-circle-fill"></i> "4.9/5.0 rated" trust badge visible in hero</div>
+              <div class="page-win"><i class="bi bi-check-circle-fill"></i> Lesson schedule with timeline - reduces pre-purchase anxiety</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="page-showcase reverse rv">
+          <div class="page-img">
+            <img src="./img/English-Resources.png" alt="English Resources page redesign" onerror="this.parentElement.style.background='#EDEAE4'">
+          </div>
+          <div class="page-desc">
+            <div class="page-desc-lbl">English Resources (New Page)</div>
+            <h3>Free value that builds trust and SEO</h3>
+            <p>A completely new page with no equivalent in the original site. Weekly vocabulary, idioms, and phrasal verbs - always free, no login. The editorial layout uses sticky sidebar labels, numbered vocabulary lists, and quote-style feature blocks. Serves dual purpose: user value and organic search traffic.</p>
+            <div class="page-wins">
+              <div class="page-win"><i class="bi bi-check-circle-fill"></i> Editorial sticky label layout - clear content hierarchy</div>
+              <div class="page-win"><i class="bi bi-check-circle-fill"></i> Numbered vocabulary list with hover interactions</div>
+              <div class="page-win"><i class="bi bi-check-circle-fill"></i> CTA at bottom converts interested readers to trial bookings</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ 07. DESIGN SYSTEM ══════ -->
+  <div class="sec">
+    <div class="sec-lbl rv">07 - Design System</div>
+    <h2 class="sec-h2 rv">Building a<br><em>Scalable UI System</em></h2>
+    <p class="sec-lead rv">One of the root causes of the original site's inconsistency was the absence of any design system. I built a complete UI kit in Figma before writing a single line of code - then translated it into CSS custom properties for scalable implementation.</p>
+
+    <!-- COLOR + TYPOGRAPHY in one full-width dark panel -->
+    <div class="rv ds-dark-panel" style="background: var(--ink-1); border-radius: var(--radius); padding: 48px; margin-bottom: 24px; display: grid; grid-template-columns: 1fr 1px 1fr; gap: 48px; align-items: start;">
+      <!-- Color system -->
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(196,170,108,.15);display:flex;align-items:center;justify-content:center;"><i class="bi bi-palette2" style="color:var(--gold);font-size:16px;"></i></div>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);">Color System</span>
+        </div>
+        <!-- Large palette strip -->
+        <div style="display:flex;border-radius:12px;overflow:hidden;height:64px;margin-bottom:24px;">
+          <div style="flex:1;background:#C4AA6C;"></div>
+          <div style="flex:1;background:#E8DFC8;"></div>
+          <div style="flex:1;background:#9A8247;"></div>
+          <div style="flex:1;background:#1A1A1A;"></div>
+          <div style="flex:1;background:#3D3730;"></div>
+          <div style="flex:1;background:#6B6258;"></div>
+          <div style="flex:1;background:#FAFAF8;"></div>
+          <div style="flex:1;background:#E05C5C;"></div>
+          <div style="flex:1;background:#3DB87A;"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:8px;">
+            <div style="display:flex;align-items:center;gap:10px;"><div style="width:20px;height:20px;border-radius:4px;background:#C4AA6C;"></div><span style="font-size:12px;color:rgba(255,255,255,.7);">--gold</span></div>
+            <span style="font-size:11px;font-family:monospace;color:var(--gold);">#C4AA6C</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:8px;">
+            <div style="display:flex;align-items:center;gap:10px;"><div style="width:20px;height:20px;border-radius:4px;background:#1A1A1A;border:1px solid rgba(255,255,255,.1)"></div><span style="font-size:12px;color:rgba(255,255,255,.7);">--ink-1</span></div>
+            <span style="font-size:11px;font-family:monospace;color:var(--gold);">#1A1A1A</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:8px;">
+            <div style="display:flex;align-items:center;gap:10px;"><div style="width:20px;height:20px;border-radius:4px;background:#FAFAF8;"></div><span style="font-size:12px;color:rgba(255,255,255,.7);">--bg</span></div>
+            <span style="font-size:11px;font-family:monospace;color:var(--gold);">#FAFAF8</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:8px;">
+            <div style="display:flex;align-items:center;gap:10px;"><div style="width:20px;height:20px;border-radius:4px;background:#E05C5C;"></div><span style="font-size:12px;color:rgba(255,255,255,.7);">--red</span></div>
+            <span style="font-size:11px;font-family:monospace;color:var(--gold);">#E05C5C</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:8px;">
+            <div style="display:flex;align-items:center;gap:10px;"><div style="width:20px;height:20px;border-radius:4px;background:#3DB87A;"></div><span style="font-size:12px;color:rgba(255,255,255,.7);">--green</span></div>
+            <span style="font-size:11px;font-family:monospace;color:var(--gold);">#3DB87A</span>
+          </div>
+        </div>
+      </div>
+      <!-- Divider -->
+      <div class="ds-dark-divider" style="background:rgba(255,255,255,.08);height:100%;"></div>
+      <!-- Typography -->
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(196,170,108,.15);display:flex;align-items:center;justify-content:center;"><i class="bi bi-type" style="color:var(--gold);font-size:16px;"></i></div>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);">Typography Scale</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div style="padding:16px 0;border-bottom:1px solid rgba(255,255,255,.07);">
+            <div style="font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Display · Playfair Display Italic</div>
+            <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.6rem,3vw,2.2rem);color:var(--gold);line-height:1;">Global Speak</div>
+          </div>
+          <div style="padding:16px 0;border-bottom:1px solid rgba(255,255,255,.07);">
+            <div style="font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">H1 · Inter 700 · clamp(2.5–4rem)</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(1.4rem,2.5vw,1.9rem);color:white;line-height:1.1;letter-spacing:-.03em;">Learn English Online</div>
+          </div>
+          <div style="padding:16px 0;border-bottom:1px solid rgba(255,255,255,.07);">
+            <div style="font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">H2 · Inter 700 · clamp(2–3.2rem)</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(1.1rem,2vw,1.45rem);color:white;line-height:1.1;letter-spacing:-.02em;">Our Programs</div>
+          </div>
+          <div style="padding:16px 0;border-bottom:1px solid rgba(255,255,255,.07);">
+            <div style="font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Body · Inter 400 · 1.05rem</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:400;font-size:0.95rem;color:rgba(255,255,255,.5);line-height:1.65;">Flexible scheduling for adult learners worldwide</div>
+          </div>
+          <div style="padding:16px 0;">
+            <div style="font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Label · Inter 700 · 10–11px · 0.16em</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);">UX Audit · Case Study</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Components + Layout in 2-col -->
+    <div class="ds-bottom-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <!-- Component Library -->
+      <div class="rv" style="background:var(--bg);border-radius:var(--radius);padding:36px 32px;border:1px solid var(--bg-3);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+          <div class="ds-card-icon"><i class="bi bi-ui-checks-grid"></i></div>
+          <h3 style="font-size:1rem;font-weight:700;color:var(--ink-1);">Component Library</h3>
+        </div>
+        <p style="font-size:13px;color:var(--ink-3);line-height:1.6;margin-bottom:20px;">All components built in Figma with Auto Layout and variants - then translated directly into reusable CSS classes.</p>
+        <!-- Button previews -->
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
+          <div style="padding:10px 20px;background:var(--gold);border-radius:8px;font-size:12px;font-weight:600;color:white;">Book a Trial</div>
+          <div style="padding:10px 20px;border:1.5px solid var(--ink-5);border-radius:8px;font-size:12px;font-weight:600;color:var(--ink-2);">View Plans</div>
+          <div style="padding:10px 20px;border:1.5px solid var(--bg-3);border-radius:8px;font-size:12px;font-weight:600;color:var(--ink-3);">Learn More</div>
+        </div>
+        <div class="ds-list">
+          <div class="ds-li">Plan cards - Default & Featured states</div>
+          <div class="ds-li">Tab navigation (Programs & Pricing)</div>
+          <div class="ds-li">FAQ accordion component</div>
+          <div class="ds-li">Dark CTA banner - reused across 4 pages</div>
+          <div class="ds-li">Section labels - uppercase gold, 0.16em tracking</div>
+          <div class="ds-li">Position cards (Careers page)</div>
+        </div>
+      </div>
+
+      <!-- Layout Principles -->
+      <div class="rv" style="background:var(--bg);border-radius:var(--radius);padding:36px 32px;border:1px solid var(--bg-3);transition-delay:.1s">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+          <div class="ds-card-icon"><i class="bi bi-grid-3x3-gap"></i></div>
+          <h3 style="font-size:1rem;font-weight:700;color:var(--ink-1);">Layout Principles</h3>
+        </div>
+        <p style="font-size:13px;color:var(--ink-3);line-height:1.6;margin-bottom:20px;">Consistent spacing system, generous whitespace, and section-level padding defined as CSS variables for easy scale.</p>
+        <!-- Spacing visualizer -->
+        <div style="display:flex;align-items:flex-end;gap:6px;margin-bottom:20px;padding:16px;background:var(--bg-2);border-radius:10px;border:1px solid var(--bg-3);">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:16px;background:var(--gold-light);border-radius:3px;height:8px;"></div><span style="font-size:9px;color:var(--ink-4);">8</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:16px;background:var(--gold-light);border-radius:3px;height:16px;"></div><span style="font-size:9px;color:var(--ink-4);">16</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:16px;background:var(--gold);border-radius:3px;height:24px;"></div><span style="font-size:9px;color:var(--ink-4);">24</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:16px;background:var(--gold);border-radius:3px;height:32px;"></div><span style="font-size:9px;color:var(--ink-4);">32</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:16px;background:var(--gold-dark);border-radius:3px;height:48px;"></div><span style="font-size:9px;color:var(--ink-4);">48</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:16px;background:var(--gold-dark);border-radius:3px;height:64px;"></div><span style="font-size:9px;color:var(--ink-4);">64</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:16px;background:var(--ink-2);border-radius:3px;height:96px;"></div><span style="font-size:9px;color:var(--ink-4);">96</span></div>
+          <div style="margin-left:8px;font-size:11px;color:var(--ink-4);line-height:1.4;">8px base<br>unit scale</div>
+        </div>
+        <div class="ds-list">
+          <div class="ds-li">120px horizontal padding - desktop default</div>
+          <div class="ds-li">Sticky sidebar labels on editorial pages</div>
+          <div class="ds-li">Border-based column dividers (no box shadows)</div>
+          <div class="ds-li">16px border-radius on all card components</div>
+          <div class="ds-li">Section transitions: white ↔ off-white alternating</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ 08. FRONTEND IMPLEMENTATION ══════ -->
+  <section class="sec-full">
+    <div class="sec-full-inner">
+      <div class="sec-lbl rv">08 - Frontend Development</div>
+      <h2 class="sec-h2 rv">From Figma to<br><em>Production Code</em></h2>
+      <p class="sec-lead rv">After completing the design system, I implemented the entire website in HTML, CSS, and vanilla JavaScript - no frameworks, no build tools. The result is a fast, maintainable codebase that a developer could take over immediately.</p>
+
+      <div class="fe-grid rv">
+        <div class="fe-card">
+          <div class="fe-card-icon"><i class="bi bi-braces"></i></div>
+          <h3>CSS Custom Properties</h3>
+          <p>All design tokens (colors, font sizes, spacing, line-heights) defined as CSS variables in main.css. One source of truth across all 6 pages.</p>
+        </div>
+        <div class="fe-card">
+          <div class="fe-card-icon"><i class="bi bi-grid"></i></div>
+          <h3>Modular Grid Systems</h3>
+          <p>CSS Grid used throughout - responsive auto-fill grids for pricing cards, programs grid, and editorial layouts without JavaScript layout logic.</p>
+        </div>
+        <div class="fe-card">
+          <div class="fe-card-icon"><i class="bi bi-toggles"></i></div>
+          <h3>Tab Switching Interface</h3>
+          <p>Tab-based navigation on Programs and Pricing pages - vanilla JS, URL param support (?tab=adult) for deep linking and shareable URLs.</p>
+        </div>
+        <div class="fe-card">
+          <div class="fe-card-icon"><i class="bi bi-phone"></i></div>
+          <h3>Mobile-First Responsive</h3>
+          <p>8 breakpoints from 320px to 1920px. Each layout reconfigures cleanly: stacked mobile → 2-col tablet → full desktop editorial.</p>
+        </div>
+        <div class="fe-card">
+          <div class="fe-card-icon"><i class="bi bi-eye"></i></div>
+          <h3>Scroll Animations</h3>
+          <p>IntersectionObserver-based reveal animations on cards and list items - staggered delays for natural feel. Zero external dependencies.</p>
+        </div>
+        <div class="fe-card">
+          <div class="fe-card-icon"><i class="bi bi-layout-text-sidebar"></i></div>
+          <h3>Mobile Navigation</h3>
+          <p>Full custom mobile menu with burger toggle, nested dropdown support, keyboard accessibility, and body scroll lock when open.</p>
+        </div>
+      </div>
+
+      <div class="code-snippet rv">
+        <span class="cs-comment">/* main.css - CSS custom properties foundation */</span><br>
+        <span class="cs-tag">:root</span> {<br>
+        <div class="cs-indent">
+          <span class="cs-comment">/* Color system */</span><br>
+          <span class="cs-prop">--dark-gold</span>: <span class="cs-val">#C4AA6C</span>;<br>
+          <span class="cs-prop">--text-dark</span>: <span class="cs-val">#1A1A1A</span>;<br>
+          <span class="cs-prop">--text-light</span>: <span class="cs-val">#6B6258</span>;<br>
+          <span class="cs-prop">--bg-soft</span>: <span class="cs-val">#FAFAF8</span>;<br>
+          <br>
+          <span class="cs-comment">/* Typography scale */</span><br>
+          <span class="cs-prop">--text-h1</span>: <span class="cs-val">clamp(2.25rem, 5vw, 3.5rem)</span>;<br>
+          <span class="cs-prop">--text-h2</span>: <span class="cs-val">clamp(1.75rem, 3vw, 2.5rem)</span>;<br>
+          <span class="cs-prop">--text-body</span>: <span class="cs-val">0.9375rem</span>;<br>
+          <br>
+          <span class="cs-comment">/* Spacing & layout */</span><br>
+          <span class="cs-prop">--lh-tight</span>: <span class="cs-val">1.1</span>;<br>
+          <span class="cs-prop">--lh-body</span>: <span class="cs-val">1.65</span>;<br>
+          <span class="cs-prop">--faq-lines</span>: <span class="cs-val">#EEEEEE</span>;<br>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ 09. RESPONSIVE STRATEGY ══════ -->
+  <div class="sec">
+    <div class="sec-lbl rv">09 - Responsive Strategy</div>
+    <h2 class="sec-h2 rv">Built for Every<br><em>Device</em></h2>
+    <p class="sec-lead rv">Each page ships with 8 responsive breakpoints, from 320px to 1920px+. The layouts don't just "shrink" - they reconfigure. Key patterns like two-column grids, editorial sidebars, and tab navigation all have purpose-built mobile variants.</p>
+
+    <div class="resp-grid">
+      <div class="resp-card rv">
+        <i class="bi bi-display resp-device"></i>
+        <h3>Desktop</h3>
+        <span class="resp-bp">1280px - 1920px+</span>
+        <p>Full editorial layouts with sticky sidebar labels, 120px horizontal padding, multi-column grids up to 4 columns.</p>
+      </div>
+      <div class="resp-card rv" style="transition-delay:.1s">
+        <i class="bi bi-tablet-landscape resp-device"></i>
+        <h3>Tablet</h3>
+        <span class="resp-bp">768px - 1024px</span>
+        <p>Grids collapse to 2 columns. Sticky sidebars become static. Navigation dropdown becomes scrollable. Two-column heroes stack to single column.</p>
+      </div>
+      <div class="resp-card rv" style="transition-delay:.2s">
+        <i class="bi bi-phone resp-device"></i>
+        <h3>Mobile</h3>
+        <span class="resp-bp">320px - 768px</span>
+        <p>Full single-column layout. Custom mobile menu with nested dropdowns. Pricing tabs scroll horizontally. CTAs expand to full width.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ 10. CHALLENGES & SOLUTIONS ══════ -->
+  <section class="sec-full">
+    <div class="sec-full-inner">
+      <div class="sec-lbl rv">10 - Design Challenges</div>
+      <h2 class="sec-h2 rv">Hard Problems<br><em>& How I Solved Them</em></h2>
+      <p class="sec-lead rv">This project had two layers of complexity - design decisions and organisational constraints. Both required deliberate solutions.</p>
+
+      <div class="ch-grid">
+        <div class="ch-card challenge rv">
+          <div class="ch-card-lbl">Challenge</div>
+          <h3>Pricing page: 6 plan categories, 15+ plans, mobile-first</h3>
+          <p>The school has significantly more plan types than a typical subscription product - Adult Monthly (5 tiers), Kids programs, Group Classes, Pay-As-You-Go, Class Packages, and Self-Guided. Showing all on one page without overwhelming users was the hardest design problem in the project.</p>
+        </div>
+        <div class="ch-card solution rv" style="transition-delay:.1s">
+          <div class="ch-card-lbl">Solution</div>
+          <h3>Tab switcher with category isolation + featured plan logic</h3>
+          <p>I designed a tab-based switcher that shows only one category at a time - reducing visible complexity to 2-5 cards per view. Within each category, a "Most Popular" featured card provides a strong default choice. The tab state persists via URL params (?tab=adult) so users can share or return to specific views.</p>
+        </div>
+        <div class="ch-card challenge rv">
+          <div class="ch-card-lbl">Challenge</div>
+          <h3>Working without a brief, stakeholder access, or user testing</h3>
+          <p>This was a self-initiated project - I had no formal brief, no UX research budget, no scheduled stakeholder sessions, and no ability to conduct user testing. All decisions had to be grounded in the heuristic audit, standard conversion design patterns, and direct observation of the existing site's structural failures.</p>
+        </div>
+        <div class="ch-card solution rv" style="transition-delay:.1s">
+          <div class="ch-card-lbl">Solution</div>
+          <h3>Evidence-based design anchored in audit findings</h3>
+          <p>Every design decision maps back to a specific problem from the UX audit. Where I couldn't test with users, I applied established conversion design principles - clear CTA hierarchy, trust signals above the fold, friction reduction at key decision points, and progressive disclosure on complex pages like Pricing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ OUTCOME ══════ -->
+  <section class="outcome">
+    <div class="outcome-inner">
+      <div class="out-h2-wrap">
+        <p class="out-lbl rv">Outcome</p>
+        <h2 class="out-h2 rv">A complete, deployable<br><em>website redesign.</em></h2>
+        <p class="out-p rv">Six pages, one design system, a full responsive codebase - delivered as a self-initiated project while working as QA Manager. The redesign demonstrates full-cycle capability: from identifying the business problem, through UX audit and IA restructuring, to production-ready HTML/CSS/JS implementation.</p>
+      </div>
+
+      <div class="out-stats rv">
+        <div>
+          <div class="stat-n">6</div>
+          <div class="stat-lbl">Pages fully redesigned & built</div>
+        </div>
+        <div>
+          <div class="stat-n">10</div>
+          <div class="stat-lbl">Critical UX problems identified & resolved</div>
+        </div>
+        <div>
+          <div class="stat-n">8<span>×</span></div>
+          <div class="stat-lbl">Responsive breakpoints (320px→1920px)</div>
+        </div>
+        <div>
+          <div class="stat-n">1</div>
+          <div class="stat-lbl">Designer + developer - solo delivery</div>
+        </div>
+      </div>
+
+      <div class="delivery-note rv">
+        <i class="bi bi-info-circle"></i>
+        <p><strong>Project status note:</strong> The redesigned website was completed and approved visually by the founder, Brandi Stephens. Deployment was not finalised due to unresolved contractual and payment issues. The project is presented here as an independent portfolio piece demonstrating full-cycle UX and frontend capability.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ FOOTER ══════ -->
+  <footer class="yanas-footer">
+    <div class="yanas-footer-inner">
+      <h3>Let's <em>work</em><br>together.</h3>
+      <p>I design and build - from UX audit through to production code. Looking for the right opportunity.</p>
+      <div class="footer-cta-row">
+        <a href="mailto:yana.harcourt@gmail.com" class="footer-btn-primary"><i class="bi bi-envelope"></i> yana.harcourt@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Yana Harcourt - All Rights Reserved</span>
+      <div class="footer-links">
+        <a href="https://www.behance.net/yana_harcourt" target="_blank">Behance</a>
+        <a href="https://github.com/yanaharcourt" target="_blank">GitHub</a>
+        <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+    /* ── Cursor ── */
+    const cur = document.getElementById('cur'), ctr = document.getElementById('ctr');
+    let mx = innerWidth / 2, my = innerHeight / 2, tx = mx, ty = my;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function t() {
+      cur.style.left = (mx - 4) + 'px'; cur.style.top = (my - 4) + 'px';
+      tx += (mx - tx) * .13; ty += (my - ty) * .13;
+      ctr.style.left = (tx - 15) + 'px'; ctr.style.top = (ty - 15) + 'px';
+      requestAnimationFrame(t);
+    })();
+    document.addEventListener('mousedown', () => cur.style.transform = 'scale(2.5)');
+    document.addEventListener('mouseup', () => cur.style.transform = '');
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => { ctr.style.transform = 'scale(1.6)'; ctr.style.opacity = '.9'; ctr.style.borderColor = 'var(--gold)'; });
+      el.addEventListener('mouseleave', () => { ctr.style.transform = ''; ctr.style.opacity = '.5'; ctr.style.borderColor = 'var(--gold)'; });
+    });
+
+    /* ── Scroll reveal ── */
+    const io = new IntersectionObserver(e => e.forEach(x => {
+      if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); }
+    }), { threshold: .06 });
+    document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+    /* ── Scroll top ── */
+    const st = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => scrollY > 300 ? st.classList.add('active') : st.classList.remove('active'));
+    st.addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); });
+  </script>
+
+</body>
+</html>
