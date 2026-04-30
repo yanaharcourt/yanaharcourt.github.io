@@ -91,7 +91,7 @@
       transition-delay: .3s;
     }
 
-    /* ── Custom cursor ── */
+    /* ── Custom cursor (desktop only) ── */
     #cur {
       position: fixed;
       width: 8px;
@@ -116,11 +116,12 @@
       opacity: .5;
     }
 
-    @media (hover: none) {
+    @media (hover: none),
+    (pointer: coarse) {
 
       #cur,
       #ctr {
-        display: none;
+        display: none !important;
       }
     }
 
@@ -161,6 +162,11 @@
       line-height: 1.02;
       color: var(--dk);
       letter-spacing: -.01em;
+    }
+
+    .hero-title__accent {
+      font-style: italic;
+      color: var(--tc);
     }
 
     h2.sec-h2 {
@@ -219,9 +225,9 @@
       color: var(--text-3);
     }
 
-    /* ── Layout ── */
+    /* ── Layout — Caixa pattern: sec wraps content with max-width ── */
     .sec {
-      padding: 96px 60px;
+      padding: 100px 64px;
     }
 
     .sec--cream {
@@ -240,81 +246,95 @@
       background: var(--tc);
     }
 
-    .container {
-      max-width: 1120px;
+    .sec>.container {
+      max-width: 1360px;
       margin: 0 auto;
     }
 
-    /* ── NAV ── */
-    .nav {
+    /* ── BREADCRUMB (Caixa-style, standalone fixed) ── */
+    .bc-nav {
       position: fixed;
-      inset: 0 0 auto;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 60px;
-      background: rgba(253, 248, 242, .95);
+      padding: 14px 60px;
+      background: rgba(253, 248, 242, .97);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-lt);
     }
 
-    .nav__logo {
-      font-family: var(--serif);
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--dk);
-      letter-spacing: .02em;
-    }
-
-    .nav__links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav__links a {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--text-2);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      transition: color .2s;
-    }
-
-    .nav__links a:hover {
-      color: var(--tc);
-    }
-
-    /* ── BREADCRUMB ── */
-    .bc {
-      padding: 88px 60px 0;
+    .bc-left {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
-    .bc a {
-      font-size: 11px;
+    .bc-left a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
       font-weight: 500;
-      color: var(--text-3);
-      letter-spacing: .04em;
+      color: var(--text-2);
       transition: color .2s;
     }
 
-    .bc a:hover {
+    .bc-left a:hover {
       color: var(--tc);
     }
 
-    .bc span {
-      font-size: 10px;
+    .bc-sep {
+      font-size: 12px;
       color: var(--border);
     }
 
-    .bc .cur {
-      color: var(--tc);
+    .bc-cur {
+      font-size: 12px;
       font-weight: 600;
-      pointer-events: none;
+      color: var(--tc);
+    }
+
+    .bc-tags {
+      display: flex;
+      gap: 6px;
+    }
+
+    .bc-tag {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .bc-tag--tc {
+      background: var(--tc-pale);
+      color: var(--tc);
+    }
+
+    .bc-tag--sand {
+      background: var(--sand);
+      color: var(--brown);
+    }
+
+    .bc-tag--green {
+      background: var(--green-lt);
+      color: var(--green);
+    }
+
+    @media (max-width: 900px) {
+      .bc-nav {
+        padding: 12px 20px;
+      }
+
+      .bc-tags {
+        display: none;
+      }
     }
 
     /* ── HERO ── */
@@ -385,6 +405,7 @@
       position: relative;
       background: var(--sand);
       overflow: hidden;
+      margin-top: 50px;
     }
 
     .hero__cover {
@@ -393,6 +414,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: top;
     }
 
     .hero__placeholder {
@@ -493,7 +515,12 @@
     /* ── PROCESS ORBITAL ── */
     .process-sec {
       background: var(--dk);
-      padding: 96px 60px;
+      padding: 100px 64px;
+    }
+
+    .process-sec>.container {
+      max-width: 1360px;
+      margin: 0 auto;
     }
 
     .process-sec .sec-num {
@@ -515,10 +542,22 @@
     .orbital {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 0;
       margin: 56px 0 40px;
-      overflow-x: auto;
-      padding-bottom: 8px;
+      position: relative;
+    }
+
+    .orbital::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(196, 113, 90, .2) 10%, rgba(196, 113, 90, .2) 90%, transparent);
+      transform: translateY(-50%);
+      pointer-events: none;
     }
 
     .planet {
@@ -553,23 +592,23 @@
     }
 
     .orb-s {
-      width: 90px;
-      height: 90px;
+      width: 88px;
+      height: 88px;
     }
 
     .orb-m {
-      width: 110px;
-      height: 110px;
-    }
-
-    .orb-l {
       width: 130px;
       height: 130px;
     }
 
+    .orb-l {
+      width: 185px;
+      height: 185px;
+    }
+
     .orb-xl {
-      width: 150px;
-      height: 150px;
+      width: 256px;
+      height: 256px;
     }
 
     .orb-label {
@@ -604,12 +643,12 @@
     }
 
     .p-dash {
-      width: 36px;
+      flex: 1;
       height: 1px;
-      background: rgba(196, 113, 90, .3);
-      flex-shrink: 0;
-      margin: 0 4px;
-      margin-top: -20px;
+      border-top: 1px dashed rgba(196, 113, 90, .2);
+      margin-top: -60px;
+      position: relative;
+      z-index: 1;
     }
 
     .planet-desc {
@@ -913,6 +952,15 @@
     }
 
     /* ── CJM ── */
+    .cjm-overflow {
+      overflow-x: auto;
+      padding: 0 64px 8px;
+    }
+
+    .cjm-inner {
+      min-width: 800px;
+    }
+
     .cjm-wrap {
       margin-top: 48px;
       border: 1px solid var(--border);
@@ -1056,23 +1104,28 @@
     /* ── IA / SITE MAP ── */
     .sitemap-sec {
       background: var(--warm);
-      padding: 96px 60px;
+      padding: 100px 64px;
+    }
+
+    .sitemap-sec>.container {
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+
+    .sitemap-inner {
+      max-width: 1360px;
+      margin: 0 auto;
     }
 
     .sitemap-diagram {
       margin-top: 48px;
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: auto;
-      padding: 24px 16px;
+      overflow-x: auto;
     }
 
-    .sm-scroll {
-      font-size: 11px;
-      color: var(--text-3);
-      text-align: center;
-      margin-bottom: 20px;
+    .sitemap-svg {
+      width: 100%;
+      height: auto;
+      min-width: 600px;
     }
 
     /* ── USER FLOW ── */
@@ -1084,9 +1137,9 @@
 
     .uf-inner {
       min-width: 900px;
-      max-width: 1120px;
+      max-width: 1360px;
       margin: 0 auto;
-      padding: 0 60px;
+      padding: 0;
     }
 
     .uf-header {
@@ -1467,28 +1520,33 @@
       color: var(--border);
     }
 
-    /* ── SCREENS GALLERY ── */
-    .screens-scroll {
-      display: flex;
+    /* ── SCREENS GALLERY — expandable grid ── */
+    .screens-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       margin-top: 48px;
-      overflow-x: auto;
-      padding: 0 60px 8px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
     }
 
     .screen-card {
-      flex-shrink: 0;
-      width: 320px;
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid var(--border);
       background: var(--cream);
+      box-shadow: 0 4px 24px rgba(44, 31, 23, .08);
+      cursor: pointer;
+      transition: box-shadow .3s, transform .3s;
     }
 
-    .screen-card--narrow {
-      width: 200px;
+    .screen-card:hover {
+      box-shadow: 0 8px 40px rgba(44, 31, 23, .14);
+      transform: translateY(-2px);
+    }
+
+    .screen-card.is-open {
+      grid-column: span 2;
+      cursor: default;
+      transform: none;
     }
 
     .screen-card__bar {
@@ -1497,6 +1555,31 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      user-select: none;
+    }
+
+    .screen-card__dot-r {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #FF5F57;
+      flex-shrink: 0;
+    }
+
+    .screen-card__dot-y {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #FEBC2E;
+      flex-shrink: 0;
+    }
+
+    .screen-card__dot-g {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #28C840;
+      flex-shrink: 0;
     }
 
     .screen-card__label {
@@ -1505,8 +1588,68 @@
       color: rgba(255, 255, 255, .25);
     }
 
+    .screen-card__toggle {
+      margin-left: 8px;
+      font-size: 9px;
+      color: rgba(255, 255, 255, .35);
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+
+    .screen-card:hover .screen-card__toggle {
+      color: rgba(255, 255, 255, .6);
+    }
+
+    .screen-card.is-open .screen-card__toggle {
+      color: var(--tc-lt);
+    }
+
+    .screen-card__preview {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Collapsed: fixed 200px tall, clipped */
+    .screen-card__preview {
+      height: 200px;
+    }
+
+    .screen-card.is-open .screen-card__preview {
+      height: auto;
+    }
+
+    .screen-card__preview::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(transparent, var(--cream));
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+
+    .screen-card.is-open .screen-card__preview::after {
+      opacity: 0;
+    }
+
+    .screen-card__img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .screen-card.is-open .screen-card__img {
+      object-fit: unset;
+      height: auto;
+    }
+
     .screen-card__ph {
-      aspect-ratio: 16/10;
+      height: 200px;
       background: var(--warm);
       display: flex;
       flex-direction: column;
@@ -1539,9 +1682,14 @@
     }
 
     .screen-card__caption {
-      padding: 14px 16px;
+      padding: 12px 16px;
       border-top: 1px solid var(--border-lt);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
+
+    .screen-card__cap-info {}
 
     .screen-card__cap-title {
       font-size: 13px;
@@ -1553,6 +1701,44 @@
     .screen-card__cap-sub {
       font-size: 11px;
       color: var(--text-3);
+    }
+
+    .screen-card__expand-hint {
+      font-size: 10px;
+      color: var(--text-3);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .screen-card__expand-hint::after {
+      content: '↓';
+      font-size: 11px;
+      transition: transform .3s;
+    }
+
+    .screen-card.is-open .screen-card__expand-hint::after {
+      content: '↑';
+    }
+
+    @media (max-width: 900px) {
+      .screens-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .screen-card.is-open {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .screens-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .screen-card.is-open {
+        grid-column: span 1;
+      }
     }
 
     /* ── RESULTS / STATS ── */
@@ -1586,6 +1772,240 @@
       font-size: 12px;
       color: rgba(253, 248, 242, .55);
       line-height: 1.5;
+    }
+
+    /* ── IMPACT SECTION (dark bg overrides) ── */
+    .sec--tc .sec-num {
+      color: rgba(253, 248, 242, .5);
+    }
+
+    .sec--tc .sec-h2 {
+      color: #FDF8F2;
+    }
+
+    .sec--tc .sec-h2 em {
+      color: rgba(253, 248, 242, .7);
+    }
+
+    .sec--tc .sec-lead {
+      color: rgba(253, 248, 242, .75);
+    }
+
+    /* ── PROCESS DARK SECTION overrides ── */
+    .process-sec .sec-num {
+      color: rgba(255, 255, 255, .3);
+    }
+
+    .process-sec .sec-h2 {
+      color: #F5EDE6;
+    }
+
+    .process-sec .sec-h2 em {
+      color: var(--tc-lt);
+    }
+
+    .process-sec .sec-lead {
+      color: rgba(245, 237, 230, .6);
+    }
+
+    /* ── UTILITY CLASSES ── */
+    .mt-8 {
+      margin-top: 8px;
+    }
+
+    .sec-lead--no-mb {
+      margin-bottom: 0;
+    }
+
+    .screen-card__img--mobile {
+      object-position: top;
+    }
+
+    .screen-card--mobile .screen-card__preview {
+      height: 200px;
+    }
+
+    /* ── DD card warning num ── */
+    .dd-num--warn {
+      color: var(--red-pale);
+    }
+
+    /* ── T-H4 (api points heading) ── */
+    .t-h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--dk);
+      margin-bottom: 4px;
+    }
+
+    .cjm-cell--emotion {
+      padding: 0;
+    }
+
+    .cjm-emotion-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      height: 100%;
+    }
+
+    /* ── IA overflow wrapper ── */
+    .cjm-overflow {
+      overflow-x: auto;
+      padding: 0 0px 8px;
+    }
+
+    .cjm-inner {
+      min-width: 800px;
+    }
+
+    /* ── DESIGN SYSTEM specific ── */
+    .ds-type-display {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--dk);
+      margin-bottom: 6px;
+    }
+
+    .ds-type-label {
+      font-size: 11px;
+      color: var(--text-3);
+      margin-bottom: 16px;
+    }
+
+    .ds-type-body {
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--dk);
+      margin-bottom: 6px;
+    }
+
+    .ds-spacing-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ds-spacing-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ds-spacing-bar {
+      height: 12px;
+      background: var(--tc);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .ds-spacing-bar--4 {
+      width: 4px;
+    }
+
+    .ds-spacing-bar--8 {
+      width: 8px;
+    }
+
+    .ds-spacing-bar--16 {
+      width: 16px;
+    }
+
+    .ds-spacing-bar--32 {
+      width: 32px;
+    }
+
+    .ds-spacing-bar--60 {
+      width: 60px;
+    }
+
+    .ds-spacing-text {
+      font-size: 11px;
+      color: var(--text-2);
+    }
+
+    .ds-tokens-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ds-token-row {
+      font-size: 12px;
+      color: var(--text-2);
+    }
+
+    .ds-token-row strong {
+      font-weight: 600;
+      color: var(--dk);
+    }
+
+    /* ── Swatch color backgrounds ── */
+    .swatch--tc {
+      background: #C4715A;
+    }
+
+    .swatch--tc span {
+      color: white;
+    }
+
+    .swatch--dk {
+      background: #2C1F17;
+    }
+
+    .swatch--dk span {
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .swatch--cream {
+      background: #FDF8F2;
+      border: 1px solid #EDE3D8;
+    }
+
+    .swatch--cream span {
+      color: var(--text-3);
+    }
+
+    .swatch--sand {
+      background: #EDE3D8;
+    }
+
+    .swatch--sand span {
+      color: var(--brown);
+    }
+
+    .swatch--green {
+      background: #6B7C4D;
+    }
+
+    .swatch--green span {
+      color: white;
+    }
+
+    /* ── Screen lead no bottom margin ── */
+    .sec-lead--no-mb {
+      margin-bottom: 0;
+    }
+
+    /* ── Orb dashed / dim (step 5) ── */
+    .orb-dashed {
+      border-style: dashed !important;
+      opacity: .55;
+    }
+
+    .orb-label--dim {
+      color: rgba(245, 237, 230, .4);
+    }
+
+    .planet-desc--dim {
+      color: rgba(245, 237, 230, .35);
+    }
+
+    .planet-desc--dim strong {
+      color: rgba(245, 237, 230, .45);
     }
 
     /* ── LEARNINGS ── */
@@ -1753,25 +2173,18 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .nav {
-        padding: 16px 24px;
-      }
-
-      .nav__links {
-        display: none;
-      }
-
-      .bc {
-        padding: 80px 24px 0;
-      }
-
       .sec {
         padding: 64px 24px;
+      }
+
+      .sec>.container {
+        padding: 0;
       }
 
       .hero {
         grid-template-columns: 1fr;
         min-height: auto;
+        margin-top: 88px;
       }
 
       .hero__left {
@@ -1818,8 +2231,16 @@
         padding: 64px 24px;
       }
 
+      .sitemap-sec>.container {
+        padding: 0;
+      }
+
       .process-sec {
         padding: 64px 24px;
+      }
+
+      .process-sec>.container {
+        padding: 0;
       }
 
       .footer {
@@ -1830,6 +2251,36 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
+      }
+
+      .orbital {
+        overflow-x: auto;
+        justify-content: flex-start;
+        gap: 8px;
+      }
+
+      .orbital::before {
+        display: none;
+      }
+
+      .orb-xl {
+        width: 140px;
+        height: 140px;
+      }
+
+      .orb-l {
+        width: 110px;
+        height: 110px;
+      }
+
+      .orb-m {
+        width: 90px;
+        height: 90px;
+      }
+
+      .orb-s {
+        width: 70px;
+        height: 70px;
       }
     }
 
@@ -1854,21 +2305,18 @@
   <div id="cur"></div>
   <div id="ctr"></div>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <a href="#" class="nav__logo">Yana Harcourt</a>
-    <ul class="nav__links">
-      <li><a href="#">Work</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- BREADCRUMB -->
-  <nav class="bc" aria-label="Breadcrumb">
-    <a href="#">Home</a><span>›</span>
-    <a href="#">Work</a><span>›</span>
-    <span class="cur">Amigatos da Milkinha</span>
+  <!-- BREADCRUMB (Caixa-style) -->
+  <nav class="bc-nav" aria-label="Breadcrumb">
+    <div class="bc-left">
+      <a href="../index.html">← Portfolio</a>
+      <span class="bc-sep">›</span>
+      <span class="bc-cur">Amigatos da Milkinha</span>
+    </div>
+    <div class="bc-tags">
+      <span class="bc-tag bc-tag--tc">UX/UI Design</span>
+      <span class="bc-tag bc-tag--sand">Frontend Dev</span>
+      <span class="bc-tag bc-tag--green">NGO · Pro Bono</span>
+    </div>
   </nav>
 
 
@@ -1878,7 +2326,7 @@
   <div class="hero">
     <div class="hero__left">
       <div class="hero__tag">UX Research · UI Design · Frontend Dev</div>
-      <h1 class="hero-title">Amigatos<br /><em style="font-style:italic;color:var(--tc)">da Milkinha</em></h1>
+      <h1 class="hero-title">Amigatos<br /><em class="hero-title__accent">da Milkinha</em></h1>
       <p class="hero__subtitle">A shelter where every cat deserves to be found</p>
       <p class="body hero__desc">End-to-end design and development of a fully automated adoption platform for a
         Lisbon-based cat shelter — connecting the public to a live animal database via real-time API, with a warm,
@@ -1903,8 +2351,10 @@
       </div>
     </div>
     <div class="hero__right">
-      <!--★ REPLACE: <img class="hero__cover" src="assets/hero.jpg" alt="Amigatos shelter"/>-->
-      <div class="hero__placeholder">
+      
+      <img class="hero__cover" src="./assets/img/case-img/screen-homepage.png" alt="Amigatos shelter"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <div class="hero__placeholder" style="display:none">
         <p>Hero image</p>
         <small>assets/hero.jpg</small>
       </div>
@@ -1923,7 +2373,7 @@
     <div class="ov__grid">
       <div class="ov__cell">
         <div class="ov__label">Client</div>
-        <div class="ov__value">Amigatos da Milkinha<br />Lisbon, Portugal</div>
+        <div class="ov__value">Amigatos da Milkinha<br />Braga, Portugal</div>
       </div>
       <div class="ov__cell">
         <div class="ov__label">Deliverables</div>
@@ -1987,11 +2437,9 @@
         <div class="planet">
           <div class="planet-num">05</div>
           <div class="orb orb-s orb-1 orb-dashed">
-            <div class="orb-glow"></div><span class="orb-label" style="color:rgba(245,237,230,.4)">Handoff
-              &amp;<br>Docs</span>
+            <div class="orb-glow"></div><span class="orb-label orb-label--dim">Handoff &amp;<br>Docs</span>
           </div>
-          <div class="planet-desc" style="color:rgba(245,237,230,.35)"><strong
-              style="color:rgba(245,237,230,.45)">Volunteer</strong>training · edit guide</div>
+          <div class="planet-desc planet-desc--dim"><strong>Volunteer</strong>training · edit guide</div>
         </div>
       </div>
 
@@ -2111,7 +2559,8 @@
       </div>
 
       <div class="insight-box rv">
-        <div class="insight-box__icon"><img src="assets/icons/lightbulb.svg" alt=""/></div>
+        <div class="insight-box__icon"><img src="./assets/img/case-img/lightbulb.svg" alt="" width="22" height="22" />
+        </div>
         <p class="insight-box__text">"The common failure across all three was a mismatch between emotional warmth in
           copy and cold friction in the actual adoption journey. The opportunity was a site that felt warm <em>and</em>
           worked frictionlessly — with live, accurate animal data."</p>
@@ -2134,9 +2583,8 @@
         <div class="dd-card">
           <div class="dd-num">01</div>
           <h3>"People DM us asking if the cat is still available"</h3>
-          <p class="body-sm" style="margin-top:8px">Volunteers fielded the same questions repeatedly — confirmation that
-            the core problem was information asymmetry, not lack of interest. Adopters existed; the channel was broken.
-          </p>
+          <p class="body-sm mt-8">Volunteers fielded the same questions repeatedly — confirmation that the core problem
+            was information asymmetry, not lack of interest. Adopters existed; the channel was broken.</p>
           <div class="dd-rationale">Design implication</div>
           <p class="body-sm">Live API integration so every listing is always accurate. No stale "already adopted"
             profiles.</p>
@@ -2144,9 +2592,8 @@
         <div class="dd-card">
           <div class="dd-num">02</div>
           <h3>"Most people find us on Instagram — they're on their phones"</h3>
-          <p class="body-sm" style="margin-top:8px">Over 80% of the shelter's audience arrived from Instagram Stories
-            and Reels. Desktop was effectively irrelevant for first contact — mobile was the only device that mattered.
-          </p>
+          <p class="body-sm mt-8">Over 80% of the shelter's audience arrived from Instagram Stories and Reels. Desktop
+            was effectively irrelevant for first contact — mobile was the only device that mattered.</p>
           <div class="dd-rationale">Design implication</div>
           <p class="body-sm">Mobile-first design, validated on small screens first. Grid, filters and donate flow all
             designed at 375px before desktop.</p>
@@ -2154,8 +2601,8 @@
         <div class="dd-card">
           <div class="dd-num">03</div>
           <h3>"We have no time to update a website every week"</h3>
-          <p class="body-sm" style="margin-top:8px">Volunteers are not marketers. Any solution requiring manual content
-            updates would fail within weeks. Sustainability meant automation — the site had to run itself.</p>
+          <p class="body-sm mt-8">Volunteers are not marketers. Any solution requiring manual content updates would fail
+            within weeks. Sustainability meant automation — the site had to run itself.</p>
           <div class="dd-rationale">Design implication</div>
           <p class="body-sm">ASM3 API as the single source of truth. Cat listings update automatically when shelter
             staff update the internal system they already use.</p>
@@ -2163,9 +2610,9 @@
         <div class="dd-card">
           <div class="dd-num">04</div>
           <h3>"We get donations via bank transfer after people ask us for our IBAN"</h3>
-          <p class="body-sm" style="margin-top:8px">The current donation flow required DM-ing the shelter, waiting for a
-            reply, and manually entering bank details. Every step was an exit point. Supporters existed — the
-            infrastructure didn't.</p>
+          <p class="body-sm mt-8">The current donation flow required DM-ing the shelter, waiting for a reply, and
+            manually entering bank details. Every step was an exit point. Supporters existed — the infrastructure
+            didn't.</p>
           <div class="dd-rationale">Design implication</div>
           <p class="body-sm">Dedicated donation page with IBAN + MB Way (Portugal's dominant mobile payment), zero
             friction path from homepage CTA.</p>
@@ -2279,8 +2726,8 @@
         critical drop-off points — and three design opportunities.</p>
     </div>
 
-    <div style="overflow-x:auto; padding: 0 60px 8px;" class="rv">
-      <div style="min-width:800px">
+    <div class="cjm-overflow rv">
+      <div class="cjm-inner">
         <div class="cjm-wrap">
           <div class="cjm-head">
             <div class="cjm-head-cell">Touchpoint</div>
@@ -2311,28 +2758,28 @@
 
           <div class="cjm-row">
             <div class="cjm-cell cjm-cell--label">Feeling</div>
-            <div class="cjm-cell cjm-cell" style="padding:0">
-              <div class="cjm-row--emotion" style="display:flex;align-items:center;justify-content:center;height:100%">
+            <div class="cjm-cell cjm-cell--emotion">
+              <div class="cjm-emotion-wrap">
                 <div class="emotion-dot e-neut">😐</div>
               </div>
             </div>
-            <div class="cjm-cell" style="padding:0">
-              <div style="display:flex;align-items:center;justify-content:center;height:100%">
+            <div class="cjm-cell cjm-cell--emotion">
+              <div class="cjm-emotion-wrap">
                 <div class="emotion-dot e-pos">🙂</div>
               </div>
             </div>
-            <div class="cjm-cell" style="padding:0">
-              <div style="display:flex;align-items:center;justify-content:center;height:100%">
+            <div class="cjm-cell cjm-cell--emotion">
+              <div class="cjm-emotion-wrap">
                 <div class="emotion-dot e-pos">😊</div>
               </div>
             </div>
-            <div class="cjm-cell" style="padding:0">
-              <div style="display:flex;align-items:center;justify-content:center;height:100%">
+            <div class="cjm-cell cjm-cell--emotion">
+              <div class="cjm-emotion-wrap">
                 <div class="emotion-dot e-pos">🤩</div>
               </div>
             </div>
-            <div class="cjm-cell" style="padding:0">
-              <div style="display:flex;align-items:center;justify-content:center;height:100%">
+            <div class="cjm-cell cjm-cell--emotion">
+              <div class="cjm-emotion-wrap">
                 <div class="emotion-dot e-neut">🤞</div>
               </div>
             </div>
@@ -2393,11 +2840,12 @@
       <h2 class="sec-h2 rv">Site <em>Map</em></h2>
       <p class="sec-lead rv">Three pages, three jobs. The architecture is deliberately minimal — no sub-navigation, no
         dead ends. Every path leads to either adoption or donation.</p>
+    </div>
 
+    <div class="sitemap-inner">
       <div class="sitemap-diagram rv">
-        <div class="sm-scroll">← Scroll to explore →</div>
         <svg viewBox="0 0 860 440" xmlns="http://www.w3.org/2000/svg" font-family="'DM Sans', sans-serif"
-          style="width:100%;min-width:700px;height:auto">
+          class="sitemap-svg">
           <defs>
             <linearGradient id="gDk" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stop-color="#3D2A1F" />
@@ -2706,9 +3154,9 @@
         <div class="dd-card">
           <div class="dd-num">01</div>
           <h3>Warm palette, editorial typography</h3>
-          <p class="body-sm" style="margin-top:8px">Terra-cotta, cream and sand were chosen because they feel domestic
-            and safe — not clinical. Playfair Display adds warmth and character without feeling childish. The goal: a
-            site that feels like the shelter, not a municipal database.</p>
+          <p class="body-sm mt-8">Terra-cotta, cream and sand were chosen because they feel domestic and safe — not
+            clinical. Playfair Display adds warmth and character without feeling childish. The goal: a site that feels
+            like the shelter, not a municipal database.</p>
           <div class="dd-rationale">Backed by</div>
           <p class="body-sm">Research finding: Sofia needed to trust the shelter before she'd commit. Visual warmth is
             the first signal of legitimacy for an NGO with no brand recognition.</p>
@@ -2716,9 +3164,9 @@
         <div class="dd-card">
           <div class="dd-num">02</div>
           <h3>Inline cat overlay — no page redirect</h3>
-          <p class="body-sm" style="margin-top:8px">Clicking a cat opens the ASM3 plain2 detail view directly on the
-            page — no full reload, no navigation away from the grid. This keeps the adopter inside the browsing flow and
-            dramatically reduces the back-button drop-off.</p>
+          <p class="body-sm mt-8">Clicking a cat opens the ASM3 plain2 detail view directly on the page — no full
+            reload, no navigation away from the grid. This keeps the adopter inside the browsing flow and dramatically
+            reduces the back-button drop-off.</p>
           <div class="dd-rationale">Backed by</div>
           <p class="body-sm">The API's iframe was explored first, but couldn't be controlled visually. The plain2
             overlay gave the same data with full layout control.</p>
@@ -2726,9 +3174,9 @@
         <div class="dd-card">
           <div class="dd-num">03</div>
           <h3>Shuffle on every page load</h3>
-          <p class="body-sm" style="margin-top:8px">By default, ASM3 returns cats in a fixed order — the same animals
-            always appear at the top. A shuffle on load ensures every cat gets equal visibility. No cat gets permanently
-            buried just because of their ID number.</p>
+          <p class="body-sm mt-8">By default, ASM3 returns cats in a fixed order — the same animals always appear at the
+            top. A shuffle on load ensures every cat gets equal visibility. No cat gets permanently buried just because
+            of their ID number.</p>
           <div class="dd-rationale">Backed by</div>
           <p class="body-sm">Volunteer insight: "Some cats never get enquiries because they're always at the bottom."
             The shuffle is a fairness mechanism, not a feature.</p>
@@ -2736,9 +3184,9 @@
         <div class="dd-card">
           <div class="dd-num">04</div>
           <h3>MB Way as primary donation method</h3>
-          <p class="body-sm" style="margin-top:8px">IBAN bank transfer was the existing method — but it required copying
-            details, opening a banking app, and manual entry. MB Way is Portugal's dominant mobile payment method and
-            completes in under 10 seconds. It was the obvious choice for a mobile audience.</p>
+          <p class="body-sm mt-8">IBAN bank transfer was the existing method — but it required copying details, opening
+            a banking app, and manual entry. MB Way is Portugal's dominant mobile payment method and completes in under
+            10 seconds. It was the obvious choice for a mobile audience.</p>
           <div class="dd-rationale">Backed by</div>
           <p class="body-sm">Persona: Pedro. He donates impulsively after seeing a post — any friction is an exit. MB
             Way removes every step between intent and action.</p>
@@ -2797,39 +3245,38 @@
 
         <div class="api-points">
           <div class="api-point">
-            <div class="api-point-icon"><img src="assets/icons/api.svg" alt=""/></div>
+            <div class="api-point-icon"><img src="./assets/img/case-img/api.svg" alt="" width="20" height="20" /></div>
             <div>
-              <div class="t-h4" style="font-size:14px;font-weight:600;color:var(--dk);margin-bottom:4px">Live animal
-                data — zero manual updates</div>
+              <div class="t-h4">Live animal data — zero manual updates</div>
               <p class="body-sm">The API endpoint returns a script with every adoptable cat's data in real time. When a
                 cat is adopted or a new cat arrives, the volunteer updates ASM3 — the website updates automatically. No
                 content management needed.</p>
             </div>
           </div>
           <div class="api-point">
-            <div class="api-point-icon"><img src="assets/icons/shuffle.svg" alt=""/></div>
+            <div class="api-point-icon"><img src="./assets/img/case-img/shuffle.svg" alt="" width="20" height="20" />
+            </div>
             <div>
-              <div class="t-h4" style="font-size:14px;font-weight:600;color:var(--dk);margin-bottom:4px">Shuffle grid
-                for equal visibility</div>
+              <div class="t-h4">Shuffle grid for equal visibility</div>
               <p class="body-sm">ASM3 returns cats in fixed ID order — the same animals always appear first. A shuffle
                 on each load distributes visibility fairly. Every cat gets seen, regardless of when they arrived.</p>
             </div>
           </div>
           <div class="api-point">
-            <div class="api-point-icon"><img src="assets/icons/overlay.svg" alt=""/></div>
+            <div class="api-point-icon"><img src="./assets/img/case-img/overlay.svg" alt="" width="20" height="20" />
+            </div>
             <div>
-              <div class="t-h4" style="font-size:14px;font-weight:600;color:var(--dk);margin-bottom:4px">Inline overlay
-                — no page reload</div>
+              <div class="t-h4">Inline overlay — no page reload</div>
               <p class="body-sm">The plain2 style renders the cat detail inline on the page. The iframe approach was
                 tested first but offered no visual control. The overlay keeps users inside the adoption flow — no
                 back-button, no lost context.</p>
             </div>
           </div>
           <div class="api-point">
-            <div class="api-point-icon"><img src="assets/icons/warning.svg" alt=""/></div>
+            <div class="api-point-icon"><img src="./assets/img/case-img/warning.svg" alt="" width="20" height="20" />
+            </div>
             <div>
-              <div class="t-h4" style="font-size:14px;font-weight:600;color:var(--dk);margin-bottom:4px">Constraint:
-                limited search customisation</div>
+              <div class="t-h4">Constraint: limited search customisation</div>
               <p class="body-sm">The ASM3 search filter had very limited API options — custom filtering parameters were
                 not exposed. The design worked within this constraint: the shuffle feature compensated for what search
                 couldn't solve.</p>
@@ -2855,63 +3302,49 @@
         <div class="ds-card">
           <div class="ds-card__label">Colour Palette</div>
           <div class="color-swatches">
-            <div class="swatch" style="background:#C4715A"><span style="color:white">Terra-cotta · Primary</span></div>
-            <div class="swatch" style="background:#2C1F17"><span style="color:rgba(255,255,255,.7)">Dark ·
-                Headings</span></div>
-            <div class="swatch" style="background:#FDF8F2; border:1px solid #EDE3D8"><span style="color:#9A8070">Cream ·
-                Background</span></div>
-            <div class="swatch" style="background:#EDE3D8"><span style="color:#6B5548">Sand · Secondary bg</span></div>
-            <div class="swatch" style="background:#6B7C4D"><span style="color:white">Green · Success</span></div>
+            <div class="swatch swatch--tc"><span>Terra-cotta · Primary</span></div>
+            <div class="swatch swatch--dk"><span>Dark · Headings</span></div>
+            <div class="swatch swatch--cream"><span>Cream · Background</span></div>
+            <div class="swatch swatch--sand"><span>Sand · Secondary bg</span></div>
+            <div class="swatch swatch--green"><span>Green · Success</span></div>
           </div>
         </div>
         <div class="ds-card">
           <div class="ds-card__label">Typography</div>
-          <p
-            style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#2C1F17;margin-bottom:6px">
-            Playfair Display</p>
-          <p style="font-size:11px;color:#9A8070;margin-bottom:16px">H1–H3 · Serif · Warmth</p>
-          <p style="font-family:'DM Sans',sans-serif;font-size:16px;font-weight:400;color:#2C1F17;margin-bottom:6px">DM
-            Sans</p>
-          <p style="font-size:11px;color:#9A8070">Body · UI · Labels</p>
+          <p class="ds-type-display">Playfair Display</p>
+          <p class="ds-type-label">H1–H3 · Serif · Warmth</p>
+          <p class="ds-type-body">DM Sans</p>
+          <p class="ds-type-label">Body · UI · Labels</p>
         </div>
         <div class="ds-card">
           <div class="ds-card__label">Spacing Scale</div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <div style="display:flex;align-items:center;gap:8px">
-              <div style="width:4px;height:12px;background:var(--tc);border-radius:2px"></div><span
-                style="font-size:11px;color:var(--text-2)">4px · Micro</span>
+          <div class="ds-spacing-list">
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-bar ds-spacing-bar--4"></div><span class="ds-spacing-text">4px · Micro</span>
             </div>
-            <div style="display:flex;align-items:center;gap:8px">
-              <div style="width:8px;height:12px;background:var(--tc);border-radius:2px"></div><span
-                style="font-size:11px;color:var(--text-2)">8px · Tight</span>
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-bar ds-spacing-bar--8"></div><span class="ds-spacing-text">8px · Tight</span>
             </div>
-            <div style="display:flex;align-items:center;gap:8px">
-              <div style="width:16px;height:12px;background:var(--tc);border-radius:2px"></div><span
-                style="font-size:11px;color:var(--text-2)">16px · Default</span>
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-bar ds-spacing-bar--16"></div><span class="ds-spacing-text">16px · Default</span>
             </div>
-            <div style="display:flex;align-items:center;gap:8px">
-              <div style="width:32px;height:12px;background:var(--tc);border-radius:2px"></div><span
-                style="font-size:11px;color:var(--text-2)">32px · Section</span>
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-bar ds-spacing-bar--32"></div><span class="ds-spacing-text">32px · Section</span>
             </div>
-            <div style="display:flex;align-items:center;gap:8px">
-              <div style="width:60px;height:12px;background:var(--tc);border-radius:2px"></div><span
-                style="font-size:11px;color:var(--text-2)">96px · Page section</span>
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-bar ds-spacing-bar--60"></div><span class="ds-spacing-text">96px · Page
+                section</span>
             </div>
           </div>
         </div>
         <div class="ds-card">
           <div class="ds-card__label">Component Tokens</div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="font-size:12px;color:var(--text-2)"><span style="font-weight:600;color:var(--dk)">Border
-                radius:</span> 6 / 10 / 14 / 18px</div>
-            <div style="font-size:12px;color:var(--text-2)"><span style="font-weight:600;color:var(--dk)">Shadow:</span>
-              0 4px 24px rgba(tc, .08)</div>
-            <div style="font-size:12px;color:var(--text-2)"><span
-                style="font-weight:600;color:var(--dk)">Transition:</span> .25s ease all</div>
-            <div style="font-size:12px;color:var(--text-2)"><span
-                style="font-weight:600;color:var(--dk)">Eyebrow:</span> 9px / 700 / .18em track</div>
-            <div style="font-size:12px;color:var(--text-2)"><span style="font-weight:600;color:var(--dk)">Grid:</span>
-              1120px max-width</div>
+          <div class="ds-tokens-list">
+            <div class="ds-token-row"><strong>Border radius:</strong> 6 / 10 / 14 / 18px</div>
+            <div class="ds-token-row"><strong>Shadow:</strong> 0 4px 24px rgba(tc, .08)</div>
+            <div class="ds-token-row"><strong>Transition:</strong> .25s ease all</div>
+            <div class="ds-token-row"><strong>Eyebrow:</strong> 9px / 700 / .18em track</div>
+            <div class="ds-token-row"><strong>Grid:</strong> 1360px max-width</div>
           </div>
         </div>
       </div>
@@ -2922,83 +3355,111 @@
   <!-- ══════════════════════════════════
      12 — SCREENS GALLERY
 ══════════════════════════════════ -->
-  <section class="sec sec--cream" style="padding-left:0;padding-right:0">
-    <div style="padding: 0 60px" class="container">
+  <section class="sec sec--cream">
+    <div class="container">
       <div class="sec-num rv">12 — Pages Delivered</div>
       <h2 class="sec-h2 rv">Three screens, <em>one mission</em></h2>
-    </div>
+      <p class="sec-lead rv sec-lead--no-mb">Each page has one job. Click any card to expand and see the full page.</p>
 
-    <div class="screens-scroll rv">
+      <div class="screens-grid rv">
 
-      <div class="screen-card">
-        <div class="screen-card__bar">
-          <div class="browser__dot browser__dot--r" style="width:10px;height:10px;border-radius:50%;background:#FF5F57">
+        <div class="screen-card" onclick="toggleScreen(this)">
+          <div class="screen-card__bar">
+            <div class="screen-card__dot-r"></div>
+            <div class="screen-card__dot-y"></div>
+            <div class="screen-card__dot-g"></div>
+            <span class="screen-card__label">index.html</span>
+            <span class="screen-card__toggle">Expand</span>
           </div>
-          <div class="browser__dot" style="width:10px;height:10px;border-radius:50%;background:#FEBC2E"></div>
-          <div class="browser__dot" style="width:10px;height:10px;border-radius:50%;background:#28C840"></div>
-          <span class="screen-card__label">index.html</span>
+          <div class="screen-card__preview">
+            <img class="screen-card__img" src="./assets/img/case-img/screen-homepage.png" alt="Homepage"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="screen-card__ph" style="display:none">
+              <p>Homepage screenshot</p><small>assets/img/case-img/screen-homepage.png</small>
+            </div>
+          </div>
+          <div class="screen-card__caption">
+            <div class="screen-card__cap-info">
+              <div class="screen-card__cap-title">Homepage</div>
+              <div class="screen-card__cap-sub">Hero · About · Process · CTA</div>
+            </div>
+            <span class="screen-card__expand-hint">View full</span>
+          </div>
         </div>
-        <!--★ REPLACE: <img src="assets/screen-homepage.png" alt="Homepage"/>-->
-        <div class="screen-card__ph">
-          <p>Homepage screenshot</p><small>assets/screen-homepage.png</small>
-        </div>
-        <div class="screen-card__caption">
-          <div class="screen-card__cap-title">Homepage</div>
-          <div class="screen-card__cap-sub">Hero · About · Process · CTA</div>
-        </div>
-      </div>
 
-      <div class="screen-card">
-        <div class="screen-card__bar">
-          <div style="width:10px;height:10px;border-radius:50%;background:#FF5F57"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:#FEBC2E"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:#28C840"></div>
-          <span class="screen-card__label">cats_grid.html</span>
+        <div class="screen-card" onclick="toggleScreen(this)">
+          <div class="screen-card__bar">
+            <div class="screen-card__dot-r"></div>
+            <div class="screen-card__dot-y"></div>
+            <div class="screen-card__dot-g"></div>
+            <span class="screen-card__label">cats_grid.html</span>
+            <span class="screen-card__toggle">Expand</span>
+          </div>
+          <div class="screen-card__preview">
+            <img class="screen-card__img" src="./assets/img/case-img/screen-cats-grid.png" alt="Cats Grid"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="screen-card__ph" style="display:none">
+              <p>Cats Grid screenshot</p><small>assets/img/case-img/screen-cats-grid.png</small>
+            </div>
+          </div>
+          <div class="screen-card__caption">
+            <div class="screen-card__cap-info">
+              <div class="screen-card__cap-title">Cats Grid</div>
+              <div class="screen-card__cap-sub">Live API · filter · shuffle · overlay</div>
+            </div>
+            <span class="screen-card__expand-hint">View full</span>
+          </div>
         </div>
-        <!--★ REPLACE: <img src="assets/screen-cats-grid.png" alt="Cats Grid"/>-->
-        <div class="screen-card__ph">
-          <p>Cats Grid screenshot</p><small>assets/screen-cats-grid.png</small>
-        </div>
-        <div class="screen-card__caption">
-          <div class="screen-card__cap-title">Cats Grid</div>
-          <div class="screen-card__cap-sub">Live API · filter · shuffle · overlay</div>
-        </div>
-      </div>
 
-      <div class="screen-card">
-        <div class="screen-card__bar">
-          <div style="width:10px;height:10px;border-radius:50%;background:#FF5F57"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:#FEBC2E"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:#28C840"></div>
-          <span class="screen-card__label">donate.html</span>
+        <div class="screen-card" onclick="toggleScreen(this)">
+          <div class="screen-card__bar">
+            <div class="screen-card__dot-r"></div>
+            <div class="screen-card__dot-y"></div>
+            <div class="screen-card__dot-g"></div>
+            <span class="screen-card__label">donate.html</span>
+            <span class="screen-card__toggle">Expand</span>
+          </div>
+          <div class="screen-card__preview">
+            <img class="screen-card__img" src="./assets/img/case-img/screen-donate.png" alt="Donate page"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="screen-card__ph" style="display:none">
+              <p>Donate page screenshot</p><small>assets/img/case-img/screen-donate.png</small>
+            </div>
+          </div>
+          <div class="screen-card__caption">
+            <div class="screen-card__cap-info">
+              <div class="screen-card__cap-title">Donation Page</div>
+              <div class="screen-card__cap-sub">Preset amounts · IBAN · MB Way</div>
+            </div>
+            <span class="screen-card__expand-hint">View full</span>
+          </div>
         </div>
-        <!--★ REPLACE: <img src="assets/screen-donate.png" alt="Donate page"/>-->
-        <div class="screen-card__ph">
-          <p>Donate page screenshot</p><small>assets/screen-donate.png</small>
-        </div>
-        <div class="screen-card__caption">
-          <div class="screen-card__cap-title">Donation Page</div>
-          <div class="screen-card__cap-sub">Preset amounts · IBAN · MB Way</div>
-        </div>
-      </div>
 
-      <div class="screen-card screen-card--narrow">
-        <div class="screen-card__bar">
-          <div style="width:10px;height:10px;border-radius:50%;background:#FF5F57"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:#FEBC2E"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:#28C840"></div>
-          <span class="screen-card__label">Mobile</span>
-        </div>
-        <!--★ REPLACE: <img src="assets/screen-mobile.png" alt="Mobile view"/>-->
-        <div class="screen-card__ph" style="aspect-ratio:9/16">
-          <p>Mobile screenshot</p><small>assets/screen-mobile.png</small>
-        </div>
-        <div class="screen-card__caption">
-          <div class="screen-card__cap-title">Mobile View</div>
-          <div class="screen-card__cap-sub">Responsive · touch-first</div>
-        </div>
-      </div>
+        <!-- <div class="screen-card screen-card--mobile" onclick="toggleScreen(this)">
+          <div class="screen-card__bar">
+            <div class="screen-card__dot-r"></div>
+            <div class="screen-card__dot-y"></div>
+            <div class="screen-card__dot-g"></div>
+            <span class="screen-card__label">Mobile</span>
+            <span class="screen-card__toggle">Expand</span>
+          </div>
+          <div class="screen-card__preview">
+            <img class="screen-card__img screen-card__img--mobile" src="./assets/img/case-img/screen-mobile.png"
+              alt="Mobile view" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="screen-card__ph" style="display:none">
+              <p>Mobile screenshot</p><small>assets/img/case-img/screen-mobile.png</small>
+            </div>
+          </div>
+          <div class="screen-card__caption">
+            <div class="screen-card__cap-info">
+              <div class="screen-card__cap-title">Mobile View</div>
+              <div class="screen-card__cap-sub">Responsive · touch-first</div>
+            </div>
+            <span class="screen-card__expand-hint">View full</span>
+          </div>
+        </div> -->
 
+      </div>
     </div>
   </section>
 
@@ -3008,12 +3469,10 @@
 ══════════════════════════════════ -->
   <section class="sec sec--tc">
     <div class="container">
-      <div class="sec-num rv" style="color:rgba(253,248,242,.5)">13 — Impact</div>
-      <h2 class="sec-h2 rv" style="color:#FDF8F2">From invisible <em style="color:rgba(253,248,242,.7)">to online</em>
-      </h2>
-      <p class="sec-lead rv" style="color:rgba(253,248,242,.75)">Launching a public-facing website transformed how the
-        shelter interacts with adopters and supporters — turning scattered social media reach into a consistent,
-        trustworthy digital presence.</p>
+      <div class="sec-num rv">13 — Impact</div>
+      <h2 class="sec-h2 rv">From invisible <em>to online</em></h2>
+      <p class="sec-lead rv">Launching a public-facing website transformed how the shelter interacts with adopters and
+        supporters — turning scattered social media reach into a consistent, trustworthy digital presence.</p>
 
       <div class="stats-grid rv">
         <div class="stat-cell">
@@ -3049,41 +3508,38 @@
 
       <div class="dd-grid rv">
         <div class="dd-card">
-          <div class="dd-num" style="color:var(--red-pale)">⚠</div>
+          <div class="dd-num dd-num--warn">⚠</div>
           <h3>ASM3 search filter limitations</h3>
-          <p class="body-sm" style="margin-top:8px">The API's search parameters were limited — custom filtering by
-            breed, colour or temperament wasn't exposed. I couldn't build a faceted filter without scraping data in a
-            way that wasn't sanctioned.</p>
+          <p class="body-sm mt-8">The API's search parameters were limited — custom filtering by breed, colour or
+            temperament wasn't exposed. I couldn't build a faceted filter without scraping data in a way that wasn't
+            sanctioned.</p>
           <div class="dd-rationale">Trade-off</div>
           <p class="body-sm">Accepted the constraint and used shuffle as the fairness mechanism. Documented the
             limitation clearly for the shelter so future developers know what's API-constrained vs custom-buildable.</p>
         </div>
         <div class="dd-card">
-          <div class="dd-num" style="color:var(--red-pale)">⚠</div>
+          <div class="dd-num dd-num--warn">⚠</div>
           <h3>No payment gateway — static donation page</h3>
-          <p class="body-sm" style="margin-top:8px">A real payment integration (Stripe, PayPal) would require server
-            infrastructure the shelter couldn't maintain. The static GitHub Pages deployment ruled out backend payment
-            processing.</p>
+          <p class="body-sm mt-8">A real payment integration (Stripe, PayPal) would require server infrastructure the
+            shelter couldn't maintain. The static GitHub Pages deployment ruled out backend payment processing.</p>
           <div class="dd-rationale">Trade-off</div>
           <p class="body-sm">MB Way phone number + IBAN — the two methods adopters in Portugal already know and trust.
             Zero infrastructure, zero maintenance, handles 95% of the real donation use case.</p>
         </div>
         <div class="dd-card">
-          <div class="dd-num" style="color:var(--red-pale)">⚠</div>
+          <div class="dd-num dd-num--warn">⚠</div>
           <h3>iframe vs overlay for cat profiles</h3>
-          <p class="body-sm" style="margin-top:8px">ASM3 offered an iframe mode for cat profiles that would open over
-            the current page. In testing, it was impossible to style or control — it clashed with the site's visual
-            language completely.</p>
+          <p class="body-sm mt-8">ASM3 offered an iframe mode for cat profiles that would open over the current page. In
+            testing, it was impossible to style or control — it clashed with the site's visual language completely.</p>
           <div class="dd-rationale">Trade-off</div>
           <p class="body-sm">Disabled the iframe, used plain2 style instead. This rendered the profile inline with full
             CSS control. The user stays on the page — better for flow, better visually.</p>
         </div>
         <div class="dd-card">
-          <div class="dd-num" style="color:var(--red-pale)">⚠</div>
+          <div class="dd-num dd-num--warn">⚠</div>
           <h3>Solo delivery in 6 weeks</h3>
-          <p class="body-sm" style="margin-top:8px">There was no team — no QA, no copywriter, no back-end developer.
-            Every decision had to be scoped to what one person could design, build, and test in 6 weeks while being
-            genuinely useful.</p>
+          <p class="body-sm mt-8">There was no team — no QA, no copywriter, no back-end developer. Every decision had to
+            be scoped to what one person could design, build, and test in 6 weeks while being genuinely useful.</p>
           <div class="dd-rationale">Trade-off</div>
           <p class="body-sm">Three pages, zero dependencies, one external API. Deliberately minimal scope so the system
             could be fully understood and maintained by anyone after handoff — including non-technical volunteers.</p>
@@ -3103,32 +3559,36 @@
 
       <div class="learnings-grid rv">
         <div class="learning-card">
-          <div class="learning-card__icon"><img src="assets/icons/api.svg" alt=""/></div>
+          <div class="learning-card__icon"><img src="./assets/img/case-img/api.svg" alt="" width="28" height="28" />
+          </div>
           <h3>Third-party APIs have real limits — design around them, not against them</h3>
-          <p class="body-sm" style="margin-top:8px">The ASM3 API's search limitations were frustrating at first. The
-            shift was accepting the constraint and finding a better solution within it — the shuffle feature emerged
-            from this. The best constraint response is usually creative, not combative.</p>
+          <p class="body-sm mt-8">The ASM3 API's search limitations were frustrating at first. The shift was accepting
+            the constraint and finding a better solution within it — the shuffle feature emerged from this. The best
+            constraint response is usually creative, not combative.</p>
         </div>
         <div class="learning-card">
-          <div class="learning-card__icon"><img src="assets/icons/trust.svg" alt=""/></div>
+          <div class="learning-card__icon"><img src="./assets/img/case-img/trust.svg" alt="" width="28" height="28" />
+          </div>
           <h3>Designing for NGOs is designing for trust — not features</h3>
-          <p class="body-sm" style="margin-top:8px">Every design decision — the warm palette, the clear process steps,
-            the plain language — was ultimately about making someone feel safe enough to adopt or donate. For a cause
-            this personal, visual design isn't decorative. It's emotional infrastructure.</p>
+          <p class="body-sm mt-8">Every design decision — the warm palette, the clear process steps, the plain language
+            — was ultimately about making someone feel safe enough to adopt or donate. For a cause this personal, visual
+            design isn't decorative. It's emotional infrastructure.</p>
         </div>
         <div class="learning-card">
-          <div class="learning-card__icon"><img src="./assets/img/case-icons/automation.svg" alt=""/></div>
+          <div class="learning-card__icon"><img src="./assets/img/case-img/automation.svg" alt="" width="28"
+              height="28" /></div>
           <h3>Automation is the most sustainable gift you can give a small team</h3>
-          <p class="body-sm" style="margin-top:8px">Volunteers don't have time to update a website. Connecting the site
-            directly to the shelter's existing system meant zero long-term content burden. The best tool for a small
-            team is one that runs itself — sustainability should be a design goal, not a nice-to-have.</p>
+          <p class="body-sm mt-8">Volunteers don't have time to update a website. Connecting the site directly to the
+            shelter's existing system meant zero long-term content burden. The best tool for a small team is one that
+            runs itself — sustainability should be a design goal, not a nice-to-have.</p>
         </div>
         <div class="learning-card">
-          <div class="learning-card__icon"><img src="assets/icons/mobile.svg" alt=""/></div>
+          <div class="learning-card__icon"><img src="./assets/img/case-img/mobile.svg" alt="" width="28" height="28" />
+          </div>
           <h3>Mobile-first isn't optional — it's where your users actually are</h3>
-          <p class="body-sm" style="margin-top:8px">The shelter's audience arrives via Instagram and Facebook — meaning
-            most users land on mobile. Designing desktop-first would have left the majority with a broken experience.
-            Mobile-first isn't a principle for its own sake — it's the reality of where NGO audiences live.</p>
+          <p class="body-sm mt-8">The shelter's audience arrives via Instagram and Facebook — meaning most users land on
+            mobile. Designing desktop-first would have left the majority with a broken experience. Mobile-first isn't a
+            principle for its own sake — it's the reality of where NGO audiences live.</p>
         </div>
       </div>
     </div>
@@ -3178,6 +3638,20 @@
     const st = document.getElementById('scroll-top');
     window.addEventListener('scroll', () => scrollY > 300 ? st.classList.add('active') : st.classList.remove('active'));
     st.addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }) });
+
+    /* Screen cards expand/collapse */
+    function toggleScreen(card) {
+      const isOpen = card.classList.contains('is-open');
+      const toggle = card.querySelector('.screen-card__toggle');
+      const hint = card.querySelector('.screen-card__expand-hint');
+      if (isOpen) {
+        card.classList.remove('is-open');
+        if (toggle) toggle.textContent = 'Expand';
+      } else {
+        card.classList.add('is-open');
+        if (toggle) toggle.textContent = 'Collapse';
+      }
+    }
   </script>
 </body>
 
