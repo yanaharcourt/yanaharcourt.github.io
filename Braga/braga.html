@@ -3,10 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Braga - Sua Cidade, Seu Futuro</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
-
 </head>
 
 <body>
@@ -16,7 +20,6 @@
                 <img src="https://raw.githubusercontent.com/yanaharcourt/yanaharcourt.github.io/e9d76e28ce044c93dfbfaa98ec55f07b2a155098/Braga/assets/img/logo.png"
                     alt="Braga" />
             </div>
-
 
             <div class="main-nav">
                 <ul class="nav-links">
@@ -43,37 +46,43 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Mobile burger -->
+            <button class="burger-btn" aria-label="Abrir menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
+
     <div class="container">
 
-        <!-- --------------------------------------------------------------
-        # HERO 
-        ---------------------------------------------------------------->
+        <!-- -------------------------------------------------------
+        # HERO
+        --------------------------------------------------------- -->
         <section class="content-grid">
             <div class="hero-section">
                 <img src="https://raw.githubusercontent.com/yanaharcourt/yanaharcourt.github.io/e9d76e28ce044c93dfbfaa98ec55f07b2a155098/Braga/assets/img/hero.jpeg"
                     alt="Braga - Inovação e Patrimônio" class="hero-image">
                 <div class="hero-overlay">
-                    <h2 style="font-size: 32px;">Braga: Inovação e Patrimônio</h2>
-                    <p>Construindo o futuro com raízes históricas</p>
+                    <h2 class="hero-overlay__title">Braga: Tradição e Inovação</h2>
+                    <p class="hero-overlay__subtitle">Uma cidade histórica projetando-se para o futuro</p>
                 </div>
             </div>
             <div class="news-sidebar">
                 <div class="sidebar-tabs">
                     <button class="active" data-tab="news">Notícias</button>
                     <button data-tab="agenda">Agenda</button>
-                    <button data-tab="distances">Distâncias</button>
+                    <button data-tab="distances">Destaques</button>
                 </div>
                 <div class="sidebar-content">
                     <!-- News Tab -->
                     <div class="tab-content active" data-tab="news">
                         <div class="content-item">
-                            <h4>Semibreve Festival</h4>
-                            <p>Celebrando música eletrônica e arte digital</p>
+                            <h4>Jogos Municipais</h4>
+                            <p>Braga será a cidade anfitriã</p>
                             <div class="details">
-                                <span class="tag">Cultura</span>
-                                <span class="date">15 de Outubro</span>
+                                <span class="tag">Evento</span>
+                                <span class="date">5 de Agosto</span>
                             </div>
                         </div>
                         <div class="content-item">
@@ -88,8 +97,8 @@
                             <h4>Jogos Municipais</h4>
                             <p>Braga será a cidade anfitriã</p>
                             <div class="details">
-                                <span class="tag">Evento</span>
-                                <span class="date">5 de Agosto</span>
+                                <span class="tag">Cultura</span>
+                                <span class="date">15 de Outubro</span>
                             </div>
                         </div>
                     </div>
@@ -159,8 +168,8 @@
                                     alt="Braga Heritage">
                             </div>
 
-                            <button class="flip-button prev-button">←</button>
-                            <button class="flip-button next-button">→</button>
+                            <button class="flip-button prev-button" aria-label="Anterior">←</button>
+                            <button class="flip-button next-button" aria-label="Próximo">→</button>
                             <div class="navigation-dots">
                                 <span class="dot active" data-index="0"></span>
                                 <span class="dot" data-index="1"></span>
@@ -171,9 +180,10 @@
                 </div>
             </div>
         </section>
-        <!------------------------------------------------------------------
+
+        <!-- -------------------------------------------------------
         # HISTORY SECTION
-        ------------------------------------------------------------------>
+        --------------------------------------------------------- -->
         <section class="history-section">
             <div class="history-container">
                 <div class="history-content">
@@ -191,8 +201,8 @@
                                 <img src="https://raw.githubusercontent.com/yanaharcourt/yanaharcourt.github.io/e9d76e28ce044c93dfbfaa98ec55f07b2a155098/Braga/assets/img/4.png"
                                     alt="Centro Histórico">
                             </div>
-                            <button class="flip-button prev-button">←</button>
-                            <button class="flip-button next-button">→</button>
+                            <button class="flip-button prev-button" aria-label="Anterior">←</button>
+                            <button class="flip-button next-button" aria-label="Próximo">→</button>
                             <div class="navigation-dots">
                                 <span class="dot active" data-index="0"></span>
                                 <span class="dot" data-index="1"></span>
@@ -218,9 +228,10 @@
                 </div>
             </div>
         </section>
-        <!------------------------------------------------------------------
+
+        <!-- -------------------------------------------------------
         # EXPLORE SECTION
-        ------------------------------------------------------------------>
+        --------------------------------------------------------- -->
         <section class="explore-section">
             <div class="explore-container">
                 <div class="explore-header-main">
@@ -249,8 +260,8 @@
                         </div>
 
                         <div class="explore-navigation">
-                            <button class="nav-btn prev-btn">‹</button>
-                            <button class="nav-btn next-btn">›</button>
+                            <button class="nav-btn prev-btn" aria-label="Anterior">‹</button>
+                            <button class="nav-btn next-btn" aria-label="Próximo">›</button>
                             <div class="nav-line"></div>
                             <div class="slide-indicator">01</div>
                         </div>
@@ -318,7 +329,7 @@
                                 alt="Nanotecnologia">
                         </div>
                         <div class="card-content">
-                            <h4>Nanotecnologia</h4>
+                            <h4>Tecnologia de Ponta</h4>
                             <p>O único International Nanotechnology Laboratory mundial desenvolve nanociência e
                                 nanotecnologia em Braga.</p>
                             <button class="card-button">Saiba Mais</button>
@@ -341,6 +352,7 @@
                 </div>
             </div>
         </section>
+
         <section class="culture-section">
             <div class="culture-container">
                 <div class="culture-header">
@@ -375,7 +387,7 @@
                             <div class="event-content">
                                 <div class="event-date">11 a 24 Junho</div>
                                 <h4>São João de Braga</h4>
-                                <p>As Festas de S. João de Braga são as maiores e mai...</p>
+                                <p>As Festas de S. João de Braga são as maiores e mais antigas sanjo...</p>
                             </div>
                         </div>
 
@@ -387,7 +399,7 @@
                             <div class="event-content">
                                 <div class="event-date">March 1 / April 15</div>
                                 <h4>Festival Vaudeville Rendez-Vous</h4>
-                                <p>Organizado no âmbito do Quadrilátero Urbano, o Festi...</p>
+                                <p>Organizado no âmbito do Quadrilátero Urbano, o Festival In...</p>
                             </div>
                         </div>
 
@@ -398,17 +410,18 @@
                             </div>
                             <div class="event-content">
                                 <div class="event-date">March 29 / June 7</div>
-                                <h4>EXPOSIÇÃO: "The Contraction of Ein Sof", p...</h4>
-                                <p>Focusing on the notion of contraction has created a le...</p>
+                                <h4>EXPOSIÇÃO: "The Contraction of Ein Sof"</h4>
+                                <p>Focusing on the notion of contraction has created a lens t...</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!------------------------------------------------------------------
+
+        <!-- -------------------------------------------------------
         # AMBIENTE SECTION
-        ------------------------------------------------------------------>
+        --------------------------------------------------------- -->
         <section class="ambiente-section">
             <div class="ambiente-container">
                 <div class="ambiente-header">
@@ -497,9 +510,10 @@
                 </div>
             </div>
         </section>
-        <!------------------------------------------------------------------
+
+        <!-- -------------------------------------------------------
         # EDUCAÇÃO SECTION
-        ------------------------------------------------------------------>
+        --------------------------------------------------------- -->
         <section class="educacao-section">
             <div class="educacao-container">
                 <div class="educacao-header">
@@ -585,9 +599,10 @@
                 </div>
             </div>
         </section>
-        <!------------------------------------------------------------------
+
+        <!-- -------------------------------------------------------
         # DESPORTO SECTION
-        ------------------------------------------------------------------>
+        --------------------------------------------------------- -->
         <section class="desporto-section">
             <div class="desporto-container">
                 <div class="desporto-header">
@@ -602,12 +617,10 @@
                 </div>
 
                 <div class="desporto-content">
-                    <!-- Main Stadium Image -->
                     <div class="stadium-main">
                         <div class="main-image">
                             <img src="https://raw.githubusercontent.com/yanaharcourt/yanaharcourt.github.io/e9d76e28ce044c93dfbfaa98ec55f07b2a155098/Braga/assets/img/Esta%CC%81dio.png"
                                 alt="Estádio Municipal de Braga">
-
                             <div class="main-overlay">
                                 <h3>Estádio Municipal de Braga</h3>
                                 <p>Projetado pelo renomado arquiteto Eduardo Souto de Moura, esta obra-prima
@@ -619,7 +632,6 @@
                         </div>
                     </div>
 
-                    <!-- Sports Grid -->
                     <div class="sports-grid">
                         <div class="sport-card large-card">
                             <img src="https://raw.githubusercontent.com/yanaharcourt/yanaharcourt.github.io/e9d76e28ce044c93dfbfaa98ec55f07b2a155098/Braga/assets/img/SC%20Braga.png"
@@ -655,7 +667,6 @@
                     </div>
                 </div>
 
-                <!-- Sports Programs Section -->
                 <div class="programas-section">
                     <div class="programas-header">
                         <h2>Programas Desportivos</h2>
@@ -691,7 +702,6 @@
                     </div>
                 </div>
 
-                <!-- Upcoming Events Section -->
                 <div class="eventos-section">
                     <div class="eventos-header">
                         <h3>Próximos Eventos Desportivos</h3>
@@ -738,9 +748,10 @@
                 </div>
             </div>
         </section>
-        <!------------------------------------------------------------------
-                # SAUDE E BEM ESTAR SECTION
-                ------------------------------------------------------------------>
+
+        <!-- -------------------------------------------------------
+        # SAUDE E BEM ESTAR SECTION
+        --------------------------------------------------------- -->
         <section class="saude-section">
             <div class="saude-container">
                 <div class="saude-header">
@@ -866,7 +877,7 @@
 
                     <div class="protecao-grid">
                         <div class="protecao-card">
-                            <h5>Proteção Civil </h5>
+                            <h5>Proteção Civil</h5>
                             <p>Planeamento e coordenação de ações de prevenção, socorro e assistência em situações de
                                 acidente
                                 grave, catástrofe ou calamidade.</p>
@@ -924,16 +935,12 @@
             </div>
         </section>
     </div>
-    
-    <!-- ============================================
-    Global Footer
-    ============================================ -->
+
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-content">
-                <!-- Logo Section -->
                 <div class="footer-section logo-section">
-                    <h2>Praça Municipal</h2>
+                    <div class="footer-brand">Praça Municipal</div>
                     <div class="social-icons">
                         <a href="#" class="social-icon" aria-label="Facebook">
                             <img src="https://raw.githubusercontent.com/yanaharcourt/yanaharcourt.github.io/e9d76e28ce044c93dfbfaa98ec55f07b2a155098/Braga/assets/img/Facebook.svg"
@@ -954,7 +961,6 @@
                     </div>
                 </div>
 
-                <!-- Contact Section -->
                 <div class="footer-section contact">
                     <h3>Contacto</h3>
                     <div class="contact-item">
@@ -979,7 +985,6 @@
                     </div>
                 </div>
 
-                <!-- Quick Links Section -->
                 <div class="footer-section links">
                     <h3>Ligações rápidas</h3>
                     <ul>
@@ -992,7 +997,6 @@
                     </ul>
                 </div>
 
-                <!-- Programs Section -->
                 <div class="footer-section programs">
                     <h3>Os nossos programas</h3>
                     <ul>
@@ -1012,171 +1016,7 @@
         </div>
     </footer>
 
-    <footer class="yanas-footer" id="contact">
-        <div class="yanas-bg-elements">
-            <div class="yanas-bg-element">
-                <i class="bi bi-code-slash"></i>
-            </div>
-            <div class="yanas-bg-element">
-                <i class="bi bi-palette"></i>
-            </div>
-            <div class="yanas-bg-element">
-                <i class="bi bi-layers"></i>
-            </div>
-            <div class="yanas-bg-element">
-                <i class="bi bi-terminal"></i>
-            </div>
-            <div class="yanas-bg-element">
-                <i class="bi bi-vector-pen"></i>
-            </div>
-            <div class="yanas-bg-element">
-                <i class="bi bi-grid-3x3"></i>
-            </div>
-            <div class="yanas-bg-element">
-                <i class="bi bi-bezier"></i>
-            </div>
-            <div class="yanas-bg-element">
-                <i class="bi bi-cpu"></i>
-            </div>
-        </div>
-
-        <div class="yanas-footer_wrapper">
-            <div class="yanas-footer_content">
-                <div class="yanas-footer_content-left">
-                    <h3 class="yanas-title-140">Let's connect</h3>
-                    <div class="yanas-footer_content-left-content">
-                        <div class="yanas-text-32">Ready to bring your ideas to life through design & code</div>
-                    </div>
-                    <a href="mailto:yana.harcourt@gmail.com" class="yanas-button">
-                        <div class="yanas-button-content">
-                            <span>Send an e-mail</span>
-                            <i class="bi bi-arrow-up-right"></i>
-                        </div>
-                        <div class="yanas-button-bg-hover"></div>
-                    </a>
-                </div>
-
-                <div class="yanas-footer_content-right">
-                    <div class="yanas-footer-form">
-                        <form id="yanasContactForm" action="https://formspree.io/f/xnnqvwab" method="POST"
-                            class="yanas-form">
-                            <div class="yanas-status-message" id="yanasStatusMessage"></div>
-
-                            <div class="yanas-form_first-line">
-                                <div class="yanas-form_first-line-title">
-                                    <div class="yanas-text-40">Contact info*</div>
-                                </div>
-                                <div class="yanas-form-row">
-                                    <input class="yanas-footer-field" name="name" placeholder="Your name*" type="text"
-                                        required>
-                                    <input class="yanas-footer-field" name="email" placeholder="Your e-mail*"
-                                        type="email" required>
-                                </div>
-                            </div>
-
-                            <div class="yanas-form_second-line">
-                                <div class="yanas-form_first-line-title">
-                                    <div class="yanas-text-40">You are interested in*</div>
-                                </div>
-                                <div class="yanas-services-grid">
-                                    <div class="yanas-form-button_field" data-service="ux-ui-design">UX/UI Design</div>
-                                    <div class="yanas-form-button_field" data-service="web-development">Web Development
-                                    </div>
-                                </div>
-                                <input type="hidden" name="services" id="selectedServices">
-                            </div>
-
-                            <div class="yanas-form_second-line">
-                                <div class="yanas-form_first-line-title">
-                                    <div class="yanas-text-40">Your budget in EUR*</div>
-                                </div>
-                                <div class="yanas-budget-grid">
-                                    <div class="yanas-form-button_field" data-budget="<5k">&lt;5K</div>
-                                    <div class="yanas-form-button_field" data-budget="5-10k">5-10K</div>
-                                    <div class="yanas-form-button_field" data-budget="10-20k">10-20K</div>
-                                    <div class="yanas-form-button_field" data-budget=">20k">&gt;20K</div>
-                                    <div class="yanas-form-button_field" data-budget="i-dont-know">I don't know yet
-                                    </div>
-                                </div>
-                                <input type="hidden" name="budget" id="selectedBudget">
-                            </div>
-
-                            <div class="yanas-form_second-line">
-                                <textarea name="message" class="yanas-message-field"
-                                    placeholder="Tell me about your project..."></textarea>
-                            </div>
-
-                            <button type="submit" class="yanas-form_button">Start a journey</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="yanas-footer_links">
-                <div class="yanas-footer_links-left">
-                    <div class="yanas-text-36">Keep in touch</div>
-                    <div class="yanas-text-24">yana.harcourt@gmail.com</div>
-                </div>
-
-                <div class="yanas-footer_links-right">
-                    <div class="yanas-footer_links-right-item">
-                        <h5>Follow Us</h5>
-                        <div class="yanas-footer_links-right-item-links">
-                            <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank"
-                                class="yanas-rolling-text">
-                                <span class="yanas-text-block">LinkedIn</span>
-                                <span class="yanas-text-block">LinkedIn</span>
-                            </a>
-                            <a href="https://www.behance.net/yana_harcourt" target="_blank" class="yanas-rolling-text">
-                                <span class="yanas-text-block">Behance</span>
-                                <span class="yanas-text-block">Behance</span>
-                            </a>
-                            <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank"
-                                class="yanas-rolling-text">
-                                <span class="yanas-text-block">Instagram</span>
-                                <span class="yanas-text-block">Instagram</span>
-                            </a>
-                            <a href="https://github.com/yanaharcourt" target="_blank" class="yanas-rolling-text">
-                                <span class="yanas-text-block">GitHub</span>
-                                <span class="yanas-text-block">GitHub</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="yanas-footer_links-right-item">
-                        <h5>Menu</h5>
-                        <div class="yanas-footer_links-right-item-links">
-                            <a href="../index.html" class="yanas-rolling-text">
-                                <span class="yanas-text-block">Home</span>
-                                <span class="yanas-text-block">Home</span>
-                            </a>
-                            <a href="#about" class="yanas-rolling-text">
-                                <span class="yanas-text-block">About</span>
-                                <span class="yanas-text-block">About</span>
-                            </a>
-                            <a href="#portfolio" class="yanas-rolling-text">
-                                <span class="yanas-text-block">Portfolio</span>
-                                <span class="yanas-text-block">Portfolio</span>
-                            </a>
-                            <a href="#resume" class="yanas-rolling-text">
-                                <span class="yanas-text-block">Resume</span>
-                                <span class="yanas-text-block">Resume</span>
-                            </a>
-                            <a href="#contact" class="yanas-rolling-text">
-                                <span class="yanas-text-block">Contact</span>
-                                <span class="yanas-text-block">Contact</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="yanas-copyright">
-                    2024 All Rights Reserved
-                </div>
-            </div>
-        </div>
-    </footer>
-</body>
-<script src="assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
