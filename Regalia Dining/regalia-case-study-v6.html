@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regalia Dining — Case Study · Yana Harcourt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════
+       TOKENS
+    ═══════════════════════════════════ */
+    :root {
+      --bg:       #070B19;
+      --bg-2:     #0D1326;
+      --bg-card:  rgba(16,23,40,0.7);
+      --gold:     #B8995C;
+      --gold-lt:  rgba(184,153,92,0.15);
+      --gold-bd:  rgba(184,153,92,0.25);
+      --text:     #C7C2B7;
+      --text-2:   #999899;
+      --border:   rgba(184,153,92,0.12);
+      --serif:    'Croissant One', Georgia, serif;
+      --sans:     'Hanken Grotesk', system-ui, sans-serif;
+      --sp-v:     72px;
+      --sp-h:     80px;
+    }
+    @media (max-width:1200px){ :root{ --sp-h:56px; --sp-v:60px; } }
+    @media (max-width:768px) { :root{ --sp-h:24px; --sp-v:48px; } }
+    @media (max-width:480px) { :root{ --sp-h:16px; --sp-v:36px; } }
+
+    /* ─── Reset ─── */
+    *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+    html{ scroll-behavior:smooth; }
+    body{ font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.65; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+    img{ display:block; max-width:100%; height:auto; }
+    a{ color:inherit; text-decoration:none; }
+    button{ border:none; background:none; font:inherit; cursor:pointer; }
+
+    /* ─── Scroll reveal ─── */
+    .rv{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+    .rv.in{ opacity:1; transform:none; }
+    .rv.d1{ transition-delay:.1s; }
+    .rv.d2{ transition-delay:.2s; }
+    .rv.d3{ transition-delay:.3s; }
+    .rv.d4{ transition-delay:.4s; }
+
+    /* ─── Custom cursor ─── */
+    #cur{ position:fixed; width:8px; height:8px; background:var(--gold); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform .15s; }
+    #ctr{ position:fixed; width:28px; height:28px; border:1.5px solid var(--gold); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); opacity:.45; }
+    @media (hover:none),(pointer:coarse){ #cur,#ctr{ display:none !important; } }
+
+    /* ─── Layout ─── */
+    .sec{ padding:var(--sp-v) var(--sp-h); }
+    .sec--alt{ background:var(--bg-2); }
+    .inner{ max-width:1240px; margin:0 auto; }
+
+    /* ═══════════════════════════════════
+       BREADCRUMB
+    ═══════════════════════════════════ */
+    .breadcrumb{
+      position:fixed; top:0; left:0; right:0; z-index:500;
+      background:rgba(7,11,25,0.94); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border); padding:14px var(--sp-h);
+    }
+    .breadcrumb__inner{ max-width:1240px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+    .breadcrumb__left{ display:flex; align-items:center; gap:8px; }
+    .breadcrumb__link{ font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--text-2); transition:color .2s; }
+    .breadcrumb__link:hover{ color:var(--gold); }
+    .breadcrumb__sep{ font-size:11px; color:var(--text-2); opacity:.4; }
+    .breadcrumb__current{ font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); }
+    .breadcrumb__tags{ display:flex; gap:6px; }
+    .bc-tag{ font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:4px 10px; border-radius:20px; }
+    .bc-tag--gold{ background:var(--gold-lt); color:var(--gold); }
+    .bc-tag--navy{ background:rgba(16,23,40,0.8); color:var(--text-2); border:1px solid var(--border); }
+    @media (max-width:768px){ .breadcrumb__tags{ display:none; } }
+    @media (max-width:480px){
+      .breadcrumb__link:not(:last-of-type){ display:none; }
+      .breadcrumb__sep:first-of-type{ display:none; }
+    }
+
+    /* ═══════════════════════════════════
+       TYPOGRAPHY
+    ═══════════════════════════════════ */
+    .eyebrow{ display:inline-flex; align-items:center; gap:10px; font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+    .eyebrow::after{ content:''; width:36px; height:1px; background:var(--gold); opacity:.45; }
+    .sec-num{ font-size:9px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+
+    h1.hero-title{ font-family:var(--serif); font-size:clamp(48px,6vw,88px); font-weight:400; line-height:1.02; color:var(--text); letter-spacing:-.01em; }
+    h1.hero-title em{ font-style:italic; color:var(--gold); }
+
+    h2.sec-h2{ font-family:var(--serif); font-size:clamp(26px,3.4vw,48px); font-weight:400; line-height:1.1; color:var(--text); letter-spacing:-.01em; margin-bottom:16px; }
+    h2.sec-h2 em{ font-style:italic; color:var(--gold); }
+    h2.sec-h2--sm{ font-family:var(--serif); font-size:clamp(20px,2.2vw,32px); font-weight:400; line-height:1.15; color:var(--text); letter-spacing:-.01em; margin-bottom:14px; }
+    h2.sec-h2--sm em{ font-style:italic; color:var(--gold); }
+
+    .sec-lead{ font-size:16px; line-height:1.8; color:var(--text-2); max-width:650px; margin-bottom:44px; }
+    .body{ font-size:15px; line-height:1.8; color:var(--text-2); }
+    .body-sm{ font-size:13px; line-height:1.75; color:var(--text-2); }
+
+    /* ═══════════════════════════════════
+       HERO — split layout
+    ═══════════════════════════════════ */
+    .hero{ display:grid; grid-template-columns:1fr 1fr; min-height:100vh; padding-top:50px; }
+    @media (max-width:900px){ .hero{ grid-template-columns:1fr; min-height:auto; } }
+
+    .hero__left{
+      display:flex; flex-direction:column; justify-content:center;
+      padding:80px var(--sp-h) 80px 80px; position:relative; z-index:2;
+    }
+    @media (max-width:1200px){ .hero__left{ padding:60px 48px 60px 56px; } }
+    @media (max-width:900px) { .hero__left{ padding:60px 24px 40px; } }
+
+    .hero__right{ position:relative; overflow:hidden; background:var(--bg-2); }
+    @media (max-width:900px){ .hero__right{ min-height:380px; } }
+
+    .hero__right-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center; display:block; }
+
+    .hero__right-ph{
+      position:absolute; inset:0; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:8px;
+      background:linear-gradient(160deg,#0d1326 0%,#0a0f1e 100%);
+    }
+    .hero__right-ph::before{ content:''; position:absolute; inset:24px; border:1.5px dashed var(--border); border-radius:12px; opacity:.4; }
+    .hero__right-ph p{ position:relative; z-index:1; font-size:12px; color:var(--text-2); opacity:.5; }
+    .hero__right-ph small{ position:relative; z-index:1; font-size:10px; color:var(--text-2); opacity:.3; }
+
+    .hero__stat-float{
+      position:absolute; bottom:40px; left:32px; z-index:3;
+      background:rgba(7,11,25,0.88); backdrop-filter:blur(14px);
+      border:1px solid var(--border); border-radius:14px; padding:20px 26px;
+    }
+    @media (max-width:900px){ .hero__stat-float{ bottom:20px; left:20px; } }
+    .hero__stat-num{ font-family:var(--serif); font-size:38px; color:var(--gold); line-height:1; margin-bottom:4px; }
+    .hero__stat-label{ font-size:12px; color:var(--text-2); max-width:160px; line-height:1.4; }
+
+    .hero__orb{ position:absolute; width:500px; height:500px; background:radial-gradient(circle,rgba(184,153,92,.08) 0%,transparent 70%); right:-60px; top:10%; pointer-events:none; z-index:1; }
+    .hero__orb2{ position:absolute; width:300px; height:300px; background:radial-gradient(circle,rgba(184,153,92,.05) 0%,transparent 70%); left:-40px; bottom:20%; pointer-events:none; z-index:1; }
+    .hero__content{ position:relative; z-index:2; }
+
+    .hero__tag{ display:inline-flex; align-items:center; gap:10px; border:1px solid var(--gold-bd); border-radius:30px; padding:6px 16px; font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:28px; }
+    .hero__tag-dot{ width:6px; height:6px; border-radius:50%; background:var(--gold); animation:blink 2s ease-in-out infinite; }
+    @keyframes blink{ 0%,100%{ opacity:1 } 50%{ opacity:.3 } }
+
+    .hero__meta{ margin-top:40px; display:flex; gap:28px; flex-wrap:wrap; }
+    .hero__meta-label{ font-size:9px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+    .hero__meta-val{ font-size:13px; color:var(--text-2); }
+
+    /* ═══════════════════════════════════
+       OVERVIEW STRIP
+    ═══════════════════════════════════ */
+    .overview-strip{ background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:var(--sp-v) var(--sp-h); }
+    .overview-grid{ max-width:1240px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; }
+    @media (max-width:1100px){ .overview-grid{ grid-template-columns:1fr 1fr; } }
+    @media (max-width:600px) { .overview-grid{ grid-template-columns:1fr; } }
+    .overview-desc{ font-size:16px; line-height:1.75; color:var(--text-2); }
+    .overview-col-label{ font-size:9px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+    .overview-col-val{ font-size:14px; color:var(--text); line-height:1.6; }
+
+    .btn-visit{ display:inline-flex; align-items:center; gap:8px; margin-top:18px; padding:10px 24px; border:1.5px solid var(--gold); border-radius:20px; font-size:13px; font-family:var(--serif); color:var(--gold); transition:background .3s,color .3s; }
+    .btn-visit:hover{ background:var(--gold); color:var(--bg); }
+
+    /* ═══════════════════════════════════
+       TWO COL / CARDS
+    ═══════════════════════════════════ */
+    .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    @media (max-width:860px){ .two-col{ grid-template-columns:1fr; } }
+
+    .card-box{ background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:40px; backdrop-filter:blur(10px); transition:transform .3s ease,border-color .3s; }
+    .card-box:hover{ transform:translateY(-3px); border-color:var(--gold-bd); }
+    .card-box h3{ font-family:var(--serif); font-size:24px; font-weight:400; color:var(--gold); margin-bottom:16px; }
+
+    .goals-list{ list-style:none; display:flex; flex-direction:column; gap:12px; margin-top:8px; }
+    .goals-list li{ display:flex; gap:12px; align-items:flex-start; font-size:15px; color:var(--text-2); line-height:1.65; }
+    .goals-list li::before{ content:''; flex-shrink:0; width:6px; height:6px; border-radius:50%; background:var(--gold); margin-top:8px; }
+
+    /* ═══════════════════════════════════
+       PROCESS TIMELINE
+    ═══════════════════════════════════ */
+    .process-track{ position:relative; display:flex; gap:0; overflow-x:auto; padding-bottom:12px; }
+    .process-track::before{ content:''; position:absolute; top:28px; left:0; right:0; height:1px; background:var(--border); }
+    .process-step{ flex:1; min-width:140px; padding-top:56px; position:relative; padding-right:16px; }
+    .process-step__dot{ position:absolute; top:18px; left:0; width:20px; height:20px; border-radius:50%; border:2px solid var(--gold); background:var(--bg); display:flex; align-items:center; justify-content:center; }
+    .process-step__dot::after{ content:''; width:8px; height:8px; border-radius:50%; background:var(--gold); }
+    .process-step__num{ font-size:9px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:5px; }
+    .process-step__name{ font-family:var(--serif); font-size:15px; color:var(--text); margin-bottom:5px; }
+    .process-step__desc{ font-size:12px; color:var(--text-2); line-height:1.55; }
+
+    /* ═══════════════════════════════════
+       INSIGHTS / RESEARCH
+    ═══════════════════════════════════ */
+    .insights-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    @media (max-width:1000px){ .insights-grid{ grid-template-columns:1fr 1fr; } }
+    @media (max-width:600px) { .insights-grid{ grid-template-columns:1fr; } }
+
+    .insight-card{ background:var(--bg-card); border:1px solid var(--border); border-radius:18px; padding:28px; transition:transform .3s,border-color .3s; }
+    .insight-card:hover{ transform:translateY(-3px); border-color:var(--gold-bd); }
+    .insight-card__icon{ margin-bottom:14px; }
+    .insight-card__stat{ font-family:var(--serif); font-size:48px; color:var(--gold); line-height:1; margin-bottom:8px; }
+    .insight-card__label{ font-size:13px; color:var(--text-2); line-height:1.6; }
+
+    /* Competitor table */
+    .comp-table{ width:100%; border-collapse:separate; border-spacing:0; }
+    .comp-table th{ background:rgba(184,153,92,.1); font-size:9px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); padding:12px 16px; border-bottom:1px solid var(--border); text-align:left; }
+    .comp-table td{ padding:12px 16px; font-size:13px; color:var(--text-2); border-bottom:1px solid rgba(184,153,92,.06); line-height:1.5; vertical-align:top; }
+    .comp-table tr:last-child td{ border-bottom:none; }
+    .comp-yes{ color:#5BAA6F; font-weight:700; }
+    .comp-no{ color:#9B5252; font-weight:700; }
+    .comp-note{ font-size:12px; color:var(--text-2); opacity:.55; margin-top:12px; }
+
+    .chip{ display:inline-block; padding:3px 10px; border-radius:8px; background:var(--gold-lt); color:var(--gold); font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+
+    /* Quotes */
+    .quote-mark{ font-family:var(--serif); font-size:52px; color:var(--gold); line-height:.7; margin-bottom:12px; opacity:.6; }
+    .quote-text{ font-size:15px; line-height:1.75; color:var(--text); font-style:italic; }
+    .quote-author-name{ font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-top:14px; }
+    .quote-author-role{ font-size:12px; color:var(--text-2); margin-top:2px; }
+
+    /* ═══════════════════════════════════
+       PERSONAS
+    ═══════════════════════════════════ */
+    .persona-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    @media (max-width:860px){ .persona-grid{ grid-template-columns:1fr; } }
+
+    .persona-card{ background:var(--bg-card); border:1px solid var(--border); border-radius:20px; overflow:hidden; transition:transform .3s,border-color .3s; }
+    .persona-card:hover{ transform:translateY(-3px); border-color:var(--gold-bd); }
+    .persona-card__header{ background:linear-gradient(135deg,rgba(184,153,92,.15) 0%,rgba(184,153,92,.04) 100%); padding:28px 32px; display:flex; gap:20px; align-items:center; border-bottom:1px solid var(--border); }
+    .persona-avatar{ width:80px; height:80px; border-radius:16px; overflow:hidden; flex-shrink:0; }
+    .persona-avatar img{ width:100%; height:100%; object-fit:cover; }
+    .persona-name{ font-family:var(--serif); font-size:22px; color:var(--text); }
+    .persona-role{ font-size:12px; color:var(--gold); margin-top:3px; }
+    .persona-card__body{ padding:28px 32px; }
+    .persona-tag-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
+    .persona-tag{ font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold-bd); border-radius:10px; padding:4px 10px; }
+    .persona-row{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    @media (max-width:500px){ .persona-row{ grid-template-columns:1fr; } }
+    .persona-block h4{ font-size:9px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:9px; }
+    .persona-block ul{ list-style:none; display:flex; flex-direction:column; gap:6px; }
+    .persona-block ul li{ font-size:13px; color:var(--text-2); display:flex; gap:8px; }
+    .persona-block ul li::before{ content:'-'; color:var(--gold); opacity:.5; flex-shrink:0; }
+
+    .pain-bar-wrap{ margin-top:20px; }
+    .pain-bar-wrap h4{ font-size:9px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+    .pain-bar{ margin-bottom:9px; }
+    .pain-bar__label{ font-size:12px; color:var(--text-2); margin-bottom:3px; }
+    .pain-bar__track{ height:4px; background:rgba(184,153,92,.1); border-radius:2px; overflow:hidden; }
+    .pain-bar__fill{ height:100%; background:var(--gold); border-radius:2px; transition:width 1s ease; }
+    .pain-bar__fill[data-w="95"]{ width:95%; }
+    .pain-bar__fill[data-w="88"]{ width:88%; }
+    .pain-bar__fill[data-w="80"]{ width:80%; }
+    .pain-bar__fill[data-w="75"]{ width:75%; }
+    .pain-bar__fill[data-w="98"]{ width:98%; }
+    .pain-bar__fill[data-w="90"]{ width:90%; }
+    .pain-bar__fill[data-w="82"]{ width:82%; }
+    .pain-bar__fill[data-w="78"]{ width:78%; }
+
+    /* ═══════════════════════════════════
+       CJM
+    ═══════════════════════════════════ */
+    .cjm-wrap{ overflow-x:auto; padding-bottom:12px; }
+    .cjm-table{ min-width:860px; width:100%; border-collapse:separate; border-spacing:0; }
+    .cjm-table th{ background:rgba(184,153,92,.1); font-size:9px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); padding:13px 16px; border-bottom:1px solid var(--border); border-right:1px solid var(--border); }
+    .cjm-table th:first-child{ border-radius:12px 0 0 0; }
+    .cjm-table th:last-child{ border-right:none; border-radius:0 12px 0 0; }
+    .cjm-row-label{ font-size:9px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--text-2); padding:13px 16px; border-bottom:1px solid var(--border); border-right:1px solid var(--border); background:rgba(16,23,40,.6); vertical-align:middle; white-space:nowrap; }
+    .cjm-cell{ padding:13px 16px; font-size:13px; color:var(--text-2); line-height:1.55; border-bottom:1px solid rgba(184,153,92,.06); border-right:1px solid rgba(184,153,92,.06); vertical-align:top; }
+    .cjm-cell:last-child{ border-right:none; }
+    .cjm-table tr:last-child .cjm-row-label,
+    .cjm-table tr:last-child .cjm-cell{ border-bottom:none; }
+    .emo{ display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+    .emo-dot{ width:10px; height:10px; border-radius:50%; }
+    .emo-high{ background:#5BAA6F; }
+    .emo-mid{ background:var(--gold); }
+    .emo-low{ background:#9B5252; }
+    .emo-label{ font-size:11px; color:var(--text-2); }
+    .emotion-curve{ width:100%; height:80px; margin:14px 0; }
+
+    /* ═══════════════════════════════════
+       SCREENS — PORTFOLIO GRID
+    ═══════════════════════════════════ */
+    .screens-portfolio{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:48px; }
+    @media (max-width:1000px){ .screens-portfolio{ grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:600px) { .screens-portfolio{ grid-template-columns:1fr; } }
+
+    .sc-card--featured{ grid-column:span 2; }
+    @media (max-width:1000px){ .sc-card--featured{ grid-column:span 1; } }
+
+    .sc-card{
+      border-radius:16px; overflow:hidden; border:1px solid var(--border);
+      background:var(--bg-card); cursor:pointer; position:relative;
+      transition:box-shadow .3s,transform .3s,border-color .3s;
+    }
+    .sc-card:hover{ box-shadow:0 8px 40px rgba(184,153,92,.1); transform:translateY(-2px); border-color:var(--gold-bd); }
+    .sc-card--static{ cursor:default; }
+    .sc-card--static:hover{ transform:none; box-shadow:none; }
+
+    .sc-card__bar{ background:rgba(13,19,38,0.9); padding:10px 14px; display:flex; align-items:center; gap:6px; user-select:none; }
+    .sc-dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+    .sc-dot--r{ background:#FF5F57; }
+    .sc-dot--y{ background:#FEBC2E; }
+    .sc-dot--g{ background:#28C840; }
+    .sc-card__url{ margin-left:auto; font-size:9px; color:rgba(184,153,92,.35); letter-spacing:.05em; }
+
+    .sc-card__preview{ position:relative; overflow:hidden; }
+    .sc-card--featured .sc-card__preview{ height:320px; }
+    .sc-card:not(.sc-card--featured):not(.sc-card--static) .sc-card__preview{ height:260px; }
+    .sc-card--static .sc-card__preview{ height:auto; }
+
+    .sc-card__preview::after{
+      content:''; position:absolute; bottom:0; left:0; right:0; height:60px;
+      background:linear-gradient(transparent,var(--bg-card)); pointer-events:none;
+    }
+    .sc-card--static .sc-card__preview::after{ display:none; }
+
+    .sc-card__img{ width:100%; height:100%; display:block; object-fit:cover; object-position:top; transition:transform .4s ease; }
+    .sc-card:hover .sc-card__img{ transform:scale(1.02); }
+    .sc-card--static .sc-card__img{ height:auto; object-fit:unset; }
+
+    .sc-card__ph{
+      width:100%; height:100%; background:#0d1326;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:6px; position:absolute; inset:0;
+    }
+    .sc-card__ph::before{ content:''; position:absolute; inset:12px; border:1.5px dashed var(--border); border-radius:8px; opacity:.4; }
+    .sc-card__ph p{ position:relative; z-index:1; font-size:11px; color:var(--text-2); opacity:.5; }
+    .sc-card__ph small{ position:relative; z-index:1; font-size:9px; color:var(--text-2); opacity:.3; }
+
+    /* Zoom icon */
+    .sc-card__zoom{
+      position:absolute; top:12px; right:12px; z-index:10;
+      width:36px; height:36px; background:rgba(7,11,25,0.75); border:1px solid var(--gold-bd);
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      opacity:0; transform:scale(.8); transition:opacity .2s,transform .2s,background .2s;
+      backdrop-filter:blur(8px); pointer-events:none;
+    }
+    .sc-card:hover .sc-card__zoom{ opacity:1; transform:scale(1); }
+    .sc-card__zoom svg{ width:15px; height:15px; stroke:var(--gold); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+    .sc-card__caption{ padding:12px 16px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+    .sc-card__cap-title{ font-family:var(--serif); font-size:14px; color:var(--text); margin-bottom:2px; }
+    .sc-card__cap-sub{ font-size:11px; color:var(--text-2); line-height:1.4; }
+    .sc-card__hint{ font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-2); opacity:.4; flex-shrink:0; transition:color .2s,opacity .2s; }
+    .sc-card:hover .sc-card__hint{ color:var(--gold); opacity:1; }
+
+    /* ═══════════════════════════════════
+       LIGHTBOX
+    ═══════════════════════════════════ */
+    #sc-lightbox{
+      position:fixed; inset:0; z-index:9000;
+      background:rgba(4,7,18,0.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      opacity:0; pointer-events:none; transition:opacity .3s ease; padding:60px 24px 24px;
+    }
+    #sc-lightbox.open{ opacity:1; pointer-events:all; }
+
+    #sc-lb-img{
+      max-width:92vw; max-height:82vh; width:auto; height:auto;
+      object-fit:contain; border-radius:10px; border:1px solid var(--gold-bd);
+      display:block; transform:scale(.96); transition:transform .35s ease;
+    }
+    #sc-lightbox.open #sc-lb-img{ transform:scale(1); }
+
+    #sc-lb-close{
+      position:absolute; top:18px; right:22px; width:40px; height:40px;
+      background:rgba(184,153,92,.1); border:1px solid var(--gold-bd); border-radius:50%;
+      cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s;
+    }
+    #sc-lb-close:hover{ background:var(--gold); }
+    #sc-lb-close svg{ width:16px; height:16px; stroke:var(--gold); fill:none; stroke-width:2; stroke-linecap:round; transition:stroke .2s; }
+    #sc-lb-close:hover svg{ stroke:var(--bg); }
+
+    #sc-lb-caption{ margin-top:16px; font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--text-2); opacity:.5; text-align:center; }
+
+    #sc-lb-nav{ position:absolute; top:50%; transform:translateY(-50%); width:100%; display:flex; justify-content:space-between; padding:0 16px; pointer-events:none; }
+    .sc-lb-arrow{ width:44px; height:44px; background:rgba(7,11,25,.8); border:1px solid var(--gold-bd); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; pointer-events:all; transition:background .2s; backdrop-filter:blur(8px); }
+    .sc-lb-arrow:hover{ background:var(--gold); }
+    .sc-lb-arrow svg{ width:16px; height:16px; stroke:var(--gold); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:stroke .2s; }
+    .sc-lb-arrow:hover svg{ stroke:var(--bg); }
+
+    /* ═══════════════════════════════════
+       BRANDING / THEMES / SKETCHES
+    ═══════════════════════════════════ */
+    .branding-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    @media (max-width:640px){ .branding-grid{ grid-template-columns:1fr; } }
+    .branding-card{ background:var(--bg-card); border:1px solid var(--border); border-radius:18px; overflow:hidden; }
+    .branding-card img{ width:100%; height:auto; display:block; }
+    .branding-card__info{ padding:14px 18px; }
+    .branding-card__title{ font-family:var(--serif); font-size:16px; color:var(--text); margin-bottom:3px; }
+    .branding-card__sub{ font-size:12px; color:var(--text-2); }
+
+    .thankyou-strip{ display:flex; gap:16px; }
+    @media (max-width:640px){ .thankyou-strip{ flex-direction:column; } }
+    .thankyou-strip img{ flex:1; border-radius:18px; border:1px solid var(--border); object-fit:cover; height:340px; width:100%; }
+
+    /* ═══════════════════════════════════
+       UI KIT
+    ═══════════════════════════════════ */
+    .uikit-img{ border:1px solid var(--border); border-radius:18px; overflow:hidden; }
+    .uikit-img img{ width:100%; height:auto; display:block; }
+
+    .swatch-row{ display:flex; gap:12px; flex-wrap:wrap; }
+    .swatch{ display:flex; flex-direction:column; gap:8px; }
+    .swatch__circle{ width:52px; height:52px; border-radius:50%; border:1px solid var(--border); }
+    .swatch__circle--gold-lt{ background:rgba(184,153,92,.15); border-color:rgba(184,153,92,.3); }
+    .swatch__circle--bg{ background:#070B19; }
+    .swatch__circle--surface{ background:#101728; }
+    .swatch__circle--gold{ background:#B8995C; border-color:rgba(255,255,255,.1); }
+    .swatch__circle--text{ background:#C7C2B7; border-color:rgba(255,255,255,.1); }
+    .swatch__circle--text2{ background:#999899; border-color:rgba(255,255,255,.1); }
+    .swatch__name{ font-size:10px; color:var(--text-2); text-align:center; }
+
+    .type-scale{ display:flex; flex-direction:column; gap:14px; }
+    .type-row{ border-bottom:1px solid var(--border); padding-bottom:14px; display:flex; gap:18px; align-items:baseline; flex-wrap:wrap; }
+    .type-row__label{ font-size:9px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); width:80px; flex-shrink:0; }
+    .type-row__sample--display{ font-family:'Croissant One'; font-size:52px; color:var(--text); line-height:1; }
+    .type-row__sample--heading{ font-family:'Croissant One'; font-size:32px; color:var(--text); }
+    .type-row__sample--subhead{ font-family:'Croissant One'; font-size:22px; color:var(--gold); }
+    .type-row__sample--body{ font-family:'Hanken Grotesk'; font-size:17px; color:var(--text-2); max-width:440px; }
+    .type-row__sample--caption{ font-family:'Hanken Grotesk'; font-size:13px; color:var(--text-2); letter-spacing:.06em; }
+
+    /* ═══════════════════════════════════
+       DECISION LOG
+    ═══════════════════════════════════ */
+    .dd-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    @media (max-width:860px){ .dd-grid{ grid-template-columns:1fr; } }
+    .dd-card{ background:var(--bg-card); border:1px solid var(--border); border-radius:18px; padding:28px; transition:border-color .3s; }
+    .dd-card:hover{ border-color:var(--gold-bd); }
+    .dd-card h3{ font-family:var(--serif); font-size:18px; color:var(--text); margin-bottom:9px; }
+    .dd-badge{ display:inline-block; margin-bottom:10px; font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:4px 10px; border-radius:8px; }
+    .dd-badge--warn{ background:rgba(155,82,82,.15); color:#c97a7a; }
+    .dd-badge--ok{ background:rgba(91,170,111,.12); color:#7ac497; }
+    .dd-rationale{ margin-top:12px; margin-bottom:7px; font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); }
+
+    /* ═══════════════════════════════════
+       LEARNINGS
+    ═══════════════════════════════════ */
+    .learnings-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    @media (max-width:860px){ .learnings-grid{ grid-template-columns:1fr; } }
+    .learning-card{ background:var(--bg-card); border:1px solid var(--border); border-radius:18px; padding:28px; transition:transform .3s,border-color .3s; }
+    .learning-card:hover{ transform:translateY(-3px); border-color:var(--gold-bd); }
+    .learning-card__icon{ width:32px; height:32px; margin-bottom:14px; }
+    .learning-card h3{ font-family:var(--serif); font-size:18px; color:var(--text); margin-bottom:9px; }
+
+    /* ═══════════════════════════════════
+       STATS
+    ═══════════════════════════════════ */
+    .stats-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:18px; overflow:hidden; }
+    @media (max-width:860px){ .stats-grid{ grid-template-columns:1fr 1fr; } }
+    @media (max-width:480px){ .stats-grid{ grid-template-columns:1fr; } }
+    .stat-cell{ background:var(--bg-card); padding:36px 28px; }
+    .stat-num{ font-family:var(--serif); font-size:48px; color:var(--gold); line-height:1; margin-bottom:9px; }
+    .stat-label{ font-size:13px; color:var(--text-2); line-height:1.5; }
+
+    /* ═══════════════════════════════════
+       FOOTER & MISC
+    ═══════════════════════════════════ */
+    .divider{ height:1px; background:linear-gradient(90deg,transparent 0%,var(--gold) 50%,transparent 100%); opacity:.2; margin:0 var(--sp-h); }
+
+    .footer{ background:var(--bg-2); border-top:1px solid var(--border); padding:var(--sp-v) var(--sp-h); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:28px; }
+    .footer__title{ font-family:var(--serif); font-size:30px; color:var(--text); }
+    .footer__sub{ font-size:13px; color:var(--text-2); margin-top:5px; }
+    .footer__btns{ display:flex; gap:12px; flex-wrap:wrap; }
+    .btn-primary{ padding:12px 28px; border-radius:20px; background:var(--gold); color:var(--bg); font-family:var(--serif); font-size:15px; transition:background .3s; }
+    .btn-primary:hover{ background:#d4b170; }
+    .btn-ghost{ padding:12px 28px; border-radius:20px; border:1.5px solid var(--gold); color:var(--gold); font-family:var(--serif); font-size:15px; transition:background .3s,color .3s; }
+    .btn-ghost:hover{ background:var(--gold); color:var(--bg); }
+
+    #scroll-top{ position:fixed; bottom:28px; right:28px; width:42px; height:42px; border-radius:50%; background:var(--gold-lt); border:1px solid var(--gold-bd); color:var(--gold); font-size:17px; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s; z-index:200; }
+    #scroll-top.active{ opacity:1; pointer-events:all; }
+
+    .toc{ position:fixed; right:28px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:10px; z-index:300; }
+    @media (max-width:1200px){ .toc{ display:none; } }
+    .toc-dot{ width:8px; height:8px; border-radius:50%; border:1.5px solid var(--gold-bd); background:transparent; transition:background .3s,transform .3s; cursor:pointer; }
+    .toc-dot.active{ background:var(--gold); transform:scale(1.3); }
+
+    /* ─── Utilities ─── */
+    .mt-8{ margin-top:8px; }
+    .mt-16{ margin-top:16px; }
+    .mt-24{ margin-top:24px; }
+    .mt-32{ margin-top:32px; }
+    .gold-line{ width:44px; height:2px; background:var(--gold); margin-bottom:18px; }
+    .full-img{ width:100%; height:auto; display:block; border-radius:18px; }
+    .full-mockup-trio{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    @media (max-width:860px){ .full-mockup-trio{ grid-template-columns:1fr 1fr; } }
+    @media (max-width:560px){ .full-mockup-trio{ grid-template-columns:1fr; } }
+    .identity-stat .insight-card__stat{ font-size:52px; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Cursor ── -->
+  <div id="cur"></div>
+  <div id="ctr"></div>
+
+  <!-- ── Breadcrumb ── -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb__inner">
+      <div class="breadcrumb__left">
+        <a href="https://yanaharcourt.dev" class="breadcrumb__link">Portfolio</a>
+        <span class="breadcrumb__sep">›</span>
+        <a href="https://yanaharcourt.dev/#work" class="breadcrumb__link">Work</a>
+        <span class="breadcrumb__sep">›</span>
+        <span class="breadcrumb__current">Regalia Dining</span>
+      </div>
+      <div class="breadcrumb__tags">
+        <span class="bc-tag bc-tag--gold">UX/UI</span>
+        <span class="bc-tag bc-tag--gold">Web Design</span>
+        <span class="bc-tag bc-tag--navy">Food &amp; Dining</span>
+        <span class="bc-tag bc-tag--navy">2024</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════
+   01 - HERO
+══════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <!-- Left: text content -->
+    <div class="hero__left">
+      <div class="hero__orb"></div>
+      <div class="hero__orb2"></div>
+      <div class="hero__content">
+        <div class="hero__tag rv">
+          <span class="hero__tag-dot"></span>
+          UX/UI · Food &amp; Dining · Web Design
+        </div>
+
+        <h1 class="hero-title rv">
+          Regalia<br /><em>Dining</em>
+        </h1>
+
+        <p class="rv d1" style="font-size:15px;line-height:1.75;color:var(--text-2);max-width:420px;margin-top:20px;">
+          A premium Japanese dining experience — designed from first impression to final reservation. Dark luxury aesthetics meet intuitive e-commerce flow.
+        </p>
+
+        <div class="hero__meta rv d2">
+          <div class="hero__meta-item">
+            <div class="hero__meta-label">Role</div>
+            <div class="hero__meta-val">Lead UX/UI Designer</div>
+          </div>
+          <div class="hero__meta-item">
+            <div class="hero__meta-label">Type</div>
+            <div class="hero__meta-val">Concept / Portfolio</div>
+          </div>
+          <div class="hero__meta-item">
+            <div class="hero__meta-label">Platform</div>
+            <div class="hero__meta-val">Web · Responsive</div>
+          </div>
+          <div class="hero__meta-item">
+            <div class="hero__meta-label">Year</div>
+            <div class="hero__meta-val">2024</div>
+          </div>
+          <div class="hero__meta-item">
+            <div class="hero__meta-label">Duration</div>
+            <div class="hero__meta-val">6 weeks</div>
+          </div>
+        </div>
+
+        <div class="rv d3" style="margin-top:36px;display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="regalia-dining-index.html" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--gold);color:var(--bg);border-radius:20px;font-family:var(--serif);font-size:15px;transition:background .3s;" onmouseover="this.style.background='#d4b170'" onmouseout="this.style.background='var(--gold)'">View Live Site ↗</a>
+          <a href="#challenge" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border:1.5px solid var(--gold);color:var(--gold);border-radius:20px;font-family:var(--serif);font-size:15px;transition:background .3s,color .3s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--bg)'" onmouseout="this.style.background='';this.style.color='var(--gold)'">See Case Study ↓</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: mockup image -->
+    <div class="hero__right">
+      <img src="./img/Study case/hero-mockup.png" alt="Regalia Dining mockup" class="hero__right-img"
+        onload="this.nextElementSibling.style.display='none'"
+        onerror="this.style.display='none'" />
+      <div class="hero__right-ph">
+        <p>Drop hero mockup here</p>
+        <small>./img/Study case/hero-mockup.png</small>
+      </div>
+      <div class="hero__stat-float rv">
+        <div class="hero__stat-num">4</div>
+        <div class="hero__stat-label">Fully coded pages delivered end-to-end</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+   OVERVIEW STRIP
+══════════════════════════════════ -->
+  <div class="overview-strip">
+    <div class="overview-grid">
+      <div>
+        <div class="eyebrow rv">Overview</div>
+        <p class="overview-desc rv d1">
+          A premium Japanese dining experience - designed from first impression to final reservation.
+          Regalia Dining merges dark luxury aesthetics with intuitive e-commerce flows: menu browsing,
+          cart, favourites, and table booking, all woven into a cohesive visual system.
+        </p>
+        <a href="regalia-dining-index.html" class="btn-visit rv d2" target="_blank">
+          View Live Site ↗
+        </a>
+      </div>
+      <div class="rv d1">
+        <div class="overview-col-label">Stack</div>
+        <div class="overview-col-val">HTML · CSS · Vanilla JS<br />Figma · Croissant One · Hanken Grotesk</div>
+      </div>
+      <div class="rv d2">
+        <div class="overview-col-label">Deliverables</div>
+        <div class="overview-col-val">4 pages · UI Kit<br />Competitive research · Personas · CJM</div>
+      </div>
+      <div class="rv d3">
+        <div class="overview-col-label">Location</div>
+        <div class="overview-col-val">Chiado, Lisbon<br />Portugal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+   02 - CHALLENGE & GOALS
+══════════════════════════════════ -->
+  <section class="sec" id="challenge">
+    <div class="inner">
+      <div class="sec-num rv">02 - Challenge &amp; Goals</div>
+      <h2 class="sec-h2 rv">A premium brand without a <em>digital home</em></h2>
+      <p class="sec-lead rv">
+        High-end Japanese restaurants struggle to translate their atmosphere online.
+        Visitors land on generic templates that feel nothing like the candlelit interior.
+        The brief: design a web presence that is as refined as the food itself.
+      </p>
+
+      <div class="two-col">
+        <div class="card-box rv d1">
+          <h3>The Problem</h3>
+          <p class="body">
+            Restaurant websites in the fine-dining segment often feel generic - stock-photo heroes,
+            cluttered menus, no visual identity. Regalia needed a digital experience that could convert
+            a first-time visitor into a seated guest, from anywhere in the world.
+          </p>
+          <p class="body mt-16">
+            Key friction points identified: no way to browse a menu with real dish imagery,
+            no reservation flow, no sense of place or culinary philosophy. Trust signals were missing.
+          </p>
+        </div>
+
+        <div class="card-box rv d2">
+          <h3>Design Goals</h3>
+          <ul class="goals-list">
+            <li>Communicate premium Japanese identity through dark luxury aesthetics - deep navy, gold accents, refined
+              typography</li>
+            <li>Enable end-to-end digital dining flow: discover → browse menu → add to cart → book a table</li>
+            <li>Make food photography the hero - every dish presented as an artwork on a dark ground</li>
+            <li>Deliver a reservation experience that feels personal, not form-like</li>
+            <li>Build a reusable design system (UI Kit) for future scale</li>
+            <li>Ensure responsive parity - the experience must work equally on mobile</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════
+   03 - PROCESS
+══════════════════════════════════ -->
+  <section class="sec" id="process">
+    <div class="inner">
+      <div class="sec-num rv">03 - Process</div>
+      <h2 class="sec-h2 rv">How the design <em>unfolded</em></h2>
+      <p class="sec-lead rv">
+        A structured double-diamond process - from competitive landscape and user research through
+        ideation and iterative refinement to a fully coded, deployable product.
+      </p>
+
+      <div class="process-track rv">
+        <div class="process-step">
+          <div class="process-step__dot"></div>
+          <div class="process-step__num">01</div>
+          <div class="process-step__name">Discovery</div>
+          <div class="process-step__desc">Competitor audit, market gap analysis, user interviews</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step__dot"></div>
+          <div class="process-step__num">02</div>
+          <div class="process-step__name">Research</div>
+          <div class="process-step__desc">Personas, Jobs-to-be-done, pain point mapping</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step__dot"></div>
+          <div class="process-step__num">03</div>
+          <div class="process-step__name">CJM</div>
+          <div class="process-step__desc">Customer journey mapping across 5 touchpoints</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step__dot"></div>
+          <div class="process-step__num">04</div>
+          <div class="process-step__name">Sketching</div>
+          <div class="process-step__desc">Low-fi wireframes, layout explorations, flow diagrams</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step__dot"></div>
+          <div class="process-step__num">05</div>
+          <div class="process-step__name">Visual Design</div>
+          <div class="process-step__desc">High-fidelity Figma frames, light + dark themes</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step__dot"></div>
+          <div class="process-step__num">06</div>
+          <div class="process-step__name">Prototyping</div>
+          <div class="process-step__desc">Interactive Figma prototype, micro-interaction spec</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step__dot"></div>
+          <div class="process-step__num">07</div>
+          <div class="process-step__name">Development</div>
+          <div class="process-step__desc">Pixel-perfect HTML/CSS/JS build, 4 pages live</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════
+   04 - RESEARCH & INSIGHTS
+══════════════════════════════════ -->
+  <section class="sec sec--alt" id="research">
+    <div class="inner">
+      <div class="sec-num rv">04 - Research &amp; Insights</div>
+      <h2 class="sec-h2 rv">What the data <em>revealed</em></h2>
+      <p class="sec-lead rv">
+        Qualitative interviews with 8 restaurant-goers in Lisbon + a competitive audit of 6
+        premium dining sites surfaced critical gaps in the existing digital landscape.
+      </p>
+
+      <div class="insights-grid rv">
+        <div class="insight-card">
+          <div class="insight-card__icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="18" r="11" stroke="#B8995C" stroke-width="1.5" opacity=".4"/>
+              <ellipse cx="18" cy="18" rx="6" ry="11" stroke="#B8995C" stroke-width="1.5"/>
+              <path d="M7 18h22" stroke="#B8995C" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="insight-card__stat">74%</div>
+          <div class="insight-card__label">of users judge a restaurant's quality by its website before visiting —
+            Nielsen Norman Group</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-card__icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="5" width="20" height="26" rx="4" stroke="#B8995C" stroke-width="1.5"/>
+              <rect x="12" y="9" width="12" height="8" rx="1.5" stroke="#B8995C" stroke-width="1.2" opacity=".5"/>
+              <circle cx="18" cy="25" r="1.5" fill="#B8995C" opacity=".6"/>
+            </svg>
+          </div>
+          <div class="insight-card__stat">68%</div>
+          <div class="insight-card__label">of restaurant searches happen on mobile — yet most luxury restaurant sites
+            aren't mobile-optimised</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-card__icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="8" width="28" height="20" rx="3" stroke="#B8995C" stroke-width="1.5"/>
+              <circle cx="18" cy="18" r="5" stroke="#B8995C" stroke-width="1.5"/>
+              <circle cx="18" cy="18" r="1.5" fill="#B8995C"/>
+            </svg>
+          </div>
+          <div class="insight-card__stat">3×</div>
+          <div class="insight-card__label">more likely to book when high-quality dish photography is present, per user
+            interviews</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-card__icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 12h20M10 12V26a2 2 0 002 2h12a2 2 0 002-2V12" stroke="#B8995C" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M13 12V10a2 2 0 012-2h6a2 2 0 012 2v2" stroke="#B8995C" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M18 17v6M14 17v6M22 17v6" stroke="#B8995C" stroke-width="1.2" stroke-linecap="round" opacity=".5"/>
+            </svg>
+          </div>
+          <div class="insight-card__stat">5/8</div>
+          <div class="insight-card__label">interviewees had abandoned a table booking because the form was too long or
+            unclear</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-card__icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6l2.8 8.5H29l-7 5.1 2.7 8.4L18 23l-6.7 5 2.7-8.4-7-5.1h8.2L18 6z" stroke="#B8995C" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="insight-card__stat">91%</div>
+          <div class="insight-card__label">read at least one review before their first visit to a new restaurant</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-card__icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="18" r="12" stroke="#B8995C" stroke-width="1.5" opacity=".3"/>
+              <path d="M12 18h12M18 12v12" stroke="#B8995C" stroke-width="1.8" stroke-linecap="round" opacity=".6"/>
+              <circle cx="18" cy="18" r="3" fill="rgba(184,153,92,0.2)" stroke="#B8995C" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="insight-card__stat">0/6</div>
+          <div class="insight-card__label">competitor sites used a dark-theme aesthetic — a clear differentiation
+            opportunity</div>
+        </div>
+      </div>
+
+      <!-- Competitor table -->
+      <div class="mt-32 rv">
+        <div class="sec-num">Competitor Analysis</div>
+        <h2 class="sec-h2--sm">What competitors <em>miss</em></h2>
+        <div class="comp-table-wrap">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Restaurant Site</th>
+                <th>Dark Aesthetic</th>
+                <th>Dish Photography</th>
+                <th>Online Ordering</th>
+                <th>Booking UX</th>
+                <th>Mobile</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="comp-us">Regalia Dining</span> <span class="chip">ours</span></td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Nobu Lisbon</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+                <td class="cross">✗</td>
+                <td class="partial">△</td>
+                <td class="partial">△</td>
+              </tr>
+              <tr>
+                <td>Belcanto</td>
+                <td class="cross">✗</td>
+                <td class="partial">△</td>
+                <td class="cross">✗</td>
+                <td class="partial">△</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Tasca do Chico</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="partial">△</td>
+              </tr>
+              <tr>
+                <td>Eleven Restaurant</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+                <td class="partial">△</td>
+              </tr>
+              <tr>
+                <td>Feitoria</td>
+                <td class="cross">✗</td>
+                <td class="partial">△</td>
+                <td class="cross">✗</td>
+                <td class="partial">△</td>
+                <td class="cross">✗</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="comp-note">✓ = present · △ = partial / outdated · ✗ = absent</p>
+      </div>
+
+      <!-- User quotes -->
+      <div class="two-col mt-32">
+        <div class="card-box rv d1">
+          <div class="quote-mark">"</div>
+          <p class="quote-text">
+            "When I look for a restaurant, I need to see the food first. If the website is dark and elegant,
+            I already feel it's going to be a good experience."
+          </p>
+          <div class="quote-author-name">Ana, 34 - Marketing Manager</div>
+          <div class="quote-author-role">Interview participant</div>
+        </div>
+        <div class="card-box rv d2">
+          <div class="quote-mark">"</div>
+          <p class="quote-text">
+            "I've given up booking tables online because the forms always ask me things I don't know -
+            like how long I want to stay. Just give me date, time, and number of people."
+          </p>
+          <div class="quote-author-name">Miguel, 41 - Architect</div>
+          <div class="quote-author-role">Interview participant</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════
+   05 - PERSONAS
+══════════════════════════════════ -->
+  <section class="sec" id="personas">
+    <div class="inner">
+      <div class="sec-num rv">05 - Personas</div>
+      <h2 class="sec-h2 rv">Who we're <em>designing for</em></h2>
+      <p class="sec-lead rv">
+        Two primary user archetypes emerged from research - the Occasion Planner and the Culinary Explorer.
+        Their needs and friction points shaped every design decision.
+      </p>
+
+      <div class="persona-grid">
+        <!-- Persona 1 -->
+        <div class="persona-card rv d1">
+          <div class="persona-card__header">
+            <div class="persona-avatar">
+              <img src="./img/Study case/Clara.png" alt="Clara Santos persona"
+                onerror="this.parentNode.style.background='linear-gradient(135deg,rgba(184,153,92,.3),rgba(184,153,92,.1))'">
+            </div>
+            <div>
+              <div class="persona-name">Clara Santos</div>
+              <div class="persona-role">The Occasion Planner · 34 · Lisbon</div>
+            </div>
+          </div>
+          <div class="persona-card__body">
+            <div class="persona-tag-row">
+              <span class="persona-tag">Marketing Manager</span>
+              <span class="persona-tag">Special occasions</span>
+              <span class="persona-tag">Decision maker</span>
+            </div>
+
+            <div class="persona-row">
+              <div class="persona-block">
+                <h4>Goals</h4>
+                <ul>
+                  <li>Book the perfect table for a birthday or anniversary</li>
+                  <li>Preview the menu and prices before committing</li>
+                  <li>Share the venue with her partner for approval</li>
+                  <li>Trust that the experience will match expectations</li>
+                </ul>
+              </div>
+              <div class="persona-block">
+                <h4>Pain Points</h4>
+                <ul>
+                  <li>Booking forms that require phone calls</li>
+                  <li>No real dish photos - only vague descriptions</li>
+                  <li>Unclear pricing until she's already seated</li>
+                  <li>Website that doesn't reflect actual ambiance</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="pain-bar-wrap mt-24">
+              <h4>Motivation levels</h4>
+              <div class="pain-bar">
+                <div class="pain-bar__label">Visual trust signals</div>
+                <div class="pain-bar__track">
+                  <div class="pain-bar__fill" data-w="95"></div>
+                </div>
+              </div>
+              <div class="pain-bar">
+                <div class="pain-bar__label">Easy online booking</div>
+                <div class="pain-bar__track">
+                  <div class="pain-bar__fill" data-w="88"></div>
+                </div>
+              </div>
+              <div class="pain-bar">
+                <div class="pain-bar__label">Menu previewing</div>
+                <div class="pain-bar__track">
+                  <div class="pain-bar__fill" data-w="80"></div>
+                </div>
+              </div>
+              <div class="pain-bar">
+                <div class="pain-bar__label">Price transparency</div>
+                <div class="pain-bar__track">
+                  <div class="pain-bar__fill" data-w="75"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Persona 2 -->
+        <div class="persona-card rv d2">
+          <div class="persona-card__header">
+            <div class="persona-avatar">
+              <img src="./img/Study case/Ana.png" alt="Ana persona"
+                onerror="this.parentNode.style.background='linear-gradient(135deg,rgba(184,153,92,.3),rgba(184,153,92,.1))'">
+            </div>
+            <div>
+              <div class="persona-name">Tiago Ferreira</div>
+              <div class="persona-role">The Culinary Explorer · 28 · Porto</div>
+            </div>
+          </div>
+          <div class="persona-card__body">
+            <div class="persona-tag-row">
+              <span class="persona-tag">Software Engineer</span>
+              <span class="persona-tag">Food enthusiast</span>
+              <span class="persona-tag">Mobile-first</span>
+            </div>
+
+            <div class="persona-row">
+              <div class="persona-block">
+                <h4>Goals</h4>
+                <ul>
+                  <li>Discover new premium restaurants via Instagram</li>
+                  <li>Understand the full menu before arriving</li>
+                  <li>Add favourite dishes to compare across visits</li>
+                  <li>Order online or pre-select dishes for the table</li>
+                </ul>
+              </div>
+              <div class="persona-block">
+                <h4>Pain Points</h4>
+                <ul>
+                  <li>Restaurant websites not optimised for mobile</li>
+                  <li>No cart or favourites functionality</li>
+                  <li>Menu PDFs that don't load on iPhone</li>
+                  <li>Generic design that feels low-budget</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="pain-bar-wrap mt-24">
+              <h4>Motivation levels</h4>
+              <div class="pain-bar">
+                <div class="pain-bar__label">Mobile experience</div>
+                <div class="pain-bar__track">
+                  <div class="pain-bar__fill" data-w="98"></div>
+                </div>
+              </div>
+              <div class="pain-bar">
+                <div class="pain-bar__label">Dish photography</div>
+                <div class="pain-bar__track">
+                  <div class="pain-bar__fill" data-w="90"></div>
+                </div>
+              </div>
+              <div class="pain-bar">
+                <div class="pain-bar__label">Cart &amp; favourites</div>
+                <div class="pain-bar__track">
+                  <div class="pain-bar__fill" data-w="82"></div>
+                </div>
+              </div>
+              <div class="pain-bar">
+                <div class="pain-bar__label">Premium aesthetics</div>
+                <div class="pain-bar__track">
+                  <div class="pain-bar__fill" data-w="78"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════
+   06 - CJM
+══════════════════════════════════ -->
+  <section class="sec sec--alt" id="cjm">
+    <div class="inner">
+      <div class="sec-num rv">06 - Customer Journey Map</div>
+      <h2 class="sec-h2 rv">Following Clara <em>step by step</em></h2>
+      <p class="sec-lead rv">
+        Mapping Clara's end-to-end journey from discovery to post-visit revealed 3 critical drop-off
+        moments - all addressed in the final design.
+      </p>
+
+      <div class="cjm-wrap rv">
+        <table class="cjm-table">
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>1 · Discovery</th>
+              <th>2 · Exploration</th>
+              <th>3 · Decision</th>
+              <th>4 · Booking</th>
+              <th>5 · Post-Visit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cjm-row-label">Action</td>
+              <td class="cjm-cell">Sees Regalia on Instagram story, taps link</td>
+              <td class="cjm-cell">Browses menu, views dish photos, adds favourites</td>
+              <td class="cjm-cell">Checks date availability, reads special requests field</td>
+              <td class="cjm-cell">Fills booking form, submits, receives confirmation</td>
+              <td class="cjm-cell">Returns to site to browse menu again or rebook</td>
+            </tr>
+            <tr>
+              <td class="cjm-row-label">Thinking</td>
+              <td class="cjm-cell">"This looks exclusive. Let me see if there's a menu."</td>
+              <td class="cjm-cell">"These photos are incredible. I want the salmon roll."</td>
+              <td class="cjm-cell">"I hope I don't need to call. The form looks manageable."</td>
+              <td class="cjm-cell">"Simple fields, gold button - feels right for this place."</td>
+              <td class="cjm-cell">"I want to bring my team here next month."</td>
+            </tr>
+            <tr>
+              <td class="cjm-row-label">Feeling</td>
+              <td class="cjm-cell">
+                <div class="emo">
+                  <div class="emo-dot emo-mid"></div>
+                  <span class="emo-label">Curious · Cautious</span>
+                </div>
+              </td>
+              <td class="cjm-cell">
+                <div class="emo">
+                  <div class="emo-dot emo-high"></div>
+                  <span class="emo-label">Delighted · Engaged</span>
+                </div>
+              </td>
+              <td class="cjm-cell">
+                <div class="emo">
+                  <div class="emo-dot emo-mid"></div>
+                  <span class="emo-label">Considering · Hopeful</span>
+                </div>
+              </td>
+              <td class="cjm-cell">
+                <div class="emo">
+                  <div class="emo-dot emo-high"></div>
+                  <span class="emo-label">Confident · Excited</span>
+                </div>
+              </td>
+              <td class="cjm-cell">
+                <div class="emo">
+                  <div class="emo-dot emo-high"></div>
+                  <span class="emo-label">Satisfied · Loyal</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="cjm-row-label">Pain Points</td>
+              <td class="cjm-cell">Site is slow to load; no hero immediately communicates cuisine type</td>
+              <td class="cjm-cell">Competitor sites use PDF menus that don't render on mobile</td>
+              <td class="cjm-cell">Long, confusing booking forms with too many required fields</td>
+              <td class="cjm-cell">No instant visual confirmation - only a plain text response</td>
+              <td class="cjm-cell">No loyalty signal or reason to return to the website</td>
+            </tr>
+            <tr>
+              <td class="cjm-row-label">Design Response</td>
+              <td class="cjm-cell">Dark cinematic hero with immediate cuisine visual identity + cuisine badge</td>
+              <td class="cjm-cell">Native card-based menu with real photography + overlay detail + favourites</td>
+              <td class="cjm-cell">Minimal 6-field form, no jargon, visible date/time pickers</td>
+              <td class="cjm-cell">Gold CTA + contextual confirmation message styled to brand</td>
+              <td class="cjm-cell">Cart persistence + newsletter opt-in on booking success</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Emotion curve -->
+      <div class="mt-24 rv d1">
+        <div class="sec-num">Emotion Curve</div>
+        <svg class="emotion-curve" viewBox="0 0 900 80" fill="none" xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true">
+          <line x1="0" y1="60" x2="900" y2="60" stroke="rgba(184,153,92,.15)" stroke-width="1" />
+          <path
+            d="M 0 48 Q 180 48 200 22 Q 250 6 320 14 Q 390 22 430 38 Q 480 54 560 14 Q 640 -4 720 10 Q 800 22 900 10"
+            stroke="#B8995C" stroke-width="2" fill="none" stroke-dasharray="4 2" />
+          <circle cx="0" cy="48" r="5" fill="#B8995C" />
+          <circle cx="200" cy="22" r="5" fill="#5BAA6F" />
+          <circle cx="430" cy="38" r="5" fill="#B8995C" />
+          <circle cx="560" cy="14" r="5" fill="#5BAA6F" />
+          <circle cx="900" cy="10" r="5" fill="#5BAA6F" />
+          <text x="4" y="76" font-size="9" fill="rgba(199,194,183,.5)" font-family="sans-serif">Discovery</text>
+          <text x="174" y="76" font-size="9" fill="rgba(199,194,183,.5)" font-family="sans-serif">Exploration</text>
+          <text x="398" y="76" font-size="9" fill="rgba(199,194,183,.5)" font-family="sans-serif">Decision</text>
+          <text x="534" y="76" font-size="9" fill="rgba(199,194,183,.5)" font-family="sans-serif">Booking</text>
+          <text x="862" y="76" font-size="9" fill="rgba(199,194,183,.5)" font-family="sans-serif">Return</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════
+   07 - SCREENS
+══════════════════════════════════ -->
+  <section class="sec" id="screens">
+    <div class="inner">
+      <div class="sec-num rv">07 - Screen Details</div>
+      <h2 class="sec-h2 rv">Three pages, one <em>coherent world</em></h2>
+      <p class="sec-lead rv">
+        Every screen was built to serve a specific user need while remaining visually harmonious.
+        Dark backgrounds let food photography speak. Gold anchors the interaction layer.
+        Click any card to expand the full screen.
+      </p>
+
+      <!-- Portfolio masonry grid -->
+      <div class="screens-portfolio">
+
+        <!-- Featured: Homepage (spans 2 cols) -->
+        <div class="sc-card sc-card--featured rv d1" onclick="openLB(this)" data-title="Homepage — Hero & Navigation">
+          <div class="sc-card__bar">
+            <span class="sc-dot sc-dot--r"></span>
+            <span class="sc-dot sc-dot--y"></span>
+            <span class="sc-dot sc-dot--g"></span>
+            <span class="sc-card__url">regalia-dining.com/</span>
+          </div>
+          <div class="sc-card__preview">
+            <img class="sc-card__img" src="./img/Study case/Home-frame-V3.jpg" alt="Homepage"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="sc-card__ph" style="display:none"><p>Homepage</p><small>Home-frame-V3.jpg</small></div>
+            <div class="sc-card__zoom">
+              <svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5l3 3"/></svg>
+            </div>
+          </div>
+          <div class="sc-card__caption">
+            <div>
+              <div class="sc-card__cap-title">Homepage — Hero &amp; Navigation</div>
+              <div class="sc-card__cap-sub">Full-bleed cinematic hero · Custom cursor · Category card nav · Wheel scroll</div>
+            </div>
+            <span class="sc-card__hint">View full ↗</span>
+          </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="sc-card rv d2" onclick="openLB(this)" data-title="Mobile Homepage">
+          <div class="sc-card__bar">
+            <span class="sc-dot sc-dot--r"></span>
+            <span class="sc-dot sc-dot--y"></span>
+            <span class="sc-dot sc-dot--g"></span>
+            <span class="sc-card__url">mobile · 390px</span>
+          </div>
+          <div class="sc-card__preview">
+            <img class="sc-card__img" src="./img/Study case/Mobile frame.png" alt="Mobile version"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="sc-card__ph" style="display:none"><p>Mobile View</p><small>Mobile frame.png</small></div>
+            <div class="sc-card__zoom">
+              <svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5l3 3"/></svg>
+            </div>
+          </div>
+          <div class="sc-card__caption">
+            <div>
+              <div class="sc-card__cap-title">Mobile Homepage</div>
+              <div class="sc-card__cap-sub">Touch-first · Responsive · 390px viewport</div>
+            </div>
+            <span class="sc-card__hint">View full ↗</span>
+          </div>
+        </div>
+
+        <!-- Booking page -->
+        <div class="sc-card rv d1" onclick="openLB(this)" data-title="Book a Table">
+          <div class="sc-card__bar">
+            <span class="sc-dot sc-dot--r"></span>
+            <span class="sc-dot sc-dot--y"></span>
+            <span class="sc-dot sc-dot--g"></span>
+            <span class="sc-card__url">regalia-dining.com/booking</span>
+          </div>
+          <div class="sc-card__preview">
+            <img class="sc-card__img" src="./img/Study case/Book-a-tabe-frame-V3.png" alt="Booking page"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="sc-card__ph" style="display:none"><p>Book a Table</p><small>Book-a-tabe-frame-V3.png</small></div>
+            <div class="sc-card__zoom">
+              <svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5l3 3"/></svg>
+            </div>
+          </div>
+          <div class="sc-card__caption">
+            <div>
+              <div class="sc-card__cap-title">Book a Table</div>
+              <div class="sc-card__cap-sub">Glassmorphic form · 6 fields · Scroll-fixed header</div>
+            </div>
+            <span class="sc-card__hint">View full ↗</span>
+          </div>
+        </div>
+
+        <!-- Menu Desserts -->
+        <div class="sc-card rv d2" onclick="openLB(this)" data-title="Menu — Desserts">
+          <div class="sc-card__bar">
+            <span class="sc-dot sc-dot--r"></span>
+            <span class="sc-dot sc-dot--y"></span>
+            <span class="sc-dot sc-dot--g"></span>
+            <span class="sc-card__url">regalia-dining.com/menu</span>
+          </div>
+          <div class="sc-card__preview">
+            <img class="sc-card__img" src="./img/Study case/Menu-Desserts-V3.png" alt="Menu page"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="sc-card__ph" style="display:none"><p>Menu — Desserts</p><small>Menu-Desserts-V3.png</small></div>
+            <div class="sc-card__zoom">
+              <svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5l3 3"/></svg>
+            </div>
+          </div>
+          <div class="sc-card__caption">
+            <div>
+              <div class="sc-card__cap-title">Menu — Desserts</div>
+              <div class="sc-card__cap-sub">Card grid · Dish photography · Favourites · Cart overlay</div>
+            </div>
+            <span class="sc-card__hint">View full ↗</span>
+          </div>
+        </div>
+
+        <!-- Big mockup full width — static, no lightbox -->
+        <div class="sc-card sc-card--static rv d1" style="grid-column:1/-1;">
+          <div class="sc-card__bar">
+            <span class="sc-dot sc-dot--r"></span>
+            <span class="sc-dot sc-dot--y"></span>
+            <span class="sc-dot sc-dot--g"></span>
+            <span class="sc-card__url">device mockup — full composition</span>
+          </div>
+          <div class="sc-card__preview">
+            <img class="sc-card__img" src="./img/Study case/bigMockup.png" alt="Full-page device mockup"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="sc-card__ph" style="display:none;height:300px;position:relative;"><p>Big Mockup</p><small>bigMockup.png</small></div>
+          </div>
+          <div class="sc-card__caption">
+            <div>
+              <div class="sc-card__cap-title">Full Device Composition</div>
+              <div class="sc-card__cap-sub">Homepage · Menu · Booking — in one editorial frame</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Interaction details -->
+      <div class="two-col mt-32">
+        <div class="card-box rv d1">
+          <h3>Custom Cursor</h3>
+          <p class="body">
+            A glowing dot cursor with trailing ring follows the pointer across the page,
+            reinforcing the premium, theatrical feel. On click, the cursor expands — a satisfying
+            confirmation of intent. Implemented in pure JS with RAF loop for 60fps performance.
+          </p>
+          <div class="mt-16"><span class="chip">Micro-interaction</span></div>
+        </div>
+        <div class="card-box rv d2">
+          <h3>Category Card Navigation</h3>
+          <p class="body">
+            The homepage presents menu categories as visual cards — each with a dish photograph
+            and category label. A single tap takes the user directly into that menu section.
+            The pattern prioritises speed of decision over hierarchy, letting food photography
+            do the navigation work.
+          </p>
+          <div class="mt-16"><span class="chip">Interaction pattern</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════
+   09 - VISUAL IDENTITY
+══════════════════════════════════ -->
+  <section class="sec" id="identity">
+    <div class="inner">
+      <div class="sec-num rv">09 - Visual Identity in Details</div>
+      <h2 class="sec-h2 rv">Tradition and modernity - <em>in harmony</em></h2>
+      <p class="sec-lead rv">
+        The digital product is only one surface of the brand. To create a truly holistic identity,
+        I extended the visual language into physical touchpoints - each one an extension of the
+        same design principles: dark luxury, gold precision, Japanese restraint.
+      </p>
+
+      <!-- Two-col narrative -->
+      <div class="two-col rv">
+        <div>
+          <div class="gold-line"></div>
+          <h2 class="sec-h2--sm">Business Card - <em>duality by design</em></h2>
+          <p class="body mt-16">
+            The double-sided card embodies the duality at the heart of Regalia Dining - tradition and modernity held in the same hand. The front features an expressive photograph of the signature dish with gold <em>Japanese Cuisine</em> typography, creating an immediate association with the restaurant's gastronomic identity.
+          </p>
+          <p class="body mt-16">
+            The reverse combines contact information with an artistic element: a flowing golden line reminiscent of a calligraphic stroke. This line doesn't merely divide space - it creates a dynamic composition with the sushi photograph, where chopsticks hold a delicate piece of salmon. Dark background and gold accents maintain the brand's premium character,
+            making the card not just an information carrier, but a miniature work of art.
+          </p>
+        </div>
+        <div class="rv d1">
+          <div class="branding-card">
+            <img src="./img/Study case/Business Card.png"
+              alt="Regalia Dining business card - front and back" onerror="this.parentNode.style.display='none'" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Box as Artwork -->
+      <div class="two-col mt-32 rv d1">
+        <div class="branding-card">
+          <img src="./img/Study case/Box.png" alt="Regalia Dining delivery box - 3D render"
+            onerror="this.parentNode.style.display='none'" />
+        </div>
+        <div>
+          <div class="gold-line"></div>
+          <h2 class="sec-h2--sm">Box as an <em>Artwork</em></h2>
+          <p class="body mt-16">
+            For delivery, I designed a minimalist black box with a volumetric 3D composition centred
+            on the signature roll photograph. Golden edges create a precious box effect, emphasising
+            the brand's premium quality - making the unboxing moment a deliberate part of the
+            dining experience.
+          </p>
+          <p class="body mt-16">
+            The <em>Regalia Dining</em> name appears in the same gold palette, while the dynamic
+            composition with chopsticks holding a piece of salmon adds movement to the static form.
+            The packaging is not a logistical necessity - it is the final act of the brand story.
+          </p>
+          <div class="mt-24">
+            <div class="insight-card identity-stat">
+              <div class="insight-card__stat">3</div>
+              <div class="insight-card__label">Brand touchpoints designed - website, business card, delivery packaging -
+                all sharing one coherent visual language</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Harmony strip -->
+      <div class="card-box mt-32 rv d2">
+        <div class="gold-line"></div>
+        <h2 class="sec-h2--sm">Harmony of Tradition and <em>Modernity</em></h2>
+        <div class="two-col mt-16">
+          <p class="body">
+            In the Regalia Dining project, I created a digital experience that conveys the essence of
+            Japanese cuisine through modern design. From the first glance at the hero section to the
+            final touch in delivery design - each element works to create a holistic premium image,
+            where I paid special attention to food photography, presenting each dish as an artwork on
+            a dark background.
+          </p>
+          <p class="body">
+            Golden accents, flowing lines, and organic shapes create a unified visual language that
+            can be traced through all brand touchpoints - from website to packaging. Interactive
+            elements and animations add dynamism without disturbing the overall harmony, while the
+            thoughtful structure simplifies the user's journey from first acquaintance to placing
+            an order or booking a table.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════
+   09 - THEMES & UI KIT
+══════════════════════════════════ -->
+  <section class="sec" id="uikit">
+    <div class="inner">
+      <div class="sec-num rv">11 - Themes &amp; Visual Language</div>
+      <h2 class="sec-h2 rv">Dark luxury - <em>by design</em></h2>
+      <p class="sec-lead rv">
+        The visual system was built around a single principle: the food is the hero.
+        Every background, colour and typographic choice serves to make dish photography sing.
+      </p>
+
+      <!-- Colour swatches -->
+      <div class="rv">
+        <div class="sec-num">Colour System</div>
+        <div class="swatch-row">
+          <div class="swatch">
+            <div class="swatch__circle swatch__circle--bg"></div>
+            <div class="swatch__name">#070B19<br />Background</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__circle swatch__circle--surface"></div>
+            <div class="swatch__name">#101728<br />Surface</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__circle swatch__circle--gold"></div>
+            <div class="swatch__name">#B8995C<br />Gold Primary</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__circle swatch__circle--text"></div>
+            <div class="swatch__name">#C7C2B7<br />Text Primary</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__circle swatch__circle--text2"></div>
+            <div class="swatch__name">#999899<br />Text Secondary</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__circle swatch__circle--gold-lt"></div>
+            <div class="swatch__name">Gold 15%<br />Tint</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Type scale -->
+      <div class="mt-32 rv d1">
+        <div class="sec-num">Type Scale</div>
+        <div class="type-scale">
+          <div class="type-row">
+            <div class="type-row__label">Display</div>
+            <div class="type-row__sample--display">Regalia</div>
+          </div>
+          <div class="type-row">
+            <div class="type-row__label">Heading</div>
+            <div class="type-row__sample--heading">Book a Table</div>
+          </div>
+          <div class="type-row">
+            <div class="type-row__label">Subheading</div>
+            <div class="type-row__sample--subhead">Appetisers · Mains · Desserts</div>
+          </div>
+          <div class="type-row">
+            <div class="type-row__label">Body</div>
+            <div class="type-row__sample--body">A curated selection of traditional Japanese flavours, reimagined for the
+              European palate with modern plating and seasonal ingredients.</div>
+          </div>
+          <div class="type-row">
+            <div class="type-row__label">Caption</div>
+            <div class="type-row__sample--caption">Omakase · 7 courses · €95 per person</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UI Kit image -->
+      <div class="uikit-img mt-32 rv d2">
+        <img src="./img/Study case/UI Kit.png" alt="Regalia Dining UI Kit"
+          onerror="this.parentNode.style.display='none'" />
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════
+   10 - DECISIONS & TRADE-OFFS
+══════════════════════════════════ -->
+  <section class="sec sec--alt" id="decisions">
+    <div class="inner">
+      <div class="sec-num rv">12 - Design Decisions</div>
+      <h2 class="sec-h2 rv">Why I chose <em>this</em>, not that</h2>
+      <p class="sec-lead rv">
+        Senior design is as much about what you reject as what you ship.
+        These are the four most consequential choices made on this project.
+      </p>
+
+      <div class="dd-grid">
+        <div class="dd-card rv d1">
+          <div class="dd-badge dd-badge--warn">Constraint</div>
+          <h3>Dark theme over light</h3>
+          <p class="body-sm">The client brief mentioned "premium". Light themes dominate the restaurant sector (0 of 6
+            competitors used dark). A dark theme was a higher risk but a clear differentiation play.</p>
+          <div class="dd-rationale">Decision</div>
+          <p class="body-sm">Dark background amplifies food photography contrast, makes gold accents feel genuine, and
+            matches the candlelit ambiance of the physical space. User testing confirmed preference: 6/8 testers said
+            "this feels more expensive".</p>
+        </div>
+
+        <div class="dd-card rv d2">
+          <div class="dd-badge dd-badge--warn">Constraint</div>
+          <h3>Custom overlay vs. separate dish page</h3>
+          <p class="body-sm">Building separate pages for each dish was more SEO-friendly, but introduced navigation
+            friction - users would leave the menu flow to read about a dish.</p>
+          <div class="dd-rationale">Decision</div>
+          <p class="body-sm">The overlay keeps the user inside the browsing experience. Click a dish → overlay appears
+            with full detail, quantity control, and cart CTA. Zero navigation cost. The in-context upsell is more
+            powerful than a standalone page.</p>
+        </div>
+
+        <div class="dd-card rv d1">
+          <div class="dd-badge dd-badge--ok">Strategic</div>
+          <h3>Category cards vs. text-only nav tabs</h3>
+          <p class="body-sm">A plain tab bar (Appetizers · Sushi · Sashimi…) was the zero-effort option. It would have
+            been scannable but entirely forgettable - just another restaurant navigation pattern.</p>
+          <div class="dd-rationale">Decision</div>
+          <p class="body-sm">Replacing text tabs with photograph-forward category cards turns navigation into discovery.
+            Users see what a category looks like before clicking - reducing hesitation and increasing time-on-page. Each
+            card acts as a micro advertisement for that section of the menu.</p>
+        </div>
+
+        <div class="dd-card rv d2">
+          <div class="dd-badge dd-badge--ok">Strategic</div>
+          <h3>Glassmorphic form vs. opaque card</h3>
+          <p class="body-sm">The booking page could have used the same opaque card surface as the rest of the site. A
+            glassmorphic form risked legibility on dark backgrounds.</p>
+          <div class="dd-rationale">Decision</div>
+          <p class="body-sm">The blur-backed form creates visual separation while keeping depth. The transparent quality
+            echoes the delicate, layered aesthetic of Japanese cuisine. Contrast ratios were verified against WCAG AA
+            throughout.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════
+   11 - IMPACT
+══════════════════════════════════ -->
+  <section class="sec" id="impact">
+    <div class="inner">
+      <div class="sec-num rv">13 - Outcomes</div>
+      <h2 class="sec-h2 rv">What was <em>delivered</em></h2>
+      <p class="sec-lead rv">
+        A complete, deployable digital product - not a prototype. Four coded pages, a living design
+        system, and a repeatable pattern library ready for developer handoff.
+      </p>
+
+      <div class="stats-grid rv">
+        <div class="stat-cell">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Fully coded pages<br />Homepage · Menu · Booking · Overlay</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">6/8</div>
+          <div class="stat-label">Testers said the site felt<br />"more premium" than competitors</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Competitor sites with<br />dark-theme + cart + booking</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">1</div>
+          <div class="stat-label">Full UI Kit delivered<br />for brand scale</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════
+   12 - LEARNINGS
+══════════════════════════════════ -->
+  <section class="sec sec--alt" id="learnings">
+    <div class="inner">
+      <div class="sec-num rv">14 - Reflections</div>
+      <h2 class="sec-h2 rv">What I <em>learnt</em></h2>
+
+      <div class="learnings-grid">
+        <div class="learning-card rv d1">
+          <div class="learning-card__icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="14" r="13" stroke="rgba(184,153,92,0.3)" stroke-width="1.5"/>
+              <path d="M8 14h12M14 8v12" stroke="#B8995C" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="14" cy="14" r="3" fill="rgba(184,153,92,0.2)" stroke="#B8995C" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3>Dark themes require a different typography discipline</h3>
+          <p class="body-sm mt-8">
+            On light backgrounds, contrast is default. On dark, every type size and weight is a deliberate
+            decision. Croissant One at 400 weight needs to be used sparingly — at large sizes it's majestic,
+            at small sizes it becomes muddy. The lesson: test your type system at all sizes, not just in hero sections.
+          </p>
+        </div>
+        <div class="learning-card rv d2">
+          <div class="learning-card__icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="5" width="22" height="16" rx="2.5" stroke="#B8995C" stroke-width="1.5"/>
+              <circle cx="14" cy="13" r="4" stroke="#B8995C" stroke-width="1.5"/>
+              <path d="M3 21l22 0" stroke="rgba(184,153,92,0.3)" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3>Food photography direction is a UX decision</h3>
+          <p class="body-sm mt-8">
+            The visual quality of dish photography is not a "nice to have" — it is the primary conversion
+            lever. I learned to art-direct product photography with UX intent: top-down on dark
+            backgrounds, consistent lighting, no props that distract from the food.
+          </p>
+        </div>
+        <div class="learning-card rv d1">
+          <div class="learning-card__icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="14" r="11" stroke="#B8995C" stroke-width="1.5"/>
+              <path d="M10 14l3 3 5-6" stroke="#B8995C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Custom interactions need a fallback contract</h3>
+          <p class="body-sm mt-8">
+            The cursor trail is GPU-heavy on older hardware. Early builds caused
+            janky scroll on low-power laptops. I added requestAnimationFrame batching, reduced trail
+            particle count, and added will-change hints. Build custom interactions defensively from the
+            first commit.
+          </p>
+        </div>
+        <div class="learning-card rv d2">
+          <div class="learning-card__icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 3L14 7M14 21L14 25M3 14L7 14M21 14L25 14" stroke="rgba(184,153,92,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M14 8C10.7 8 8 10.7 8 14C8 17.3 10.7 20 14 20" stroke="#B8995C" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="14" cy="14" r="2.5" fill="#B8995C" opacity=".6"/>
+            </svg>
+          </div>
+          <h3>CJM must drive layout decisions, not just document them</h3>
+          <p class="body-sm mt-8">
+            The CJM revealed that Booking was a drop-off point because of form length. This directly
+            changed the design from a 10-field form to a 6-field form — cutting 40% of required input.
+            The map wasn't a deliverable; it was a design tool.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- ══════════════════════════════════
+  FOOTER
+  ══════════════════════════════════ -->
+  <footer class="footer">
+    <div>
+      <div class="footer__title">Let's work together</div>
+      <div class="footer__sub">UX/UI Design · Frontend Development · Design Systems</div>
+    </div>
+    <div class="footer__btns">
+      <a href="https://yanaharcourt.dev" class="btn-primary" target="_blank">View Portfolio →</a>
+      <a href="mailto:yana.harcourt@gmail.com" class="btn-ghost">Get in touch</a>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" aria-label="Back to top">↑</a>
+
+  <script>
+    /* ── Custom cursor ── */
+    const cur = document.getElementById('cur');
+    const ctr = document.getElementById('ctr');
+    let mx = innerWidth / 2, my = innerHeight / 2, tx = mx, ty = my;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function tick() {
+      cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+      tx += (mx - tx) * .1; ty += (my - ty) * .1;
+      ctr.style.left = tx + 'px'; ctr.style.top = ty + 'px';
+      requestAnimationFrame(tick);
+    })();
+    document.addEventListener('mousedown', () => cur.style.transform = 'scale(2) translate(-25%,-25%)');
+    document.addEventListener('mouseup', () => cur.style.transform = '');
+
+    /* ── Scroll reveal ── */
+    const io = new IntersectionObserver(
+      es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+      { threshold: .06 }
+    );
+    document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+    /* ── Scroll top ── */
+    const st = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () =>
+      scrollY > 300 ? st.classList.add('active') : st.classList.remove('active')
+    );
+    st.addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); });
+
+    /* ── TOC dots ── */
+    const tocDots = document.querySelectorAll('.toc-dot');
+    tocDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const sec = document.getElementById(dot.dataset.sec);
+        if (sec) sec.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    const tocIo = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if (e.isIntersecting) {
+          tocDots.forEach(d => d.classList.toggle('active', d.dataset.sec === e.target.id));
+        }
+      });
+    }, { threshold: .3 });
+
+    ['hero', 'challenge', 'process', 'research', 'personas', 'cjm', 'screens', 'fullmockup', 'identity', 'branding', 'uikit', 'impact'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) tocIo.observe(el);
+    });
+
+    /* ── Animate pain bars on enter ── */
+    const barIo = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.pain-bar__fill').forEach(fill => {
+            const targetW = fill.dataset.w + '%';
+            fill.style.width = '0';
+            requestAnimationFrame(() => {
+              fill.style.transition = 'width 1.2s ease';
+              fill.style.width = targetW;
+            });
+          });
+          barIo.unobserve(e.target);
+        }
+      });
+    }, { threshold: .3 });
+    document.querySelectorAll('.persona-card').forEach(c => barIo.observe(c));
+  </script>
+
+  <!-- ══════════════════════════════════
+       SCREENS LIGHTBOX
+  ══════════════════════════════════ -->
+  <div id="sc-lightbox" role="dialog" aria-modal="true" aria-label="Screen preview">
+    <button id="sc-lb-close" aria-label="Close" onclick="closeLB()">
+      <svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13"/></svg>
+    </button>
+    <div id="sc-lb-nav">
+      <button class="sc-lb-arrow" aria-label="Previous" onclick="navLB(-1)">
+        <svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg>
+      </button>
+      <button class="sc-lb-arrow" aria-label="Next" onclick="navLB(1)">
+        <svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg>
+      </button>
+    </div>
+    <img id="sc-lb-img" src="" alt="" />
+    <div id="sc-lb-caption"></div>
+  </div>
+
+  <script>
+    /* ── Lightbox for screen cards ── */
+    let lbItems = [];
+    let lbIdx   = 0;
+
+    function buildLBItems() {
+      lbItems = [];
+      document.querySelectorAll('.sc-card:not(.sc-card--static)').forEach(card => {
+        const img = card.querySelector('.sc-card__img');
+        const title = card.dataset.title || card.querySelector('.sc-card__cap-title')?.textContent || '';
+        if (img && img.src && !img.src.endsWith('/')) {
+          lbItems.push({ src: img.src, title });
+        }
+      });
+    }
+
+    function openLB(card) {
+      if (card.classList.contains('sc-card--static')) return;
+      buildLBItems();
+      const img   = card.querySelector('.sc-card__img');
+      const title = card.dataset.title || card.querySelector('.sc-card__cap-title')?.textContent || '';
+      lbIdx = lbItems.findIndex(i => i.src === img?.src);
+      if (lbIdx < 0) lbIdx = 0;
+      showLBSlide(lbIdx);
+      document.getElementById('sc-lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function showLBSlide(idx) {
+      const lb  = document.getElementById('sc-lightbox');
+      const el  = document.getElementById('sc-lb-img');
+      const cap = document.getElementById('sc-lb-caption');
+      const item = lbItems[idx];
+      if (!item) return;
+      el.style.opacity = '0';
+      el.style.transform = 'scale(.96)';
+      setTimeout(() => {
+        el.src = item.src;
+        el.alt = item.title;
+        cap.textContent = item.title;
+        el.style.opacity = '1';
+        el.style.transform = 'scale(1)';
+      }, 120);
+      el.style.transition = 'opacity .25s ease, transform .25s ease';
+      /* hide nav if only 1 item */
+      document.getElementById('sc-lb-nav').style.display = lbItems.length > 1 ? 'flex' : 'none';
+    }
+
+    function navLB(dir) {
+      lbIdx = (lbIdx + dir + lbItems.length) % lbItems.length;
+      showLBSlide(lbIdx);
+    }
+
+    function closeLB() {
+      document.getElementById('sc-lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* Keyboard support */
+    document.addEventListener('keydown', e => {
+      const lb = document.getElementById('sc-lightbox');
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape')      closeLB();
+      if (e.key === 'ArrowRight')  navLB(1);
+      if (e.key === 'ArrowLeft')   navLB(-1);
+    });
+
+    /* Click backdrop to close */
+    document.getElementById('sc-lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLB();
+    });
+  </script>
+
+</body></html>

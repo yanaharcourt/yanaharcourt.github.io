@@ -1,0 +1,2946 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Braga Municipality · Website Redesign - Yana Harcourt</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --clr-ink: #1A1814;
+            --clr-ink-2: #3A342C;
+            --clr-ink-3: #6B6057;
+            --clr-ink-4: #9E958D;
+            --clr-ink-5: #C4BDB5;
+            --clr-bg: #F7F5F2;
+            --clr-bg-warm: #EEEAE4;
+            --clr-bg-card: #FFFFFF;
+            --clr-accent: #2B5CE6;
+            --clr-accent-2: #C4973A;
+            --clr-accent-light: #EEF2FD;
+            --clr-gold-light: #FDF6EA;
+            --clr-pain: #DC2626;
+            --clr-pain-bg: #FEF2F2;
+            --clr-ok: #16A34A;
+            --grad-sofia: #3A342C;
+            --grad-miguel: #6B6057;
+            --grad-teresa: #9E958D;
+            --ff-display: 'Playfair Display', Georgia, serif;
+            --ff-body: 'Inter', system-ui, sans-serif;
+            --fs-hero: clamp(48px, 7vw, 88px);
+            --fs-h2: clamp(28px, 4vw, 48px);
+            --fs-h3: clamp(20px, 2.5vw, 28px);
+            --fs-lead: clamp(16px, 1.5vw, 20px);
+            --fs-body: 16px;
+            --fs-sm: 14px;
+            --fs-xs: 12px;
+            --fs-label: 11px;
+            --fw-normal: 400;
+            --fw-medium: 500;
+            --fw-semi: 600;
+            --fw-bold: 700;
+            --lh-tight: 1.15;
+            --lh-normal: 1.5;
+            --lh-relaxed: 1.7;
+            --ls-wide: 0.12em;
+            --ls-tight: -0.02em;
+            --max-w: 1200px;
+            --max-w-narrow: 720px;
+            --r-sm: 6px;
+            --r-md: 12px;
+            --r-lg: 20px;
+            --r-xl: 32px;
+            --r-pill: 999px;
+            --tr-fast: 0.15s ease;
+            --tr-normal: 0.3s ease;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--ff-body);
+            font-size: var(--fs-body);
+            line-height: var(--lh-normal);
+            color: var(--clr-ink);
+            background: var(--clr-bg);
+            -webkit-font-smoothing: antialiased
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        em {
+            font-style: italic
+        }
+
+        /* CURSOR */
+        #cur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            background: var(--clr-accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform var(--tr-fast)
+        }
+
+        #ctr {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--clr-accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: .55
+        }
+        @media (hover: none) {
+            #cur, #ctr { display: none; }
+        }
+
+        /* SCROLL REVEAL - only on screens that support hover (non-touch) to avoid dark flash on mobile */
+        @media(hover:hover) {
+            .rv {
+                opacity: 0;
+                transform: translateY(24px);
+                transition: opacity .6s ease, transform .6s ease
+            }
+
+            .rv.in {
+                opacity: 1;
+                transform: none
+            }
+
+            .rv.d1 {
+                transition-delay: .1s
+            }
+
+            .rv.d2 {
+                transition-delay: .2s
+            }
+
+            .rv.d3 {
+                transition-delay: .3s
+            }
+        }
+
+        /* NAV */
+        .bc-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 64px;
+            background: rgba(247, 245, 242, .92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--clr-ink-5)
+        }
+
+        .bc-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--fs-sm);
+            color: var(--clr-ink-3)
+        }
+
+        .bc-left a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--clr-ink-3);
+            transition: color var(--tr-fast)
+        }
+
+        .bc-left a:hover {
+            color: var(--clr-accent)
+        }
+
+        .bc-sep {
+            color: var(--clr-ink-5)
+        }
+
+        .bc-cur {
+            color: var(--clr-ink);
+            font-weight: var(--fw-semi)
+        }
+
+        .bc-tags {
+            display: flex;
+            gap: 8px
+        }
+
+        .bc-tag {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: var(--r-pill)
+        }
+
+        .bc-tag.blue {
+            background: var(--clr-accent-light);
+            color: var(--clr-accent)
+        }
+
+        .bc-tag.gold {
+            background: var(--clr-gold-light);
+            color: var(--clr-accent-2)
+        }
+
+        /* SECTIONS - explicit bg to prevent dark bleed-through */
+        .sec {
+            background: var(--clr-bg);
+            padding: 100px 64px
+        }
+
+        .sec-inner {
+            display: contents
+        }
+
+        .sec-full {
+            background: var(--clr-bg-warm);
+            padding: 100px 64px
+        }
+
+        .sec-full-inner {
+            display: contents
+        }
+
+        .sec-lbl {
+            font-size: var(--fs-label);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            color: var(--clr-accent-2);
+            margin-bottom: 16px
+        }
+
+        .sec-h2 {
+            font-family: var(--ff-display);
+            font-size: var(--fs-h2);
+            font-weight: var(--fw-normal);
+            line-height: var(--lh-tight);
+            letter-spacing: var(--ls-tight);
+            color: var(--clr-ink);
+            margin-bottom: 24px
+        }
+
+        .sec-lead {
+            font-size: var(--fs-lead);
+            color: var(--clr-ink-3);
+            line-height: var(--lh-relaxed);
+            max-width: var(--max-w-narrow);
+            margin-bottom: 48px
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 90vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 48px;
+            padding: 80px 64px
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: var(--fs-label);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            color: var(--clr-accent-2);
+            margin-bottom: 24px
+        }
+
+        .hero-h1 {
+            font-family: var(--ff-display);
+            font-size: var(--fs-hero);
+            font-weight: var(--fw-normal);
+            line-height: var(--lh-tight);
+            letter-spacing: var(--ls-tight);
+            color: var(--clr-ink);
+            margin-bottom: 32px
+        }
+
+        .hero-sub {
+            font-size: var(--fs-lead);
+            color: var(--clr-ink-3);
+            line-height: var(--lh-relaxed);
+            max-width: 480px;
+            margin-bottom: 48px
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px 40px;
+            padding-top: 32px;
+            border-top: 1px solid var(--clr-ink-5)
+        }
+
+        .meta-lbl {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            color: var(--clr-ink-4);
+            margin-bottom: 4px
+        }
+
+        .meta-val {
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-medium);
+            color: var(--clr-ink)
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+
+        .hero-visual img {
+            width: 100%;
+            border-radius: var(--r-lg)
+        }
+
+        /* OVERVIEW STRIP */
+        .ov-strip {
+            background: var(--clr-ink);
+            color: #fff;
+            padding: 56px 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+            flex-wrap: wrap
+        }
+
+        .ov-grid {
+            display: contents
+        }
+
+        .ov-item {
+            padding: 0
+        }
+
+        .ov-item:not(:last-child) {
+            padding-right: 0
+        }
+
+        .ov-lbl {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            color: var(--clr-ink-5);
+            margin-bottom: 8px
+        }
+
+        .ov-val {
+            font-size: var(--fs-sm);
+            color: rgba(255, 255, 255, .85);
+            line-height: 1.6
+        }
+
+        .ov-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: var(--fs-sm);
+            color: var(--clr-accent-2);
+            margin-top: 8px;
+            transition: opacity var(--tr-fast)
+        }
+
+        .ov-link:hover {
+            opacity: .75
+        }
+
+        .ov-div {
+            width: 1px;
+            height: 44px;
+            background: rgba(255, 255, 255, .1)
+        }
+
+        .ov-quote-row {
+            padding-top: 28px;
+            font-family: var(--ff-display);
+            font-size: 18px;
+            font-style: italic;
+            color: rgba(255, 255, 255, .55);
+            line-height: var(--lh-relaxed)
+        }
+
+        /* CHALLENGE */
+        .ch-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px
+        }
+
+        .ch-card {
+            background: var(--clr-bg-card);
+            border-radius: var(--r-xl);
+            padding: 40px;
+            border: 1px solid var(--clr-bg-warm)
+        }
+
+        .ch-card-lbl {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            color: var(--clr-accent-2);
+            margin-bottom: 16px
+        }
+
+        .ch-card-ttl {
+            font-family: var(--ff-display);
+            font-size: var(--fs-h3);
+            font-weight: var(--fw-normal);
+            line-height: var(--lh-tight);
+            color: var(--clr-ink);
+            margin-bottom: 16px
+        }
+
+        .ch-card-p {
+            font-size: var(--fs-sm);
+            color: var(--clr-ink-3);
+            line-height: var(--lh-relaxed);
+            margin-bottom: 24px
+        }
+
+        .ch-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .ch-li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: var(--fs-sm);
+            color: var(--clr-ink-2)
+        }
+
+        .ch-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--clr-accent-2);
+            margin-top: 6px;
+            flex-shrink: 0
+        }
+
+        /* PROCESS */
+        .process-section {
+            background: var(--clr-ink);
+            padding: 100px 64px
+        }
+
+        .process-section-inner {
+            display: contents
+        }
+
+        .process-section .sec-lbl {
+            color: var(--clr-accent-2)
+        }
+
+        .tl-ttl {
+            font-family: var(--ff-display);
+            font-size: var(--fs-h2);
+            color: #fff;
+            margin-bottom: 12px
+        }
+
+        .tl-sub {
+            font-size: var(--fs-lead);
+            color: var(--clr-ink-4);
+            margin-bottom: 64px
+        }
+
+        .orbital {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 40px 0
+        }
+
+        .planet {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px
+        }
+
+        .planet-num {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            color: var(--clr-ink-4)
+        }
+
+        .orb {
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, .18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: transform var(--tr-normal), border-color var(--tr-normal)
+        }
+
+        .orb:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, .5)
+        }
+
+        .orb-s {
+            width: 80px;
+            height: 80px;
+            background: transparent
+        }
+
+        .orb-m {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, .04)
+        }
+
+        .orb-l {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, .06)
+        }
+
+        .orb-xl {
+            width: 144px;
+            height: 144px;
+            background: rgba(255, 255, 255, .09)
+        }
+
+        .orb-dim {
+            width: 80px;
+            height: 80px;
+            background: transparent;
+            border-style: dashed;
+            opacity: .4
+        }
+
+        .orb-glow {
+            display: none
+        }
+
+        .orb-label {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            color: #fff;
+            text-align: center;
+            line-height: 1.4;
+            letter-spacing: .03em;
+            position: relative;
+            z-index: 1
+        }
+
+        .orb-label-dim {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            color: var(--clr-ink-4);
+            text-align: center;
+            line-height: 1.4;
+            letter-spacing: .03em;
+            position: relative;
+            z-index: 1
+        }
+
+        .planet-desc {
+            font-size: var(--fs-xs);
+            color: var(--clr-ink-4);
+            text-align: center;
+            line-height: 1.5;
+            max-width: 110px
+        }
+
+        .planet-desc strong {
+            display: block;
+            color: var(--clr-ink-5);
+            margin-bottom: 2px
+        }
+
+        .p-dash {
+            flex: 1;
+            height: 1px;
+            border-top: 1px dashed rgba(255, 255, 255, .15);
+            margin-bottom: 56px
+        }
+
+        .process-foot {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            padding-top: 48px;
+            border-top: 1px solid rgba(255, 255, 255, .1)
+        }
+
+        .pfoot-item {
+            font-size: var(--fs-sm);
+            color: var(--clr-ink-4);
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .pfoot-item span {
+            color: rgba(255, 255, 255, .7);
+            font-weight: var(--fw-medium)
+        }
+
+        .pfoot-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--clr-accent-2);
+            flex-shrink: 0
+        }
+
+        /* AUDIT */
+        .audit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+            align-items: start
+        }
+
+        .browser-chrome {
+            background: #E2E0DC;
+            border-radius: var(--r-lg) var(--r-lg) 0 0;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .browser-dots {
+            display: flex;
+            gap: 5px
+        }
+
+        .bdot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%
+        }
+
+        .bdot.r {
+            background: #FF5F57
+        }
+
+        .bdot.y {
+            background: #FEBC2E
+        }
+
+        .bdot.g {
+            background: #28C840
+        }
+
+        .browser-url {
+            flex: 1;
+            background: #fff;
+            border-radius: 4px;
+            padding: 3px 10px;
+            font-size: var(--fs-xs);
+            color: var(--clr-ink-3);
+            font-family: monospace
+        }
+
+        .before-wrap {
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            border: 1px solid var(--clr-bg-warm);
+            position: relative
+        }
+
+        .before-label {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(220, 38, 38, .85);
+            color: #fff;
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: var(--r-pill);
+            backdrop-filter: blur(4px)
+        }
+
+        .before-wrap .browser-chrome {
+            border-radius: 0
+        }
+
+        .scores-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .score-row {
+            background: var(--clr-bg-card);
+            border-radius: var(--r-md);
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px solid var(--clr-bg-warm)
+        }
+
+        .score-lbl {
+            font-size: var(--fs-sm);
+            color: var(--clr-ink-2);
+            flex: 1
+        }
+
+        .score-bar {
+            width: 90px;
+            height: 4px;
+            background: var(--clr-bg-warm);
+            border-radius: 2px;
+            overflow: hidden;
+            flex-shrink: 0
+        }
+
+        .score-fill {
+            height: 100%;
+            border-radius: 2px
+        }
+
+        .score-num {
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-bold);
+            min-width: 36px;
+            text-align: right
+        }
+
+        .c-bad {
+            color: var(--clr-pain)
+        }
+
+        .c-warn {
+            color: var(--clr-accent-2)
+        }
+
+        .c-ok {
+            color: var(--clr-ok)
+        }
+
+        .f-bad {
+            background: var(--clr-pain)
+        }
+
+        .f-warn {
+            background: var(--clr-accent-2)
+        }
+
+        .f-ok {
+            background: var(--clr-ok)
+        }
+
+        .issues-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px
+        }
+
+        .issue-row {
+            background: var(--clr-bg-card);
+            border-radius: var(--r-md);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid var(--clr-bg-warm)
+        }
+
+        .issue-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .issue-dot.red {
+            background: var(--clr-pain)
+        }
+
+        .issue-dot.amber {
+            background: var(--clr-accent-2)
+        }
+
+        .issue-text {
+            font-size: var(--fs-sm);
+            color: var(--clr-ink-2);
+            flex: 1
+        }
+
+        .issue-badge {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            padding: 3px 10px;
+            border-radius: var(--r-pill);
+            flex-shrink: 0
+        }
+
+        .issue-badge.red {
+            background: var(--clr-pain-bg);
+            color: var(--clr-pain)
+        }
+
+        .issue-badge.amber {
+            background: var(--clr-gold-light);
+            color: var(--clr-accent-2)
+        }
+
+        /* PERSONAS */
+        .personas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px
+        }
+
+        .persona-card {
+            background: var(--clr-bg-card);
+            border-radius: var(--r-xl);
+            overflow: hidden;
+            border: 1px solid var(--clr-bg-warm)
+        }
+
+        .pcard-top {
+            padding: 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-bottom: 1px solid var(--clr-bg-warm)
+        }
+
+        .pcard-av {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--ff-display);
+            font-size: 22px;
+            color: #fff;
+            flex-shrink: 0
+        }
+
+        .pcard-av.sofia {
+            background: var(--grad-sofia)
+        }
+
+        .pcard-av.miguel {
+            background: var(--grad-miguel)
+        }
+
+        .pcard-av.teresa {
+            background: var(--grad-teresa)
+        }
+
+        .pcard-name {
+            font-family: var(--ff-display);
+            font-size: 22px;
+            color: var(--clr-ink)
+        }
+
+        .pcard-role {
+            font-size: var(--fs-xs);
+            color: var(--clr-ink-4);
+            margin-top: 2px
+        }
+
+        .pcard-body {
+            padding: 32px
+        }
+
+        .pcard-row {
+            display: flex;
+            gap: 8px;
+            font-size: var(--fs-sm);
+            padding: 8px 0;
+            border-bottom: 1px solid var(--clr-bg-warm)
+        }
+
+        .pcard-k {
+            color: var(--clr-ink-4);
+            min-width: 88px;
+            flex-shrink: 0
+        }
+
+        .pcard-v {
+            color: var(--clr-ink-2)
+        }
+
+        .pcard-sec {
+            margin-top: 20px
+        }
+
+        .pcard-sec-ttl {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            color: var(--clr-ink-4);
+            margin-bottom: 8px
+        }
+
+        .pcard-li {
+            font-size: var(--fs-sm);
+            color: var(--clr-ink-3);
+            line-height: var(--lh-relaxed);
+            padding-left: 12px;
+            position: relative;
+            margin-bottom: 6px
+        }
+
+        .pcard-li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--clr-ink-5)
+        }
+
+        /* USER FLOW */
+        .flow-section {
+            background: var(--clr-ink);
+            padding: 100px 64px
+        }
+
+        .flow-inner {
+            display: contents
+        }
+
+        .flow-inner .sec-lbl {
+            color: var(--clr-accent-2)
+        }
+
+        .flow-inner .sec-h2 {
+            color: #fff
+        }
+
+        .flow-inner .sec-lead {
+            color: var(--clr-ink-4)
+        }
+
+        .flow-block {
+            margin-bottom: 40px
+        }
+
+        .flow-block:last-child {
+            margin-bottom: 0
+        }
+
+        .flow-p-lbl {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            color: var(--clr-accent-2);
+            margin-bottom: 14px
+        }
+
+        .flow-nodes {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0;
+            row-gap: 12px
+        }
+
+        .flow-node {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: var(--r-md);
+            padding: 10px 16px;
+            font-size: var(--fs-xs);
+            color: #fff;
+            white-space: nowrap;
+            transition: background var(--tr-fast);
+            flex-shrink: 0
+        }
+
+        .flow-node:hover {
+            background: rgba(255, 255, 255, .12)
+        }
+
+        .flow-node.primary {
+            background: rgba(255, 255, 255, .15);
+            border-color: rgba(255, 255, 255, .3);
+            font-weight: var(--fw-semi)
+        }
+
+        .flow-node.gold {
+            background: rgba(196, 151, 58, .15);
+            border-color: rgba(196, 151, 58, .35)
+        }
+
+        .flow-node.pain {
+            background: rgba(255, 255, 255, .04);
+            border-color: rgba(255, 255, 255, .1);
+            color: rgba(255, 255, 255, .4);
+            text-decoration: line-through;
+            text-decoration-color: rgba(255, 255, 255, .2)
+        }
+
+        .flow-arrow {
+            width: 20px;
+            height: 1px;
+            background: rgba(255, 255, 255, .2);
+            flex-shrink: 0;
+            position: relative;
+            align-self: center
+        }
+
+        .flow-arrow::after {
+            content: '';
+            position: absolute;
+            right: -1px;
+            top: -3px;
+            border-left: 5px solid rgba(255, 255, 255, .35);
+            border-top: 3px solid transparent;
+            border-bottom: 3px solid transparent
+        }
+
+        .flow-note {
+            margin-top: 12px;
+            font-size: var(--fs-xs);
+            color: var(--clr-ink-4);
+            padding: 7px 14px;
+            border-left: 2px solid var(--clr-accent-2);
+            line-height: 1.5
+        }
+
+        /* CJM - desktop table */
+        .cjm-table-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border: 1px solid var(--clr-bg-warm);
+            border-radius: var(--r-lg);
+            overflow: hidden
+        }
+
+        .cjm-table {
+            width: 100%;
+            min-width: 700px;
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .cjm-table th {
+            background: var(--clr-bg-card);
+            padding: 20px 24px;
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            color: var(--clr-ink-3);
+            text-align: left;
+            border-bottom: 1px solid var(--clr-bg-warm)
+        }
+
+        .cjm-table th:first-child {
+            width: 160px;
+            color: var(--clr-ink-4)
+        }
+
+        .cjm-table td {
+            padding: 16px 24px;
+            font-size: var(--fs-sm);
+            color: var(--clr-ink-3);
+            line-height: 1.6;
+            vertical-align: top;
+            border-bottom: 1px solid var(--clr-bg-warm);
+            background: var(--clr-bg-card)
+        }
+
+        .cjm-table tr:last-child td {
+            border-bottom: none
+        }
+
+        .cjm-table td.stage {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            color: var(--clr-ink-2);
+            white-space: nowrap;
+            letter-spacing: .03em;
+            text-transform: uppercase;
+            vertical-align: middle
+        }
+
+        .cjm-table td.stage span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .cjm-table .row-pain td {
+            background: #FAFAF9 !important
+        }
+
+        .cjm-table .row-pain td.stage {
+            border-left: 2px solid var(--clr-ink-3);
+            padding-left: 22px;
+            color: var(--clr-ink)
+        }
+
+        .cjm-table .row-pain td:not(.stage) {
+            color: var(--clr-ink-2);
+            font-weight: var(--fw-medium)
+        }
+
+        .cjm-table .cell-emotion {
+            font-style: italic;
+            color: var(--clr-ink-2) !important
+        }
+
+        .cjm-th-persona {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .cjm-av {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: var(--fw-bold);
+            font-size: 11px;
+            flex-shrink: 0
+        }
+
+        .cjm-th-name {
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-semi);
+            color: var(--clr-ink)
+        }
+
+        .cjm-th-role {
+            font-size: var(--fs-xs);
+            color: var(--clr-ink-4);
+            font-weight: var(--fw-normal)
+        }
+
+        /* CJM - mobile cards (shown below 768px) */
+        .cjm-mobile {
+            display: none
+        }
+
+        .cjm-m-persona {
+            margin-bottom: 32px
+        }
+
+        .cjm-m-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--clr-ink);
+            border-radius: var(--r-lg) var(--r-lg) 0 0
+        }
+
+        .cjm-m-av {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: var(--fw-bold);
+            font-size: var(--fs-sm);
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, .15)
+        }
+
+        .cjm-m-name {
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-semi);
+            color: #fff
+        }
+
+        .cjm-m-role {
+            font-size: var(--fs-xs);
+            color: rgba(255, 255, 255, .5)
+        }
+
+        .cjm-m-rows {
+            border: 1px solid var(--clr-bg-warm);
+            border-top: none;
+            border-radius: 0 0 var(--r-lg) var(--r-lg);
+            overflow: hidden
+        }
+
+        .cjm-m-row {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            border-bottom: 1px solid var(--clr-bg-warm)
+        }
+
+        .cjm-m-row:last-child {
+            border-bottom: none
+        }
+
+        .cjm-m-stage {
+            padding: 12px 14px;
+            font-size: 10px;
+            font-weight: var(--fw-semi);
+            color: var(--clr-ink-3);
+            background: var(--clr-bg-card);
+            display: flex;
+            align-items: flex-start;
+            gap: 4px;
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: .04em
+        }
+
+        .cjm-m-cell {
+            padding: 12px 14px;
+            font-size: 11px;
+            color: var(--clr-ink-3);
+            line-height: 1.5;
+            background: var(--clr-bg-card)
+        }
+
+        .cjm-m-row.pain .cjm-m-stage {
+            background: var(--clr-bg-card);
+            color: var(--clr-ink-2);
+            border-left: 2px solid var(--clr-ink-3)
+        }
+
+        .cjm-m-row.pain .cjm-m-cell {
+            background: var(--clr-bg-card);
+            color: var(--clr-ink-2);
+            font-weight: var(--fw-medium)
+        }
+
+        .cjm-m-row.emotion .cjm-m-cell {
+            font-style: italic;
+            color: var(--clr-ink-2)
+        }
+
+        @media(max-width:768px) {
+            .cjm-table-wrap {
+                display: none
+            }
+
+            .cjm-mobile {
+                display: block
+            }
+        }
+
+        /* INSIGHTS */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px
+        }
+
+        .ic {
+            background: var(--clr-bg-card);
+            border-radius: var(--r-xl);
+            padding: 40px;
+            border: 1px solid var(--clr-bg-warm)
+        }
+
+        .ic.featured {
+            grid-column: 1/-1;
+            background: var(--clr-ink);
+            border: none
+        }
+
+        .ic.featured .ic-lbl {
+            color: rgba(255, 255, 255, .45)
+        }
+
+        .ic.featured .ic-ttl {
+            color: #fff
+        }
+
+        .ic.featured .ic-body {
+            color: rgba(255, 255, 255, .65)
+        }
+
+        .ic.featured .ic-tag {
+            background: rgba(255, 255, 255, .1);
+            color: rgba(255, 255, 255, .7)
+        }
+
+        .ic-lbl {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            color: var(--clr-accent-2);
+            margin-bottom: 12px
+        }
+
+        .ic-ttl {
+            font-family: var(--ff-display);
+            font-size: var(--fs-h3);
+            font-weight: var(--fw-normal);
+            color: var(--clr-ink);
+            margin-bottom: 16px;
+            line-height: var(--lh-tight)
+        }
+
+        .ic-body {
+            font-size: var(--fs-sm);
+            color: var(--clr-ink-3);
+            line-height: var(--lh-relaxed)
+        }
+
+        .ic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 24px
+        }
+
+        .ic-tag {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-medium);
+            padding: 4px 12px;
+            border-radius: var(--r-pill);
+            background: var(--clr-accent-light);
+            color: var(--clr-accent)
+        }
+
+        /* IA SVG */
+        .ia-box {
+            overflow-x: auto;
+            margin-top: 40px
+        }
+
+        .ia-svg {
+            min-width: 900px;
+            width: 100%
+        }
+
+        /* DESIGN SYSTEM */
+        .ds-colors {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 32px
+        }
+
+        .clr-card {
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            border: 1px solid var(--clr-bg-warm);
+            cursor: default;
+            transition: transform var(--tr-normal)
+        }
+
+        .clr-card:hover {
+            transform: translateY(-6px)
+        }
+
+        .clr-swatch {
+            height: 96px;
+            transition: filter var(--tr-normal)
+        }
+
+        .clr-card:hover .clr-swatch {
+            filter: brightness(1.08)
+        }
+
+        .clr-info {
+            background: var(--clr-bg-card);
+            padding: 14px 18px
+        }
+
+        .clr-name {
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-semi);
+            color: var(--clr-ink);
+            margin-bottom: 3px
+        }
+
+        .clr-hex {
+            font-size: var(--fs-xs);
+            color: var(--clr-ink-4);
+            font-family: monospace
+        }
+
+        .ds-type {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px
+        }
+
+        .ds-type-card {
+            background: var(--clr-bg-card);
+            border-radius: var(--r-lg);
+            padding: 32px;
+            border: 1px solid var(--clr-bg-warm)
+        }
+
+        .ds-card-lbl {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            color: var(--clr-ink-4);
+            margin-bottom: 20px
+        }
+
+        /* SCREEN SECTIONS - clean image, no browser frame */
+        .sd-wrap {
+            background: var(--clr-bg);
+            padding: 100px 64px
+        }
+
+        .sd-wrap-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: top;
+        }
+
+        .sd-wrap-inner.rev .sd-img {
+            order: 2
+        }
+
+        .bg-warm .sd-wrap-inner {
+            background: var(--clr-bg-warm)
+        }
+
+        .sd-img img {
+            width: 100%;
+            display: block;
+            border-radius: var(--r-lg)
+        }
+
+        .sd-img-placeholder {
+            width: 100%;
+            aspect-ratio: 4/3;
+            border-radius: var(--r-lg);
+            background: var(--clr-bg-warm);
+            border: 2px dashed var(--clr-ink-5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--clr-ink-4);
+            font-size: var(--fs-sm);
+            text-align: center;
+            padding: 24px
+        }
+
+        .sd-img-placeholder i {
+            font-size: 32px;
+            color: var(--clr-ink-5)
+        }
+
+        .sd-num {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            color: var(--clr-accent-2);
+            margin-bottom: 12px
+        }
+
+        .sd-h3 {
+            font-family: var(--ff-display);
+            font-size: var(--fs-h3);
+            font-weight: var(--fw-normal);
+            color: var(--clr-ink);
+            margin-bottom: 8px;
+            line-height: var(--lh-tight)
+        }
+
+        .sd-sub {
+            font-size: var(--fs-sm);
+            color: var(--clr-accent-2);
+            font-weight: var(--fw-medium);
+            margin-bottom: 20px
+        }
+
+        .sd-p {
+            font-size: var(--fs-sm);
+            color: var(--clr-ink-3);
+            line-height: var(--lh-relaxed);
+            margin-bottom: 32px
+        }
+
+        .sd-feats {
+            display: flex;
+            flex-direction: column;
+            gap: 20px
+        }
+
+        .sd-feat {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start
+        }
+
+        .sd-feat-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--r-sm);
+            background: var(--clr-accent-light);
+            color: var(--clr-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            flex-shrink: 0
+        }
+
+        .sd-feat-ttl {
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-semi);
+            color: var(--clr-ink);
+            margin-bottom: 3px
+        }
+
+        .sd-feat-desc {
+            font-size: var(--fs-xs);
+            color: var(--clr-ink-4);
+            line-height: 1.5
+        }
+
+        /* RESULTS */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px
+        }
+
+        .result-card {
+            background: var(--clr-bg-card);
+            border-radius: var(--r-xl);
+            padding: 40px;
+            border: 1px solid var(--clr-bg-warm);
+            text-align: center
+        }
+
+        .result-num {
+            font-family: var(--ff-display);
+            font-size: 52px;
+            color: var(--clr-ink);
+            line-height: 1;
+            margin-bottom: 8px
+        }
+
+        .result-lbl {
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-medium);
+            color: var(--clr-ink);
+            margin-bottom: 8px
+        }
+
+        .result-desc {
+            font-size: var(--fs-xs);
+            color: var(--clr-ink-4);
+            line-height: 1.5
+        }
+
+        /* SCROLL TOP */
+        .scroll-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 44px;
+            height: 44px;
+            background: var(--clr-ink);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--tr-normal);
+            z-index: 50
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+            pointer-events: auto
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--clr-ink);
+            color: #fff;
+            padding: 80px 64px
+        }
+
+        .footer-inner {
+            display: contents
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 64px;
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+            gap: 40px
+        }
+
+        .footer-headline {
+            font-family: var(--ff-display);
+            font-size: var(--fs-h2);
+            line-height: var(--lh-tight);
+            color: #fff;
+            max-width: 480px
+        }
+
+        .footer-headline em {
+            color: var(--clr-accent-2)
+        }
+
+        .footer-links-group {
+            display: flex;
+            gap: 64px
+        }
+
+        .footer-links-col h5 {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semi);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            color: var(--clr-ink-4);
+            margin-bottom: 20px
+        }
+
+        .footer-links-col a {
+            display: block;
+            font-size: var(--fs-sm);
+            color: rgba(255, 255, 255, .6);
+            margin-bottom: 12px;
+            transition: color var(--tr-fast)
+        }
+
+        .footer-links-col a:hover {
+            color: #fff
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px
+        }
+
+        .footer-copy {
+            font-size: var(--fs-xs);
+            color: var(--clr-ink-4)
+        }
+
+        /* RESPONSIVE */
+        .bg-warm {
+            background: var(--clr-bg-warm)
+        }
+
+        @media(max-width:1024px) {
+
+            .hero,
+            .sd-wrap-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                min-height: auto
+            }
+
+            .hero-visual {
+                display: none
+            }
+
+            .sd-wrap-inner.rev .sd-img {
+                order: 0
+            }
+
+            .ch-grid,
+            .personas-grid,
+            .insights-grid,
+            .ds-type {
+                grid-template-columns: 1fr
+            }
+
+            .audit-grid {
+                grid-template-columns: 1fr
+            }
+
+            .results-grid,
+            .ds-colors {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .issues-grid {
+                grid-template-columns: 1fr
+            }
+
+            .ov-grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media(max-width:640px) {
+
+            .sec,
+            .sec-full,
+            .process-section,
+            .flow-section,
+            .sd-wrap,
+            footer,
+            .ov-strip,
+            .bc-nav {
+                padding-left: 20px !important;
+                padding-right: 20px !important
+            }
+
+            .hero {
+                padding: 56px 20px
+            }
+
+            .sd-wrap-inner {
+                padding: 56px 20px
+            }
+
+            .bc-nav {
+                padding: 16px 20px
+            }
+
+            .bc-tags {
+                display: none
+            }
+
+            .ov-strip {
+                padding: 32px 20px
+            }
+
+            .ov-grid {
+                grid-template-columns: 1fr
+            }
+
+            .orbital {
+                flex-direction: column;
+                align-items: center
+            }
+
+            .p-dash {
+                display: none
+            }
+
+            .results-grid,
+            .ds-colors {
+                grid-template-columns: 1fr
+            }
+
+            .footer-top {
+                flex-direction: column
+            }
+
+            .footer-links-group {
+                flex-direction: column;
+                gap: 32px
+            }
+
+            footer {
+                padding: 56px 20px
+            }
+
+            .hero-meta {
+                flex-wrap: wrap;
+                gap: 20px
+            }
+
+            .hero-meta>div {
+                min-width: calc(50% - 10px)
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cur"></div>
+    <div id="ctr"></div>
+
+    <nav class="bc-nav">
+        <div class="bc-left">
+            <a href="../index.html"><i class="bi bi-arrow-left"></i> Portfolio</a>
+            <span class="bc-sep">›</span>
+            <span class="bc-cur">Braga Municipality</span>
+        </div>
+        <div class="bc-tags">
+            <span class="bc-tag blue">UX/UI Design</span>
+            <span class="bc-tag blue">Web Design</span>
+            <span class="bc-tag gold">Gov &amp; Civic</span>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section style="background:var(--clr-bg)">
+        <div class="hero">
+            <div class="hero-content">
+                <span class="hero-eyebrow">Case Study · 2025</span>
+                <h1 class="hero-h1">Braga<br><em>Redesign</em></h1>
+                <p class="hero-sub">A complete UX redesign of Portugal's most historically rich municipality website -
+                    bridging 2,000 years of heritage with the digital expectations of modern citizens and tourists.</p>
+                <div class="hero-meta">
+                    <div>
+                        <div class="meta-lbl">Role</div>
+                        <div class="meta-val">UX/UI Designer</div>
+                    </div>
+                    <div>
+                        <div class="meta-lbl">Platform</div>
+                        <div class="meta-val">Desktop / Mobile Web</div>
+                    </div>
+                    <div>
+                        <div class="meta-lbl">Year</div>
+                        <div class="meta-val">2025</div>
+                    </div>
+                    <div>
+                        <div class="meta-lbl">Live Website</div>
+                        <div class="meta-val"><a href="./braga.html" target="_blank" style="color:var(--clr-accent);display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:var(--fw-medium);transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'"><i class="bi bi-box-arrow-up-right" style="font-size:11px"></i>View Live</a></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="hero-visual">
+                <img src="https://raw.githubusercontent.com/yanaharcourt/yanaharcourt.github.io/55ea06e15670c267e32cf0390e7bfa6a370d342e/Braga/presentation%20img/Hero.png"
+                    alt="Braga Redesign">
+            </div>
+        </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <div class="ov-strip">
+        <div class="ov-item">
+            <div class="ov-lbl">Client</div>
+            <div class="ov-val">Município de Braga</div>
+        </div>
+        <div class="ov-div"></div>
+        <div class="ov-item">
+            <div class="ov-lbl">Screens</div>
+            <div class="ov-val">20+</div>
+        </div>
+        <div class="ov-div"></div>
+        <div class="ov-item">
+            <div class="ov-lbl">Deliverables</div>
+            <div class="ov-val">Research · Personas · CJM · User Flow · IA · UI · Prototype</div>
+        </div>
+        <p class="ov-quote-row rv">"Where 2,000 years of history meets the city of tomorrow."</p>
+    </div>
+    </div>
+
+    <!-- 01 CHALLENGE -->
+    <div class="sec">
+        <div class="sec-inner">
+            <div class="sec-lbl rv">01 - The Brief</div>
+            <h2 class="sec-h2 rv">Challenge &amp;<br><em>Goals</em></h2>
+            <p class="sec-lead rv">As a resident of Braga, I undertook this project with both professional intent and
+                personal connection. The city's digital presence failed to reflect its unique duality - a UNESCO-valued
+                historic city that is simultaneously Portugal's leading tech hub.</p>
+            <div class="ch-grid rv">
+                <div class="ch-card">
+                    <div class="ch-card-lbl">The Problem</div>
+                    <h3 class="ch-card-ttl">A homepage that showed only links</h3>
+                    <p class="ch-card-p">The original cm-braga.pt displayed almost no content on its landing page - just
+                        a cluster of navigation links with no visual hierarchy and no indication of where each one led.
+                        Citizens and tourists had to already know what they were looking for.</p>
+                    <div class="ch-list">
+                        <div class="ch-li">
+                            <div class="ch-dot"></div><span>Landing page = only navigation links, no content, no
+                                context</span>
+                        </div>
+                        <div class="ch-li">
+                            <div class="ch-dot"></div><span>No visual distinction between residents, tourists, and
+                                business users</span>
+                        </div>
+                        <div class="ch-li">
+                            <div class="ch-dot"></div><span>Mobile performance score 61/100 - 6.4s LCP on mobile</span>
+                        </div>
+                        <div class="ch-li">
+                            <div class="ch-dot"></div><span>Visual identity failed to reflect Braga's rich heritage and
+                                innovation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ch-card">
+                    <div class="ch-card-lbl">The Solution</div>
+                    <h3 class="ch-card-ttl">Bring everything to the homepage</h3>
+                    <p class="ch-card-p">The redesign moved key content sections - Innovation, Culture, Environment,
+                        Education, Health, Sports - directly onto the homepage. Users immediately understand the city's
+                        offer and navigate with intention, not guesswork.</p>
+                    <div class="ch-list">
+                        <div class="ch-li">
+                            <div class="ch-dot"></div><span>Content-rich homepage with rich sectioning for every user
+                                type</span>
+                        </div>
+                        <div class="ch-li">
+                            <div class="ch-dot"></div><span>Audience-first navigation: Residents, Visitors,
+                                Business</span>
+                        </div>
+                        <div class="ch-li">
+                            <div class="ch-dot"></div><span>Visual language blending heritage and modernity
+                                authentically</span>
+                        </div>
+                        <div class="ch-li">
+                            <div class="ch-dot"></div><span>Mobile-first layout with WCAG AA accessibility
+                                compliance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 02 PROCESS -->
+    <section class="process-section rv">
+        <div class="process-section-inner">
+            <div class="sec-lbl">02 - Process</div>
+            <p class="tl-ttl">Design Process</p>
+            <p class="tl-sub">From discovery to prototype - every decision grounded in research, not assumption</p>
+            <div class="orbital">
+                <div class="planet">
+                    <div class="planet-num">01</div>
+                    <div class="orb orb-s">
+                        <div class="orb-glow"></div><span class="orb-label">Research<br>&amp; Audit</span>
+                    </div>
+                    <div class="planet-desc"><strong>Discovery</strong>Performance audit · State analysis</div>
+                </div>
+                <div class="p-dash"></div>
+                <div class="planet">
+                    <div class="planet-num">02</div>
+                    <div class="orb orb-m">
+                        <div class="orb-glow"></div><span class="orb-label">Personas<br>&amp; CJM</span>
+                    </div>
+                    <div class="planet-desc"><strong>3 personas</strong>Sofia · Miguel · Teresa</div>
+                </div>
+                <div class="p-dash"></div>
+                <div class="planet">
+                    <div class="planet-num">03</div>
+                    <div class="orb orb-l">
+                        <div class="orb-glow"></div><span class="orb-label">IA &amp;<br>User Flow</span>
+                    </div>
+                    <div class="planet-desc"><strong>Architecture</strong>Sitemap · task flows</div>
+                </div>
+                <div class="p-dash"></div>
+                <div class="planet">
+                    <div class="planet-num">04</div>
+                    <div class="orb orb-xl">
+                        <div class="orb-glow"></div><span class="orb-label">UI<br>Design</span>
+                    </div>
+                    <div class="planet-desc"><strong>20+ screens</strong>Design system · prototype</div>
+                </div>
+                <div class="p-dash"></div>
+                <div class="planet">
+                    <div class="planet-num">05</div>
+                    <div class="orb orb-dim">
+                        <div class="orb-glow"></div><span class="orb-label-dim">Test &amp;<br>Iterate</span>
+                    </div>
+                    <div class="planet-desc"><strong>Iteration</strong>Usability tests</div>
+                </div>
+            </div>
+            <div class="process-foot">
+                <div class="pfoot-item">
+                    <div class="pfoot-dot"></div>Role: <span>UX/UI Designer (Solo)</span>
+                </div>
+                <div class="pfoot-item">
+                    <div class="pfoot-dot"></div>Platform: <span>Desktop &amp; Mobile Web</span>
+                </div>
+                <div class="pfoot-item">
+                    <div class="pfoot-dot"></div>Year: <span>2025</span>
+                </div>
+                <div class="pfoot-item">
+                    <div class="pfoot-dot"></div>Screens: <span>20+</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03 AUDIT -->
+    <div class="sec">
+        <div class="sec-inner">
+            <div class="sec-lbl rv">03 - Audit</div>
+            <h2 class="sec-h2 rv">Current State<br><em>Analysis</em></h2>
+            <p class="sec-lead rv">A comprehensive analysis of cm-braga.pt revealed critical mobile performance failures
+                and an interface that communicated nothing about the city. The homepage was effectively a wall of links.
+            </p>
+            <div class="audit-grid rv">
+                <div>
+                    <div class="before-wrap">
+                        <div class="browser-chrome">
+                            <div class="browser-dots">
+                                <div class="bdot r"></div>
+                                <div class="bdot y"></div>
+                                <div class="bdot g"></div>
+                            </div>
+                            <div class="browser-url">www.cm-braga.pt</div>
+                        </div>
+                        <div style="position:relative">
+                            <img src="https://raw.githubusercontent.com/yanaharcourt/yanaharcourt.github.io/55ea06e15670c267e32cf0390e7bfa6a370d342e/Braga/presentation%20img/current-site-1.png"
+                                alt="cm-braga.pt before redesign"
+                                onerror="this.parentElement.style.minHeight='260px';this.parentElement.style.background='var(--clr-bg-warm)';this.style.display='none'">
+                            <div class="before-label">Before Redesign</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scores-wrap">
+                    <div
+                        style="font-size:var(--fs-xs);font-weight:var(--fw-semi);letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--clr-ink-4);margin-bottom:16px">
+                        Lighthouse Scores</div>
+                    <div class="score-row"><span class="score-lbl">Mobile Performance</span>
+                        <div class="score-bar">
+                            <div class="score-fill f-bad" style="width:61%"></div>
+                        </div><span class="score-num c-bad">61</span>
+                    </div>
+                    <div class="score-row"><span class="score-lbl">Desktop Performance</span>
+                        <div class="score-bar">
+                            <div class="score-fill f-ok" style="width:86%"></div>
+                        </div><span class="score-num c-ok">86</span>
+                    </div>
+                    <div class="score-row"><span class="score-lbl">Accessibility</span>
+                        <div class="score-bar">
+                            <div class="score-fill f-warn" style="width:85%"></div>
+                        </div><span class="score-num c-warn">85</span>
+                    </div>
+                    <div class="score-row"><span class="score-lbl">SEO</span>
+                        <div class="score-bar">
+                            <div class="score-fill f-ok" style="width:91%"></div>
+                        </div><span class="score-num c-ok">91</span>
+                    </div>
+                    <div class="score-row"><span class="score-lbl">Mobile LCP</span>
+                        <div class="score-bar">
+                            <div class="score-fill f-bad" style="width:30%"></div>
+                        </div><span class="score-num c-bad">6.4s</span>
+                    </div>
+                    <div class="score-row"><span class="score-lbl">Speed Index (Mobile)</span>
+                        <div class="score-bar">
+                            <div class="score-fill f-bad" style="width:20%"></div>
+                        </div><span class="score-num c-bad">9.3s</span>
+                    </div>
+                </div>
+            </div>
+            <div class="issues-grid rv">
+                <div class="issue-row">
+                    <div class="issue-dot red"></div><span class="issue-text">Homepage showed only links - no content,
+                        no visual hierarchy</span><span class="issue-badge red">Critical</span>
+                </div>
+                <div class="issue-row">
+                    <div class="issue-dot red"></div><span class="issue-text">No distinction between residents,
+                        tourists, and business users</span><span class="issue-badge red">Critical</span>
+                </div>
+                <div class="issue-row">
+                    <div class="issue-dot red"></div><span class="issue-text">Same uncompressed assets served to mobile
+                        and desktop</span><span class="issue-badge red">Critical</span>
+                </div>
+                <div class="issue-row">
+                    <div class="issue-dot red"></div><span class="issue-text">Outdated visual design - no cohesive
+                        identity or brand system</span><span class="issue-badge red">Critical</span>
+                </div>
+                <div class="issue-row">
+                    <div class="issue-dot amber"></div><span class="issue-text">Missing ARIA labels on interactive
+                        elements</span><span class="issue-badge amber">Important</span>
+                </div>
+                <div class="issue-row">
+                    <div class="issue-dot amber"></div><span class="issue-text">Events calendar completely unusable on
+                        mobile</span><span class="issue-badge amber">Important</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 04 PERSONAS -->
+    <section class="sec-full">
+        <div class="sec-full-inner">
+            <div class="sec-lbl rv">04 - Personas</div>
+            <h2 class="sec-h2 rv">User<br><em>Personas</em></h2>
+            <p class="sec-lead rv">Three distinct personas representing Braga's primary digital audiences - each with
+                fundamentally different mental models, goals, and contexts of use.</p>
+            <div class="personas-grid">
+                <div class="persona-card rv d1">
+                    <div class="pcard-top">
+                        <div class="pcard-av sofia">S</div>
+                        <div>
+                            <div class="pcard-name">Sofia</div>
+                            <div class="pcard-role">29 · Braga Resident &amp; Teacher</div>
+                        </div>
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-row"><span class="pcard-k">Personality</span><span class="pcard-v">Organised,
+                                digital-native, values efficiency</span></div>
+                        <div class="pcard-row"><span class="pcard-k">Device</span><span class="pcard-v">Mobile-first,
+                                iPhone user</span></div>
+                        <div class="pcard-row"><span class="pcard-k">Motivation</span><span class="pcard-v">Access civic
+                                services without visiting offices</span></div>
+                        <div class="pcard-sec">
+                            <div class="pcard-sec-ttl">Frustrations</div>
+                            <div class="pcard-li">Old site shows only links - no idea where to start</div>
+                            <div class="pcard-li">No confirmation after submitting requests</div>
+                            <div class="pcard-li">Needed services buried 3 levels deep in menus</div>
+                        </div>
+                        <div class="pcard-sec">
+                            <div class="pcard-sec-ttl">Goals</div>
+                            <div class="pcard-li">Renew permits and access services from her phone</div>
+                            <div class="pcard-li">Stay updated with local news and council decisions</div>
+                            <div class="pcard-li">Find cultural events without calling the Câmara</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="persona-card rv d2">
+                    <div class="pcard-top">
+                        <div class="pcard-av miguel">M</div>
+                        <div>
+                            <div class="pcard-name">Miguel</div>
+                            <div class="pcard-role">45 · Small Business Owner</div>
+                        </div>
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-row"><span class="pcard-k">Personality</span><span class="pcard-v">Pragmatic,
+                                time-poor, results-oriented</span></div>
+                        <div class="pcard-row"><span class="pcard-k">Device</span><span class="pcard-v">Desktop at
+                                office, mobile on the go</span></div>
+                        <div class="pcard-row"><span class="pcard-k">Motivation</span><span class="pcard-v">Manage
+                                licences and compliance fully online</span></div>
+                        <div class="pcard-sec">
+                            <div class="pcard-sec-ttl">Frustrations</div>
+                            <div class="pcard-li">Licence forms impossible to locate</div>
+                            <div class="pcard-li">No status tracking for submitted applications</div>
+                            <div class="pcard-li">Must visit Câmara in person for every step</div>
+                        </div>
+                        <div class="pcard-sec">
+                            <div class="pcard-sec-ttl">Goals</div>
+                            <div class="pcard-li">Complete all municipal paperwork entirely online</div>
+                            <div class="pcard-li">Access investment incentive information quickly</div>
+                            <div class="pcard-li">Track application status in real time</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="persona-card rv d3">
+                    <div class="pcard-top">
+                        <div class="pcard-av teresa">T</div>
+                        <div>
+                            <div class="pcard-name">Teresa</div>
+                            <div class="pcard-role">34 · Tourist from France</div>
+                        </div>
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-row"><span class="pcard-k">Personality</span><span class="pcard-v">Curious,
+                                experience-driven, researches ahead</span></div>
+                        <div class="pcard-row"><span class="pcard-k">Device</span><span class="pcard-v">Mobile-only
+                                while travelling</span></div>
+                        <div class="pcard-row"><span class="pcard-k">Motivation</span><span class="pcard-v">Discover
+                                heritage and plan a 3-day visit</span></div>
+                        <div class="pcard-sec">
+                            <div class="pcard-sec-ttl">Frustrations</div>
+                            <div class="pcard-li">Tourist content buried inside civic service sections</div>
+                            <div class="pcard-li">No English support beyond the homepage</div>
+                            <div class="pcard-li">Events calendar unusable on mobile</div>
+                        </div>
+                        <div class="pcard-sec">
+                            <div class="pcard-sec-ttl">Goals</div>
+                            <div class="pcard-li">Find top historical sites and plan a route</div>
+                            <div class="pcard-li">Discover local events during her visit</div>
+                            <div class="pcard-li">Access the city in English without friction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 05 USER FLOW -->
+    <section class="flow-section">
+        <div class="flow-inner">
+            <div class="sec-lbl rv">05 - User Flow</div>
+            <h2 class="sec-h2 rv">Key User<br><em>Flows</em></h2>
+            <p class="sec-lead rv">Mapping critical task flows per persona revealed exactly where the old site created
+                dead ends - and where the redesign creates clear paths to completion.</p>
+            <div class="flow-block rv">
+                <div class="flow-p-lbl">Sofia - Submit a Document Request</div>
+                <div class="flow-nodes">
+                    <div class="flow-node primary">Homepage</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Residents</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Services</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Documents</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node gold">Fill Form</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node gold">Authenticate</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node primary">Confirmation ✓</div>
+                </div>
+                <div class="flow-note">Old site: 7+ taps to find the form, no confirmation state - users couldn't tell
+                    if submission worked</div>
+            </div>
+            <div class="flow-block rv">
+                <div class="flow-p-lbl">Teresa - Discover Events &amp; Plan Visit</div>
+                <div class="flow-nodes">
+                    <div class="flow-node primary">Homepage</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Visit Braga</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">What's On</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node gold">Filter by Date</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node gold">Event Detail</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node primary">Save / Share ✓</div>
+                </div>
+                <div class="flow-note">Old site: Events buried under "Comunicação" - tourists never found them</div>
+            </div>
+            <div class="flow-block rv">
+                <div class="flow-p-lbl">Miguel - Apply for Business Licence</div>
+                <div class="flow-nodes">
+                    <div class="flow-node primary">Homepage</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node pain">Old: Dead end ✗</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Invest &amp; Business</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Licences</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node gold">Application</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node gold">Track Status</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node primary">Approval ✓</div>
+                </div>
+                <div class="flow-note">Old site: No status tracking - users called the office daily to check progress
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 06 CJM -->
+    <div class="sec">
+        <div class="sec-inner">
+            <div class="sec-lbl rv">06 - Journey Mapping</div>
+            <h2 class="sec-h2 rv">Customer<br><em>Journey Map</em></h2>
+            <p class="sec-lead rv">Mapping all three personas across the full interaction lifecycle revealed consistent
+                pain points at the same stages - confirming systemic design failures, not individual user problems.</p>
+
+            <!-- DESKTOP TABLE -->
+            <div class="cjm-table-wrap rv">
+                <table class="cjm-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>
+                                <div class="cjm-th-persona">
+                                    <div class="cjm-av" style="background:var(--grad-sofia)">S</div>
+                                    <div>
+                                        <div class="cjm-th-name">Sofia</div>
+                                        <div class="cjm-th-role">29 · Resident</div>
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="cjm-th-persona">
+                                    <div class="cjm-av" style="background:var(--grad-miguel)">M</div>
+                                    <div>
+                                        <div class="cjm-th-name">Miguel</div>
+                                        <div class="cjm-th-role">45 · Business</div>
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="cjm-th-persona">
+                                    <div class="cjm-av" style="background:var(--grad-teresa)">T</div>
+                                    <div>
+                                        <div class="cjm-th-name">Teresa</div>
+                                        <div class="cjm-th-role">34 · Tourist</div>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span
+                                    style="display:flex;align-items:center;gap:6px;font-weight:600;color:var(--clr-ink-2)"><i
+                                        class="bi bi-search"></i> Discovery</span></td>
+                            <td>Finds site via Google, hoping to renew parking permit online</td>
+                            <td>Referred by chamber of commerce to cm-braga.pt</td>
+                            <td>Googles "Braga tourism" - city site 3rd after travel blogs</td>
+                        </tr>
+                        <tr>
+                            <td><span
+                                    style="display:flex;align-items:center;gap:6px;font-weight:600;color:var(--clr-ink-2)"><i
+                                        class="bi bi-emoji-smile"></i> Emotions</span></td>
+                            <td class="cell-emotion">Hopeful, immediately confused by the homepage wall of links</td>
+                            <td class="cell-emotion">Cautious optimism, quickly frustrated</td>
+                            <td class="cell-emotion">Excited about Braga, deflated by the interface</td>
+                        </tr>
+                        <tr>
+                            <td><span
+                                    style="display:flex;align-items:center;gap:6px;font-weight:600;color:var(--clr-ink-2)"><i
+                                        class="bi bi-cursor"></i> Touchpoints</span></td>
+                            <td>Homepage (wall of links), navigation, services section</td>
+                            <td>Homepage, search bar, "Município" section</td>
+                            <td>Homepage, news section, events calendar</td>
+                        </tr>
+                        <tr class="row-pain">
+                            <td class="stage"><span><i class="bi bi-exclamation-triangle"></i> Pain Points</span></td>
+                            <td>Wall of links - no idea where to start, especially on mobile</td>
+                            <td>Business section buried 3 levels deep, no search results</td>
+                            <td>Events in Portuguese only, no photos, no mobile filtering</td>
+                        </tr>
+                        <tr>
+                            <td><span
+                                    style="display:flex;align-items:center;gap:6px;font-weight:600;color:var(--clr-ink-2)"><i
+                                        class="bi bi-lightbulb"></i> Opportunities</span></td>
+                            <td>Content-rich homepage with clear residents entry point</td>
+                            <td>Dedicated Invest &amp; Business with smart search</td>
+                            <td>Visual events calendar, bilingual, mobile-optimised</td>
+                        </tr>
+                        <tr>
+                            <td><span
+                                    style="display:flex;align-items:center;gap:6px;font-weight:600;color:var(--clr-ink-2)"><i
+                                        class="bi bi-tools"></i> Design Response</span></td>
+                            <td>Homepage: news, events, services hub all visible on load</td>
+                            <td>Business portal with status tracking and direct contact CTA</td>
+                            <td>Immersive "Visit Braga" section with map, events, guides</td>
+                        </tr>
+                        <tr>
+                            <td><span
+                                    style="display:flex;align-items:center;gap:6px;font-weight:600;color:var(--clr-ink-2)"><i
+                                        class="bi bi-check2-circle"></i> Success</span></td>
+                            <td>Task completion without needing phone support</td>
+                            <td>Application submitted and status visible in first session</td>
+                            <td>3+ events saved and visit itinerary formed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- MOBILE CARDS -->
+            <div class="cjm-mobile rv">
+                <!-- Sofia -->
+                <div class="cjm-m-persona">
+                    <div class="cjm-m-header">
+                        <div class="cjm-m-av" style="background:var(--grad-sofia)">S</div>
+                        <div>
+                            <div class="cjm-m-name">Sofia</div>
+                            <div class="cjm-m-role">29 · Resident</div>
+                        </div>
+                    </div>
+                    <div class="cjm-m-rows">
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-search"></i> Discovery</div>
+                            <div class="cjm-m-cell">Finds site via Google, hoping to renew parking permit online</div>
+                        </div>
+                        <div class="cjm-m-row emotion">
+                            <div class="cjm-m-stage"><i class="bi bi-emoji-smile"></i> Emotions</div>
+                            <div class="cjm-m-cell">Hopeful, immediately confused by the homepage wall of links</div>
+                        </div>
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-cursor"></i> Touchpoints</div>
+                            <div class="cjm-m-cell">Homepage (wall of links), navigation, services</div>
+                        </div>
+                        <div class="cjm-m-row pain">
+                            <div class="cjm-m-stage"><i class="bi bi-exclamation-triangle"></i> Pain</div>
+                            <div class="cjm-m-cell">Wall of links - no idea where to start on mobile</div>
+                        </div>
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-lightbulb"></i> Opportunity</div>
+                            <div class="cjm-m-cell">Content-rich homepage with residents entry point</div>
+                        </div>
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-tools"></i> Response</div>
+                            <div class="cjm-m-cell">Homepage: news, events, services hub visible on load</div>
+                        </div>
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-check2-circle"></i> Success</div>
+                            <div class="cjm-m-cell">Task completion without phone support</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Miguel -->
+                <div class="cjm-m-persona">
+                    <div class="cjm-m-header">
+                        <div class="cjm-m-av" style="background:var(--grad-miguel)">M</div>
+                        <div>
+                            <div class="cjm-m-name">Miguel</div>
+                            <div class="cjm-m-role">45 · Business Owner</div>
+                        </div>
+                    </div>
+                    <div class="cjm-m-rows">
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-search"></i> Discovery</div>
+                            <div class="cjm-m-cell">Referred by chamber of commerce to cm-braga.pt</div>
+                        </div>
+                        <div class="cjm-m-row emotion">
+                            <div class="cjm-m-stage"><i class="bi bi-emoji-smile"></i> Emotions</div>
+                            <div class="cjm-m-cell">Cautious optimism, quickly frustrated</div>
+                        </div>
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-cursor"></i> Touchpoints</div>
+                            <div class="cjm-m-cell">Homepage, search bar, "Município" section</div>
+                        </div>
+                        <div class="cjm-m-row pain">
+                            <div class="cjm-m-stage"><i class="bi bi-exclamation-triangle"></i> Pain</div>
+                            <div class="cjm-m-cell">Business section buried 3 levels deep, no search results</div>
+                        </div>
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-lightbulb"></i> Opportunity</div>
+                            <div class="cjm-m-cell">Dedicated Invest &amp; Business with smart search</div>
+                        </div>
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-tools"></i> Response</div>
+                            <div class="cjm-m-cell">Business portal with status tracking and direct CTA</div>
+                        </div>
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-check2-circle"></i> Success</div>
+                            <div class="cjm-m-cell">Application submitted, status visible in first session</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Teresa -->
+                <div class="cjm-m-persona">
+                    <div class="cjm-m-header">
+                        <div class="cjm-m-av" style="background:var(--grad-teresa)">T</div>
+                        <div>
+                            <div class="cjm-m-name">Teresa</div>
+                            <div class="cjm-m-role">34 · Tourist</div>
+                        </div>
+                    </div>
+                    <div class="cjm-m-rows">
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-search"></i> Discovery</div>
+                            <div class="cjm-m-cell">Googles "Braga tourism" - city site 3rd after travel blogs</div>
+                        </div>
+                        <div class="cjm-m-row emotion">
+                            <div class="cjm-m-stage"><i class="bi bi-emoji-smile"></i> Emotions</div>
+                            <div class="cjm-m-cell">Excited about Braga, deflated by the interface</div>
+                        </div>
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-cursor"></i> Touchpoints</div>
+                            <div class="cjm-m-cell">Homepage, news section, events calendar</div>
+                        </div>
+                        <div class="cjm-m-row pain">
+                            <div class="cjm-m-stage"><i class="bi bi-exclamation-triangle"></i> Pain</div>
+                            <div class="cjm-m-cell">Events in Portuguese only, no photos, no mobile filtering</div>
+                        </div>
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-lightbulb"></i> Opportunity</div>
+                            <div class="cjm-m-cell">Visual events calendar, bilingual, mobile-optimised</div>
+                        </div>
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-tools"></i> Response</div>
+                            <div class="cjm-m-cell">"Visit Braga" section with map, events, heritage guides</div>
+                        </div>
+                        <div class="cjm-m-row">
+                            <div class="cjm-m-stage"><i class="bi bi-check2-circle"></i> Success</div>
+                            <div class="cjm-m-cell">3+ events saved and visit itinerary formed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 07 INSIGHTS -->
+    <section class="sec-full">
+        <div class="sec-full-inner">
+            <div class="sec-lbl rv">07 - Insights</div>
+            <h2 class="sec-h2 rv">Research<br><em>Insights</em></h2>
+            <p class="sec-lead rv">Key insights from the research phase that directly shaped every design decision in
+                the redesign.</p>
+            <div class="insights-grid">
+                <div class="ic featured rv">
+                    <div class="ic-lbl">Core Insight</div>
+                    <div class="ic-ttl">The homepage hid the city</div>
+                    <div class="ic-body">The fundamental problem wasn't visual - it was structural. The old homepage
+                        offered no content: just a header and navigation links. Users had to already know what section
+                        held what they needed. The redesign inverted this completely - bringing Innovation, Culture,
+                        Education, Health, and Environment directly onto the homepage, so users instantly understand the
+                        city's offer and find their path naturally.</div>
+                    <div class="ic-tags"><span class="ic-tag">Homepage architecture</span><span class="ic-tag">Content
+                            visibility</span><span class="ic-tag">User mental models</span></div>
+                </div>
+                <div class="ic rv d1">
+                    <div class="ic-lbl">Navigation Insight</div>
+                    <div class="ic-ttl">Structure mirrored the organisation, not the user</div>
+                    <div class="ic-body">Navigation reflected internal departmental divisions. Users don't think "which
+                        department handles this?" - they think "I want to pay a fine" or "visit the cathedral." The
+                        redesign inverted this with audience-based entry points and task-oriented sections on the
+                        homepage itself.</div>
+                    <div class="ic-tags"><span class="ic-tag">Mental model mismatch</span><span
+                            class="ic-tag">Task-based IA</span></div>
+                </div>
+                <div class="ic rv d2">
+                    <div class="ic-lbl">Visual Insight</div>
+                    <div class="ic-ttl">Heritage and modernity aren't opposites</div>
+                    <div class="ic-body">Braga holds two identities - ancient Rome of Portugal and Portugal's tech
+                        capital. The visual language needed to honour this duality: editorial serif for heritage, clean
+                        sans-serif for function, warm gold and navy rooted in the city's own palette.</div>
+                    <div class="ic-tags"><span class="ic-tag">Dual identity</span><span class="ic-tag">Typographic
+                            contrast</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 08 IA -->
+    <div class="sec">
+        <div class="sec-inner">
+            <div class="sec-lbl rv">08 - Information Architecture</div>
+            <h2 class="sec-h2 rv">Site<br><em>Structure</em></h2>
+            <p class="sec-lead rv">The new IA was designed around three distinct entry audiences - replacing the
+                department-based structure with a user-mental-model approach.</p>
+            <div class="ia-box rv">
+                <svg class="ia-svg" viewBox="0 0 980 380" xmlns="http://www.w3.org/2000/svg"
+                    font-family="Inter,sans-serif">
+
+                    <!-- Root: Homepage -->
+                    <rect x="390" y="10" width="160" height="36" rx="6" fill="#1A1814" />
+                    <text x="470" y="32" text-anchor="middle" fill="#fff" font-size="12"
+                        font-weight="600">Homepage</text>
+
+                    <!-- Vertical line down from root -->
+                    <line x1="470" y1="46" x2="470" y2="72" stroke="#C4BDB5" stroke-width="1" />
+                    <!-- Horizontal bus -->
+                    <line x1="90" y1="72" x2="890" y2="72" stroke="#C4BDB5" stroke-width="1" />
+
+                    <!-- Verticals down to parents: x = 90, 270, 470, 670, 890 -->
+                    <line x1="90" y1="72" x2="90" y2="94" stroke="#C4BDB5" stroke-width="1" />
+                    <line x1="270" y1="72" x2="270" y2="94" stroke="#C4BDB5" stroke-width="1" />
+                    <line x1="470" y1="72" x2="470" y2="94" stroke="#C4BDB5" stroke-width="1" />
+                    <line x1="670" y1="72" x2="670" y2="94" stroke="#C4BDB5" stroke-width="1" />
+                    <line x1="890" y1="72" x2="890" y2="94" stroke="#C4BDB5" stroke-width="1" />
+
+                    <!-- Parent nodes -->
+                    <rect x="20" y="94" width="140" height="34" rx="6" fill="#1A1814" />
+                    <text x="90" y="116" text-anchor="middle" fill="#fff" font-size="11"
+                        font-weight="600">Residentes</text>
+
+                    <rect x="192" y="94" width="156" height="34" rx="6" fill="#C4973A" />
+                    <text x="270" y="116" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">Visitar
+                        Braga</text>
+
+                    <rect x="392" y="94" width="156" height="34" rx="6" fill="#1A1814" />
+                    <text x="470" y="116" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">Serviços
+                        Online</text>
+
+                    <rect x="583" y="94" width="174" height="34" rx="6" fill="#C4973A" />
+                    <text x="670" y="116" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">Investir
+                        &amp; Negócios</text>
+
+                    <rect x="822" y="94" width="136" height="34" rx="6" fill="#1A1814" />
+                    <text x="890" y="116" text-anchor="middle" fill="#fff" font-size="11"
+                        font-weight="600">Município</text>
+
+                    <!-- Vertical lines from parents down to first child -->
+                    <line x1="90" y1="128" x2="90" y2="152" stroke="#C4BDB5" stroke-width="1" />
+                    <line x1="270" y1="128" x2="270" y2="152" stroke="#C4BDB5" stroke-width="1" />
+                    <line x1="470" y1="128" x2="470" y2="152" stroke="#C4BDB5" stroke-width="1" />
+                    <line x1="670" y1="128" x2="670" y2="152" stroke="#C4BDB5" stroke-width="1" />
+                    <line x1="890" y1="128" x2="890" y2="152" stroke="#C4BDB5" stroke-width="1" />
+
+                    <!-- CHILDREN: Residentes (stacked, x=90, y=152/196/240) -->
+                    <rect x="24" y="152" width="132" height="28" rx="4" fill="none" stroke="#C4BDB5" stroke-width="1" />
+                    <text x="90" y="170" text-anchor="middle" fill="#6B6057" font-size="10">Documentos</text>
+                    <line x1="90" y1="180" x2="90" y2="196" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="3,2" />
+                    <rect x="24" y="196" width="132" height="28" rx="4" fill="none" stroke="#C4BDB5" stroke-width="1" />
+                    <text x="90" y="214" text-anchor="middle" fill="#6B6057" font-size="10">Multas</text>
+                    <line x1="90" y1="224" x2="90" y2="240" stroke="#C4BDB5" stroke-width="1" stroke-dasharray="3,2" />
+                    <rect x="24" y="240" width="132" height="28" rx="4" fill="none" stroke="#C4BDB5" stroke-width="1" />
+                    <text x="90" y="258" text-anchor="middle" fill="#6B6057" font-size="10">Notícias</text>
+
+                    <!-- CHILDREN: Visitar Braga (stacked, x=270) -->
+                    <rect x="196" y="152" width="148" height="28" rx="4" fill="none" stroke="#C4973A" stroke-width="1"
+                        stroke-dasharray="4,2" />
+                    <text x="270" y="170" text-anchor="middle" fill="#9E6A0A" font-size="10">Monumentos</text>
+                    <line x1="270" y1="180" x2="270" y2="196" stroke="#C4BDB5" stroke-width="1"
+                        stroke-dasharray="3,2" />
+                    <rect x="196" y="196" width="148" height="28" rx="4" fill="none" stroke="#C4973A" stroke-width="1"
+                        stroke-dasharray="4,2" />
+                    <text x="270" y="214" text-anchor="middle" fill="#9E6A0A" font-size="10">Agenda Cultural</text>
+                    <line x1="270" y1="224" x2="270" y2="240" stroke="#C4BDB5" stroke-width="1"
+                        stroke-dasharray="3,2" />
+                    <rect x="196" y="240" width="148" height="28" rx="4" fill="none" stroke="#C4973A" stroke-width="1"
+                        stroke-dasharray="4,2" />
+                    <text x="270" y="258" text-anchor="middle" fill="#9E6A0A" font-size="10">Restaurantes</text>
+
+                    <!-- CHILDREN: Serviços Online (stacked, x=470) -->
+                    <rect x="396" y="152" width="148" height="28" rx="4" fill="none" stroke="#C4BDB5"
+                        stroke-width="1" />
+                    <text x="470" y="170" text-anchor="middle" fill="#6B6057" font-size="10">Formulários</text>
+                    <line x1="470" y1="180" x2="470" y2="196" stroke="#C4BDB5" stroke-width="1"
+                        stroke-dasharray="3,2" />
+                    <rect x="396" y="196" width="148" height="28" rx="4" fill="none" stroke="#C4BDB5"
+                        stroke-width="1" />
+                    <text x="470" y="214" text-anchor="middle" fill="#6B6057" font-size="10">Pagamentos</text>
+                    <line x1="470" y1="224" x2="470" y2="240" stroke="#C4BDB5" stroke-width="1"
+                        stroke-dasharray="3,2" />
+                    <rect x="396" y="240" width="148" height="28" rx="4" fill="none" stroke="#C4BDB5"
+                        stroke-width="1" />
+                    <text x="470" y="258" text-anchor="middle" fill="#6B6057" font-size="10">Estado do Pedido</text>
+
+                    <!-- CHILDREN: Investir & Negócios (stacked, x=670) -->
+                    <rect x="587" y="152" width="166" height="28" rx="4" fill="none" stroke="#C4973A" stroke-width="1"
+                        stroke-dasharray="4,2" />
+                    <text x="670" y="170" text-anchor="middle" fill="#9E6A0A" font-size="10">Licenças</text>
+                    <line x1="670" y1="180" x2="670" y2="196" stroke="#C4BDB5" stroke-width="1"
+                        stroke-dasharray="3,2" />
+                    <rect x="587" y="196" width="166" height="28" rx="4" fill="none" stroke="#C4973A" stroke-width="1"
+                        stroke-dasharray="4,2" />
+                    <text x="670" y="214" text-anchor="middle" fill="#9E6A0A" font-size="10">Incentivos</text>
+                    <line x1="670" y1="224" x2="670" y2="240" stroke="#C4BDB5" stroke-width="1"
+                        stroke-dasharray="3,2" />
+                    <rect x="587" y="240" width="166" height="28" rx="4" fill="none" stroke="#C4973A" stroke-width="1"
+                        stroke-dasharray="4,2" />
+                    <text x="670" y="258" text-anchor="middle" fill="#9E6A0A" font-size="10">Contato Direto</text>
+
+                    <!-- CHILDREN: Município (stacked, x=890) -->
+                    <rect x="822" y="152" width="136" height="28" rx="4" fill="none" stroke="#C4BDB5"
+                        stroke-width="1" />
+                    <text x="890" y="170" text-anchor="middle" fill="#6B6057" font-size="10">Câmara Municipal</text>
+                    <line x1="890" y1="180" x2="890" y2="196" stroke="#C4BDB5" stroke-width="1"
+                        stroke-dasharray="3,2" />
+                    <rect x="822" y="196" width="136" height="28" rx="4" fill="none" stroke="#C4BDB5"
+                        stroke-width="1" />
+                    <text x="890" y="214" text-anchor="middle" fill="#6B6057" font-size="10">Publicações</text>
+                    <line x1="890" y1="224" x2="890" y2="240" stroke="#C4BDB5" stroke-width="1"
+                        stroke-dasharray="3,2" />
+                    <rect x="822" y="240" width="136" height="28" rx="4" fill="none" stroke="#C4BDB5"
+                        stroke-width="1" />
+                    <text x="890" y="258" text-anchor="middle" fill="#6B6057" font-size="10">Transparência</text>
+
+                    <!-- Legend -->
+                    <rect x="0" y="320" width="10" height="10" rx="2" fill="#1A1814" />
+                    <text x="18" y="330" fill="#9E958D" font-size="11">Resident &amp; Civic</text>
+                    <rect x="180" y="320" width="10" height="10" rx="2" fill="#C4973A" />
+                    <text x="198" y="330" fill="#9E958D" font-size="11">Tourism &amp; Business</text>
+                    <rect x="380" y="320" width="10" height="10" rx="2" fill="none" stroke="#C4BDB5" stroke-width="1" />
+                    <text x="398" y="330" fill="#9E958D" font-size="11">Sub-pages (civic)</text>
+                    <rect x="560" y="320" width="10" height="10" rx="2" fill="none" stroke="#C4973A" stroke-width="1"
+                        stroke-dasharray="4,2" />
+                    <text x="578" y="330" fill="#9E958D" font-size="11">Sub-pages (tourism)</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- 09 DESIGN SYSTEM -->
+    <section class="sec-full">
+        <div class="sec-full-inner">
+            <div class="sec-lbl rv">09 - Design System</div>
+            <h2 class="sec-h2 rv">Visual<br><em>Language</em></h2>
+            <p class="sec-lead rv">A design system built from Braga's identity - navy from institutional heritage, gold
+                from Roman foundations, green from the Minho landscape.</p>
+            <div class="ds-colors rv">
+                <div class="clr-card">
+                    <div class="clr-swatch" style="background:#2B5CE6"></div>
+                    <div class="clr-info">
+                        <div class="clr-name">Primary Blue</div>
+                        <div class="clr-hex">#2B5CE6</div>
+                    </div>
+                </div>
+                <div class="clr-card">
+                    <div class="clr-swatch" style="background:linear-gradient(135deg,#B45309,#D97706)"></div>
+                    <div class="clr-info">
+                        <div class="clr-name">Roman Gold</div>
+                        <div class="clr-hex">#D97706</div>
+                    </div>
+                </div>
+                <div class="clr-card">
+                    <div class="clr-swatch" style="background:#C4973A"></div>
+                    <div class="clr-info">
+                        <div class="clr-name">Gold</div>
+                        <div class="clr-hex">#C4973A</div>
+                    </div>
+                </div>
+                <div class="clr-card">
+                    <div class="clr-swatch" style="background:linear-gradient(135deg,#E2DDD6,#F7F5F2)"></div>
+                    <div class="clr-info">
+                        <div class="clr-name">Limestone</div>
+                        <div class="clr-hex">#F7F5F2</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ds-type rv">
+                <div class="ds-type-card">
+                    <div class="ds-card-lbl">Typography</div>
+                    <div
+                        style="font-family:'Playfair Display',serif;font-size:30px;line-height:1;color:var(--clr-ink);margin-bottom:16px">
+                        Playfair Display</div>
+                    <div style="font-size:var(--fs-sm);color:var(--clr-ink-3);line-height:1.6">Inter - For all body
+                        copy, labels, UI elements, and navigation. Clean, legible, WCAG AA compliant at all sizes.</div>
+                </div>
+                <div class="ds-type-card">
+                    <div class="ds-card-lbl">Type Scale</div>
+                    <div style="display:flex;flex-direction:column;gap:10px">
+                        <div
+                            style="font-family:'Playfair Display',serif;font-size:32px;line-height:1;color:var(--clr-ink)">
+                            Hero · 88px</div>
+                        <div
+                            style="font-family:'Playfair Display',serif;font-size:22px;line-height:1;color:var(--clr-ink)">
+                            Heading · 48px</div>
+                        <div style="font-size:16px;color:var(--clr-ink-2)">Body · 16px · Inter Regular</div>
+                        <div
+                            style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--clr-ink-4)">
+                            LABEL · 11PX · INTER SEMIBOLD</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10 HOMEPAGE SCREEN -->
+    <div class="sd-wrap">
+        <div class="sd-wrap-inner rv">
+            <div class="sd-img">
+                <img src="./assets/img/homepage-screen.png" alt="Braga Homepage Redesign">
+            </div>
+            <div>
+                <p class="sd-num">10 - Homepage</p>
+                <h3 class="sd-h3">Everything visible from the first scroll</h3>
+                <p class="sd-sub">Heritage · News · Events · Clear entry points</p>
+                <p class="sd-p">Where the old site showed only navigation links, the redesigned homepage surfaces real content immediately - hero with news sidebar, "Bem-vindo a Braga" narrative, photo carousels, and direct entry into the city's key topics: History, Innovation, Culture, Sports, Health.</p>
+                <div class="sd-feats">
+                    <div class="sd-feat"><div class="sd-feat-icon"><i class="bi bi-people"></i></div><div><div class="sd-feat-ttl">Audience-first navigation</div><div class="sd-feat-desc">Three clear entry points - Residents, Visitors, Business - replace the old department-based menu.</div></div></div>
+                    <div class="sd-feat"><div class="sd-feat-icon"><i class="bi bi-newspaper"></i></div><div><div class="sd-feat-ttl">News + events above the fold</div><div class="sd-feat-desc">Live news sidebar with tabs (Notícias, Agenda, Destaques) replaces static link lists.</div></div></div>
+                    <div class="sd-feat"><div class="sd-feat-icon"><i class="bi bi-translate"></i></div><div><div class="sd-feat-ttl">PT / EN bilingual toggle</div><div class="sd-feat-desc">Always visible - serves both residents and international visitors from the first pixel.</div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11 HERITAGE SCREEN -->
+    <div class="sd-wrap bg-warm">
+        <div class="sd-wrap-inner rev rv">
+            <div class="sd-img">
+                <img src="./assets/img/herritage-screen.png" alt="Braga Heritage Redesign">
+            </div>
+            <div>
+                <p class="sd-num">11 - Conhecer · Heritage &amp; Tourism</p>
+                <h3 class="sd-h3">2,000 years told through design</h3>
+                <p class="sd-sub">Sé de Braga · Bom Jesus · Braga Romana</p>
+                <p class="sd-p">The redesign brought Braga's rich heritage directly onto the homepage - full-bleed monument photography, a "Bem-vindo a Braga" narrative section, and a horizontally scrolling Destinos de Topo carousel showcasing Sé de Braga, Bom Jesus, and the city's iconic landmarks.</p>
+                <div class="sd-feats">
+                    <div class="sd-feat"><div class="sd-feat-icon"><i class="bi bi-buildings"></i></div><div><div class="sd-feat-ttl">Monument showcase cards</div><div class="sd-feat-desc">Sé de Braga (founded 1070), Bom Jesus do Monte, Braga Parque - with photography, dates, and descriptions.</div></div></div>
+                    <div class="sd-feat"><div class="sd-feat-icon"><i class="bi bi-card-image"></i></div><div><div class="sd-feat-ttl">Swipeable photo carousels</div><div class="sd-feat-desc">"Braga: História e Modernidade" section with carousel and Saiba Mais CTAs on every section.</div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 12 INNOVATION SCREEN -->
+    <div class="sd-wrap">
+        <div class="sd-wrap-inner rv">
+            <div class="sd-img">
+                <img src="./assets/img/innovation-screen.png" alt="Braga Innovation Redesign">
+            </div>
+            <div>
+                <p class="sd-num">12 - Inovação · Cultura · Ambiente</p>
+                <h3 class="sd-h3">All city topics, one scrollable homepage</h3>
+                <p class="sd-sub">Innovation cards · Cultural events · Green initiatives</p>
+                <p class="sd-p">Innovation (nanotechnology, tech companies), Culture (Braga Romana, São João festival, exhibitions), and Environment (sustainability, green spaces) were previously buried link pages. The redesign surfaces all of them as distinct, visually rich homepage sections with cards, photos, and event listings.</p>
+                <div class="sd-feats">
+                    <div class="sd-feat"><div class="sd-feat-icon"><i class="bi bi-cpu"></i></div><div><div class="sd-feat-ttl">Innovation section</div><div class="sd-feat-desc">INL Nanotechnology Laboratory, Tecnologia de Ponta, Empresas Inovadoras - each with image and CTA.</div></div></div>
+                    <div class="sd-feat"><div class="sd-feat-icon"><i class="bi bi-tree"></i></div><div><div class="sd-feat-ttl">Environment section</div><div class="sd-feat-desc">Braga + Verde, Eco-Escolas, Mobilidade Sustentável, Reciclagem - sustainability made visible and navigable.</div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 13 HEALTH SCREEN -->
+    <div class="sd-wrap bg-warm">
+        <div class="sd-wrap-inner rev rv">
+            <div class="sd-img">
+                <img src="./assets/img/health-screen.png" alt="Braga Health Redesign">
+            </div>
+            <div>
+                <p class="sd-num">13 - Educação · Desporto · Saúde</p>
+                <h3 class="sd-h3">Citizen services brought to the surface</h3>
+                <p class="sd-sub">Universidade do Minho · Estádio · Hospital de Braga</p>
+                <p class="sd-p">Education (35,000+ students, 95% literacy), Sports (Estádio Municipal, SC Braga, Próximos Eventos Desportivos), and Health (12 centres, 1,500+ professionals, emergency contacts) are now surfaced as full homepage sections - with stats strips and always-visible emergency numbers.</p>
+                <div class="sd-feats">
+                    <div class="sd-feat"><div class="sd-feat-icon"><i class="bi bi-mortarboard"></i></div><div><div class="sd-feat-ttl">Education stats strip</div><div class="sd-feat-desc">35,000+ students · 80+ schools · 95% literacy · 150+ projects - Braga as a knowledge city, made visible.</div></div></div>
+                    <div class="sd-feat"><div class="sd-feat-icon"><i class="bi bi-telephone"></i></div><div><div class="sd-feat-ttl">Emergency contacts always visible</div><div class="sd-feat-desc">112, Bombeiros Sapadores (253 609 230), Proteção Civil, PSP Braga - prominent footer strip, every page.</div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 14 RESULTS -->
+    <section class="sec-full">
+        <div class="sec-full-inner">
+            <div class="sec-lbl rv">14 - Outcomes</div>
+            <h2 class="sec-h2 rv">Projected<br><em>Impact</em></h2>
+            <p class="sec-lead rv">Based on competitor benchmarks and established UX research principles, the redesign
+                is projected to deliver measurable improvements across all three user segments.</p>
+            <div class="results-grid rv">
+                <div class="result-card">
+                    <div class="result-num">+40%</div>
+                    <div class="result-lbl">Mobile task completion</div>
+                    <div class="result-desc">From simplified navigation and performance improvements - mobile LCP target
+                        90+.</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-num">−60%</div>
+                    <div class="result-lbl">Phone enquiries to the Câmara</div>
+                    <div class="result-desc">Services hub with live status tracking removes the need for follow-up calls
+                        on submitted applications.</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-num">+85%</div>
+                    <div class="result-lbl">Tourist content engagement</div>
+                    <div class="result-desc">Visit Braga section with visual calendar and bilingual support replaces
+                        buried text-heavy pages.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 15 REFLECTIONS -->
+    <div class="sec">
+        <div class="sec-inner">
+            <div class="sec-lbl rv">15 - Reflections</div>
+            <h2 class="sec-h2 rv">What I<br><em>Learned</em></h2>
+            <p class="sec-lead rv">A civic design project carries responsibilities that commercial ones don't. Every
+                decision affects citizens' ability to access services they depend on.</p>
+            <div class="insights-grid">
+                <div class="ic featured rv">
+                    <div class="ic-lbl">Biggest Challenge</div>
+                    <div class="ic-ttl">Serving three audiences with one homepage</div>
+                    <div class="ic-body">The hardest UX problem wasn't visual - it was content strategy. I had to design
+                        a homepage that works for a local teacher renewing a permit, a French tourist planning three
+                        days, and a Portuguese entrepreneur applying for a licence. The solution - content sections
+                        visible immediately, with audience-based entry points - was only possible through rigorous
+                        persona research and journey mapping.</div>
+                    <div class="ic-tags"><span class="ic-tag">Multi-audience IA</span><span class="ic-tag">Persona-led
+                            decisions</span><span class="ic-tag">Content strategy</span></div>
+                </div>
+                <div class="ic rv d1">
+                    <div class="ic-lbl">Design Principle</div>
+                    <div class="ic-ttl">Visual identity must be earned, not borrowed</div>
+                    <div class="ic-body">Generic government-site aesthetics would have been easier. Instead I spent time
+                        understanding Braga's specific character - Roman heritage, baroque churches, nanotechnology
+                        institutes - and let that shape the colour palette, typography, and imagery direction
+                        authentically.</div>
+                </div>
+                <div class="ic rv d2">
+                    <div class="ic-lbl">Next Steps</div>
+                    <div class="ic-ttl">Usability testing &amp; iteration</div>
+                    <div class="ic-body">The next phase would involve usability testing with all three persona groups -
+                        specifically testing the services hub task completion rates and tourist event discovery flow on
+                        mobile. Every assumption in this redesign is a hypothesis waiting to be tested.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-headline">Let's build something<br><em>worth remembering</em></div>
+                    <div style="margin-top:32px;font-size:var(--fs-sm);color:rgba(255,255,255,.5)">Open to UX/UI and web
+                        development projects</div>
+                    <div style="margin-top:8px"><a href="mailto:yana.harcourt@gmail.com"
+                            style="color:var(--clr-accent);font-size:var(--fs-sm)">yana.harcourt@gmail.com</a></div>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-links-col">
+                        <h5>Follow</h5>
+                        <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank">LinkedIn</a>
+                        <a href="https://www.behance.net/yana_harcourt" target="_blank">Behance</a>
+                        <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank">Instagram</a>
+                        <a href="https://github.com/yanaharcourt" target="_blank">GitHub</a>
+                    </div>
+                    <div class="footer-links-col">
+                        <h5>Navigate</h5>
+                        <a href="/index.html">Home</a>
+                        <a href="/index.html#about">About</a>
+                        <a href="/index.html#portfolio">Portfolio</a>
+                        <a href="#">Back to Top</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">© 2025 Yana Harcourt - All Rights Reserved</div>
+                <div class="footer-copy">Braga · Portugal</div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" id="scroll-top" class="scroll-top"><i class="bi bi-arrow-up-short"></i></a>
+
+    <script>
+        const cur = document.getElementById('cur'), ctr = document.getElementById('ctr');
+        let mx = innerWidth / 2, my = innerHeight / 2, tx = mx, ty = my;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY });
+        (function loop() { cur.style.left = (mx - 4) + 'px'; cur.style.top = (my - 4) + 'px'; tx += (mx - tx) * .13; ty += (my - ty) * .13; ctr.style.left = (tx - 15) + 'px'; ctr.style.top = (ty - 15) + 'px'; requestAnimationFrame(loop) })();
+        document.addEventListener('mousedown', () => cur.style.transform = 'scale(2)');
+        document.addEventListener('mouseup', () => cur.style.transform = '');
+        const io = new IntersectionObserver(entries => entries.forEach(x => { if (x.isIntersecting) x.target.classList.add('in') }), { threshold: .06 });
+        document.querySelectorAll('.rv').forEach(el => io.observe(el));
+        const st = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => scrollY > 300 ? st.classList.add('active') : st.classList.remove('active'));
+        st.addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }) });
+    </script>
+</body>
+
+</html>
