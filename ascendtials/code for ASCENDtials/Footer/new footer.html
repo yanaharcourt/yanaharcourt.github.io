@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Footer</title>
+
+    <!-- Font Links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Amoret+Sans&display=swap" rel="stylesheet"> 
+
+    <style>
+        .footer {
+            background-color: #fff;
+            color: #666;
+            padding: 40px 20px;
+            font-family: Noto Sans, sans-serif; /* Default font */
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: center; 
+            align-items: flex-start; 
+            text-align: center;
+        }
+
+        .footer-column {
+            margin: 0 10px;
+            text-align: left; 
+        }
+
+        .logo-column,
+        .candid-column {
+            flex: 0 0 13%; 
+            text-align: center;
+        }
+
+        .logo-column img,
+        .candid-column img {
+            width: 60%; 
+            height: auto; 
+            margin-bottom: 10px;
+            border-radius: 15px; 
+        }
+
+        .logo-column p,
+        .candid-column p {
+            margin: 0;
+            text-align: center;
+        }
+
+        .quick-links {
+            position: relative;
+            left: 120px; 
+            text-align: left;
+            flex: 1;
+        }
+
+        .contact-us {
+            flex: 1; 
+            text-align: left; 
+        }
+
+        .blog-links {
+            margin-top: 20px; /* Adjust this value as needed */
+        }
+
+        .quick-links h3, 
+        .contact-us h3 {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: left;
+            font-family: Amoret Sans, sans-serif; /* Font for headers */
+        }
+
+        .quick-links ul, 
+        .contact-us ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .quick-links ul li, 
+        .contact-us ul li {
+            margin-bottom: 10px;
+        }
+
+        .quick-links ul li a, 
+        .contact-us ul li a {
+            color: #666;
+            text-decoration: none;
+            padding: 5px;
+            display: block;
+        }
+
+        .quick-links ul li a:hover, 
+        .contact-us ul li a:hover {
+            color: #3CA8E6;
+            border-color: transparent;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            padding: 20px 0;
+            border-top: 1px solid #333;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            text-align: center; /* Ensure center alignment */
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .footer-bottom-links a {
+            color: #666;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #3CA8E6;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-column {
+                margin-bottom: 20px;
+                text-align: center; 
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                margin-top: 20px;
+                justify-content: center;
+            }
+
+            .quick-links {
+                position: static;
+                left: auto;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Первая колонка: Логотип и название -->
+        <div class="footer-column logo-column">
+            <a href="https://ascendtials.org/">
+                <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png" alt="ASCENDtials Logo">
+            </a>
+            <p>ASCENDtials</p>
+        </div>
+
+        <!-- Вторая колонка: Quick Links (первая часть) -->
+        <div class="footer-column quick-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="https://ascendtials.org/about-us/">About Us</a></li>
+                <li><a href="https://ascendtials.org/education/">Education & Training</a></li>
+                <li><a href="https://ascendtials.org/events/">Featured Events</a></li>
+                <li><a href="https://ascendtials.org/get-involved/">Get Involved</a></li>
+            </ul>
+        </div>
+
+        <!-- Третья колонка: Quick Links (вторая часть) -->
+        <div class="footer-column quick-links blog-links">
+            <ul>
+                <li><a href="https://ascendtials.org/blog/">Blog</a></li>
+                <li><a href="https://ascendtials.org/newsletter/">Newsletter</a></li>
+                <li><a href="https://ascendtials.org/get-involved/partners/">Partners</a></li>
+                <li><a href="https://ascendtials.org/memberships/">Membership</a></li>
+                <li><a href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1?locale=en&__embed_source=buy_btn_1O7QQfKPdzGaX2lnUTMK2gbq">Donate</a></li>
+            </ul>
+        </div>
+
+        <!-- Четвертая колонка: Contact Us -->
+        <div class="footer-column contact-us">
+            <h3>Contact Us</h3>
+            <p>505 W Broadway, San Diego, CA 92101</p>
+            <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
+        </div>
+
+        <!-- Пятая колонка: Логотип Candid и EIN -->
+        <div class="footer-column candid-column">
+            <a href="https://ascendtials.org/">
+                <img class="candid-logo" src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg" alt="Candid Seal">
+            </a>
+            <p>EIN. 47-2451577</p>
+        </div>
+    </div>
+
+    
+    </div>
+</footer>
+
+</body>
+</html>

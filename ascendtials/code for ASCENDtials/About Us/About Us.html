@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My version of About Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+    @font-face {
+    font-family: 'Amoret Sans';
+    src: url('assets/font/amoret-sans.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    color: #666666 !important;
+    line-height: 1.6;
+}
+
+.mission-container {
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    max-width: 1440px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+h1 {
+    font-family: 'Amoret Sans', serif;
+    font-weight: 400;
+    font-size: 80px;
+    color: #333 !important;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+h2 {
+    font-family: 'Amoret Sans', serif;
+    font-size: 40px;
+    font-weight: 400;
+    color: #333 !important;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    color: #274353 !important;
+    text-align: left;
+    font-size: 32px;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600;
+    word-wrap: break-word;
+    padding: 1rem 0;
+}
+
+.about-us-box {
+    background-color: #E6E6E6 !important;
+    border-radius: 50px;
+    width: 686px;
+    height: 161px;
+    position: absolute;
+    bottom: 5px; 
+    left: 350px;
+    transform: translateX(-50%);
+    bottom: 10px; 
+}
+
+.butt {
+    background-color: #274353;
+    transition: background-color 0.3s ease;
+}
+
+.butt:hover {
+    background-color: #3CA8E6;
+}
+
+.hero-shape {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    padding-bottom: 50%; 
+}
+
+.hero-shape svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: url(#hero-clip-path);
+     transform: translateX(50px)!important;
+}
+
+.mission-title {
+    font-family: 'Amoret Sans', sans-serif;
+    font-size: 40px;
+    color: #274353;
+    font-weight: normal;
+}
+
+.mission-paragraph {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 20px;
+    line-height: 1.6;
+    color: #666666;
+    max-width: 666px;
+}
+
+.vision-subheading, .truth-subheading, .systems-subheading {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    color: #274353;
+}
+
+.vision-paragraph, .truth-paragraph, .systems-paragraph {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    color: #666666;
+}
+
+.relative {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.vision-section, .truth-section, .systems-section {
+    position: relative;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; 
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.flex-item {
+    flex: 1 1 0; 
+    min-width: 0;
+}
+
+.flex-item:nth-child(1) {
+    flex-basis: 330px; 
+    margin-left: -30px;
+}
+
+.flex-item:nth-child(2) {
+    flex-basis: 384px; 
+}
+
+.flex-item:nth-child(3) {
+    flex-basis: 332px; 
+    margin-right: -60px;
+}
+
+.vision-title {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    color: #274353;
+    margin-bottom: 15px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+.vision-text {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    color: #666666;
+    line-height: 1.5;
+}
+
+.about-us-container {
+    position: relative;
+    width: 100%;
+    max-width: 1379px;
+    margin: 0 auto;
+}
+
+.about-us-svg {
+    width: 100%;
+    height: auto;
+}
+
+.content-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 28px;
+}
+
+.flex-item {
+    flex: 1;
+}
+
+.vision-title {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    color: #274353;
+    margin-bottom: 15px;
+}
+
+.vision-text {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    color: #666666;
+    line-height: 1.5;
+}
+
+.our-founder-section {
+    max-width: 14400px;
+    margin: 120px 30px 200px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    }
+
+    .founder-content {
+     max-width: 700px;
+    }
+
+    .our-founder-title {
+    font-family: 'Amoret Sans', sans-serif;
+    font-size: 40px;
+    color: #274353;
+    margin-bottom: 30px;
+    }
+
+    .founder-text {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    color: #666666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    }
+
+    .founder-photo {
+    width: 296px;
+    height: 412px;
+    object-fit: cover;
+    margin: 104px 30px 0 150px;
+    border-radius: 30px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="flex flex-col gap-28 px-7">
+        <div>
+            <div class="relative py-0">
+                <svg width="1379" height="689" viewBox="0 0 1379 689" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path opacity="0.111111"
+                        d="M86.3241 146.508L131.256 83.9559C137.122 75.7888 145.315 69.5804 154.764 66.1411L1159.97 -299.725C1185.92 -309.17 1214.61 -295.79 1224.06 -269.841L1227.71 -259.816C1236.84 -234.733 1264.57 -221.801 1289.65 -230.93C1314.74 -240.059 1342.47 -227.127 1351.6 -202.044L1487.27 170.703C1496.71 196.652 1483.34 225.344 1457.39 234.789L1335.92 278.997C1309.97 288.442 1281.28 275.063 1271.84 249.114L1250.63 190.853C1241.19 164.904 1212.5 151.525 1186.55 160.969L313.931 478.576C299.706 483.753 283.901 482.207 270.948 474.371L172.522 414.823C162.766 408.92 155.32 399.859 151.42 389.144L79.9488 192.779C74.2966 177.249 76.6829 159.93 86.3241 146.508Z"
+                        stroke="url(#paint0_linear_130_71)" stroke-width="1.22222" />
+                    <path opacity="0.222222"
+                        d="M78.4487 145.146L125.95 84.6736C132.169 76.7565 140.633 70.9011 150.235 67.8737L1168.8 -253.279C1195.14 -261.582 1223.22 -246.964 1231.52 -220.628L1234.75 -210.384C1242.77 -184.965 1269.87 -170.856 1295.29 -178.87C1320.71 -186.885 1347.81 -172.776 1355.82 -147.357L1475.13 231.022C1483.43 257.358 1468.81 285.439 1442.48 293.743L1319.53 332.508C1293.19 340.812 1265.11 326.194 1256.81 299.857L1238.16 240.727C1229.86 214.391 1201.78 199.773 1175.44 208.076L291.264 486.857C276.814 491.413 261.077 489.171 248.474 480.761L152.865 416.959C143.391 410.636 136.359 401.268 132.933 390.404L70.0828 191.067C65.1171 175.318 68.2479 158.133 78.4487 145.146Z"
+                        stroke="url(#paint1_linear_130_71)" stroke-width="1.44444" />
+                    <path opacity="0.333333"
+                        d="M70.5034 143.7L120.479 85.4118C127.04 77.7598 135.76 72.2693 145.496 69.6606L1175.43 -206.31C1202.11 -213.457 1229.52 -197.628 1236.67 -170.955L1239.47 -160.509C1246.36 -134.804 1272.78 -119.549 1298.48 -126.437C1324.19 -133.324 1350.61 -118.07 1357.5 -92.364L1460.2 290.929C1467.35 317.602 1451.52 345.019 1424.85 352.166L1300.66 385.442C1273.99 392.589 1246.57 376.76 1239.42 350.087L1223.38 290.199C1216.23 263.526 1188.81 247.697 1162.14 254.844L268.118 494.396C253.471 498.321 237.834 495.386 225.606 486.418L132.997 418.493C123.822 411.764 117.217 402.106 114.272 391.116L60.1652 189.186C55.8944 173.247 59.7627 156.227 70.5034 143.7Z"
+                        stroke="url(#paint2_linear_130_71)" stroke-width="1.66667" />
+                    <path opacity="0.444444"
+                        d="M62.4918 142.166L114.842 86.1632C121.733 78.791 130.694 73.6766 140.547 71.4924L1179.86 -158.917C1206.81 -164.894 1233.52 -147.884 1239.49 -120.924L1241.14 -113.51C1247.23 -86.0204 1274.81 -68.982 1302.12 -75.8364L1322.64 -80.9861C1349.95 -87.8405 1377.53 -70.8021 1383.63 -43.3122L1468.96 341.603C1474.88 368.307 1458.24 394.812 1431.62 401.09L1279.85 436.881C1252.72 443.28 1225.6 426.255 1219.56 399.038L1206.29 339.168C1200.31 312.209 1173.61 295.199 1146.65 301.175L244.529 501.172C229.711 504.457 214.204 500.834 202.376 491.323L112.945 419.417C104.087 412.295 97.9203 402.368 95.4603 391.272L50.2035 187.132C46.6347 171.034 51.2319 154.212 62.4918 142.166Z"
+                        stroke="url(#paint3_linear_130_71)" stroke-width="1.88889" />
+                    <path opacity="0.555556"
+                        d="M54.4181 140.542L109.039 86.9203C116.249 79.8422 125.434 75.1145 135.384 73.36L1182.05 -111.196C1209.25 -115.991 1235.18 -97.8329 1239.98 -70.6382L1241.54 -61.7636C1246.34 -34.5733 1272.26 -16.4155 1299.45 -21.2036L1339.81 -28.3107C1367 -33.0989 1392.93 -14.9411 1397.72 12.2493L1466.32 401.254C1471.11 428.451 1452.95 454.385 1425.75 459.178L1255.62 489.156C1228.42 493.948 1202.5 475.79 1197.7 448.597L1186.93 387.533C1182.14 360.339 1156.21 342.18 1129.01 346.975L220.528 507.165C205.569 509.803 190.222 505.497 178.817 495.463L92.7342 419.723C84.2109 412.224 78.4934 402.047 76.522 390.867L40.2052 184.905C37.3442 168.679 42.6605 152.085 54.4181 140.542Z"
+                        stroke="url(#paint4_linear_130_71)" stroke-width="2.11111" />
+                    <path opacity="0.666667"
+                        d="M46.2862 138.825L103.07 87.6758C110.586 80.9056 119.978 76.5743 130.007 75.2539L1206.4 -66.4557C1222.23 -68.54 1238.11 -62.9372 1249.12 -51.3774L1266.55 -33.0932C1274.9 -24.3299 1286.14 -18.8938 1298.2 -17.7939L1360.09 -12.1474C1385.84 -9.79829 1405.55 11.7919 1405.55 37.6458L1405.55 472.689C1405.55 497.781 1386.95 518.986 1362.07 522.262L1229.53 539.711C1202.15 543.315 1177.04 524.043 1173.43 496.665L1165.34 435.196C1161.73 407.818 1136.62 388.545 1109.24 392.15L196.151 512.36C181.079 514.344 165.922 509.363 154.964 498.824L72.3934 419.405C64.2203 411.544 58.9621 401.138 57.482 389.895L30.1781 182.502C28.0291 166.179 34.0534 149.844 46.2862 138.825Z"
+                        stroke="url(#paint5_linear_130_71)" stroke-width="2.33333" />
+                    <path opacity="0.777778"
+                        d="M38.1003 137.012L96.935 88.4224C104.744 81.9733 114.327 78.0475 124.416 77.1649L1184.81 -15.6075C1210.26 -17.8342 1233.3 -0.515336 1238.23 24.5529L1249.44 81.5707C1253.83 103.899 1273.41 120 1296.17 120C1320.94 120 1341.57 138.995 1343.62 163.685L1373.51 524.227C1375.79 551.659 1355.46 575.769 1328.04 578.168L1201.11 589.273C1173.6 591.68 1149.35 571.331 1146.94 543.821L1141.54 482.057C1139.13 454.548 1114.88 434.199 1087.37 436.605L171.434 516.74C156.276 518.066 141.339 512.417 130.851 501.393L51.9495 418.458C44.1418 410.252 39.3522 399.637 38.3649 388.353L20.1296 179.922C18.6958 163.533 25.4156 147.488 38.1003 137.012Z"
+                        stroke="url(#paint6_linear_130_71)" stroke-width="2.55556" />
+                    <path opacity="0.888889"
+                        d="M29.8646 135.102L90.6357 89.1528C98.7238 83.0374 108.48 79.5256 118.61 79.0833L1175.24 32.9498C1202.83 31.7453 1226.17 53.1333 1227.37 80.7213L1227.86 91.8879C1229.01 118.275 1251.34 138.731 1277.72 137.579C1304.11 136.427 1326.44 156.884 1327.59 183.27L1344.91 580.07C1346.12 607.658 1324.73 630.998 1297.14 632.203L1170.42 637.736C1142.83 638.94 1119.49 617.552 1118.28 589.964L1115.57 527.856C1114.37 500.333 1091.13 478.968 1063.61 480.077L146.016 517.052C131.122 517.653 116.738 511.577 106.784 500.481L31.9114 417.02C24.1828 408.405 19.6823 397.375 19.1774 385.812L10.0677 177.166C9.35066 160.743 16.7521 145.016 29.8646 135.102Z"
+                        stroke="url(#paint7_linear_130_71)" stroke-width="2.77778" />
+                    
+                    <!-- <defs>
+                        <linearGradient id="paint0_linear_130_71" x1="672.896" y1="-122.443" x2="879.476" y2="445.131"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#289376" />
+                            <stop offset="1" stop-color="#A35E27" />
+                        </linearGradient>
+                        <linearGradient id="paint1_linear_130_71" x1="675.268" y1="-97.6686" x2="856.894" y2="478.376"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#289376" />
+                            <stop offset="1" stop-color="#A35E27" />
+                        </linearGradient>
+                        <linearGradient id="paint2_linear_130_71" x1="676.409" y1="-72.597" x2="832.736" y2="510.822"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#289376" />
+                            <stop offset="1" stop-color="#A35E27" />
+                        </linearGradient>
+                        <linearGradient id="paint3_linear_130_71" x1="676.308" y1="-47.283" x2="807.037" y2="542.4"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#289376" />
+                            <stop offset="1" stop-color="#A35E27" />
+                        </linearGradient>
+                        <linearGradient id="paint4_linear_130_71" x1="674.958" y1="-21.7815" x2="779.841" y2="573.043"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#289376" />
+                            <stop offset="1" stop-color="#A35E27" />
+                        </linearGradient>
+                        <linearGradient id="paint5_linear_130_71" x1="672.354" y1="3.8527" x2="751.192" y2="602.685"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#289376" />
+                            <stop offset="1" stop-color="#A35E27" />
+                        </linearGradient>
+                        <linearGradient id="paint6_linear_130_71" x1="668.492" y1="29.5644" x2="721.134" y2="631.266"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#289376" />
+                            <stop offset="1" stop-color="#A35E27" />
+                        </linearGradient>
+                        <linearGradient id="paint7_linear_130_71" x1="663.374" y1="55.2984" x2="689.72" y2="658.724"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#289376" />
+                            <stop offset="1" stop-color="#A35E27" />
+                        </linearGradient>
+                        <linearGradient id="paint8_linear_130_71" x1="657" y1="81" x2="657" y2="685"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#289376" />
+                            <stop offset="1" stop-color="#A35E27" />
+                        </linearGradient>
+                    </defs> -->
+                </svg>
+                <img class="absolute top-0" src="assets/img/about us hero 2.png" alt="Powerful Women">
+                <div class="flex items-center justify-center absolute bottom-0 about-us-box px-16 py-7">
+                    <h1 class='text-7xl'>About Us</h1>
+                </div>
+            </div>
+        </div>
+        <section>
+                <div class="mission-container">
+                    <h2 class="mission-title">OUR MISSION</h2>
+                    <p class="mission-paragraph">
+                        ASCENDtials is a 501(c)(3) nonprofit established in 2014 by Director/Founder Mika Marzette that seeks to uplift BIPOC communities in Southern California through workshops, programs, and events that ignite real change in spaces that are not inclusive towards BIPOC people.
+                    </p>
+                </div>
+        </section>
+
+        
+        <div class="about-us-container">
+            <svg class="about-us-svg" width="1379" height="552" viewBox="0 0 1381 552" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.5218 74.5306L95.0436 7.24702C100.062 3.20437 106.312 1 112.756 1H1251.54C1267.13 1 1279.78 13.641 1279.78 29.2344V67.7656C1279.78 83.359 1292.42 96 1308.01 96H1325.5H1351.77C1367.36 96 1380 108.641 1380 124.234V520C1380 534.896 1368.43 547.23 1353.56 548.177L1293.58 552H1191.36H1154.19H102.798H29.2344C13.641 552 1 539.359 1 523.766V96.518C1 87.9745 4.86854 79.8904 11.5218 74.5306Z" stroke="url(#paint0_linear_117_14)" stroke-width="1.69406" />
+                <defs>
+                    <linearGradient id="paint0_linear_117_14" x1="690.5" y1="1" x2="690.5" y2="730.285" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#289376" />
+                        <stop offset="1" stop-color="#A35E27" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            
+            <div class="content-wrapper">
+                <div class="flex-container">
+                    <div class="flex-item">
+                        <h3 class="vision-title">Our Vision for Change</h3>
+                        <p class="vision-text">We build community through farmers’ markets, climate clean-ups, and star viewing parties, we grow healthy foods together in our community garden, we move our bodies with intention at weekly yoga sessions, we support young kids in our after-school care program, and so much more. Small steps make a big impact.</p>
+                    </div>
+                    <div class="flex-item">
+                        <h3 class="vision-title">Truth and Transformation</h3>
+                        <p class="vision-text">African philosophies and principles are at our core. We often turn to the wisdom of our ancestors from Kemet (the indigenous name given to the land of Egypt) to guide us. They founded a system—the seven principles of Maat—that not only imitates nature but provides a deeper understanding of our Oneness, true nature, and unity with all things in existence. It is through their teachings that we will find truth and transformation.</p>
+                    </div>
+                    <div class="flex-item">
+                        <h3 class="vision-title">Systems for All</h3>
+                        <p class="vision-text">We believe that all people deserve systems that support a complete human experience. From our founding, we have worked hard to recognize and fight against the systems of inequality holding us back. But we don’t do it alone. Your support and participation in our programs is what keeps us going. For that, we say a big THANK YOU.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="our-founder-section">
+            <div class="founder-content">
+                <h2 class="our-founder-title">Our Founder</h2>
+                <p class="founder-text">
+                    Mika has spent over 25 years in the U.S. and abroad working in education, finance, community capacity building, and self-development. She taught business courses as a professor at Sorbonne University in Paris and the Higher College of Technology in Muscat, Oman. She also headed an immersive program for a cohort of MBA students at UC San Diego.
+                </p>
+                <p class="founder-text">
+                    For 12 years overseas in Japan, France, Oman, Brazil, Thailand, Togo, and Korea, she partnered with the United Nations and UNESCO to teach about structural and policy changes that would benefit those affected disproportionately by structural racism. Mika lives with purpose, always using her platform to uplift and support BIPOC communities.
+                </p>
+                <p class="founder-text">
+                    Now back home in San Diego, she works as the director of ASCENDtials.
+                </p>
+            </div>
+            <img src="https://ascendtials.org/wp-content/uploads/2024/10/Mika.jpg" alt="Founder" class="founder-photo">
+        </section>
+        <!-- <div>
+            <button class="butt ml-7 mt-10 mb-14 py-4 px-24 rounded-full text-white">See Open Roles</button>
+        </div> -->
+</body>
+</html>

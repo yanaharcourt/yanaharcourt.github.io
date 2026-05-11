@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga Cards</title>
+
+    <style>
+        @font-face {
+            font-family: 'Amoret Sans';
+            src: url('assets/font/amoret-sans.ttf') format('truetype');
+        }
+
+        :root {
+            --d: 700ms;
+            --e: cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1800px;
+            margin: 150px auto 0;
+            padding: 1rem;
+        }
+
+        /* Unique classes for yoga cards */
+        .yoga-card {
+            width: 428px;
+            height: 446px;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .yoga-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform calc(var(--d) * 1.5) var(--e);
+        }
+
+        .yoga-card:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+            transition: opacity calc(var(--d) * 2) var(--e);
+            opacity: 0;
+            backdrop-filter: blur(5px);
+            z-index: 1;
+        }
+
+        .yoga-card-content {
+            position: absolute;
+            bottom: 24px;
+            left: 16px;
+            right: 0;
+            padding: 1.5rem;
+            transition: transform var(--d) var(--e);
+            transform: translateY(calc(100% - 4.5rem));
+            z-index: 2;
+        }
+
+        .yoga-card:hover:after {
+            opacity: 1;
+        }
+
+        .yoga-card:hover .yoga-card-content {
+            transform: translateY(0);
+        }
+
+        .yoga-card:hover img {
+            transform: translateY(-0.5%);
+        }
+
+        .yoga-card-title-container {
+            background-color: #F5F5F5;
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+            z-index: 3;
+        }
+
+        .yoga-card-title {
+            color: #222222;
+            font-family: 'Amoret Sans', sans-serif;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .yoga-card-copy {
+            color: #E5E4E4;
+            font-size: 16px;
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity var(--d) var(--e), transform var(--d) var(--e);
+            z-index: 3;
+        }
+
+        .yoga-card-btn {
+            font-family: 'Amoret Sans', sans-serif;
+            font-size: 14px;
+            background-color: #2A495A;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity var(--d) var(--e), transform var(--d) var(--e);
+            z-index: 3;
+        }
+
+        .yoga-card:hover .yoga-card-copy,
+        .yoga-card:hover .yoga-card-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="page-content">
+        <!-- Cards will be added here by JavaScript -->
+    </main>
+
+    <script>
+        (function() {
+            const cards = [
+                { title: 'Private Yoga', copy: 'Private sessions use Kemetic geometric poses, movements, postures, and ancient ancestral knowledge. These are all designed to bring calmness, alignment, and Oneness. These sessions may include sound healing, breathing, mantras, mudras, and silent meditation. They will use the guided “rule of four” for breathing. ', button: 'Contact Us', image: 'Assets/img/Private Yoga.jpg' },
+
+                { title: 'Group Yoga', copy: 'We offer community sessions with semi-private and small groups, at your preferred location. We designed these sessions for special private events or parties. We love outdoor locations. Bring us to your next party or gathering with friends. We love to connect and be harmonious with our community. ', button: 'Contact Us', image: 'Assets/img/Group Yoga.jpg' },
+
+                { title: 'Corporate Yoga', copy: 'These sessions are made for work. They are a great team-building exercise! A fabulous way to start your company retreat! Feel re-energized and ready to relate. These sessions are made for your team. They’re a great team-building exercise!', button: 'Contact Us', image: 'Assets/img/Corporate Yoga.jpg' },
+            ];
+
+            const pageContent = document.querySelector('.page-content');
+
+            cards.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'yoga-card'; // Unique class for each card
+                cardElement.innerHTML = `
+                    <img src="${card.image}" alt="${card.title}">
+                    <div class="yoga-card-content">
+                        <div class="yoga-card-title-container">
+                            <h2 class="yoga-card-title">${card.title}</h2>
+                        </div>
+                        <p class="yoga-card-copy">${card.copy}</p>
+                        <button class="yoga-card-btn">${card.button}</button>
+                    </div>
+                `;
+                pageContent.appendChild(cardElement);
+            });
+        })(); // Self-invoking function to encapsulate the script
+    </script>
+</body>
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <!-- Font Links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,300;0,400;0,700;0,900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Amoret+Sans&display=swap" rel="stylesheet"> 
+
+    <style>
+        @font-face {
+            font-family: 'Amoret Sans';
+            src: url('assets/font/amoret-sans.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            font-family: 'Noto Sans', sans-serif !important;
+            color: #222 !important;
+        }
+        .about-us-text {
+            font-family: 'Amoret Sans', sans-serif !important;
+            font-size: 80px !important;
+            fill: #274353 !important;
+            text-anchor: middle !important;
+            dominant-baseline: middle !important;
+        }
+        .svg-container {
+            margin: 0 30px !important;
+        }
+        .about-us-section {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding: 20px !important;
+        }
+    
+        @media (max-width: 1024px) {
+            .svg-container {
+            margin: 0 !important;
+        }
+        .svg-container svg {
+            width: 102% !important;
+            height: auto !important;
+            transform: scale(1.02) !important;
+            transform-origin: top center !important;
+            margin: 0 -1% !important;
+        }
+            .about-us-text {
+                font-size: 60px !important;
+            }
+        }
+    
+        @media (max-width: 768px) {
+            .svg-container svg {
+                width: 100% !important;
+                transform: scale(1.1) !important;
+                margin: 0 !important;
+            }
+            .about-us-text {
+                font-size: 40px !important;
+            }
+        }
+    
+        @media (max-width: 480px) {
+            .svg-container svg {
+                width: 100% !important;
+                transform: scale(1.2) !important;
+                margin: 0 !important;
+            }
+            .about-us-text {
+                font-size: 32px !important;
+            }
+        }
+    
+        @media (max-width: 414px) {
+             .svg-container svg {
+                width: 100% !important;
+                transform: scale(1.15) !important;
+                margin: 0 -7.5% !important;
+            }
+            .about-us-text {
+                font-size: 36px !important;
+            }
+        }
+    
+        @media (max-width: 375px) {
+            .svg-container svg {
+                width: 120% !important;
+                transform: scale(1.2) !important;
+                margin: 0 -10% !important;
+            }
+            .about-us-text {
+                font-size: 32px !important;
+            }
+        }
+    
+        @media (max-width: 360px) {
+            .svg-container svg {
+                width: 100% !important;
+                transform: scale(1.25) !important;
+                margin: 0 !important;
+            }
+            .about-us-text {
+                font-size: 28px !important;
+            }
+        }
+    
+        @media (max-width: 320px) {
+            .svg-container svg {
+                width: 130% !important;
+                transform: scale(1.3) !important;
+                margin: 0 -15% !important;
+            }
+            .about-us-text {
+                font-size: 28px !important;
+            }
+        }
+    
+        /* Our Mission */
+        .mission-section {
+            padding: 50px 30px !important;
+            text-align: left !important;
+        }
+        
+        .mission-title {
+            font-family: 'Amoret Sans', sans-serif !important;
+            font-size: 40px !important;
+            color: #274353 !important;
+            font-weight: normal !important;
+            margin-bottom: 20px !important;
+            text-align: left !important;
+        }
+        
+        .mission-paragraph {
+            font-family: 'Noto Sans', sans-serif !important;
+            font-size: 20px !important;
+            line-height: 1.6 !important;
+            color: #666666 !important;
+            max-width: 666px !important;
+            text-align: left !important;
+        }
+        
+        @media (max-width: 768px) {
+            .mission-section {
+                padding: 40px 20px !important;
+            }
+        
+            .mission-title {
+                font-size: 36px !important;
+                margin-bottom: 15px !important;
+            }
+        
+            .mission-paragraph {
+                font-size: 18px !important;
+                max-width: 100% !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .mission-section {
+                padding: 30px 15px !important;
+            }
+        
+            .mission-title {
+                font-size: 32px !important;
+                margin-bottom: 12px !important;
+            }
+        
+            .mission-paragraph {
+                font-size: 16px !important;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .mission-section {
+                padding: 25px 10px !important;
+            }
+        
+            .mission-title {
+                font-size: 28px !important;
+                margin-bottom: 10px !important;
+            }
+        
+            .mission-paragraph {
+                font-size: 14px !important;
+            }
+        }
+    
+       /* About Us Section */
+        .about-us-section {
+            padding: 100px 0 50px !important;
+            position: relative !important;
+            text-align: left !important;
+        }
+        
+        .about-us-container {
+            position: relative !important;
+            width: 100% !important;
+            max-width: 1379px !important;
+            margin: 0 auto !important;
+        }
+        
+        .about-us-svg {
+            width: 100% !important;
+            height: auto !important;
+        }
+        
+        .content-wrapper {
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: 90% !important;
+            max-width: 1200px !important;
+            padding: 20px !important;
+            text-align: left !important;
+        }
+        
+        .flex-container {
+            display: flex !important; 
+            justify-content: space-between !important;
+            gap: 20px !important;
+        }
+        
+        .flex-item {
+            flex: 1 !important;
+            min-width: 300px !important; 
+        }
+        
+        .flex-item:nth-child(1) {
+            flex-basis: 327px !important; 
+            margin-left: -35px !important; 
+        }
+        
+        .flex-item:nth-child(2) {
+            flex-basis: 387px !important; 
+        }
+        
+        .flex-item:nth-child(3) {
+            flex-basis: 349px !important; 
+            margin-right: -64px !important; 
+        }
+        
+        .vision-title,
+        .truth-title,
+        .systems-title {
+            font-family: 'Noto Sans', sans-serif !important;
+            font-weight: 600 !important;
+            font-size: 32px !important;
+            color: #274353 !important;
+            margin-bottom: 15px !important;
+        }
+        
+        .vision-text,
+        .truth-text,
+        .systems-text {
+            font-family: 'Noto Sans', sans-serif !important;
+            font-weight: 300 !important;
+            font-size: 20px !important;
+            color: #666666 !important;
+            line-height: 1.5 !important;
+            max-width: 666px !important;
+        }
+        
+        @media (max-width: 768px) {
+            .about-us-section {
+                padding: 30px 20px !important;
+            }
+        
+            .about-us-svg {
+                display: none !important;
+            }
+        
+            .content-wrapper {
+                position: static !important;
+                transform: none !important;
+                padding: 0 !important;
+                width: 100% !important;
+            }
+        
+            .flex-container {
+                flex-direction: column !important;
+                gap: 30px !important;
+            }
+        
+            .flex-item,
+            .flex-item:nth-child(1),
+            .flex-item:nth-child(2),
+            .flex-item:nth-child(3) {
+                margin: 0 !important;
+                min-width: 0 !important;
+                flex-basis: auto !important;
+            }
+        
+            .vision-title, .truth-title, .systems-title {
+                font-size: 28px !important;
+                margin-bottom: 15px !important;
+            }
+        
+            .vision-text, .truth-text, .systems-text {
+                font-size: 18px !important;
+                max-width: 100% !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .about-us-section {
+                padding: 20px 15px !important;
+            }
+        
+            .vision-title, .truth-title, .systems-title {
+                font-size: 24px !important;
+            }
+        
+            .vision-text, .truth-text, .systems-text {
+                font-size: 16px !important;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .vision-title, .truth-title, .systems-title {
+                font-size: 22px !important;
+            }
+        
+            .vision-text, .truth-text, .systems-text {
+                font-size: 14px !important;
+            }
+        }
+
+        /* Our founder */
+        .our-founder-section {
+            max-width: 1440px;
+            margin: 120px auto 200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0 30px;
+        }
+        
+        .founder-content {
+            max-width: 700px;
+        }
+        
+        .our-founder-title {
+            font-family: 'Amoret Sans', sans-serif !important;
+            font-size: 40px !important;
+            color: #274353 !important;
+            margin-bottom: 30px !important;
+        }
+        
+        .founder-text {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 300 !important;
+            font-size: 20px !important;
+            color: #666666 !important;
+            line-height: 1.6 !important;
+            margin-bottom: 20px !important;
+        }
+        
+        .founder-photo {
+            width: 296px !important;
+            height: 412px !important;
+            object-fit: cover !important;
+            margin: 104px 0 0 150px !important;
+            border-radius: 30px !important;
+        }
+        
+        @media (max-width: 1024px) {
+            .our-founder-section {
+                margin: 100px auto 150px;
+            }
+        
+            .founder-photo {
+                width: 250px !important;
+                height: 348px !important;
+                margin: 80px 0 0 80px !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .our-founder-section {
+                flex-direction: column-reverse !important;
+                align-items: center !important;
+                margin: 80px auto 120px;
+                padding: 0 20px;
+            }
+        
+            .founder-content {
+                max-width: 100%;
+            }
+        
+            .our-founder-title {
+                font-size: 36px !important;
+                margin-bottom: 20px !important;
+                text-align: center !important;
+            }
+        
+            .founder-text {
+                font-size: 18px !important;
+                text-align: left !important;
+            }
+        
+            .founder-photo {
+                width: 250px !important;
+                height: 348px !important;
+                margin: 0 0 30px 0 !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .our-founder-section {
+                margin: 60px auto 100px;
+                padding: 0 15px;
+            }
+        
+            .our-founder-title {
+                font-size: 32px !important;
+                margin-bottom: 15px !important;
+            }
+        
+            .founder-text {
+                font-size: 16px !important;
+            }
+        
+            .founder-photo {
+                width: 200px !important;
+                height: 278px !important;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .our-founder-section {
+                margin: 50px auto 80px;
+                padding: 0 10px;
+            }
+        
+            .our-founder-title {
+                font-size: 28px !important;
+            }
+        
+            .founder-text {
+                font-size: 14px !important;
+            }
+        
+            .founder-photo {
+                width: 180px !important;
+                height: 250px !important;
+            }
+        }
+    </style>    
+</head>
+<body>
+    <!-- About Us Section -->
+    <section class="about-us-section">
+        <div class="svg-container">
+            <svg width="1380" height="689" viewBox="0 0 1380 689" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <defs>
+                    <pattern id="image-fill" patternUnits="userSpaceOnUse" width="1380" height="689">
+                        <image xlink:href="assets/img/about us hero 2.png" x="0" y="0" width="1380" height="689" />
+                    </pattern>
+                </defs>
+                <path d="M0 401.215V50C0 22.3858 22.3857 0 50 0H1219.5C1247.11 0 1269.5 22.3858 1269.5 50V66.5C1269.5 94.1142 1291.89 116.5 1319.5 116.5H1332C1357.96 116.5 1379 137.543 1379 163.5V638.5C1379 666.114 1356.61 688.5 1329 688.5H744C716.386 688.5 694 666.114 694 638.5V610V570.832C694 543.089 671.412 520.65 643.669 520.833L618.5 521H365H238H174.751L129.472 520.645C117.551 520.551 106.056 516.202 97.0593 508.38L17.1953 438.949C6.27211 429.453 0 415.689 0 401.215Z" fill="url(#image-fill)"/>
+                <rect y="528" width="686" height="161" rx="50" fill="#E6E6E6"/>
+                <text x="343" y="608" class="about-us-text">About Us</text>
+            </svg>
+        </div>
+    </section>
+    <section class="mission-section">
+        <div class="mission-container">
+            <h2 class="mission-title">OUR MISSION</h2>
+            <p class="mission-paragraph">
+                ASCENDtials is a 501(c)(3) nonprofit established in 2014 by Director/Founder Mika Marzette that seeks to uplift BIPOC communities in Southern California through workshops, programs, and events that ignite real change in spaces that are not inclusive towards BIPOC people.
+            </p>
+        </div>
+    </section>
+    
+    <section class="about-us-section">
+        <div class="about-us-container">
+            <svg class="about-us-svg" width="1379" height="552" viewBox="0 0 1381 552" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.5218 74.5306L95.0436 7.24702C100.062 3.20437 106.312 1 112.756 1H1251.54C1267.13 1 1279.78 13.641 1279.78 29.2344V67.7656C1279.78 83.359 1292.42 96 1308.01 96H1325.5H1351.77C1367.36 96 1380 108.641 1380 124.234V520C1380 534.896 1368.43 547.23 1353.56 548.177L1293.58 552H1191.36H1154.19H102.798H29.2344C13.641 552 1 539.359 1 523.766V96.518C1 87.9745 4.86854 79.8904 11.5218 74.5306Z" stroke="url(#paint0_linear_117_14)" stroke-width="1.69406"/>
+                <defs>
+                    <linearGradient id="paint0_linear_117_14" x1="690.5" y1="1" x2="690.5" y2="730.285" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#289376"/>
+                        <stop offset="1" stop-color="#A35E27"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div class="content-wrapper">
+                <div class="flex-container">
+                    <div class="flex-item">
+                        <h3 class="vision-title">Our Vision for Change</h3>
+                        <p class="vision-text">We build community through farmers’ markets, climate clean-ups, and star viewing parties, we grow healthy foods together in our community garden, we move our bodies with intention at weekly yoga sessions, we support young kids in our after-school care program, and so much more. Small steps make a big impact.</p>
+                    </div>
+                    <div class="flex-item">
+                        <h3 class="vision-title">Truth and Transformation</h3>
+                        <p class="vision-text">African philosophies and principles are at our core. We often turn to the wisdom of our ancestors from Kemet (the indigenous name given to the land of Egypt) to guide us. They founded a system—the seven principles of Maat—that not only imitates nature but provides a deeper understanding of our Oneness, true nature, and unity with all things in existence. It is through their teachings that we will find truth and transformation.</p>
+                    </div>
+                    <div class="flex-item">
+                        <h3 class="vision-title">Systems for All</h3>
+                        <p class="vision-text">We believe that all people deserve systems that support a complete human experience. From our founding, we have worked hard to recognize and fight against the systems of inequality holding us back. But we don’t do it alone. Your support and participation in our programs is what keeps us going. For that, we say a big THANK YOU.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="our-founder-section">
+        <div class="founder-content">
+            <h2 class="our-founder-title">Our Founder</h2>
+            <p class="founder-text">
+                Mika has spent over 25 years in the U.S. and abroad working in education, finance, community capacity building, and self-development. She taught business courses as a professor at Sorbonne University in Paris and the Higher College of Technology in Muscat, Oman. She also headed an immersive program for a cohort of MBA students at UC San Diego.
+            </p>
+            <p class="founder-text">
+                For 12 years overseas in Japan, France, Oman, Brazil, Thailand, Togo, and Korea, she partnered with the United Nations and UNESCO to teach about structural and policy changes that would benefit those affected disproportionately by structural racism. Mika lives with purpose, always using her platform to uplift and support BIPOC communities.
+            </p>
+            <p class="founder-text">
+                Now back home in San Diego, she works as the director of ASCENDtials.
+            </p>
+        </div>
+        <img src="assets/img/Mika.png" alt="Founder" class="founder-photo">
+    </section>
+</body>
+</html>

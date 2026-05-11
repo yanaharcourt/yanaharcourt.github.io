@@ -1,0 +1,132 @@
+.footer {
+    background-color: #1c1c1c;
+    color: #fff;
+    padding: 40px 20px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    text-align: center;
+}
+
+.footer-column {
+    margin: 0 10px;
+    text-align: left; 
+}
+
+.logo-column,
+.candid-column {
+    flex: 0 0 13%; 
+    text-align: center;
+}
+
+.logo-column img,
+.candid-column img {
+    width: 100%; 
+    height: auto; 
+    margin-bottom: 10px;
+    border-radius: 15px; 
+}
+
+.logo-column p,
+.candid-column p {
+    margin: 0;
+    text-align: center;
+}
+
+.quick-links {
+    position: relative;
+    left: 120px; 
+    text-align: left;
+    flex: 1;
+}
+
+.contact-us {
+    flex: 1; 
+    text-align: left; 
+}
+
+.quick-links h3, .contact-us h3 {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.quick-links ul, .contact-us ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quick-links ul li, .contact-us ul li {
+    margin-bottom: 10px;
+}
+
+.quick-links ul li a, .contact-us ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px;
+    display: block;
+}
+
+.quick-links ul li a:hover, .contact-us ul li a:hover {
+    color: #3CA8E6;
+    border-color: transparent;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    padding: 20px 0;
+    border-top: 1px solid #333;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.footer-bottom-links {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.footer-bottom-links a {
+    color: #fff;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.footer-bottom-links a:hover {
+    color: #3CA8E6;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-column {
+        margin-bottom: 20px;
+        text-align: center; 
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-bottom-links {
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    .quick-links {
+        position: static;
+        left: auto;
+        margin-bottom: 20px;
+    }
+}

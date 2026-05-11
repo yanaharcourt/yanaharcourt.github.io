@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kemetic Yoga</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+        <style>
+            /* Hero Section */ 
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: 'Noto Sans', sans-serif !important;
+                font-weight: 400!important;
+                font-size: 20px;
+                color: #666666;
+                line-height: 1.6;
+            }
+
+            .kemetic-yoga {
+                display: flex;
+                max-width: 1440px;
+                margin: 0 auto;
+                padding: 40px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .content {
+                margin-left: 30px;
+                padding-right: 40px;
+                z-index: 2;
+                max-width: 40%; 
+            }
+            .third-paragraph {
+                position: relative;   
+                left: 594px;          
+                margin-top: -244px;    
+                max-width: 600px;     
+            }
+
+            h1 {
+                font-family: 'Amoret Sans', serif!important;
+                font-size: 72px!important;
+                font-weight: 400!important;
+                color: #274353!important;
+                margin-bottom: 20px;
+                line-height: 1.2;
+            }
+
+            h2 {
+                font-family: 'Amoret Sans', serif !important;
+                font-size: 36px;
+                font-weight: 400;
+                color: #274353!important;
+                margin-top: 30px;
+                margin-bottom: 15px;
+            }
+
+            .image-container {
+                position: relative;
+                flex: 1;
+            }
+
+            .image-wrapper {
+                position: absolute;
+                top: -50px; 
+                right: -100px; 
+                width: 946px; 
+                height: 733px; 
+                overflow: hidden;
+                border-radius: 0 0 0 60% / 0 0 0 100%;
+            }
+
+            .image-wrapper img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            /* cards */ 
+        @font-face {
+            font-family: 'Amoret Sans';
+            src: url('assets/font/amoret-sans.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            color: #222;
+        }
+
+        .page-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: left;
+            margin-left: 30px;
+            gap: 2rem;
+            max-width: 1800px;
+            margin: 120px auto 0;
+            margin-bottom: 200px;
+            padding: 1rem;
+            margin-left: 30px;
+        }
+
+        .yoga-card {
+            width: 428px;
+            height: 446px;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .yoga-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .yoga-card:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+            transition: opacity 1400ms cubic-bezier(0.19, 1, 0.22, 1);
+            opacity: 0;
+            backdrop-filter: blur(5px);
+            z-index: 1;
+        }
+
+        .yoga-card-content {
+            position: absolute;
+            bottom: 24px;
+            left: 16px;
+            right: 0;
+            padding: 1.5rem;
+            transform: translateY(calc(100% - 4.5rem));
+            z-index: 2;
+            transition: transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .yoga-card:hover:after {
+            opacity: 1;
+        }
+
+        .yoga-card:hover .yoga-card-content {
+            transform: translateY(0);
+        }
+
+        .yoga-card:hover img {
+            transform: translateY(-0.5%);
+        }
+
+        .yoga-card-title-container {
+            background-color: #F5F5F5;
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+            z-index: 3;
+        }
+
+        .yoga-card-title {
+            color: #222222!important;
+            font-family: 'Amoret Sans', sans-serif;
+            font-size: 16px!important;
+            font-weight: 400!important;
+            margin: 0!important;
+        }
+
+        .yoga-card-copy {
+            color: #E5E4E4;
+            font-size: 16px;
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity 700ms cubic-bezier(0.19, 1, 0.22, 1), transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 3;
+        }
+
+        .yoga-card-btn {
+            font-family: 'Amoret Sans', sans-serif!important;
+            font-size: 14px;
+            background-color: #2A495A!important;
+            color: white;
+            border: none!important;
+            padding: 10px 20px;
+            border-radius: 15px!important;
+            cursor: pointer;
+            margin-top: 10px!important;
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity 700ms cubic-bezier(0.19, 1, 0.22, 1), transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 3;
+        }
+        .yoga-card-btn:hover {
+            background-color: #3CA8E6!important;
+            color:#fff !important;
+            }
+
+        .yoga-card:hover .yoga-card-copy,
+        .yoga-card:hover .yoga-card-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        </style>
+    </head>
+    <body>
+        <section class="kemetic-yoga">
+            <div class="content">
+                <h1>KEMETIC YOGA</h1>
+                <p>Kemetic Yoga is an ancient yoga practice originating from the land of Kemet—a name given to Egypt by its ancient indigenous inhabitants. The practice connects breath and slow movement, guiding the body through poses inspired by the ancient illustrations of Egyptian gods and goddesses. It’s a spiritual practice, moving energy through the body to connect with our higher selves and our ancestors. </p>
+
+                <h2>Why Do Kemetic Yoga?</h2>
+                <div class="text-container">
+                    <p>Practicing Kemetic yoga connects us to a rich ancient African heritage largely forgotten. Our ancient African ancestors used Kemetic yoga to connect with themselves and higher beings. Divine movement brought them health, wealth, and harmony. Rediscovering this practice for ourselves will grant us that same wisdom. Challenge mainstream yoga culture and find your inner power. </p>
+                    
+                    <p class="third-paragraph">Our Kemetic Yoga sessions use our Whiteness to Oneness™ and KOS-Melanin-ology™ curricula at their foundation. We work to dismantle structural inequality and foster constructive dialogue around Blackness.</p>
+                </div>
+            </div>
+            <div class="image-container">
+                <div class="image-wrapper">
+                    <svg width="946" height="733" viewBox="0 0 946 733" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="imagePattern" patternUnits="userSpaceOnUse" width="946" height="733">
+                                <image href="assets/img/Kemetic Yoga.jpg" width="946" height="733" />
+                            </pattern>
+                        </defs>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.894312 1.97369C10.1225 6.69337 24.1066 13.8454 30.6366 33C36.6366 47.8 53.4699 63.1667 61.1366 69L92.6366 91.5C105.126 99.9925 117.215 118.168 121.625 150.913C121.633 150.97 121.644 151.021 121.66 151.076C123.501 157.104 123.817 181.38 124.482 232.614C124.531 236.426 124.582 240.386 124.637 244.5C125.342 298.101 125.052 325.836 124.82 348.053C124.723 357.338 124.637 365.658 124.637 374.5C124.303 393.5 128.069 438.314 143.137 467C169.137 516.5 183.137 528 224.137 556C293.92 599.344 394.89 610.75 452.457 617.253C461.297 618.252 469.114 619.135 475.637 620C493.942 622.313 515.53 624.506 538.436 626.832C612.811 634.387 701.079 643.353 735.983 662.416C736.014 662.433 736.043 662.447 736.072 662.46C736.146 662.491 736.218 662.512 736.303 662.525C743.599 663.708 760.6 675.368 778.525 687.663C795.326 699.186 812.939 711.267 824.137 715.801C824.305 715.869 824.471 715.935 824.637 716C825.702 716.4 826.8 716.815 827.93 717.242C852.149 726.403 891.255 741.195 944.387 727.199C944.825 727.084 945.137 726.685 945.137 726.233V10C944.137 10 944.137 0 944.137 0H0.982805C-0.0481942 0 -0.381549 1.32086 0.536256 1.79053C0.654783 1.85118 0.774144 1.91223 0.894312 1.97369Z" fill="url(#imagePattern)"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+        <section>
+            <main class="page-content">
+                <!-- Cards will be added here by JavaScript -->
+            </main>
+        
+            <script>
+                (function() {
+                    const cards = [
+                    { title: 'Group Yoga', 
+                    copy: 'We offer community sessions a few times a week. These sessions are open to all members of our community, held at local parks and events. Check out our event calendar to find the next available session! Bring a mat, water, and a willingness to learn something new. ', 
+                    button: '<a href="https://ascendtials.org/contact-us/" target="_blank" style="color:inherit; text-decoration:none;">Contact Us</a>', 
+                    image: 'assets/img/Group Yoga.jpg' },
+
+                    { title: 'Youth Yoga', 
+                    copy: 'We host Kemetic yoga sessions for youngsters through our Build My Spirit after-school program. Kids ages 5-17 will be aided on a journey of self discovery, health, and well-being by our experienced teachers.', 
+                    button: '<a href="https://ascendtials.org/contact-us/" target="_blank" style="color:inherit; text-decoration:none;">Contact Us</a>', 
+                    image: 'assets/img/Youth Yoga.jpg' },
+
+                    { title: 'Private Yoga', 
+                    copy: 'Private sessions are designed for special private events or parties, at your preferred location. We especially love being outdoors. Bring us to your next party or gathering with friends.', 
+                    button: '<a href="https://ascendtials.org/contact-us/" target="_blank" style="color:inherit; text-decoration:none;">Contact Us</a>', 
+                    image: 'assets/img/Private Yoga.jpg' },
+
+                    { title: 'Corporate Yoga', 
+                    copy: 'These sessions are made for work. They are a great team-building exercise, or a fabulous way to start your company retreat! Feel re-energized and better connected with your coworkers.', 
+                    button: '<a href="https://ascendtials.org/contact-us/" target="_blank" style="color:inherit; text-decoration:none;">Contact Us</a>', 
+                    image: 'assets/img/Corporate Yoga.jpg' },
+
+                    { title: 'Full Moon Yoga', 
+                    copy: 'We celebrate the full moon each month with a Kemetic yoga session. During these sessions, we honor our ancestors and share cosmic consciousness. Stick around for a bonfire, too!', 
+                    button: '<a href="https://ascendtials.org/contact-us/" target="_blank" style="color:inherit; text-decoration:none;">Contact Us</a>', 
+                    image: 'assets/img/Full Moon Yoga.jpg' },
+                    ];
+        
+                    const pageContent = document.querySelector('.page-content');
+        
+                    cards.forEach(card => {
+                        const cardElement = document.createElement('div');
+                        cardElement.className = 'yoga-card'; // Unique class for each card
+                        cardElement.innerHTML = `
+                            <img src="${card.image}" alt="${card.title}">
+                            <div class="yoga-card-content">
+                                <div class="yoga-card-title-container">
+                                    <h2 class="yoga-card-title">${card.title}</h2>
+                                </div>
+                                <p class="yoga-card-copy">${card.copy}</p>
+                                <button class="yoga-card-btn">${card.button}</button>
+                            </div>
+                        `;
+                        pageContent.appendChild(cardElement);
+                    });
+                })(); // Self-invoking function to encapsulate the script
+            </script>
+        </section>
+
+          
+</body>
+</html>

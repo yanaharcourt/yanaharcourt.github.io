@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Сигнатура - Школа брейкинга в Волгограде. Твой почерк в танце.</title>
+  <meta name="description" content="Школа брейкинга «Сигнатура» в Волгограде. Для детей от 4 лет. Спорт и творчество в одном месте. Первое занятие - бесплатно. Тел: 8 (909) 394-26-28">
+
+  <!-- SEO -->
+  <meta name="description" content="Школа брейкинга «Сигнатура» в Волгограде. Занятия для детей от 4 лет в КДК «21 ВЕК». Первое занятие бесплатно. Запишитесь по телефону 8 (909) 394-26-28.">
+  <meta name="keywords" content="брейкинг Волгоград, школа брейкинга, брейк-данс для детей, танцы для детей Волгоград, КДК 21 век, Сигнатура, брейкинг от 4 лет">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://signatura-volgograd.ru/">
+
+  <!-- Open Graph  -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://signatura-volgograd.ru/">
+  <meta property="og:title" content="Сигнатура — школа брейкинга в Волгограде">
+  <meta property="og:description" content="Брейкинг для детей от 4 лет. Сцена, соревнования и настоящий результат. Первое занятие бесплатно.">
+  <meta property="og:image" content="https://signatura-volgograd.ru/assets/img/og-image.jpg">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Сигнатура">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Сигнатура — школа брейкинга в Волгограде">
+  <meta name="twitter:description" content="Брейкинг для детей от 4 лет. Первое занятие бесплатно.">
+  <meta name="twitter:image" content="https://signatura-volgograd.ru/assets/img/og-image.jpg">
+
+  <!-- Геолокация -->
+  <meta name="geo.region" content="RU-VGG">
+  <meta name="geo.placename" content="Волгоград">
+  <meta name="geo.position" content="48.770449;44.489396">
+  <meta name="ICBM" content="48.770449, 44.489396">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Unbounded:wght@400;700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+   
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+ 
+    :root {
+      --color-accent: #FFE600;
+      --color-accent-dark: #C9B800;
+      --color-bg-base: #0A0A0A;
+      --color-bg-subtle: #111;
+      --color-bg-raised: #181818;
+      --color-surface: #222;
+      --color-surface-high: #2C2C2C;
+      --color-text-primary: #fff;
+      --color-text-muted: #888;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-heading: 'Unbounded', sans-serif;
+      --font-body: 'Manrope', sans-serif;
+      --nav-bg-default: rgba(10, 10, 10, .9);
+      --nav-bg-scrolled: rgba(10, 10, 10, .98);
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 24px;
+      --space-lg: 40px;
+      --space-xl: 64px;
+      --space-2xl: 100px;
+      --logo-img-size: 80px;
+      --logo-margin: 12px;
+      --bento-cell-min: 320px;
+      --bento-cell-mid: 280px;
+      --fs-label: 10px;
+      --fs-nav: 12px;
+      --fs-body: 15px;
+      --fs-sub: 14px;
+      --fs-large: 17px;
+      --color-accent-dim: rgba(255, 230, 0, .05);
+      --color-accent-border: rgba(255, 230, 0, .25);
+      --color-accent-border-soft: rgba(255, 230, 0, .1);
+      --color-text-primary-dim: rgba(255, 255, 255, .52);
+      --color-text-primary-mid: rgba(255, 255, 255, .7);
+      --color-dark-accent: rgba(0, 0, 0, .15);
+    }
+ 
+    html { scroll-behavior: smooth; overflow-x: hidden }
+    body { background: var(--color-bg-base); color: var(--color-text-primary); font-family: var(--font-body); overflow-x: hidden; max-width: 100vw; cursor: none }
+ 
+    /* CURSOR */
+    #cur { width: 10px; height: 10px; background: var(--color-accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width .2s, height .2s; mix-blend-mode: difference }
+    #cur.big { width: 60px; height: 60px }
+    #cur2 { width: 38px; height: 38px; border: 1.5px solid rgba(255, 230, 0, .5); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: left .12s ease, top .12s ease, width .2s, height .2s; mix-blend-mode: difference }
+    #cur2.big { width: 80px; height: 80px }
+ 
+    /* NOISE */
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; opacity: .4 }
+ 
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: var(--nav-bg-default); backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255, 230, 0, .08); transition: all .3s }
+    .logo { font-family: var(--font-display); font-size: 28px; letter-spacing: 5px; color: var(--color-accent); text-decoration: none; display: flex; align-items: center; flex-shrink: 0; line-height: 1; position: relative; z-index: 999 }
+    .logo-img { width: var(--logo-img-size); object-fit: contain; flex-shrink: 0; margin-right: var(--logo-margin); display: block }
+    .logo-text { font-family: var(--font-display); font-size: 22px; letter-spacing: 3px; color: var(--color-accent); display: block }
+    .navr { display: flex; align-items: center; gap: 32px }
+    .navl { display: flex; gap: 28px }
+    .navl a { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-muted); text-decoration: none; transition: color .2s }
+    .navl a:hover { color: var(--color-accent) }
+    .nav-btn { background: var(--color-accent); color: var(--color-bg-base); padding: 13px 28px; font-family: var(--font-heading); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%); transition: all .2s; white-space: nowrap }
+    .nav-btn:hover { background: var(--color-text-primary); transform: translateY(-2px) }
+ 
+    /* BURGER */
+    .burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; background: none; border: none; cursor: pointer; padding: 6px; z-index: 600; position: relative; flex-shrink: 0 }
+    .burger span { display: block; height: 2px; background: var(--color-text-primary); border-radius: 2px; transition: all .3s cubic-bezier(.25, .46, .45, .94); transform-origin: center }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg) }
+    .burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0) }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) }
+ 
+    /* MOBILE MENU */
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 490; background: var(--color-bg-base); flex-direction: column; padding: 96px 32px 48px; overflow-y: auto }
+    .mobile-menu.open { display: flex }
+    .mobile-nav-links { display: flex; flex-direction: column; gap: 0; flex: 1 }
+    .mobile-nav-links a { font-family: var(--font-display); font-size: clamp(40px, 11vw, 64px); letter-spacing: 2px; color: var(--color-text-primary); text-decoration: none; padding: 16px 0; border-bottom: 1px solid rgba(255, 230, 0, .1); transition: color .2s, padding-left .2s; display: block }
+    .mobile-nav-links a:hover { color: var(--color-accent); padding-left: 8px }
+    .mobile-menu-bottom { margin-top: 40px; display: flex; flex-direction: column; gap: 20px }
+    .mobile-cta { background: var(--color-accent); color: var(--color-bg-base); padding: 18px; font-family: var(--font-heading); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; text-align: center; clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%); display: block }
+    .mobile-phone { font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: var(--color-accent); text-decoration: none; letter-spacing: 1px; text-align: center }
+ 
+    /* HERO */
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; padding-top: 80px }
+    .hero-left { display: flex; flex-direction: column; justify-content: flex-end; padding: 0 48px 72px; position: relative; z-index: 2; background: transparent }
+    .hero-tag { display: inline-flex; align-items: center; gap: 10px; background: transparent; border: none; border-left: 2px solid rgba(255, 230, 0, .4); padding: 0 0 0 12px; font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: rgba(255, 230, 0, .85); width: fit-content; position: absolute; top: 100px; left: 48px; z-index: 3; animation: fadeUp .8s .1s both }
+    .hero-tag::before { display: none }
+    .hero-right { position: absolute; inset: 0; overflow: hidden; z-index: 0 }
+    .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: right top; display: block; filter: grayscale(15%) contrast(1.1) }
+    .hero-right::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 40%), linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 60%, transparent 100%) }
+    .hero-scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 2; animation: fadeIn 1s 1.5s both }
+    .scroll-oval { width: 40px; height: 54px }
+    .scroll-oval-svg { width: 100%; height: 100% }
+    .scroll-arrow { animation: scrollBounce 1.6s ease-in-out infinite }
+    .scroll-label { font-size: 10px; letter-spacing: 3px; color: var(--color-text-muted); text-transform: uppercase }
+    .hphone-ghost { font-family: var(--font-heading); font-size: clamp(18px, 2vw, 26px); font-weight: 700; color: rgba(255, 255, 255, .85); text-decoration: none; letter-spacing: 2px; transition: color .2s; position: absolute; bottom: 86px; right: 48px; z-index: 3 }
+    .hphone-ghost:hover { color: var(--color-accent) }
+    .hphone:hover { color: var(--color-text-primary) }
+    .htitle { font-family: var(--font-display); font-size: clamp(72px, 12vw, 160px); line-height: .86; letter-spacing: -1px; color: rgba(255, 255, 255, 0.85); animation: fadeUp .8s .2s both; overflow-wrap: normal; word-break: keep-all; margin-bottom: 40px }
+    .htitle .y { color: var(--color-accent) }
+    .htitle .out { -webkit-text-stroke: 2px var(--color-accent); color: transparent }
+    .hslogan { font-family: var(--font-heading); font-size: clamp(10px, 1vw, 13px); font-weight: 600; color: rgba(255, 230, 0, .5); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; animation: fadeUp .8s .3s both }
+    .hdesc { font-size: 15px; line-height: 1.65; color: rgba(255, 255, 255, .52); max-width: 450px; animation: fadeUp .8s .38s both; overflow-wrap: break-word; margin-bottom: 36px }
+    .hdesc strong { color: rgba(255, 230, 0, .5); font-weight: 700 }
+    .hbtns { display: flex; flex-direction: row; gap: 20px; align-items: center; flex-wrap: wrap; animation: fadeUp .8s .46s both }
+ 
+    /* BUTTONS */
+    .btn-y { background: var(--color-accent); color: var(--color-bg-base); padding: 18px 40px; font-family: var(--font-heading); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%); transition: all .25s; position: relative; overflow: hidden }
+    .btn-y::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, .12); transform: translateX(-100%); transition: transform .3s }
+    .btn-y:hover::after { transform: translateX(0) }
+    .btn-y:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255, 230, 0, .3) }
+    .btn-y--inline { display: inline-flex; align-items: center; gap: 10px }
+ 
+    /* MARQUEE */
+    .mq { overflow: hidden; background: var(--color-accent); padding: 20px 0 }
+    .mq-track { display: flex; animation: mqs 22s linear infinite; width: max-content }
+    .mq-item { font-family: var(--font-display); font-size: 36px; letter-spacing: 5px; color: #111; padding: 0 48px; white-space: nowrap; display: flex; align-items: center; gap: 48px }
+    .mq-dot { width: 8px; height: 8px; background: #111; border-radius: 50%; flex-shrink: 0 }
+ 
+    /* BENTO */
+    .bento { padding: 6px; display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto; gap: 6px; background: var(--color-bg-base) }
+    .b-cell { background: var(--color-surface); overflow: hidden; position: relative }
+    .b-cell.tall { grid-row: span 2 }
+    .b-cell.wide { grid-column: span 2 }
+    .b-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.25, .46, .45, .94), filter .4s; filter: grayscale(20%) contrast(1.1) }
+    .b-cell:hover img { transform: scale(1.06); filter: grayscale(0%) contrast(1.1) }
+    .b-cell--tall-min { min-height: var(--bento-cell-min) }
+    .b-cell--mid-min { min-height: var(--bento-cell-mid) }
+    .b-text { padding: 40px }
+    .b-num { font-family: var(--font-display); font-size: 96px; color: var(--color-accent); line-height: 1; margin-bottom: 8px }
+    .b-label { font-size: 13px; color: var(--color-text-muted); letter-spacing: 1px; line-height: 1.4 }
+    .b-desc { padding: 40px; display: flex; flex-direction: column; justify-content: flex-end }
+    .b-desc p { font-size: 15px; line-height: 1.75; color: rgba(255, 255, 255, .65) }
+    .b-desc strong { color: var(--color-accent); font-weight: 600 }
+    .b-desc.wide.b-dark { grid-column: 1 / -1 }
+    .b-yellow { background: var(--color-accent) }
+    .b-yellow .b-num { color: var(--color-bg-base) }
+    .b-yellow .b-label { color: rgba(0, 0, 0, .55) }
+    .b-dark { background: var(--color-bg-raised) }
+    .b-tag-box { padding: 40px; display: flex; flex-direction: column; justify-content: space-between }
+    .b-tagline { font-family: var(--font-display); font-size: clamp(36px, 4vw, 56px); color: var(--color-text-primary); line-height: 1 }
+    .b-tagline .y { color: var(--color-accent) }
+    .b-sub { font-size: 13px; color: var(--color-text-muted); margin-top: 16px; line-height: 1.6; max-width: 280px }
+    .b-chip { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 230, 0, .1); border: 1px solid rgba(255, 230, 0, .2); padding: 6px 14px; font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent); margin-bottom: 16px }
+    .b-accent-line { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--color-accent); transform: scaleX(0); transform-origin: left; transition: transform .4s }
+    .b-accent-line--dark { background: var(--color-dark-accent) }
+    .b-cell:hover .b-accent-line { transform: scaleX(1) }
+ 
+    /* SECTION */
+    .section { padding: 100px 48px }
+    .section--dark-bg { background: var(--color-bg-base); padding-top: 80px }
+    .sec-label { display: inline-flex; align-items: center; gap: 12px; font-size: 10px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--color-accent); margin-bottom: 20px }
+    .sec-label::before { content: ''; width: 28px; height: 2px; background: var(--color-accent) }
+    .sec-title { font-family: var(--font-display); font-size: clamp(48px, 8vw, 96px); line-height: .95; letter-spacing: 1px; margin-bottom: 56px }
+    .sec-title .y { color: var(--color-accent) }
+ 
+    /* ИСТОРИЯ */
+    .history-section { background: var(--color-bg-subtle); padding: 100px 48px }
+    .history-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start }
+    .history-visual { position: relative }
+    .history-visual img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; filter: grayscale(15%) contrast(1.1) }
+    .history-visual-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; filter: grayscale(15%) contrast(1.1) }
+    .history-visual-wrap { position: relative }
+    .history-visual-badge { position: absolute; bottom: -20px; left: -20px; background: var(--color-accent); color: var(--color-bg-base); padding: 24px 28px; font-family: var(--font-display); font-size: 48px; line-height: 1; text-align: center }
+    .history-visual-badge small { display: block; font-family: var(--font-body); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(0, 0, 0, .55); font-weight: 600; margin-top: 4px }
+    .history-p { font-size: 16px; line-height: 1.8; color: rgba(255, 255, 255, .7); margin-bottom: 24px }
+    .history-p strong { color: var(--color-accent) }
+    .history-p--mt { margin-top: var(--space-md) }
+    .tv-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 32px }
+    .tv-item:last-child:nth-child(odd) { grid-column: 1 / -1 }
+    .tv-item { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: rgba(255, 230, 0, .05); border: 1px solid rgba(255, 230, 0, .1); border-left: 3px solid var(--color-accent); transition: all .2s }
+    .tv-item:hover { background: rgba(255, 230, 0, .1); border-color: rgba(255, 230, 0, .3); border-left-color: var(--color-accent) }
+    .tv-dot { display: none }
+    .tv-name { font-size: 14px; font-weight: 600; color: var(--color-text-primary); line-height: 1.3 }
+    .tv-channel { font-size: 11px; color: var(--color-text-muted); letter-spacing: 1px }
+ 
+    /* WHY */
+    .why-scroll-hint { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 16px }
+    .why-scroll-hint svg { stroke: var(--color-text-muted) }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px }
+    .wcard { background: var(--color-surface); padding: 40px; position: relative; overflow: hidden; transition: all .35s }
+    .wcard:last-child:nth-child(3n+1) { grid-column: 1 / -1 }
+    .wcard:last-child:nth-child(3n+2) { grid-column: span 2 }
+    .wcard:hover { background: var(--color-bg-raised); transform: translateY(-8px) }
+    .wcard-num { font-family: var(--font-display); font-size: 88px; color: rgba(255, 230, 0, .06); position: absolute; top: -10px; right: 10px; line-height: 1; transition: color .3s }
+    .wcard:hover .wcard-num { color: rgba(255, 230, 0, .12) }
+    .wcard-line { width: 0; height: 3px; background: var(--color-accent); transition: width .4s ease; margin-bottom: 32px }
+    .wcard:hover .wcard-line { width: 100% }
+    .wcard-icon { width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 230, 0, .2); margin-bottom: 24px; transition: all .3s; background: rgba(255, 230, 0, .06); color: #141414 }
+    .wcard:hover .wcard-icon { background: var(--color-accent); border-color: var(--color-accent) }
+    .wcard:hover .wcard-icon svg { stroke: var(--color-bg-base) }
+    .wcard-icon svg { stroke: var(--color-accent); transition: stroke .3s }
+    .wcard-t { font-family: var(--font-heading); font-size: 18px; font-weight: 700; margin-bottom: 14px; line-height: 1.3 }
+    .wcard-p { font-size: 14px; color: var(--color-text-muted); line-height: 1.7 }
+ 
+    /* ТРЕНЕР */
+    .trainer-section { background: var(--color-bg-subtle); overflow: hidden }
+    .trainer-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 90vh }
+    .trainer-left { position: relative; overflow: hidden }
+    .trainer-left img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(10%) contrast(1.1) }
+    .trainer-left::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(17, 17, 17, .9) 0%, transparent 50%) }
+    .trainer-left-bottom { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px; z-index: 2 }
+    .tl-name { font-family: var(--font-display); font-size: clamp(36px, 4vw, 56px); line-height: .95; color: var(--color-text-primary) }
+    .tl-name .y { color: var(--color-accent) }
+    .tl-role { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255, 255, 255, .5); margin-top: 8px }
+    .trainer-right { padding: 64px 56px; display: flex; flex-direction: column; justify-content: center }
+    .trainer-pills { display: flex; gap: 4px; margin-bottom: 48px }
+    .tpill { flex: 1; background: var(--color-accent); color: var(--color-bg-base); padding: 16px 20px; text-align: center; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%) }
+    .tpill span { display: block; font-family: var(--font-display); font-size: 40px; line-height: 1 }
+    .tpill small { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(0, 0, 0, .55); line-height: 1.3; display: block; margin-top: 4px }
+    .ach-list { margin-bottom: 40px }
+    .ach-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent); font-weight: 600; margin-bottom: 16px }
+    .ach-item { display: flex; gap: 14px; align-items: flex-start; padding: 12px 14px; border-left: 2px solid transparent; background: rgba(255, 230, 0, .03); margin-bottom: 6px; transition: all .2s }
+    .ach-item:hover { border-left-color: var(--color-accent); background: rgba(255, 230, 0, .07); padding-left: 18px }
+    .ach-dot { width: 6px; height: 6px; background: var(--color-accent); border-radius: 50%; margin-top: 7px; flex-shrink: 0 }
+    .ach-item p { font-size: 14px; color: rgba(255, 255, 255, .7); line-height: 1.6 }
+    .team-wrap { margin-top: 32px }
+    .team-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px }
+    .ttag { border: 1px solid rgba(255, 230, 0, .25); padding: 8px 18px; font-size: 12px; font-weight: 600; color: var(--color-accent); letter-spacing: 1px; transition: all .2s; background: rgba(255, 230, 0, .05) }
+    .ttag:hover { background: var(--color-accent); color: var(--color-bg-base) }
+ 
+    /* FREE */
+    .free { position: relative; overflow: hidden; min-height: 500px; display: flex; align-items: center }
+    .free img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(20%) brightness(.4) }
+    .free-inner { position: relative; z-index: 2; padding: 80px 48px; width: 100% }
+    .free-label { display: inline-flex; align-items: center; gap: 10px; background: var(--color-accent); color: var(--color-bg-base); padding: 8px 20px; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 28px }
+    .free-title { font-family: var(--font-display); font-size: clamp(44px, 9vw, 140px); line-height: .92; color: var(--color-text-primary); margin-bottom: 36px; word-break: keep-all; overflow-wrap: normal }
+    .free-title .y { color: var(--color-accent) }
+    .free-row { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap }
+    .free-desc { font-size: 17px; line-height: 1.7; color: rgba(255, 255, 255, .75); max-width: 520px }
+    .free-phone { font-family: var(--font-heading); font-size: 28px; font-weight: 700; color: var(--color-accent); text-decoration: none; letter-spacing: 1px; transition: text-shadow .2s; white-space: nowrap }
+    .free-phone:hover { text-shadow: 0 0 30px rgba(255, 230, 0, .6) }
+ 
+    /* ГАЛЕРЕЯ */
+    .gallery-section-header { background: var(--color-bg-base); padding: 60px 48px 20px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px }
+    .gallery-header-h2 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); line-height: .95; color: var(--color-text-primary) }
+    .gallery-header-h2 span { color: var(--color-accent) }
+    .gallery-sec-label { margin-bottom: 12px }
+    .gallery-view-all { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent); text-decoration: none; border-bottom: 1px solid rgba(255, 230, 0, .3); padding-bottom: 2px; white-space: nowrap; transition: border-color .2s; cursor: pointer; background: none; border-left: none; border-right: none; border-top: none; font-family: var(--font-body) }
+    .gallery-view-all:hover { border-bottom-color: var(--color-accent) }
+    .gallery-strip { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 300px 300px; gap: 4px; background: var(--color-bg-base); padding: 6px }
+    .gitem { overflow: hidden; position: relative; cursor: none }
+    .gitem:first-child { grid-row: span 2 }
+    .gitem img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s, filter .4s; filter: grayscale(25%) contrast(1.1) }
+    .gitem:hover img { transform: scale(1.08); filter: grayscale(0%) }
+    .gitem-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 0, 0, .7) 0%, transparent 60%); opacity: 0; transition: opacity .3s }
+    .gitem:hover .gitem-overlay { opacity: 1 }
+ 
+    /* LIGHTBOX */
+    .lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, .95); z-index: 9000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(8px) }
+    .lightbox.open { display: flex }
+    .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh }
+    .lightbox-inner img { max-width: 90vw; max-height: 85vh; object-fit: contain; display: block }
+    .lb-close { position: fixed; top: 24px; right: 24px; background: rgba(255, 230, 0, .15); border: 1.5px solid rgba(255, 230, 0, .3); color: var(--color-accent); width: 44px; height: 44px; border-radius: 50%; font-size: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s }
+    .lb-close:hover { background: var(--color-accent); color: var(--color-bg-base) }
+    .lb-arrow { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255, 230, 0, .15); border: 1.5px solid rgba(255, 230, 0, .3); color: var(--color-accent); width: 48px; height: 48px; border-radius: 50%; font-size: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s }
+    .lb-arrow:hover { background: var(--color-accent); color: var(--color-bg-base) }
+    .lb-prev { left: 20px }
+    .lb-next { right: 20px }
+    .lb-counter { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); font-size: 12px; font-weight: 600; letter-spacing: 3px; color: rgba(255, 255, 255, .5) }
+ 
+    /* SPLIT */
+    .split { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; background: var(--color-bg-base) }
+    .split-img { position: relative; overflow: hidden }
+    .split-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s; filter: grayscale(15%) contrast(1.1) }
+    .split:hover .split-img img { transform: scale(1.04) }
+    .split-content { background: var(--color-accent); padding: 80px 64px; display: flex; flex-direction: column; justify-content: center }
+    .split-content * { color: var(--color-bg-base) !important }
+    .split-content .sec-label::before { background: rgba(0, 0, 0, .3) }
+    .split-content .sec-label { color: rgba(0, 0, 0, .5) }
+    .split-content .sec-title { margin-bottom: 24px }
+    .split-sec-title { font-size: clamp(40px, 5vw, 72px); margin-bottom: var(--space-md) }
+    .split-desc { font-size: var(--fs-large); line-height: 1.75; max-width: 400px }
+    .split-cta { margin-top: 32px }
+ 
+    /* КОНТАКТЫ */
+    .contact-section { background: var(--color-bg-base) }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 }
+    .contact-left { background: var(--color-accent); padding: 80px 64px; display: flex; flex-direction: column; justify-content: space-between }
+    .contact-left h2 { font-family: var(--font-display); font-size: clamp(40px, 4.5vw, 64px); color: var(--color-bg-base); line-height: .92 }
+    .contact-details { margin-top: 40px }
+    .cd-item { margin-bottom: 28px }
+    .cd-item strong { display: block; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(0, 0, 0, .45); font-weight: 600; margin-bottom: 6px }
+    .cd-item a, .cd-val { font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: var(--color-bg-base); text-decoration: none; line-height: 1.3; display: block }
+    .cd-sub { font-size: 13px; color: rgba(0, 0, 0, .5); margin-top: 3px }
+    .contact-right { background: var(--color-bg-subtle); padding: 80px 64px; display: flex; flex-direction: column; justify-content: center }
+    .form-head { font-family: var(--font-display); font-size: 52px; color: var(--color-text-primary); margin-bottom: 8px; line-height: .95 }
+    .form-head .y { color: var(--color-accent) }
+    .form-sub { font-size: 14px; color: var(--color-text-muted); margin-bottom: 40px; line-height: 1.6 }
+    .fgrp { margin-bottom: 16px }
+    .fgrp label { display: block; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--color-text-muted); font-weight: 600; margin-bottom: 8px }
+    .finput { width: 100%; background: var(--color-surface); border: 1px solid rgba(255, 255, 255, .06); color: var(--color-text-primary); padding: 16px 20px; font-size: 15px; font-family: var(--font-body); outline: none; transition: all .2s; -webkit-appearance: none }
+    .finput:focus { border-color: var(--color-accent); background: var(--color-surface-high); box-shadow: 0 0 0 3px rgba(255, 230, 0, .08) }
+    .finput::placeholder { color: rgba(255, 255, 255, .2) }
+    .privacy-row { display: flex; align-items: flex-start; gap: 12px; margin: 20px 0; cursor: pointer }
+    .privacy-row input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--color-accent); flex-shrink: 0; cursor: pointer; margin-top: 2px }
+    .privacy-row span { font-size: 12px; color: var(--color-text-muted); line-height: 1.6 }
+    .privacy-row a { color: var(--color-accent); text-decoration: underline }
+    .fsubmit { width: 100%; background: var(--color-accent); color: var(--color-bg-base); border: none; padding: 18px; font-family: var(--font-heading); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all .25s; clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%); position: relative; overflow: hidden }
+    .fsubmit::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, .1); transform: translateX(-100%); transition: transform .3s }
+    .fsubmit:hover::after { transform: translateX(0) }
+    .fsubmit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 230, 0, .3) }
+    .form-ok { display: none; text-align: center; padding: 48px 0 }
+    .form-ok-icon { font-family: var(--font-display); font-size: 80px; color: var(--color-accent); display: block }
+    .form-ok p { color: var(--color-text-muted); font-size: 15px; margin-top: 8px }
+ 
+    /* КАРТА */
+    .map-wrap { display: block; min-height: 500px; position: relative }
+    .map-bg { position: relative; overflow: hidden; height: 500px }
+    .map-bg iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block }
+    .map-bg::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(255, 230, 0, .04) 0%, transparent 70%) }
+ 
+    /* ФУТЕР */
+    footer { background: var(--color-bg-subtle); border-top: 1px solid rgba(255, 230, 0, .08); padding: var(--space-lg) 48px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: var(--space-md) }
+    .flogo { font-family: var(--font-display); font-size: 28px; letter-spacing: 5px; color: var(--color-accent); line-height: 1 }
+    .flogo-slogan { font-family: var(--font-body); font-size: 10px; letter-spacing: 2px; color: var(--color-text-muted); text-transform: uppercase; margin-top: 3px }
+    .fcopy { font-size: 12px; color: var(--color-text-muted); text-align: center; line-height: 1.6 }
+    .fphone { font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: var(--color-accent); text-decoration: none; letter-spacing: 1px }
+    .footer-center { text-align: center }
+    .footer-right { text-align: right }
+    .footer-legal-block { margin-top: var(--space-sm); display: flex; flex-direction: column; gap: 6px }
+    .footer-legal-block a { font-size: 11px; color: var(--color-text-muted); text-decoration: none; letter-spacing: 1px; transition: color .2s; border-bottom: 1px solid rgba(255, 230, 0, .15); padding-bottom: 1px; display: inline-block }
+    .footer-legal-block a:hover { color: var(--color-accent); border-bottom-color: var(--color-accent) }
+    .footer-requisites { font-size: 11px; color: var(--color-text-muted); line-height: 1.7; margin-top: 4px }
+    .footer-requisites--mt { margin-top: var(--space-xs) }
+    .footer-email { color: var(--color-text-muted); text-decoration: none; font-size: 12px; display: block; margin-top: var(--space-xs); transition: color .2s }
+    .footer-email:hover { color: var(--color-accent) }
+ 
+    /* SCROLL TOP */
+    .scroll-top { position: fixed; bottom: 40px; right: 40px; width: 48px; height: 48px; background: var(--color-accent); display: flex; align-items: center; justify-content: center; z-index: 999; opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%) }
+    .scroll-top.visible { opacity: 1; pointer-events: auto }
+    .scroll-top:hover { transform: translateY(-4px) }
+    .scroll-top svg { stroke: var(--color-bg-base) }
+ 
+    /* REVEAL */
+    .rv { opacity: 0; transform: translateY(36px); transition: all .7s cubic-bezier(.25, .46, .45, .94) }
+    .rvl { opacity: 0; transform: translateX(-36px); transition: all .7s cubic-bezier(.25, .46, .45, .94) }
+    .rvr { opacity: 0; transform: translateX(36px); transition: all .7s cubic-bezier(.25, .46, .45, .94) }
+    .rv.on, .rvl.on, .rvr.on { opacity: 1; transform: none }
+    .rv--d1 { transition-delay: .1s }
+    .rv--d2 { transition-delay: .15s }
+    .rv--d3 { transition-delay: .2s }
+    .rv--d4 { transition-delay: .25s }
+    .rv--d5 { transition-delay: .3s }
+ 
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px) } to { opacity: 1; transform: none } }
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+    @keyframes scrollBounce { 0%, 100% { transform: translateY(-4px); opacity: 0.4 } 50% { transform: translateY(4px); opacity: 1 } }
+    @keyframes mqs { 0% { transform: translateX(0) } 100% { transform: translateX(-50%) } }
+ 
+    /* TOUCH DEVICES */
+    @media (hover: none) and (pointer: coarse) {
+      body { cursor: auto }
+      #cur, #cur2 { display: none !important }
+      a, button { cursor: pointer }
+    }
+ 
+    /* ═══ 1280px ═══ */
+    @media (max-width: 1280px) {
+      nav { padding: 18px 40px }
+      .hero-left { padding: 0 40px 64px }
+      .hero-tag { left: 40px }
+      .hphone-ghost { right: 40px }
+      .section { padding: 80px 40px }
+      .history-section { padding: 80px 40px }
+      .free-inner { padding: 80px 40px }
+      .gallery-section-header { padding: 60px 40px 20px }
+      footer { padding: var(--space-lg) 40px }
+      .contact-left { padding: 80px 48px }
+      .contact-right { padding: 80px 48px }
+    }
+ 
+    /* ═══ 1024px ═══ */
+    @media (max-width: 1024px) {
+      nav { padding: 16px 32px }
+      .navl { gap: 20px }
+      .hero-left { padding: 0 32px 56px }
+      .hero-tag { left: 32px }
+      .hphone-ghost { right: 32px; font-size: 18px }
+      .htitle { font-size: clamp(64px, 10vw, 120px) }
+      .section { padding: 72px 32px }
+      .history-section { padding: 72px 32px }
+      .history-inner { gap: 48px }
+      .bento { grid-template-columns: 1fr 1fr }
+      .b-cell.tall { grid-row: span 1 }
+      .b-desc.wide.b-dark { grid-column: 1 / -1 }
+      .b-tag-box { padding: 28px }
+      .b-text { padding: 28px }
+      .b-desc { padding: 28px }
+      .why-grid { grid-template-columns: 1fr 1fr }
+      .wcard:last-child:nth-child(3n+1) { grid-column: 1 / -1 }
+      .wcard:last-child:nth-child(3n+2) { grid-column: span 1 }
+      .trainer-right { padding: 48px 36px }
+      .split-content { padding: 60px 48px }
+      .contact-left { padding: 60px 40px }
+      .contact-right { padding: 60px 40px }
+      footer { padding: var(--space-lg) 32px }
+      .free-inner { padding: 72px 32px }
+      .gallery-section-header { padding: 48px 32px 16px }
+    }
+ 
+    /* ═══ 768px ═══ */
+    @media (max-width: 768px) {
+      nav { padding: 12px 16px; padding-top: max(12px, env(safe-area-inset-top)) }
+      .navl, .nav-btn { display: none }
+      .burger { display: flex }
+      .navr { gap: 8px }
+ 
+      .hero { display: block; min-height: 100dvh; position: relative; padding-top: 0 }
+      .hero-left { padding: 24px 16px 40px; gap: 8px; position: absolute; bottom: 0; left: 0; right: 0; justify-content: flex-end; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 60%, transparent 100%) }
+      .hero-tag { position: relative; top: auto; left: auto; margin-bottom: 8px }
+      .hero-right { display: block; position: absolute; inset: 0 }
+      .hero-scroll { display: none }
+      .hphone-ghost { position: relative; bottom: auto; right: auto; font-size: 15px; text-align: center; width: 100%; display: block; margin-top: 8px }
+      .htitle { font-size: clamp(52px, 14vw, 80px); letter-spacing: 0; line-height: .9; margin-bottom: 16px }
+      .hslogan { font-size: 10px; letter-spacing: 2px; white-space: normal; margin-bottom: 8px }
+      .hdesc { font-size: 14px; max-width: 100%; line-height: 1.55; margin-bottom: 20px }
+      .hbtns { width: 100%; gap: 12px }
+      .btn-y { clip-path: none; border-radius: 3px; width: 100%; justify-content: center; padding: 16px 20px }
+ 
+      .mq-item { font-size: 22px; padding: 0 20px; gap: 20px }
+ 
+      .bento { display: flex; flex-direction: column; gap: 3px }
+      .b-cell { width: 100% }
+      .b-cell.tall { min-height: 200px }
+      .b-cell--tall-min { min-height: 220px }
+      .b-cell--mid-min { min-height: 180px }
+      .b-tag-box { padding: 16px }
+      .b-text { padding: 16px }
+      .b-desc { padding: 16px }
+      .b-num { font-size: clamp(44px, 14vw, 72px) }
+      .b-chip { font-size: 9px; padding: 5px 10px }
+ 
+      .sec-title { font-size: clamp(40px, 12vw, 64px); line-height: .93; margin-bottom: 32px }
+      .sec-label { font-size: 9px; margin-bottom: 12px }
+      .section { padding: 40px 16px }
+      .section--dark-bg { padding-top: 40px }
+ 
+      .history-section { padding: 40px 16px }
+      .history-inner { grid-template-columns: 1fr; gap: 20px }
+      .history-p { font-size: 14px }
+      .tv-list { grid-template-columns: 1fr; gap: 4px }
+      .tv-name { font-size: 13px }
+      .tv-item { padding: 10px 12px }
+ 
+      .why-grid { grid-template-columns: 1fr; gap: 4px }
+      .wcard { padding: 20px 16px }
+      .wcard:last-child:nth-child(3n+1), .wcard:last-child:nth-child(3n+2) { grid-column: 1 }
+      .wcard-num { font-size: 44px }
+      .why-scroll-hint { display: none }
+ 
+      .trainer-grid { grid-template-columns: 1fr }
+      .trainer-left { min-height: 300px }
+      .trainer-right { padding: 24px 16px }
+      .tl-name { font-size: clamp(28px, 10vw, 48px) }
+      .trainer-pills { flex-wrap: wrap; gap: 6px; margin-bottom: 28px }
+      .tpill { clip-path: none; border-radius: 2px; padding: 10px 14px }
+      .tpill span { font-size: 28px }
+      .ach-item { padding: 8px 12px }
+      .ach-item p { font-size: 13px }
+ 
+      .split { display: flex; flex-direction: column }
+      .split-img { min-height: 220px; order: -1 }
+      .split-content { padding: 28px 16px }
+ 
+      .free-inner { padding: 40px 16px }
+      .free-title { font-size: clamp(36px, 11vw, 56px); line-height: .93 }
+      .free-row { flex-direction: column; align-items: flex-start; gap: 20px }
+      .free-phone { font-size: 22px }
+      .free-desc { font-size: 15px; max-width: 100% }
+ 
+      .gallery-section-header { padding: 28px 16px 10px; flex-wrap: wrap; gap: 10px }
+      .gallery-strip { grid-template-columns: 1fr 1fr; grid-template-rows: 140px 140px 140px; gap: 2px }
+      .gitem:first-child { grid-row: span 1; grid-column: span 2 }
+ 
+      .lb-arrow { width: 36px; height: 36px; font-size: 14px }
+      .lb-prev { left: 4px }
+      .lb-next { right: 4px }
+      .lb-close { top: 10px; right: 10px; width: 36px; height: 36px }
+ 
+      .contact-grid { grid-template-columns: 1fr }
+      .contact-left { padding: 32px 16px }
+      .contact-right { padding: 32px 16px }
+      .finput { font-size: 16px; padding: 14px 16px }
+ 
+      footer { grid-template-columns: 1fr; text-align: center; gap: 20px; padding: 28px 16px }
+      .footer-right { text-align: center }
+      .footer-legal-block { align-items: center }
+ 
+      .scroll-top { bottom: 20px; right: 16px; width: 44px; height: 44px }
+      #cur, #cur2 { display: none }
+    }
+ 
+    /* ═══ 414px ═══ */
+    @media (max-width: 414px) {
+      nav { padding: 12px 14px; padding-top: max(12px, env(safe-area-inset-top)) }
+      .logo-img { width: 44px }
+      .logo-text { font-size: 18px }
+      .hero-left { padding: 76px 14px 28px }
+      .htitle { font-size: clamp(44px, 13vw, 64px) }
+      .hdesc { font-size: 13px }
+      .bento { gap: 2px }
+      .b-tag-box { padding: 14px }
+      .b-text { padding: 14px }
+      .b-desc { padding: 14px }
+      .b-num { font-size: clamp(40px, 13vw, 60px) }
+      .section { padding: 32px 14px }
+      .history-section { padding: 32px 14px }
+      .wcard { padding: 16px }
+      .wcard-icon { width: 44px; height: 44px }
+      .wcard-t { font-size: 16px }
+      .trainer-left { min-height: 260px }
+      .trainer-right { padding: 20px 14px }
+      .split-content { padding: 24px 14px }
+      .free-inner { padding: 32px 14px }
+      .free-title { font-size: clamp(32px, 12vw, 48px) }
+      .gallery-strip { grid-template-rows: 120px 120px 120px }
+      .contact-left { padding: 28px 14px }
+      .contact-right { padding: 28px 14px }
+      .fsubmit { clip-path: none; border-radius: 3px }
+      footer { padding: 24px 14px }
+    }
+ 
+    /* ═══ 375px ═══ */
+    @media (max-width: 375px) {
+      .htitle { font-size: clamp(40px, 12.5vw, 56px) }
+      .logo-text { font-size: 16px; letter-spacing: 2px }
+      .logo-img { width: 40px }
+      .mq-item { font-size: 18px; padding: 0 14px; gap: 14px }
+      .free-title { font-size: clamp(30px, 11.5vw, 44px) }
+      .b-tagline { font-size: clamp(28px, 9vw, 40px) }
+      .gallery-strip { grid-template-rows: 110px 110px 110px }
+      .trainer-pills { gap: 4px }
+      .tpill { padding: 8px 10px }
+      .tpill span { font-size: 24px }
+    }
+ 
+    /* ═══ 360px ═══ */
+    @media (max-width: 360px) {
+      .htitle { font-size: clamp(38px, 12vw, 52px) }
+      .logo-text { font-size: 15px; letter-spacing: 2px }
+      .logo-img { width: 36px; margin-right: 8px }
+      .hero-left { padding: 72px 12px 24px }
+      .section { padding: 28px 12px }
+      .history-section { padding: 28px 12px }
+      .contact-left { padding: 24px 12px }
+      .contact-right { padding: 24px 12px }
+      .free-inner { padding: 28px 12px }
+      footer { padding: 20px 12px }
+      .gallery-strip { grid-template-rows: 100px 100px 100px }
+      .wcard { padding: 14px }
+      .b-tag-box, .b-text, .b-desc { padding: 12px }
+    }
+ 
+    /* ═══ 320px ═══ */
+    @media (max-width: 320px) {
+      .htitle { font-size: clamp(34px, 11.5vw, 46px) }
+      .logo-text { display: none }
+      .logo-img { width: 36px; margin-right: 0 }
+      .hero-left { padding: 68px 10px 20px }
+      .section { padding: 24px 10px }
+      .history-section { padding: 24px 10px }
+      .free-inner { padding: 24px 10px }
+      .contact-left { padding: 20px 10px }
+      .contact-right { padding: 20px 10px }
+      footer { padding: 18px 10px }
+      .b-tag-box, .b-text, .b-desc { padding: 10px }
+      .wcard { padding: 12px }
+      .wcard-t { font-size: 15px }
+      .gallery-strip { grid-template-rows: 90px 90px 90px }
+      .free-title { font-size: clamp(28px, 11vw, 40px) }
+      .split-content { padding: 20px 10px }
+      .trainer-right { padding: 16px 10px }
+      .tpill span { font-size: 20px }
+    }
+ 
+    /* ═══ Desktop overrides ═══ */
+    @media (min-width: 769px) {
+      .navl { display: flex !important; align-items: center }
+      .navr { display: flex; align-items: center; gap: 20px }
+      .nav-btn { display: inline-flex !important; align-items: center }
+      .logo { display: flex !important; align-items: center; opacity: 1 !important; visibility: visible !important }
+      .logo-text { display: block !important }
+      .burger { display: none !important }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="cur"></div>
+  <div id="cur2"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#home" class="logo">
+      <img src="assets/img/logo.png" alt="Сигнатура" class="logo-img">
+      <span class="logo-text">СИГНАТУРА</span>
+    </a>
+    <div class="navr">
+      <div class="navl">
+        <a href="#about">О школе</a>
+        <a href="#history">История</a>
+        <a href="#trainer">Тренер</a>
+      </div>
+      <a href="#contact" class="nav-btn">Записаться</a>
+      <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-nav-links">
+      <a href="#about" onclick="closeMenu()">О школе</a>
+      <a href="#history" onclick="closeMenu()">История</a>
+      <a href="#trainer" onclick="closeMenu()">Тренер</a>
+      <a href="#contact" onclick="closeMenu()">Записаться</a>
+    </div>
+    <div class="mobile-menu-bottom">
+      <a href="#contact" class="mobile-cta" onclick="closeMenu()">Первое занятие бесплатно</a>
+      <a href="tel:89093942628" class="mobile-phone">8 (909) 394-26-28</a>
+    </div>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <h1 class="htitle">СИГНАТУРА</h1>
+      <p class="hslogan">Твой почерк в танце</p>
+      <p class="hdesc">Там, где <strong>творчество соединяется со спортом</strong>. Брейкинг для детей от 4 лет - сцена, соревнования и настоящий результат.</p>
+      <div class="hbtns">
+        <a href="#contact" class="btn-y">
+          Первое занятие бесплатно
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <img src="assets/img/hero.jpg" alt="Брейкинг">
+    </div>
+
+    <div class="hero-tag">Волгоград · С 2015 года · от 4 лет</div>
+
+    <a href="tel:89093942628" class="hphone-ghost">8 (909) 394-26-28</a>
+
+    <div class="hero-scroll">
+      <div class="scroll-oval">
+        <svg class="scroll-oval-svg" viewBox="0 0 48 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1.5" y="1.5" width="45" height="61" rx="22.5" stroke="rgba(255,230,0,0.5)" stroke-width="1.5"/>
+          <line class="scroll-arrow" x1="24" y1="14" x2="24" y2="42" stroke="#FFE600" stroke-width="1.5" stroke-linecap="round"/>
+          <polyline class="scroll-arrow" points="16,34 24,44 32,34" stroke="#FFE600" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="scroll-label">прокрути</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="mq">
+    <div class="mq-track">
+      <div class="mq-item">Брейкинг <span class="mq-dot"></span></div>
+      <div class="mq-item">Фриз <span class="mq-dot"></span></div>
+      <div class="mq-item">Топрок <span class="mq-dot"></span></div>
+      <div class="mq-item">Фут-ворк <span class="mq-dot"></span></div>
+      <div class="mq-item">Флоурворк <span class="mq-dot"></span></div>
+      <div class="mq-item">Пауэрмув <span class="mq-dot"></span></div>
+      <div class="mq-item">Хип-хоп <span class="mq-dot"></span></div>
+      <div class="mq-item">Эстрада <span class="mq-dot"></span></div>
+      <div class="mq-item">Спорт <span class="mq-dot"></span></div>
+      <div class="mq-item">Сцена <span class="mq-dot"></span></div>
+      <div class="mq-item">Брейкинг <span class="mq-dot"></span></div>
+      <div class="mq-item">Фриз <span class="mq-dot"></span></div>
+      <div class="mq-item">Топрок <span class="mq-dot"></span></div>
+      <div class="mq-item">Фут-ворк <span class="mq-dot"></span></div>
+      <div class="mq-item">Флоурворк <span class="mq-dot"></span></div>
+      <div class="mq-item">Пауэрмув <span class="mq-dot"></span></div>
+      <div class="mq-item">Хип-хоп <span class="mq-dot"></span></div>
+      <div class="mq-item">Эстрада <span class="mq-dot"></span></div>
+      <div class="mq-item">Спорт <span class="mq-dot"></span></div>
+      <div class="mq-item">Сцена <span class="mq-dot"></span></div>
+    </div>
+  </div>
+
+  <!-- ═══ BENTO ABOUT ═══ -->
+  <div class="bento" id="about">
+    <div class="b-cell b-tag-box rv b-cell--tall-min">
+      <div>
+        <div class="b-chip">О школе</div>
+        <div class="b-tagline">ОБРАЗЦОВЫЙ<br>КОЛЛЕКТИВ <span class="y">БРЕЙКИНГА</span></div>
+        <p class="b-sub">Образцовый художественный коллектив на базе КДК «21 ВЕК» Дзержинского района Волгограда. Член Федерации брейкинга Волгоградской области.</p>
+      </div>
+      <div class="b-accent-line"></div>
+    </div>
+
+    <div class="b-cell tall rv b-cell--tall-min rv--d1">
+      <img src="assets/img/02.jpg" alt="Брейкинг дети">
+      <div class="b-accent-line"></div>
+    </div>
+
+    <div class="b-cell b-yellow b-text rv rv--d2">
+      <div class="b-num">10+</div>
+      <div class="b-label">лет тренерского опыта</div>
+      <div class="b-accent-line b-accent-line--dark"></div>
+    </div>
+
+    <div class="b-cell b-text rv rv--d3">
+      <div class="b-num">4+</div>
+      <div class="b-label">возраст с которого принимаем</div>
+      <div class="b-accent-line"></div>
+    </div>
+
+    <div class="b-cell rv b-cell--mid-min rv--d4">
+      <img src="assets/img/03.jpg" alt="Брейкинг тренировка">
+      <div class="b-accent-line"></div>
+    </div>
+
+    <div class="b-cell b-desc wide b-dark rv rv--d5">
+      <p>Мы ведём подготовку как в <strong>спортивном</strong>, так и в <strong>эстрадном</strong> направлении. Наши ученики - призёры соревнований, имеют спортивные разряды и участвуют в конкурсах различного уровня. Три команды: <strong>Just Name Kids, Volt, Аргумент</strong>.</p>
+      <div class="b-accent-line"></div>
+    </div>
+  </div>
+
+  <!-- ═══ ИСТОРИЯ ═══ -->
+  <section class="history-section" id="history">
+    <div class="history-inner">
+      <div class="rvl">
+        <div class="sec-label">История</div>
+        <h2 class="sec-title">С 2015<br><span class="y">ГОДА</span></h2>
+
+        <p class="history-p">Школа «Сигнатура» началась с танцевального шоу <strong>«Just Name»</strong> - трёх танцоров из Дзержинского района Волгограда, которые своим упорством и мастерством покорили не только Россию, но и ближнее зарубежье.</p>
+
+        <p class="history-p">Они стали победителями танцевальных конкурсов и всероссийских фестивалей, а также участниками крупнейших телевизионных проектов страны:</p>
+
+        <div class="tv-list">
+          <div class="tv-item">
+            <div class="tv-dot"></div>
+            <div>
+              <div class="tv-name">Шоу «Минута славы»</div>
+              <div class="tv-channel">Россия 1, Первый канал</div>
+            </div>
+          </div>
+          <div class="tv-item">
+            <div class="tv-dot"></div>
+            <div>
+              <div class="tv-name">Шоу «Украина мае талант»</div>
+              <div class="tv-channel">Канал СТБ, Украина</div>
+            </div>
+          </div>
+          <div class="tv-item">
+            <div class="tv-dot"></div>
+            <div>
+              <div class="tv-name">Шоу «Танцуют все»</div>
+              <div class="tv-channel">Канал СТБ, Украина</div>
+            </div>
+          </div>
+          <div class="tv-item">
+            <div class="tv-dot"></div>
+            <div>
+              <div class="tv-name">Шоу «Танцуй»</div>
+              <div class="tv-channel">МУЗ ТВ (Ю), Россия</div>
+            </div>
+          </div>
+          <div class="tv-item">
+            <div class="tv-dot"></div>
+            <div>
+              <div class="tv-name">Шоу «Большие танцы»</div>
+              <div class="tv-channel">Россия 1</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="history-p history-p--mt">С 2015 года в школу стали набирать молодых ребят, желающих заниматься брейкингом. С тех пор численность только растёт. Сегодня школа представлена несколькими группами - <strong>от 4 лет</strong>.
+        </p>
+      </div>
+
+      <div class="rvr history-visual-wrap">
+        <img src="assets/img/012.jpg" alt="История школы" class="history-visual-img">
+        <div class="history-visual-badge">
+          2015 <small>основана</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ WHY ═══ -->
+  <section class="section section--dark-bg" id="why">
+    <div class="sec-label rv">Для кого</div>
+    <h2 class="sec-title rv">НАЙДИ <span class="y">СЕБЯ</span></h2>
+    <div class="why-grid" id="whyScroll">
+      <div class="wcard">
+        <div class="wcard-num">01</div>
+        <div class="wcard-line"></div>
+        <div class="wcard-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+          </svg>
+        </div>
+        <div class="wcard-t">Хочешь стать сильным</div>
+        <p class="wcard-p">Брейкинг развивает силу, гибкость и выносливость. Занятия подойдут тем, кто хочет крепкое тело и уверенность в движениях - без скучных тренажёров.</p>
+      </div>
+      <div class="wcard">
+        <div class="wcard-num">02</div>
+        <div class="wcard-line"></div>
+        <div class="wcard-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+        </div>
+        <div class="wcard-t">Любишь сцену</div>
+        <p class="wcard-p">Выступления, зрители, яркие постановки. Если тебе нравится танец и аплодисменты - ты наш. Школа участвует в конкурсах и фестивалях разных уровней.</p>
+      </div>
+      <div class="wcard">
+        <div class="wcard-num">03</div>
+        <div class="wcard-line"></div>
+        <div class="wcard-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <circle cx="12" cy="8" r="6" />
+            <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
+          </svg>
+        </div>
+        <div class="wcard-t">Хочешь побеждать</div>
+        <p class="wcard-p">Школа - член Федерации брейкинга Волгоградской области. Ученики участвуют в спортивных соревнованиях, получают разряды и занимают призовые места.</p>
+      </div>
+      <div class="wcard">
+        <div class="wcard-num">04</div>
+        <div class="wcard-line"></div>
+        <div class="wcard-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+        </div>
+        <div class="wcard-t">Работаешь в команде</div>
+        <p class="wcard-p">Брейкинг - это и соло, и командный вид. Три группы разного уровня: Just Name Kids, Volt, Аргумент. Найди своих людей и расти вместе с ними.</p>
+      </div>
+      <div class="wcard">
+        <div class="wcard-num">05</div>
+        <div class="wcard-line"></div>
+        <div class="wcard-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+        </div>
+        <div class="wcard-t">Начинаешь с нуля</div>
+        <p class="wcard-p">Никакого опыта не нужно. Принимаем с 4 лет - мальчиков и девочек. Каждый найдёт свой уровень и своё место в коллективе.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FREE LESSON ═══ -->
+  <div class="free">
+    <img src="assets/img/04.jpg" alt="Брейкинг выступление">
+    <div class="free-inner">
+      <div class="free-label">Специальное предложение</div>
+      <h2 class="free-title rv">ПЕРВОЕ<br>ЗАНЯТИЕ<br><span class="y">БЕСПЛАТНО</span></h2>
+      <div class="free-row rv">
+        <p class="free-desc">Трудолюбивым, ответственным, целеустремлённым - тем, кто умеет работать в команде. Если хочешь таким же - приходи.</p>
+        <a href="tel:89093942628" class="free-phone">8 (909) 394-26-28</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ GALLERY ═══ -->
+  <div id="gallery">
+    <div class="gallery-section-header">
+      <div>
+        <div class="sec-label gallery-sec-label">Наши фото</div>
+        <h2 class="gallery-header-h2">ГАЛЕРЕЯ <span>ШКОЛЫ</span></h2>
+      </div>
+      <button class="gallery-view-all" onclick="openLightbox(0)">Смотреть все →</button>
+    </div>
+    <div class="gallery-strip">
+      <div class="gitem" onclick="openLightbox(0)">
+        <img src="assets/img/05.jpg" alt="Выступление">
+        <div class="gitem-overlay"></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(1)">
+        <img src="assets/img/06.jpg" alt="Брейкинг">
+        <div class="gitem-overlay"></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(2)">
+        <img src="assets/img/07.jpg" alt="Сцена">
+        <div class="gitem-overlay"></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(3)">
+        <img src="assets/img/08.jpg" alt="Тренировка">
+        <div class="gitem-overlay"></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(4)">
+        <img src="assets/img/09.jpg" alt="Команда">
+        <div class="gitem-overlay"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+    <div class="lightbox-inner">
+      <img id="lbImg" src="" alt="">
+    </div>
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+    <button class="lb-arrow lb-prev" onclick="lbMove(-1)">←</button>
+    <button class="lb-arrow lb-next" onclick="lbMove(1)">→</button>
+    <div class="lb-counter" id="lbCounter"></div>
+  </div>
+
+  <!-- ═══ TRAINER ═══ -->
+  <section class="trainer-section" id="trainer">
+    <div class="trainer-grid">
+      <div class="trainer-left rvl">
+        <img src="assets/img/010.jpg" alt="Константин Петренко">
+        <div class="trainer-left-bottom">
+          <div class="tl-name">ПЕТРЕНКО<br><span class="y">КОНСТАНТИН</span></div>
+          <div class="tl-role">Тренер · Руководитель школы «Сигнатура»</div>
+        </div>
+      </div>
+      <div class="trainer-right rvr">
+        <div class="trainer-pills">
+          <div class="tpill"><span>21</span><small>год танце-<br>вального<br>опыта</small></div>
+          <div class="tpill"><span>10</span><small>лет трене-<br>рской<br>практики</small></div>
+          <div class="tpill"><span>5+</span><small>телешоу<br>на фед.<br>каналах</small></div>
+        </div>
+        <div class="ach-list">
+          <div class="ach-title">Достижения и опыт</div>
+          <div class="ach-item">
+            <div class="ach-dot"></div>
+            <p>Профессиональная переподготовка в ВГАФК по направлению «тренер»</p>
+          </div>
+          <div class="ach-item">
+            <div class="ach-dot"></div>
+            <p>Участник федеральных телепроектов: «Большие танцы» (Россия 1), «Минута славы» (Первый), «Украина мае
+              талант», «Танцуют все» (СТБ), «Танцуй» (МУЗ ТВ)</p>
+          </div>
+          <div class="ach-item">
+            <div class="ach-dot"></div>
+            <p>Призёр соревнований по брейкингу городского, областного и всероссийского уровней</p>
+          </div>
+          <div class="ach-item">
+            <div class="ach-dot"></div>
+            <p>Организатор Межрегионального фестиваля по брейкингу «Right Now» (2017, 2018, 2019, 2023, 2024, 2025,
+              2026)</p>
+          </div>
+          <div class="ach-item">
+            <div class="ach-dot"></div>
+            <p>Организатор и ведущий мастер-классов в школах и студиях города и области</p>
+          </div>
+          <div class="ach-item">
+            <div class="ach-dot"></div>
+            <p>Почётные грамоты и благодарственные письма Волгоградской городской и областной думы</p>
+          </div>
+        </div>
+        <div class="team-wrap">
+          <div class="ach-title">Команды школы</div>
+          <div class="team-tags">
+            <span class="ttag">Just Name Kids</span>
+            <span class="ttag">Volt</span>
+            <span class="ttag">Аргумент</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SPLIT - философия ═══ -->
+  <div class="split">
+    <div class="split-img">
+      <img src="assets/img/011.jpg" alt="Тренировка">
+    </div>
+    <div class="split-content">
+      <div class="sec-label rv">Наша философия</div>
+      <h2 class="sec-title split-sec-title rv">ТВОЙ<br>ПОЧЕРК<br>В ТАНЦЕ</h2>
+      <p class="rv split-desc">В нашей школе каждый найдёт себя и дойдёт до результата, который хочет получить. Брейкинг здесь - и индивидуальный, и командный. Мы постоянные участники соревнований и мероприятий города и области.</p>
+      <div class="rv split-cta">
+        <a href="#contact" class="btn-y btn-y--inline">
+          Прийти на занятие
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section class="contact-section" id="contact">
+    <div class="contact-grid">
+      <div class="contact-left rvl">
+        <h2>ЗАПИШИСЬ<br>НА ПРОБНОЕ<br>ЗАНЯТИЕ</h2>
+        <div class="contact-details">
+          <div class="cd-item">
+            <strong>Телефон</strong>
+            <a href="tel:89093942628" class="cd-val">8 (909) 394-26-28</a>
+            <span class="cd-sub">Константин Евгеньевич - тренер и руководитель</span>
+          </div>
+          <div class="cd-item">
+            <strong>Адрес</strong>
+            <span class="cd-val">ул. Савкина, д. 8</span>
+            <span class="cd-sub">КДК «21 ВЕК», Дзержинский район, Волгоград</span>
+          </div>
+          <div class="cd-item">
+            <strong>Первое занятие</strong>
+            <span class="cd-val">Бесплатно</span>
+            <span class="cd-sub">Для всех желающих - мальчиков и девочек от 4 лет</span>
+          </div>
+        </div>
+      </div>
+      <div class="contact-right rvr">
+        <div class="form-head">ОСТАВЬ<br><span class="y">ЗАЯВКУ</span></div>
+        <p class="form-sub">Мы перезвоним и расскажем всё о занятиях и расписании</p>
+        <form id="frm">
+          <div class="fgrp">
+            <label for="fname">Имя ребёнка</label>
+            <input type="text" id="fname" class="finput" placeholder="Александр" required>
+          </div>
+          <div class="fgrp">
+            <label for="fphone">Ваш номер телефона</label>
+            <input type="tel" id="fphone" class="finput" placeholder="+7 (___) ___-__-__" required>
+          </div>
+          <label class="privacy-row" for="privacy">
+            <input type="checkbox" id="privacy" required>
+            <span>Я согласен(а) на обработку персональных данных в соответствии с <a
+                href="/privacy-policy.html">политикой конфиденциальности</a></span>
+          </label>
+          <button type="submit" class="fsubmit">Записаться на бесплатное занятие →</button>
+        </form>
+        <div class="form-ok" id="fok">
+          <span class="form-ok-icon">✓</span>
+          <p>Заявка принята!<br>Константин перезвонит вам в ближайшее время</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <div class="map-wrap">
+    <div class="map-bg">
+      <iframe
+        src="https://yandex.ru/map-widget/v1/?ll=44.489396%2C48.770449&z=16&pt=44.489396%2C48.770449,pm2rdm"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      <div class="flogo">СИГНАТУРА</div>
+      <div class="flogo-slogan">Твой почерк в танце</div>
+      <div class="footer-requisites">
+        ИП Петренко Константин Евгеньевич<br>
+        ИНН: [ИНН заказчика]<br>
+        ОГРНИП: [ОГРНИП заказчика]
+      </div>
+    </div>
+
+    <div class="footer-center">
+      <div class="fcopy">© 2025 Школа брейкинга «Сигнатура»<br>МБУК «КДК «21 ВЕК» Дзержинского района Волгограда<br>Возрастная маркировка: 0+</div>
+      <div class="footer-legal-block">
+        <a href="/privacy-policy.html">Политика конфиденциальности</a>
+        <a href="/oferta.html">Публичная оферта</a>
+        <a href="/consent.html">Согласие на обработку данных</a>
+      </div>
+    </div>
+
+    <div class="footer-right">
+      <a href="tel:89093942628" class="fphone">8 (909) 394-26-28</a>
+      <div class="footer-requisites footer-requisites--mt">
+      <a href="mailto:info@signatura-volgograd.ru" class="footer-email">info@signatura-volgograd.ru</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#home" class="scroll-top" aria-label="Наверх">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </a>
+
+  <script>
+    // Cursor
+    const cur = document.getElementById('cur'), cur2 = document.getElementById('cur2');
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2, rx = mx, ry = my;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px' });
+    (function loop() { rx += (mx - rx) * .13; ry += (my - ry) * .13; cur2.style.left = rx + 'px'; cur2.style.top = ry + 'px'; requestAnimationFrame(loop) })();
+    document.querySelectorAll('a,button,.gitem,.wcard,.b-cell').forEach(el => {
+      el.addEventListener('mouseenter', () => { cur.classList.add('big'); cur2.classList.add('big') });
+      el.addEventListener('mouseleave', () => { cur.classList.remove('big'); cur2.classList.remove('big') });
+    });
+
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    const scrollTopBtn = document.querySelector('.scroll-top');
+    window.addEventListener('scroll', () => {
+      nav.style.background = scrollY > 60 ? 'var(--nav-bg-scrolled)' : 'var(--nav-bg-default)';
+      scrollTopBtn.classList.toggle('visible', scrollY > 400);
+    });
+
+    // Reveal on scroll
+    const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on') }), { threshold: .1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.rv,.rvl,.rvr').forEach(el => obs.observe(el));
+
+    // Form submit
+    document.getElementById('frm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      this.style.display = 'none';
+      document.getElementById('fok').style.display = 'block';
+    });
+
+    // Phone mask
+    document.getElementById('fphone').addEventListener('input', function () {
+      let v = this.value.replace(/\D/g, '');
+      if (v.startsWith('8')) v = '7' + v.slice(1);
+      if (v.startsWith('7')) {
+        let r = '+7';
+        if (v.length > 1) r += ' (' + v.slice(1, 4);
+        if (v.length >= 4) r += ') ' + v.slice(4, 7);
+        if (v.length >= 7) r += '-' + v.slice(7, 9);
+        if (v.length >= 9) r += '-' + v.slice(9, 11);
+        this.value = r;
+      }
+    });
+
+    // Burger menu
+    function toggleMenu() {
+      const burger = document.getElementById('burger');
+      const menu = document.getElementById('mobileMenu');
+      const isOpen = burger.classList.toggle('open');
+      menu.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+    function closeMenu() {
+      document.getElementById('burger').classList.remove('open');
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Lightbox
+    const lbImages = [
+      'assets/img/05.jpg', 'assets/img/06.jpg', 'assets/img/07.jpg', 'assets/img/08.jpg', 'assets/img/09.jpg'
+    ];
+    let lbCurrent = 0;
+    function openLightbox(idx) {
+      lbCurrent = idx;
+      lbShow();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeLightboxOutside(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    }
+    function lbMove(dir) {
+      lbCurrent = (lbCurrent + dir + lbImages.length) % lbImages.length;
+      lbShow();
+    }
+    function lbShow() {
+      document.getElementById('lbImg').src = lbImages[lbCurrent];
+      document.getElementById('lbCounter').textContent = (lbCurrent + 1) + ' / ' + lbImages.length;
+    }
+    document.addEventListener('keydown', e => {
+      const lb = document.getElementById('lightbox');
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lbMove(-1);
+      if (e.key === 'ArrowRight') lbMove(1);
+    });
+  </script>
+</body>
+
+</html>

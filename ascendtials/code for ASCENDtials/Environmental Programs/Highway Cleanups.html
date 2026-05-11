@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highway Cleanups</title>
+
+    <!-- Font Links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Amoret+Sans&display=swap" rel="stylesheet"> 
+
+    <style>
+        @font-face {
+            font-family: 'Amoret Sans', sans-serif;
+            src: url('assets/font/amoret-sans.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            color: #222;
+        }
+        .hero {
+            display: flex;
+            height: 700px;
+            padding: 0 0%;
+            margin: 30px; 
+        }
+        .hero-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .subtitle {
+            font-size: 32px;
+            margin-bottom: 0px;
+            opacity: 50%;
+        }
+        .title {
+            font-family: Amoret Sans, sans-serif!important;
+            font-size: 80px;
+            font-weight: 400;
+            line-height: 90px;
+            color: #274353!important;
+            margin-bottom: 40px;
+            margin-top: 24px;
+        }
+
+        .description {
+            max-width: 729px;
+            font-weight: 700;
+            font-size: 24px;
+            color: #666666;
+        }
+        .shape-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .programs-events {
+            width: 674px;
+            margin-left: 30px;
+            padding: 30px 0;
+        }
+
+        .programs-events h2 {
+            font-family: 'Amoret Sans', sans-serif!important;
+            font-size: 40px!important;
+            font-weight: 400!important;
+            line-height: 90px!important;
+            color: #274353!important;
+            margin-bottom: 20px!important;
+        }
+
+        .programs-events p {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: #666666;
+            margin-bottom: 30px;
+        }
+
+        .programs-events button {
+            width: 243px;
+            height: 51px;
+            background-color: #274353!important;
+            color: white;
+            border: none;
+            border-radius: 28px;
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .programs-events button:hover {
+            background-color: #3CA8E6!important;
+        }
+
+    /* cards */ 
+        @font-face {
+            font-family: 'Amoret Sans';
+            src: url('assets/font/amoret-sans.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            color: #222;
+        }
+
+        .page-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-left: 30px;
+            gap: 2rem;
+            max-width: 1800px;
+            margin: 120px auto 0;
+            margin-bottom: 64px;
+            padding: 1rem;
+        }
+
+        .yoga-card {
+            width: 428px;
+            height: 446px;
+            border: solid 1px #666;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .yoga-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .yoga-card:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+            transition: opacity 1400ms cubic-bezier(0.19, 1, 0.22, 1);
+            opacity: 0;
+            backdrop-filter: blur(5px);
+            z-index: 1;
+        }
+
+        .yoga-card-content {
+            position: absolute;
+            bottom: 24px;
+            left: 16px;
+            right: 0;
+            padding: 1.5rem;
+            transform: translateY(calc(100% - 4.5rem));
+            z-index: 2;
+            transition: transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .yoga-card:hover:after {
+            opacity: 1;
+        }
+
+        .yoga-card:hover .yoga-card-content {
+            transform: translateY(0);
+        }
+
+        .yoga-card:hover img {
+            transform: translateY(-0.5%);
+        }
+
+        .yoga-card-title-container {
+            background-color: #666;
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+            z-index: 3;
+        }
+
+        .yoga-card-title {
+            color: #fff!important;
+            font-family: 'Amoret Sans', sans-serif;
+            font-size: 16px!important;
+            font-weight: 400!important;
+            margin: 0!important;
+        }
+
+        .yoga-card-copy {
+            color: #F2F1F1;
+            font-size: 16px;
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity 700ms cubic-bezier(0.19, 1, 0.22, 1), transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 3;
+        }
+
+        .yoga-card-btn {
+            font-family: 'Amoret Sans', sans-serif!important;
+            font-size: 14px;
+            background-color: #2A495A!important;
+            color: white;
+            border: none!important;
+            padding: 10px 20px;
+            border-radius: 15px!important;
+            cursor: pointer;
+            margin-top: 10px!important;
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity 700ms cubic-bezier(0.19, 1, 0.22, 1), transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 3;
+        }
+        .yoga-card-btn:hover {
+            background-color: #3CA8E6!important;
+            color:#fff !important;
+            }
+
+        .yoga-card:hover .yoga-card-copy,
+        .yoga-card:hover .yoga-card-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .past-sessions-container {
+            width: 100%;
+            padding: 20px 0;
+        }
+        
+        .past-sessions-content {
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .past-sessions-header {
+            text-align: center;
+            font-family: 'Amoret Sans', cursive;
+            color: #274353 !important;
+            font-size: 40px;
+            margin-bottom: 32px;
+            margin-top: 120px;
+        }
+        
+        .past-sessions-divider {
+            height: 2px;
+            background-color: rgba(34, 34, 34, 0.2);
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .cleanup-info {
+            font-family: 'Noto Sans', sans-serif;
+            color: #666;
+            margin: 0 50px 200px 50px;
+            padding: 20px;
+        }
+
+        .cleanup-info h3 {
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .cleanup-info ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+        .cleanup-info ul li {
+            margin-bottom: 8px;
+        }
+
+        .cleanup-info a {
+            color: #666;
+            text-decoration: underline;
+        }
+
+        .cleanup-info p {
+            margin-bottom: 15px;
+        }
+
+    </style>
+<body>
+    <!-- Hero Section Starts -->
+     <section>
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="title">Highway<br>Cleanups</h1>
+                <p class="description">
+                    Monthly cleanups are conducted for 9 highways and ramps, with volunteers provided with safety equipment, trash grabbers, and bags. Reservations can be made via scheduling and <a href="https://www.eventbrite.com/o/ascendtials-31138060263" target="_blank">Eventbrite</a>, and entire groups can reserve space.<br> 
+                </p>
+                <p class="description">
+                    Cleanups are during the mornings on Saturdays and Sundays. For those wanting to become a member and have unlimited access to cleanups, please sign up as a <a href="https://ascendtials.org/volunteer/" target="_blank">volunteer</a>, then the schedule link is made available to search dates. We look forward to connecting with you soon!
+                </p>
+            </div>
+            <div class="svg-container">
+                <svg width="534" height="685" viewBox="0 0 534 685" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="paint0_linear_427_1679" x1="135" y1="0" x2="135" y2="160" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#B9BDA4"/>
+                            <stop offset="100%" stop-color="#B0B4A5"/>
+                        </linearGradient>
+                        <pattern id="imagePattern" patternUnits="userSpaceOnUse" width="534" height="685">
+                            <image href="assets/img/Highway-cleanups-1.jpg" x="0" y="60" width="534" height="685" preserveAspectRatio="xMidYMid slice" />
+                        </pattern>
+                    </defs>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M134.999 180C182.155 180 220.841 143.733 224.685 97.5697C225.099 92.6008 226.198 87.675 229.534 83.9689V83.9689V83.9689C233.072 80.037 239.322 75 244.612 75H499C518.33 75 534 90.67 534 110V650C534 669.33 518.33 685 499 685H35C15.67 685 0 669.33 0 650V89.0359C0 81.2841 6.2841 75 14.0359 75V75C20.8369 75 28.448 79.2373 34.2128 82.8458C35.2374 83.4872 36.2861 84.1221 37.3156 84.7455V84.7455C42.4212 87.8368 44.8643 93.3735 45.4745 99.3108C50.1336 144.642 88.437 180 134.999 180Z" fill="url(#imagePattern)"/>
+                    <circle cx="135" cy="80" r="80" fill="url(#paint0_linear_427_1679)"/>
+                
+                    <g transform="translate(73, 17) scale(2.8)"> <!-- Добавлено масштабирование -->
+                        <circle cx="22" cy="22" r="20.6186" stroke="#fff" stroke-width="1.23711"/>
+                        <circle cx="22" cy="22" r="20.6186" stroke="#fff" stroke-width="1.23711"/>
+                        <path d="M10 23.4815C10 32.963 17.0519 35.3333 20.5778 35.3333C22.3832 35.3333 24.9974 34.8575 27.3333 33.4796M30.9609 30C32.0028 28.3382 32.6667 26.2027 32.6667 23.4815C32.6667 17.4457 28.8871 13.135 25.4697 10.6636C23.925 9.54646 22 10.7733 22 12.6796V13.1111C22 15.0336 21.1917 18.5427 18.9458 20.0023C17.7991 20.7475 16.5607 19.6322 16.4213 18.2717L16.3069 17.1546C16.1739 15.856 14.8512 15.0676 13.8133 15.8594C12.9173 16.5429 12.0019 17.4731 11.2926 18.6667" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M16.6667 30.5926C16.6667 34.3852 19.9852 35.3333 21.6445 35.3333C23.0963 35.3333 26 34.3852 26 30.5926C26 29.1246 25.2143 28.1336 24.4539 27.5617C23.9233 27.1626 23.177 27.521 22.9946 28.1594C22.7567 28.9916 21.897 29.5146 21.4592 28.7679C21.0588 28.085 21.0588 27.0608 21.0588 26.4444C21.0588 25.5958 20.2052 25.0463 19.5186 25.5451C18.142 26.5454 16.6667 28.2419 16.6667 30.5926Z" stroke="#fff" stroke-width="1.5"/>
+                    </g>
+                    
+                </svg>
+                
+            </div>
+        </section>
+        <!-- Hero Section Ends -->
+        <div class="past-sessions-container">
+            <div class="past-sessions-content">
+                <h2 class="past-sessions-header">Hike with us</h2>
+            </div>
+            <div class="past-sessions-divider"></div>
+        </div>
+
+        <main class="page-content">
+            <!-- Yoga Cards will be dynamically injected here -->
+        </main>
+        <section>
+            <section class="cleanup-info">
+                <h3>Please Note!</h3>
+                <ol>
+                    <li>Please watch the safety video below before all cleanups take place.</li>
+                    <li>All volunteers will be given their own personal safety vests, goggles, gloves, trash grabbers, and bags.</li>
+                    <li>No more than 12 volunteers are allowed to signup for a single cleanup event.</li>
+                    <li>Volunteers may clean up as often as they like, there's no cap on the number of times you clean up the highway.</li>
+                    <li>Volunteers can request Letters of Appreciation once cleanup is complete.</li>
+                    <li>Volunteers can sign up for group cleanups.</li>
+                    <li>Please sign the waiver form below before your cleanup begins.</li>
+                </ol>
+                <p>To sign up for our highway cleanups:</p>
+                <p>Please, first, <a href="https://ascendtials.org/volunteer/" target="_blank">signup as a volunteer</a> for unlimited access to cleanups. Once signed up, please follow the instructions in the confirmation message to access our cleanup events! We look forward to seeing you there. After each cleanup, we will celebrate by having lunch together! Stay tuned for details of upcoming cleanup events below! You can also find all our cleanup events <a href="https://www.eventbrite.com/o/ascendtials-31138060263" target="_blank">here monthly on Eventbrite</a> to signup! Participation is free, but we accept donations for supplies and lunch for the groups. If you'd like to make a donation to support us for future programming, please donate via PayPal <a href="https://www.paypal.com" target="_blank">here</a>.</p>
+            </section>
+            
+        </section>
+        <script>
+            (function() {
+                const cards = [
+                    { title: 'Coronado Highway 75 N & S', copy: '<strong>Clean Up Dates:</strong><br>Saturday, October 19, 2024<br> Saturday, November 16, 2024 <br> Saturday, December 21, 2024 <br> <span style="margin-top: 8px; display: block;">', button: '<a href="https://www.eventbrite.com/e/ascendtials-climate-cares-highway-cleanup-event-at-coronado-route-75-tickets-1020361337227" target="_blank" style="color:inherit; text-decoration:none;">Join</a>', image: 'https://ascendtials.org/wp-content/uploads/2024/08/1-Coronado-Highway-75-N-S.jpg' },
+
+                    { title: 'Elketon/Quarry Highway 125', copy: '<strong>Clean Up Dates:</strong><br>Saturday, October 26, 2024<br>Saturday, November 23, 2024<br> Saturday, December 28, 2024<br> <span style="margin-top: 8px; display: block;">', button: '<a href="https://www.eventbrite.com/e/ascendtials-climate-cares-highway-cleanup-at-highway-125n-at-quarryelketon-tickets-1020362691277" target="_blank" style="color:inherit; text-decoration:none;">Join</a>', image: 'https://ascendtials.org/wp-content/uploads/2024/08/2-Quarry-Highway-125-N.jpg' },
+
+                    { title: 'Highway 94 E &amp; W at 1005', copy: '<strong>Clean Up Dates:</strong><br>Sunday, October 27, 2024<br>Sunday, November 24, 2024<br>Sunday, December 22, 2024<br> <span style="margin-top: 8px; display: block;">', button: '<a href="https://www.eventbrite.com/e/ascendtials-climate-cares-highway-cleanup-event-at-highway-94-two-locations-tickets-1020363283047" target="_blank" style="color:inherit; text-decoration:none;">Join</a>', image: 'https://ascendtials.org/wp-content/uploads/2024/08/3-4-Broadway-to-On-Ramp.​-two-locations.jpg' },
+
+                    { title: 'Highway 94 E/W, 47th St & 32nd St, Broadway SR-94', copy: '<strong>Clean Up Dates:</strong><br>Sunday, October 27, 2024<br>Sunday, November 24, 2024<br>Sunday, December 22, 2024<br> <span style="margin-top: 8px; display: block;">', button: '<a href="https://www.eventbrite.com/e/ascendtials-climate-cares-highway-cleanup-event-at-highway-94-two-locations-tickets-1020363283047" target="_blank" style="color:inherit; text-decoration:none;">Join</a>', image: 'https://ascendtials.org/wp-content/uploads/2024/08/3-4-Broadway-to-On-Ramp.​-two-locations.jpg' },
+
+                    { title: '805 N @Sweetwater Rd Off & On Ramps', copy: '<strong>Clean Up Dates:</strong><br>Tuesday, October 27, 2024<br>Sunday, December 29, 2024<br> <span style="margin-top: 8px; display: block;">', button: '<a href="https://www.eventbrite.com/e/ascendtials-highway-cleanup-805-n-sweetwater-rd-off-on-ramps-tickets-1028689206107" target="_blank" style="color:inherit; text-decoration:none;">Join</a>', image: 'https://ascendtials.org/wp-content/uploads/2024/08/5-805-N-@Sweetwater-Rd-Off-On-Ramps.jpg' },
+
+                    { title: 'Highway 15N @Market Street, Stockton ', copy: '<strong>Clean Up Dates:</strong><br>Sunday, October 13, 2024<br>Sunday, November 10, 2024<br>Sunday, December 08, 2024 <br> <span style="margin-top: 8px; display: block;">', button: '<a href="https://www.eventbrite.com/e/ascendtials-climate-cares-highway-cleanup-event-at-highway-15n-tickets-1024424490227" target="_blank" style="color:inherit; text-decoration:none;">Join</a>', image: 'https://ascendtials.org/wp-content/uploads/2024/09/Highway-15N-@Market-Street-Stockton.jpg' },
+
+                    { title: 'Highway 5 N @28th St / National Ave', copy: '<strong>Clean Up Dates:</strong><br>Friday, October 25, 2024<br>Friday, November 29, 2024<br>Friday, December 27, 2024<br> <span style="margin-top: 8px; display: block;">', button: '<a href="https://www.eventbrite.com/e/ascendtials-highway-cleanup-highway-5-n-28th-st-national-ave-tickets-1021286534517" target="_blank" style="color:inherit; text-decoration:none;">Join</a>', image: 'https://ascendtials.org/wp-content/uploads/2024/08/7-Highway-5-N-@28th-St-.jpg' },
+
+                    { title: '5 S @ Mission Bay Beach Club', copy: '<strong>Clean Up Dates:</strong><br>Sunday, October 6 & 20, 2024<br>Sunday, November 3 & 17, 2024<br>Sunday, December 1 & 15, 2024<br> <span style="margin-top: 8px; display: block;">', button: '<a href="https://www.eventbrite.com/e/ascendtials-climate-cares-highway-cleanup-event-at-5mission-bay-beach-club-tickets-1021291770177" target="_blank" style="color:inherit; text-decoration:none;">Join</a>', image: 'https://ascendtials.org/wp-content/uploads/2024/08/8-5-S-@-Mission-Bay-Beach-Club-Clairemont-Dr-Off-On-Ramps.jpg' },
+
+                    { title: 'I-5 Poinsettia Ln. and La Costa Highway', copy: '<strong>Clean Up Dates:</strong><br>Sunday, October 20, 2024<br>Sunday, November 17, 2024<br>Sunday, December 15, 2024<br> <span style="margin-top: 8px; display: block;">', button: '<a href="https://www.eventbrite.com/e/climate-cares-cleanup-event-at-i-5-poinsettia-ln-la-costa-highway-tickets-1021294558517" target="_blank" style="color:inherit; text-decoration:none;">Join</a>', image: 'https://ascendtials.org/wp-content/uploads/2024/08/9-I-5-Poinsettia-Ln.-and-La-Costa-Highway.jpg' },
+                ];
+        
+                const pageContent = document.querySelector('.page-content');
+        
+                cards.forEach(card => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'yoga-card';
+                    cardElement.innerHTML = `
+                        <img src="${card.image}" alt="${card.title}">
+                        <div class="yoga-card-content">
+                            <div class="yoga-card-title-container">
+                                <h2 class="yoga-card-title">${card.title}</h2>
+                            </div>
+                            <p class="yoga-card-copy">${card.copy}</p>
+                            <button class="yoga-card-btn">${card.button}</button>
+                        </div>
+                    `;
+                    pageContent.appendChild(cardElement);
+                });
+            })();
+        </script>
+        <!-- Featured Events Ends -->
+
+
+
+    </body>
+</html>

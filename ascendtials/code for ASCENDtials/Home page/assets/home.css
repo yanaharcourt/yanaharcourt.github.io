@@ -1,0 +1,126 @@
+@font-face {
+    font-family: 'Amoret Sans';
+    src: url('assets/font/amoret-sans.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    }
+    body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            color: #222;
+        }
+        .hero {
+            display: flex;
+            height: 100vh;
+            padding: 0 0%;
+            margin: 30px; 
+        }
+        .hero-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .subtitle {
+            font-size: 32px;
+            margin-bottom: 0px;
+            opacity: 50%;
+        }
+        .title {
+            font-family: 'Amoret Sans', sans-serif;
+            font-size: 80px;
+            line-height: 90px;
+            color: #274353;
+            margin-bottom: 40px;
+            margin-top: 24px;
+        }
+        .email-form {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative; 
+            max-width: 500px; 
+        }
+        .email-input {
+            width: 100%;
+            padding: 25px;
+            padding-right: 135px; 
+            border: 1px solid rgba(34, 34, 34, 0.5); 
+            border-radius: 50px; 
+            font-size: 16px;
+            background-color: transparent; 
+            color: #222;
+        }
+        .email-input::placeholder {
+            color: rgba(34, 34, 34, 0.5);
+        }
+        .join-button {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            bottom: 8px;
+            width: 127px;
+            border: none;
+            border-radius: 28px;
+            background-color: #274353;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .join-button:hover {
+            background-color: #3CA8E6;
+        }
+
+        .description {
+            max-width: 729px;
+            font-weight: 700;
+            font-size: 24px;
+            color: #666666;
+        }
+        .shape-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .programs-events {
+            width: 674px;
+            margin-left: 30px;
+            padding: 30px 0;
+        }
+
+        .programs-events h2 {
+            font-family: 'Amoret Sans', sans-serif;
+            font-size: 40px;
+            line-height: 90px;
+            color: #274353;
+            margin-bottom: 20px;
+        }
+
+        .programs-events p {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: #666666;
+            margin-bottom: 30px;
+        }
+
+        .programs-events button {
+            width: 243px;
+            height: 51px;
+            background-color: #274353;
+            color: white;
+            border: none;
+            border-radius: 28px;
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .programs-events button:hover {
+            background-color: #3CA8E6;
+        }
+        

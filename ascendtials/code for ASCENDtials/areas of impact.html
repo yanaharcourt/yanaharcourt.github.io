@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Страница с SVG изображением</title>
+        <style>
+        body 
+            .svg-container {
+            width: 100%; /* Ensures responsiveness */
+            max-width: 1368px; /* Matches the original SVG width */
+            height: auto;}
+            svg {
+
+            display: block; /* Removes unnecessary spaces */
+            width: 100%;
+            height: auto;
+            }
+        </style>
+    </head>
+<body>
+    <div class="svg-container">
+        <svg width="1368" height="570" viewBox="0 0 1368 570" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- First Circle -->
+            <rect x="58" y="96" width="150" height="150" fill="url(#pattern0_253_7963)"/>
+            <circle cx="133.5" cy="170.5" r="82.6638" stroke="#C8C2E0" stroke-width="15.3793" />
+            <circle cx="133.5" cy="170.5" r="100.927" stroke="#EBE9F4" stroke-width="21.1466"/>
+            <circle cx="133.5" cy="170.5" r="122.073" stroke="#F8F7FB" stroke-width="21.1466"/>
+    
+            <!-- Second Circle -->
+            <rect x="376" y="361" width="150" height="150" fill="url(#pattern1_253_7963)"/>
+            <circle cx="450.5" cy="436.5" r="82.6638" stroke="#C8C2E0" stroke-width="15.3793"/>
+            <circle cx="450.5" cy="436.5" r="100.927" stroke="#EBE9F4" stroke-width="21.1466"/>
+            <circle cx="450.5" cy="436.5" r="122.073" stroke="#F8F7FB" stroke-width="21.1466"/>
+    
+            <!-- Third Circle -->
+            <circle cx="850.5" cy="133.5" r="82.6638" stroke="#C8C2E0" stroke-width="15.3793"/>
+            <circle cx="850.5" cy="133.5" r="100.927" stroke="#EBE9F4" stroke-width="21.1466"/>
+            <circle cx="850.5" cy="133.5" r="122.073" stroke="#F8F7FB" stroke-width="21.1466"/>
+    
+            <!-- Fourth Circle (Added) -->
+            <circle cx="1250.5" cy="436.5" r="82.6638" stroke="#C8C2E0" stroke-width="15.3793"/>
+            <circle cx="1250.5" cy="436.5" r="100.927" stroke="#EBE9F4" stroke-width="21.1466"/>
+            <circle cx="1250.5" cy="436.5" r="122.073" stroke="#F8F7FB" stroke-width="21.1466"/>
+    
+            <!-- Clip paths for placing images/icons inside circles -->
+            <defs>
+                <clipPath id="clipCircle1">
+                    <circle cx="133.5" cy="170.5" r="82.6638"/>
+                </clipPath>
+                <clipPath id="clipCircle2">
+                    <circle cx="450.5" cy="436.5" r="82.6638"/>
+                </clipPath>
+                <clipPath id="clipCircle3">
+                    <circle cx="850.5" cy="133.5" r="82.6638"/>
+                </clipPath>
+                <clipPath id="clipCircle4">
+                    <circle cx="1250.5" cy="436.5" r="82.6638"/>
+                </clipPath>
+            </defs>
+    
+            <!-- Placeholders for images or icons inside each circle -->
+            <image x="50" y="90" width="167" height="167" xlink:href="assets/img/group of people hugging.svg" clip-path="url(#clipCircle1)"/>
+            <image x="370" y="355" width="167" height="167" xlink:href="assets/img/meditating.svg" clip-path="url(#clipCircle2)"/>
+            <image x="770" y="50" width="167" height="167" xlink:href="assets/img/environment.svg" clip-path="url(#clipCircle3)"/>
+            <image x="1170" y="350" width="167" height="167" xlink:href="assets/img/education.svg" clip-path="url(#clipCircle4)"/>
+        </svg>
+    </div>
+    
+</body>
+</html>

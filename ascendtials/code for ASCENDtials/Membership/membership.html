@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCENDtials Membership</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Amoret Sans';
+            src: url('assets/font/amoret-sans.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Noto Sans', sans-serif !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            min-height: 100vh !important;
+            margin: 0 !important;
+            background-color: #fff !important;
+            margin-top: 100px !important;
+            margin-bottom: 100px !important;
+        }
+
+        .header {
+            text-align: center !important;
+            margin-bottom: 64px !important;
+            width: 100% !important;
+        }
+      
+
+        .header h1 {
+            font-family: 'Amoret Sans', sans-serif !important;
+            font-size: 64px !important;
+            color: #274353 !important;
+            margin-bottom: 10px !important;
+            font-weight: 400 !important;
+        }
+
+        .header p {
+            font-family: 'Noto Sans', sans-serif !important;
+            font-size: 24px !important;
+            font-weight: 400 !important;
+            color: #666666 !important;
+            margin: 0 auto !important;
+            line-height: 1.5 !important;
+            max-width: 1100px !important;
+        }
+
+        .pricing-container {
+            display: flex !important;
+            gap: 20px !important;
+            max-width: 1100px !important;
+            padding: 20px !important;
+            align-items: flex-start !important; 
+        }
+
+
+        .pricing-card {
+            background-color: #F5F5F5 !important;
+            border-radius: 30px !important;
+            padding: 20px !important;
+            width: 304px !important;
+            position: relative !important;
+            display: flex !important;
+            flex-direction: column !important;
+            transition: all 0.5s ease-in-out !important; 
+        }
+
+        .pricing-card h2 {
+            margin-top: 0 !important;
+            margin-bottom: 2px !important;
+            font-family: 'Amoret Sans', sans-serif !important;
+            font-size: 36px !important;
+            font-weight: 400 !important;
+            color: #222 !important;
+            text-align: center !important;
+        }
+
+        .membership-type {
+            font-family: 'Noto Sans', sans-serif !important;
+            font-weight: bold !important;
+            font-size: 13px !important;
+            color: #747474 !important;
+            text-align: center !important;
+        }
+
+        .price {
+            font-family: 'Amoret Sans', sans-serif !important;
+            font-size: 48px !important;
+            color: #000 !important;
+            text-align: center !important;
+            margin-top: 16px !important;
+            margin-bottom: 16px !important; 
+        }
+
+        .price .currency {
+            font-size: 24px !important;
+            vertical-align: super !important;
+        }
+
+        .subscribe-btn {
+            display: block !important;
+            width: 163px !important;
+            height: 36px !important;
+            line-height: 36px !important;
+            background-color: #274353 !important;
+            color: #fff !important;
+            text-align: center !important;
+            text-decoration: none !important;
+            border-radius: 24px !important;
+            margin: 0px auto 16px !important;
+            font-family: 'Noto Sans', sans-serif !important;
+            transition: background-color 0.3s ease !important;
+        }
+
+        .subscribe-btn:hover {
+            background-color: #3CA8E6 !important;
+        }
+
+        .features-divider {
+            border: none !important;
+            border-top: 1px solid #907B7B !important;
+            margin: 0 0 16px 0 !important;
+        }
+
+        .features-container {
+            flex-grow: 1 !important;
+            overflow: hidden !important;
+            transition: max-height 0.5s ease-in-out !important;
+            max-height: 100px !important; 
+        }
+
+        .features-container.expanded {
+            max-height: 1000px !important; 
+        }
+
+        .features {
+            list-style-type: none !important;
+            padding: 0 !important;
+            margin: 0 20px !important;
+        }
+
+        .features li {
+            margin-bottom: 10px !important;
+            display: flex !important;
+            align-items: center !important;
+            padding-left: 30px !important;
+            position: relative !important;
+            color:#222;
+        }
+
+        .features li::before {
+            content: "" !important;
+            position: absolute !important;
+            left: 0 !important;
+            top: 2px !important;
+            width: 18px !important;
+            height: 15px !important;
+            background-image: url("data:image/svg+xml,%3Csvg width='18' height='15' viewBox='0 0 18 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.5 8.42857L5.78571 12.7143L16.5 2' stroke='%23274353' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: center !important;
+        }
+
+        .more-features-btn {
+            background: none !important;
+            border: none !important;
+            color: #222 !important;
+            cursor: pointer !important;
+            padding: 18px 0 !important;
+            margin: 0 !important;
+            text-align: center !important;
+            font-family: 'Noto Sans', sans-serif !important;
+            font-weight: 300 !important;
+            font-size: 14px !important;
+            display: block !important;
+            width: 100% !important;
+            position: sticky !important;
+            bottom: 0 !important;
+            background-color: #F5F5F5 !important;
+        }
+
+        .more-features-btn::after {
+            content: "" !important;
+            color: #222 !important;
+            display: inline-block !important;
+            width: 11px !important;
+            height: 7px !important;
+            margin-left: 5px !important;
+            background-image: url("data:image/svg+xml,%3Csvg width='11' height='7' viewBox='0 0 11 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.5 1L5.5 6L0.5 1' stroke='black' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: center !important;
+            transition: transform 0.5s ease-in-out !important;
+            vertical-align: middle !important;
+        }
+
+        .more-features-btn.open::after {
+            transform: rotate(180deg) !important;
+        }
+        .additional-info-section {
+            width: 100% !important;
+            max-width: 1113px !important;
+            margin: 40px auto !important;
+        }
+
+        .additional-info {
+            font-family: 'Noto Sans', sans-serif !important;
+            font-size: 24px !important;
+            color: #666666 !important;
+            text-align: center !important;
+        }
+
+        .additional-info p {
+            margin-bottom: 20px !important;
+            line-height: normal !important;
+        }
+
+        .additional-info strong {
+            font-weight: bold !important;
+        }
+    
+
+    @media (max-width: 1024px) {
+        .pricing-container {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 30px !important;
+        }
+        .pricing-card {
+            width: 100% !important;
+            max-width: 400px !important;
+        }
+        .additional-info-section {
+            padding: 0 20px !important;
+        }
+        .additional-info {
+            font-size: 20px !important;
+        }
+        .svg-divider-section svg {
+            height: 300px !important;
+        }
+    }
+    
+    @media (max-width: 767px) {
+        .pricing-card {
+            max-width: 340px !important;
+        }
+        .additional-info {
+            font-size: 18px !important;
+        }
+        .svg-divider-section svg {
+            height: 200px !important;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        body {
+            margin-top: 20px !important;
+            margin-bottom: 20px !important;
+        }
+        .header {
+            margin-bottom: 30px !important;
+        }
+        .header h1 {
+            font-size: 28px !important;
+            font-weight: 400 !important;
+        }
+        .header p {
+            font-size: 14px !important;
+        }
+        .pricing-card {
+            max-width: 100% !important;
+            padding: 20px !important;
+        }
+        .pricing-card h2 {
+            font-size: 24px !important;
+        }
+        .membership-type {
+            font-size: 16px !important;
+        }
+        .price {
+            font-size: 36px !important;
+        }
+        .subscribe-btn {
+            font-size: 16px !important;
+            padding: 0 !important; 
+            height: 40px !important; 
+            line-height: 40px !important; 
+            display: flex !important; 
+            align-items: center !important; 
+            justify-content: center !important; 
+        }   
+        .additional-info-section {
+            margin: 20px auto !important;
+        }
+        .additional-info {
+            font-size: 16px !important;
+        }
+        .additional-info p {
+            font-size: 14px !important;
+            margin-bottom: 15px !important;
+            line-height: normal; 
+        }
+        .svg-divider-section {
+            margin-top: 20px !important;
+        }
+        .svg-divider-section svg {
+            height: 150px !important;
+        }
+    }
+
+        .svg-divider-section {
+            width: 100% !important;
+            margin-top: 40px !important;
+        }
+
+        .svg-divider-section svg {
+            width: 100% !important;
+            height: auto !important;
+            display: block !important;
+        }
+        .vendors-section {
+            max-width: 1100px !important;
+            margin: 0 auto !important;
+            padding: 40px 20px !important;
+        }
+        
+        .vendors-title {
+            font-family: 'Amoret Sans', sans-serif !important;
+            font-size: 32px !important;
+            font-weight: 400 !important;
+            line-height: normal !important;
+            color: #274353 !important;
+            text-align: center !important; 
+            margin-bottom: 20px !important;
+        }
+        
+        .vendors-description {
+            font-size: 24px !important;
+            color: #666666 !important;
+            text-align: center !important; 
+            margin: 0 auto 40px !important; 
+            max-width: 1200px !important;
+            line-height: normal!important;
+        }
+        @media (max-width: 1024px) {
+            .vendors-section {
+                padding: 30px 15px !important;
+            }
+            
+            .vendors-title {
+                font-size: 28px !important;
+            }
+            
+            .vendors-description {
+                font-size: 22px !important;
+                margin-bottom: 30px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .vendors-section {
+                padding: 25px 10px !important;
+            }
+            
+            .vendors-title {
+                font-size: 24px !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .vendors-description {
+                font-size: 20px !important;
+                margin-bottom: 25px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .vendors-section {
+                padding: 20px 10px !important;
+            }
+            
+            .vendors-title {
+                font-size: 22px !important;
+                margin-bottom: 12px !important;
+            }
+            
+            .vendors-description {
+                font-size: 18px !important;
+                margin-bottom: 20px !important;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .vendors-title {
+                font-size: 20px !important;
+            }
+            
+            .vendors-description {
+                font-size: 16px !important;
+            }
+        }
+        
+        .pricing-container {
+            display: flex;
+            justify-content: center; 
+            gap: 20px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background-color: #F5F5F5 !important;
+            border-radius: 30px !important;
+            padding: 20px !important;
+            width: 304px !important;
+        }
+        
+        .chcdc-members {
+            font-size: 24px !important;
+            color: #666666 !important;
+            text-align: center !important;
+            margin: 64px auto 200px auto!important; 
+            max-width: 1100px !important;
+        }
+        
+        .chcdc-members strong {
+            font-weight: bold !important;
+        }
+    @media (max-width: 1024px) {
+        .chcdc-members {
+            font-size: 22px !important;
+            margin: 50px auto 150px auto !important;
+            padding: 0 20px !important;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .chcdc-members {
+            font-size: 20px !important;
+            margin: 40px auto 120px auto !important;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .chcdc-members {
+            font-size: 18px !important;
+            margin: 30px auto 100px auto !important;
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ASCENDtials Membership</h1>
+        <p>Become part of a community dedicated to empowering change and uplifting BIPOC voices.</p>
+        <p>Join ASCENDtials to access exclusive resources, workshops, and transformative programs.</p>
+    </div>
+    <div class="pricing-container">
+        <!-- Basic card -->
+        <div class="pricing-card">
+            <h2>Basic</h2>
+            <div class="membership-type">Six-Month Membership</div>
+            <div class="price"><span class="currency">$</span>25</div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScYMwa_vi3L3jvcAKMME-4K8RmHTRkheT2GuY3ZZUEd54CF3A/viewform" class="subscribe-btn" target="_blank">Subscribe</a>
+            <hr class="features-divider">
+            <div class="features-container">
+                <ul class="features collapsed">
+                    <li>ASCENDtials Swag including a T-shirt</li>
+                    <li>One free Kemetic Yoga Session</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Pro card -->
+        <div class="pricing-card">
+            <h2>Pro</h2>
+            <div class="membership-type">One-Year Membership</div>
+            <div class="price"><span class="currency">$</span>45</div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScYMwa_vi3L3jvcAKMME-4K8RmHTRkheT2GuY3ZZUEd54CF3A/viewform" class="subscribe-btn" target="_blank">Subscribe</a>
+            <hr class="features-divider">
+            <div class="features-container">
+                <ul class="features collapsed">
+                    <li>Four free Kemetic yoga sessions</li>
+                    <li>ASCENDtials swag, including a t-shirt and tote bag</li>
+                    <li>Subscription to ASCENDtials' Newsletter</li>
+                    <li>Garden Membership, with access to freshly grown produce</li>
+                    <li>Priority registration for special events</li>
+                    <li>Be featured on our social media page up to four times per year</li>
+                </ul>
+            </div>
+            <button class="more-features-btn">See more features</button>
+        </div>
+
+        <!-- Premium card -->
+        <div class="pricing-card">
+            <h2>Premium</h2>
+            <div class="membership-type">Two-Year Membership</div>
+            <div class="price"><span class="currency">$</span>75</div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScYMwa_vi3L3jvcAKMME-4K8RmHTRkheT2GuY3ZZUEd54CF3A/viewform" class="subscribe-btn" target="_blank">Subscribe</a>
+            <hr class="features-divider">
+            <div class="features-container">
+                <ul class="features collapsed">
+                    <li>Ten free Kemetic Yoga Sessions</li>
+                    <li>Free admission to a workshop of your choice</li>
+                    <li>ASCENDtials swag, including a t-shirt and tote bag</li>
+                    <li>Subscription to ASCENDtials' Newsletter</li>
+                    <li>Garden Membership, with access to freshly grown produce</li>
+                    <li>Priority Registration for Special Events</li>
+                    <li>Be featured on our social media page up to four times per year</li>
+                    <li>Listed as a sponsor for one of our big events</li>
+                    <li>Be a speaker at one of our events</li>
+                </ul>
+            </div>
+            <button class="more-features-btn">See more features</button>
+        </div>
+    </div>
+    <section class="additional-info-section">
+        <div class="additional-info">
+            <p>All private sessions are outdoors. Contact our Event Coordinator to schedule your private session directly, and for other scheduling of sessions, please send a calendar invitation to bookyogasessions@ascendtials.org on the day you plan to use your free sessions.</p>
+            <p><strong>Do not forget to read our ASCENDtials-Membership-Responsibility.</strong></p>
+        </div>
+    </section>
+
+    <section class="svg-divider-section">
+            <svg width="1440" height="600" viewBox="0 300 1440 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g opacity="0.3">
+                  <path opacity="0.111111" d="M1383.44 747.653C1383.44 747.653 1193.58 344.47 916.278 261.939C638.973 179.409 581.062 519.993 303.745 437.458C86.7832 372.886 -15.5277 0.712848 -15.5277 0.712848" stroke="url(#paint0_linear_388_2903)" stroke-width="1.55118"/>
+                  <path opacity="0.222222" d="M1408.44 748.73C1408.44 748.73 1197.83 352.852 916.88 280.417C635.929 207.983 596.095 550.271 315.131 477.833C95.3162 421.16 -26.3305 53.0984 -26.3305 53.0984" stroke="url(#paint1_linear_388_2903)" stroke-width="1.83321"/>
+                  <path opacity="0.333333" d="M1433.66 749.216C1433.66 749.216 1202.72 361.356 918.676 299.12C634.626 236.885 612.941 580.235 328.879 517.996C106.64 469.303 -34.0995 106.024 -34.0995 106.024" stroke="url(#paint2_linear_388_2903)" stroke-width="2.11524"/>
+                  <path opacity="0.444444" d="M1459.09 749.106C1459.09 749.106 1208.27 383.953 921.673 332C635.078 280.046 631.579 623.816 344.971 571.859C120.74 531.211 -38.8138 159.381 -38.8138 159.381" stroke="url(#paint3_linear_388_2903)" stroke-width="2.39728"/>
+                  <path opacity="0.555556" d="M1484.67 748.388C1484.67 748.388 1220.59 411.109 932 369.5C643.415 327.892 651.984 638.962 363.386 597.351C137.598 564.796 -40.4588 213.055 -40.4588 213.055" stroke="url(#paint4_linear_388_2903)" stroke-width="2.67931"/>
+                  <path opacity="0.666667" d="M1510.39 747.059C1510.39 747.059 1232.02 440.221 942 409C651.982 377.779 674.129 667.595 384.097 636.373C157.188 611.946 -39.0259 266.936 -39.0259 266.936" stroke="url(#paint5_linear_388_2903)" stroke-width="2.96134"/>
+                  <path opacity="0.777778" d="M1536.2 745.116C1536.2 745.116 1233.89 461.81 943 441C652.106 420.19 697.981 695.662 407.075 674.85C179.481 658.569 -34.5122 320.918 -34.5122 320.918" stroke="url(#paint6_linear_388_2903)" stroke-width="3.24337"/>
+                  <path opacity="0.888889" d="M1562.09 742.555C1562.09 742.555 1262.71 481.896 971.5 471.5C680.289 461.103 723.507 723.098 432.282 712.701C204.44 704.566 -26.921 374.885 -26.921 374.885" stroke="url(#paint7_linear_388_2903)" stroke-width="3.52541"/>
+                  <path d="M1588.26 742.176C1588.26 742.176 1273.47 511 982.5 511C691.528 511 750.928 752.648 459.943 752.648C232.287 752.648 -16.0001 431.532 -16.0001 431.532" stroke="url(#paint8_linear_388_2903)" stroke-width="3.80744"/>
+                </g>
+                <defs>
+                  <linearGradient id="paint0_linear_388_2903" x1="755.251" y1="214.015" x2="657.423" y2="542.719" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FEC1A2"/>
+                    <stop offset="1" stop-color="#E6B2D8"/>
+                  </linearGradient>
+                  <linearGradient id="paint1_linear_388_2903" x1="753.736" y1="238.356" x2="668.505" y2="568.939" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FEC1A2"/>
+                    <stop offset="1" stop-color="#E6B2D8"/>
+                  </linearGradient>
+                  <linearGradient id="paint2_linear_388_2903" x1="753.733" y1="262.981" x2="680.957" y2="595.137" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FEC1A2"/>
+                    <stop offset="1" stop-color="#E6B2D8"/>
+                  </linearGradient>
+                  <linearGradient id="paint3_linear_388_2903" x1="755.252" y1="287.837" x2="694.805" y2="621.283" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FEC1A2"/>
+                    <stop offset="1" stop-color="#E6B2D8"/>
+                  </linearGradient>
+                  <linearGradient id="paint4_linear_388_2903" x1="758.302" y1="312.864" x2="710.077" y2="647.338" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FEC1A2"/>
+                    <stop offset="1" stop-color="#E6B2D8"/>
+                  </linearGradient>
+                  <linearGradient id="paint5_linear_388_2903" x1="762.889" y1="338.009" x2="726.797" y2="673.265" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FEC1A2"/>
+                    <stop offset="1" stop-color="#E6B2D8"/>
+                  </linearGradient>
+                  <linearGradient id="paint6_linear_388_2903" x1="769.013" y1="363.219" x2="744.989" y2="699.025" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FEC1A2"/>
+                    <stop offset="1" stop-color="#E6B2D8"/>
+                  </linearGradient>
+                  <linearGradient id="paint7_linear_388_2903" x1="776.674" y1="388.435" x2="764.674" y2="724.567" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FEC1A2"/>
+                    <stop offset="1" stop-color="#E6B2D8"/>
+                  </linearGradient>
+                  <linearGradient id="paint8_linear_388_2903" x1="786.13" y1="416.407" x2="786.13" y2="752.648" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FEC1A2"/>
+                    <stop offset="1" stop-color="#E6B2D8"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+        </div>
+    </section>
+    <section class="vendors-section"></section>
+        <h2 class="vendors-title">ASCENDKemet Farmers' Market Vendor Membership Plan</h2>
+        <p class="vendors-description">We are seeking local, BIPOC-run businesses to sell their wares at our Sunday Farmers' Markets! Become a member and gain access to a booth, organization support, and other exclusive benefits. Support us in our mission to empower and uplift the Black community of Southern California.</p>
+        
+        <div class="pricing-container">
+            <!-- Starting card -->
+            <div class="pricing-card">
+                <h2>Starting</h2>
+                <div class="membership-type">Six-Week Membership</div>
+                <div class="price"><span class="currency"></span></div>
+                <a href="https://docs.google.com/forms/d/1C6RZV4QGQDlZHet1GSdBwCzUy48o1SHpNSAyi3lDkS4/edit?ts=66d8cb71" class="subscribe-btn" target="_blank">Subscribe</a>
+                <div class="membership-type">Discount: 20% off the standard prices</div> <br>
+                <hr class="features-divider">
+                <div class="features-container">
+                    <ul class="features collapsed">
+                        <li>Ideal for new vendors who want to try selling at the market with a very short-term commitment. </li>
+                        <li>Access to all market events and benefits for six consecutive weeks</li>
+                        <li>Assigned booth and parking access</li>
+                        <li>Consistent support from our team</li>
+                    </ul>
+                </div>
+                <button class="more-features-btn">See more features</button>
+            </div>
+            <!-- Pro card -->
+            <div class="pricing-card">
+                <h2>Pro</h2>
+                <div class="membership-type">Two-Month Membership</div>
+                <div class="price"><span class="currency"></span></div>
+                <a href="https://docs.google.com/forms/d/1C6RZV4QGQDlZHet1GSdBwCzUy48o1SHpNSAyi3lDkS4/edit?ts=66d8cb71" class="subscribe-btn" target="_blank">Subscribe</a>
+                <div class="membership-type">Discount: 25% off the standard prices</div> <br>
+                <hr class="features-divider">
+                <div class="features-container">
+                    <ul class="features collapsed">
+                        <li>Ideal for vendors with some market experience who want to test out the market with a medium-term commitment.</li>
+                        <li>Access to all market events and benefits for two consecutive months</li>
+                        <li>Assigned booth and parking access</li>
+                        <li>Consistent support from our team</li>
+                        <li>Gain exposure and start building a regular customer base</li>
+                    </ul>
+                </div>
+                <button class="more-features-btn">See more features</button>
+            </div>
+            <!-- Premium card -->
+            <div class="pricing-card">
+                <h2>Premium</h2>
+                <div class="membership-type">Four-Month Membership</div>
+                <div class="price"><span class="currency"></span></div>
+                <a href="https://docs.google.com/forms/d/1C6RZV4QGQDlZHet1GSdBwCzUy48o1SHpNSAyi3lDkS4/edit?ts=66d8cb71" class="subscribe-btn" target="_blank">Subscribe</a>
+                <div class="membership-type">Discount: 30% off the standard prices</div> <br>
+                <hr class="features-divider">
+                <div class="features-container">
+                    <ul class="features collapsed">
+                        <li>Ideal for experienced vendors looking to establish a solid presence at the market with a long-term commitment.</li>
+                        <li>Access to all market events and benefits for four consecutive months</li>
+                        <li>Assigned booth and parking access</li>
+                        <li>Consistent support from our team</li>
+                        <li>Ample time to build relationships, chat with regulars, and grow your business</li>
+                        <li>Increased visibility and brand recognition within the community</li>
+                    </ul>
+                </div>
+                <button class="more-features-btn">See more features</button>
+            </div>
+        </div>
+    
+        <div class="chcdc-members">
+            <p><strong>CHCDC Members!</strong> </p>
+            <p>We offer special discounts for you. Gain access to all the benefits of the above Farmers' Market Vendor Memberships at a fraction of the cost.</p>
+            <p>6-week Membership Plan: Discount: 20% off<br>
+            2-Month Membership Plan: Discount: 25% off<br>
+            4-Month Membership Plan: Discount: 30% off</p>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const buttons = document.querySelectorAll('.more-features-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const card = button.closest('.pricing-card');
+                const featuresContainer = card.querySelector('.features-container');
+                const wasCollapsed = !featuresContainer.classList.contains('expanded');
+
+                // Закрыть все другие карточки
+                document.querySelectorAll('.pricing-card').forEach(otherCard => {
+                    if (otherCard !== card) {
+                        const otherFeaturesContainer = otherCard.querySelector('.features-container');
+                        const otherButton = otherCard.querySelector('.more-features-btn');
+                        if (otherFeaturesContainer && otherButton) {
+                            otherFeaturesContainer.classList.remove('expanded');
+                            otherButton.textContent = 'See more features';
+                            otherButton.classList.remove('open');
+                        }
+                    }
+                });
+
+                // Переключить состояние текущей карточки
+                featuresContainer.classList.toggle('expanded');
+                button.classList.toggle('open');
+                button.textContent = wasCollapsed ? 'See less features' : 'See more features';
+
+                // Плавная прокрутка к нижней части карточки, если она раскрывается и не полностью видна
+                if (wasCollapsed) {
+                    setTimeout(() => {
+                        const cardRect = card.getBoundingClientRect();
+                        const isFullyVisible = cardRect.bottom <= window.innerHeight;
+
+                        if (!isFullyVisible) {
+                            const scrollTarget = window.pageYOffset + cardRect.bottom - window.innerHeight + 20;
+                            window.scrollTo({
+                                top: scrollTarget,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }, 50); 
+                }
+
+                event.preventDefault();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

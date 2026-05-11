@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="ASCENDtials" content="Holistic education">
+    <meta name="keywords" content="BIPOC, SanDiego, Yoga">
+    <title>ASCENDtials - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amoret+Sans&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/home.css">
+</head>
+    <style> 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        @font-face {
+        font-family: 'Amoret Sans';
+        src: url('assets/font/amoret-sans.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif !important;
+            color: #222!important;
+            overflow-x: hidden;
+        }
+        .hero {
+            display: flex;
+            height: 100vh;
+            padding: 0 0%;
+            margin: 30px; 
+        }
+        .hero-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .subtitle {
+            font-size: 32px;
+            margin-bottom: 0px;
+            opacity: 50%;
+        }
+        .title {
+            font-family: 'Amoret Sans', sans-serif!important;
+            font-size: 80px;
+            font-weight: 400;
+            line-height: 90px;
+            color: #274353!important;
+            margin-bottom: 40px;
+            margin-top: 24px;
+        }
+        .email-form {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative; 
+            max-width: 500px; 
+        }
+        .email-input {
+            width: 100%;
+            padding: 25px;
+            padding-right: 135px; 
+            border: 1px solid rgba(34, 34, 34, 0.5); 
+            border-radius: 50px; 
+            font-size: 16px;
+            background-color: transparent; 
+            color: #222;
+        }
+        .email-input::placeholder {
+            color: rgba(34, 34, 34, 0.5);
+        }
+        .join-button {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            bottom: 8px;
+            width: 127px;
+            border: none;
+            border-radius: 28px;
+            background-color: #274353;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .join-button:hover {
+            background-color: #3CA8E6;
+        }
+
+        .description {
+            max-width: 729px;
+            font-weight: 700;
+            font-size: 24px;
+            color: #666666!important;
+            line-height: normal;
+        }
+        .shape-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        @media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        height: auto;
+        padding: 30px 20px;
+        margin: 0;
+    }
+
+    .hero-content {
+        order: 2;
+        text-align: center;
+    }
+
+    .svg-container {
+        order: 1;
+        margin-bottom: 30px;
+    }
+
+    .svg-container svg {
+        width: 100%;
+        height: auto;
+    }
+
+    .subtitle {
+        font-size: 24px;
+    }
+
+    .title {
+        font-size: 48px;
+        line-height: 54px;
+        margin-bottom: 20px;
+    }
+
+    .description {
+        font-size: 18px;
+        max-width: 100%;
+    }
+
+    .email-form {
+        max-width: 100%;
+    }
+
+    .email-input {
+        padding: 15px;
+        padding-right: 110px;
+    }
+
+    .join-button {
+        width: 100px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 36px;
+        line-height: 42px;
+    }
+
+    .subtitle {
+        font-size: 20px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+}
+        
+    /* area of impact */
+.page-wrapper {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.areas-of-impact-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.areas-of-impact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.areas-of-impact {
+    width: 100%;
+    margin: 0 auto; 
+}
+
+.areas-of-impact svg {
+    width: 100%;
+    margin: 0px 0px 60px 0; 
+    height: auto;
+    display: block;
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media screen and (max-width: 768px) {
+    .areas-of-impact-wrapper,
+    .areas-of-impact-container {
+        flex-direction: column; 
+    }
+
+    .areas-of-impact svg {
+        margin: 0px 0px 40px 0; 
+    }
+}
+
+    /* Programs and Events */
+    .parallax-container {
+        position: relative !important;
+        width: 1440px;
+        max-width: 100%;
+        height: 490px;
+        overflow: hidden;
+        margin-top: 120px;
+        margin-bottom: 200px;
+    }
+
+    .parallax {
+        position: absolute !important;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    .layer {
+        position: absolute;
+        background-repeat: no-repeat;
+        background-size: contain;
+        transition: transform 0.1s ease-out;
+    }
+
+    .content {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        padding-top: 100px;
+        width: 1440px;
+        max-width: 100%;
+        height: 490px;
+    }
+
+    h2 {
+        font-family: 'Amoret Sans', sans-serif;
+        font-size: 40px;
+        color: #274353 !important;
+        margin-bottom: 20px;
+        margin-top: 100px;
+    }
+
+    p {
+        font-weight: 300;
+        font-size: 20px;
+        color: #666666 !important;
+        max-width: 790px;
+        margin: 0 auto;
+    }
+
+    .layer-1 { 
+        background-image: url('assets/img/environment.png');
+        width: 174px;
+        height: 174px;
+        top: 50px;
+        left: 1151px;
+    }
+
+    .layer-2 { 
+        background-image: url('assets/img/child.png');
+        width: 76px;
+        height: 76px;
+        top: 32px;
+        left: 591px;
+    }
+
+    .layer-3 { 
+        background-image: url('assets/img/farmers.png');
+        width: 125px;
+        height: 125px;
+        top: 320px;
+        left: 103px;
+    }
+
+    .layer-4 { 
+        background-image: url('assets/img/child2.png');
+        width: 63px;
+        height: 63px;
+        top: 300px;
+        left: 1150px;
+    }
+
+    .layer-5 { 
+        background-image: url('assets/img/Legal\ Aid.png');
+        width: 111px;
+        height: 111px;
+        top: 42px;
+        left: 319px;
+    }
+
+    .layer-6 { 
+        background-image: url('assets/img/road.png');
+        width: 76px;
+        height: 76px;
+        top: 22px;
+        left: 969px;
+    }
+
+    .layer-7 { 
+        background-image: url('assets/img/hiking.png');
+        width: 80px;
+        height: 80px;
+        top: 137px;
+        left: 148px;
+    }
+
+    .environmental-programs-section {
+        position: relative;
+        overflow: hidden;
+        margin: 30px;
+    }
+    .environmental-programs-section .section-container {
+        width: 1440px;
+        height: 610px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+    }
+    .environmental-programs-section h1 {
+        font-family: 'Amoret Sans', sans-serif;
+        font-size: 40px;
+        color: #274353 !important;
+        margin: 0;
+        padding-top: 40px;
+    }
+    .environmental-programs-section .text-box {
+        width: 725px;
+        background-color: #F5F5F5 !important;
+        border-radius: 30px;
+        padding: 24px 30px;
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+    }
+    .environmental-programs-section .text-box h2 {
+        font-family: 'Amoret Sans', sans-serif;
+        font-size: 20px;
+        color: #274353 !important;
+        margin: 0 0 8px 0;
+    }
+            .environmental-programs-section .text-box ol {
+        margin: 0;
+        padding-left: 20px!important;
+        color: #222 !important;
+    }
+    .environmental-programs-section .text-box li {
+        margin-bottom: 10px;
+    }
+    .environmental-programs-section #goals-box {
+        top: 112px;
+        height: 190px;
+    }
+    .environmental-programs-section #benefits-box {
+        top: 320px;
+        height: 260px !important;
+        opacity: 0.4;
+    }
+    .environmental-programs-section .image-container {
+        position: absolute;
+        right: 80px; 
+        top: 40px;
+        width: 589px;
+        height: 1080px; 
+        overflow: visible;
+    }
+    .environmental-programs-section #top-image,
+    .environmental-programs-section #bottom-image {
+        width: 589px;
+        height: 532px;
+        object-fit: cover;
+        position: absolute;
+        left: 0;
+        border-radius: 30px;
+    }
+    .environmental-programs-section #top-image {
+        top: 0;
+    }
+    .environmental-programs-section #bottom-image {
+        top: 8px;
+    }
+
+    /* cards */ 
+        @font-face {
+            font-family: 'Amoret Sans';
+            src: url('assets/font/amoret-sans.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            color: #222;
+        }
+
+        .page-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1800px;
+            margin: 64px auto 0;
+            margin-bottom: 64px;
+            padding: 1rem;
+        }
+
+        .yoga-card {
+            width: 428px;
+            height: 446px;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .yoga-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .yoga-card:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+            transition: opacity 1400ms cubic-bezier(0.19, 1, 0.22, 1);
+            opacity: 0;
+            backdrop-filter: blur(5px);
+            z-index: 1;
+        }
+
+        .yoga-card-content {
+            position: absolute;
+            bottom: 24px;
+            left: 16px;
+            right: 0;
+            padding: 1.5rem;
+            transform: translateY(calc(100% - 4.5rem));
+            z-index: 2;
+            transition: transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .yoga-card:hover:after {
+            opacity: 1;
+        }
+
+        .yoga-card:hover .yoga-card-content {
+            transform: translateY(0);
+        }
+
+        .yoga-card:hover img {
+            transform: translateY(-0.5%);
+        }
+
+        .yoga-card-title-container {
+            background-color: #F5F5F5!important;
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+            z-index: 3;
+        }
+
+        .yoga-card-title {
+            color: #274353!important;
+            font-family: 'Amoret Sans', sans-serif!important;
+            font-size: 16px!important;
+            font-weight: 400!important;
+            margin: 0!important;
+        }
+
+        .yoga-card-copy {
+            color: #F2F1F1!important;
+            font-size: 16px!important;
+            font-weight:500 !important;
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity 700ms cubic-bezier(0.19, 1, 0.22, 1), transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 3;
+        }
+
+        .yoga-card-btn {
+            font-family: 'Amoret Sans', sans-serif!important;
+            font-weight: 400!important;
+            font-size: 14px!important;
+            background-color: #2A495A!important;
+            color: white!important;
+            border: none!important;
+            padding: 10px 20px!important;
+            border-radius: 15px!important;
+            cursor: pointer!important;
+            margin-top: 10px!important;
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity 700ms cubic-bezier(0.19, 1, 0.22, 1), transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 3;
+        }
+        .yoga-card-btn:hover {
+            background-color: #3CA8E6!important;
+            }
+
+        .yoga-card:hover .yoga-card-copy,
+        .yoga-card:hover .yoga-card-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Edication and training section*/
+        .education-training {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 120px 30px;
+        }
+
+        .education-content {
+            width: 692px;
+            margin-left: 30px;
+        }
+
+        .education-title {
+            font-family: 'Amoret Sans', sans-serif;
+            font-size: 40px;
+            color: #274353!important;
+            margin-bottom: 20px;
+        }
+
+        .education-text {
+            font-family: 'Noto Sans', sans-serif!important;
+            font-size: 20px;
+            color: #666666;
+            margin-bottom: 30px!important;
+        }
+
+        .education-text strong {
+            font-weight: bold;
+        }
+
+        .learn-more-btn {
+            width: 343px!important;
+            height: 40px!important;
+            background-color: #274353!important;
+            color: white!important;
+            border: none!important;
+            border-radius: 20px!important;
+            font-family: 'Noto Sans', sans-serif!important;
+            font-size: 16px!important;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .learn-more-btn:hover {
+            background-color: #3CA8E6!important;
+        }
+
+        @media screen and (max-width: 768px) {
+            .education-training {
+                flex-direction: column;
+                margin: 60px 15px;
+            }
+
+            .education-content {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .education-title {
+                font-size: 32px;
+            }
+
+            .education-text {
+                font-size: 16px;
+            }
+
+            .learn-more-btn {
+                width: 100%!important;
+            }
+
+            .education-shape {
+                display: none !important;
+            }
+        }
+                /* Join section*/
+            .join-section {
+            text-align: center;
+            padding: 50px 20px;
+            margin: 30px auto !important;
+            margin-bottom: 200px !important;
+            max-width: 1440px;
+        }
+
+        .join-title {
+            font-family: 'Amoret Sans', sans-serif !important;
+            font-size: 40px !important;
+            font-weight: 400 !important;
+            color: #274353 !important;
+            margin-bottom: 20px !important;
+            line-height: 1.2;
+        }
+
+        .join-text {
+            font-family: 'Noto Sans', sans-serif !important;
+            font-size: 24px !important;
+            font-weight: 700 !important;
+            color: #274353 !important;
+            margin-bottom: 30px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            max-width: 800px; /* Ограничиваем ширину текста */
+            line-height: 1.4;
+        }
+
+        .join-btn {
+            width: 343px;
+            height: 40px !important;
+            background-color: #274353 !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 20px !important;
+            font-family: 'Noto Sans', sans-serif !important;
+            font-size: 16px !important;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        .join-btn:hover {
+            background-color: #3CA8E6 !important;
+        }
+
+        @media (max-width: 768px) {
+            .join-title {
+                font-size: 32px !important;
+            }
+
+            .join-text {
+                font-size: 20px !important;
+            }
+
+            .join-btn {
+                width: 100%;
+                max-width: 343px;
+            }
+        }
+    </style>
+<body>
+    <!-- Hero Section Starts -->
+    <section>
+        <div class="hero">
+            <div class="hero-content">
+                <div class="subtitle">In Southern California & Beyond</div>
+                <h1 class="title">EMPOWERING<br>BIPOC<br>COMMUNITIES</h1>
+                <form class="email-form">
+                    <input type="email" class="email-input" placeholder="Enter your email" required>
+                    <button type="submit" class="join-button">Join Us</button>
+                </form>
+                <p class="description">
+                    ASCENDtials (pronounced "essentials") is a 501(c)(3) nonprofit that offers holistic educational tools, resources, and training programs aimed at uplifting San Diego's BIPOC community.
+                </p>
+            </div>
+            <div class="svg-container">
+                <svg width="610" height="610" viewBox="0 0 610 610" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="imgPattern" patternUnits="userSpaceOnUse" width="610" height="610">
+                            <image href="https://ascendtials.org/wp-content/uploads/2024/10/hero-1.png" x="0" y="0" width="610" height="610" preserveAspectRatio="none" />
+                        </pattern>
+                        
+                        <linearGradient id="customGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#97918F" />
+                            <stop offset="100%" stop-color="#896D62" />
+                        </linearGradient>
+                    </defs>
+    
+                    
+                <!-- Rectangle with gradient -->
+                <rect x="538" y="8" width="64" height="64" rx="32" fill="url(#customGradient)"></rect>
+
+                <!-- SVG icon -->
+                <g transform="translate(550, 20)"> 
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.6667 5.56305C14.1182 4.14496 16.9643 3.33334 20 3.33334C29.2048 3.33334 36.6667 10.7953 36.6667 20C36.6667 29.2048 29.2048 36.6667 20 36.6667C10.7953 36.6667 3.33337 29.2048 3.33337 20C3.33337 16.9643 4.14499 14.1181 5.56308 11.6667" 
+                            stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M24.7141 31.7851C24.095 33.3327 23.3601 34.5604 22.5513 35.398C21.7424 36.2356 20.8755 36.6667 20 36.6667C19.1246 36.6667 18.2577 36.2356 17.4488 35.398C16.64 34.5604 15.9051 33.3327 15.286 31.7851C14.6669 30.2375 14.1759 28.4001 13.8408 26.378C13.5058 24.356 13.3334 22.1887 13.3334 20C13.3334 17.8113 13.5058 15.644 13.8408 13.6219C14.1759 11.5998 14.6669 9.76252 15.286 8.21488C15.9051 6.66723 16.64 5.43958 17.4488 4.602C18.2577 3.76442 19.1246 3.33332 20 3.33332C20.8755 3.33332 21.7424 3.76442 22.5513 4.60199C23.3601 5.43957 24.095 6.66723 24.7141 8.21488C25.3331 9.76252 25.8242 11.5998 26.1593 13.6219C26.4944 15.644 26.6667 17.8113 26.6667 20C26.6667 22.1887 26.4944 24.356 26.1593 26.378" 
+                            stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M3.33337 20H16.6667M36.6667 20H23.3334" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>            
+                </g>
+                    
+                    <!-- Main rectangle -->
+                    <rect x="10" y="370" width="64" height="216" rx="32" fill="url(#customGradient)"/>
+                    
+                    <!-- First SVG (Environment) -->
+                    <g transform="translate(20, 388)">
+                        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="22" cy="22" r="20.6186" stroke="#EBE9F4" stroke-width="1.23711"/>
+                            <circle cx="22" cy="22" r="20.6186" stroke="#fff" stroke-width="1.23711"/>
+                            <path d="M10 23.4815C10 32.963 17.0519 35.3333 20.5778 35.3333C22.3832 35.3333 24.9974 34.8575 27.3333 33.4796M30.9609 30C32.0028 28.3382 32.6667 26.2027 32.6667 23.4815C32.6667 17.4457 28.8871 13.135 25.4697 10.6636C23.925 9.54646 22 10.7733 22 12.6796V13.1111C22 15.0336 21.1917 18.5427 18.9458 20.0023C17.7991 20.7475 16.5607 19.6322 16.4213 18.2717L16.3069 17.1546C16.1739 15.856 14.8512 15.0676 13.8133 15.8594C12.9173 16.5429 12.0019 17.4731 11.2926 18.6667" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M16.6667 30.5926C16.6667 34.3852 19.9852 35.3333 21.6445 35.3333C23.0963 35.3333 26 34.3852 26 30.5926C26 29.1246 25.2143 28.1336 24.4539 27.5617C23.9233 27.1626 23.177 27.521 22.9946 28.1594C22.7567 28.9916 21.897 29.5146 21.4592 28.7679C21.0588 28.085 21.0588 27.0608 21.0588 26.4444C21.0588 25.5958 20.2052 25.0463 19.5186 25.5451C18.142 26.5454 16.6667 28.2419 16.6667 30.5926Z" stroke="#fff" stroke-width="1.5"/>
+                        </svg>
+                    </g>
+
+                    <!-- Second SVG (Education) -->
+                    <g transform="translate(20, 456)">
+                        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="22" cy="22" r="20.6186" stroke="#fff" stroke-width="1.23711"/>
+                            <path d="M32.5304 27.3333H16.5304C15.2904 27.3333 14.6704 27.3333 14.1618 27.4696C12.7814 27.8395 11.7032 28.9177 11.3333 30.2981" stroke="#fff" stroke-width="1.5"/>
+                            <path d="M16.6667 15.3333H27.3334" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M16.6667 20H23.3334" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M32 31.3333H16.6667" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M19.3333 35.3333C15.5621 35.3333 13.6765 35.3333 12.5049 34.1618C11.3333 32.9902 11.3333 31.1046 11.3333 27.3333V16.6667C11.3333 12.8954 11.3333 11.0098 12.5049 9.83824C13.6765 8.66667 15.5621 8.66667 19.3333 8.66667H24.6667C28.4379 8.66667 30.3235 8.66667 31.4951 9.83824C32.6667 11.0098 32.6667 12.8954 32.6667 16.6667M24.6667 35.3333C28.4379 35.3333 30.3235 35.3333 31.4951 34.1618C32.6667 32.9902 32.6667 31.1046 32.6667 27.3333V22" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </g>
+
+                    <!-- Third SVG (Arrow) -->
+                    <g transform="translate(20, 524)">
+                        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="22" cy="22" r="20.6186" stroke="#fff" stroke-width="1.23711"/>
+                            <path d="M14 30L30 14M30 14H18M30 14V26" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </g>
+
+                    <!-- Background pattern -->
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 80C0 35.8172 35.8172 0 80 0H490C512.091 0 530 17.9086 530 40C530 62.0914 547.909 80 570 80C592.091 80 610 97.9086 610 120V530C610 574.183 574.183 610 530 610H164C119.817 610 84 574.183 84 530V402C84 378.804 65.196 360 42 360C18.804 360 0 341.196 0 318V80Z" fill="url(#imgPattern)"/>
+                </svg>  
+            </div>
+        </div>
+
+    </section>
+        
+        <!-- Area of Impacts Starts -->
+        <section class="areas-of-impact-wrapper">
+            <div class="areas-of-impact-container">
+                <div class="areas-of-impact">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1432 774">
+                    <defs>
+                        <style>
+                            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&amp;display=swap');
+                            .impact-text { font-family: 'Noto Sans', sans-serif; font-size: 20px; color: #274353; max-width: 415px; }
+                            .impact-title { font-family: 'Noto Sans', sans-serif; font-weight: 700; font-size: 32px; fill: #274353; text-transform: uppercase; text-anchor: middle; }
+                        </style>
+                    </defs>
+                    
+                    <!-- Environment Section -->
+                    <g class="environment-section">
+                        <!-- Основная форма (светло-зелёная) -->
+                        <path d="M623.598 74H324.189C173.863 74 52 195.863 52 346.189V691.87C52 736.968 88.5591 773.527 133.657 773.527H299.692C344.79 773.527 381.349 736.968 381.349 691.87V479.562C381.349 434.464 417.908 397.905 463.006 397.905H623.598C668.695 397.905 705.254 361.346 705.254 316.249V155.657C705.254 110.559 668.695 74 623.598 74Z" fill="#EBF1AB"/>
+                        
+                        <!-- Рисунок внутри первой формы -->
+                        <g clip-path="url(#environment-clip)">
+                            <path opacity="0.3" fill="none" stroke="#0B2738" stroke-width="2" d="M16 263M58.5214 290.719C65.0331 296.647 73.3187 300.26 82.093 300.998 90.8674 301.736 99.6402 299.559 107.051 294.803 114.461 290.047 120.096 282.979 123.08 274.695 126.064 266.411 126.231 257.373 123.556 248.984 120.88 240.595 115.511 233.324 84 218M176 121C188 149 173 152 180.735 181.8 182.293 190.467 186.667 198.377 193.178 204.305 199.69 210.232 207.975 213.845 216.75 214.583 225.524 215.321 234.297 213.144 241.708 208.388 249.118 203.632 254.753 196.564 257.737 188.28 260.721 179.996 260.888 170.958 258.212 162.569 255.537 154.18 250.168 146.909 242.938 141.882 235.709 136.855 227.022 134.355 218.227 134.768 209.431 135.181 191 133 176 121M255.5 83.0001C259 91.5606 255.931 105.34 251.891 113.164 247.851 120.988 246.505 129.927 248.063 138.593 249.621 147.26 253.995 155.17 260.507 161.097 267.018 167.024 275.304 170.637 284.078 171.376 292.853 172.114 301.625 169.936 309.036 165.181 316.447 160.425 322.081 153.357 325.065 145.073 328.049 136.788 328.217 127.751 325.541 119.362 322.865 110.973 317.496 103.701 310.267 98.6746 303.037 93.648 294.351 91.1474 285.555 91.5606 276.759 91.9739 263 89.5001 256.5 83.0001M319 76.1544C314.96 83.9783 313.834 86.7191 315.392 95.3856 316.949 104.052 321.323 111.962 327.835 117.89 334.347 123.817 342.632 127.43 351.407 128.168 360.181 128.907 368.954 126.729 376.364 121.973 383.775 117.218 389.409 110.149 392.394 101.865 395.378 93.5809 395.545 84.5434 392.869 76.1544M118.5 168C122.5 175.5 121.274 191.755 117.234 199.579 113.194 207.403 111.849 216.341 113.406 225.008 114.964 233.674 119.338 241.585 125.85 247.512 132.362 253.439 140.647 257.052 149.421 257.791 158.196 258.529 166.969 256.351 174.379 251.596 181.79 246.84 187.424 239.772 190.408 231.488 193.393 223.203 193.56 214.166 190.884 205.777 188.208 197.388 182.839 190.116 175.61 185.089 168.38 180.063 159.694 177.562 150.898 177.976 142.103 178.389 124.5 175 118.5 168Z"/>
+                        </g>
+                        
+                        <foreignObject x="74" y="112" width="391" height="200" transform="translate(220, 70)">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="impact-text">
+                                ASCENDtials has adopted nine highways and are actively restoring several beaches! We are working along side the California Department of Transportation, Sweetwater Park, and other organizations to clean up the world.
+                            </div>
+                        </foreignObject>
+                        
+                        <image x="74" y="328" width="273" height="343" href="https://ascendtials.org/wp-content/uploads/2024/10/environment.png"/>
+                        <text x="210.5" y="701" class="impact-title">Environment</text>
+                    </g>
+                    
+                    <!-- Education and Mindfulness Section -->
+                    <path d="M1067.27 155.657V320.636C1067.27 365.734 1030.71 402.293 985.609 402.293H932.81H832.027C812.086 402.293 792.305 408.924 776.639 421.263C772.341 424.649 767.976 428.501 763.003 433.915C756.406 441.095 752.07 450.005 749.192 459.322L746.998 466.427C744.587 474.232 743.361 482.356 743.361 490.525V691.87C743.361 736.968 706.802 773.527 661.704 773.527H501.112C456.014 773.527 419.455 736.968 419.455 691.87V524.121C419.455 479.023 456.014 442.464 501.112 442.464H647.71C667.765 442.464 687.119 435.083 702.081 421.729L705.454 418.72C709.437 415.165 713.062 411.228 716.277 406.965L725.024 395.367L731.454 384.803C739.242 372.009 743.361 357.321 743.361 342.344V155.657C743.361 110.559 779.92 74.0002 825.018 74.0002H985.609C1030.71 74.0002 1067.27 110.559 1067.27 155.657Z" fill="#E8D0CC"/> 
+                    
+                    <image x="763" y="84" width="273" height="343" href="https://ascendtials.org/wp-content/uploads/2024/10/Mindfulness.png" transform="translate(0, -60)"/>
+                    <text x="899.5" y="457" class="impact-title" transform="translate(0, -100)">Mindfulness</text>
+                    
+                    <image x="733" y="370" width="273" height="343" href="https://ascendtials.org/wp-content/uploads/2024/10/education.png" transform="translate(-290, 0)"/>
+                    <text x="579.5" y="743" class="impact-title" transform="translate(0, -42)">Education</text>
+    
+                    
+                    <!-- BIPOC Section -->
+                    <path d="M860.402 773.527H1159.81C1310.14 773.527 1432 651.664 1432 501.338V155.657C1432 110.559 1395.44 74.0002 1350.34 74.0002H1184.31C1139.21 74.0002 1102.65 110.559 1102.65 155.657V367.965C1102.65 413.063 1066.09 449.622 1020.99 449.622H860.402C815.305 449.622 778.746 486.181 778.746 531.278V691.87C778.746 736.968 815.305 773.527 860.402 773.527Z" fill="#B2D5D1"/>
+                    
+                    <image x="1105" y="84" width="273" height="343" href="https://ascendtials.org/wp-content/uploads/2024/10/BIPOC.png"/>
+                    <text x="1241.5" y="457" class="impact-title">BIPOC</text>
+    
+                    <foreignObject x="1085" y="487" width="415" height="200" transform="translate(-260, 60)">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="impact-text">
+                            ASCENDtials runs multiple programs uniting people of all backgrounds. Our Farmers' Markets celebrate diverse cultures and give BIPOC businesses an opportunity to connect with BIPOC communities.
+                        </div>
+                    </foreignObject>
+                </svg>
+                </div>
+            </div>                        
+        </section>
+
+        <!-- Programs and events  -->
+        <section> 
+            <div class="parallax-container">
+                <div class="parallax">
+                    <div class="layer layer-1"></div>
+                    <div class="layer layer-2"></div>
+                    <div class="layer layer-3"></div>
+                    <div class="layer layer-4"></div>
+                    <div class="layer layer-5"></div>
+                    <div class="layer layer-6"></div>
+                    <div class="layer layer-7"></div>
+                </div>
+                <div class="content">
+                    <h2>Programs & Events</h2>
+                    <p>We host programs and events that teach, engage, and create change. Learn something new at one of our literacy workshops, buy locally grown produce and handmade crafts at our Farmers' Markets, or help us reduce environmental pollution at one of our highway clean-ups. There are so many ways to get involved!</p>
+                </div>
+            </div>
+    
+            <script>
+               document.addEventListener('DOMContentLoaded', function() {
+                const parallax = document.querySelector('.parallax');
+                const layers = document.querySelectorAll('.layer');
+                let mouseX = 0, mouseY = 0;
+                let windowWidth = window.innerWidth;
+                let windowHeight = window.innerHeight;
+
+                function lerp(start, end, factor) {
+                    return (1 - factor) * start + factor * end;
+                }
+
+                function updateParallax(e) {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                }
+
+                function animate() {
+                    layers.forEach((layer, index) => {
+                        const speed = (index + 1) * 0.007; 
+                        const rect = layer.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const centerY = rect.top + rect.height / 2;
+                        
+                        const targetX = (windowWidth / 2 - mouseX) * speed;
+                        const targetY = (windowHeight / 2 - mouseY) * speed;
+                        
+                        const currentX = parseFloat(layer.dataset.x || 0);
+                        const currentY = parseFloat(layer.dataset.y || 0);
+                        
+                        const newX = lerp(currentX, targetX, 0.1); 
+                        const newY = lerp(currentY, targetY, 0.1); 
+                        
+                        layer.dataset.x = newX;
+                        layer.dataset.y = newY;
+                        
+                        layer.style.transform = `translate3d(${newX}px, ${newY}px, 0)`;
+                    });
+                    
+                    requestAnimationFrame(animate);
+                }
+
+                window.addEventListener('mousemove', updateParallax);
+                window.addEventListener('resize', function() {
+                    windowWidth = window.innerWidth;
+                    windowHeight = window.innerHeight;
+                });
+
+                animate();
+            });
+            </script>
+        </section>
+
+        <main class="page-content">
+            <!-- Yoga Cards will be dynamically injected here -->
+        </main>
+        <script>
+            (function() {
+                const cards = [
+                    { title: 'Farmers’ Market', copy: 'Support our diaspora vendors and pick up fresh fruits, veggies, herbs, and antidotes surrounded by the sounds of African drumming.', button: '<a href="https://ascendtials.org/farmers-market-2024/" target="_blank" style="color:inherit; text-decoration:none;">Learn More</a>', image: 'assets/img/Farmers Market.jpg' },
+
+                    { title: 'Youth Programs', copy: 'Our youth programs teach kids to be aware of their environment. We provide activities to help youth learn about nature and the world. This will set them up for success. View our upcoming events below. We are excited to see you there! ', button: '<a href="https://ascendtials.org/youth-programs-2024/" target="_blank" style="color:inherit; text-decoration:none;">Learn More</a>', image: 'assets/img/Youth.jpg' },
+
+                    { title: 'Environmental Clean-ups', copy: 'Help us reduce the amount of trash and debris polluting our environment and improve our community spaces.', button: '<a href="https://ascendtials.org/environmental-programs-24/" target="_blank" style="color:inherit; text-decoration:none;">Learn More</a>', image: 'assets/img/Environmental.jpg' },
+                ];
+        
+                const pageContent = document.querySelector('.page-content');
+        
+                cards.forEach(card => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'yoga-card';
+                    cardElement.innerHTML = `
+                        <img src="${card.image}" alt="${card.title}">
+                        <div class="yoga-card-content">
+                            <div class="yoga-card-title-container">
+                                <h2 class="yoga-card-title">${card.title}</h2>
+                            </div>
+                            <p class="yoga-card-copy">${card.copy}</p>
+                            <button class="yoga-card-btn">${card.button}</button>
+                        </div>
+                    `;
+                    pageContent.appendChild(cardElement);
+                });
+            })();
+        </script>
+        <!-- Featured Events Ends -->
+
+        <!-- Education and Training Starts -->
+        <section class="education-training">
+            <div class="education-content">
+                <h2 class="education-title">Education & Training</h2>
+                <p class="education-text">
+                    At ASCENDtials, we recognize that the current education system fails to equip individuals with the critical thinking and problem-solving skills needed to overcome systemic issues of racism and inequality. Our unique curriculum, <strong>Designing from Whiteness to Oneness™</strong>, shifts the focus toward empowering Black communities through dialogue and discussion. We host workshops covering topics of <strong>civic, environmental, financial, cosmic, and spiritual literacy</strong> for participants of all ages. Through education, we can create change.
+                </p>
+                <a href="https://ascendtials.org/education-and-training-24/">
+                    <button class="learn-more-btn">Learn More</button>
+                </a>
+            </div>
+            <div class="education-shape">
+                <svg width="449" height="390" viewBox="0 0 449 390" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <mask id="mask0" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="390">
+                            <path d="M17 135.436C17 93.2797 17 72.2013 25.2042 56.0996C32.4209 41.9362 43.9362 30.4209 58.0996 23.2042C74.2013 15 95.2797 15 137.436 15H449V390H17V135.436Z" fill="white"/>
+                        </mask>
+                    </defs>
+                   
+                    <path d="M120.436 0.5H431.5V374.5H0.5V120.436C0.5 99.3498 0.500389 83.5649 1.52387 71.0381C2.54687 58.5171 4.58952 49.2952 8.64974 41.3266C15.8185 27.2572 27.2572 15.8185 41.3266 8.64974C49.2952 4.58952 58.5171 2.54687 71.0381 1.52387C83.5649 0.500389 99.3498 0.5 120.436 0.5Z" stroke="#666666"/>
+                    
+                    <image href="assets/img/Education and training.jpg" x="0" y="0" width="449" height="390" mask="url(#mask0)" preserveAspectRatio="xMidYMid slice"/>
+                </svg>
+            </div>
+        </section>
+        <!-- Education and Training Ends -->
+
+        <!-- Join Section Starts -->
+        <section class="join-section">
+            <h2 class="join-title">WANT TO JOIN THE TEAM?</h2>
+            <p class="join-text">ASCENDtials is actively seeking volunteers.</p>
+            <button class="join-btn">Learn More</button>
+        </section
+</body>
+</html>

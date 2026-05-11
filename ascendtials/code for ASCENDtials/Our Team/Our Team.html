@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team</title>
+    <!-- Font Links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Amoret+Sans&display=swap" rel="stylesheet"> 
+
+    <style>
+        @font-face {
+            font-family: 'Amoret Sans';
+            src: url('assets/font/amoret-sans.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            color: #222;
+        }
+        .our-team-text {
+            font-family: 'Amoret Sans', sans-serif;
+            font-size: 80px;
+            fill: #274353;
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+        .svg-container {
+            margin: 0 30px;
+        }
+        .team-container {
+            max-width: 1380px; 
+            margin: 0 auto;
+            margin-top: 120px;
+            margin-bottom: 200px;
+            padding: 20px;
+        }
+        .category-buttons {
+            display: flex;
+            justify-content: center !important;
+            gap: 16px!important;
+            margin-bottom: 40px!important;
+        }
+        .category-button {
+            padding: 8px 16px!important;
+            font-size: 16px!important;
+            font-weight: bold!important;
+            color: #666666!important;
+            background: none!important;
+            border: 1px solid transparent!important;
+            border-radius: 16px!important;
+            cursor: pointer!important;
+            font-family: 'Noto Sans', sans-serif!important;
+            transition: all 0.3s ease!important;
+        }
+        .category-button:hover {
+            background-color: rgba(34, 34, 34, 0.05)!important;
+        }
+        .category-button.active {
+            border-color: #222222 !important;
+            background-color: rgba(34, 34, 34, 0.1) !important;
+        }
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            justify-content: center;
+        }
+        .team-member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 428px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .member-photo {
+            width: 428px;
+            height: 428px;
+            border-radius: 30px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            transition: transform 0.3s ease;
+        }
+        .member-photo:hover {
+            transform: scale(1.05);
+        }
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .member-photo:hover img {
+            transform: scale(1.1);
+        }
+        .member-name {
+            font-family: 'Amoret Sans', sans-serif !important;
+            font-size: 20px;
+            color: #666666!important;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+        .member-position {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 16px;
+            color: #666666;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+        .team-member:hover .member-name,
+        .team-member:hover .member-position {
+            color: #222222;
+        }
+     
+    @media (max-width: 1400px) {
+        .team-container {
+            max-width: calc(100% - 20px)!important; 
+            padding: 0px!important;
+            margin-left: 10px!important;
+            margin-right: 10px!important;
+        }
+        .team-members {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))!important;
+            justify-items: center!important;
+        }
+        .member-photo {
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%;
+            position: relative;
+            max-width: 380px!important;
+        }
+        .member-photo img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover!important;
+        }
+        .team-member {
+            display: flex!important;
+            flex-direction: column!important;
+            align-items: center!important;
+            width: 100%!important;
+            max-width: 380px!important;
+        }
+    }
+    
+    @media (max-width: 1024px) {
+        .svg-container {
+            margin: 0 !important;
+        }
+        .svg-container svg {
+            width: 95% !important;
+            height: auto !important;
+            transform: scale(0.95) !important;
+            transform-origin: top center !important;
+            margin: 0 2.5% !important;
+        }
+        .our-team-text {
+            font-size: 55px !important;
+        }
+        .team-container {
+            margin-top: 60px!important;
+            margin-bottom: 100px!important;
+        }
+        .team-members {
+            grid-template-columns: repeat(2, 1fr)!important;
+            gap: 20px!important;
+        }
+        .member-photo {
+            max-width: 340px!important;
+        }
+        .team-member {
+            max-width: 340px!important;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .svg-container svg {
+            width: 90% !important;
+            transform: scale(0.9) !important;
+            margin: 0 5% !important;
+        }
+        .our-team-text {
+            font-size: 35px !important;
+        }
+        .team-container {
+            margin-top: 50px!important;
+            margin-bottom: 70px!important;
+        }
+        .category-buttons {
+            flex-wrap: wrap;
+        }
+        .category-button {
+            font-size: 13px !important;
+            padding: 5px 10px !important;
+        }
+        .team-members {
+            grid-template-columns: 1fr!important;
+        }
+        .member-name {
+            font-size: 16px!important;
+        }
+        .member-position {
+            font-size: 12px!important;
+        }
+        .member-photo {
+            max-width: 300px!important;
+        }
+        .team-member {
+            max-width: 300px!important;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .svg-container svg {
+            width: 85% !important;
+            transform: scale(0.85) !important;
+            margin: 0 7.5% !important;
+        }
+        .our-team-text {
+            font-size: 28px !important;
+        }
+        .team-container {
+            margin-top: 30px!important;
+            margin-bottom: 50px!important;
+        }
+        .category-buttons {
+            gap: 8px !important;
+            margin-bottom: 15px !important;
+        }
+        .category-button {
+            font-size: 11px !important;
+            padding: 4px 7px !important;
+        }
+        .member-name {
+            font-size: 14px!important;
+        }
+        .member-position { 
+            font-size: 10px!important;
+        }
+        .member-photo {
+            max-width: 260px!important;
+        }
+        .team-member {
+            max-width: 260px!important;
+        }
+    }
+    
+    @media (max-width: 414px) {
+        .svg-container svg {
+            width: 80% !important;
+            transform: scale(0.8) !important;
+            margin: 0 10% !important;
+        }
+        .our-team-text {
+            font-size: 30px !important;
+        }
+        .member-photo {
+            max-width: 240px!important;
+        }
+        .team-member {
+            max-width: 240px!important;
+        }
+    }
+    
+    @media (max-width: 375px) {
+        .svg-container svg {
+            width: 75% !important;
+            transform: scale(0.75) !important;
+            margin: 0 12.5% !important;
+        }
+        .our-team-text {
+            font-size: 26px !important;
+        }
+        .member-photo {
+            max-width: 220px!important;
+        }
+        .team-member {
+            max-width: 220px!important;
+        }
+    }
+    
+    @media (max-width: 360px) {
+        .svg-container svg {
+            width: 70% !important;
+            transform: scale(0.7) !important;
+            margin: 0 15% !important;
+        }
+        .our-team-text {
+            font-size: 24px !important;
+        }
+        .member-photo {
+            max-width: 200px!important;
+        }
+        .team-member {
+            max-width: 200px!important;
+        }
+    }
+    
+    @media (max-width: 320px) {
+        .svg-container svg {
+            width: 65% !important;
+            transform: scale(0.65) !important;
+            margin: 0 17.5% !important;
+        }
+        .our-team-text {
+            font-size: 22px !important;
+        }
+        .member-photo {
+            max-width: 180px!important;
+        }
+        .team-member {
+            max-width: 180px!important;
+        }
+    }
+        
+    </style>
+</head>
+<body>
+    <div class="svg-container">
+        <svg width="1380" height="689" viewBox="0 0 1380 689" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+                <pattern id="image-fill" patternUnits="userSpaceOnUse" width="1380" height="689">
+                    <image xlink:href="https://ascendtials.org/wp-content/uploads/2024/10/Our-Team-hero.png" x="0" y="0" width="1380" height="689" />
+                </pattern>
+            </defs>
+            <path d="M0 401.215V50C0 22.3858 22.3857 0 50 0H1219.5C1247.11 0 1269.5 22.3858 1269.5 50V66.5C1269.5 94.1142 1291.89 116.5 1319.5 116.5H1332C1357.96 116.5 1379 137.543 1379 163.5V638.5C1379 666.114 1356.61 688.5 1329 688.5H744C716.386 688.5 694 666.114 694 638.5V610V570.832C694 543.089 671.412 520.65 643.669 520.833L618.5 521H365H238H174.751L129.472 520.645C117.551 520.551 106.056 516.202 97.0593 508.38L17.1953 438.949C6.27211 429.453 0 415.689 0 401.215Z" fill="url(#image-fill)"/>
+            <rect y="528" width="686" height="161" rx="50" fill="#E6E6E6"/>
+            <text x="343" y="608" class="our-team-text">Our Team</text>
+        </svg>
+    </div>
+    
+    <div id="our-team-root" class="team-container"></div>
+
+    <script>
+        const teamCategories = [
+            "All",
+            "DIRECTORS & BOARD MEMBERS",
+            "Advisory Board",
+            "Program Team",
+            "Grants Team",
+            "Environmental Programs"
+        ];
+
+        const teamMembers = [
+            { name: "Mika Marzette", position: "Director/Founder", category: "DIRECTORS & BOARD MEMBERS", photo: "https://ascendtials.org/wp-content/uploads/2024/10/Mika-1.jpg" },
+            { name: "Dr. Keisha Clark", position: "Ma'at Equity & Inclusion Director/Board Member", category: "DIRECTORS & BOARD MEMBERS", photo: "https://ascendtials.org/wp-content/uploads/2024/10/Dr-Keisha-Clark.jpg" },
+            { name: "Tonia Ferguson", position: "Advocacy & Community Director/Board Member", category: "DIRECTORS & BOARD MEMBERS", photo: "https://ascendtials.org/wp-content/uploads/2024/10/Tonia-Ferguson-1.jpg" },
+            { name: "Onyeka Tefari", position: "Wellness Director", category: "Advisory Board", photo: "https://ascendtials.org/wp-content/uploads/2024/10/Onyeka-Tefari.jpg" },
+            { name: "Jill Minard", position: "Creative Director", category: "Advisory Board", photo: "https://ascendtials.org/wp-content/uploads/2024/10/Jill-Minard.jpg" },
+            { name: "Neha Sakuja", position: "Program Manager Volunteer", category: "Program Team", photo: "https://ascendtials.org/wp-content/uploads/2024/10/Neha-Sakuja.jpg" },
+            { name: "Lotty Asaba", position: "Finance Intern", category: "Program Team", photo: "https://ascendtials.org/wp-content/uploads/2024/10/Lotty-Asaba.jpg" },
+            { name: "Vera Martinoska", position: "Executive Editor", category: "Grants Team", photo: "https://ascendtials.org/wp-content/uploads/2024/10/Vera-Martinoska.jpg" },
+            { name: "Kenyatta Parker", position: "Garden Program Lead", category: "Environmental Programs", photo: "https://ascendtials.org/wp-content/uploads/2024/10/Kenyatta-Parker.jpg" },
+        ];
+
+        function createTeamMember(member) {
+            const memberElement = document.createElement('div');
+            memberElement.className = 'team-member';
+            memberElement.innerHTML = `
+                <div class="member-photo">
+                    <img src="${member.photo}" alt="${member.name}">
+                </div>
+                <h3 class="member-name">${member.name}</h3>
+                <p class="member-position">${member.position}</p>
+            `;
+            return memberElement;
+        }
+
+        function renderTeamMembers(category) {
+            const teamMembersContainer = document.querySelector('.team-members');
+            teamMembersContainer.innerHTML = '';
+            const filteredMembers = category === 'All' 
+                ? teamMembers 
+                : teamMembers.filter(member => member.category === category);
+            
+            filteredMembers.forEach(member => {
+                teamMembersContainer.appendChild(createTeamMember(member));
+            });
+        }
+
+        function initializeTeam() {
+            const root = document.getElementById('our-team-root');
+            
+            const categoryButtons = document.createElement('div');
+            categoryButtons.className = 'category-buttons';
+            teamCategories.forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'category-button';
+                button.textContent = category;
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    renderTeamMembers(category);
+                });
+                categoryButtons.appendChild(button);
+            });
+            
+            const teamMembersContainer = document.createElement('div');
+            teamMembersContainer.className = 'team-members';
+            
+            root.appendChild(categoryButtons);
+            root.appendChild(teamMembersContainer);
+            
+            // Activate 'All' category by default
+            categoryButtons.firstChild.click();
+        }
+        document.addEventListener('DOMContentLoaded', initializeTeam);
+    </script>
+</body>
+</html>

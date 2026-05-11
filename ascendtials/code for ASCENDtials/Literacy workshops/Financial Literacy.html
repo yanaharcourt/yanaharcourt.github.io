@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Literacy</title>
+
+    <!-- Font Links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Amoret+Sans&display=swap" rel="stylesheet"> 
+
+    <style>
+        @font-face {
+            font-family: 'Amoret Sans', sans-serif;
+            src: url('assets/font/amoret-sans.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            color: #222;
+        }
+        .hero {
+            display: flex;
+            height: 700px;
+            padding: 0 0%;
+            margin: 30px; 
+        }
+        .hero-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .subtitle {
+            font-size: 32px;
+            margin-bottom: 0px;
+            opacity: 50%;
+        }
+        .title {
+            font-family: Amoret Sans, sans-serif!important;
+            font-size: 80px;
+            font-weight: 400;
+            line-height: 90px;
+            color: #274353!important;
+            margin-bottom: 40px;
+            margin-top: 24px;
+        }
+
+        .description {
+            max-width: 729px;
+            font-weight: 700;
+            font-size: 24px;
+            color: #666666;
+            line-height: normal;
+        }
+        .shape-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .programs-events {
+            width: 674px;
+            margin-left: 30px;
+            padding: 30px 0;
+        }
+
+        .programs-events h2 {
+            font-family: 'Amoret Sans', sans-serif!important;
+            font-size: 40px!important;
+            font-weight: 400!important;
+            line-height: 90px!important;
+            color: #274353!important;
+            margin-bottom: 20px!important;
+        }
+
+        .programs-events p {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: #666666;
+            margin-bottom: 30px;
+        }
+
+        .programs-events button {
+            width: 243px;
+            height: 51px;
+            background-color: #274353!important;
+            color: white;
+            border: none;
+            border-radius: 28px;
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .programs-events button:hover {
+            background-color: #3CA8E6!important;
+        }
+        .past-sessions-header {
+            text-align: center;
+            font-family: 'Amoret Sans', cursive;
+            color: #274353 !important;
+            font-size: 40px;
+            margin-bottom: 32px;
+            margin-top: 120px;
+        }
+        
+        .past-sessions-date {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #222222;
+            margin-bottom: 8px;
+            margin-left: 30px;
+        }
+        
+        .past-sessions-divider {
+            height: 2px;
+            background-color: rgba(34, 34, 34, 0.2);
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        @media only screen and (max-width: 767px) {
+            body .hero {
+                flex-direction: column !important;
+                height: auto !important;
+                margin: 15px !important;
+                padding: 20px 0 !important;
+            }
+
+            body .hero-content {
+                text-align: center !important;
+                order: 2 !important;
+            }
+
+            body .title {
+                font-size: 36px !important;
+                line-height: 40px !important;
+                margin-bottom: 15px !important;
+                margin-top: 20px !important;
+            }
+
+            body .description {
+                font-size: 16px !important;
+                max-width: 100% !important;
+                margin-bottom: 20px !important;
+            }
+
+            body .svg-container {
+                order: 1 !important;
+                width: 100% !important;
+                display: flex !important;
+                justify-content: center !important;
+                margin-bottom: 20px !important;
+            }
+
+            body .svg-container svg {
+                width: 80% !important;
+                height: auto !important;
+                max-height: 400px !important;
+            }
+
+            body .past-sessions-container {
+                margin-top: 30px !important;
+            }
+
+            body .past-sessions-header {
+                font-size: 24px !important;
+            }
+
+            body .past-sessions-date {
+                font-size: 18px !important;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            body .hero {
+                margin: 10px !important;
+            }
+
+            body .title {
+                font-size: 30px !important;
+                line-height: 34px !important;
+            }
+
+            body .description {
+                font-size: 14px !important;
+            }
+
+            body .svg-container svg {
+                width: 90% !important;
+                max-height: 300px !important;
+            }
+
+            body .past-sessions-header {
+                font-size: 22px !important;
+            }
+
+            body .past-sessions-date {
+                font-size: 16px !important;
+            }
+        }
+
+
+    /* cards */ 
+        @font-face {
+            font-family: 'Amoret Sans';
+            src: url('assets/font/amoret-sans.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            color: #222;
+        }
+
+        .page-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: left;
+            margin-left: 30px;
+            gap: 2rem;
+            max-width: 1800px;
+            margin: 120px auto 0;
+            margin-bottom: 200px;
+            padding: 1rem;
+        }
+
+        .yoga-card {
+            width: 428px;
+            height: 446px;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .yoga-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .yoga-card:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+            transition: opacity 1400ms cubic-bezier(0.19, 1, 0.22, 1);
+            opacity: 0;
+            backdrop-filter: blur(5px);
+            z-index: 1;
+        }
+
+        .yoga-card-content {
+            position: absolute;
+            bottom: 24px;
+            left: 16px;
+            right: 0;
+            padding: 1.5rem;
+            transform: translateY(calc(100% - 4.5rem));
+            z-index: 2;
+            transition: transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .yoga-card:hover:after {
+            opacity: 1;
+        }
+
+        .yoga-card:hover .yoga-card-content {
+            transform: translateY(0); 
+        }
+
+        .yoga-card:hover img {
+            transform: translateY(-0.5%);
+        }
+
+        .yoga-card-title-container {
+            background-color: #F5F5F5;
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+            z-index: 3;
+        }
+
+        .yoga-card-title {
+            color: #222222!important;
+            font-family: 'Amoret Sans', sans-serif;
+            font-size: 16px!important;
+            font-weight: 400!important;
+            margin: 0!important;
+        }
+
+        .yoga-card-copy {
+            color: #E5E4E4;
+            font-size: 16px;
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity 700ms cubic-bezier(0.19, 1, 0.22, 1), transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 3;
+        }
+
+        .yoga-card-btn {
+            font-family: 'Amoret Sans', sans-serif!important;
+            font-size: 14px;
+            background-color: #2A495A!important;
+            color: white;
+            border: none!important;
+            padding: 10px 20px;
+            border-radius: 15px!important;
+            cursor: pointer;
+            margin-top: 10px!important;
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity 700ms cubic-bezier(0.19, 1, 0.22, 1), transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 3;
+        }
+        .yoga-card-btn:hover {
+            background-color: #3CA8E6!important;
+            color:#fff !important;
+            }
+
+        .yoga-card:hover .yoga-card-copy,
+        .yoga-card:hover .yoga-card-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        
+    </style>
+<body>
+    <!-- Hero Section Starts -->
+     <section>
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="title">Financial<br>Literacy</h1>
+                <p class="description">
+                    Make informed decisions about your money. 
+
+                    Our Generational Wealth Workshops offer a comprehensive approach to building and maintaining generational wealth, with a focus on land preservation and addressing trans-generational trauma.
+<br> 
+                </p>
+            </div>
+            <div class="svg-container">
+                <svg width="534" height="685" viewBox="0 0 534 685" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                   <linearGradient id="paint0_linear_427_1679" x1="135" y1="0" x2="135" y2="160" gradientUnits="userSpaceOnUse">
+                   <stop offset="0%" stop-color="#A6BCC7"/>
+                   <stop offset="100%" stop-color="#31231C"/>
+                   </linearGradient>
+                   <pattern id="imagePattern" patternUnits="userSpaceOnUse" width="534" height="685">
+                   <image href="assets/img/Financial Literacy.jpg" x="0" y="60" width="534" height="685" preserveAspectRatio="xMidYMid slice" />
+                   </pattern>
+                   </defs>
+                   <path fill-rule="evenodd" clip-rule="evenodd" d="M134.999 180C182.155 180 220.841 143.733 224.685 97.5697C225.099 92.6008 226.198 87.675 229.534 83.9689V83.9689V83.9689C233.072 80.037 239.322 75 244.612 75H499C518.33 75 534 90.67 534 110V650C534 669.33 518.33 685 499 685H35C15.67 685 0 669.33 0 650V89.0359C0 81.2841 6.2841 75 14.0359 75V75C20.8369 75 28.448 79.2373 34.2128 82.8458C35.2374 83.4872 36.2861 84.1221 37.3156 84.7455V84.7455C42.4212 87.8368 44.8643 93.3735 45.4745 99.3108C50.1336 144.642 88.437 180 134.999 180Z" fill="url(#imagePattern)"/>
+                   <circle cx="135" cy="80" r="80" fill="url(#paint0_linear_427_1679)"/>
+                   <g transform="translate(73, 17)">
+                   <circle cx="62" cy="62" r="60.6186" stroke="#F5F5F5" stroke-width="1.23711"/>
+                   <path d="M94.9074 78.6667H44.9074C41.0325 78.6667 39.0951 78.6667 37.5055 79.0927C33.1918 80.2485 29.8225 83.6179 28.6667 87.9315" stroke="#F5F5F5" stroke-width="1.5"/>
+                   <path d="M45.3333 41.1667H78.6667" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round"/>
+                   <path d="M45.3333 55.75H66.1667" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round"/>
+                   <path d="M93.25 91.1667H45.3333" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round"/>
+                   <path d="M53.6667 103.667C41.8816 103.667 35.989 103.667 32.3278 100.005C28.6667 96.3443 28.6667 90.4517 28.6667 78.6666V45.3333C28.6667 33.5481 28.6667 27.6556 32.3278 23.9944C35.989 20.3333 41.8816 20.3333 53.6667 20.3333H70.3333C82.1184 20.3333 88.011 20.3333 91.6722 23.9944C95.3333 27.6556 95.3333 33.5481 95.3333 45.3333M70.3333 103.667C82.1184 103.667 88.011 103.667 91.6722 100.005C95.3333 96.3443 95.3333 90.4517 95.3333 78.6666V61.9999" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round"/>
+                   </g>
+                </svg>
+            </div>
+        </section>
+        <!-- Hero Section Ends -->
+
+        <div class="past-sessions-container">
+            <div class="past-sessions-content">
+                <h2 class="past-sessions-header">PAST SESSIONS</h2>
+                <div class="past-sessions-date">July 2024</div>
+            </div>
+            <div class="past-sessions-divider"></div>
+        </div>
+
+        <main class="page-content">
+            <!-- Yoga Cards will be dynamically injected here -->
+        </main>
+        <script>
+            (function() {
+                const cards = [
+                    { title: 'Generation Wealth', copy: '<strong>Dates:</strong><br>July 18th 6:00–7:00 P.M. (PDT)<br><span style="margin-top: 8px; display: block;">Unlock the secrets to building and preserving generational wealth at our workshop hosted by Sharyna Scott, a seasoned attorney!</span>', button: 'Sign Up', image: 'assets/img/Financial Literacy.jpg' },
+                ];
+        
+                const pageContent = document.querySelector('.page-content');
+        
+                cards.forEach(card => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'yoga-card';
+                    cardElement.innerHTML = `
+                        <img src="${card.image}" alt="${card.title}">
+                        <div class="yoga-card-content">
+                            <div class="yoga-card-title-container">
+                                <h2 class="yoga-card-title">${card.title}</h2>
+                            </div>
+                            <p class="yoga-card-copy">${card.copy}</p>
+                            <button class="yoga-card-btn">${card.button}</button>
+                        </div>
+                    `;
+                    pageContent.appendChild(cardElement);
+                });
+            })();
+        </script>
+        <!-- Featured Events Ends -->
+    </body>
+</html>

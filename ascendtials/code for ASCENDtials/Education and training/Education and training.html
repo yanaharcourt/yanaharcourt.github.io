@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education and Training</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amoret+Sans&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+    <style> 
+    @font-face {
+    font-family: 'Amoret Sans';
+    src: url('assets/font/amoret-sans.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    }
+    body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            color: #222!important;
+        }
+        .hero {
+            display: flex;
+            height: auto;
+            margin: 30px;
+            padding: 0;
+            margin-top: 64px;
+            margin-bottom: 100px;
+        }
+        .hero-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: top-center;
+        }
+        .subtitle {
+            font-size: 32px;
+            margin-bottom: 0px;
+            opacity: 50%;
+        }
+        .title {
+            font-family: 'Amoret Sans', sans-serif;
+            font-size: 80px;
+            font-weight: 400;
+            line-height: 90px;
+            color: #274353!important;
+            margin-bottom: 40px;
+            margin-top: 0px;
+        }
+
+        .description1 {
+            max-width: 729px;
+            margin: 0px;
+            font-weight: 700;
+            font-size: 32px;
+            color: #999999;
+            line-height: normal;
+        }
+        .separator {
+            width: 662px;
+            height: 1px;
+            background-color: #D9D9D9;
+            margin-top: 80px;
+            margin-bottom: 16px;
+        }
+        .description2 {
+            width: 662px;
+            margin: 0px;
+            font-weight: 700;
+            font-size: 20px;
+            color: #666666;
+            line-height: normal;
+        }
+        .shape-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+       
+        @media (max-width: 1024px) {
+            .hero {
+                flex-direction: column;
+                margin: 20px;
+                margin-top: 40px;
+                margin-bottom: 60px;
+            }
+        
+            .hero-content {
+                order: 2;
+                width: 100%; 
+            }
+        
+            .shape-container {
+                order: 1;
+                justify-content: center;
+                margin-bottom: 30px;
+            }
+        
+            .subtitle {
+                font-size: 28px;
+            }
+        
+            .title {
+                font-size: 60px;
+                line-height: 70px;
+                margin-bottom: 30px;
+            }
+        
+            .description1 {
+                font-size: 28px;
+                max-width: 100%;
+            }
+        
+            .separator {
+                width: 100%;
+                margin-top: 60px;
+            }
+        
+            .description2 {
+                width: 100%;
+                font-size: 18px;
+                word-wrap: break-word; 
+                overflow-wrap: break-word; 
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                height: auto;
+                padding: 30px 20px;
+                margin: 0;
+            }
+        
+            .hero-content {
+                order: 2;
+                text-align: center;
+            }
+        
+            .svg-container {
+                order: 1;
+                margin-bottom: 30px;
+            }
+        
+            .svg-container svg {
+                width: 100%;
+                height: auto;
+            }
+        
+            .subtitle {
+                font-size: 24px;
+            }
+        
+            .title {
+                font-size: 48px;
+                line-height: 56px;
+                margin-bottom: 20px;
+            }
+        
+            .description1 {
+                font-size: 24px;
+            }
+        
+            .separator {
+                margin-top: 40px;
+            }
+        
+            .description2 {
+                font-size: 16px;
+                line-height: 1.5; 
+            }
+        
+            .shape-container svg {
+                width: 100%;
+                height: auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                margin: 10px;
+                margin-top: 20px;
+                margin-bottom: 30px;
+            }
+        
+            .subtitle {
+                font-size: 20px;
+            }
+        
+            .title {
+                font-size: 36px;
+                line-height: 42px;
+                margin-bottom: 15px;
+            }
+        
+            .description1 {
+                font-size: 20px;
+            }
+        
+            .separator {
+                margin-top: 30px;
+            }
+        
+            .description2 {
+                font-size: 14px;
+                line-height: 1.4; 
+            }
+        }
+
+        /* BENTO SECTION */
+        .bento-section {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-bottom: 120px;
+            overflow: hidden;
+        }
+        .bento-container {
+            position: relative;
+            width: 1380px;
+            height: 437px;
+            margin: 0 auto;
+        }
+        .bento-block {
+            position: absolute;
+            border-radius: 30px;
+            background-color: #F5F5F5;
+        }
+        .bento-block-1 {
+            left: 0px;
+            top: 12px;
+            width: 723px;
+            height: 419px;
+            clip-path: path('M186.149 12H147.068H99.2454H64C41.5979 12 30.3968 12 21.8404 16.3597C14.3139 20.1947 8.19467 26.3139 4.35974 33.8404C0 42.3968 0 53.5979 0 76V367C0 389.402 0 400.603 4.35974 409.16C8.19467 416.686 14.3139 422.805 21.8404 426.64C30.3968 431 41.5979 431 64 431H659C681.402 431 692.603 431 701.16 426.64C708.686 422.805 714.805 416.686 718.64 409.16C723 400.603 723 389.402 723 367V295.391C723 272.988 723 261.787 718.64 253.231C714.805 245.704 708.686 239.585 701.16 235.75C692.603 231.391 681.402 231.391 659 231.391H483.607C461.205 231.391 450.004 231.391 441.448 227.031C433.921 223.196 427.802 217.077 423.967 209.55C419.607 200.994 419.607 189.793 419.607 167.391V76C419.607 53.5979 419.607 42.3968 415.248 33.8404C411.413 26.3139 405.294 20.1947 397.767 16.3597C389.211 12 378.01 12 355.607 12H186.149Z');
+        }
+        .bento-block-2, .bento-block-3, .bento-block-4, .bento-block-5, .bento-block-6 {
+            width: 283px;
+            height: 196px;
+        }
+        .bento-block-2 { left: 440px; top: 24px; }
+        .bento-block-3 { left: 743px; top: 24px; }
+        .bento-block-4 { left: 1063px; top: 24px; }
+        .bento-block-5 { left: 743px; top: 235px; }
+        .bento-block-6 { left: 1063px; top: 235px; }
+        
+        .bento-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .bento-title-container {
+            position: absolute;
+            left: 32px;
+            top: 64px;
+            width: 391px;
+        }
+        
+        .bento-purpose-container {
+            position: absolute;
+            left: 32px;
+            top: 255px;
+            width: 315px;
+        }
+        
+        .bento-main-title {
+            font-family: 'Amoret Sans', sans-serif;
+            font-size: 40px;
+            font-weight: 300;
+            color: #274353!important;
+            width: 352px;
+            margin: 0 0 20px 0;
+        }
+        .bento-subtitle {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: #666666 !important;
+            margin: 0 0 10px 0;
+        }
+        .bento-text {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 300;
+            font-size: 20px;
+            color: #666666;
+            margin: 0;
+        }
+        .bento-image-title {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: #274353;
+            text-transform: uppercase;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .bento-section img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto;
+        }
+        .bento-image-container {
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+    @media screen and (max-width: 1024px) {
+        .bento-section {
+            margin: 15px !important;
+        }
+    
+        .bento-container {
+            transform: none !important;
+            width: 100% !important;
+            height: auto !important;
+        }
+    
+        .bento-block {
+            position: static !important;
+            width: 100% !important;
+            height: auto !important;
+            background-color: transparent !important;
+            border-radius: 0 !important;
+            padding: 0 !important;
+            margin-bottom: 20px !important;
+            box-shadow: none !important;
+        }
+    
+        .bento-block-1 {
+            clip-path: none !important;
+        }
+    
+        .bento-content {
+            position: static !important;
+            height: auto !important;
+        }
+    
+        .bento-content > div[style] {
+            position: static !important;
+            left: auto !important;
+            top: auto !important;
+            width: 100% !important;
+            height: auto !important;
+            margin-bottom: 20px !important;
+        }
+    
+        .bento-title-container,
+        .bento-purpose-container {
+            position: static !important;
+            left: auto !important;
+            top: auto !important;
+            width: 100% !important;
+        }
+    
+        .bento-main-title {
+            font-size: 28px !important;
+            width: 100% !important;
+            margin-bottom: 15px !important;
+        }
+    
+        .bento-subtitle {
+            font-size: 20px !important;
+            margin-bottom: 10px !important;
+        }
+    
+        .bento-text {
+            font-size: 16px !important;
+            margin-bottom: 15px !important;
+        }
+    
+        .bento-image-container {
+            display: inline-block !important;
+            width: calc(50% - 10px) !important;
+            margin: 5px !important;
+            vertical-align: top !important;
+        }
+    
+        .bento-section img {
+            width: auto !important;
+            height: auto !important;
+            max-width: 100% !important;
+            max-height: 150px !important;
+            margin-bottom: 10px !important;
+        }
+    
+        .bento-image-title {
+            font-size: 14px !important;
+            text-align: center !important;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .bento-main-title {
+            font-size: 24px !important;
+        }
+    
+        .bento-subtitle {
+            font-size: 18px !important;
+        }
+    
+        .bento-text {
+            font-size: 14px !important;
+        }
+    
+        .bento-image-container {
+            width: 100% !important;
+        }
+    
+        .bento-image-title {
+            font-size: 12px !important;
+        }
+    
+        .bento-section img {
+            max-height: 120px !important;
+        }
+    }
+        
+        /* FOUNDATIONAL COURSEWORK */
+        .fc-section {
+            margin: 0 auto;
+            width: 1380px;
+            height: 517px;
+            background: linear-gradient(to right, rgba(87, 70, 57, 0.25), rgba(160, 97, 72, 0.25));
+            position: relative;
+            border-radius: 30px;
+            margin-bottom: 200px;
+        }
+
+        .fc-image {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 432px;
+            height: 446px;
+            background-image: url('https://ascendtials.org/wp-content/uploads/2024/10/image.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .fc-content {
+            position: absolute;
+            right: 50px;
+            top: 50px;
+            width: 800px;
+        }
+
+        .fc-title {
+            font-family: 'Amoret Sans', sans-serif;
+            font-size: 40px;
+            color: #274353!important;
+            margin-bottom: 20px;
+            margin-top: -14px;
+        }
+
+        .fc-paragraph {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 500;
+            font-size: 20px;
+            color: #666666!important;
+            margin-bottom: 20px;
+            margin-top: -10px;
+        }
+
+        .fc-subtitle {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: #274353!important;
+            margin-bottom: 20px;
+        }
+
+        .fc-learn-more-btn {
+            display: inline-block;
+            width: 343px;
+            height: 40px;
+            line-height: 40px;
+            background-color: #274353!important;
+            color: white!important;
+            border: none;
+            border-radius: 20px;
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 10px
+        }
+
+        .fc-learn-more-btn:hover {
+            background-color: #3CA8E6!important;
+        }
+        
+    @media screen and (max-width: 767px) {
+        .fc-section {
+            width: 100% !important;
+            height: auto !important;
+            padding: 20px !important;
+            margin-bottom: 50px !important;
+        }
+    
+        .fc-image {
+            position: static !important;
+            width: 100% !important;
+            height: 200px !important;
+            transform: none !important;
+            border-radius: 30px;
+            margin-bottom: 20px !important;
+            background-position: center 30% !important;
+        }
+    
+        .fc-content {
+            position: static !important;
+            width: 100% !important;
+            right: auto !important;
+            top: auto !important;
+        }
+    
+        .fc-title {
+            font-size: 28px !important;
+            text-align: left !important;
+            margin-top: 16px;
+        }
+    
+        .fc-paragraph {
+            font-size: 16px !important;
+        }
+    
+        .fc-subtitle {
+            font-size: 20px !important;
+        }
+    
+        .fc-learn-more-btn {
+            width: 100% !important;
+            max-width: none !important;
+        }
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1023px) {
+        .fc-section {
+            height: auto !important;
+            padding: 30px !important;
+        }
+    
+        .fc-image {
+            width: 40% !important;
+            height: 300px !important;
+            left: 20px !important;
+            border-radius: 30px;
+            margin-bottom: 20px !important;
+            background-position: 70% center !important;
+        }
+    
+        .fc-content {
+            width: 55% !important;
+            right: 20px !important;
+        }
+    
+        .fc-title {
+            font-size: 32px !important;
+        }
+    
+        .fc-paragraph {
+            font-size: 18px !important;
+        }
+    }
+    </style>
+<body>
+    <!-- Hero Section Starts -->
+    <section>
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="title">Education<br> and Training</h1>
+                <p class="description1">
+                    Black Bodies can't do it alone - <br> (Hue) mans fighting for Humans
+                </p>
+                <div class="separator"></div>
+                <p class="description2">
+                    At ASCENDtials, we believe the current education system sustains systemic racism and oppressive structures. We've worked to develop a teaching curriculum, for all ages, that offers alternative methods of thinking. We teach this curriculum through literacy workshops, retreats, yoga sessions, healing sessions and environmental programs.
+                </p>
+            </div>
+            <div class="svg-container">
+                <svg width="610" height="610" viewBox="0 0 610 610" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="imgPattern" patternUnits="userSpaceOnUse" width="610" height="610">
+                            <image href="assets/img/hero.png" x="0" y="0" width="610" height="610" preserveAspectRatio="none" />
+                        </pattern>
+                        
+                        <linearGradient id="customGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#979797" />
+                            <stop offset="100%" stop-color="#725239" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Rectangle with gradient -->
+                    <rect x="538" y="8" width="64" height="64" rx="32" fill="url(#customGradient)"></rect>
+                
+                    <!-- SVG icon -->
+                    <g transform="translate(550, 20)"> 
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.6667 5.56305C14.1182 4.14496 16.9643 3.33334 20 3.33334C29.2048 3.33334 36.6667 10.7953 36.6667 20C36.6667 29.2048 29.2048 36.6667 20 36.6667C10.7953 36.6667 3.33337 29.2048 3.33337 20C3.33337 16.9643 4.14499 14.1181 5.56308 11.6667" 
+                                stroke="#f5f5f5" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M24.7141 31.7851C24.095 33.3327 23.3601 34.5604 22.5513 35.398C21.7424 36.2356 20.8755 36.6667 20 36.6667C19.1246 36.6667 18.2577 36.2356 17.4488 35.398C16.64 34.5604 15.9051 33.3327 15.286 31.7851C14.6669 30.2375 14.1759 28.4001 13.8408 26.378C13.5058 24.356 13.3334 22.1887 13.3334 20C13.3334 17.8113 13.5058 15.644 13.8408 13.6219C14.1759 11.5998 14.6669 9.76252 15.286 8.21488C15.9051 6.66723 16.64 5.43958 17.4488 4.602C18.2577 3.76442 19.1246 3.33332 20 3.33332C20.8755 3.33332 21.7424 3.76442 22.5513 4.60199C23.3601 5.43957 24.095 6.66723 24.7141 8.21488C25.3331 9.76252 25.8242 11.5998 26.1593 13.6219C26.4944 15.644 26.6667 17.8113 26.6667 20C26.6667 22.1887 26.4944 24.356 26.1593 26.378" 
+                                stroke="#f5f5f5" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M3.33337 20H16.6667M36.6667 20H23.3334" stroke="#f5f5f5" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>            
+                    </g>
+                        
+                    <!-- Main rectangle -->
+                    <rect x="10" y="370" width="64" height="216" rx="32" fill="url(#customGradient)"/>
+                    
+                    <!-- First SVG (Environment) -->
+                    <g transform="translate(20, 388)">
+                        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="22" cy="22" r="20.6186" stroke="#EBE9F4" stroke-width="1.23711"/>
+                            <circle cx="22" cy="22" r="20.6186" stroke="#f5f5f5" stroke-width="1.23711"/>
+                            <path d="M10 23.4815C10 32.963 17.0519 35.3333 20.5778 35.3333C22.3832 35.3333 24.9974 34.8575 27.3333 33.4796M30.9609 30C32.0028 28.3382 32.6667 26.2027 32.6667 23.4815C32.6667 17.4457 28.8871 13.135 25.4697 10.6636C23.925 9.54646 22 10.7733 22 12.6796V13.1111C22 15.0336 21.1917 18.5427 18.9458 20.0023C17.7991 20.7475 16.5607 19.6322 16.4213 18.2717L16.3069 17.1546C16.1739 15.856 14.8512 15.0676 13.8133 15.8594C12.9173 16.5429 12.0019 17.4731 11.2926 18.6667" stroke="#f5f5f5" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M16.6667 30.5926C16.6667 34.3852 19.9852 35.3333 21.6445 35.3333C23.0963 35.3333 26 34.3852 26 30.5926C26 29.1246 25.2143 28.1336 24.4539 27.5617C23.9233 27.1626 23.177 27.521 22.9946 28.1594C22.7567 28.9916 21.897 29.5146 21.4592 28.7679C21.0588 28.085 21.0588 27.0608 21.0588 26.4444C21.0588 25.5958 20.2052 25.0463 19.5186 25.5451C18.142 26.5454 16.6667 28.2419 16.6667 30.5926Z" stroke="#f5f5f5" stroke-width="1.5"/>
+                        </svg>
+                    </g>
+                
+                    <!-- Second SVG (Education) -->
+                    <g transform="translate(20, 456)">
+                        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="22" cy="22" r="20.6186" stroke="#f5f5f5" stroke-width="1.23711"/>
+                            <path d="M32.5304 27.3333H16.5304C15.2904 27.3333 14.6704 27.3333 14.1618 27.4696C12.7814 27.8395 11.7032 28.9177 11.3333 30.2981" stroke="#f5f5f5" stroke-width="1.5"/>
+                            <path d="M16.6667 15.3333H27.3334" stroke="#f5f5f5" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M16.6667 20H23.3334" stroke="#f5f5f5" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M32 31.3333H16.6667" stroke="#f5f5f5" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M19.3333 35.3333C15.5621 35.3333 13.6765 35.3333 12.5049 34.1618C11.3333 32.9902 11.3333 31.1046 11.3333 27.3333V16.6667C11.3333 12.8954 11.3333 11.0098 12.5049 9.83824C13.6765 8.66667 15.5621 8.66667 19.3333 8.66667H24.6667C28.4379 8.66667 30.3235 8.66667 31.4951 9.83824C32.6667 11.0098 32.6667 12.8954 32.6667 16.6667M24.6667 35.3333C28.4379 35.3333 30.3235 35.3333 31.4951 34.1618C32.6667 32.9902 32.6667 31.1046 32.6667 27.3333V22" stroke="#f5f5f5" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </g>
+                
+                    <!-- Third SVG (Arrow) -->
+                    <g transform="translate(20, 524)">
+                        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="22" cy="22" r="20.6186" stroke="#f5f5f5" stroke-width="1.23711"/>
+                            <path d="M14 30L30 14M30 14H18M30 14V26" stroke="#f5f5f5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </g>
+                
+                    <!-- Background pattern -->
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 80C0 35.8172 35.8172 0 80 0H490C512.091 0 530 17.9086 530 40C530 62.0914 547.909 80 570 80C592.091 80 610 97.9086 610 120V530C610 574.183 574.183 610 530 610H164C119.817 610 84 574.183 84 530V402C84 378.804 65.196 360 42 360C18.804 360 0 341.196 0 318V80Z" fill="url(#imgPattern)"/>
+                </svg>  
+            </div>
+    </section>
+
+    <!-- BREAKING OPPRESSIVE STRUCTURES -->
+    <section class="bento-section">
+        <div class="bento-container">
+            <!-- Бенто-сетка -->
+            <div class="bento-block bento-block-1"></div>
+            <div class="bento-block bento-block-2"></div>
+            <div class="bento-block bento-block-3"></div>
+            <div class="bento-block bento-block-4"></div>
+            <div class="bento-block bento-block-5"></div>
+            <div class="bento-block bento-block-6"></div>
+            
+            <div class="bento-content">
+                <div class="bento-title-container">
+                    <h1 class="bento-main-title">ASCENDTIALS LITERACY WORKSHOPS</h1>
+                </div>
+                <div class="bento-purpose-container">
+                    <h2 class="bento-subtitle">Purpose</h2>
+                    <p class="bento-text">These workshops offer a safe space for the BIPOC community to share experiences, heal, and work toward systemic change.</p>
+                </div>
+                <div style="position: absolute; left: 465px; top: 274px; width: 207px;">
+                    <h2 class="bento-subtitle">Topics</h2>
+                    <p class="bento-text">We offer workshops on the following topics:</p>
+                </div>
+                
+                <div style="position: absolute; left: 440px; top: 30px; width: 283px; height: 196px;">
+                    <div class="bento-image-container">
+                        <img src="assets/img/Civic Literacy.png" alt="Civic Literacy">
+                        <p class="bento-image-title">Civic Literacy</p>
+                    </div>
+                </div>
+                
+                <div style="position: absolute; left: 735px; top: 30px; width: 300px; height: 196px;">
+                    <div class="bento-image-container">
+                        <img src="assets/img/Cosmic Literacy.png" alt="Cosmic Literacy">
+                        <p class="bento-image-title">Cosmic Literacy</p>
+                    </div>
+                </div>
+                
+                <div style="position: absolute; left: 1057px; top: 30px; width: 300px; height: 196px;">
+                    <div class="bento-image-container">
+                        <img src="assets/img/Environmental Literacy.png" alt="Environmental Literacy">
+                        <p class="bento-image-title">Environmental Literacy</p>
+                    </div>
+                </div>
+                
+                <div style="position: absolute; left: 735px; top: 232px; width: 300px; height: 196px;">
+                    <div class="bento-image-container">
+                        <img src="assets/img/Spiritual Literacy.png" alt="Spiritual Literacy">
+                        <p class="bento-image-title">Spiritual Literacy</p>
+                    </div>
+                </div>
+                
+                <div style="position: absolute; left: 1057px; top: 232px; width: 300px; height: 196px;">
+                    <div class="bento-image-container">
+                        <img src="assets/img/Financial Literacy.png" alt="Financial Literacy">
+                        <p class="bento-image-title">Financial Literacy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FOUNDATIONAL COURSEWORK -->
+    <section class="fc-section">
+        <div class="fc-image"></div>
+        <div class="fc-content">
+            <h2 class="fc-title">FOUNDATIONAL COURSEWORK</h2>
+            <p class="fc-paragraph">Designing From Whiteness to Oneness™ is the core of our curriculum. It is an exploration, understanding, and analysis of oppressive structures, while simultaneously developing new ways of thinking that work to challenge them. We want learners to critically, cosmically, and consciously engage in dialogue centered around Blackness.</p>
+            <h3 class="fc-subtitle">Designing From Whiteness to Oneness™</h3>
+            <p class="fc-paragraph">These modules will be offered as an online, self-study option. There will be four modules, 20 minutes each. If you'd like to learn more, or would like to be contacted when these modules are available, let us know here.</p>
+            <a href="assets/img/Coursework.jpg" class="fc-learn-more-btn">Read more</a>
+        </div>
+    </section>
+</body>
+</html>
