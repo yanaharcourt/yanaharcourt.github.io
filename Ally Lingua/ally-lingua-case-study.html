@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ally Lingua -- Case Study · Yana Harcourt</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <style>
+
+    /* ================================================
+    TOKENS -- Ally Lingua palette 
+    ================================================ */
+    :root {
+      --ivory:        #F8F6F0;
+      --ivory-warm:   #F3EFE5;
+      --cream:        #EDE8DB;
+      --cream-lt:     #F5F1EA;
+
+      --navy:         #1E2D4A;
+      --navy-mid:     #253353;
+      --navy-deep:    #16243D;
+
+      --gold:         #C9A84C;
+      --gold-lt:      #D4B566;
+      --gold-pale:    rgba(201,168,76,.14);
+      --gold-border:  rgba(201,168,76,.28);
+      --gold-mid:     rgba(201,168,76,.52);
+
+      --text:         #1A1614;
+      --text-2:       rgba(26,22,20,.60);
+      --text-3:       rgba(26,22,20,.34);
+      --text-inv:     #F5F1EA;
+      --text-inv-2:   rgba(245,241,234,.68);
+      --text-inv-3:   rgba(245,241,234,.38);
+
+      --border:       rgba(30,45,74,.14);
+      --border-lt:    rgba(30,45,74,.08);
+
+      --serif:        'Playfair Display', Georgia, serif;
+      --serif-2:      'Cormorant Garamond', Georgia, serif;
+      --sans:         'Poppins', system-ui, sans-serif;
+    }
+
+    /* ================================================
+       RESET AND BASE
+    ================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+    html { scroll-behavior: smooth }
+    body {
+      font-family: var(--sans);
+      background: var(--ivory);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100% }
+    a { color: inherit; text-decoration: none }
+
+    /* ================================================
+       SCROLL REVEAL
+    ================================================ */
+    .rv { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease }
+    .rv.in { opacity: 1; transform: none }
+    .rv.d1 { transition-delay: .1s }
+    .rv.d2 { transition-delay: .2s }
+    .rv.d3 { transition-delay: .3s }
+
+    /* ================================================
+       CUSTOM CURSOR (desktop only)
+    ================================================ */
+    #cur {
+      position: fixed; width: 8px; height: 8px;
+      background: var(--gold); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      mix-blend-mode: multiply;
+    }
+    #ctr {
+      position: fixed; width: 30px; height: 30px;
+      border: 1.5px solid var(--gold-mid); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%); opacity: .6;
+    }
+    @media (hover:none),(pointer:coarse) { #cur, #ctr { display: none !important } }
+
+    /* ================================================
+       TYPOGRAPHY
+    ================================================ */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 14px;
+    }
+    .eyebrow::after { content: ''; width: 38px; height: 1px; background: var(--gold); opacity: .5 }
+
+    .sec-num {
+      font-size: 10px; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
+    }
+
+    h1.hero-title {
+      font-family: var(--serif);
+      font-size: clamp(50px, 6.5vw, 84px);
+      font-weight: 700; line-height: 1.02;
+      color: var(--navy); letter-spacing: -.01em;
+    }
+    .hero-title__accent { font-style: italic; color: var(--gold) }
+
+    h2.sec-h2 {
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 54px);
+      font-weight: 700; line-height: 1.08;
+      color: var(--navy); letter-spacing: -.01em;
+      margin-bottom: 18px;
+    }
+    h2.sec-h2 em { font-style: italic; color: var(--gold) }
+
+    h2.sec-h2--inv {
+      font-family: var(--serif);
+      font-size: clamp(30px,4vw,54px);
+      font-weight: 700; line-height: 1.08;
+      color: var(--text-inv); letter-spacing: -.01em; margin-bottom: 18px;
+    }
+    h2.sec-h2--inv em { font-style: italic; color: var(--gold) }
+
+    .sec-lead {
+      font-size: 17px; line-height: 1.82; color: var(--text-2);
+      max-width: 680px; margin-bottom: 52px;
+    }
+    .sec-lead--inv { font-size: 17px; line-height: 1.82; color: var(--text-inv-2); max-width: 680px; margin-bottom: 52px }
+    .sec-lead--no-mb { margin-bottom: 0 }
+
+    .body { font-size: 16px; line-height: 1.82; color: var(--text-2) }
+    .body-sm { font-size: 15px; line-height: 1.78; color: var(--text-2) }
+
+    .lbl {
+      font-size: 10px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--text-3);
+    }
+
+    /* ================================================
+       LAYOUT
+    ================================================ */
+    .sec { padding: 100px 64px }
+    .sec > .container { max-width: 1360px; margin: 0 auto }
+
+    .sec--ivory  { background: var(--ivory) }
+    .sec--warm   { background: var(--ivory-warm) }
+    .sec--cream  { background: var(--cream-lt) }
+    .sec--navy   { background: var(--navy) }
+
+    /* ================================================
+       BREADCRUMB NAV
+    ================================================ */
+    .bc-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 60px;
+      background: rgba(248,246,240,.97);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-lt);
+    }
+    .bc-left { display: flex; align-items: center; gap: 8px }
+    .bc-left a { font-size: 12px; font-weight: 500; color: var(--text-2); transition: color .2s }
+    .bc-left a:hover { color: var(--gold) }
+    .bc-sep { font-size: 12px; color: var(--border) }
+    .bc-cur { font-size: 12px; font-weight: 600; color: var(--gold) }
+    .bc-tags { display: flex; gap: 6px }
+    .bc-tag {
+      font-size: 9px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 20px;
+    }
+    .bc-tag--gold  { background: var(--gold-pale); color: #8B6E20 }
+    .bc-tag--navy  { background: rgba(30,45,74,.10); color: var(--navy) }
+    .bc-tag--cream { background: var(--cream); color: var(--text-2) }
+    @media (max-width: 900px) { .bc-nav { padding: 12px 20px } .bc-tags { display: none } }
+
+    /* ================================================
+       HERO
+    ================================================ */
+    .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh }
+
+    .hero__left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 64px; margin-top: 50px;
+    }
+    .hero__tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 28px;
+    }
+    .hero__tag::before { content: ''; width: 26px; height: 1.5px; background: var(--gold) }
+
+    .hero__subtitle {
+      font-family: var(--serif-2);
+      font-size: clamp(16px, 1.8vw, 22px);
+      font-style: italic; color: var(--text-2);
+      margin: 10px 0 28px;
+    }
+    .hero__desc { max-width: 460px; margin-bottom: 44px }
+    .hero__meta { display: flex; gap: 36px; flex-wrap: wrap }
+    .hero__meta-item { display: flex; flex-direction: column; gap: 3px }
+    .hero__meta-value { font-size: 14px; font-weight: 500; color: var(--navy) }
+
+    .hero__right {
+      position: relative; background: var(--navy);
+      overflow: hidden; margin-top: 50px;
+    }
+    .hero__placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 6px;
+    }
+    .hero__placeholder::before {
+      content: ''; position: absolute; inset: 16px;
+      border: 1.5px dashed rgba(201,168,76,.2); border-radius: 8px;
+    }
+    .hero__placeholder p { position: relative; z-index: 1; font-size: 13px; color: var(--text-inv-3) }
+
+    .hero__bg-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse at 30% 20%, rgba(201,168,76,.12) 0%, transparent 60%),radial-gradient(ellipse at 80% 80%, rgba(201,168,76,.07) 0%, transparent 50%);
+    }
+    .hero__deco-ring {
+      position: absolute; bottom: -15%; right: -15%;
+      width: 130%; height: 130%;
+      border: 1px solid rgba(201,168,76,.06); border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .stat-float {
+      position: absolute; bottom: 44px; left: 40px; z-index: 2;
+      background: rgba(248,246,240,.94); backdrop-filter: blur(12px);
+      border: 1px solid var(--gold-border); border-radius: 14px; padding: 22px 28px;
+    }
+    .stat-float__num {
+      font-family: var(--serif);
+      font-size: 44px; font-weight: 700; color: var(--gold);
+      line-height: 1; margin-bottom: 4px;
+    }
+    .stat-float__label { font-size: 13px; color: var(--text-2); max-width: 190px; line-height: 1.4 }
+
+    /* ================================================
+    OVERVIEW STRIP
+    ================================================ */
+    .ov { background: var(--cream) }
+    .ov__grid { display: grid; grid-template-columns: repeat(3, 1fr) }
+    .ov__cell { padding: 44px; border-right: 1px solid var(--border) }
+    .ov__cell:last-child { border-right: none }
+    .ov__label {
+      font-size: 9px; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--gold); opacity: .85; margin-bottom: 10px;
+    }
+    .ov__value { font-family: var(--serif); font-size: 15px; color: var(--navy); line-height: 1.65 }
+
+    /* ================================================
+    PROCESS ORBITAL
+    ================================================ */
+    .process-sec { background: var(--navy); padding: 100px 64px }
+    .process-sec > .container { max-width: 1360px; margin: 0 auto }
+    .process-sec .sec-num { color: rgba(255,255,255,.3) }
+    .process-sec h2 { color: var(--text-inv) }
+    .process-sec h2 em { color: var(--gold) }
+    .process-sec .sec-lead { color: var(--text-inv-2) }
+
+    .orbital {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 0; margin: 56px 0 40px; position: relative;
+    }
+
+    .planet { display: flex; flex-direction: column; align-items: center; text-align: center }
+    .planet-num { font-size: 10px; font-weight: 700; letter-spacing: .1em; color: rgba(255,255,255,.25); margin-bottom: 8px }
+
+    .orb {
+      position: relative; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      border: 1.5px solid rgba(201,168,76,.30);
+    }
+    .orb-glow { position: absolute; inset: -1px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,.10) 0%, transparent 70%) }
+    .orb-s  { width: 88px;  height: 88px;  background: rgba(201,168,76,.05) }
+    .orb-m  { width: 130px; height: 130px; background: rgba(201,168,76,.09) }
+    .orb-l  { width: 185px; height: 185px; background: rgba(201,168,76,.14) }
+    .orb-xl { width: 255px; height: 255px; background: rgba(201,168,76,.18) }
+    .orb-label { position: relative; z-index: 1; font-size: 12px; font-weight: 600; color: var(--text-inv); line-height: 1.3; text-align: center; padding: 0 10px }
+
+    .p-dash { flex: 1; height: 1px; border-top: 1px dashed rgba(201,168,76,.22); margin-top: -56px; position: relative; z-index: 1 }
+
+    .planet-desc { margin-top: 12px; font-size: 12px; color: rgba(245,241,234,.40); line-height: 1.5; max-width: 110px }
+    .planet-desc strong { display: block; color: rgba(245,241,234,.55); font-weight: 600; margin-bottom: 2px }
+
+    .process-foot { display: flex; flex-wrap: wrap; gap: 26px; margin-top: 12px }
+    .pfoot-item { font-size: 13px; color: rgba(245,241,234,.40); display: flex; align-items: center; gap: 8px }
+    .pfoot-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0 }
+    .pfoot-item span { color: rgba(245,241,234,.72) }
+
+    /* ================================================
+    CHALLENGE GRID
+    ================================================ */
+    .ch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px }
+
+    .ch-card {
+      background: var(--ivory); border: 1px solid var(--border);
+      border-radius: 14px; padding: 32px;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .ch-card:hover { border-color: var(--gold-border); box-shadow: 0 6px 36px rgba(201,168,76,.07) }
+
+    .ch-card-lbl {
+      font-size: 9px; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--gold); opacity: .8; margin-bottom: 10px;
+    }
+    .ch-card-ttl { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--navy); margin-bottom: 10px; line-height: 1.3 }
+    .ch-card-p { font-size: 15px; color: var(--text-2); line-height: 1.78; margin-bottom: 20px }
+
+    .ch-list { display: flex; flex-direction: column; gap: 10px }
+    .ch-li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-2); line-height: 1.55 }
+    .ch-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px }
+
+    /* ================================================
+    COMPETITOR ANALYSIS
+    ================================================ */
+    .comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px }
+    .comp-card {
+      background: var(--ivory); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px;
+      transition: border-color .25s;
+    }
+    .comp-card:hover { border-color: var(--gold-border) }
+    .comp-name { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 8px }
+    .comp-tag {
+      display: inline-block; font-size: 9px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 4px; margin-bottom: 12px;
+    }
+    .comp-tag--strength { background: rgba(52,120,70,.12); color: #2A6B3E }
+    .comp-tag--gap      { background: rgba(180,60,60,.10); color: #8B2020 }
+    .comp-tag--mixed    { background: var(--gold-pale); color: #8B6E20 }
+    .comp-desc { font-size: 14px; color: var(--text-2); line-height: 1.72 }
+
+    /* ================================================
+    INSIGHT CALLOUT
+    ================================================ */
+    .insight-box {
+      background: var(--navy); border-left: 3px solid var(--gold);
+      border-radius: 0 14px 14px 0; padding: 32px 40px; margin-top: 40px;
+    }
+    .insight-box p { font-family: var(--serif); font-size: 18px; font-style: italic; color: var(--text-inv); line-height: 1.75 }
+    .insight-box strong { color: var(--gold) }
+    .insight-box cite { display: block; margin-top: 12px; font-size: 11px; color: var(--text-inv-3); font-style: normal; letter-spacing: .06em }
+
+    /* ================================================
+    PERSONAS
+    ================================================ */
+    .personas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px }
+
+    .persona-card { background: var(--ivory); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: border-color .25s }
+    .persona-card:hover { border-color: var(--gold-border) }
+
+    .persona-card__top { background: var(--navy); padding: 28px 24px 20px }
+    .persona-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(201,168,76,.15); border: 1.5px solid var(--gold-border);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+    }
+    .persona-avatar i { font-size: 24px; color: var(--gold) }
+    .persona-name { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--text-inv); margin-bottom: 3px }
+    .persona-role { font-size: 12px; color: var(--text-inv-3); letter-spacing: .03em }
+
+    .persona-card__body { padding: 22px 24px }
+    .persona-quote {
+      font-family: var(--serif-2); font-style: italic; font-size: 15px;
+      color: var(--text-2); line-height: 1.65; margin-bottom: 16px;
+      border-left: 2px solid var(--gold); padding-left: 14px;
+    }
+    .persona-needs { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px }
+    .persona-need { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; color: var(--text-2) }
+    .persona-need i { color: var(--gold); font-size: 12px; flex-shrink: 0; margin-top: 2px }
+    .persona-badge {
+      display: inline-block; font-size: 9px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 4px; margin-right: 4px;
+    }
+    .badge-gold  { background: var(--gold-pale); color: #8B6E20 }
+    .badge-navy  { background: rgba(30,45,74,.10); color: var(--navy) }
+    .badge-green { background: rgba(52,120,70,.12); color: #2A6B3E }
+
+    /* ================================================
+    CJM
+    ================================================ */
+    .cjm-wrap { overflow-x: auto; margin-top: 48px; padding-bottom: 8px }
+    .cjm-inner { min-width: 860px }
+    .cjm-table { width: 100%; border-collapse: collapse }
+    .cjm-table th {
+      background: var(--navy); color: var(--text-inv);
+      font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+      padding: 14px 16px; text-align: left; border-right: 1px solid rgba(255,255,255,.08);
+    }
+    .cjm-table th:first-child { width: 110px }
+    .cjm-table th:last-child { border-right: none }
+    .cjm-table td {
+      font-size: 13px; color: var(--text-2); line-height: 1.6;
+      padding: 14px 16px; vertical-align: top;
+      border-right: 1px solid var(--border-lt);
+      border-bottom: 1px solid var(--border-lt);
+      background: var(--ivory);
+    }
+    .cjm-table td:first-child {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--gold); background: var(--cream-lt); width: 110px;
+    }
+    .cjm-table td:last-child { border-right: none }
+    .cjm-table tr:last-child td { border-bottom: none }
+    .cjm-tag {
+      display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; padding: 2px 7px; border-radius: 3px; margin-bottom: 4px;
+    }
+    .cjm-tag--pain { background: rgba(180,60,60,.10); color: #8B2020 }
+    .cjm-tag--opp  { background: rgba(52,120,70,.12); color: #2A6B3E }
+    .cjm-emotion { font-size: 20px; text-align: center; padding: 10px 0 }
+
+    /* ================================================
+    SITEMAP
+    ================================================ */
+    .sitemap-sec { padding: 100px 64px; background: var(--cream-lt) }
+    .sitemap-sec > .container { max-width: 1360px; margin: 0 auto }
+    .sitemap-diagram { margin-top: 48px; padding: 0 }
+    .sitemap-svg { width: 100%; max-width: 900px; display: block; margin: 0 auto }
+
+    /* ================================================
+    USER FLOW
+    ================================================ */
+    .uf-scroll { overflow-x: auto; margin-top: 0 }
+    .uf-inner { min-width: 900px; padding: 0 64px }
+
+    .uf-header { display: flex; align-items: center; margin-bottom: 12px }
+    .uf-header-spacer { width: 90px; flex-shrink: 0 }
+    .uf-header-cell {
+      flex: 1; text-align: center;
+      font-size: 9px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--text-3);
+    }
+    .uf-lane { display: flex; align-items: center; margin-bottom: 10px }
+    .uf-lane-label {
+      width: 90px; flex-shrink: 0;
+      font-size: 11px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--gold); padding-right: 12px;
+    }
+    .uf-col { flex: 1; display: flex; flex-direction: column; align-items: center }
+    .uf-box {
+      background: var(--ivory); border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px 14px;
+      font-size: 12px; font-weight: 500; color: var(--navy);
+      text-align: center; line-height: 1.4; width: 100%;
+    }
+    .uf-box--accent   { background: var(--navy); color: var(--text-inv); border-color: var(--navy) }
+    .uf-box--gold     { background: var(--gold); color: #fff; border-color: var(--gold) }
+    .uf-box--decision { background: var(--ivory-warm); border: 1.5px dashed var(--gold-border); color: var(--navy) }
+    .uf-sub { font-size: 10px; color: var(--text-3); margin-top: 3px }
+    .uf-arrow { flex-shrink: 0 }
+
+    /* ================================================
+    HMW
+    ================================================ */
+    .hmw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px }
+    .hmw-card {
+      background: var(--ivory); border: 1px solid var(--border);
+      border-radius: 14px; padding: 30px; position: relative; overflow: hidden;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .hmw-card:hover { border-color: var(--gold-border); box-shadow: 0 6px 32px rgba(201,168,76,.07) }
+    .hmw-num {
+      font-family: var(--serif-2);
+      font-size: 88px; font-weight: 300;
+      color: var(--gold); opacity: .08;
+      position: absolute; top: -14px; right: 12px; line-height: 1;
+    }
+    .hmw-icon { font-size: 22px; color: var(--gold); margin-bottom: 14px }
+    .hmw-q { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 10px; line-height: 1.4 }
+    .hmw-ans { font-size: 14px; color: var(--text-2); line-height: 1.72 }
+
+    /* ================================================
+    DESIGN SYSTEM
+    ================================================ */
+    .ds-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px }
+
+    .ds-card {
+      background: var(--ivory); border: 1px solid var(--border);
+      border-radius: 12px; padding: 22px;
+    }
+    .ds-card__label {
+      font-size: 9px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--text-3); margin-bottom: 12px;
+    }
+    .color-swatches { display: flex; flex-direction: column; gap: 6px }
+    .swatch {
+      height: 32px; border-radius: 7px;
+      display: flex; align-items: center; justify-content: flex-end; padding-right: 9px;
+    }
+    .swatch span { font-size: 9px; font-weight: 600; opacity: .75 }
+    .swatch--navy     { background: #1E2D4A }
+    .swatch--navy span { color: rgba(255,255,255,.75) }
+    .swatch--gold     { background: #C9A84C }
+    .swatch--gold span { color: rgba(255,255,255,.85) }
+    .swatch--ivory    { background: #F8F6F0; border: 1px solid #DDD8CC }
+    .swatch--ivory span { color: var(--text-3) }
+    .swatch--cream    { background: #EDE8DB }
+    .swatch--cream span { color: var(--text-2) }
+    .swatch--charcoal { background: #1A1614 }
+    .swatch--charcoal span { color: rgba(255,255,255,.6) }
+
+    .ds-type-display { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 5px }
+    .ds-type-serif2  { font-family: var(--serif-2); font-size: 22px; font-style: italic; font-weight: 400; color: var(--navy); margin-bottom: 5px }
+    .ds-type-sans    { font-family: var(--sans); font-size: 16px; font-weight: 500; color: var(--navy) }
+    .ds-type-label   { font-size: 10px; color: var(--text-3); margin-bottom: 14px }
+
+    .ds-spacing-list { display: flex; flex-direction: column; gap: 6px }
+    .ds-spacing-item { display: flex; align-items: center; gap: 8px }
+    .ds-spacing-bar  { height: 12px; background: var(--gold); border-radius: 2px; flex-shrink: 0 }
+    .ds-spacing-bar--4  { width: 4px }
+    .ds-spacing-bar--8  { width: 8px }
+    .ds-spacing-bar--16 { width: 16px }
+    .ds-spacing-bar--32 { width: 32px }
+    .ds-spacing-bar--64 { width: 64px }
+    .ds-spacing-text { font-size: 11px; color: var(--text-2) }
+
+    .ds-token-row { font-size: 12px; color: var(--text-2); margin-bottom: 7px }
+    .ds-token-row strong { font-weight: 600; color: var(--navy) }
+
+    /* ================================================
+    BENTO SCREENS 
+    ================================================ */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 220px;
+      gap: 16px; margin-top: 52px;
+    }
+    .bento-cell {
+      background: var(--cream-lt); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden; position: relative;
+      transition: border-color .3s, box-shadow .3s; cursor: pointer;
+    }
+    .bento-cell:hover { border-color: var(--gold-border); box-shadow: 0 0 40px rgba(201,168,76,.09) }
+    .bc-7 { grid-column: span 7 }
+    .bc-5 { grid-column: span 5 }
+    .bc-4 { grid-column: span 4 }
+    .bc-8 { grid-column: span 8 }
+    .bc-6 { grid-column: span 6 }
+    .br-2 { grid-row: span 2 }
+    .bento-img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform .5s ease }
+    .bento-cell:hover .bento-img { transform: scale(1.03) }
+    .bento-ph {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      background: var(--ivory-warm);
+    }
+    .bento-ph i { font-size: 32px; color: var(--text-3) }
+    .bento-ph p { font-size: 13px; color: var(--text-3) }
+    .bento-ph small { font-size: 10px; color: var(--border) }
+    .bento-cap {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 40px 22px 20px;
+      background: linear-gradient(to top, rgba(26,22,20,.85) 0%, transparent 100%);
+      transition: transform .3s;
+    }
+    .bento-cell::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(26,22,20,.25);
+      pointer-events: none;
+      transition: background .3s ease;
+    }
+    .bento-cell:hover::after { background: rgba(26,22,20,.08) }
+    .bento-cap-title { font-size: 15px; font-weight: 600; color: #fff }
+    .bento-cap-sub { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 3px }
+    .bento-no-cursor { cursor: default }
+    .bento-no-cursor:hover { border-color: var(--border); box-shadow: none }
+    .bento-stat {
+      background: var(--navy);
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: flex-end; padding: 28px;
+    }
+    .bento-stat-num { font-family: var(--serif); font-size: 64px; font-weight: 700; color: var(--gold); line-height: 1 }
+    .bento-stat-lbl { font-size: 13px; color: rgba(245,241,234,.55); margin-top: 6px; max-width: 160px; line-height: 1.4 }
+    .bento-info {
+      background: var(--ivory);
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: center; padding: 28px; gap: 10px;
+    }
+    .bento-info i { font-size: 28px; color: var(--gold) }
+    .bento-info-title { font-family: var(--serif); font-size: 18px; color: var(--navy); line-height: 1.3 }
+    .bento-info-sub { font-size: 13px; color: var(--text-2) }
+
+    /* Lightbox */
+    #lb {
+      display: none; position: fixed; inset: 0; z-index: 5000;
+      background: rgba(26,22,20,.94); backdrop-filter: blur(14px);
+      align-items: flex-start; justify-content: center;
+      padding: 32px; overflow-y: auto;
+    }
+    #lb.open { display: flex }
+    #lb-inner { position: relative; max-width: 1280px; width: 100% }
+    #lb-img { width: 100%; border-radius: 12px; box-shadow: 0 0 80px rgba(0,0,0,.5); display: block }
+    #lb-caption { text-align: center; margin-top: 14px; font-size: 13px; color: rgba(245,241,234,.35); letter-spacing: .04em }
+    #lb-close {
+      position: absolute; top: -16px; right: -16px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--gold); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: #fff; z-index: 1; transition: background .2s;
+    }
+    #lb-close:hover { background: var(--gold-lt) }
+
+    @media (max-width: 900px) {
+      .bento { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 180px }
+      .bc-7 { grid-column: span 6 }
+      .bc-5 { grid-column: span 6 }
+      .bc-4 { grid-column: span 6 }
+      .bc-8 { grid-column: span 6 }
+      .bc-6 { grid-column: span 6 }
+      .br-2 { grid-row: span 1 }
+    }
+    /* ================================================
+    IMPACT STATS
+    ================================================ */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px; overflow: hidden; margin-top: 48px;
+    }
+    .stat-cell { padding: 44px 32px; background: rgba(255,255,255,.05); text-align: center }
+    .stat-num { font-family: var(--serif); font-size: 50px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 10px }
+    .stat-label { font-size: 13px; color: rgba(245,241,234,.55); line-height: 1.5 }
+
+    /* ================================================
+    DESIGN DECISIONS
+    ================================================ */
+    .dd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 48px }
+
+    .dd-card {
+      background: var(--ivory); border: 1px solid var(--border);
+      border-radius: 14px; padding: 30px;
+      transition: border-color .25s;
+    }
+    .dd-card:hover { border-color: var(--gold-border) }
+
+    .dd-icon { font-size: 22px; color: #B07020; margin-bottom: 12px }
+    .dd-card h3 { font-family: var(--serif); font-size: 19px; font-weight: 600; color: var(--navy); margin-bottom: 8px }
+    .dd-rationale {
+      font-size: 11px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--gold); margin-top: 14px; margin-bottom: 5px;
+    }
+
+    /* ================================================
+    LEARNINGS
+    ================================================ */
+    .learnings-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 48px }
+
+    .learning-card {
+      background: var(--ivory); border: 1px solid var(--border);
+      border-radius: 14px; padding: 30px;
+      transition: border-color .25s;
+    }
+    .learning-card:hover { border-color: var(--gold-border) }
+    .learning-card__icon { font-size: 26px; margin-bottom: 12px }
+    .learning-card h3 { font-family: var(--serif); font-size: 19px; font-weight: 600; color: var(--navy); margin-bottom: 8px }
+
+    /* ================================================
+    FOOTER
+    ================================================ */
+    .footer { background: var(--navy-deep); padding: 52px 60px }
+    .footer__inner {
+      max-width: 1120px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;
+    }
+    .footer__title { font-family: var(--serif); font-size: 23px; font-weight: 600; color: var(--text-inv); margin-bottom: 4px }
+    .footer__sub { font-size: 12px; color: var(--text-inv-3) }
+    .footer__btns { display: flex; gap: 12px }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 9px;
+      font-size: 13px; font-weight: 500; transition: all .2s; cursor: pointer;
+    }
+    .btn--primary  { background: var(--gold); color: #fff }
+    .btn--primary:hover { background: var(--gold-lt) }
+    .btn--ghost    { border: 1px solid rgba(245,241,234,.22); color: var(--text-inv-2) }
+    .btn--ghost:hover { border-color: rgba(245,241,234,.45); color: var(--text-inv) }
+
+    /* ================================================
+    SCROLL TOP
+    ================================================ */
+    #scroll-top {
+      position: fixed; bottom: 28px; right: 28px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--gold); display: flex; align-items: center;
+      justify-content: center; color: #fff; font-size: 18px;
+      opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 50;
+    }
+    #scroll-top.active { opacity: 1; pointer-events: auto }
+
+    /* ================================================
+    RESPONSIVE
+    ================================================ */
+    @media (max-width: 900px) {
+      .sec { padding: 64px 24px }
+      .hero { grid-template-columns: 1fr; min-height: auto; margin-top: 88px }
+      .hero__left { padding: 28px 24px 44px; margin-top: 0 }
+      .hero__right { height: 260px; margin-top: 0 }
+      .ov__grid { grid-template-columns: 1fr 1fr }
+      .ch-grid, .dd-grid, .learnings-grid { grid-template-columns: 1fr }
+      .comp-grid, .personas-grid, .hmw-grid { grid-template-columns: 1fr }
+      .stats-grid { grid-template-columns: repeat(2, 1fr) }
+      .ds-grid { grid-template-columns: repeat(2, 1fr) }
+      .screens-grid { grid-template-columns: 1fr 1fr }
+      .screen-card.is-open { grid-column: span 2 }
+      .sitemap-sec, .process-sec { padding: 64px 24px }
+      .uf-inner { padding: 0 24px }
+      .orbital { overflow-x: auto; justify-content: flex-start; gap: 8px }
+      .orbital::before { display: none }
+      .orb-xl { width: 140px; height: 140px }
+      .orb-l  { width: 110px; height: 110px }
+      .orb-m  { width: 90px;  height: 90px }
+      .orb-s  { width: 70px;  height: 70px }
+      .footer { padding: 40px 24px }
+      .footer__inner { flex-direction: column; align-items: flex-start }
+    }
+    @media (max-width: 480px) {
+      .ov__grid { grid-template-columns: 1fr }
+      .stats-grid { grid-template-columns: 1fr 1fr }
+      .ds-grid { grid-template-columns: 1fr 1fr }
+      .screens-grid { grid-template-columns: 1fr }
+      .screen-card.is-open { grid-column: span 1 }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ctr"></div>
+
+<!-- BREADCRUMB -->
+<nav class="bc-nav">
+  <div class="bc-left">
+    <a href="../index.html">Portfolio</a>
+    <span class="bc-sep">›</span>
+    <span class="bc-cur">Ally Lingua</span>
+  </div>
+  <div class="bc-tags">
+    <span class="bc-tag bc-tag--gold">UX / UI Design</span>
+    <span class="bc-tag bc-tag--navy">Frontend Dev</span>
+    <span class="bc-tag bc-tag--cream">Education · EU Expats</span>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+HERO
+============================================================ -->
+<div class="hero">
+  <div class="hero__left">
+    <div class="hero__tag">UX Research · UI Design · Frontend Dev</div>
+    <h1 class="hero-title">Ally<br /><em class="hero-title__accent">Lingua</em></h1>
+    <p class="hero__subtitle">An English school built for Russian-speaking Europeans</p>
+    <p class="body hero__desc">
+      End-to-end design and development of a premium bilingual online school -- from zero brand identity to a live, conversion-ready website targeting Russian-speaking expats across the EU.
+    </p>
+    <div class="hero__meta">
+      <div class="hero__meta-item">
+        <span class="lbl">Role</span>
+        <span class="hero__meta-value">UX/UI + Frontend Dev</span>
+      </div>
+      <div class="hero__meta-item">
+        <span class="lbl">Duration</span>
+        <span class="hero__meta-value">6 weeks</span>
+      </div>
+      <!-- <div class="hero__meta-item">
+        <span class="lbl">Type</span>
+        <span class="hero__meta-value">Personal Project</span>
+      </div> -->
+      <div class="hero__meta-item">
+        <span class="lbl">Audience</span>
+        <span class="hero__meta-value">RU-speaking EU expats</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__right">
+    <div class="hero__bg-glow"></div>
+    <div class="hero__deco-ring"></div>
+    <img class="hero__cover" src="./assets/img/case-img/hero-screen.jpg" alt="Ally Lingua website" />
+    <div class="stat-float">
+      <div class="stat-float__num">4M+</div>
+      <div class="stat-float__label">Russian-speaking people living in the EU -- the underserved audience this school was built for</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- OVERVIEW STRIP -->
+<div class="ov">
+  <div class="ov__grid">
+   <!--  <div class="ov__cell">
+      <div class="ov__label">Client</div>
+      <div class="ov__value">Ally Lingua<br />Personal project</div>
+    </div> -->
+    <div class="ov__cell">
+      <div class="ov__label">Deliverables</div>
+      <div class="ov__value">UX Research · Personas · CJM<br />UI Design · Frontend · Bilingual system</div>
+    </div>
+    <div class="ov__cell">
+      <div class="ov__label">Tools</div>
+      <div class="ov__value">Figma · HTML / CSS / JS<br />GSAP · GitHub Pages</div>
+    </div>
+    <div class="ov__cell">
+      <div class="ov__label">Status</div>
+      <div class="ov__value">Live · allylinguaschool.com</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  01 -- PROCESS
+============================================================ -->
+<section class="process-sec">
+  <div class="container">
+    <div class="sec-num rv">01 -- Process</div>
+    <h2 class="sec-h2 rv">Design <em>Process</em></h2>
+    <p class="sec-lead rv">From community observation and expat interviews to a live bilingual website -- every phase grounded in real audience needs, not assumptions.</p>
+
+    <div class="orbital rv">
+      <div class="planet">
+        <div class="planet-num">01</div>
+        <div class="orb orb-s">
+          <div class="orb-glow"></div>
+          <span class="orb-label">Audience<br />Discovery</span>
+        </div>
+        <div class="planet-desc"><strong>Research</strong>Telegram groups, expat forums, 1st-hand experience</div>
+      </div>
+      <div class="p-dash"></div>
+      <div class="planet">
+        <div class="planet-num">02</div>
+        <div class="orb orb-m">
+          <div class="orb-glow"></div>
+          <span class="orb-label">Personas<br />&amp; CJM</span>
+        </div>
+        <div class="planet-desc"><strong>3 personas</strong>Masha · Dmitri · Irina · journey maps</div>
+      </div>
+      <div class="p-dash"></div>
+      <div class="planet">
+        <div class="planet-num">03</div>
+        <div class="orb orb-l">
+          <div class="orb-glow"></div>
+          <span class="orb-label">IA and UX<br />Architecture</span>
+        </div>
+        <div class="planet-desc"><strong>Sitemap</strong>User flows, wireframes, HMW questions</div>
+      </div>
+      <div class="p-dash"></div>
+      <div class="planet">
+        <div class="planet-num">04</div>
+        <div class="orb orb-xl">
+          <div class="orb-glow"></div>
+          <span class="orb-label">UI Design<br />&amp; Build</span>
+        </div>
+        <div class="planet-desc"><strong>2 pages live</strong>Design system, GSAP, bilingual, GDPR</div>
+      </div>
+    </div>
+
+    <div class="process-foot rv">
+      <div class="pfoot-item"><div class="pfoot-dot"></div>Role: <span>UX/UI Designer + Frontend Developer (Solo)</span></div>
+      <!-- <div class="pfoot-item"><div class="pfoot-dot"></div>Type: <span>Personal project</span></div> -->
+      <div class="pfoot-item"><div class="pfoot-dot"></div>Duration: <span>6 weeks</span></div>
+      <div class="pfoot-item"><div class="pfoot-dot"></div>Pages delivered: <span>2 (RU + EN)</span></div>
+      <div class="pfoot-item"><div class="pfoot-dot"></div>Bilingual: <span>RU primary, EN secondary</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  02 -- CHALLENGE AND GOALS
+============================================================ -->
+<section class="sec sec--warm">
+  <div class="container">
+    <div class="sec-num rv">02 -- The Brief</div>
+    <h2 class="sec-h2 rv">Challenge &amp; <em>Goals</em></h2>
+    <p class="sec-lead rv">
+      Ally Lingua existed as a concept -- a personal idea for an English school aimed at Russian speakers in Europe. No brand. No website. No digital presence of any kind. The brief was to build everything from scratch and launch a product that could compete with established schools from day one.
+    </p>
+
+    <div class="ch-grid rv">
+      <div class="ch-card">
+        <div class="ch-card-lbl">The Challenge</div>
+        <h3 class="ch-card-ttl">A school with no identity, entering a crowded market</h3>
+        <p class="ch-card-p">Over 4 million Russian speakers live across EU countries -- many arrived post-2022, needing English urgently for work, healthcare, and daily life. Existing English schools do not speak their language, literally or culturally.</p>
+        <div class="ch-list">
+          <div class="ch-li"><div class="ch-dot"></div><span>No brand, no content, no photography at launch</span></div>
+          <div class="ch-li"><div class="ch-dot"></div><span>Target audience distrusts generic EdTech and language apps</span></div>
+          <div class="ch-li"><div class="ch-dot"></div><span>Bilingual delivery required -- Russian for trust, English as the goal</span></div>
+          <div class="ch-li"><div class="ch-dot"></div><span>GDPR compliance mandatory for EU-based users from day one</span></div>
+        </div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-card-lbl">Goals</div>
+        <h3 class="ch-card-ttl">Three outcomes to design for</h3>
+        <p class="ch-card-p">The design had to work on three levels simultaneously: build trust fast, guide users to the free trial, and leave no legal gaps for an EU audience. Every section earned its place by serving at least one of these goals.</p>
+        <div class="ch-list">
+          <div class="ch-li"><div class="ch-dot"></div><span>Build premium brand perception without any existing social proof</span></div>
+          <div class="ch-li"><div class="ch-dot"></div><span>Create a clear, low-friction path to booking a free trial lesson</span></div>
+          <div class="ch-li"><div class="ch-dot"></div><span>Make teacher profiles feel specific and human, not generic</span></div>
+          <div class="ch-li"><div class="ch-dot"></div><span>Deliver a GDPR-compliant bilingual product ready to scale</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  03 -- COMPETITOR ANALYSIS
+============================================================ -->
+<section class="sec sec--ivory">
+  <div class="container">
+    <div class="sec-num rv">03 -- Research</div>
+    <h2 class="sec-h2 rv">Competitor <em>Analysis</em></h2>
+    <p class="sec-lead rv">
+      Before designing, I benchmarked three comparable online English schools targeting expats or non-native speakers -- to understand what made their digital presence trustworthy, and where the category consistently fails.
+    </p>
+
+    <div class="comp-grid rv">
+      <div class="comp-card">
+        <div class="comp-name">Preply</div>
+        <div class="comp-tag comp-tag--strength">Strength</div>
+        <p class="comp-desc">Massive teacher marketplace with strong social proof -- thousands of verified reviews and granular filters. However the experience feels like a marketplace, not a school. No warmth, no brand voice, no cultural understanding of the Russian-speaking expat who is not just looking for a tutor but for a trusted guide.</p>
+      </div>
+      <div class="comp-card">
+        <div class="comp-name">Skyeng</div>
+        <div class="comp-tag comp-tag--gap">Gap</div>
+        <p class="comp-desc">The dominant RU-language EdTech product -- but built for Russia, not for Europeans. EU-based users face currency friction, time zone mismatches, and content calibrated for life in Russia. The brand does not address the expat identity: living between two cultures and needing English as a bridge to the new one.</p>
+      </div>
+      <div class="comp-card">
+        <div class="comp-name">Local EU language schools</div>
+        <div class="comp-tag comp-tag--mixed">Mixed</div>
+        <p class="comp-desc">Teach English to Western European locals. No Russian-language communication, no acknowledgement of the migrant context. Trust signals are calibrated for a different audience entirely. This leaves a clear and underserved gap: a premium, culturally fluent English school for the Russian-speaking EU diaspora.</p>
+      </div>
+    </div>
+
+    <div class="insight-box rv">
+      <p>The gap in the market is not about teaching quality -- it is about <strong>cultural positioning</strong>. No online school speaks Russian, understands the expat experience, and offers a <strong>premium product built around that identity</strong>. Ally Lingua was designed to own that space.</p>
+      <cite>-- Research insight · Ally Lingua · 2024</cite>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  04 -- PERSONAS
+============================================================ -->
+<section class="sec sec--warm">
+  <div class="container">
+    <div class="sec-num rv">04 -- User Research</div>
+    <h2 class="sec-h2 rv">Three personas, <em>one shared need</em></h2>
+    <p class="sec-lead rv">
+      Research was conducted through community observation in Russian-speaking Telegram and Facebook groups, and through first-hand experience living across South Korea, Portugal, and France -- giving direct access to the expat mindset that no secondary research could replicate.
+    </p>
+
+    <div class="personas-grid rv">
+      <div class="persona-card">
+        <div class="persona-card__top">
+          <div class="persona-avatar"><i class="bi bi-briefcase-fill"></i></div>
+          <div class="persona-name">Masha, 31</div>
+          <div class="persona-role">Marketing Manager · Berlin</div>
+        </div>
+        <div class="persona-card__body">
+          <div class="persona-quote">"I need to present in English at board meetings. My written English is fine but speaking under pressure -- I freeze completely."</div>
+          <div class="persona-needs">
+            <div class="persona-need"><i class="bi bi-check2"></i>Business English for corporate environments</div>
+            <div class="persona-need"><i class="bi bi-check2"></i>Speaking confidence, not grammar drills</div>
+            <div class="persona-need"><i class="bi bi-check2"></i>Flexible schedule -- morning or late evening</div>
+          </div>
+          <span class="persona-badge badge-gold">B2 Level</span>
+          <span class="persona-badge badge-navy">EU-based</span>
+        </div>
+      </div>
+
+      <div class="persona-card">
+        <div class="persona-card__top">
+          <div class="persona-avatar"><i class="bi bi-code-slash"></i></div>
+          <div class="persona-name">Dmitri, 26</div>
+          <div class="persona-role">Software Engineer · Paris</div>
+        </div>
+        <div class="persona-card__body">
+          <div class="persona-quote">"I can code in English no problem. But client calls, networking events -- that is where I disappear. I need to sound fluent, not just functional."</div>
+          <div class="persona-needs">
+            <div class="persona-need"><i class="bi bi-check2"></i>Conversational fluency and natural rhythm</div>
+            <div class="persona-need"><i class="bi bi-check2"></i>Tech vocabulary and professional small talk</div>
+            <div class="persona-need"><i class="bi bi-check2"></i>A teacher who understands the tech world</div>
+          </div>
+          <span class="persona-badge badge-gold">B1-B2</span>
+          <span class="persona-badge badge-green">Career focus</span>
+        </div>
+      </div>
+
+      <div class="persona-card">
+        <div class="persona-card__top">
+          <div class="persona-avatar"><i class="bi bi-house-heart-fill"></i></div>
+          <div class="persona-name">Irina, 44</div>
+          <div class="persona-role">Relocated with family · Amsterdam</div>
+        </div>
+        <div class="persona-card__body">
+          <div class="persona-quote">"We moved for my husband's job. Now I need English for the doctor, the school, the neighbours. I am not stupid. I just never needed it before."</div>
+          <div class="persona-needs">
+            <div class="persona-need"><i class="bi bi-check2"></i>Everyday communication English</div>
+            <div class="persona-need"><i class="bi bi-check2"></i>Patience and encouragement, no pressure</div>
+            <div class="persona-need"><i class="bi bi-check2"></i>Russian-speaking teacher she can trust</div>
+          </div>
+          <span class="persona-badge badge-navy">A2-B1</span>
+          <span class="persona-badge badge-gold">Everyday English</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  05 -- CUSTOMER JOURNEY MAP
+============================================================ -->
+<section class="sec sec--ivory">
+  <div class="container">
+    <div class="sec-num rv">05 -- Customer Journey</div>
+    <h2 class="sec-h2 rv">From first click <em>to first lesson</em></h2>
+    <p class="sec-lead rv">
+      The primary flow maps how Masha -- the career-focused persona -- moves from social discovery to booking a free trial lesson. Pain points from the old non-existent flow become design opportunities in the new product.
+    </p>
+
+    <div class="cjm-wrap rv">
+      <div class="cjm-inner">
+        <table class="cjm-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Discovery</th>
+              <th>First Impression</th>
+              <th>Explore</th>
+              <th>Decision</th>
+              <th>Booking</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Action</td>
+              <td>Sees Instagram post or Google result in Russian</td>
+              <td>Lands on homepage, reads value prop and teachers section</td>
+              <td>Goes to Courses page, selects Business English tab</td>
+              <td>Reads teacher profiles, checks credentials and specialisations</td>
+              <td>Fills in free trial form -- 5 fields -- and submits</td>
+            </tr>
+            <tr>
+              <td>Thinking</td>
+              <td>"Let me see if this is different from other schools"</td>
+              <td>"This looks serious. And it is in Russian -- finally."</td>
+              <td>"Business English -- yes, that is exactly what I need"</td>
+              <td>"Sarah speaks Russian and has corporate experience. She gets it."</td>
+              <td>"Free trial, no commitment -- ok, I will try"</td>
+            </tr>
+            <tr>
+              <td>Feeling</td>
+              <td class="cjm-emotion">😐</td>
+              <td class="cjm-emotion">🙂</td>
+              <td class="cjm-emotion">😊</td>
+              <td class="cjm-emotion">🤩</td>
+              <td class="cjm-emotion">🤞</td>
+            </tr>
+            <tr>
+              <td>Pain points</td>
+              <td><span class="cjm-tag cjm-tag--pain">OLD FLOW</span><br />No website existed -- Instagram bio linked nowhere</td>
+              <td>--</td>
+              <td><span class="cjm-tag cjm-tag--pain">Risk</span><br />Generic courses with no differentiation cause drop-off</td>
+              <td><span class="cjm-tag cjm-tag--pain">Trust gap</span><br />No reviews yet -- profiles must do the trust work alone</td>
+              <td><span class="cjm-tag cjm-tag--pain">Friction</span><br />Long form or phone-only CTA loses mobile users</td>
+            </tr>
+            <tr>
+              <td>Opportunities</td>
+              <td><span class="cjm-tag cjm-tag--opp">Fixed</span><br />Live website as destination for all social traffic</td>
+              <td><span class="cjm-tag cjm-tag--opp">Designed</span><br />Russian-language hero builds trust before any mention of prices</td>
+              <td><span class="cjm-tag cjm-tag--opp">Designed</span><br />3 clear tracks -- Business, General, Children's -- no decision paralysis</td>
+              <td><span class="cjm-tag cjm-tag--opp">Designed</span><br />Named teachers with specific credentials replace generic testimonials</td>
+              <td><span class="cjm-tag cjm-tag--opp">Designed</span><br />5-field form framed as "personalised consultation" not a sales call</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  06 -- HMW QUESTIONS
+============================================================ -->
+<section class="sec sec--warm">
+  <div class="container">
+    <div class="sec-num rv">06 -- Design Strategy</div>
+    <h2 class="sec-h2 rv">How Might We <em>questions</em></h2>
+    <p class="sec-lead rv">Each HMW question was translated directly into a design decision -- not left as abstract intent. Every one of these questions has a visible answer somewhere in the final product.</p>
+
+    <div class="hmw-grid rv">
+      <div class="hmw-card">
+        <div class="hmw-num">1</div>
+        <div class="hmw-icon"><i class="bi bi-shield-check"></i></div>
+        <div class="hmw-q">HMW build trust when we have no reviews, no history, and no accreditation?</div>
+        <div class="hmw-ans">Replace social proof with specificity. Named teachers, real credentials, defined teaching philosophies, and CEFR-mapped programs signal expertise before a single student endorses the school.</div>
+      </div>
+      <div class="hmw-card">
+        <div class="hmw-num">2</div>
+        <div class="hmw-icon"><i class="bi bi-translate"></i></div>
+        <div class="hmw-q">HMW serve a Russian-speaking audience without alienating future EN-speaking students?</div>
+        <div class="hmw-ans">Bilingual architecture with RU/EN toggle. Russian is the emotional, trust-building primary voice. English is the aspirational destination the student is actively working toward. The toggle makes both identities visible at once.</div>
+      </div>
+      <div class="hmw-card">
+        <div class="hmw-num">3</div>
+        <div class="hmw-icon"><i class="bi bi-calendar-check"></i></div>
+        <div class="hmw-q">HMW convert a hesitant visitor into a free trial booking without hard-sell tactics?</div>
+        <div class="hmw-ans">Low-commitment CTA positioned as "personalised consultation." 5-field form -- name, phone, email, level, goal. No pricing pressure, no urgency timers, no countdown clocks. Just one clear, calm next step.</div>
+      </div>
+      <div class="hmw-card">
+        <div class="hmw-num">4</div>
+        <div class="hmw-icon"><i class="bi bi-person-video3"></i></div>
+        <div class="hmw-q">HMW make teacher profiles feel human when we have no student stories yet?</div>
+        <div class="hmw-ans">Each teacher has a name, a specific credential signal, a defined specialisation, and a direct quote that reveals their personality. Designed to feel like meeting a real person, not browsing an anonymous catalogue.</div>
+      </div>
+      <div class="hmw-card">
+        <div class="hmw-num">5</div>
+        <div class="hmw-icon"><i class="bi bi-grid-3x3-gap"></i></div>
+        <div class="hmw-q">HMW present three program tracks without creating decision paralysis?</div>
+        <div class="hmw-ans">Three clearly named tracks -- Business, General, Children's -- each with a single-sentence job description. Tab navigation on the Courses page lets users self-identify quickly without scrolling through everything.</div>
+      </div>
+      <div class="hmw-card">
+        <div class="hmw-num">6</div>
+        <div class="hmw-icon"><i class="bi bi-file-earmark-check"></i></div>
+        <div class="hmw-q">HMW handle GDPR compliance without making legal copy feel like a wall?</div>
+        <div class="hmw-ans">Privacy policy and consent language authored in plain Russian and English -- not generated. Integrated naturally at the form level and in the footer. Compliance built into the UX, not bolted on after the fact.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  07 -- INFORMATION ARCHITECTURE
+============================================================ -->
+<section class="sitemap-sec">
+  <div class="container">
+    <div class="sec-num rv">07 -- Information Architecture</div>
+    <h2 class="sec-h2 rv">Site <em>Map</em></h2>
+    <p class="sec-lead rv">Two pages, deliberately minimal. The architecture is built around the trust journey -- every path leads to either the courses page or the free trial booking. No dead ends, no unnecessary navigation.</p>
+  </div>
+
+  <div class="sitemap-diagram rv">
+    <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" font-family="'Poppins', sans-serif" class="sitemap-svg">
+      <defs>
+        <linearGradient id="gNavy" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#253353" />
+          <stop offset="100%" stop-color="#1E2D4A" />
+        </linearGradient>
+        <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#D4B566" />
+          <stop offset="100%" stop-color="#C9A84C" />
+        </linearGradient>
+        <linearGradient id="gIvory" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#F8F6F0" />
+          <stop offset="100%" stop-color="#EDE8DB" />
+        </linearGradient>
+        <filter id="sh">
+          <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(30,45,74,.12)" />
+        </filter>
+      </defs>
+
+      <!-- Entry -->
+      <rect x="20" y="160" width="110" height="80" rx="10" fill="url(#gNavy)" filter="url(#sh)" />
+      <text x="75" y="193" text-anchor="middle" fill="rgba(245,241,234,.45)" font-size="8" font-weight="700" letter-spacing="1">ENTRY</text>
+      <text x="75" y="212" text-anchor="middle" fill="#F5F1EA" font-size="12" font-weight="600">Instagram</text>
+      <text x="75" y="228" text-anchor="middle" fill="rgba(245,241,234,.5)" font-size="11">/ Google</text>
+
+      <line x1="130" y1="200" x2="168" y2="200" stroke="#DDD8CC" stroke-width="1.5" />
+      <polyline points="163,195 170,200 163,205" stroke="#DDD8CC" stroke-width="1.5" fill="none" />
+
+      <!-- Homepage -->
+      <rect x="170" y="110" width="155" height="180" rx="10" fill="url(#gGold)" filter="url(#sh)" />
+      <text x="248" y="138" text-anchor="middle" fill="rgba(255,255,255,.55)" font-size="8" font-weight="700" letter-spacing="1">HOMEPAGE</text>
+      <text x="248" y="160" text-anchor="middle" fill="white" font-size="13" font-weight="600">index.html</text>
+      <text x="248" y="180" text-anchor="middle" fill="rgba(255,255,255,.75)" font-size="10">Hero · Why Choose</text>
+      <text x="248" y="196" text-anchor="middle" fill="rgba(255,255,255,.75)" font-size="10">Programs · Teachers</text>
+      <text x="248" y="212" text-anchor="middle" fill="rgba(255,255,255,.75)" font-size="10">Reviews · Book Trial</text>
+      <text x="248" y="228" text-anchor="middle" fill="rgba(255,255,255,.60)" font-size="10">FAQ · Blog Articles</text>
+      <text x="248" y="274" text-anchor="middle" fill="rgba(255,255,255,.40)" font-size="9" font-style="italic">1st impression + conversion</text>
+
+      <line x1="325" y1="160" x2="400" y2="125" stroke="#DDD8CC" stroke-width="1.5" />
+      <polyline points="395,120 402,124 397,130" stroke="#DDD8CC" stroke-width="1.5" fill="none" />
+
+      <line x1="325" y1="240" x2="400" y2="275" stroke="#DDD8CC" stroke-width="1.5" />
+      <polyline points="395,270 402,276 396,281" stroke="#DDD8CC" stroke-width="1.5" fill="none" />
+
+      <!-- Courses page -->
+      <rect x="400" y="60" width="165" height="130" rx="10" fill="url(#gIvory)" filter="url(#sh)" />
+      <text x="483" y="88" text-anchor="middle" fill="#8B6E20" font-size="8" font-weight="700" letter-spacing="1">COURSES</text>
+      <text x="483" y="108" text-anchor="middle" fill="#1E2D4A" font-size="13" font-weight="600">courses.html</text>
+      <text x="483" y="127" text-anchor="middle" fill="#6B5548" font-size="10">Business English</text>
+      <text x="483" y="143" text-anchor="middle" fill="#6B5548" font-size="10">General English</text>
+      <text x="483" y="159" text-anchor="middle" fill="#6B5548" font-size="10">Children's English</text>
+      <text x="483" y="178" text-anchor="middle" fill="#9A8070" font-size="9" font-style="italic">Tab navigation</text>
+
+      <line x1="565" y1="125" x2="718" y2="125" stroke="#C9A84C" stroke-width="1.5" />
+      <polyline points="712,120 719,125 712,130" stroke="#C9A84C" stroke-width="1.5" fill="none" />
+      <rect x="718" y="105" width="80" height="40" rx="7" fill="#C9A84C" />
+      <text x="758" y="123" text-anchor="middle" fill="white" font-size="11" font-weight="600">Book Trial</text>
+      <text x="758" y="137" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="9">5-field form</text>
+
+      <!-- Book a lesson -->
+      <rect x="400" y="230" width="165" height="120" rx="10" fill="url(#gNavy)" filter="url(#sh)" />
+      <text x="483" y="258" text-anchor="middle" fill="rgba(245,241,234,.45)" font-size="8" font-weight="700" letter-spacing="1">FREE TRIAL</text>
+      <text x="483" y="278" text-anchor="middle" fill="#F5F1EA" font-size="12" font-weight="600">Book a Lesson</text>
+      <text x="483" y="296" text-anchor="middle" fill="rgba(245,241,234,.68)" font-size="10">Name + Phone</text>
+      <text x="483" y="312" text-anchor="middle" fill="rgba(245,241,234,.68)" font-size="10">Email + Level + Goal</text>
+      <text x="483" y="335" text-anchor="middle" fill="rgba(245,241,234,.40)" font-size="9" font-style="italic">GDPR consent included</text>
+
+      <line x1="565" y1="290" x2="718" y2="290" stroke="#8BA0C4" stroke-width="1.5" />
+      <polyline points="712,285 719,290 712,295" stroke="#8BA0C4" stroke-width="1.5" fill="none" />
+      <rect x="718" y="270" width="80" height="40" rx="7" fill="#1E2D4A" />
+      <text x="758" y="288" text-anchor="middle" fill="white" font-size="11" font-weight="600">Enrolled!</text>
+      <text x="758" y="302" text-anchor="middle" fill="rgba(255,255,255,.55)" font-size="9">Trial lesson</text>
+
+      <!-- RU/EN toggle badge -->
+      <rect x="400" y="200" width="165" height="24" rx="6" fill="#EDE8DB" stroke="#C9A84C" stroke-width="1" />
+      <text x="483" y="216" text-anchor="middle" fill="#8B6E20" font-size="10" font-weight="600">RU / EN Language Toggle</text>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  08 -- USER FLOW
+============================================================ -->
+<section class="sec sec--ivory">
+  <div class="container">
+    <div class="sec-num rv">08 -- User Flow</div>
+    <h2 class="sec-h2 rv">From first visit <em>to first booking</em></h2>
+    <p class="sec-lead rv">Two user types, two paths, one shared conversion goal. The flows were designed to be short and purposeful -- every step earns the next one.</p>
+  </div>
+
+  <div class="uf-scroll rv">
+    <div class="uf-inner">
+      <div class="uf-header">
+        <div class="uf-header-spacer"></div>
+        <div class="uf-header-cell">Entry</div>
+        <div class="uf-header-cell">Landing</div>
+        <div class="uf-header-cell">Explore</div>
+        <div class="uf-header-cell">Decision</div>
+        <div class="uf-header-cell">Action</div>
+        <div class="uf-header-cell">Outcome</div>
+      </div>
+
+      <div class="uf-lane">
+        <div class="uf-lane-label">Career learner</div>
+        <div class="uf-col">
+          <div class="uf-box">Instagram<br />/ Google</div>
+          <div class="uf-sub">Discovery</div>
+        </div>
+        <svg class="uf-arrow" width="32" height="14" viewBox="0 0 32 14">
+          <line x1="0" y1="7" x2="25" y2="7" stroke="#DDD8CC" stroke-width="1.5" />
+          <polyline points="18,2 25,7 18,12" stroke="#DDD8CC" stroke-width="1.5" fill="none" />
+        </svg>
+        <div class="uf-col">
+          <div class="uf-box uf-box--accent">Homepage</div>
+          <div class="uf-sub">1st impression</div>
+        </div>
+        <svg class="uf-arrow" width="32" height="14" viewBox="0 0 32 14">
+          <line x1="0" y1="7" x2="25" y2="7" stroke="#DDD8CC" stroke-width="1.5" />
+          <polyline points="18,2 25,7 18,12" stroke="#DDD8CC" stroke-width="1.5" fill="none" />
+        </svg>
+        <div class="uf-col">
+          <div class="uf-box uf-box--accent">Courses page</div>
+          <div class="uf-sub">Browse programs</div>
+        </div>
+        <svg class="uf-arrow" width="32" height="14" viewBox="0 0 32 14">
+          <line x1="0" y1="7" x2="25" y2="7" stroke="#DDD8CC" stroke-width="1.5" />
+          <polyline points="18,2 25,7 18,12" stroke="#DDD8CC" stroke-width="1.5" fill="none" />
+        </svg>
+        <div class="uf-col">
+          <div class="uf-box uf-box--decision">Teacher profiles</div>
+          <div class="uf-sub">Trust check</div>
+        </div>
+        <svg class="uf-arrow" width="32" height="14" viewBox="0 0 32 14">
+          <line x1="0" y1="7" x2="25" y2="7" stroke="#DDD8CC" stroke-width="1.5" />
+          <polyline points="18,2 25,7 18,12" stroke="#DDD8CC" stroke-width="1.5" fill="none" />
+        </svg>
+        <div class="uf-col">
+          <div class="uf-box uf-box--accent">Book free trial</div>
+          <div class="uf-sub">5-field form</div>
+        </div>
+        <svg class="uf-arrow" width="32" height="14" viewBox="0 0 32 14">
+          <line x1="0" y1="7" x2="25" y2="7" stroke="#DDD8CC" stroke-width="1.5" />
+          <polyline points="18,2 25,7 18,12" stroke="#DDD8CC" stroke-width="1.5" fill="none" />
+        </svg>
+        <div class="uf-col">
+          <div class="uf-box uf-box--gold">Enrolled</div>
+          <div class="uf-sub">Trial lesson</div>
+        </div>
+      </div>
+
+      <div class="uf-lane">
+        <div class="uf-lane-label">Everyday learner</div>
+        <div class="uf-col">
+          <div class="uf-box">Word of<br />mouth</div>
+        </div>
+        <svg class="uf-arrow" width="32" height="14" viewBox="0 0 32 14">
+          <line x1="0" y1="7" x2="25" y2="7" stroke="#DDD8CC" stroke-width="1.5" />
+          <polyline points="18,2 25,7 18,12" stroke="#DDD8CC" stroke-width="1.5" fill="none" />
+        </svg>
+        <div class="uf-col">
+          <div class="uf-box uf-box--accent">Homepage<br />(Russian)</div>
+          <div class="uf-sub">Immediate trust</div>
+        </div>
+        <svg class="uf-arrow" width="32" height="14" viewBox="0 0 32 14">
+          <line x1="0" y1="7" x2="25" y2="7" stroke="#DDD8CC" stroke-width="1.5" />
+          <polyline points="18,2 25,7 18,12" stroke="#DDD8CC" stroke-width="1.5" fill="none" />
+        </svg>
+        <div class="uf-col">
+          <div class="uf-box uf-box--accent">General English<br />track</div>
+          <div class="uf-sub">Self-select</div>
+        </div>
+        <svg class="uf-arrow" width="32" height="14" viewBox="0 0 32 14">
+          <line x1="0" y1="7" x2="25" y2="7" stroke="#DDD8CC" stroke-width="1.5" />
+          <polyline points="18,2 25,7 18,12" stroke="#DDD8CC" stroke-width="1.5" fill="none" />
+        </svg>
+        <div class="uf-col">
+          <div class="uf-box uf-box--decision">FAQ section</div>
+          <div class="uf-sub">Objections handled</div>
+        </div>
+        <svg class="uf-arrow" width="32" height="14" viewBox="0 0 32 14">
+          <line x1="0" y1="7" x2="25" y2="7" stroke="#DDD8CC" stroke-width="1.5" />
+          <polyline points="18,2 25,7 18,12" stroke="#DDD8CC" stroke-width="1.5" fill="none" />
+        </svg>
+        <div class="uf-col">
+          <div class="uf-box uf-box--accent">Book free trial</div>
+          <div class="uf-sub">Low friction</div>
+        </div>
+        <svg class="uf-arrow" width="32" height="14" viewBox="0 0 32 14">
+          <line x1="0" y1="7" x2="25" y2="7" stroke="#DDD8CC" stroke-width="1.5" />
+          <polyline points="18,2 25,7 18,12" stroke="#DDD8CC" stroke-width="1.5" fill="none" />
+        </svg>
+        <div class="uf-col">
+          <div class="uf-box uf-box--gold">Enrolled</div>
+          <div class="uf-sub">Trial lesson</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  09 -- DESIGN SYSTEM
+============================================================ -->
+<section class="sec sec--warm">
+  <div class="container">
+    <div class="sec-num rv">09 -- Design System</div>
+    <h2 class="sec-h2 rv">Visual <em>Language</em></h2>
+    <p class="sec-lead rv">A complete editorial design system -- tokens, typography, and components -- built to convey premium positioning before a single line of copy is read. The visual language does positioning work independently of the content.</p>
+
+    <div class="ds-grid rv">
+      <div class="ds-card">
+        <div class="ds-card__label">Colour Palette</div>
+        <div class="color-swatches">
+          <div class="swatch swatch--navy"><span>Navy · Primary brand</span></div>
+          <div class="swatch swatch--gold"><span>Gold · Accent + CTAs</span></div>
+          <div class="swatch swatch--ivory"><span>Ivory · Background</span></div>
+          <div class="swatch swatch--cream"><span>Cream · Secondary bg</span></div>
+          <div class="swatch swatch--charcoal"><span>Charcoal · Body text</span></div>
+        </div>
+      </div>
+
+      <div class="ds-card">
+        <div class="ds-card__label">Typography</div>
+        <p class="ds-type-display">Playfair Display</p>
+        <p class="ds-type-label">H1-H3 · Serif · Trust + Premium</p>
+        <p class="ds-type-serif2">Cormorant Garamond</p>
+        <p class="ds-type-label">Accent · Quotes · Elegance</p>
+        <p class="ds-type-sans">Poppins</p>
+        <p class="ds-type-label">Body · UI · Labels · Readability</p>
+      </div>
+
+      <div class="ds-card">
+        <div class="ds-card__label">Spacing Scale</div>
+        <div class="ds-spacing-list">
+          <div class="ds-spacing-item"><div class="ds-spacing-bar ds-spacing-bar--4"></div><span class="ds-spacing-text">4px · Micro</span></div>
+          <div class="ds-spacing-item"><div class="ds-spacing-bar ds-spacing-bar--8"></div><span class="ds-spacing-text">8px · Tight</span></div>
+          <div class="ds-spacing-item"><div class="ds-spacing-bar ds-spacing-bar--16"></div><span class="ds-spacing-text">16px · Default</span></div>
+          <div class="ds-spacing-item"><div class="ds-spacing-bar ds-spacing-bar--32"></div><span class="ds-spacing-text">32px · Section gap</span></div>
+          <div class="ds-spacing-item"><div class="ds-spacing-bar ds-spacing-bar--64"></div><span class="ds-spacing-text">100px · Page section</span></div>
+        </div>
+      </div>
+
+      <div class="ds-card">
+        <div class="ds-card__label">Component Tokens</div>
+        <div class="ds-token-row"><strong>Border radius:</strong> 8 / 12 / 14 / 18px</div>
+        <div class="ds-token-row"><strong>Shadow:</strong> 0 6px 36px rgba(navy, .08)</div>
+        <div class="ds-token-row"><strong>Transition:</strong> .25s ease all</div>
+        <div class="ds-token-row"><strong>Eyebrow:</strong> 10px / 700 / .18em tracking</div>
+        <div class="ds-token-row"><strong>Max-width:</strong> 1360px container</div>
+        <div class="ds-token-row"><strong>Cursor:</strong> Custom gold dot + ring</div>
+        <div class="ds-token-row"><strong>Animation:</strong> GSAP ScrollTrigger</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  10 -- SCREENS
+============================================================ -->
+<!-- ============================================================
+  10 -- PAGES DELIVERED
+============================================================ -->
+<section class="sec sec--ivory">
+  <div class="container">
+    <div class="sec-num rv">10 -- Pages Delivered</div>
+    <h2 class="sec-h2 rv">The site, <em>section by section</em></h2>
+    <p class="sec-lead rv">Every section designed to answer a specific question in the visitor's trust journey -- from first impression to booking.</p>
+
+    <div class="bento rv">
+
+      <!-- Homepage Hero - tall, 2 rows -->
+      <div class="bento-cell bc-7 br-2" onclick="openLightbox('./assets/img/case-img/screen-hero.jpg', 'Homepage - Hero')">
+        <img class="bento-img" src="./assets/img/case-img/screen-hero.jpg" alt="Hero"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="bento-ph" style="display:none">
+          <i class="bi bi-image"></i><p>Homepage - Hero</p><small>screen-hero.jpg</small>
+        </div>
+        <div class="bento-cap">
+          <div class="bento-cap-title">Homepage - Hero</div>
+          <div class="bento-cap-sub">Editorial split layout · bilingual headline · premium photography zone</div>
+        </div>
+      </div>
+
+      <!-- Stat tile -->
+      <div class="bento-cell bc-5 bento-stat bento-no-cursor">
+        <div class="bento-stat-num">0 to 1</div>
+        <div class="bento-stat-lbl">First digital presence built entirely from scratch</div>
+      </div>
+
+      <!-- Why Choose section -->
+      <div class="bento-cell bc-5" onclick="openLightbox('./assets/img/case-img/screen-why.jpg', 'Why Choose Ally Lingua')">
+        <img class="bento-img" src="./assets/img/case-img/screen-why.jpg" alt="Why Choose"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="bento-ph" style="display:none">
+          <i class="bi bi-image"></i><p>Why Choose section</p><small>screen-why.jpg</small>
+        </div>
+        <div class="bento-cap">
+          <div class="bento-cap-title">Why Choose Ally Lingua</div>
+          <div class="bento-cap-sub">3 value props · Fluency · Tailored · Any time</div>
+        </div>
+      </div>
+
+      <!-- Programs -->
+      <div class="bento-cell bc-6" onclick="openLightbox('./assets/img/case-img/screen-programs.jpg', 'Our Programs')">
+        <img class="bento-img" src="./assets/img/case-img/screen-programs.jpg" alt="Programs"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="bento-ph" style="display:none">
+          <i class="bi bi-image"></i><p>Programs section</p><small>screen-programs.jpg</small>
+        </div>
+        <div class="bento-cap">
+          <div class="bento-cap-title">Our Programs</div>
+          <div class="bento-cap-sub">Business · General · Children's · Tab select</div>
+        </div>
+      </div>
+
+      <!-- Teachers - tall, 2 rows -->
+      <div class="bento-cell bc-6 br-2" onclick="openLightbox('./assets/img/case-img/screen-teachers.jpg', 'Meet Our Teachers')">
+        <img class="bento-img" src="./assets/img/case-img/screen-teachers.jpg" alt="Teachers"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="bento-ph" style="display:none">
+          <i class="bi bi-image"></i><p>Teachers section</p><small>screen-teachers.jpg</small>
+        </div>
+        <div class="bento-cap">
+          <div class="bento-cap-title">Meet Our Teachers</div>
+          <div class="bento-cap-sub">4 named profiles · Credentials · Quotes · Specialisations</div>
+        </div>
+      </div>
+
+      <!-- Info tile -->
+      <div class="bento-cell bc-6 bento-info bento-no-cursor">
+        <i class="bi bi-translate"></i>
+        <div class="bento-info-title">Full bilingual RU/EN system -- trust in Russian, aspirations in English</div>
+        <div class="bento-info-sub">Separate file architecture, seamless toggle, zero page reload</div>
+      </div>
+
+      <!-- Book trial -->
+      <div class="bento-cell bc-4" onclick="openLightbox('./assets/img/case-img/screen-book.jpg', 'Book Free Trial')">
+        <img class="bento-img" src="./assets/img/case-img/screen-book.jpg" alt="Book Trial"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="bento-ph" style="display:none">
+          <i class="bi bi-image"></i><p>Book Trial section</p><small>screen-book.jpg</small>
+        </div>
+        <div class="bento-cap">
+          <div class="bento-cap-title">Book a Free Trial Lesson</div>
+          <div class="bento-cap-sub">5-field form · No hard sell · GDPR consent</div>
+        </div>
+      </div>
+
+      <!-- Courses page - wide -->
+      <div class="bento-cell bc-8" onclick="openLightbox('./assets/img/case-img/screen-courses.jpg', 'Courses Page')">
+        <img class="bento-img" src="./assets/img/case-img/screen-courses.jpg" alt="Courses"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="bento-ph" style="display:none">
+          <i class="bi bi-image"></i><p>Courses page</p><small>screen-courses.jpg</small>
+        </div>
+        <div class="bento-cap">
+          <div class="bento-cap-title">Courses Page</div>
+          <div class="bento-cap-sub">Dedicated page · CEFR levels · Program detail · CTA</div>
+        </div>
+      </div>
+
+      <!-- FAQ + Articles - wide -->
+      <div class="bento-cell bc-8" onclick="openLightbox('./assets/img/case-img/screen-faq.jpg', 'FAQ and Articles')">
+        <img class="bento-img" src="./assets/img/case-img/screen-faq.jpg" alt="FAQ"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="bento-ph" style="display:none">
+          <i class="bi bi-image"></i><p>FAQ and Articles</p><small>screen-faq.jpg</small>
+        </div>
+        <div class="bento-cap">
+          <div class="bento-cap-title">FAQ and Articles</div>
+          <div class="bento-cap-sub">Objection handling · 5 questions · Resource blog</div>
+        </div>
+      </div>
+
+      <!-- Footer stat -->
+      <div class="bento-cell bc-4 bento-stat bento-no-cursor">
+        <div class="bento-stat-num">GDPR</div>
+        <div class="bento-stat-lbl">EU-compliant from day one -- consent built into the UX</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lb" onclick="closeLightbox()">
+  <div id="lb-inner" onclick="event.stopPropagation()">
+    <button id="lb-close" onclick="closeLightbox()"><i class="bi bi-x-lg"></i></button>
+    <img id="lb-img" src="" alt="" />
+    <div id="lb-caption"></div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  11 -- IMPACT
+============================================================ -->
+<section class="sec sec--navy">
+  <div class="container">
+    <div class="sec-num rv" style="color:rgba(255,255,255,.3)">11 -- Impact</div>
+    <h2 class="sec-h2--inv rv">From concept <em>to conversion-ready</em></h2>
+    <p class="sec-lead--inv rv">A complete digital identity built from zero -- designed to compete with established online schools from day one.</p>
+
+    <div class="stats-grid rv">
+      <div class="stat-cell">
+        <div class="stat-num">0 to 1</div>
+        <div class="stat-label">Complete brand and web presence created from scratch -- no templates, no generators</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Languages delivered -- full bilingual site with seamless toggle and separate file architecture</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Program tracks designed end-to-end -- Business, General, and Children's English</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">GDPR</div>
+        <div class="stat-label">EU-compliant from launch -- privacy policy authored in scope, consent integrated into UX</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  12 -- TRADE-OFFS
+============================================================ -->
+<section class="sec sec--warm">
+  <div class="container">
+    <div class="sec-num rv">12 -- Constraints and Trade-offs</div>
+    <h2 class="sec-h2 rv">What I had to <em>work around</em></h2>
+    <p class="sec-lead rv">Senior design is about decision-making under constraints -- what got built, what got cut, and why.</p>
+
+    <div class="dd-grid rv">
+      <div class="dd-card">
+        <i class="bi bi-exclamation-triangle-fill dd-icon"></i>
+        <h3>No photography at launch</h3>
+        <p class="body-sm">The school had no images of teachers, lessons, or the learning environment. In education, photography is the primary trust signal. Its absence is not a minor gap -- it is a structural problem that the design had to compensate for actively.</p>
+        <div class="dd-rationale">Decision</div>
+        <p class="body-sm">The layout was architected to be photography-ready -- image zones with defined proportions and placeholder states that do not look empty. A photography brief was included in the handoff. The site upgrades dramatically when real images are added, with zero redesign required.</p>
+      </div>
+      <div class="dd-card">
+        <i class="bi bi-exclamation-triangle-fill dd-icon"></i>
+        <h3>No testimonials or social proof</h3>
+        <p class="body-sm">A new school has no reviews, no ratings, no case study students. Testimonials are the most effective trust signal in education. Starting without them is a significant disadvantage that the design had to compensate for with other means.</p>
+        <div class="dd-rationale">Decision</div>
+        <p class="body-sm">Social proof was replaced with specificity. Named teachers with real credentials, CEFR-mapped programs, methodology stat blocks. The design signals expertise through precision -- an approach that holds up even as real testimonials are collected and added over time.</p>
+      </div>
+      <div class="dd-card">
+        <i class="bi bi-exclamation-triangle-fill dd-icon"></i>
+        <h3>Bilingual UX without a CMS</h3>
+        <p class="body-sm">Maintaining two languages in a static HTML/CSS/JS build means duplicating files manually. Without a CMS or i18n library, this creates editing overhead and synchronisation risk as content evolves and grows.</p>
+        <div class="dd-rationale">Decision</div>
+        <p class="body-sm">A file-duplication architecture was chosen -- separate RU and EN HTML files with a clean redirect script. This sacrifices edit efficiency for zero external dependencies and fast load performance. A migration path to a CMS was documented for the next phase.</p>
+      </div>
+      <div class="dd-card">
+        <i class="bi bi-exclamation-triangle-fill dd-icon"></i>
+        <h3>No booking or payment infrastructure</h3>
+        <p class="body-sm">A fully online school ideally has an integrated booking calendar, payment processor, and student portal. None of these existed in scope -- nor did the backend infrastructure needed to support them at launch stage.</p>
+        <div class="dd-rationale">Decision</div>
+        <p class="body-sm">The free trial form collects enough information for a manual follow-up call. This is intentional. For the launch phase, human-led onboarding creates a better first impression than a clunky automated system. Automation is the correct next step once students exist to automate for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  13 -- LEARNINGS
+============================================================ -->
+<section class="sec sec--ivory">
+  <div class="container">
+    <div class="sec-num rv">13 -- Reflections</div>
+    <h2 class="sec-h2 rv">What I <em>learnt</em></h2>
+
+    <div class="learnings-grid rv">
+      <div class="learning-card">
+        <!-- <div class="learning-card__icon">🌍</div> -->
+        <h3>Designing for a diaspora means designing for dual identity</h3>
+        <p class="body-sm">Russian-speaking expats live in two worlds simultaneously -- their culture of origin and their adopted country. The bilingual design is not just functional. Russian as the primary language says: I understand where you are from. English as the product says: I know where you are going. That duality is the product itself.</p>
+      </div>
+      <div class="learning-card">
+        <!-- <div class="learning-card__icon">🎨</div> -->
+        <h3>Premium aesthetics are a trust mechanism, not just aesthetics</h3>
+        <p class="body-sm">Going editorial and premium when the EdTech category defaults to bright rounded sans-serifs was not just a style preference -- it was a deliberate positioning decision. The visual language signals that this school takes itself seriously, which makes educated, discerning users take it seriously too.</p>
+      </div>
+      <div class="learning-card">
+        <!-- <div class="learning-card__icon">📸</div> -->
+        <h3>Designing for content you do not yet have is a senior skill</h3>
+        <p class="body-sm">No photography. No testimonials. No student stories. The architecture had to be honest about what exists and confident about what will come. Designing photography-ready zones rather than placeholder-filled layouts means the site improves dramatically as real content is produced -- without a redesign.</p>
+      </div>
+      <div class="learning-card">
+        <!-- <div class="learning-card__icon">🤝</div> -->
+        <h3>Empathy-informed design performs -- especially in education</h3>
+        <p class="body-sm">Living across three countries gave direct access to the expat experience that no secondary research could replicate. Understanding that moving abroad is emotionally disorienting -- and that English fluency feels like control over your own life -- shaped every CTA, every headline, and every piece of microcopy. The best research is sometimes lived experience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <div class="footer__title">Let's work together</div>
+      <div class="footer__sub">UX/UI Design · Frontend Development</div>
+    </div>
+    <div class="footer__btns">
+      <a href="https://yanaharcourt.dev" class="btn btn--primary" target="_blank">View Portfolio</a>
+      <a href="mailto:yana.harcourt@gmail.com" class="btn btn--ghost">Get in touch</a>
+    </div>
+  </div>
+</footer>
+
+<a href="#" id="scroll-top">^</a>
+
+<script>
+  /* Custom cursor */
+  const cur = document.getElementById('cur');
+  const ctr = document.getElementById('ctr');
+  let mx = innerWidth / 2, my = innerHeight / 2, tx = mx, ty = my;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY });
+  (function tick() {
+    cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+    tx += (mx - tx) * .12; ty += (my - ty) * .12;
+    ctr.style.left = tx + 'px'; ctr.style.top = ty + 'px';
+    requestAnimationFrame(tick);
+  })();
+
+  /* Scroll reveal */
+  const io = new IntersectionObserver(
+    es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') }),
+    { threshold: 0.06 }
+  );
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  /* Scroll top */
+  const st = document.getElementById('scroll-top');
+  window.addEventListener('scroll', () =>
+    scrollY > 300 ? st.classList.add('active') : st.classList.remove('active')
+  );
+  st.addEventListener('click', e => {
+    e.preventDefault();
+    scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* Screen card expand/collapse */
+  function toggleScreen(card) {
+    const wasOpen = card.classList.contains('is-open');
+    document.querySelectorAll('.screen-card.is-open').forEach(c => {
+      c.classList.remove('is-open');
+      const t = c.querySelector('.screen-card__toggle');
+      if (t) t.textContent = 'Expand';
+    });
+    if (!wasOpen) {
+      card.classList.add('is-open');
+      const toggle = card.querySelector('.screen-card__toggle');
+      if (toggle) toggle.textContent = 'Collapse';
+    }
+  }
+</script>
+<script>
+  function openLightbox(src, caption) {
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-caption').textContent = caption;
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox() });
+</script>
+</body>
+</html>
