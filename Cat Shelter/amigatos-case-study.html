@@ -512,6 +512,15 @@
       line-height: 1.65;
     }
 
+    .ov__value a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .ov__value a:hover {
+      text-decoration: underline;
+    }
+
     /* ── PROCESS ORBITAL ── */
     .process-sec {
       background: var(--dk);
@@ -546,18 +555,6 @@
       gap: 0;
       margin: 56px 0 40px;
       position: relative;
-    }
-
-    .orbital::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 50%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(196, 113, 90, .2) 10%, rgba(196, 113, 90, .2) 90%, transparent);
-      transform: translateY(-50%);
-      pointer-events: none;
     }
 
     .planet {
@@ -1148,8 +1145,6 @@
       padding-bottom: 8px;
     }
 
-    .uf-header-spacer {}
-
     .uf-header-cell {
       font-size: 9px;
       font-weight: 700;
@@ -1689,8 +1684,6 @@
       justify-content: space-between;
     }
 
-    .screen-card__cap-info {}
-
     .screen-card__cap-title {
       font-size: 13px;
       font-weight: 600;
@@ -2171,6 +2164,31 @@
       pointer-events: auto;
     }
 
+    /* Lightbox for screens */
+    #screens-lb {
+      display: none; position: fixed; inset: 0; z-index: 5000;
+      background: rgba(0,0,0,.92); backdrop-filter: blur(16px);
+      align-items: flex-start; justify-content: center;
+      padding: 32px; overflow-y: auto;
+    }
+    #screens-lb.open { display: flex }
+    #screens-lb-inner { position: relative; max-width: 1280px; width: 100%; margin: auto }
+    #screens-lb-img {
+      width: 100%; border-radius: 12px;
+      box-shadow: 0 0 80px rgba(0,0,0,.6); display: block;
+    }
+    #screens-lb-caption {
+      text-align: center; margin-top: 14px;
+      font-size: 13px; color: rgba(255,255,255,.35); letter-spacing: .04em;
+    }
+    #screens-lb-close {
+      position: absolute; top: -16px; right: -16px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #C9A84C; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: #fff; z-index: 1; transition: background .2s;
+    }
+    #screens-lb-close:hover { background: #D4B566 }
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .sec {
@@ -2321,8 +2339,8 @@
 
 
   <!-- ══════════════════════════════════
-     HERO
-══════════════════════════════════ -->
+  HERO
+  ══════════════════════════════════ -->
   <div class="hero">
     <div class="hero__left">
       <div class="hero__tag">UX Research · UI Design · Frontend Dev</div>
@@ -2351,7 +2369,7 @@
       </div>
     </div>
     <div class="hero__right">
-      
+
       <img class="hero__cover" src="./assets/img/case-img/screen-homepage.png" alt="Amigatos shelter"
         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
       <div class="hero__placeholder" style="display:none">
@@ -2367,8 +2385,8 @@
 
 
   <!-- ══════════════════════════════════
-     OVERVIEW STRIP
-══════════════════════════════════ -->
+  OVERVIEW STRIP
+  ══════════════════════════════════ -->
   <div class="ov">
     <div class="ov__grid">
       <div class="ov__cell">
@@ -2385,15 +2403,19 @@
       </div>
       <div class="ov__cell">
         <div class="ov__label">Status</div>
-        <div class="ov__value">Live — amigatosdamilkinha.org</div>
+        <div class="ov__value">
+          <a href="https://yanaharcourt.dev/Amigatos-da-Milkinha/" target="_blank" rel="noopener noreferrer">
+            Live — amigatosdamilkinha.org
+          </a>
+        </div>
       </div>
     </div>
   </div>
 
 
   <!-- ══════════════════════════════════
-     01 — DESIGN PROCESS
-══════════════════════════════════ -->
+  01 — DESIGN PROCESS
+  ══════════════════════════════════ -->
   <section class="process-sec">
     <div class="container">
       <div class="sec-num rv">01 — Process</div>
@@ -2465,8 +2487,8 @@
 
 
   <!-- ══════════════════════════════════
-     02 — CHALLENGE & GOALS
-══════════════════════════════════ -->
+  02 — CHALLENGE & GOALS
+  ══════════════════════════════════ -->
   <section class="sec sec--warm">
     <div class="container">
       <div class="sec-num rv">02 — The Brief</div>
@@ -2527,8 +2549,8 @@
 
 
   <!-- ══════════════════════════════════
-     03 — NGO LANDSCAPE RESEARCH
-══════════════════════════════════ -->
+  03 — NGO LANDSCAPE RESEARCH
+  ══════════════════════════════════ -->
   <section class="sec sec--cream">
     <div class="container">
       <div class="sec-num rv">03 — Research</div>
@@ -2570,8 +2592,8 @@
 
 
   <!-- ══════════════════════════════════
-     04 — FIELD RESEARCH
-══════════════════════════════════ -->
+  04 — FIELD RESEARCH
+  ══════════════════════════════════ -->
   <section class="sec sec--warm">
     <div class="container">
       <div class="sec-num rv">04 — User Research</div>
@@ -2623,8 +2645,8 @@
 
 
   <!-- ══════════════════════════════════
-     05 — PERSONAS
-══════════════════════════════════ -->
+  05 — PERSONAS
+  ══════════════════════════════════ -->
   <section class="sec sec--cream">
     <div class="container">
       <div class="sec-num rv">05 — Personas</div>
@@ -2716,8 +2738,8 @@
 
 
   <!-- ══════════════════════════════════
-     06 — CJM
-══════════════════════════════════ -->
+  06 — CJM
+  ══════════════════════════════════ -->
   <section class="sec sec--warm">
     <div class="container">
       <div class="sec-num rv">06 — Customer Journey Map</div>
@@ -2832,8 +2854,8 @@
 
 
   <!-- ══════════════════════════════════
-     07 — INFORMATION ARCHITECTURE
-══════════════════════════════════ -->
+  07 — INFORMATION ARCHITECTURE
+  ══════════════════════════════════ -->
   <section class="sitemap-sec">
     <div class="container">
       <div class="sec-num rv">07 — Information Architecture</div>
@@ -2964,8 +2986,8 @@
 
 
   <!-- ══════════════════════════════════
-     08 — USER FLOW
-══════════════════════════════════ -->
+  08 — USER FLOW
+  ══════════════════════════════════ -->
   <section class="sec sec--cream">
     <div class="container">
       <div class="sec-num rv">08 — User Flow</div>
@@ -3141,8 +3163,8 @@
 
 
   <!-- ══════════════════════════════════
-     09 — DESIGN DECISIONS
-══════════════════════════════════ -->
+  09 — DESIGN DECISIONS
+  ══════════════════════════════════ -->
   <section class="sec sec--warm">
     <div class="container">
       <div class="sec-num rv">09 — Design Decisions</div>
@@ -3197,8 +3219,8 @@
 
 
   <!-- ══════════════════════════════════
-     10 — API TECHNICAL
-══════════════════════════════════ -->
+  10 — API TECHNICAL
+  ══════════════════════════════════ -->
   <section class="sec sec--cream">
     <div class="container">
       <div class="sec-num rv">10 — Technical Architecture</div>
@@ -3289,8 +3311,8 @@
 
 
   <!-- ══════════════════════════════════
-     11 — DESIGN SYSTEM
-══════════════════════════════════ -->
+  11 — DESIGN SYSTEM
+  ══════════════════════════════════ -->
   <section class="sec sec--warm">
     <div class="container">
       <div class="sec-num rv">11 — Design System</div>
@@ -3353,23 +3375,24 @@
 
 
   <!-- ══════════════════════════════════
-     12 — SCREENS GALLERY
-══════════════════════════════════ -->
+  12 — SCREENS GALLERY
+  ══════════════════════════════════ -->
   <section class="sec sec--cream">
     <div class="container">
       <div class="sec-num rv">12 — Pages Delivered</div>
       <h2 class="sec-h2 rv">Three screens, <em>one mission</em></h2>
-      <p class="sec-lead rv sec-lead--no-mb">Each page has one job. Click any card to expand and see the full page.</p>
+      <p class="sec-lead rv sec-lead--no-mb">Each page has one job. Click any card to view it full size.</p>
 
       <div class="screens-grid rv">
 
-        <div class="screen-card" onclick="toggleScreen(this)">
+        <div class="screen-card"
+          onclick="openScreenLightbox('./assets/img/case-img/screen-homepage.png', 'Homepage — Hero · About · Process · CTA')">
           <div class="screen-card__bar">
             <div class="screen-card__dot-r"></div>
             <div class="screen-card__dot-y"></div>
             <div class="screen-card__dot-g"></div>
             <span class="screen-card__label">index.html</span>
-            <span class="screen-card__toggle">Expand</span>
+            <span class="screen-card__toggle">View</span>
           </div>
           <div class="screen-card__preview">
             <img class="screen-card__img" src="./assets/img/case-img/screen-homepage.png" alt="Homepage"
@@ -3387,13 +3410,14 @@
           </div>
         </div>
 
-        <div class="screen-card" onclick="toggleScreen(this)">
+        <div class="screen-card"
+          onclick="openScreenLightbox('./assets/img/case-img/screen-cats-grid.png', 'Cats Grid — Live API · filter · shuffle · overlay')">
           <div class="screen-card__bar">
             <div class="screen-card__dot-r"></div>
             <div class="screen-card__dot-y"></div>
             <div class="screen-card__dot-g"></div>
             <span class="screen-card__label">cats_grid.html</span>
-            <span class="screen-card__toggle">Expand</span>
+            <span class="screen-card__toggle">View</span>
           </div>
           <div class="screen-card__preview">
             <img class="screen-card__img" src="./assets/img/case-img/screen-cats-grid.png" alt="Cats Grid"
@@ -3411,13 +3435,14 @@
           </div>
         </div>
 
-        <div class="screen-card" onclick="toggleScreen(this)">
+        <div class="screen-card"
+          onclick="openScreenLightbox('./assets/img/case-img/screen-donate.png', 'Donation Page — Preset amounts · IBAN · MB Way')">
           <div class="screen-card__bar">
             <div class="screen-card__dot-r"></div>
             <div class="screen-card__dot-y"></div>
             <div class="screen-card__dot-g"></div>
             <span class="screen-card__label">donate.html</span>
-            <span class="screen-card__toggle">Expand</span>
+            <span class="screen-card__toggle">View</span>
           </div>
           <div class="screen-card__preview">
             <img class="screen-card__img" src="./assets/img/case-img/screen-donate.png" alt="Donate page"
@@ -3435,38 +3460,23 @@
           </div>
         </div>
 
-        <!-- <div class="screen-card screen-card--mobile" onclick="toggleScreen(this)">
-          <div class="screen-card__bar">
-            <div class="screen-card__dot-r"></div>
-            <div class="screen-card__dot-y"></div>
-            <div class="screen-card__dot-g"></div>
-            <span class="screen-card__label">Mobile</span>
-            <span class="screen-card__toggle">Expand</span>
-          </div>
-          <div class="screen-card__preview">
-            <img class="screen-card__img screen-card__img--mobile" src="./assets/img/case-img/screen-mobile.png"
-              alt="Mobile view" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-            <div class="screen-card__ph" style="display:none">
-              <p>Mobile screenshot</p><small>assets/img/case-img/screen-mobile.png</small>
-            </div>
-          </div>
-          <div class="screen-card__caption">
-            <div class="screen-card__cap-info">
-              <div class="screen-card__cap-title">Mobile View</div>
-              <div class="screen-card__cap-sub">Responsive · touch-first</div>
-            </div>
-            <span class="screen-card__expand-hint">View full</span>
-          </div>
-        </div> -->
-
       </div>
     </div>
   </section>
 
+  <!-- Lightbox overlay -->
+  <div id="screens-lb">
+    <div id="screens-lb-inner">
+      <button id="screens-lb-close" onclick="closeScreenLightbox()">✕</button>
+      <img id="screens-lb-img" src="" alt="" />
+      <div id="screens-lb-caption"></div>
+    </div>
+  </div>
+
 
   <!-- ══════════════════════════════════
-     13 — IMPACT
-══════════════════════════════════ -->
+  13 — IMPACT
+  ══════════════════════════════════ -->
   <section class="sec sec--tc">
     <div class="container">
       <div class="sec-num rv">13 — Impact</div>
@@ -3497,8 +3507,8 @@
 
 
   <!-- ══════════════════════════════════
-     14 — CONSTRAINTS & TRADE-OFFS
-══════════════════════════════════ -->
+  14 — CONSTRAINTS & TRADE-OFFS
+  ══════════════════════════════════ -->
   <section class="sec sec--warm">
     <div class="container">
       <div class="sec-num rv">14 — Constraints &amp; Trade-offs</div>
@@ -3550,8 +3560,8 @@
 
 
   <!-- ══════════════════════════════════
-     15 — LEARNINGS
-══════════════════════════════════ -->
+  15 — LEARNINGS
+  ══════════════════════════════════ -->
   <section class="sec sec--cream">
     <div class="container">
       <div class="sec-num rv">15 — Reflections</div>
@@ -3596,8 +3606,8 @@
 
 
   <!-- ══════════════════════════════════
-     FOOTER
-══════════════════════════════════ -->
+  FOOTER
+  ══════════════════════════════════ -->
   <footer class="footer">
     <div class="footer__inner">
       <div>
@@ -3652,6 +3662,27 @@
         if (toggle) toggle.textContent = 'Collapse';
       }
     }
+  </script>
+
+  <script>
+    function openScreenLightbox(src, caption) {
+      document.getElementById('screens-lb-img').src = src;
+      document.getElementById('screens-lb-caption').textContent = caption;
+      document.getElementById('screens-lb').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeScreenLightbox() {
+      document.getElementById('screens-lb').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    // Close on backdrop click
+    document.getElementById('screens-lb').addEventListener('click', function(e) {
+      if (e.target === this) closeScreenLightbox();
+    });
+    // Close on Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeScreenLightbox();
+    });
   </script>
 </body>
 
