@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCENDtials – Empowering BIPOC Communities</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+
+    <style>
+    /* ============================================================
+       DESIGN TOKENS
+    ============================================================ */
+    :root {
+        /* Brand */
+        --color-navy:        #1E3A47;
+        --color-navy-deep:   #152E3A;
+        --color-sky:         #C9A96E;     
+        --color-sky-light:   #F5EBD8;
+
+        /* Neutrals */
+        --color-white:       #FFFFFF;
+        --color-bg:          #FAFAF8;
+        --color-surface:     #F4F2EE;
+        --color-surface-2:   #ECEAE5;
+        --color-line:        #E2DDD6;
+        --color-text:        #1A1A18;
+        --color-text-muted:  #666660;
+        --color-text-light:  #9D9A93;
+
+        /* Accent */
+        --color-accent:      #C9A96E;
+        --color-warm:        #E8D0CC;
+        --color-sage:        #B2D5D1;
+        --color-olive:       #EBF1AB;
+
+        /* Typography */
+        --font-display:      'Playfair Display', Georgia, serif;
+        --font-body:         'DM Sans', system-ui, sans-serif;
+
+        /* Type scale */
+        --text-xs:           0.75rem;
+        --text-sm:           0.875rem;
+        --text-base:         1rem;
+        --text-lg:           1.125rem;
+        --text-xl:           1.375rem;
+        --text-2xl:          1.75rem;
+        --text-3xl:          2.25rem;
+        --text-hero:         clamp(3rem, 6vw, 5.5rem);
+
+        /* Spacing */
+        --space-xs:          4px;
+        --space-sm:          8px;
+        --space-md:          16px;
+        --space-lg:          24px;
+        --space-xl:          40px;
+        --space-2xl:         64px;
+        --space-3xl:         96px;
+        --space-section:     120px;
+
+        /* Radius */
+        --radius-sm:         8px;
+        --radius-md:         16px;
+        --radius-lg:         24px;
+        --radius-xl:         32px;
+        --radius-pill:       999px;
+
+        /* Shadow */
+        --shadow-sm:         0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.06);
+        --shadow-md:         0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+        --shadow-lg:         0 16px 48px rgba(0,0,0,0.10);
+
+        /* Motion */
+        --ease-out:          cubic-bezier(0.22, 1, 0.36, 1);
+        --ease-in-out:       cubic-bezier(0.4, 0, 0.2, 1);
+        --dur-fast:          180ms;
+        --dur-base:          280ms;
+        --dur-slow:          500ms;
+    }
+
+    /* ============================================================
+       RESET
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: var(--font-body);
+        color: var(--color-text);
+        background: var(--color-bg);
+        overflow-x: hidden;
+        font-size: var(--text-base);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    button { cursor: pointer; font-family: inherit; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ============================================================
+       NAV  — GSA style: fixed, frosted on scroll, pill CTA
+    ============================================================ */
+    .nav {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 500;
+        background: var(--color-bg);
+        border-bottom: 1px solid var(--color-line);
+        height: 72px;
+        display: flex;
+        align-items: center;
+        padding: 0 40px;
+        gap: 32px;
+        transition: all var(--dur-slow) var(--ease-in-out);
+    }
+    .nav.scrolled {
+        background: rgba(255,255,255,0.72);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        top: 10px; left: 16px; right: 16px;
+        border-radius: var(--radius-xl);
+        border: 1px solid rgba(255,255,255,0.5);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06),
+                    inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+    .nav-logo {
+        margin-right: auto;
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+    }
+    .nav-logo img { height: 52px; width: auto; }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        list-style: none;
+    }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 8px 12px;
+        font-size: var(--text-sm);
+        font-weight: 400;
+        color: var(--color-text-muted);
+        border-radius: var(--radius-sm);
+        transition: color var(--dur-fast) var(--ease-out),
+                    background var(--dur-fast) var(--ease-out);
+    }
+    .nav-links > li > a:hover { color: var(--color-navy); background: var(--color-surface); }
+
+    /* Dropdown chevron */
+    .nav-links .has-dropdown > a::after {
+        content: '';
+        width: 10px; height: 10px;
+        border: solid var(--color-text-muted);
+        border-width: 0 1.5px 1.5px 0;
+        transform: rotate(45deg) translateY(-2px);
+        transition: transform var(--dur-fast) var(--ease-out);
+    }
+    .nav-links .has-dropdown:hover > a::after { transform: rotate(225deg) translateY(-2px); }
+
+    .nav-dropdown {
+        display: none;
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        background: var(--color-bg);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--color-line);
+        list-style: none;
+        min-width: 220px;
+        padding: 6px;
+        z-index: 600;
+    }
+    .nav-links .has-dropdown:hover .nav-dropdown { display: block; }
+    .nav-dropdown li a {
+        display: block;
+        padding: 9px 14px;
+        font-size: var(--text-sm);
+        color: var(--color-text-muted);
+        border-radius: var(--radius-sm);
+        white-space: nowrap;
+        transition: color var(--dur-fast), background var(--dur-fast);
+    }
+    .nav-dropdown li a:hover { color: var(--color-navy); background: var(--color-surface); }
+
+    /* ============================================================
+       BUTTONS — fill-sweep hover effect
+    ============================================================ */
+    .btn-primary,
+    .btn-white,
+    .btn-ghost,
+    .btn-outline,
+    .nav-cta,
+    .hero-email-btn,
+    .bento-link {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+        z-index: 0;
+    }
+    /* Sweep fill layer */
+    .btn-primary::before,
+    .btn-white::before,
+    .btn-ghost::before,
+    .btn-outline::before,
+    .nav-cta::before,
+    .hero-email-btn::before,
+    .bento-link::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--color-sky);
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+        z-index: -1;
+        border-radius: inherit;
+    }
+    .btn-primary:hover::before,
+    .nav-cta:hover::before,
+    .hero-email-btn:hover::before { transform: scaleX(1); }
+
+    /* Ghost/outline on dark bg: sweep white */
+    .btn-ghost::before  { background: rgba(255,255,255,0.12); }
+    .btn-ghost:hover::before  { transform: scaleX(1); }
+
+    .btn-outline::before { background: var(--color-sky-light); }
+    .btn-outline:hover::before { transform: scaleX(1); }
+
+    /* bento-link sweep white */
+    .bento-link::before { background: var(--color-sky); }
+    .bento-link:hover::before { transform: scaleX(1); }
+    .bento-link:hover { color: var(--color-white, #fff); }
+
+    /* btn-white (on dark join section) */
+    .btn-white::before { background: var(--color-sky); }
+    .btn-white:hover::before { transform: scaleX(1); }
+    .btn-white:hover { color: var(--color-white); }
+
+    .nav-cta {
+        flex-shrink: 0;
+        background: var(--color-navy);
+        color: var(--color-bg);
+        padding: 9px 20px;
+        border-radius: var(--radius-pill);
+        font-size: var(--text-sm);
+        font-weight: 500;
+        white-space: nowrap;
+        transition: color var(--dur-fast);
+    }
+    .nav-burger {
+        display: none;
+        background: none;
+        border: none;
+        flex-direction: column;
+        gap: 5px;
+        padding: 6px;
+        margin-left: auto;
+    }
+    .nav-burger span {
+        display: block;
+        width: 24px; height: 2px;
+        background: var(--color-navy);
+        border-radius: 2px;
+        transition: all var(--dur-base) var(--ease-out);
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: var(--color-bg);
+        z-index: 490;
+        padding: 90px 24px 32px;
+        overflow-y: auto;
+        flex-direction: column;
+        gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+        display: block;
+        padding: 14px 16px;
+        font-size: var(--text-xl);
+        color: var(--color-text);
+        border-bottom: 1px solid var(--color-line);
+        font-family: var(--font-display);
+    }
+    .mobile-menu .mob-cta {
+        margin-top: 24px;
+        background: var(--color-navy);
+        color: var(--color-white);
+        text-align: center;
+        padding: 16px;
+        border-radius: var(--radius-pill);
+        font-size: var(--text-lg);
+        border-bottom: none;
+    }
+
+    @media (max-width: 900px) {
+        .nav-links, .nav-cta { display: none; }
+        .nav-burger { display: flex; }
+    }
+
+    /* ============================================================
+       HERO  — split layout, 2-line heading, SVG right
+    ============================================================ */
+    .hero {
+        padding-top: 72px;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding-left: max(40px, 5vw);
+        padding-right: max(40px, 5vw);
+        gap: var(--space-2xl);
+    }
+    .hero-content {
+        flex: 1 1 480px;
+        max-width: 600px;
+    }
+    .hero-tag {
+        display: inline-block;
+        font-size: var(--text-xs);
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--color-sky);
+        margin-bottom: var(--space-lg);
+    }
+    .hero-h1 {
+        font-family: var(--font-display);
+        font-size: clamp(3.25rem, 5.5vw, 5.5rem);
+        font-weight: 300;
+        line-height: 1.02;
+        letter-spacing: -2px;
+        color: var(--color-navy);
+        margin-bottom: var(--space-lg);
+        /* Force 2 lines by keeping words together */
+        white-space: nowrap;
+    }
+    .hero-h1 em {
+        font-style: italic;
+        font-weight: 300;
+        display: block;
+        white-space: nowrap;
+    }
+    .hero-desc {
+        font-size: var(--text-lg);
+        color: var(--color-text-muted);
+        line-height: 1.7;
+        max-width: 100%;
+        margin-bottom: var(--space-xl);
+    }
+    /* All hero controls share same width as text block */
+    .hero-email-form,
+    .hero-btn-row {
+        width: 100%;
+        max-width: 100%;
+    }
+    .hero-email-form {
+        display: flex;
+        position: relative;
+        margin-bottom: var(--space-md);
+    }
+    .hero-email-input {
+        width: 100%;
+        padding: 18px 150px 18px 24px;
+        border: 1px solid var(--color-line);
+        border-radius: var(--radius-pill);
+        font-size: var(--text-base);
+        font-family: var(--font-body);
+        color: var(--color-text);
+        background: var(--color-surface);
+        outline: none;
+        transition: border-color var(--dur-fast);
+    }
+    .hero-email-input:focus { border-color: var(--color-sky); }
+    .hero-email-input::placeholder { color: var(--color-text-light); }
+    .hero-email-btn {
+        position: absolute;
+        right: 5px; top: 5px; bottom: 5px;
+        padding: 0 28px;
+        background: var(--color-navy);
+        color: var(--color-white);
+        border: none;
+        border-radius: var(--radius-pill);
+        font-size: var(--text-sm);
+        font-weight: 500;
+        white-space: nowrap;
+        transition: color var(--dur-fast);
+    }
+    .hero-email-btn:hover { color: var(--color-bg); }
+
+    .hero-btn-row {
+        display: flex;
+        gap: var(--space-md);
+        margin-bottom: var(--space-xl);
+    }
+    .btn-primary {
+        background: var(--color-navy);
+        color: var(--color-bg);
+        padding: 14px 28px;
+        border-radius: var(--radius-pill);
+        font-size: var(--text-base);
+        font-weight: 500;
+        border: none;
+        display: inline-block;
+        flex: 1;
+        text-align: center;
+        transition: color var(--dur-fast);
+    }
+    .btn-outline {
+        background: transparent;
+        color: var(--color-navy);
+        padding: 13px 27px;
+        border-radius: var(--radius-pill);
+        font-size: var(--text-base);
+        font-weight: 400;
+        border: 1px solid var(--color-line);
+        display: inline-block;
+        flex: 1;
+        text-align: center;
+        transition: color var(--dur-fast), border-color var(--dur-fast);
+    }
+    .btn-outline:hover { border-color: var(--color-sky); color: var(--color-navy); }
+
+    .hero-visual {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+    }
+    .hero-visual svg { max-width: min(560px, 46vw); height: auto; align-self: flex-end; }
+
+    @media (max-width: 1100px) {
+        .hero-h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); }
+    }
+    @media (max-width: 960px) {
+        .hero { flex-direction: column; align-items: flex-start; padding-top: 100px; padding-bottom: 48px; min-height: auto; }
+        .hero-visual { display: none; }
+        .hero-h1 { font-size: clamp(2.5rem, 8vw, 3.5rem); white-space: normal; }
+        .hero-h1 em { white-space: normal; }
+        .hero-content { max-width: 100%; }
+    }
+    @media (max-width: 600px) {
+        .hero { padding-left: 24px; padding-right: 24px; }
+        .hero-btn-row { flex-direction: column; }
+    }
+
+    /* ============================================================
+       SHARED SECTION LABELS & HEADINGS
+    ============================================================ */
+    .section-label {
+        font-size: var(--text-xs);
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--color-sky);
+        display: block;
+        margin-bottom: var(--space-md);
+        text-align: center;
+    }
+    .section-h2 {
+        font-family: var(--font-display);
+        font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+        font-weight: 300;
+        color: var(--color-navy);
+        line-height: 1.2;
+        letter-spacing: -0.5px;
+        text-align: center;
+        margin-bottom: var(--space-xl);
+    }
+
+    /* ============================================================
+       IMPACT — modern asymmetric card grid
+    ============================================================ */
+    .section-impact {
+        padding: var(--space-section) max(40px, 5vw);
+        background: var(--color-bg);
+    }
+    .impact-header {
+        text-align: center;
+        margin-bottom: var(--space-2xl);
+    }
+    .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: auto auto;
+        gap: var(--space-md);
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+
+    /* Layout:
+    Row 1: Environment(7) | Mindfulness(5)
+    Row 2: Education(5)   | BIPOC(7)
+    */
+
+    .impact-card {
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        position: relative;
+        min-height: clamp(160px, 18vh, 220px);
+    }
+
+    .impact-card:nth-child(1) { grid-column: span 7; }
+    .impact-card:nth-child(2) { grid-column: span 5; }
+    .impact-card:nth-child(3) { grid-column: span 5; }
+    .impact-card:nth-child(4) { grid-column: span 7; }
+
+    .impact-card--olive { background: var(--color-olive); }
+    .impact-card--warm  { background: var(--color-warm); }
+    .impact-card--sage  { background: var(--color-sage); }
+    .impact-card--navy  { background: #D4E3DF; }
+
+    .impact-card-inner {
+        padding: var(--space-xl) var(--space-md);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: relative;
+        z-index: 2;
+        gap: var(--space-sm);
+    }
+
+    .impact-card-top {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-lg);
+    }
+
+    /* Images smaller = less vertical height */
+    .impact-card-img {
+        width: 120px;
+        height: 140px;
+        object-fit: contain;
+        object-position: bottom;
+        flex-shrink: 0;
+        filter: drop-shadow(0 8px 24px rgba(0,0,0,0.15));
+        transition: transform var(--dur-slow) var(--ease-out);
+    }
+
+    .impact-card:hover .impact-card-img {
+        transform: translateY(-4px);
+    }
+
+    /* Large cards */
+    .impact-card:nth-child(1) .impact-card-inner,
+    .impact-card:nth-child(4) .impact-card-inner {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-lg);
+    }
+
+    .impact-card:nth-child(1) .impact-card-img,
+    .impact-card:nth-child(4) .impact-card-img {
+        width: 130px;
+        height: 130px;
+    }
+
+    .impact-card-text {
+        flex: 1;
+    }
+
+    .impact-card-name {
+        font-family: var(--font-display);
+        font-size: var(--text-3xl);
+        font-weight: 300;
+        letter-spacing: -0.5px;
+        color: var(--color-navy);
+        margin-bottom: var(--space-sm);
+        line-height: 1;
+    }
+
+    .impact-card--navy .impact-card-name {
+        color: var(--color-navy);
+    }
+
+    .impact-card-desc {
+        font-size: var(--text-base);
+        color: var(--color-text-muted);
+        line-height: 1.5;
+        max-width: 400px;
+    }
+
+    .impact-card--navy .impact-card-desc {
+        color: var(--color-text-muted);
+    }
+
+    /* Small cards */
+    .impact-card:nth-child(2) .impact-card-inner,
+    .impact-card:nth-child(3) .impact-card-inner {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-lg);
+    }
+
+    .impact-card:nth-child(2) .impact-card-img,
+    .impact-card:nth-child(3) .impact-card-img {
+        width: 100px;
+        height: 100px;
+        align-self: center;
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    .impact-number {
+        font-family: var(--font-display);
+        font-size: 4rem;
+        font-weight: 300;
+        line-height: 1;
+        color: rgba(39,67,83,0.12);
+        position: absolute;
+        top: var(--space-md);
+        right: var(--space-md);
+        pointer-events: none;
+    }
+
+    .impact-card--navy .impact-number {
+        color: rgba(39,67,83,0.12);
+    }
+
+    @media (max-width: 900px) {
+        .impact-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .impact-card:nth-child(n) {
+            grid-column: span 1;
+            min-height: 240px;
+        }
+
+        .impact-card:nth-child(1) .impact-card-inner,
+        .impact-card:nth-child(4) .impact-card-inner {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    @media (max-width: 560px) {
+        .impact-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .impact-card:nth-child(n) {
+            min-height: 220px;
+        }
+    }
+
+    /* ============================================================
+       PROGRAMS & EVENTS  — original parallax, no background fill
+    ============================================================ */
+    .section-programs-wrapper {
+        padding: var(--space-section) 0;
+    }
+    .parallax-container {
+        position: relative;
+        width: 100%;
+        max-width: 1440px;
+        height: 420px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    .parallax {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+    .layer {
+        position: absolute;
+        background-repeat: no-repeat;
+        background-size: contain;
+        transition: transform 0.1s ease-out;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    .layer img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        display: block;
+        box-shadow: var(--shadow-lg);
+        border: 2px solid var(--color-line);
+        filter: sepia(30%) saturate(80%) brightness(0.95);
+    }
+    .layer-1 { width: 174px; height: 174px; top: 50px;  left: 80%; }
+    .layer-2 { width: 76px;  height: 76px;  top: 32px;  left: 41%; }
+    .layer-3 { width: 125px; height: 125px; top: 290px; left: 7%;  }
+    .layer-4 { width: 63px;  height: 63px;  top: 300px; left: 80%; }
+    .layer-5 { width: 111px; height: 111px; top: 42px;  left: 22%; }
+    .layer-6 { width: 76px;  height: 76px;  top: 22px;  left: 67%; }
+    .layer-7 { width: 80px;  height: 80px;  top: 137px; left: 10%; }
+    
+    .programs-content {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        padding-top: 40px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .programs-content .section-label {
+        color: var(--color-sky);
+    }
+    .programs-content h2 {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 3.25rem);
+        font-weight: 400;
+        color: var(--color-navy);
+        margin-bottom: var(--space-md);
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+    }
+    .programs-content p {
+        font-size: var(--text-lg);
+        font-weight: 300;
+        color: var(--color-text-muted);
+        max-width: 680px;
+        margin: 0 auto;
+        line-height: 1.75;
+    }
+
+    /* ============================================================
+       BENTO CARDS  — programs grid
+    ============================================================ */
+    .section-bento {
+        padding: var(--space-section) max(40px, 5vw);
+    }
+    .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 360px 280px;
+        gap: var(--space-md);
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+    /* Row 1: narrow | wide */
+    .bento-card:nth-child(1) { grid-column: span 5; grid-row: span 1; }
+    .bento-card:nth-child(2) { grid-column: span 7; grid-row: span 1; }
+    /* Row 2: wide | narrow */
+    .bento-card:nth-child(3) { grid-column: span 7; grid-row: span 1; }
+    .bento-card:nth-child(4) { grid-column: span 5; grid-row: span 1; }
+    .bento-card {
+        position: relative;
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        background: var(--color-surface-2);
+        box-shadow: var(--shadow-sm);
+    }
+    .bento-card img {
+        position: absolute;
+        inset: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        transition: transform var(--dur-slow) var(--ease-out);
+    }
+    .bento-card:hover img { transform: scale(1.04); }
+
+    /* Always-on dark gradient at bottom */
+    .bento-card-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(15,28,38,0.92) 0%, rgba(15,28,38,0.45) 55%, transparent 100%);
+        transition: opacity var(--dur-slow) var(--ease-out);
+    }
+    /* On hover: deepen overlay + blur for legibility */
+    .bento-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(10,22,30,0);
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+        transition: background var(--dur-slow) var(--ease-out),
+                    backdrop-filter var(--dur-slow) var(--ease-out);
+        pointer-events: none;
+        z-index: 1;
+    }
+    .bento-card:hover::after {
+        background: rgba(10,22,30,0.25);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+
+    .bento-card-body {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        padding: var(--space-md) var(--space-lg) var(--space-lg);
+        color: var(--color-bg);
+        z-index: 2;
+        transform: translateY(calc(100% - 60px));
+        transition: transform var(--dur-slow) var(--ease-out);
+    }
+    .bento-card:hover .bento-card-body { transform: translateY(0); }
+
+    .bento-pill {
+        display: inline-block;
+        background: rgba(255,255,255,0.18);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        color: var(--color-white);
+        padding: 4px 12px;
+        border-radius: var(--radius-pill);
+        font-size: var(--text-xs);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+        border: 1px solid rgba(255,255,255,0.25);
+    }
+    .bento-pill--top-right {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        left: auto;
+        bottom: auto;
+    }
+    .bento-title {
+        font-family: var(--font-display);
+        font-size: var(--text-xl);
+        font-weight: 400;
+        margin-bottom: var(--space-sm);
+        line-height: 1.2;
+    }
+    /* .bento-card:nth-child(1) .bento-title { font-size: var(--text-2xl); } */
+    .bento-desc {
+        font-size: var(--text-base);
+        line-height: 1.6;
+        color: rgba(255,255,255,0.85);
+        margin-bottom: var(--space-md);
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+    }
+    .bento-card:hover .bento-desc { opacity: 1; transform: translateY(0); }
+    .bento-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--color-white);
+        color: var(--color-navy);
+        padding: 7px 16px;
+        border-radius: var(--radius-pill);
+        font-size: var(--text-xs);
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out),
+                    background var(--dur-fast);
+    }
+    .bento-link:hover { background: var(--color-sky); color: var(--color-white); }
+    .bento-card:hover .bento-link { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 800px) {
+        .bento-grid {
+            grid-template-columns: 1fr;
+            grid-auto-rows: 300px;
+        }
+        .bento-card:nth-child(n) { grid-column: span 1; grid-row: span 1; }
+        .bento-card-body { transform: translateY(0); }
+        .bento-desc, .bento-link { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       EDUCATION & TRAINING  — premium 2-col with decorative number
+    ============================================================ */
+    .section-education {
+        padding: var(--space-section) max(40px, 5vw);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-2xl);
+        align-items: center;
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+    .education-text .section-label { text-align: left; }
+    .education-text .section-h2 {
+        text-align: left;
+        /* Slight italic for editorial feel */
+        font-style: italic;
+    }
+    /* Large decorative pull number */
+    .education-text::before {
+        content: '✦';
+        display: block;
+        font-size: 1.1rem;
+        color: var(--color-sky);
+        margin-bottom: var(--space-md);
+        letter-spacing: 6px;
+    }
+    .education-body {
+        font-size: var(--text-lg);
+        color: var(--color-text-muted);
+        line-height: 1.8;
+        margin-bottom: var(--space-xl);
+    }
+    .education-body strong { color: var(--color-navy); font-weight: 600; }
+
+    /* Literacy pillars chips */
+    .edu-pillars {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: var(--space-xl);
+    }
+    .edu-pillar {
+        background: var(--color-surface);
+        color: var(--color-navy);
+        border: 1px solid var(--color-line);
+        border-radius: var(--radius-pill);
+        padding: 6px 16px;
+        font-size: var(--text-sm);
+        font-weight: 400;
+        letter-spacing: 0.2px;
+    }
+
+    .education-visual {
+        position: relative;
+    }
+    .education-visual svg {
+        width: 100%; height: auto;
+    }
+    /* Gold accent bar along the left of the image area */
+    .education-visual::before {
+        content: '';
+        position: absolute;
+        left: -20px;
+        top: 15%;
+        bottom: 15%;
+        width: 3px;
+        background: linear-gradient(to bottom, transparent, var(--color-sky), transparent);
+        border-radius: 3px;
+    }
+    .education-badge {
+        position: absolute;
+        bottom: 24px; left: -24px;
+        background: var(--color-bg);
+        border: 1px solid var(--color-line);
+        border-radius: var(--radius-md);
+        padding: 16px 20px;
+        box-shadow: var(--shadow-md);
+        max-width: 220px;
+    }
+    .education-badge-num {
+        font-family: var(--font-display);
+        font-size: var(--text-3xl);
+        font-weight: 400;
+        color: var(--color-navy);
+        line-height: 1;
+    }
+    .education-badge-label {
+        font-size: var(--text-sm);
+        color: var(--color-text-muted);
+        margin-top: 4px;
+    }
+    @media (max-width: 840px) {
+        .section-education { grid-template-columns: 1fr; }
+        .education-badge { left: 16px; }
+        .education-visual::before { display: none; }
+    }
+
+    /* ============================================================
+       JOIN / CTA SECTION
+    ============================================================ */
+    .section-join {
+        margin: 0 max(24px, 4vw) var(--space-section);
+        background: linear-gradient(135deg, var(--color-navy) 0%, #2A4A5A 100%);
+        border-radius: var(--radius-xl);
+        padding: var(--space-section) max(40px, 6vw);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .section-join::before {
+        content: '';
+        position: absolute;
+        top: -80px; right: -80px;
+        width: 400px; height: 400px;
+        background: radial-gradient(circle, rgba(201,169,110,0.18) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .section-join::after {
+        content: '';
+        position: absolute;
+        bottom: -100px; left: -60px;
+        width: 350px; height: 350px;
+        background: radial-gradient(circle, rgba(178,213,209,0.2) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .join-eyebrow {
+        font-size: var(--text-xs);
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--color-sky);
+        display: block;
+        margin-bottom: var(--space-lg);
+    }
+    .join-h2 {
+        font-family: var(--font-display);
+        font-size: clamp(var(--text-2xl), 5vw, 3.5rem);
+        font-weight: 300;
+        color: var(--color-white);
+        line-height: 1.15;
+        margin-bottom: var(--space-lg);
+        letter-spacing: -0.5px;
+    }
+    .join-sub {
+        font-size: var(--text-lg);
+        color: rgba(255,255,255,0.65);
+        max-width: 570px;
+        margin: 0 auto var(--space-xl);
+        line-height: 1.7;
+    }
+    .join-actions {
+        display: flex;
+        gap: var(--space-md);
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .btn-white {
+        background: var(--color-white);
+        color: var(--color-navy);
+        padding: 14px 28px;
+        border-radius: var(--radius-pill);
+        font-size: var(--text-base);
+        font-weight: 500;
+        border: none;
+        transition: background var(--dur-fast);
+        display: inline-block;
+    }
+    .btn-white:hover { background: var(--color-sky); color: var(--color-white); }
+    .btn-ghost {
+        background: transparent;
+        color: var(--color-white);
+        padding: 13px 27px;
+        border-radius: var(--radius-pill);
+        font-size: var(--text-base);
+        font-weight: 400;
+        border: 1px solid rgba(255,255,255,0.3);
+        transition: border-color var(--dur-fast), background var(--dur-fast);
+        display: inline-block;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+        background: var(--color-surface);
+        border-top: 1px solid var(--color-line);
+        padding: var(--space-section) max(40px, 5vw);
+    }
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+        gap: var(--space-2xl);
+        margin-bottom: var(--space-2xl);
+    }
+    .footer-brand img { height: 48px; width: auto; margin-bottom: var(--space-md); }
+    .footer-brand p {
+        font-size: var(--text-sm);
+        color: var(--color-text-muted);
+        line-height: 1.65;
+        max-width: 260px;
+    }
+    .footer-col-title {
+        font-size: var(--text-xs);
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--color-navy);
+        margin-bottom: var(--space-lg);
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+        font-size: var(--text-sm);
+        color: var(--color-text-muted);
+        transition: color var(--dur-fast);
+    }
+    .footer-links a:hover { color: var(--color-sky); }
+    .footer-contact p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; margin-bottom: 8px; }
+    .footer-contact a { color: var(--color-sky); }
+    .footer-candid { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-md); }
+    .footer-candid img { width: 80px; border-radius: var(--radius-sm); }
+    .footer-candid span { font-size: var(--text-sm); color: var(--color-text-muted); }
+    .footer-bottom {
+        padding-top: var(--space-xl);
+        border-top: 1px solid var(--color-line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+    }
+    .footer-bottom p, .footer-bottom a {
+        font-size: var(--text-sm);
+        color: var(--color-text-light);
+    }
+    .footer-bottom a:hover { color: var(--color-sky); }
+    .footer-bottom-links { display: flex; gap: var(--space-xl); }
+    @media (max-width: 900px) {
+        .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+    }
+    @media (max-width: 600px) {
+        .footer-grid { grid-template-columns: 1fr; }
+        .footer-bottom { flex-direction: column; text-align: center; }
+        .footer-bottom-links { justify-content: center; }
+    }
+
+    .footer-social {
+        display: flex;
+        gap: 8px;
+        margin-top: var(--space-lg);
+        flex-wrap: wrap;
+    }
+    .footer-social a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--color-surface-2);
+        color: var(--color-text-muted);
+        transition: background var(--dur-fast), color var(--dur-fast);
+    }
+    .footer-social a:hover {
+        background: var(--color-navy);
+        color: var(--color-white);
+    }
+
+    .footer-partners {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        gap: var(--space-2xl);
+        padding: var(--space-xl) max(40px, 5vw);
+        border-top: 1px solid var(--color-line);
+        border-bottom: 1px solid var(--color-line);
+        flex-wrap: wrap;
+    }
+    .footer-partners img {
+        height: 56px;
+        width: auto;
+        object-fit: contain;
+        opacity: 0.7;
+        filter: grayscale(20%);
+        transition: opacity var(--dur-fast);
+    }
+    .footer-partners img:hover {
+        opacity: 1;
+    }
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal--delay-1 { transition-delay: 0.1s; }
+    .reveal--delay-2 { transition-delay: 0.2s; }
+    .mt-md { margin-top: var(--space-md); }
+    /* ============================================================
+   RESPONSIVE BREAKPOINTS — ascendtials_home_v3
+   Вставить в конец <style>, после всех существующих стилей.
+   ============================================================ */
+
+/* ============================================================
+   1280px — широкий ноутбук
+   ============================================================ */
+@media (max-width: 1280px) {
+    .hero {
+        padding-left: max(32px, 4vw);
+        padding-right: max(32px, 4vw);
+    }
+    .bento-grid {
+        grid-template-rows: 320px 260px;
+    }
+    .section-education {
+        gap: var(--space-xl);
+    }
+}
+
+/* ============================================================
+   1024px — планшет landscape / небольшой ноутбук
+   ============================================================ */
+@media (max-width: 1024px) {
+    .nav { padding: 0 24px; }
+    .nav.scrolled { left: 12px; right: 12px; }
+
+    .hero {
+        padding-left: 24px;
+        padding-right: 24px;
+        gap: var(--space-xl);
+    }
+    .hero-visual svg { max-width: min(420px, 42vw); }
+
+    .section-impact { padding: var(--space-2xl) 24px; }
+    .section-bento  { padding: var(--space-2xl) 24px; }
+    .section-education {
+        padding: var(--space-2xl) 24px;
+        gap: var(--space-lg);
+    }
+    .section-join {
+        margin: 0 16px var(--space-2xl);
+        padding: var(--space-2xl) 32px;
+    }
+    .footer { padding: var(--space-2xl) 24px; }
+
+    .bento-grid {
+        grid-template-rows: 300px 240px;
+    }
+    .parallax-container { height: 360px; }
+}
+
+    /* ============================================================
+   768px — планшет portrait
+   ============================================================ */
+    @media (max-width: 768px) {
+        /* Nav */
+        .nav { padding: 0 20px; height: 64px; }
+        .nav.scrolled { top: 8px; left: 12px; right: 12px; }
+        .nav-logo img { height: 44px; }
+
+        /* Hero: фото вверху, текст внизу */
+        .hero {
+            flex-direction: column-reverse;
+            align-items: stretch;
+            padding-top: 80px;
+            padding-bottom: 48px;
+            padding-left: 20px;
+            padding-right: 20px;
+            min-height: auto;
+            gap: var(--space-lg);
+        }
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            margin-left: 0;
+        }
+        .hero-visual svg {
+            max-width: min(400px, 80vw);
+        }
+        .hero-content { max-width: 100%; }
+        .hero-h1 {
+            font-size: clamp(2.25rem, 7vw, 3rem);
+            white-space: normal;
+            letter-spacing: -1px;
+        }
+        .hero-h1 em { white-space: normal; }
+        .hero-desc { font-size: var(--text-base); }
+        .hero-btn-row { flex-direction: column; }
+        .btn-primary, .btn-outline { flex: none; width: 100%; }
+
+        /* Impact */
+        .section-impact { padding: var(--space-2xl) 20px; }
+        .impact-card-img { display: none; }
+        .impact-card:nth-child(1) .impact-card-inner,
+        .impact-card:nth-child(4) .impact-card-inner {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        /* Bento */
+        .section-bento { padding: var(--space-2xl) 20px; }
+        .bento-grid { grid-auto-rows: 280px; }
+        .bento-card-overlay {
+            background: linear-gradient(to top, rgba(5,12,18,0.97) 0%, rgba(5,12,18,0.80) 50%, rgba(5,12,18,0.35) 100%);
+        }
+
+        /* Programs parallax */
+        .parallax-container { height: 300px; }
+        .parallax-container .layer { display: none; }
+        .layer-1 { width: 130px; height: 130px; }
+        .layer-3 { width: 96px; height: 96px; }
+        .layer-5 { width: 84px; height: 84px; }
+
+        /* Education */
+        .section-education {
+            padding: var(--space-2xl) 20px;
+            grid-template-columns: 1fr;
+        }
+        .education-badge { left: 16px; }
+        .education-visual::before { display: none; }
+
+        /* Join */
+        .section-join {
+            margin: 0 12px var(--space-2xl);
+            padding: var(--space-2xl) 24px;
+            border-radius: var(--radius-lg);
+        }
+        .join-h2 { font-size: clamp(var(--text-xl), 6vw, var(--text-2xl)); }
+        .join-actions { flex-direction: column; align-items: center; }
+        .btn-white, .btn-ghost { width: 100%; max-width: 320px; text-align: center; }
+
+        /* Footer */
+        .footer { padding: var(--space-2xl) 20px; }
+        .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+        .footer-partners { gap: var(--space-xl); padding: var(--space-lg) 20px; }
+        .footer-partners img { height: 44px; }
+    }
+
+    /* ============================================================
+   414px — iPhone Plus / landscape target (portrait)
+   ============================================================ */
+    @media (max-width: 414px) {
+        .nav { padding: 0 20px; }
+        .nav.scrolled { left: 8px; right: 8px; }
+
+        .hero {
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 76px;
+            gap: var(--space-md);
+        }
+        .hero-h1 { font-size: clamp(2rem, 9vw, 2.5rem); letter-spacing: -0.5px; }
+        .hero-desc { font-size: var(--text-base); }
+        .hero-email-form { flex-direction: column; gap: 8px; }
+        .hero-email-input { padding: 15px 20px; border-radius: var(--radius-lg); }
+        .hero-email-btn {
+            position: static;
+            width: 100%;
+            padding: 14px;
+            border-radius: var(--radius-pill);
+        }
+
+        .section-impact { padding: var(--space-xl) 20px; }
+        .impact-grid { grid-template-columns: 1fr; }
+        .impact-card:nth-child(n) { grid-column: span 1; min-height: 160px; }
+        .impact-card-img { display: none; }
+        .impact-card-name { font-size: var(--text-2xl); }
+
+        .section-bento { padding: var(--space-xl) 20px; }
+        .bento-grid { grid-auto-rows: 260px; }
+        .bento-card-body { transform: translateY(0); }
+        .bento-desc, .bento-link { opacity: 1; transform: translateY(0); }
+
+        .parallax-container { height: 240px; }
+        .parallax-container .layer { display: none; }
+
+        .section-education { padding: var(--space-xl) 20px; }
+        .education-badge { left: 12px; bottom: 12px; max-width: 180px; }
+
+        .section-join {
+            margin: 0 8px var(--space-xl);
+            padding: var(--space-xl) 20px;
+            border-radius: var(--radius-lg);
+        }
+        .join-sub { font-size: var(--text-base); }
+
+        .footer { padding: var(--space-xl) 20px; }
+        .footer-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+        .footer-brand p { max-width: 100%; }
+        .footer-bottom { flex-direction: column; text-align: center; gap: var(--space-sm); }
+        .footer-bottom-links { justify-content: center; flex-wrap: wrap; gap: var(--space-md); }
+        .footer-partners { flex-wrap: wrap; gap: var(--space-md); padding: var(--space-lg) 20px; }
+        .footer-partners img { height: 36px; }
+    }
+
+    /* ============================================================
+   375px — iPhone SE / standard iPhone
+   ============================================================ */
+    @media (max-width: 375px) {
+        .nav { padding: 0 16px; }
+        .nav.scrolled { left: 6px; right: 6px; }
+        .nav-logo img { height: 40px; }
+
+        .hero {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        .hero-h1 { font-size: clamp(1.875rem, 9.5vw, 2.25rem); }
+
+        .section-impact,
+        .section-bento,
+        .section-education { padding-left: 16px; padding-right: 16px; }
+
+        .section-join {
+            margin-left: 6px;
+            margin-right: 6px;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        .footer { padding-left: 16px; padding-right: 16px; }
+        .footer-partners { padding-left: 16px; padding-right: 16px; }
+
+        .education-badge { left: 8px; padding: 12px 14px; }
+        .education-badge-num { font-size: var(--text-xl); }
+    }
+
+    /* ============================================================
+   360px — Android standard (Samsung Galaxy и др.)
+   ============================================================ */
+    @media (max-width: 360px) {
+        .nav { padding: 0 16px; }
+
+        .hero {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        .hero-h1 { font-size: 1.75rem; letter-spacing: -0.5px; }
+        .hero-tag { letter-spacing: 1.5px; }
+
+        .section-impact,
+        .section-bento,
+        .section-education { padding-left: 16px; padding-right: 16px; }
+
+        .impact-card-name { font-size: var(--text-xl); }
+
+        .section-join {
+            padding-left: 16px;
+            padding-right: 16px;
+            margin-left: 6px;
+            margin-right: 6px;
+        }
+        .join-h2 { font-size: var(--text-xl); }
+
+        .footer { padding-left: 16px; padding-right: 16px; }
+        .footer-partners { padding-left: 16px; padding-right: 16px; }
+
+        .bento-grid { grid-auto-rows: 240px; }
+    }
+
+    /* ============================================================
+   320px — iPhone SE (1st gen) / минимальный экран
+   ============================================================ */
+    @media (max-width: 320px) {
+        .nav { padding: 0 12px; height: 60px; }
+        .nav-logo img { height: 36px; }
+
+        .hero {
+            padding-left: 12px;
+            padding-right: 12px;
+            padding-top: 68px;
+        }
+        .hero-h1 { font-size: 1.625rem; }
+        .hero-desc { font-size: var(--text-sm); }
+        .hero-tag { font-size: 0.65rem; letter-spacing: 1px; }
+
+        .section-impact,
+        .section-bento,
+        .section-education { padding-left: 12px; padding-right: 12px; }
+
+        .impact-card-name { font-size: var(--text-lg); }
+        .impact-card-desc { font-size: var(--text-sm); }
+
+        .section-join {
+            padding: var(--space-lg) 12px;
+            margin-left: 4px;
+            margin-right: 4px;
+        }
+        .join-h2 { font-size: var(--text-lg); }
+        .join-sub { font-size: var(--text-sm); }
+        .btn-white, .btn-ghost { font-size: var(--text-sm); padding: 12px 20px; }
+
+        .footer { padding: var(--space-xl) 12px; }
+        .footer-partners { padding-left: 12px; padding-right: 12px; }
+        .footer-partners img { height: 30px; }
+
+        .bento-grid { grid-auto-rows: 220px; }
+        .bento-title { font-size: var(--text-base); }
+
+        .edu-pillar { font-size: var(--text-xs); padding: 5px 12px; }
+    }
+
+    /* ============================================================
+   LANDSCAPE — iPhone (896×414, 915×412 и аналоги)
+   ============================================================ */
+    @media (max-height: 500px) and (orientation: landscape) {
+        .nav { height: 56px; }
+        .nav-logo img { height: 38px; }
+
+        .hero {
+            flex-direction: row;
+            padding-top: 64px;
+            padding-bottom: 24px;
+            padding-left: 20px;
+            padding-right: 20px;
+            min-height: auto;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+        .hero-visual { display: none; }
+        .hero-content { max-width: 100%; }
+        .hero-h1 { font-size: clamp(1.5rem, 5vw, 2rem); }
+        .hero-desc { font-size: var(--text-sm); margin-bottom: var(--space-md); }
+        .hero-btn-row { margin-bottom: var(--space-md); }
+
+        .section-impact,
+        .section-bento,
+        .section-education,
+        .section-programs-wrapper { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
+
+        .section-impact  { padding-left: 20px; padding-right: 20px; }
+        .section-bento   { padding-left: 20px; padding-right: 20px; }
+        .section-education { padding-left: 20px; padding-right: 20px; }
+
+        .impact-grid { grid-template-columns: 1fr 1fr; }
+        .impact-card:nth-child(n) { grid-column: span 1; min-height: 140px; }
+        .impact-card-img { display: none; }
+
+        .parallax-container { height: 200px; }
+
+        .section-join {
+            margin: 0 12px var(--space-xl);
+            padding: var(--space-xl) 20px;
+        }
+        .join-h2 { font-size: var(--text-xl); }
+
+        .footer { padding-left: 20px; padding-right: 20px; }
+        .footer-partners { padding-left: 20px; padding-right: 20px; }
+
+        .mobile-menu { padding-top: 64px; }
+        .mobile-menu a { padding: 10px 16px; font-size: var(--text-base); }
+    }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+============================================================ -->
+<header class="nav" id="mainNav">
+    <div class="nav-logo">
+        <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png" alt="ASCENDtials Logo">
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="https://ascendtials.org">Home</a></li>
+        <li><a href="https://ascendtials.org/ascendtials-membership-2024/">Membership</a></li>
+        <li class="has-dropdown">
+            <a href="#">About</a>
+            <ul class="nav-dropdown">
+                <li><a href="https://ascendtials.org/about-us-2024/">About Us</a></li>
+                <li><a href="https://ascendtials.org/the-team/">Our Team</a></li>
+                <li><a href="https://ascendtials.org/contact-us/">Contact Us</a></li>
+            </ul>
+        </li>
+        <li class="has-dropdown">
+            <a href="#">Education</a>
+            <ul class="nav-dropdown">
+                <li><a href="https://ascendtials.org/education-and-training-2024/">Education & Training</a></li>
+                <li><a href="https://ascendtials.org/literacy-workshops-2024/">Literacy Workshops</a></li>
+                <li><a href="https://ascendtials.org/kemetic-yoga-2024/">Kemetic Yoga</a></li>
+                <li><a href="https://ascendtials.org/designing-from-whiteness-to-oneness-2024/">Whiteness To Oneness™</a></li>
+            </ul>
+        </li>
+        <li class="has-dropdown">
+            <a href="#">Programs</a>
+            <ul class="nav-dropdown">
+                <li><a href="https://ascendtials.org/events/">Event Calendar</a></li>
+                <li><a href="https://ascendtials.org/experiential-and-service-learning-programs-2024/">Service Learning</a></li>
+                <li><a href="https://ascendtials.org/youth-programs-2024/">Youth Programs</a></li>
+                <li><a href="https://ascendtials.org/environmental-programs-2024/">Environmental Programs</a></li>
+                <li><a href="https://ascendtials.org/legal-aid-program-2024/">Legal Aid Programs</a></li>
+                <li><a href="https://ascendtials.org/fellowship-program-2024/">Internships & Fellowships</a></li>
+            </ul>
+        </li>
+        <li class="has-dropdown">
+            <a href="#">Join Us</a>
+            <ul class="nav-dropdown">
+                <li><a href="https://ascendtials.org/get-involved/">Partner with Us</a></li>
+                <li><a href="https://ascendtials.org/volunteer/">Internship / Volunteer</a></li>
+                <li><a href="https://ascendtials.org/get-involved/">Blog</a></li>
+                <li><a href="https://ascendtials.org/volunteer/">Newsletter</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <a class="nav-cta" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1">Support Us</a>
+
+    <button class="nav-burger" id="navBurger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="https://ascendtials.org">Home</a>
+    <a href="https://ascendtials.org/ascendtials-membership-2024/">Membership</a>
+    <a href="https://ascendtials.org/about-us-2024/">About Us</a>
+    <a href="https://ascendtials.org/the-team/">Our Team</a>
+    <a href="https://ascendtials.org/education-and-training-2024/">Education & Training</a>
+    <a href="https://ascendtials.org/events/">Event Calendar</a>
+    <a href="https://ascendtials.org/youth-programs-2024/">Youth Programs</a>
+    <a href="https://ascendtials.org/environmental-programs-2024/">Environmental Programs</a>
+    <a href="https://ascendtials.org/volunteer/">Volunteer</a>
+    <a class="mob-cta" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1">Support Us</a>
+</div>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero">
+    <div class="hero-content">
+        <span class="hero-tag">In Southern California &amp; Beyond</span>
+        <h1 class="hero-h1">
+            Empowering<br>
+            <em>BIPOC Communities</em>
+        </h1>
+        <p class="hero-desc">
+            ASCENDtials is a 501(c)(3) nonprofit offering holistic educational tools, resources, and training programs aimed at uplifting San Diego's BIPOC community.
+        </p>
+        <form class="hero-email-form" onsubmit="return false;">
+            <input class="hero-email-input" type="email" placeholder="Enter your email address" required>
+            <button class="hero-email-btn" type="submit">Join Us</button>
+        </form>
+        <div class="hero-btn-row">
+            <a class="btn-outline" href="https://ascendtials.org/about-us-2024/">Learn About Us</a>
+            <a class="btn-outline" href="https://ascendtials.org/events/">Upcoming Events</a>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <!-- Original hero SVG, preserved exactly -->
+        <svg width="560" height="560" viewBox="0 0 610 610" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="imgPattern" patternUnits="userSpaceOnUse" width="610" height="610">
+                    <image href="./assets/img/home-page/hero.png" x="0" y="0" width="610" height="610" preserveAspectRatio="none" />
+                </pattern>
+                <linearGradient id="customGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#97918F" />
+                    <stop offset="100%" stop-color="#896D62" />
+                </linearGradient>
+            </defs>
+            <rect x="538" y="8" width="64" height="64" rx="32" fill="url(#customGradient)"></rect>
+            <g transform="translate(550, 20)">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <path d="M11.6667 5.56305C14.1182 4.14496 16.9643 3.33334 20 3.33334C29.2048 3.33334 36.6667 10.7953 36.6667 20C36.6667 29.2048 29.2048 36.6667 20 36.6667C10.7953 36.6667 3.33337 29.2048 3.33337 20C3.33337 16.9643 4.14499 14.1181 5.56308 11.6667" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M24.7141 31.7851C24.095 33.3327 23.3601 34.5604 22.5513 35.398C21.7424 36.2356 20.8755 36.6667 20 36.6667C19.1246 36.6667 18.2577 36.2356 17.4488 35.398C16.64 34.5604 15.9051 33.3327 15.286 31.7851C14.6669 30.2375 14.1759 28.4001 13.8408 26.378C13.5058 24.356 13.3334 22.1887 13.3334 20C13.3334 17.8113 13.5058 15.644 13.8408 13.6219C14.1759 11.5998 14.6669 9.76252 15.286 8.21488C15.9051 6.66723 16.64 5.43958 17.4488 4.602C18.2577 3.76442 19.1246 3.33332 20 3.33332C20.8755 3.33332 21.7424 3.76442 22.5513 4.60199C23.3601 5.43957 24.095 6.66723 24.7141 8.21488C25.3331 9.76252 25.8242 11.5998 26.1593 13.6219C26.4944 15.644 26.6667 17.8113 26.6667 20C26.6667 22.1887 26.4944 24.356 26.1593 26.378" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M3.33337 20H16.6667M36.6667 20H23.3334" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </g>
+            <rect x="10" y="370" width="64" height="216" rx="32" fill="url(#customGradient)"/>
+            <g transform="translate(20, 388)">
+                <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+                    <circle cx="22" cy="22" r="20.6186" stroke="#fff" stroke-width="1.23711"/>
+                    <path d="M10 23.4815C10 32.963 17.0519 35.3333 20.5778 35.3333C22.3832 35.3333 24.9974 34.8575 27.3333 33.4796M30.9609 30C32.0028 28.3382 32.6667 26.2027 32.6667 23.4815C32.6667 17.4457 28.8871 13.135 25.4697 10.6636C23.925 9.54646 22 10.7733 22 12.6796V13.1111C22 15.0336 21.1917 18.5427 18.9458 20.0023C17.7991 20.7475 16.5607 19.6322 16.4213 18.2717L16.3069 17.1546C16.1739 15.856 14.8512 15.0676 13.8133 15.8594C12.9173 16.5429 12.0019 17.4731 11.2926 18.6667" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M16.6667 30.5926C16.6667 34.3852 19.9852 35.3333 21.6445 35.3333C23.0963 35.3333 26 34.3852 26 30.5926C26 29.1246 25.2143 28.1336 24.4539 27.5617C23.9233 27.1626 23.177 27.521 22.9946 28.1594C22.7567 28.9916 21.897 29.5146 21.4592 28.7679C21.0588 28.085 21.0588 27.0608 21.0588 26.4444C21.0588 25.5958 20.2052 25.0463 19.5186 25.5451C18.142 26.5454 16.6667 28.2419 16.6667 30.5926Z" stroke="#fff" stroke-width="1.5"/>
+                </svg>
+            </g>
+            <g transform="translate(20, 456)">
+                <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+                    <circle cx="22" cy="22" r="20.6186" stroke="#fff" stroke-width="1.23711"/>
+                    <path d="M32.5304 27.3333H16.5304C15.2904 27.3333 14.6704 27.3333 14.1618 27.4696C12.7814 27.8395 11.7032 28.9177 11.3333 30.2981" stroke="#fff" stroke-width="1.5"/>
+                    <path d="M16.6667 15.3333H27.3334" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M16.6667 20H23.3334" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M32 31.3333H16.6667" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M19.3333 35.3333C15.5621 35.3333 13.6765 35.3333 12.5049 34.1618C11.3333 32.9902 11.3333 31.1046 11.3333 27.3333V16.6667C11.3333 12.8954 11.3333 11.0098 12.5049 9.83824C13.6765 8.66667 15.5621 8.66667 19.3333 8.66667H24.6667C28.4379 8.66667 30.3235 8.66667 31.4951 9.83824C32.6667 11.0098 32.6667 12.8954 32.6667 16.6667M24.6667 35.3333C28.4379 35.3333 30.3235 35.3333 31.4951 34.1618C32.6667 32.9902 32.6667 31.1046 32.6667 27.3333V22" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </g>
+            <g transform="translate(20, 524)">
+                <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+                    <circle cx="22" cy="22" r="20.6186" stroke="#fff" stroke-width="1.23711"/>
+                    <path d="M14 30L30 14M30 14H18M30 14V26" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 80C0 35.8172 35.8172 0 80 0H490C512.091 0 530 17.9086 530 40C530 62.0914 547.909 80 570 80C592.091 80 610 97.9086 610 120V530C610 574.183 574.183 610 530 610H164C119.817 610 84 574.183 84 530V402C84 378.804 65.196 360 42 360C18.804 360 0 341.196 0 318V80Z" fill="url(#imgPattern)"/>
+        </svg>
+    </div>
+</section>
+
+<!-- ============================================================
+     AREAS OF IMPACT — modern card grid
+============================================================ -->
+<section class="section-impact">
+    <div class="impact-header reveal">
+        <span class="section-label">Our Impact</span>
+        <h2 class="section-h2">Where We Make a Difference</h2>
+    </div>
+
+    <div class="impact-grid">
+        <!-- Environment — large left -->
+        <div class="impact-card impact-card--olive reveal">
+            <span class="impact-number">01</span>
+            <div class="impact-card-inner">
+                <img class="impact-card-img"
+                     src="./assets/img/home-page/environment-outline.png"
+                     alt="Environment">
+                <div class="impact-card-text">
+                    <div class="impact-card-name">Environment</div>
+                    <p class="impact-card-desc">ASCENDtials has adopted nine highways and actively restores several beaches — working alongside CalTrans, Sweetwater Park, and partner organizations to clean up the world.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mindfulness — small right -->
+        <div class="impact-card impact-card--warm reveal">
+            <span class="impact-number">02</span>
+            <div class="impact-card-inner">
+                <img class="impact-card-img"
+                     src="./assets/img/home-page/mindfulness-outline.png"
+                     alt="Mindfulness">
+                <div class="impact-card-text">
+                    <div class="impact-card-name">Mindfulness</div>
+                    <p class="impact-card-desc">Holistic wellness practices rooted in Kemetic Yoga and mindful living for BIPOC communities.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education — small left -->
+        <div class="impact-card impact-card--sage reveal">
+            <span class="impact-number">03</span>
+            <div class="impact-card-inner">
+                <img class="impact-card-img"
+                     src="./assets/img/home-page/education-outline.png"
+                     alt="Education">
+                <div class="impact-card-text">
+                    <div class="impact-card-name">Education</div>
+                    <p class="impact-card-desc">Literacy workshops, civic engagement, and our Designing from Whiteness to Oneness™ curriculum.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BIPOC — large right -->
+        <div class="impact-card impact-card--navy reveal">
+            <span class="impact-number">04</span>
+            <div class="impact-card-inner">
+                <img class="impact-card-img" src="./assets/img/home-page/group-outline.png" alt="BIPOC">
+                <div class="impact-card-text">
+                    <div class="impact-card-name">BIPOC</div>
+                    <p class="impact-card-desc">Multiple programs uniting people of all backgrounds. Our Farmers' Markets celebrate diverse cultures and give BIPOC businesses the opportunity to connect and thrive within their communities.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     PROGRAMS & EVENTS — original parallax with circle images
+============================================================ -->
+<div class="section-programs-wrapper">
+    <div class="parallax-container">
+        <div class="parallax" id="parallaxLayers">
+            <div class="layer layer-1"><img src="./assets/img/home-page/environment.png" alt="Environment"></div>
+            <div class="layer layer-2"><img src="./assets/img/home-page/child.png" alt="Child"></div>
+            <div class="layer layer-3"><img src="./assets/img/home-page/Farmers Market.jpg" alt="Farmers Market"></div>
+            <div class="layer layer-4"><img src="./assets/img/home-page/child2.png" alt="Child 2"></div>
+            <div class="layer layer-5"><img src="./assets/img/home-page/Legal Aid.png" alt="Legal Aid"></div>
+            <div class="layer layer-6"><img src="./assets/img/home-page/road.png" alt="Road"></div>
+            <div class="layer layer-7"><img src="./assets/img/home-page/hiking.png" alt="Hiking"></div>
+        </div>
+        <div class="programs-content">
+            <span class="section-label">Get Involved</span>
+            <h2>Programs &amp; Events</h2>
+            <p>We host programs and events that teach, engage, and create change. Learn something new at one of our literacy workshops, buy locally grown produce and handmade crafts at our Farmers' Markets, or help us reduce environmental pollution at one of our highway clean-ups.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     BENTO CARDS
+============================================================ -->
+<div class="section-bento">
+    <div class="bento-grid">
+        <div class="bento-card reveal">
+            <img src="./assets/img/home-page/Farmers Market.jpg" alt="Farmers Market" onerror="this.style.background='#EBF1AB'">
+            <div class="bento-card-overlay"></div>
+            <span class="bento-pill bento-pill--top-right">Community</span>
+            <div class="bento-card-body">
+                <h3 class="bento-title">Farmers' Market</h3>
+                <p class="bento-desc">Support our diaspora vendors and pick up fresh fruits, veggies, herbs, and antidotes surrounded by the sounds of African drumming.</p>
+                <a class="bento-link" href="https://ascendtials.org/farmers-market-2024/">Learn More →</a>
+            </div>
+        </div>
+        <div class="bento-card reveal reveal--delay-1">
+            <img src="./assets/img/home-page/Youth1.jpg" alt="Youth Programs" onerror="this.style.background='#B2D5D1'">
+            <div class="bento-card-overlay"></div>
+            <span class="bento-pill bento-pill--top-right">Youth</span>
+            <div class="bento-card-body">
+                <h3 class="bento-title">Youth Programs</h3>
+                <p class="bento-desc">Teaching kids environmental awareness and setting them up for success through nature-based activities.</p>
+                <a class="bento-link" href="https://ascendtials.org/youth-programs-2024/">Learn More →</a>
+            </div>
+        </div>
+        <div class="bento-card reveal reveal--delay-2">
+            <img src="./assets/img/home-page/Environmental.jpg" alt="Environmental Clean-ups" onerror="this.style.background='#E8D0CC'">
+            <div class="bento-card-overlay"></div>
+            <span class="bento-pill bento-pill--top-right">Environment</span>
+            <div class="bento-card-body">
+                <h3 class="bento-title">Environmental Clean-ups</h3>
+                <p class="bento-desc">Help us reduce pollution and improve community spaces through hands-on environmental action.</p>
+                <a class="bento-link" href="https://ascendtials.org/environmental-programs-24/">Learn More →</a>
+            </div>
+        </div>
+        <div class="bento-card reveal reveal--delay-3">
+            <img src="./assets/img/home-page/food-distribution.jpg" alt="Food Distributions" onerror="this.style.background='#EBF1AB'">
+            <div class="bento-card-overlay"></div>
+            <span class="bento-pill bento-pill--top-right">Food</span>
+            <div class="bento-card-body">
+                <h3 class="bento-title">Food Distributions</h3>
+                <p class="bento-desc">Monthly food distributions in City Heights and other communities, supporting families facing food insecurity.</p>
+                <a class="bento-link" href="https://ascendtials.org/food-distributions/">Learn More →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     EDUCATION & TRAINING
+============================================================ -->
+<div class="section-education reveal">
+    <div class="education-text">
+        <span class="section-label">Learn &amp; Grow</span>
+        <h2 class="section-h2">Learning as a Tool<br>for Liberation</h2>
+        <p class="education-body">
+            At ASCENDtials, we recognize that the current education system fails to equip individuals with the critical thinking and problem-solving skills needed to overcome systemic issues of racism and inequality. Our unique curriculum, <strong>Designing from Whiteness to Oneness™</strong>, shifts the focus toward empowering Black communities through dialogue and discussion.
+        </p>
+        <div class="edu-pillars">
+            <span class="edu-pillar">Civic Literacy</span>
+            <span class="edu-pillar">Environmental</span>
+            <span class="edu-pillar">Financial</span>
+            <span class="edu-pillar">Cosmic</span>
+        </div>
+        <a class="btn-primary" href="https://ascendtials.org/education-and-training-24/">Explore Programs</a>
+    </div>
+    <div class="education-visual">
+        <svg width="449" height="390" viewBox="0 0 449 390" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <mask id="edu-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="390">
+                    <path d="M17 135.436C17 93.2797 17 72.2013 25.2042 56.0996C32.4209 41.9362 43.9362 30.4209 58.0996 23.2042C74.2013 15 95.2797 15 137.436 15H449V390H17V135.436Z" fill="white"/>
+                </mask>
+            </defs>
+            <path d="M120.436 0.5H431.5V374.5H0.5V120.436C0.5 99.3498 0.500389 83.5649 1.52387 71.0381C2.54687 58.5171 4.58952 49.2952 8.64974 41.3266C15.8185 27.2572 27.2572 15.8185 41.3266 8.64974C49.2952 4.58952 58.5171 2.54687 71.0381 1.52387C83.5649 0.500389 99.3498 0.5 120.436 0.5Z" stroke="var(--color-line)"/>
+            <image href="./assets/img/home-page/Education and training.jpg" x="0" y="0" width="449" height="390" mask="url(#edu-mask)" preserveAspectRatio="xMidYMid slice"/>
+        </svg>
+        <div class="education-badge">
+            <div class="education-badge-num">5</div>
+            <div class="education-badge-label">Literacy pillars for all ages</div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     JOIN CTA
+============================================================ -->
+<section class="section-join reveal">
+    <span class="join-eyebrow">Get Involved</span>
+    <h2 class="join-h2">Ready to Make<br>a Real Difference?</h2>
+    <p class="join-sub">ASCENDtials is actively seeking volunteers, partners, and community members who believe in the power of collective action.</p>
+    <div class="join-actions">
+        <a class="btn-white" href="https://ascendtials.org/volunteer/">Volunteer with Us</a>
+        <a class="btn-ghost" href="https://ascendtials.org/get-involved/">Partner with Us</a>
+        <a class="btn-ghost" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1">Donate</a>
+    </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer">
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png" alt="ASCENDtials Logo">
+            <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's BIPOC community.</p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/ascendtials" aria-label="Facebook" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/ascendtials" aria-label="Instagram" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                </a>
+                <a href="https://www.youtube.com/@ascendtials" aria-label="YouTube" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+                </a>
+                <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/company/ascendtials" aria-label="LinkedIn" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://twitter.com/ascendtials" aria-label="X / Twitter" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+        <div>
+            <div class="footer-col-title">Quick Links</div>
+            <ul class="footer-links">
+                <li><a href="https://ascendtials.org/about-us-2024/">About Us</a></li>
+                <li><a href="https://ascendtials.org/education-and-training-2024/">Education & Training</a></li>
+                <li><a href="https://ascendtials.org/events/">Events Calendar</a></li>
+                <li><a href="https://ascendtials.org/get-involved/">Get Involved</a></li>
+                <li><a href="https://ascendtials.org/ascendtials-membership-2024/">Membership</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-title">Programs</div>
+            <ul class="footer-links">
+                <li><a href="https://ascendtials.org/youth-programs-2024/">Youth Programs</a></li>
+                <li><a href="https://ascendtials.org/environmental-programs-2024/">Environmental Programs</a></li>
+                <li><a href="https://ascendtials.org/legal-aid-program-2024/">Legal Aid</a></li>
+                <li><a href="https://ascendtials.org/fellowship-program-2024/">Internships & Fellowships</a></li>
+                <li><a href="https://ascendtials.org/kemetic-yoga-2024/">Kemetic Yoga</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-title">Contact</div>
+            <div class="footer-contact">
+                <p>505 W Broadway<br>San Diego, CA 92101</p>
+                <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
+            </div>
+            <!-- <div class="footer-candid mt-md">
+                <img src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg" alt="Candid Platinum Seal">
+                <span>EIN: 47-2451577</span>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- Partners row -->
+    <div class="footer-partners">
+        <img src="https://ascendtials.org/wp-content/uploads/2024/08/county-san-diego-logo.png" alt="County of San Diego">
+        <img src="https://ascendtials.org/wp-content/uploads/2024/08/live-well-san-diego-logo.png" alt="Live Well San Diego">
+        <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png" alt="ASCENDtials">
+        <img src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg" alt="Candid Platinum 2025">
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2024 ASCENDtials. All rights reserved.</p>
+        <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="https://ascendtials.org/contact-us/">Contact</a>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================
+     JS
+============================================================ -->
+<script>
+    // Nav scroll effect
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Mobile menu
+    const burger = document.getElementById('navBurger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                observer.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Parallax — Programs & Events (original logic restored)
+    document.addEventListener('DOMContentLoaded', function () {
+        const layers = document.querySelectorAll('.parallax-container .layer');
+        let mouseX = 0, mouseY = 0;
+        let windowWidth  = window.innerWidth;
+        let windowHeight = window.innerHeight;
+
+        function lerp(start, end, factor) {
+            return (1 - factor) * start + factor * end;
+        }
+
+        window.addEventListener('mousemove', e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        window.addEventListener('resize', () => {
+            windowWidth  = window.innerWidth;
+            windowHeight = window.innerHeight;
+        });
+
+        (function animate() {
+            layers.forEach((layer, index) => {
+                const speed   = (index + 1) * 0.007;
+                const targetX = (windowWidth  / 2 - mouseX) * speed;
+                const targetY = (windowHeight / 2 - mouseY) * speed;
+                const currentX = parseFloat(layer.dataset.x || 0);
+                const currentY = parseFloat(layer.dataset.y || 0);
+                const newX = lerp(currentX, targetX, 0.1);
+                const newY = lerp(currentY, targetY, 0.1);
+                layer.dataset.x = newX;
+                layer.dataset.y = newY;
+                layer.style.transform = `translate3d(${newX}px, ${newY}px, 0)`;
+            });
+            requestAnimationFrame(animate);
+        })();
+    });
+</script>
+
+</body>
+</html>
