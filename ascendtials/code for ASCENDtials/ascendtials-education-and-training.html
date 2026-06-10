@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education & Training – ASCENDtials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ============================================================
+       DESIGN TOKENS (identical to home/about)
+        ============================================================ */
+        :root {
+            --color-navy: #1E3A47;
+            --color-navy-deep: #152E3A;
+            --color-sky: #C9A96E;
+            --color-sky-light: #F5EBD8;
+            --color-white: #FFFFFF;
+            --color-bg: #FAFAF8;
+            --color-surface: #F4F2EE;
+            --color-surface-2: #ECEAE5;
+            --color-line: #E2DDD6;
+            --color-text: #1A1A18;
+            --color-text-muted: #666660;
+            --color-text-light: #9D9A93;
+            --color-accent: #C9A96E;
+            --color-warm: #E8D0CC;
+            --color-sage: #B2D5D1;
+            --color-olive: #EBF1AB;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.375rem;
+            --text-2xl: 1.75rem;
+            --text-3xl: 2.25rem;
+            --text-hero: clamp(3rem, 6vw, 5.5rem);
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
+            --space-section: 120px;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-pill: 999px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --dur-fast: 180ms;
+            --dur-base: 280ms;
+            --dur-slow: 500ms;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            overflow-x: hidden;
+            font-size: var(--text-base);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ============================================================
+        NAV (identical to home)
+        ============================================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            gap: 32px;
+            transition: all var(--dur-slow) var(--ease-in-out);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            top: 10px;
+            left: 16px;
+            right: 16px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-logo {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .nav-logo img {
+            height: 52px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links>li {
+            position: relative;
+        }
+
+        .nav-links>li>a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            font-size: var(--text-sm);
+            font-weight: 400;
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links>li>a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-links .has-dropdown>a::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: solid var(--color-text-muted);
+            border-width: 0 1.5px 1.5px 0;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links .has-dropdown:hover>a::after {
+            transform: rotate(225deg) translateY(-2px);
+        }
+
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;         
+            left: 0;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-line);
+            list-style: none;
+            min-width: 220px;
+            padding: 6px;
+            padding-top: 10px;  
+            z-index: 600;
+        }
+
+        .nav-links .has-dropdown:hover .nav-dropdown {
+            display: block;
+        }
+
+        .nav-dropdown li a {
+            display: block;
+            padding: 9px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .nav-dropdown li a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-cta {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            flex-shrink: 0;
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 9px 20px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color var(--dur-fast);
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .nav-cta:hover::before {
+            transform: scaleX(1);
+        }
+
+        .nav-burger {
+            display: none;
+            background: none;
+            border: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+            margin-left: auto;
+        }
+
+        .nav-burger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-navy);
+            border-radius: 2px;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 490;
+            padding: 90px 24px 32px;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 16px;
+            font-size: var(--text-xl);
+            color: var(--color-text);
+            border-bottom: 1px solid var(--color-line);
+            font-family: var(--font-display);
+        }
+
+        .mobile-menu .mob-cta {
+            margin-top: 24px;
+            background: var(--color-navy);
+            color: var(--color-white);
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-lg);
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+        }
+
+        /* ============================================================
+        BUTTONS
+        ============================================================ */
+        .btn-primary,
+        .btn-outline,
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            cursor: pointer;
+            transition: color var(--dur-fast);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-white);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            border: 1.5px solid var(--color-navy);
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-sm {
+            padding: 9px 20px;
+            font-size: var(--text-xs);
+        }
+
+        /* ============================================================
+        SCROLL REVEAL
+        ============================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal--delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal--delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal--delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        /* ============================================================
+        PAGE HERO — education
+        ============================================================ */
+        .page-hero {
+            padding-top: 72px;
+            background: var(--color-navy-deep);
+            color: var(--color-white);
+            min-height: 480px;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: var(--space-3xl);
+            padding-left: max(40px, 5vw);
+            padding-right: max(40px, 5vw);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201, 169, 110, 0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Decorative grid lines */
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(201, 169, 110, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201, 169, 110, 0.06) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+        }
+
+        .page-hero-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 760px;
+        }
+
+        .page-hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(201, 169, 110, 0.18);
+            border: 1px solid rgba(201, 169, 110, 0.35);
+            color: var(--color-sky);
+            font-size: var(--text-xs);
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: var(--radius-pill);
+            margin-bottom: var(--space-lg);
+        }
+
+        .page-hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: var(--space-lg);
+            color: var(--color-white);
+        }
+
+        .page-hero h1 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .page-hero p {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.72);
+            max-width: 580px;
+            line-height: 1.7;
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast);
+        }
+
+        .hero-pill:hover,
+        .hero-pill.active {
+            background: rgba(201, 169, 110, 0.22);
+            border-color: rgba(201, 169, 110, 0.5);
+            color: var(--color-sky);
+        }
+
+        .hero-pill svg {
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+        SECTION LAYOUT
+        ============================================================ */
+        .section-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-section) max(40px, 5vw);
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .section-eyebrow {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 500;
+            line-height: 1.15;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .section-body {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            max-width: 640px;
+        }
+
+        /* ============================================================
+        CATEGORY OVERVIEW CARDS (4-pillars bento grid)
+        ============================================================ */
+        .pillars-section {
+            background: var(--color-bg);
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: var(--space-2xl);
+        }
+
+        .pillar-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl) var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            cursor: pointer;
+            transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-base);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .pillar-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .pillar-num {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--color-sky);
+            line-height: 1;
+        }
+
+        .pillar-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-sky-light);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .pillar-label {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 500;
+            line-height: 1.25;
+            color: var(--color-navy);
+        }
+
+        .pillar-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            flex: 1;
+        }
+
+        .pillar-arrow {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--color-sky);
+            transition: gap var(--dur-fast);
+        }
+
+        .pillar-card:hover .pillar-arrow {
+            gap: 10px;
+        }
+
+        /* ============================================================
+        SECTION DIVIDER
+        ============================================================ */
+        .divider {
+            height: 1px;
+            background: var(--color-line);
+            margin: 0 max(40px, 5vw);
+        }
+
+        /* ============================================================
+        PROGRAM SECTION — alternating layout
+        ============================================================ */
+        .prog-section {
+            padding: var(--space-section) max(40px, 5vw);
+        }
+
+        .prog-section.alt {
+            background: var(--color-surface);
+        }
+
+        .prog-section.dark {
+            background: var(--color-navy-deep);
+            color: var(--color-white);
+        }
+
+        .prog-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .prog-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .prog-header-text {
+            flex: 1;
+            max-width: 560px;
+        }
+
+        .prog-num-badge {
+            width: 56px;
+            height: 56px;
+            flex-shrink: 0;
+            background: var(--color-sky-light);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-style: italic;
+            font-weight: 400;
+            color: var(--color-sky);
+        }
+
+        .prog-section.dark .prog-num-badge {
+            background: rgba(201, 169, 110, 0.15);
+        }
+
+        .prog-section.dark .section-tag {
+            color: var(--color-sky);
+        }
+
+        .prog-section.dark .section-title {
+            color: var(--color-white);
+        }
+
+        .prog-section.dark .section-body {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .prog-section.dark .section-eyebrow {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .prog-cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: var(--space-xl);
+        }
+
+        /* Topics grid — literacy */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-top: var(--space-xl);
+        }
+
+        .topic-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg) var(--space-md);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: var(--space-sm);
+            transition: box-shadow var(--dur-base), transform var(--dur-base), border-color var(--dur-base);
+        }
+
+        .topic-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .topic-img {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-md);
+            object-fit: cover;
+        }
+
+        .topic-name {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--color-navy);
+        }
+
+        /* Bullet list */
+        .prog-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: var(--space-lg);
+        }
+
+        .prog-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+        }
+
+        .prog-section.dark .prog-list li {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .prog-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--color-sky);
+            border-radius: 50%;
+            margin-top: 9px;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+        WORKFORCE — program links grid
+        ============================================================ */
+        .prog-links-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: var(--space-xl);
+        }
+
+        .prog-link-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            transition: box-shadow var(--dur-base), transform var(--dur-base), border-color var(--dur-base);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .prog-section.dark .prog-link-card {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .prog-link-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .prog-section.dark .prog-link-card:hover {
+            border-color: rgba(201, 169, 110, 0.45);
+        }
+
+        .prog-link-tag {
+            font-size: var(--text-xs);
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-sky);
+        }
+
+        .prog-link-title {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 500;
+            color: var(--color-navy);
+            line-height: 1.3;
+        }
+
+        .prog-section.dark .prog-link-title {
+            color: var(--color-white);
+        }
+
+        .prog-link-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .prog-section.dark .prog-link-desc {
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        .prog-link-arrow {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--color-sky);
+            margin-top: auto;
+            padding-top: var(--space-sm);
+            transition: gap var(--dur-fast);
+        }
+
+        .prog-link-card:hover .prog-link-arrow {
+            gap: 9px;
+        }
+
+        /* ============================================================
+        COURSES GRID
+        ============================================================ */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: var(--space-2xl);
+        }
+
+        .course-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow var(--dur-base), transform var(--dur-base);
+        }
+
+        .course-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .course-card-top {
+            padding: var(--space-xl) var(--space-lg) var(--space-lg);
+            background: var(--color-surface);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .course-badge {
+            display: inline-flex;
+            font-size: var(--text-xs);
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-white);
+            background: var(--color-navy);
+            padding: 4px 10px;
+            border-radius: var(--radius-pill);
+            width: fit-content;
+        }
+
+        .course-badge.available {
+            background: var(--color-sky);
+        }
+
+        .course-badge.tbd {
+            background: var(--color-text-muted);
+        }
+
+        .course-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 500;
+            color: var(--color-navy);
+            line-height: 1.25;
+        }
+
+        .course-card-body {
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            flex: 1;
+        }
+
+        .course-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+        }
+
+        .course-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .course-meta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: var(--text-xs);
+            color: var(--color-text-muted);
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            padding: 4px 10px;
+            border-radius: var(--radius-pill);
+        }
+
+        .course-footer {
+            padding: var(--space-md) var(--space-lg);
+            border-top: 1px solid var(--color-line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .course-price {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 500;
+            color: var(--color-navy);
+        }
+
+        .course-price.free {
+            color: var(--color-sage);
+        }
+
+        .course-enroll {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-xs);
+            font-weight: 500;
+            background: var(--color-navy);
+            color: var(--color-white);
+            border: none;
+            cursor: pointer;
+            transition: background var(--dur-fast), transform var(--dur-fast);
+        }
+
+        .course-enroll:hover {
+            background: var(--color-sky);
+        }
+
+        .course-enroll.disabled {
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            cursor: not-allowed;
+        }
+
+        /* ============================================================
+        SERVICE LEARNING SPLIT LAYOUT
+        ============================================================ */
+        .service-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: center;
+        }
+
+        .service-visual {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .service-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .service-stat-num {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--color-sky);
+            line-height: 1;
+        }
+
+        .service-stat-label {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+        }
+
+        .service-stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-md);
+        }
+
+        .service-activities {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .service-activity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-sm);
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+        }
+
+        .service-activity-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+        INTERNSHIP FEATURE
+        ============================================================ */
+        .internship-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: var(--space-xl);
+        }
+
+        .internship-card {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            transition: background var(--dur-base), border-color var(--dur-base);
+        }
+
+        .internship-card:hover {
+            background: rgba(201, 169, 110, 0.1);
+            border-color: rgba(201, 169, 110, 0.3);
+        }
+
+        .internship-card-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(201, 169, 110, 0.15);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+        }
+
+        .internship-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 500;
+            color: var(--color-white);
+            line-height: 1.2;
+        }
+
+        .internship-card-body {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.65;
+        }
+
+        /* ============================================================
+        CTA BANNER
+        ============================================================ */
+        .cta-banner {
+            background: var(--color-navy-deep);
+            padding: var(--space-section) max(40px, 5vw);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201, 169, 110, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-banner-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 640px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .cta-banner h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.25rem);
+            font-weight: 500;
+            line-height: 1.15;
+            color: var(--color-white);
+        }
+
+        .cta-banner h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .cta-banner p {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.7;
+        }
+
+        .cta-btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 28px;
+            border-radius: var(--radius-pill);
+            background: var(--color-sky);
+            color: var(--color-navy-deep);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: opacity var(--dur-fast), transform var(--dur-fast);
+        }
+
+        .btn-gold:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 28px;
+            border-radius: var(--radius-pill);
+            background: transparent;
+            color: var(--color-white);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost-white:hover {
+            border-color: rgba(255, 255, 255, 0.65);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        /* ============================================================
+        FOOTER (identical to home)
+        ============================================================ */
+        /* ============================================================
+        FOOTER
+        ============================================================ */
+        .footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            padding: var(--space-section) max(40px, 5vw);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-brand img {
+            height: 48px;
+            width: auto;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            max-width: 260px;
+        }
+
+        .footer-col-title {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-contact p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .footer-contact a {
+            color: var(--color-sky);
+        }
+
+        .footer-bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 8px;
+            margin-top: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            transition: background var(--dur-fast), color var(--dur-fast);
+        }
+
+        .footer-social a:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .footer-partners {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) max(40px, 5vw);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            flex-wrap: wrap;
+        }
+
+        .footer-partners img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(20%);
+            transition: opacity var(--dur-fast);
+        }
+
+        .footer-partners img:hover {
+            opacity: 1;
+        }
+
+        /* ============================================================
+        RESPONSIVE
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 24px;
+            }
+
+            .nav.scrolled {
+                left: 12px;
+                right: 12px;
+            }
+
+            .pillars-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .topics-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .prog-links-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .service-split {
+                grid-template-columns: 1fr;
+            }
+
+            .internship-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                padding-bottom: var(--space-2xl);
+            }
+
+            .page-hero h1 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .section-wrap,
+            .prog-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .pillars-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .prog-header {
+                flex-direction: column;
+            }
+
+            .topics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .prog-links-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-partners {
+                gap: var(--space-xl);
+            }
+
+            .divider {
+                margin: 0 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+    NAV
+    ============================================================ -->
+    <header class="nav" id="mainNav">
+        <div class="nav-logo">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="./ascendtials-home.html">Home</a></li>
+            <li class="has-dropdown">
+                <a href="#">About</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./ascendtials-about.html">About Us</a></li>
+                    <li><a href="./ascendtials-our-team.html">Our Team</a></li>
+                    <li><a href="./ascendtials-contact.html">Contact Us</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Education</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./ascendtials-education-and-training.html">Education & Training</a></li>
+                    <li><a href="./ascendtials-literacy_workshop.html">Literacy Workshops</a></li>
+                    <li><a href="./ascendtials-kemetic-yoga.html">Kemetic Yoga</a></li>
+                    <li><a href="./ascendtials-from-whiteness-to-oneness.html">Whiteness To Oneness™</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Programs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./ascendtials-events.html">Event Calendar</a></li>
+                    <li><a href="./ascendtials-service-learning-programs.html">Service Learning</a></li>
+                    <li><a href="./ascendtials-youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./ascendtials-environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./ascendtials-legal-aid-program.html">Legal Aid Programs</a></li>
+                    <li><a href="./ascendtials-fellowship-program.html">Internships & Fellowships</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Join Us</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./ascendtials-get-involved.html">Get Involved</a></li>
+                    <li><a href="./ascendtials-partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="./ascendtials-volunteer.html">Volunteer</a></li>
+                </ul>
+            </li>
+        </ul>
+        <a class="nav-cta" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1">Support Us</a>
+        <button class="nav-burger" id="navBurger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="./ascendtials-home.html">Home</a>
+
+        <a href="./ascendtials-about.html">About Us</a>
+        <a href="./ascendtials-our-team.html">Our Team</a>
+        <a href="./ascendtials-contact.html">Contact Us</a>
+
+        <a href="./ascendtials-education-and-training.html">Education & Training</a>
+        <a href="./ascendtials-literacy_workshops.html">Literacy Workshops</a>
+        <a href="./ascendtials-kemetic-yoga.html">Kemetic Yoga</a>
+        <a href="./ascendtials-from-whiteness-to-oneness.html">Whiteness To Oneness™</a>
+
+        <a href="./ascendtials-events.html">Event Calendar</a>
+        <a href="./ascendtials-service-learning-programs.html">Service Learning</a>
+        <a href="./ascendtials-youth-programs.html">Youth Programs</a>
+        <a href="./ascendtials-environmental-programs.html">Environmental Programs</a>
+        <a href="./ascendtials-legal-aid-program.html">Legal Aid Programs</a>
+        <a href="./ascendtials-fellowship-program.html">Internships & Fellowships</a>
+
+        <a href="./ascendtials-get-involved.html">Get Involved</a>
+        <a href="./ascendtials-partner-with-us.html">Partner with Us</a>
+        <a href="./ascendtials-volunteer.html">Volunteer</a>
+
+        <a class="mob-cta" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1">Support Us</a>
+    </div>
+
+    <!-- ============================================================
+    PAGE HERO
+    ============================================================ -->
+    <section class="page-hero">
+        <div class="page-hero-inner">
+            <span class="page-hero-tag">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path
+                        d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                </svg>
+                Education & Training
+            </span>
+            <h1>Learning Pathways Rooted in<br><em>Culture, Ecology & Community</em></h1>
+            <p>ASCENDtials offers a holistic ecosystem of learning experiences that reconnect participants with land,
+                culture, and community while building practical skills for personal and professional growth.</p>
+            <div class="hero-pill-row">
+                <a href="#literacy" class="hero-pill">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                    </svg>
+                    Literacy Workshops
+                </a>
+                <a href="#workforce" class="hero-pill">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="7" width="20" height="14" rx="2" />
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    </svg>
+                    Workforce Development
+                </a>
+                <a href="#service" class="hero-pill">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                    Service Learning
+                </a>
+                <a href="#courses" class="hero-pill">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                    </svg>
+                    Courses
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    4 PILLARS OVERVIEW
+    ============================================================ -->
+    <section class="pillars-section">
+        <div class="section-wrap">
+            <span class="section-tag reveal">Our Four Core Categories</span>
+            <h2 class="section-title reveal">Everything We Offer,<br><em>At a Glance</em></h2>
+            <p class="section-body reveal">Explore our four core education categories — each one a doorway into deeper
+                knowledge, community connection, and personal growth.</p>
+
+            <div class="pillars-grid">
+                <a href="#literacy" class="pillar-card reveal">
+                    <div style="display:flex;align-items:center;justify-content:space-between;">
+                        <div class="pillar-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.75">
+                                <path d="M12 20h9" />
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                            </svg>
+                        </div>
+                        <span class="pillar-num">01</span>
+                    </div>
+                    <div class="pillar-label">Literacy Workshops</div>
+                    <p class="pillar-desc">Ecological, cultural & spiritual literacy rooted in environmental justice and
+                        ancestral knowledge — land, water, air, and community healing.</p>
+                    <div class="pillar-arrow">
+                        Explore
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#workforce" class="pillar-card reveal reveal--delay-1">
+                    <div style="display:flex;align-items:center;justify-content:space-between;">
+                        <div class="pillar-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.75">
+                                <rect x="2" y="7" width="20" height="14" rx="2" />
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                            </svg>
+                        </div>
+                        <span class="pillar-num">02</span>
+                    </div>
+                    <div class="pillar-label">Workforce Development</div>
+                    <p class="pillar-desc">Internships, fellowships & apprenticeships preparing youth and adults for
+                        creative economy, environmental stewardship, and community enterprise.</p>
+                    <div class="pillar-arrow">
+                        Explore
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#service" class="pillar-card reveal reveal--delay-2">
+                    <div style="display:flex;align-items:center;justify-content:space-between;">
+                        <div class="pillar-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.75">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <span class="pillar-num">03</span>
+                    </div>
+                    <div class="pillar-label">Service Learning</div>
+                    <p class="pillar-desc">Community engagement, environmental action & applied learning that connects
+                        students with meaningful projects integrating cultural education and social responsibility.</p>
+                    <div class="pillar-arrow">
+                        Explore
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#courses" class="pillar-card reveal reveal--delay-3">
+                    <div style="display:flex;align-items:center;justify-content:space-between;">
+                        <div class="pillar-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.75">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                            </svg>
+                        </div>
+                        <span class="pillar-num">04</span>
+                    </div>
+                    <div class="pillar-label">Courses</div>
+                    <p class="pillar-desc">Self-paced & instructor-led learning blending cultural literacy, ecological
+                        knowledge, entrepreneurship, and practical skill-building for personal and community growth.</p>
+                    <div class="pillar-arrow">
+                        Explore
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ============================================================
+    01 — LITERACY WORKSHOPS
+    ============================================================ -->
+    <section class="prog-section" id="literacy">
+        <div class="prog-inner">
+            <div class="prog-header">
+                <div class="prog-header-text">
+                    <span class="section-tag reveal">Category 01</span>
+                    <h2 class="section-title reveal">Literacy Workshops</h2>
+                    <p class="section-body reveal">Our Literacy Workshops restore ancestral knowledge and deepen
+                        participants' understanding of land, water, air, and cultural truth. These workshops are
+                        experiential, youth-friendly, and rooted in environmental justice.</p>
+                    <div class="prog-cta-row reveal">
+                        <a href="https://ascendtials.org/literacy-workshops/" class="btn-primary">Explore Literacy
+                            Workshops</a>
+                        <a href="https://ascendtials.org/work-shops/cosmic-literacy-workshop/night-sky-education/"
+                            class="btn-outline">Night Sky Kemetic Course</a>
+                    </div>
+                </div>
+                <div class="prog-num-badge reveal">01</div>
+            </div>
+
+            <span class="section-eyebrow reveal">Workshop Topics</span>
+            <div class="topics-grid">
+                <div class="topic-card reveal">
+                    <img class="topic-img" src="https://ascendtials.org/wp-content/uploads/2024/10/Civic-Literacy-1.png"
+                        alt="Civic Literacy" onerror="this.style.background='var(--color-surface)';this.src='';">
+                    <span class="topic-name">Civic Literacy</span>
+                </div>
+                <div class="topic-card reveal reveal--delay-1">
+                    <img class="topic-img" src="https://ascendtials.org/wp-content/uploads/2024/10/Cosmic-Literacy.png"
+                        alt="Cosmic Literacy" onerror="this.style.background='var(--color-surface)';this.src='';">
+                    <span class="topic-name">Cosmic Literacy</span>
+                </div>
+                <div class="topic-card reveal reveal--delay-2">
+                    <img class="topic-img"
+                        src="https://ascendtials.org/wp-content/uploads/2024/10/Environmental-Literacy.png"
+                        alt="Environmental Literacy"
+                        onerror="this.style.background='var(--color-surface)';this.src='';">
+                    <span class="topic-name">Environmental Literacy</span>
+                </div>
+                <div class="topic-card reveal reveal--delay-1">
+                    <img class="topic-img"
+                        src="https://ascendtials.org/wp-content/uploads/2024/10/Spiritual-Literacy.png"
+                        alt="Spiritual Literacy" onerror="this.style.background='var(--color-surface)';this.src='';">
+                    <span class="topic-name">Spiritual Literacy</span>
+                </div>
+                <div class="topic-card reveal reveal--delay-2">
+                    <img class="topic-img"
+                        src="https://ascendtials.org/wp-content/uploads/2024/10/Financial-Literacy.png"
+                        alt="Financial Literacy" onerror="this.style.background='var(--color-surface)';this.src='';">
+                    <span class="topic-name">Financial Literacy</span>
+                </div>
+            </div>
+
+            <div style="margin-top: var(--space-xl);">
+                <p class="section-body reveal" style="max-width:100%;">Participants explore land stewardship & food
+                    systems, water guardianship & healing, air quality, climate & breathwork, cultural & ancestral
+                    knowledge, and environmental justice for BIPOC communities.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ============================================================
+    02 — WORKFORCE DEVELOPMENT (dark bg)
+    ============================================================ -->
+    <section class="prog-section dark" id="workforce">
+        <div class="prog-inner">
+            <div class="prog-header">
+                <div class="prog-header-text">
+                    <span class="section-tag reveal">Category 02</span>
+                    <h2 class="section-title reveal">Workforce Development</h2>
+                    <p class="section-body reveal">Our Workforce Development programs prepare youth and adults for
+                        real-world roles in publishing, creative economy, environmental stewardship, and community
+                        enterprise. Participants gain hands-on experience, mentorship, and portfolio-building
+                        opportunities.</p>
+                </div>
+                <div class="prog-num-badge reveal">02</div>
+            </div>
+
+            <div class="internship-grid">
+                <div class="internship-card reveal">
+                    <div class="internship-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 8v4l3 3" />
+                        </svg>
+                    </div>
+                    <div class="internship-card-title">Internship Program</div>
+                    <div class="internship-card-body">Open to students from all majors seeking meaningful, hands-on
+                        experience. Our work reconnects students with the natural world, encouraging self-awareness and
+                        a deeper understanding of our relationship with the environment.</div>
+                    <a href="https://ascendtials.org/internship-fellowship-program/" class="pillar-arrow"
+                        style="color:var(--color-sky);">
+                        Learn more
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="internship-card reveal reveal--delay-1">
+                    <div class="internship-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path
+                                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                        </svg>
+                    </div>
+                    <div class="internship-card-title">Fellowship Program</div>
+                    <div class="internship-card-body">Annually selects up to 12 fellows from U.S. and international
+                        institutions to explore ancient Kemet's decolonization through art. Fellows engage in healing
+                        sessions, Kemetic Yoga, and climate-centered activities, culminating in an exhibition.</div>
+                    <a href="https://ascendtials.org/internship-fellowship-program/" class="pillar-arrow"
+                        style="color:var(--color-sky);">
+                        Learn more
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div style="margin-top: var(--space-2xl);">
+                <span class="section-eyebrow reveal">All Programs in This Category</span>
+                <div class="prog-links-grid" style="margin-top:var(--space-lg);">
+                    <a href="https://ascendtials.org/internship-fellowship-program/" class="prog-link-card reveal">
+                        <span class="prog-link-tag">Open</span>
+                        <div class="prog-link-title">Internship & Fellowship Programs</div>
+                        <p class="prog-link-desc">Paid and unpaid internships, fellowships, and work-based learning
+                            placements.</p>
+                        <div class="prog-link-arrow">View page <svg width="12" height="12" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg></div>
+                    </a>
+                    <a href="https://ascendtials.org/course/grant-team-foundations/"
+                        class="prog-link-card reveal reveal--delay-1">
+                        <span class="prog-link-tag">Course</span>
+                        <div class="prog-link-title">Grant Foundations Course</div>
+                        <p class="prog-link-desc">Build your skills in grant writing and community fundraising strategy.
+                        </p>
+                        <div class="prog-link-arrow">View page <svg width="12" height="12" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg></div>
+                    </a>
+                    <a href="https://ascendtials.org/course-2/become-a-vendor-course/"
+                        class="prog-link-card reveal reveal--delay-2">
+                        <span class="prog-link-tag">Course</span>
+                        <div class="prog-link-title">Vendor Learning Academy</div>
+                        <p class="prog-link-desc">Creative economy training for vendors entering ASCENDtials
+                            programming.</p>
+                        <div class="prog-link-arrow">View page <svg width="12" height="12" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg></div>
+                    </a>
+                    <a href="#" class="prog-link-card reveal">
+                        <span class="prog-link-tag"
+                            style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.4);">Coming Soon</span>
+                        <div class="prog-link-title">Publishing & Print House Apprenticeship</div>
+                        <p class="prog-link-desc">Hands-on apprenticeship in community publishing and print media.</p>
+                        <div class="prog-link-arrow" style="opacity:0.4;">Coming soon <svg width="12" height="12"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg></div>
+                    </a>
+                    <a href="#" class="prog-link-card reveal reveal--delay-1">
+                        <span class="prog-link-tag"
+                            style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.4);">Coming Soon</span>
+                        <div class="prog-link-title">Yacht Club Essentials Course</div>
+                        <p class="prog-link-desc">Marine skills and ocean stewardship for BIPOC communities.</p>
+                        <div class="prog-link-arrow" style="opacity:0.4;">Coming soon <svg width="12" height="12"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    03 — SERVICE LEARNING
+    ============================================================ -->
+    <section class="prog-section alt" id="service">
+        <div class="prog-inner">
+            <div class="prog-header">
+                <div class="prog-header-text">
+                    <span class="section-tag reveal">Category 03</span>
+                    <h2 class="section-title reveal">Service Learning Program</h2>
+                    <p class="section-body reveal">Our Service Learning Program connects students with meaningful
+                        community projects that integrate ecological stewardship, cultural education, and social
+                        responsibility. Move beyond the classroom — develop civic knowledge and practical skills while
+                        working for a nonprofit that heals.</p>
+                    <div class="prog-cta-row reveal">
+                        <a href="https://ascendtials.org/service-learning-programs/" class="btn-primary">Explore Service
+                            Learning</a>
+                        <a href="https://ascendtials.org/youth-programs/" class="btn-outline">Youth Leadership
+                            Activities</a>
+                    </div>
+                </div>
+                <div class="prog-num-badge reveal">03</div>
+            </div>
+
+            <div class="service-split">
+                <div class="service-visual reveal">
+                    <div class="service-stats-row">
+                        <div class="service-stat">
+                            <div class="service-stat-num">2</div>
+                            <div class="service-stat-label">Program tracks — Volunteer & Internship</div>
+                        </div>
+                        <div class="service-stat">
+                            <div class="service-stat-num">5+</div>
+                            <div class="service-stat-label">Types of service activities</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="section-eyebrow" style="margin-bottom:var(--space-sm);">Service Activities</div>
+                        <div class="service-activities">
+                            <div class="service-activity">
+                                <div class="service-activity-dot"></div>Community cleanups
+                            </div>
+                            <div class="service-activity">
+                                <div class="service-activity-dot"></div>Market support roles
+                            </div>
+                            <div class="service-activity">
+                                <div class="service-activity-dot"></div>Curriculum development
+                            </div>
+                            <div class="service-activity">
+                                <div class="service-activity-dot"></div>Youth programming assistance
+                            </div>
+                            <div class="service-activity">
+                                <div class="service-activity-dot"></div>Environmental stewardship projects
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal reveal--delay-1">
+                    <p
+                        style="font-size:var(--text-lg);color:var(--color-text-muted);line-height:1.75;margin-bottom:var(--space-lg);">
+                        ASCENDtials' unique Service Learning Program offers real-time Volunteer and Internship roles,
+                        providing students with opportunities for the practical application of knowledge that heals —
+                        crafting entrepreneurial and business-acumen-ready futures.</p>
+                    <p style="font-size:var(--text-base);color:var(--color-text-muted);line-height:1.75;">Our
+                        Experiential and Service Learning Program invites undergraduate and graduate college students to
+                        join our efforts in community engagement, social advocacy, and environmental justice.</p>
+                    <a href="https://ascendtials.org/service-learning-programs/" class="btn-primary"
+                        style="margin-top:var(--space-xl);">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ============================================================
+    04 — COURSES
+    ============================================================ -->
+    <section class="prog-section" id="courses">
+        <div class="prog-inner">
+            <div class="prog-header">
+                <div class="prog-header-text">
+                    <span class="section-tag reveal">Category 04</span>
+                    <h2 class="section-title reveal">Courses</h2>
+                    <p class="section-body reveal">Self-paced & instructor-led learning for personal and community
+                        growth. Each course blends cultural literacy, ecological knowledge, entrepreneurship, and
+                        practical skill-building.</p>
+                </div>
+                <div class="prog-num-badge reveal">04</div>
+            </div>
+
+            <div class="courses-grid">
+                <!-- Whiteness to Oneness -->
+                <div class="course-card reveal">
+                    <div class="course-card-top">
+                        <span class="course-badge available">Available</span>
+                        <div class="course-title">Designing From Whiteness to Oneness™</div>
+                    </div>
+                    <div class="course-card-body">
+                        <p class="course-desc">An exploration, understanding, and analysis of oppressive structures,
+                            while developing new ways of thinking that challenge them. Four 20-minute self-study modules
+                            centering Blackness in dialogue.</p>
+                        <div class="course-meta">
+                            <span class="course-meta-pill">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                                </svg>
+                                4 Modules
+                            </span>
+                            <span class="course-meta-pill">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 8v4l3 3" />
+                                </svg>
+                                ~80 min
+                            </span>
+                            <span class="course-meta-pill">Online · Self-paced</span>
+                        </div>
+                    </div>
+                    <div class="course-footer">
+                        <div class="course-price">Free</div>
+                        <a href="https://ascendtials.org/designing-from-whiteness-to-oneness/"
+                            class="course-enroll">Enroll Now</a>
+                    </div>
+                </div>
+
+                <!-- Night Sky Kemetic -->
+                <div class="course-card reveal reveal--delay-1">
+                    <div class="course-card-top">
+                        <span class="course-badge available">Available</span>
+                        <div class="course-title">Night Sky Kemetic Course</div>
+                    </div>
+                    <div class="course-card-body">
+                        <p class="course-desc">A 21-day course connecting participants to Night Sky Star Party sessions
+                            held every second Saturday from sunset. Guided telescope viewing, cultural storytelling, and
+                            hands-on astronomy rooted in ancient Kemetic knowledge.</p>
+                        <div class="course-meta">
+                            <span class="course-meta-pill">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 8v4l3 3" />
+                                </svg>
+                                21 Days
+                            </span>
+                            <span class="course-meta-pill">In-person + Online</span>
+                        </div>
+                    </div>
+                    <div class="course-footer">
+                        <div class="course-price">—</div>
+                        <a href="https://ascendtials.org/work-shops/cosmic-literacy-workshop/night-sky-education/"
+                            class="course-enroll">View Course</a>
+                    </div>
+                </div>
+
+                <!-- Vendor Learning Academy -->
+                <div class="course-card reveal reveal--delay-2">
+                    <div class="course-card-top" style="position:relative;">
+                        <img src="https://ascendtials.org/wp-content/uploads/2026/03/ascendtials_vendor_learning_academy_vla_logo.png"
+                            alt="VLA Logo" style="height:36px;width:auto;object-fit:contain;margin-bottom:8px;"
+                            onerror="this.style.display='none'">
+                        <span class="course-badge available">Available</span>
+                        <div class="course-title">Vendor Learning Academy</div>
+                    </div>
+                    <div class="course-card-body">
+                        <p class="course-desc">A required 4-module training preparing vendors for successful
+                            participation in ASCENDtials programming. Covers expectations, values, operational
+                            standards, and partnership guidelines.</p>
+                        <ul class="prog-list" style="margin-top:var(--space-sm);">
+                            <li>Direct sales & higher profits</li>
+                            <li>Community connection & loyalty</li>
+                            <li>Marketing support & outreach</li>
+                            <li>Flexible, affordable stall fees</li>
+                        </ul>
+                    </div>
+                    <div class="course-footer">
+                        <div class="course-price">$49</div>
+                        <a href="https://ascendtials.org/course-2/become-a-vendor-course/" class="course-enroll">Enroll
+                            Now</a>
+                    </div>
+                </div>
+
+                <!-- Grant Foundations -->
+                <div class="course-card reveal">
+                    <div class="course-card-top">
+                        <span class="course-badge available">Available</span>
+                        <div class="course-title">Grant Foundations Course</div>
+                    </div>
+                    <div class="course-card-body">
+                        <p class="course-desc">Build the skills and knowledge needed to pursue grant funding for
+                            community-based projects. Learn the fundamentals of grant research, writing, and reporting.
+                        </p>
+                        <div class="course-meta">
+                            <span class="course-meta-pill">Self-paced</span>
+                            <span class="course-meta-pill">Online</span>
+                        </div>
+                    </div>
+                    <div class="course-footer">
+                        <div class="course-price">—</div>
+                        <a href="https://ascendtials.org/course/grant-team-foundations/" class="course-enroll">View
+                            Course</a>
+                    </div>
+                </div>
+
+                <!-- Yacht Club Essentials — TBD -->
+                <div class="course-card reveal reveal--delay-1" style="opacity:0.65;">
+                    <div class="course-card-top">
+                        <span class="course-badge tbd">Coming Soon</span>
+                        <div class="course-title">Yacht Club Essentials Course</div>
+                    </div>
+                    <div class="course-card-body">
+                        <p class="course-desc">Marine skills and ocean stewardship education for BIPOC communities. Stay
+                            tuned for enrollment information.</p>
+                    </div>
+                    <div class="course-footer">
+                        <div class="course-price">TBD</div>
+                        <button class="course-enroll disabled" disabled>Notify Me</button>
+                    </div>
+                </div>
+
+                <!-- Grant Assistant — TBD -->
+                <div class="course-card reveal reveal--delay-2" style="opacity:0.65;">
+                    <div class="course-card-top">
+                        <span class="course-badge tbd">Coming Soon</span>
+                        <div class="course-title">Grant Assistant Training</div>
+                    </div>
+                    <div class="course-card-body">
+                        <p class="course-desc">Specialized training for grant assistants supporting ASCENDtials' funding
+                            and community development work.</p>
+                    </div>
+                    <div class="course-footer">
+                        <div class="course-price">TBD</div>
+                        <button class="course-enroll disabled" disabled>Notify Me</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    CTA BANNER
+    ============================================================ -->
+    <section class="cta-banner">
+        <div class="cta-banner-inner">
+            <span class="section-tag" style="color:var(--color-sky);">Ready to Begin?</span>
+            <h2>Start Your Learning<br><em>Journey Today</em></h2>
+            <p>Whether you're a student, community member, or professional, there's a pathway for you at ASCENDtials.
+                Explore our programs or reach out to learn more.</p>
+            <div class="cta-btn-row">
+                <a href="https://ascendtials.org/get-involved/" class="btn-gold">Get Involved</a>
+                <a href="https://ascendtials.org/contact-us/" class="btn-ghost-white">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER (identical to home)
+    ============================================================ -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                    alt="ASCENDtials Logo">
+                <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
+                    BIPOC community.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/ascendtials" aria-label="Facebook" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/ascendtials" aria-label="Instagram" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/@ascendtials" aria-label="YouTube" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/ascendtials" aria-label="LinkedIn" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/ascendtials" aria-label="X / Twitter" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Quick Links</div>
+                <ul class="footer-links">
+                    <li><a href="https://ascendtials.org/about-us-2024/">About Us</a></li>
+                    <li><a href="https://ascendtials.org/education-and-training-2024/">Education & Training</a></li>
+                    <li><a href="https://ascendtials.org/events/">Events Calendar</a></li>
+                    <li><a href="https://ascendtials.org/get-involved/">Get Involved</a></li>
+                    <li><a href="https://ascendtials.org/ascendtials-membership-2024/">Membership</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Programs</div>
+                <ul class="footer-links">
+                    <li><a href="https://ascendtials.org/youth-programs-2024/">Youth Programs</a></li>
+                    <li><a href="https://ascendtials.org/environmental-programs-2024/">Environmental Programs</a></li>
+                    <li><a href="https://ascendtials.org/legal-aid-program-2024/">Legal Aid</a></li>
+                    <li><a href="https://ascendtials.org/fellowship-program-2024/">Internships & Fellowships</a></li>
+                    <li><a href="https://ascendtials.org/kemetic-yoga-2024/">Kemetic Yoga</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Contact</div>
+                <div class="footer-contact">
+                    <p>505 W Broadway<br>San Diego, CA 92101</p>
+                    <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-partners">
+            <img src="assets/img/country-of-san-diego.png" alt="County of San Diego">
+            <img src="assets/img/Live-well-with-San-diego.png" alt="Live Well San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg"
+                alt="Candid Platinum 2025">
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 ASCENDtials. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="https://ascendtials.org/contact-us/">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    JS
+    ============================================================ -->
+    <script>
+        // Nav scroll effect
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        // Mobile menu
+        const burger = document.getElementById('navBurger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        });
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.10 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+
+</html>
