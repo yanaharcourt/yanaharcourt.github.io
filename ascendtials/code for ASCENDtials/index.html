@@ -11,7 +11,7 @@
 
     <style>
         /* ============================================================
-       DESIGN TOKENS
+        DESIGN TOKENS
         ============================================================ */
         :root {
             /* Brand */
@@ -1396,12 +1396,12 @@
         }
 
         /* ============================================================
-       FOOTER
-    ============================================================ */
+        FOOTER
+        ============================================================ */
         .footer {
             background: var(--color-surface);
             border-top: 1px solid var(--color-line);
-            padding: var(--space-section) max(40px, 5vw);
+            padding: var(--space-2xl) max(40px, 5vw);
         }
 
         .footer-grid {
@@ -1461,70 +1461,6 @@
             color: var(--color-sky);
         }
 
-        .footer-candid {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: var(--space-md);
-        }
-
-        .footer-candid img {
-            width: 80px;
-            border-radius: var(--radius-sm);
-        }
-
-        .footer-candid span {
-            font-size: var(--text-sm);
-            color: var(--color-text-muted);
-        }
-
-        .footer-bottom {
-            padding-top: var(--space-xl);
-            border-top: 1px solid var(--color-line);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--space-md);
-        }
-
-        .footer-bottom p,
-        .footer-bottom a {
-            font-size: var(--text-sm);
-            color: var(--color-text-light);
-        }
-
-        .footer-bottom a:hover {
-            color: var(--color-sky);
-        }
-
-        .footer-bottom-links {
-            display: flex;
-            gap: var(--space-xl);
-        }
-
-        @media (max-width: 900px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: var(--space-xl);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-bottom-links {
-                justify-content: center;
-            }
-        }
-
         .footer-social {
             display: flex;
             gap: 8px;
@@ -1571,6 +1507,63 @@
 
         .footer-partners img:hover {
             opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
         }
 
         /* ============================================================
@@ -2334,48 +2327,50 @@
 </head>
 
 <body>
-
+    <!-- ============================================================
+    NAV
+    ============================================================ -->
     <header class="nav" id="mainNav">
         <div class="nav-logo">
             <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
                 alt="ASCENDtials Logo">
         </div>
         <ul class="nav-links">
-            <li><a href="./ascendtials-home.html">Home</a></li>
+            <li><a href="./index.html">Home</a></li>
             <li class="has-dropdown">
                 <a href="#">About</a>
                 <ul class="nav-dropdown">
-                    <li><a href="./ascendtials-about.html">About Us</a></li>
-                    <li><a href="./ascendtials-our-team.html">Our Team</a></li>
-                    <li><a href="./ascendtials-contact.html">Contact Us</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="our-team.html">Our Team</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </li>
             <li class="has-dropdown">
                 <a href="#">Education</a>
                 <ul class="nav-dropdown">
-                    <li><a href="./ascendtials-education-and-training.html">Education & Training</a></li>
-                    <li><a href="./ascendtials-literacy_workshop.html">Literacy Workshops</a></li>
-                    <li><a href="./ascendtials-kemetic-yoga.html">Kemetic Yoga</a></li>
-                    <li><a href="./ascendtials-from-whiteness-to-oneness.html">Whiteness To Oneness™</a></li>
+                    <li><a href="./education-and-training.html">Education & Training</a></li>
+                    <li><a href="./literacy-workshops.html">Literacy Workshops</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                    <li><a href="./from-whiteness-to-oneness.html">Whiteness To Oneness™</a></li>
                 </ul>
             </li>
             <li class="has-dropdown">
                 <a href="#">Programs</a>
                 <ul class="nav-dropdown">
-                    <li><a href="./ascendtials-events.html">Event Calendar</a></li>
-                    <li><a href="./ascendtials-service-learning-programs.html">Service Learning</a></li>
-                    <li><a href="./ascendtials-youth-programs.html">Youth Programs</a></li>
-                    <li><a href="./ascendtials-environmental-programs.html">Environmental Programs</a></li>
-                    <li><a href="./ascendtials-legal-aid-program.html">Legal Aid Programs</a></li>
-                    <li><a href="./ascendtials-fellowship-program.html">Internships & Fellowships</a></li>
+                    <li><a href="./events.html">Event Calendar/a></li>
+                    <li><a href="./service-learning-programs.html">Service Learning</a></li>
+                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./legal-aid-program.html">Legal Aid Programs</a></li>
+                    <li><a href="./fellowship-program.html">Internships & Fellowships</a></li>
                 </ul>
             </li>
             <li class="has-dropdown">
                 <a href="#">Join Us</a>
                 <ul class="nav-dropdown">
-                    <li><a href="./ascendtials-get-involved.html">Get Involved</a></li>
-                    <li><a href="./ascendtials-partner-with-us.html">Partner with Us</a></li>
-                    <li><a href="./ascendtials-volunteer.html">Volunteer</a></li>
+                    <li><a href="./get-involved.html">Get Involved</a></li>
+                    <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="./volunteer.html">Volunteer</a></li>
                 </ul>
             </li>
         </ul>
@@ -2386,33 +2381,33 @@
     </header>
 
     <div class="mobile-menu" id="mobileMenu">
-        <a href="./ascendtials-home.html">Home</a>
+        <a href="./index.html">Home</a>
 
-        <a href="./ascendtials-about.html">About Us</a>
-        <a href="./ascendtials-our-team.html">Our Team</a>
-        <a href="./ascendtials-contact.html">Contact Us</a>
+        <a href="./about.html">About Us</a>
+        <a href="./our-team.html">Our Team</a>
+        <a href="./contact.html">Contact Us</a>
 
-        <a href="./ascendtials-education-and-training.html">Education & Training</a>
-        <a href="./ascendtials-literacy_workshops.html">Literacy Workshops</a>
-        <a href="./ascendtials-kemetic-yoga.html">Kemetic Yoga</a>
-        <a href="./ascendtials-from-whiteness-to-oneness.html">Whiteness To Oneness™</a>
+        <a href="./education-and-training.html">Education & Training</a>
+        <a href="./literacy-workshops.html">Literacy Workshops</a>
+        <a href="./kemetic-yoga.html">Kemetic Yoga</a>
+        <a href="./from-whiteness-to-oneness.html">Whiteness To Oneness™</a>
 
-        <a href="./ascendtials-events.html">Event Calendar</a>
-        <a href="./ascendtials-service-learning-programs.html">Service Learning</a>
-        <a href="./ascendtials-youth-programs.html">Youth Programs</a>
-        <a href="./ascendtials-environmental-programs.html">Environmental Programs</a>
-        <a href="./ascendtials-legal-aid-program.html">Legal Aid Programs</a>
-        <a href="./ascendtials-fellowship-program.html">Internships & Fellowships</a>
+        <a href="./events.html">Event Calendar</a>
+        <a href="./service-learning-programs.html">Service Learning</a>
+        <a href="./youth-programs.html">Youth Programs</a>
+        <a href="./environmental-programs.html">Environmental Programs</a>
+        <a href="./legal-aid-program.html">Legal Aid Programs</a>
+        <a href="./fellowship-program.html">Internships & Fellowships</a>
 
-        <a href="./ascendtials-get-involved.html">Get Involved</a>
-        <a href="./ascendtials-partner-with-us.html">Partner with Us</a>
-        <a href="./ascendtials-volunteer.html">Volunteer</a>
+        <a href="./get-involved.html">Get Involved</a>
+        <a href="./partner-with-us.html">Partner with Us</a>
+        <a href="./volunteer.html">Volunteer</a>
 
         <a class="mob-cta" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1">Support Us</a>
     </div>
 
     <!-- ============================================================
-    HERO
+    PAGE HERO 
     ============================================================ -->
     <section class="hero">
         <div class="hero-content">
@@ -2502,8 +2497,8 @@
     </section>
 
     <!-- ============================================================
-     AREAS OF IMPACT — modern card grid
-============================================================ -->
+    AREAS OF IMPACT — modern card grid
+    ============================================================ -->
     <section class="section-impact">
         <div class="impact-header reveal">
             <span class="section-label">Our Impact</span>
@@ -2568,8 +2563,8 @@
     </section>
 
     <!-- ============================================================
-     PROGRAMS & EVENTS — original parallax with circle images
-============================================================ -->
+    PROGRAMS & EVENTS — original parallax with circle images
+    ============================================================ -->
     <div class="section-programs-wrapper">
         <div class="parallax-container">
             <div class="parallax" id="parallaxLayers">
@@ -2593,8 +2588,8 @@
     </div>
 
     <!-- ============================================================
-     BENTO CARDS
-============================================================ -->
+    BENTO CARDS
+    ============================================================ -->
     <div class="section-bento">
         <div class="bento-grid">
             <div class="bento-card reveal">
@@ -2649,8 +2644,8 @@
     </div>
 
     <!-- ============================================================
-     EDUCATION & TRAINING
-============================================================ -->
+    EDUCATION & TRAINING
+    ============================================================ -->
     <div class="section-education reveal">
         <div class="education-text">
             <span class="section-label">Learn &amp; Grow</span>
@@ -2692,8 +2687,8 @@
     </div>
 
     <!-- ============================================================
-     JOIN CTA
-============================================================ -->
+    JOIN CTA
+    ============================================================ -->
     <section class="section-join reveal">
         <span class="join-eyebrow">Get Involved</span>
         <h2 class="join-h2">Ready to Make<br>a Real Difference?</h2>
@@ -2707,8 +2702,8 @@
     </section>
 
     <!-- ============================================================
-     FOOTER
-============================================================ -->
+    FOOTER
+    ============================================================ -->
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-brand">
@@ -2717,12 +2712,12 @@
                 <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
                     BIPOC community.</p>
                 <div class="footer-social">
-                    <a href="https://www.facebook.com/ascendtials" aria-label="Facebook" target="_blank">
+                    <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook" target="_blank">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                         </svg>
                     </a>
-                    <a href="https://www.instagram.com/ascendtials" aria-label="Instagram" target="_blank">
+                    <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram" target="_blank">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -2730,7 +2725,7 @@
                             <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
                         </svg>
                     </a>
-                    <a href="https://www.youtube.com/@ascendtials" aria-label="YouTube" target="_blank">
+                    <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube" target="_blank">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                             <path
                                 d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
@@ -2743,27 +2738,27 @@
                                 d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
                         </svg>
                     </a>
-                    <a href="https://www.linkedin.com/company/ascendtials" aria-label="LinkedIn" target="_blank">
+                    <a href="https://www.linkedin.com/company/the-ascendtials/" aria-label="LinkedIn" target="_blank">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
                             <rect x="2" y="9" width="4" height="12" />
                             <circle cx="4" cy="4" r="2" />
                         </svg>
                     </a>
-                    <a href="https://twitter.com/ascendtials" aria-label="X / Twitter" target="_blank">
+                    <a href="https://x.com/ascendtials" aria-label="X / Twitter" target="_blank">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                         </svg>
                     </a>
                 </div>
             </div>
+            
             <div>
                 <div class="footer-col-title">Quick Links</div>
                 <ul class="footer-links">
-                    <li><a href="https://ascendtials.org/about-us-2024/">About Us</a></li>
-                    <li><a href="https://ascendtials.org/education-and-training-2024/">Education & Training</a></li>
-                    <li><a href="https://ascendtials.org/events/">Events Calendar</a></li>
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="education-and-training.html">Education & Training</a></li>
+                    <li><a href="./events">Events Calendar</a></li>
                     <li><a href="https://ascendtials.org/get-involved/">Get Involved</a></li>
                     <li><a href="https://ascendtials.org/ascendtials-membership-2024/">Membership</a></li>
                 </ul>
@@ -2771,11 +2766,11 @@
             <div>
                 <div class="footer-col-title">Programs</div>
                 <ul class="footer-links">
-                    <li><a href="https://ascendtials.org/youth-programs-2024/">Youth Programs</a></li>
-                    <li><a href="https://ascendtials.org/environmental-programs-2024/">Environmental Programs</a></li>
-                    <li><a href="https://ascendtials.org/legal-aid-program-2024/">Legal Aid</a></li>
-                    <li><a href="https://ascendtials.org/fellowship-program-2024/">Internships & Fellowships</a></li>
-                    <li><a href="https://ascendtials.org/kemetic-yoga-2024/">Kemetic Yoga</a></li>
+                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./legal-aid-program.html">Legal Aid</a></li>
+                    <li><a href="./fellowship-program.html">Internships & Fellowships</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
                 </ul>
             </div>
             <div>
@@ -2806,14 +2801,14 @@
             <div class="footer-bottom-links">
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms of Use</a>
-                <a href="https://ascendtials.org/contact-us/">Contact</a>
+                <a href="./contact.html">Contact</a>
             </div>
         </div>
     </footer>
 
     <!-- ============================================================
-     JS
-============================================================ -->
+    JS
+    ============================================================ -->
     <script>
         // Nav scroll effect
         const nav = document.getElementById('mainNav');
