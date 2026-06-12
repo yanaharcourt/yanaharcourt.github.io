@@ -1708,6 +1708,131 @@
             flex-wrap: wrap;
         }
 
+        /* ============================================================
+        SECTION: FAQ
+        ============================================================ */
+        .section-faq {
+            padding: var(--space-section) max(48px, 6vw);
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .faq-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: max(80px, 8vw);
+            align-items: start;
+        }
+
+        .faq-sticky {
+            position: sticky;
+            top: 100px;
+        }
+
+        .faq-sticky h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .faq-sticky h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .faq-intro {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-top: var(--space-lg);
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-group-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            margin: var(--space-xl) 0 var(--space-sm);
+        }
+
+        .faq-group-title:first-child {
+            margin-top: 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-lg);
+            padding: var(--space-lg) 0;
+            font-size: var(--text-base);
+            font-weight: 500;
+            color: var(--color-text);
+            cursor: pointer;
+            transition: color var(--dur-fast);
+            list-style: none;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            color: var(--color-sky);
+        }
+
+        .faq-question::after {
+            content: '+';
+            flex-shrink: 0;
+            font-size: var(--text-xl);
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+            transition: transform var(--dur-base) var(--ease-out);
+        }
+
+        .faq-item.open .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s var(--ease-out), padding 0.3s;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 600px;
+            padding-bottom: var(--space-lg);
+        }
+
+        @media (max-width: 960px) {
+            .faq-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-sticky {
+                position: static;
+            }
+
+            .section-faq {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
         .gallery-header h2 {
             font-family: var(--font-display);
             font-size: clamp(2rem, 3.5vw, 3rem);
@@ -1727,6 +1852,11 @@
             grid-template-columns: repeat(5, 1fr);
             gap: 10px;
             margin-bottom: var(--space-2xl);
+        }
+
+        .gallery-grid img,
+        .gallery-events img {
+            cursor: pointer;
         }
 
         .gallery-grid img {
@@ -1754,7 +1884,8 @@
             border-radius: var(--radius-lg);
             border: 1px solid var(--color-line);
             object-fit: cover;
-            max-height: 320px;
+            max-height: 550px;
+            object-position: top;
         }
 
         .gallery-cta-row {
@@ -2853,25 +2984,25 @@
 
         <div class="gallery-events">
             <img src="https://ascendtials.org/wp-content/uploads/2026/04/Kemetic-Yoga-Sundays.png"
-                alt="Kemetic Yoga Sundays event flyer">
+                alt="Kemetic Yoga Sundays event flyer" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/04/Kemetic-Yoga-Sundays.png">
             <img src="https://ascendtials.org/wp-content/uploads/2026/04/April-Promo-2026-Event-Flyers-Instagram-Post-45-2-1.png"
-                alt="April 2026 ASCENDtials community event flyer">
+                alt="April 2026 ASCENDtials community event flyer" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/04/April-Promo-2026-Event-Flyers-Instagram-Post-45-2-1.png">
         </div>
 
         <div class="gallery-grid reveal reveal--delay-1">
-            <img src="https://ascendtials.org/wp-content/uploads/2026/03/nessys-doughlites.png" alt="Nessy's Doughlites vendor">
-            <img src="https://ascendtials.org/wp-content/uploads/2026/03/toros-churros.jpg" alt="Toro's Churros vendor">
-            <img src="https://ascendtials.org/wp-content/uploads/2026/03/lumpia.jpg" alt="Lumpia vendor">
-            <img src="https://ascendtials.org/wp-content/uploads/2026/03/sheabutter.png" alt="Shea butter vendor">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/nessys-doughlites.png" alt="Nessy's Doughlites vendor" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/03/nessys-doughlites.png">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/toros-churros.jpg" alt="Toro's Churros vendor" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/03/toros-churros.jpg">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/lumpia.jpg" alt="Lumpia vendor" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/03/lumpia.jpg">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/sheabutter.png" alt="Shea butter vendor" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/03/sheabutter.png">
             <img src="https://ascendtials.org/wp-content/uploads/2026/03/kaspers-icecream-sandwich.webp"
-                alt="Kasper's Ice Cream Sandwich vendor">
-            <img src="https://ascendtials.org/wp-content/uploads/2026/03/shjeabutterlove.png" alt="Shea Butter Love vendor">
+                alt="Kasper's Ice Cream Sandwich vendor" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/03/kaspers-icecream-sandwich.webp">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/shjeabutterlove.png" alt="Shea Butter Love vendor" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/03/shjeabutterlove.png">
             <img src="https://ascendtials.org/wp-content/uploads/2026/03/SUNNYDESIGNSBYV-1024x683.jpg"
-                alt="Sunny Designs by V vendor">
-            <img src="https://ascendtials.org/wp-content/uploads/2026/03/babafoods.jpg" alt="Baba Foods vendor">
+                alt="Sunny Designs by V vendor" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/03/SUNNYDESIGNSBYV-1024x683.jpg">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/babafoods.jpg" alt="Baba Foods vendor" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/03/babafoods.jpg">
             <img src="https://ascendtials.org/wp-content/uploads/2026/03/drizzled_n_sprinkles.jpg"
-                alt="Drizzled n Sprinkles vendor">
-            <img src="https://ascendtials.org/wp-content/uploads/2026/03/slice_Garage.jpg" alt="Slice Garage vendor">
+                alt="Drizzled n Sprinkles vendor" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/03/drizzled_n_sprinkles.jpg">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/slice_Garage.jpg" alt="Slice Garage vendor" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/03/slice_Garage.jpg">
         </div>
 
         <div class="gallery-cta-row reveal reveal--delay-2">
@@ -2892,24 +3023,87 @@
     </section>
 
     <!-- ============================================================
-    EVENT CTA
+    FAQ
     ============================================================ -->
-    <div class="event-cta">
-        <div class="event-cta-inner reveal">
-            <div class="event-cta-text">
-                <span class="section-label">Questions?</span>
-                <p>Have more questions about our<br>farmers' markets? Visit our FAQs page.</p>
+    <section class="section-faq" id="faq">
+        <div class="faq-layout">
+            <div class="faq-sticky">
+                <span class="section-label reveal">Questions?</span>
+                <h2 class="reveal reveal--delay-1">Market<br><em>FAQs</em></h2>
+                <p class="faq-intro reveal reveal--delay-2">Everything you need to know before you visit. Can't find
+                    your answer? Reach out to us directly.</p>
+                <a href="./contact.html" class="btn-outline"
+                    style="margin-top: var(--space-xl); display: inline-flex;">Contact Us</a>
             </div>
-            <a class="btn-navy" href="https://ascendtials.org/faq/">
-                Visit FAQs
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                </svg>
-            </a>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">Where are the markets held, and what are the hours?</div>
+                    <div class="faq-answer">We host markets at two vibrant San Diego locations.<br><br>
+                        <strong>City Heights:</strong><br>4325 Wightman St, San Diego, CA 92105<br>Saturdays | 10:00
+                        AM - 2:00 PM<br><br>
+                        <strong>Downtown Marina District:</strong><br>210 W Island Ave, San Diego, CA
+                        92101<br>Fridays | 3:00 PM - 7:00 PM</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What makes the ASCENDKemet Farmers' Market unique?</div>
+                    <div class="faq-answer">This market is more than just a place to shop—it's a cultural gathering
+                        that centers holistic living, wellness, and community upliftment. Led by ASCENDtials, the
+                        market creates space for BIPOC vendors, artisans, and farmers to share their offerings and
+                        stories. It's a celebration of food, heritage, and mutual support.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do you accept EBT, SNAP, or WIC benefits?</div>
+                    <div class="faq-answer">Yes, we accept EBT/SNAP and WIC at both market locations.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Is the market open rain or shine?</div>
+                    <div class="faq-answer">Yes! Our markets operate rain or shine. We believe that access to fresh,
+                        nutritious food is essential, no matter the weather.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">I'm trying to find a specific vendor, but I don't see them listed. How
+                        can I check if they're part of the market?</div>
+                    <div class="faq-answer">Feel free to ask any of our volunteers or email us at
+                        ascendkemetcollectivemarkets@ascendtials.org.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">I have a specific question about becoming a farmers' market vendor.
+                        Who can I contact to help me with permits/packaging/marketing?</div>
+                    <div class="faq-answer">For any inquiries, please reach out to us at
+                        ascendkemetcollectivemarkets@ascendtials.org.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do vendors accept credit or debit cards?</div>
+                    <div class="faq-answer">Most vendors are equipped to take card payments, but it's always a good
+                        idea to bring some cash or small bills just in case. Some may also offer contactless payment
+                        options.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Is there parking at the market locations?</div>
+                    <div class="faq-answer">Yes, both locations have nearby public parking and street parking
+                        options. We also encourage carpooling, biking, or using public transportation to help lower
+                        our collective carbon footprint.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I bring my dog or pet to the market?</div>
+                    <div class="faq-answer">We kindly ask that pets stay home unless they are certified service
+                        animals. This ensures a safe and sanitary experience for all marketgoers and vendors.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">I'm interested in partnering with the ASCENDKemet Collective Farmers'
+                        Market to promote my business and connect with the community. Who should I reach out to?
+                    </div>
+                    <div class="faq-answer">For any business or partnership inquiries, please reach out to
+                        ascendkemetcollectivemarkets@ascendtials.org.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Who should I contact for additional questions?</div>
+                    <div class="faq-answer">Please email us at ascendkemetcollectivemarkets@ascendtials.org for any
+                        other questions you may have.</div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
     <!-- ============================================================
     JOIN BANNER
@@ -3071,6 +3265,16 @@
                 btn.classList.add('active');
                 btn.setAttribute('aria-selected', 'true');
                 document.getElementById('tab-' + target).classList.add('active');
+            });
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.closest('.faq-item');
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
             });
         });
     </script>
