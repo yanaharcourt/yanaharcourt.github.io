@@ -1,0 +1,2579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kemetic Yoga – ASCENDtials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================================
+        DESIGN TOKENS
+        ============================================================ */
+        :root {
+            --color-navy: #1E3A47;
+            --color-navy-deep: #152E3A;
+            --color-sky: #C9A96E;
+            --color-sky-light: #F5EBD8;
+            --color-white: #FFFFFF;
+            --color-bg: #FAFAF8;
+            --color-surface: #F4F2EE;
+            --color-surface-2: #ECEAE5;
+            --color-line: #E2DDD6;
+            --color-text: #1A1A18;
+            --color-text-muted: #666660;
+            --color-text-light: #9D9A93;
+            --color-accent: #C9A96E;
+            --color-warm: #E8D0CC;
+            --color-sage: #B2D5D1;
+
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.375rem;
+            --text-2xl: 1.75rem;
+            --text-3xl: 2.25rem;
+
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
+            --space-section: 120px;
+
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-pill: 999px;
+
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --dur-fast: 180ms;
+            --dur-base: 280ms;
+            --dur-slow: 500ms;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            overflow-x: hidden;
+            font-size: var(--text-base);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal--delay-1 {
+            transition-delay: 0.08s;
+        }
+
+        .reveal--delay-2 {
+            transition-delay: 0.16s;
+        }
+
+        .reveal--delay-3 {
+            transition-delay: 0.24s;
+        }
+
+        .reveal--delay-4 {
+            transition-delay: 0.32s;
+        }
+
+        /* ── SHARED LABELS ── */
+        .section-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .section-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+            font-weight: 300;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        /* ============================================================
+        NAV 
+        ============================================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            gap: 32px;
+            transition: all var(--dur-slow) var(--ease-in-out);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            top: 10px;
+            left: 16px;
+            right: 16px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-logo {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .nav-logo img {
+            height: 52px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links>li {
+            position: relative;
+        }
+
+        .nav-links>li>a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            font-size: var(--text-sm);
+            font-weight: 400;
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            transition: color var(--dur-fast) var(--ease-out),
+                background var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links>li>a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        /* Dropdown chevron */
+        .nav-links .has-dropdown>a::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: solid var(--color-text-muted);
+            border-width: 0 1.5px 1.5px 0;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links .has-dropdown:hover>a::after {
+            transform: rotate(225deg) translateY(-2px);
+        }
+
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-line);
+            list-style: none;
+            min-width: 220px;
+            padding: 6px;
+            padding-top: 10px;
+            z-index: 600;
+        }
+
+        .nav-links .has-dropdown:hover .nav-dropdown {
+            display: block;
+        }
+
+        .nav-dropdown li a {
+            display: block;
+            padding: 9px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .nav-dropdown li a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        /* ============================================================
+        BUTTONS — fill-sweep hover effect
+        ============================================================ */
+        .btn-primary,
+        .btn-white,
+        .btn-ghost,
+        .btn-outline,
+        .nav-cta,
+        .hero-email-btn,
+        .bento-link {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        /* Sweep fill layer */
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-ghost::before,
+        .btn-outline::before,
+        .nav-cta::before,
+        .hero-email-btn::before,
+        .bento-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before,
+        .nav-cta:hover::before,
+        .hero-email-btn:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Ghost/outline on dark bg: sweep white */
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline::before {
+            background: var(--color-sky-light);
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* bento-link sweep white */
+        .bento-link::before {
+            background: var(--color-sky);
+        }
+
+        .bento-link:hover::before {
+            transform: scaleX(1);
+        }
+
+        .bento-link:hover {
+            color: var(--color-white, #fff);
+        }
+
+        /* btn-white (on dark join section) */
+        .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        .nav-cta {
+            flex-shrink: 0;
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 9px 20px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color var(--dur-fast);
+        }
+
+        .nav-burger {
+            display: none;
+            background: none;
+            border: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+            margin-left: auto;
+        }
+
+        .nav-burger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-navy);
+            border-radius: 2px;
+            transition: all var(--dur-base) var(--ease-out);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 490;
+            padding: 90px 24px 32px;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 16px;
+            font-size: var(--text-xl);
+            color: var(--color-text);
+            border-bottom: 1px solid var(--color-line);
+            font-family: var(--font-display);
+        }
+
+        .mobile-menu .mob-cta {
+            margin-top: 24px;
+            background: var(--color-navy);
+            color: var(--color-white);
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-lg);
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+        }
+
+        /* ── BUTTON BASE STYLES ── */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            background: var(--color-navy);
+            color: var(--color-bg);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 27px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: transparent;
+            color: var(--color-navy);
+            border: 1px solid var(--color-line);
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-surface);
+            border-color: var(--color-sky);
+        }
+
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            background: var(--color-white);
+            color: var(--color-navy);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 27px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: transparent;
+            color: var(--color-white);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ════════════════════════════════════════════════════════════
+           BREADCRUMB
+        ════════════════════════════════════════════════════════════ */
+        .breadcrumb {
+            padding-top: 0;
+            padding-left: 0;
+            padding-right: 0;
+            padding-bottom: var(--space-lg);
+            background: transparent;
+        }
+
+        .breadcrumb-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+        }
+
+        .breadcrumb-inner a {
+            color: var(--color-text-light);
+            transition: color var(--dur-fast);
+        }
+
+        .breadcrumb-inner a:hover {
+            color: var(--color-sky);
+        }
+
+        .breadcrumb-inner .bc-sep {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--color-line);
+            flex-shrink: 0;
+        }
+
+        .breadcrumb-inner .bc-current {
+            color: var(--color-sky);
+        }
+
+        @media (max-width: 600px) {
+            .breadcrumb {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ════════════════════════════════════════════════════════════
+           CHILD HERO — light, typographic, geometric
+        ════════════════════════════════════════════════════════════ */
+        .page-hero {
+            padding-top: calc(72px + var(--space-2xl));
+            padding-left: max(48px, 6vw);
+            padding-right: max(48px, 6vw);
+            padding-bottom: 0;
+            background: var(--color-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Watermark */
+        .page-hero::before {
+            content: 'KY';
+            position: absolute;
+            bottom: -40px;
+            right: -10px;
+            font-family: var(--font-display);
+            font-size: clamp(200px, 25vw, 340px);
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(201, 169, 110, 0.05);
+            letter-spacing: -10px;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 5vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.02;
+            letter-spacing: -2px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 em {
+            font-style: italic;
+            color: var(--color-sky);
+            display: block;
+        }
+
+        .hero-divider {
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-sky), transparent);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-desc {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            max-width: 500px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Light hero button overrides */
+        .page-hero .btn-white {
+            background: var(--color-navy);
+            color: var(--color-bg);
+        }
+
+        .page-hero .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .page-hero .btn-ghost {
+            background: transparent;
+            color: var(--color-navy);
+            border: 1px solid var(--color-line);
+        }
+
+        .page-hero .btn-ghost:hover {
+            background: var(--color-surface);
+            border-color: var(--color-sky);
+            color: var(--color-navy);
+        }
+
+        /* Right panel — photo */
+        .hero-photo-wrap {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-photo-wrap img {
+            width: 100%;
+            height: 540px;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: var(--radius-xl);
+            display: block;
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+
+        .hero-photo-wrap:hover img {
+            transform: scale(1.02);
+        }
+
+        .hero-photo-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -24px;
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg) var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            z-index: 3;
+        }
+
+        .hero-photo-badge-num {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+        }
+
+        .hero-photo-badge-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-top: 6px;
+        }
+
+        @media (max-width: 960px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .hero-photo-wrap img {
+                height: 380px;
+            }
+
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-photo-wrap {
+                display: none;
+            }
+        }
+
+        /* DEAD CODE kept for reference only */
+        .hero-visual-UNUSED {
+            position: relative;
+            z-index: 1;
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 10px;
+            padding-bottom: var(--space-2xl);
+        }
+
+        .hero-stat-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg) var(--space-xl);
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+        }
+
+        .hero-stat-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201, 169, 110, 0.35);
+            transform: translateX(4px);
+        }
+
+        .hero-stat-card.card--accent {
+            background: var(--color-navy);
+            border-color: transparent;
+        }
+
+        .hero-stat-card.card--accent .hsc-num {
+            color: var(--color-sky);
+        }
+
+        .hero-stat-card.card--accent .hsc-label {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .hsc-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .card--accent .hsc-icon {
+            background: rgba(201, 169, 110, 0.15);
+        }
+
+        .hsc-num {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--color-navy);
+            line-height: 1;
+        }
+
+        .hsc-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-top: 4px;
+        }
+
+        /* Gold geometric ornament */
+        .hero-ornament {
+            position: absolute;
+            top: 20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            border: 1px solid rgba(201, 169, 110, 0.18);
+            border-radius: var(--radius-md);
+            transform: rotate(15deg);
+            pointer-events: none;
+        }
+
+        .hero-ornament::after {
+            content: '';
+            position: absolute;
+            inset: 12px;
+            border: 1px solid rgba(201, 169, 110, 0.12);
+            border-radius: 8px;
+        }
+
+        @media (max-width: 960px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .hero-visual {
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding-bottom: 0;
+            }
+
+            .hero-stat-card {
+                flex: 1 1 200px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-visual {
+                flex-direction: column;
+            }
+        }
+
+        /* ════════════════════════════════════════════════════════════
+           INFO STRIP
+        ════════════════════════════════════════════════════════════ */
+        .info-strip {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-xl) max(48px, 6vw);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
+        }
+
+        .info-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-bottom: 3px;
+        }
+
+        .info-value {
+            font-size: var(--text-sm);
+            color: var(--color-navy);
+        }
+
+        .info-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--color-line);
+        }
+
+        @media (max-width: 900px) {
+            .info-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--space-xl) 24px;
+            }
+
+            .info-divider {
+                display: none;
+            }
+        }
+
+        /* ════════════════════════════════════════════════════════════
+           ORIGIN SECTION — 2-col editorial
+        ════════════════════════════════════════════════════════════ */
+        .section-origin {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+
+        .origin-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 8vw);
+            align-items: center;
+        }
+
+        .pull-quote {
+            font-family: var(--font-display);
+            font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--color-navy);
+            line-height: 1.55;
+            border-left: 3px solid var(--color-sky);
+            padding-left: var(--space-lg);
+            margin: var(--space-xl) 0;
+        }
+
+        .body-text {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .body-text p+p {
+            margin-top: var(--space-lg);
+        }
+
+        /* Right: hieroglyphic-inspired bento */
+        .origin-bento {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .ob-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+        }
+
+        .ob-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201, 169, 110, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .ob-card:nth-child(1) {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xl);
+        }
+
+        .ob-card:nth-child(4) {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-xl);
+        }
+
+        .ob-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            flex-shrink: 0;
+            margin-bottom: var(--space-sm);
+        }
+
+        .ob-card:nth-child(1) .ob-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 0;
+        }
+
+        .ob-num {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: rgba(201, 169, 110, 0.12);
+            line-height: 1;
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-lg);
+            pointer-events: none;
+        }
+
+        .ob-title {
+            font-family: var(--font-display);
+            font-size: var(--text-base);
+            font-weight: 500;
+            color: var(--color-navy);
+            margin-bottom: 4px;
+        }
+
+        .ob-body {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 960px) {
+            .origin-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+        }
+
+        @media (max-width: 560px) {
+            .section-origin {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .origin-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .ob-card:nth-child(n) {
+                grid-column: 1;
+            }
+
+            .ob-card:nth-child(1) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* ════════════════════════════════════════════════════════════
+           WHY SECTION — dark navy, pillar cards
+        ════════════════════════════════════════════════════════════ */
+        .section-why {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-navy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-why::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .section-why::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(178, 213, 209, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .why-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .why-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 8vw);
+            align-items: end;
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .why-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+            font-weight: 300;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            color: var(--color-white);
+        }
+
+        .why-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .why-sub {
+            font-size: var(--text-base);
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.75;
+        }
+
+        .why-label {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+            display: block;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+        }
+
+        .why-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl) var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            transition: background var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+        }
+
+        .why-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(201, 169, 110, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .why-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            background: rgba(201, 169, 110, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .why-card-num {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: rgba(201, 169, 110, 0.08);
+            line-height: 1;
+            margin-bottom: var(--space-xs);
+        }
+
+        .why-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-white);
+            line-height: 1.2;
+            margin-bottom: var(--space-sm);
+        }
+
+        .why-card-body {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.7;
+            margin-top: auto;
+        }
+
+        @media (max-width: 960px) {
+            .why-header {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .section-why {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ════════════════════════════════════════════════════════════
+           CURRICULUM SECTION — light surface, bento mosaic
+        ════════════════════════════════════════════════════════════ */
+        .section-curriculum {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-surface);
+        }
+
+        .curriculum-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .curriculum-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 8vw);
+            align-items: end;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .curriculum-desc {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .curr-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-md);
+        }
+
+        .curr-card {
+            background: var(--color-bg);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+        }
+
+        .curr-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201, 169, 110, 0.5);
+            transform: translateY(-3px);
+            background: var(--color-white);
+        }
+
+        .curr-card:nth-child(1) {
+            grid-column: span 7;
+            min-height: 220px;
+        }
+
+        .curr-card:nth-child(2) {
+            grid-column: span 5;
+            min-height: 220px;
+        }
+
+        .curr-card:nth-child(3) {
+            grid-column: span 4;
+            min-height: 230px;
+        }
+
+        .curr-card:nth-child(4) {
+            grid-column: span 4;
+            min-height: 230px;
+        }
+
+        .curr-card:nth-child(5) {
+            grid-column: span 4;
+            min-height: 230px;
+        }
+
+        .curr-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-sm);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+            flex-shrink: 0;
+        }
+
+        .curr-card-num {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: rgba(201, 169, 110, 0.10);
+            line-height: 1;
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-lg);
+        }
+
+        .curr-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .curr-card-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+        }
+
+        /* Wide top cards horizontal */
+        .curr-card:nth-child(1),
+        .curr-card:nth-child(2) {
+            flex-direction: row;
+            align-items: center;
+            gap: var(--space-xl);
+            padding-bottom: var(--space-xl);
+        }
+
+        .curr-card:nth-child(1) .curr-card-icon,
+        .curr-card:nth-child(2) .curr-card-icon {
+            margin-bottom: 0;
+            width: 60px;
+            height: 60px;
+        }
+
+        @media (max-width: 900px) {
+            .curr-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .curr-card:nth-child(n) {
+                grid-column: span 1;
+                min-height: 200px;
+            }
+
+            .curr-card:nth-child(1),
+            .curr-card:nth-child(2) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .section-curriculum {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .curr-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .curriculum-header {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+        }
+
+        /* ════════════════════════════════════════════════════════════
+           EVENTS SECTION
+        ════════════════════════════════════════════════════════════ */
+        .section-events {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+
+        .events-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .events-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+        }
+
+        .event-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+        }
+
+        .event-card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(201, 169, 110, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .event-card-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            object-position: center;
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+
+        .event-card:hover .event-card-img {
+            transform: scale(1.03);
+        }
+
+        .event-img-wrap {
+            overflow: hidden;
+        }
+
+        .event-card-body {
+            padding: var(--space-xl);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-card-tag {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            background: var(--color-sky-light);
+            border-radius: var(--radius-pill);
+            padding: 4px 12px;
+            margin-bottom: var(--space-md);
+        }
+
+        .event-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            margin-bottom: var(--space-sm);
+            line-height: 1.2;
+        }
+
+        .event-card-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-lg);
+        }
+
+        .event-card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--color-sky);
+            margin-top: auto;
+            transition: gap var(--dur-fast);
+        }
+
+        .event-card:hover .event-card-cta {
+            gap: 9px;
+        }
+
+        @media (max-width: 760px) {
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-events {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ════════════════════════════════════════════════════════════
+           VOLUNTEER SECTION — cream, asymmetric
+        ════════════════════════════════════════════════════════════ */
+        .section-volunteer {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-surface);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .volunteer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 8vw);
+            align-items: start;
+            position: relative;
+            z-index: 1;
+        }
+
+        .volunteer-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+            font-weight: 300;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .volunteer-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .volunteer-desc {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            margin-bottom: var(--space-xl);
+        }
+
+        .volunteer-cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .vol-lists {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+        }
+
+        .vol-list-block {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            transition: box-shadow var(--dur-base), transform var(--dur-base);
+        }
+
+        .vol-list-block:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .vol-list-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--color-line);
+            line-height: 1.2;
+        }
+
+        .vol-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .vol-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .vol-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-sky);
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+
+        @media (max-width: 960px) {
+            .volunteer-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+        }
+
+        @media (max-width: 560px) {
+            .section-volunteer {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .vol-lists {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ════════════════════════════════════════════════════════════
+           JOIN CTA
+        ════════════════════════════════════════════════════════════ */
+        .section-join {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-navy);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-join::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .join-eyebrow {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            display: block;
+            margin-bottom: var(--space-lg);
+        }
+
+        .join-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(var(--text-2xl), 5vw, 3.5rem);
+            font-weight: 300;
+            color: var(--color-white);
+            line-height: 1.15;
+            margin-bottom: var(--space-lg);
+            letter-spacing: -0.5px;
+        }
+
+        .join-sub {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.65);
+            max-width: 570px;
+            margin: 0 auto var(--space-xl);
+            line-height: 1.7;
+        }
+
+        .join-actions {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 600px) {
+            .section-join {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ════════════════════════════════════════════════════════════
+           FOOTER
+        ════════════════════════════════════════════════════════════ */
+        .footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            padding: var(--space-2xl) max(40px, 5vw);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-brand img {
+            height: 48px;
+            width: auto;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            max-width: 260px;
+        }
+
+        .footer-col-title {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-contact p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .footer-contact a {
+            color: var(--color-sky);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 8px;
+            margin-top: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            transition: background var(--dur-fast), color var(--dur-fast);
+        }
+
+        .footer-social a:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .footer-partners {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) max(40px, 5vw);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            flex-wrap: wrap;
+        }
+
+        .footer-partners img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(20%);
+            transition: opacity var(--dur-fast);
+        }
+
+        .footer-partners img:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ============================================================
+    NAV
+    ============================================================ -->
+    <header class="nav" id="mainNav">
+        <div class="nav-logo">
+            <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="./index.html">Home</a></li>
+
+            <li class="has-dropdown">
+                <a href="#">About</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./our-team.html">Our Team</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Education</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./education-and-training.html">Education and Training</a></li>
+                    <li><a href="./literacy-workshops.html">Literacy Workshops</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                    <li><a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a></li>
+                    <li><a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a></li>
+                    <li><a href="./service-learning.html">Service Learning</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Programs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./events.html">Event Calendar</a></li>
+                    <li><a href="./program-participant.html">Program Participant</a></li>
+                    <li><a href="./farmers-market.html">Farmers' Market</a></li>
+                    <li><a href="./food-distribution.html">Food Distribution</a></li>
+                    <li><a href="./youth-programs.html">Youth Program</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./court-order-community-service.html">Court Order Community Service</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Clubs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./mdba-portal.html">MDBA Portal</a></li>
+                    <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
+                    <li><a href="./join-our-community">Join our community</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Join Us</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./get-involved.html">Get Involved</a></li>
+                    <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="./volunteer.html">Volunteer</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+        <a class="nav-cta" href="./support-us">Support Us</a>
+        
+        <button class="nav-burger" id="navBurger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="./index.html">Home</a>
+
+        <a href="./about.html">About Us</a>
+        <a href="./our-team.html">Our Team</a>
+        <a href="./contact.html">Contact Us</a>
+
+        <a href="./education-and-training.html">Education and Training</a>
+        <a href="./literacy-workshops.html">Literacy Workshops</a>
+        <a href="./kemetic-yoga.html">Kemetic Yoga</a>
+        <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
+        <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
+        <a href="./service-learning.html">Service Learning</a>
+
+        <a href="./events.html">Event Calendar</a>
+        <a href="./program-participant.html">Program Participant</a>
+        <a href="./farmers-market.html">Farmers' Market</a>
+        <a href="./food-distribution.html">Food Distribution</a>
+        <a href="./youth-programs.html">Youth Program</a>
+        <a href="./environmental-programs.html">Environmental Programs</a>
+        <a href="./court-order-community-service.html">Court Order Community Service</a>
+
+        <a href="./mdba-portal.html">MDBA Portal</a>
+        <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+        <a href="./join-our-community">Join our community</a>
+
+        <a href="./get-involved.html">Get Involved</a>
+        <a href="./partner-with-us.html">Partner with Us</a>
+        <a href="./volunteer.html">Volunteer</a>
+
+        <a class="mob-cta" href="./support-us"> Support Us </a>
+    </div>
+
+    <!-- ============================================================
+    PAGE HERO — light child style
+    ============================================================ -->
+    <section class="page-hero">
+        <!-- breadcrumb inside hero -->
+        <!-- <nav class="breadcrumb" aria-label="Breadcrumb">
+            <div class="breadcrumb-inner">
+                <a href="./index.html">Home</a>
+                <span class="bc-sep"></span>
+                <a href="./education-and-training.html">Education & Training</a>
+                <span class="bc-sep"></span>
+                <span class="bc-current">Kemetic Yoga</span>
+            </div>
+        </nav> -->
+
+        <div class="hero-inner">
+            <!-- LEFT: text -->
+            <div class="hero-text">
+                <div class="hero-eyebrow">Education &amp; Training</div>
+                <h1 class="hero-h1">Kemetic<br><em>Yoga</em></h1>
+                <div class="hero-divider"></div>
+                <p class="hero-desc">An ancient practice rooted in the land of Kemet — reconnecting our community with
+                    ancestral wisdom, breathwork, and the healing power of movement.</p>
+                <div class="hero-cta-row">
+                    <a class="btn-white reveal reveal--delay-2" href="#events">Upcoming Sessions</a>
+                    <a class="btn-ghost reveal reveal--delay-3" href="#volunteer">Teach With Us</a>
+                </div>
+            </div>
+
+            <!-- RIGHT: photo -->
+            <div class="hero-photo-wrap reveal reveal--delay-1">
+                <img src="assets/img/kemetic-yoga/Kemetic Yoga.jpg" alt="Kemetic Yoga at ASCENDtials">
+                <div class="hero-photo-badge">
+                    <div class="hero-photo-badge-num">Free</div>
+                    <div class="hero-photo-badge-label">Community sessions</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    INFO STRIP
+    ============================================================ -->
+    <div class="info-strip">
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Frequency</div>
+                <div class="info-value">Weekly Sessions</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Locations</div>
+                <div class="info-value">Marina District &amp; City Heights</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path
+                        d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Cost</div>
+                <div class="info-value">Free to Community</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M4.5 12.5l6 6 9-10" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Level</div>
+                <div class="info-value">All Levels Welcome</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    ORIGIN SECTION
+    ============================================================ -->
+    <section class="section-origin" id="overview">
+        <div class="origin-inner">
+            <!-- LEFT: editorial text -->
+            <div class="origin-text">
+                <span class="section-label reveal">Ancient Roots</span>
+                <h2 class="section-h2 reveal">A practice born<br><em>in Kemet</em></h2>
+                <blockquote class="pull-quote reveal">
+                    "Our ancient ancestors used these practices to connect with themselves and the divine — divine
+                    movement brought health, wealth, and harmony."
+                </blockquote>
+                <div class="body-text reveal">
+                    <p>Kemetic Yoga is an ancient practice originating from the land of Kemet — modern-day Egypt —
+                        developed by its indigenous inhabitants thousands of years ago. Rooted in breath mastery and
+                        slow, intentional movement, it guides the body through poses inspired by the hieroglyphic
+                        illustrations found on the walls of temples and tombs.</p>
+                    <p>This is more than exercise. It is a spiritual practice — moving energy through the body to heal,
+                        to connect with our higher selves, and to honor the wisdom of our ancestors. Rediscovering this
+                        practice reconnects us to a rich diasporic heritage that has been largely forgotten.</p>
+                </div>
+            </div>
+
+            <!-- RIGHT: bento -->
+            <div class="origin-bento reveal reveal--delay-1">
+                <div class="ob-card">
+                    <div class="ob-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z" />
+                            <circle cx="12" cy="9" r="2.5" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="ob-title">Rooted in Kemet</div>
+                        <div class="ob-body">Ancient Egypt's indigenous traditions, carried forward through diaspora and
+                            now reclaimed by community.</div>
+                    </div>
+                </div>
+
+                <div class="ob-card">
+                    <div class="ob-num">01</div>
+                    <div class="ob-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                    </div>
+                    <div class="ob-title">Breath Mastery</div>
+                    <div class="ob-body">Focused breathwork at the heart of every session.</div>
+                </div>
+
+                <div class="ob-card">
+                    <div class="ob-num">02</div>
+                    <div class="ob-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                    </div>
+                    <div class="ob-title">Slow Movement</div>
+                    <div class="ob-body">Deliberate poses drawn from ancient temple illustrations.</div>
+                </div>
+
+                <div class="ob-card">
+                    <div class="ob-num">03</div>
+                    <div class="ob-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                    </div>
+                    <div class="ob-title">Ancestral Healing</div>
+                    <div class="ob-body">A spiritual path that honors those who came before us.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    WHY KEMETIC YOGA — dark navy
+    ============================================================ -->
+    <section class="section-why" id="why">
+        <div class="why-inner">
+            <div class="why-header reveal">
+                <div>
+                    <span class="why-label">The Benefits</span>
+                    <h2 class="why-h2">Why practice<br><em>Kemetic Yoga?</em></h2>
+                </div>
+                <p class="why-sub">Practicing Kemetic Yoga connects us to a rich ancient diasporic heritage largely
+                    forgotten. The same wisdom that brought our ancestors health, wealth, and harmony is available to us
+                    today — through breath, movement, and intention.</p>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-card reveal">
+                    <div class="why-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                        </svg>
+                    </div>
+                    <div class="why-card-num">01</div>
+                    <div class="why-card-title">Physical Health</div>
+                    <p class="why-card-body">Slow, precise movement builds flexibility, joint health, and postural
+                        alignment without strain — accessible to all bodies and fitness levels.</p>
+                </div>
+                <div class="why-card reveal reveal--delay-1">
+                    <div class="why-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                        </svg>
+                    </div>
+                    <div class="why-card-num">02</div>
+                    <div class="why-card-title">Mental Clarity</div>
+                    <p class="why-card-body">Breathwork and meditation reduce anxiety, sharpen focus, and cultivate the
+                        stillness needed to navigate daily life with intention.</p>
+                </div>
+                <div class="why-card reveal reveal--delay-2">
+                    <div class="why-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+                            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+                            <line x1="6" y1="1" x2="6" y2="4" />
+                            <line x1="10" y1="1" x2="10" y2="4" />
+                            <line x1="14" y1="1" x2="14" y2="4" />
+                        </svg>
+                    </div>
+                    <div class="why-card-num">03</div>
+                    <div class="why-card-title">Spiritual Connection</div>
+                    <p class="why-card-body">Reconnect with higher self and ancestral energy through the same poses
+                        depicted in ancient Kemetic temples and tombs.</p>
+                </div>
+                <div class="why-card reveal reveal--delay-3">
+                    <div class="why-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <div class="why-card-num">04</div>
+                    <div class="why-card-title">Community Belonging</div>
+                    <p class="why-card-body">Each session is a gathering — a space where neighbors, families, and youth
+                        share in the collective practice of ancestral wellness.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    CURRICULUM — light surface bento
+    ============================================================ -->
+    <section class="section-curriculum" id="curriculum">
+        <div class="curriculum-inner">
+            <div class="curriculum-header">
+                <div>
+                    <span class="section-label reveal">Our Framework</span>
+                    <h2 class="section-h2 reveal">Rooted in <em>our curricula</em></h2>
+                </div>
+                <p class="curriculum-desc reveal">Our Kemetic Yoga sessions are grounded in ASCENDtials' signature
+                    frameworks — Whiteness to Oneness™ and KOS-Melanin-ology™. We use movement as an entry point for
+                    deeper conversations about identity, systemic inequality, and the science of Melanin.</p>
+            </div>
+
+            <div class="curr-grid">
+                <div class="curr-card reveal">
+                    <div class="curr-card-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M8 12h8M12 8v8" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="curr-card-title">Whiteness to Oneness™</div>
+                        <div class="curr-card-desc">Our foundational curriculum dismantles structural inequality and
+                            fosters constructive dialogue. Yoga becomes a space to challenge oppressive structures while
+                            building new ways of thinking and being.</div>
+                    </div>
+                </div>
+                <div class="curr-card reveal reveal--delay-1">
+                    <div class="curr-card-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 0v20M2 12h20" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="curr-card-title">KOS-Melanin-ology™</div>
+                        <div class="curr-card-desc">A science-informed curriculum exploring the role of Melanin in the
+                            human body, African heritage, and spiritual practice — woven directly into movement and
+                            breathwork.</div>
+                    </div>
+                </div>
+
+                <div class="curr-card reveal">
+                    <div class="curr-card-num">I</div>
+                    <div class="curr-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                            <line x1="4" y1="22" x2="4" y2="15" />
+                        </svg>
+                    </div>
+                    <div class="curr-card-title">Ancestral Poses</div>
+                    <div class="curr-card-desc">Each posture is drawn from temple and tomb illustrations, recreating the
+                        exact forms held by our ancient ancestors.</div>
+                </div>
+                <div class="curr-card reveal reveal--delay-1">
+                    <div class="curr-card-num">II</div>
+                    <div class="curr-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path d="M12 22c0 0-8-5.4-8-11A8 8 0 1 1 20 11c0 5.6-8 11-8 11z" />
+                        </svg>
+                    </div>
+                    <div class="curr-card-title">Breathwork Mastery</div>
+                    <div class="curr-card-desc">Air quality and breath control are central. Participants develop a
+                        personal breathing practice that extends beyond the yoga mat.</div>
+                </div>
+                <div class="curr-card reveal reveal--delay-2">
+                    <div class="curr-card-num">III</div>
+                    <div class="curr-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path
+                                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                        </svg>
+                    </div>
+                    <div class="curr-card-title">Dialogue &amp; Reflection</div>
+                    <div class="curr-card-desc">Sessions include structured discussion, creating space for honest
+                        conversation about identity, healing, and community wellness.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    EVENTS
+    ============================================================ -->
+    <section class="section-events" id="events">
+        <div class="events-inner">
+            <div class="events-header">
+                <span class="section-label reveal">Upcoming Sessions</span>
+                <h2 class="section-h2 reveal">Join us <em>this week</em></h2>
+            </div>
+
+            <div class="events-grid">
+                <!-- Event 1 -->
+                <div class="event-card reveal">
+                    <div class="event-img-wrap">
+                        <img class="event-card-img"
+                            src="https://ascendtials.org/wp-content/uploads/2025/11/MarinaMarketYoga.avif"
+                            alt="Marina District Yoga Session" onerror="this.style.display='none'">
+                    </div>
+                    <div class="event-card-body">
+                        <span class="event-card-tag">Marina District</span>
+                        <div class="event-card-title">Marina District Yoga Session</div>
+                        <p class="event-card-desc">Join us at the Marina Farmers' Market for a free outdoor Kemetic Yoga
+                            session — open to all levels, all ages. Bring a mat and an open heart.</p>
+                        <a class="event-card-cta" href="https://tinyurl.com/MarinaMarketyoga" target="_blank">
+                            Sign Up
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="event-card reveal reveal--delay-1">
+                    <div class="event-img-wrap">
+                        <img class="event-card-img"
+                            src="https://ascendtials.org/wp-content/uploads/2025/11/CityHeightsYoga.avif"
+                            alt="City Heights Yoga Session" onerror="this.style.display='none'">
+                    </div>
+                    <div class="event-card-body">
+                        <span class="event-card-tag">City Heights</span>
+                        <div class="event-card-title">City Heights Yoga Session</div>
+                        <p class="event-card-desc">A community yoga gathering in the heart of City Heights — grounded in
+                            ancestral practice, open to neighbors, families, and first-timers alike.</p>
+                        <a class="event-card-cta" href="https://tinyurl.com/CityHeightsyoga" target="_blank">
+                            Sign Up
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    VOLUNTEER / INSTRUCTOR SECTION
+    ============================================================ -->
+    <section class="section-volunteer" id="volunteer">
+        <div class="volunteer-inner">
+            <div class="volunteer-text">
+                <span class="section-label reveal">Get Involved</span>
+                <h2 class="volunteer-h2 reveal">Join our Yoga<br><em>Instructor Team</em></h2>
+                <p class="volunteer-desc reveal">We're building a community of yoga instructors who want to share their
+                    practice with neighbors, families, and youth across San Diego. Each week we offer free yoga sessions
+                    at our farmers' markets and community events — and we need passionate instructors to help expand
+                    this work.</p>
+                <p class="volunteer-desc reveal" style="margin-top: -20px;">Whether you're newly certified or have years
+                    of experience, this is a supportive space to grow your teaching skills, connect with new students,
+                    and bring wellness directly into the heart of our community.</p>
+                <div class="volunteer-cta-row reveal">
+                    <a class="btn-primary" href="https://forms.gle/3HHwFUXxXZao3neGA" target="_blank">Apply to Teach</a>
+                    <a class="btn-outline" href="./get-involved.html">Other Ways to Help</a>
+                </div>
+            </div>
+
+            <div class="vol-lists reveal reveal--delay-2">
+                <div class="vol-list-block">
+                    <div class="vol-list-title">Who We're Looking For</div>
+                    <ul class="vol-list">
+                        <li>Recently certified instructors eager to gain real-world experience</li>
+                        <li>Teachers who enjoy working with beginners and youth</li>
+                        <li>Instructors who value community wellness and accessibility</li>
+                        <li>Volunteers who can commit to weekly or rotating sessions</li>
+                    </ul>
+                </div>
+                <div class="vol-list-block">
+                    <div class="vol-list-title">Why Teach With Us</div>
+                    <ul class="vol-list">
+                        <li>Share your craft with students trying yoga for the first time</li>
+                        <li>Build confidence and teaching experience in a real setting</li>
+                        <li>Support community wellness at farmers' markets &amp; partner events</li>
+                        <li>Join a growing network of wellness practitioners and youth mentors</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    JOIN CTA
+    ============================================================ -->
+    <section class="section-join reveal">
+        <span class="join-eyebrow">Begin the Practice</span>
+        <h2 class="join-h2">Connect with Your<br>Ancestral Wisdom</h2>
+        <p class="join-sub">Sessions are free, open to all levels, and held weekly across San Diego. Come as you are.
+        </p>
+        <div class="join-actions">
+            <a class="btn-white" href="#events">View Upcoming Sessions</a>
+            <a class="btn-ghost" href="https://forms.gle/3HHwFUXxXZao3neGA" target="_blank">Become an Instructor</a>
+            <a class="btn-ghost" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1">Support Our Work</a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+                
+                <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
+                    BIPOC community.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube"
+                        target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-ascendtials/" aria-label="LinkedIn" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                    <a href="https://x.com/ascendtials" aria-label="X / Twitter" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Quick Links</div>
+                <ul class="footer-links">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="education-and-training.html">Education & Training</a></li>
+                    <li><a href="./events.html">Events Calendar</a></li>
+                    <li><a href="https://ascendtials.org/get-involved/">Get Involved</a></li>
+                    <li><a href="https://ascendtials.org/ascendtials-membership-2024/">Membership</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Programs</div>
+                <ul class="footer-links">
+                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./legal-aid-program.html">Legal Aid</a></li>
+                    <li><a href="./fellowship-program.html">Internships & Fellowships</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Contact</div>
+                <div class="footer-contact">
+                    <p>505 W Broadway<br>San Diego, CA 92101</p>
+                    <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-partners">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/10/country-of-san-diego.png"
+                alt="County of San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/10/Live-well-with-San-diego.png"
+                alt="Live Well San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/02/candid-seal-platinum-2025.png"
+                alt="Candid Platinum 2025">
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 ASCENDtials. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+        const burger = document.getElementById('navBurger');
+        const mm = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => mm.classList.toggle('open'));
+        mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.10 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+
+</html>

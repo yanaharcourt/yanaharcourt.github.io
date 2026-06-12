@@ -1,0 +1,3080 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers' Markets – ASCENDtials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+        ============================================================ */
+        :root {
+            --color-navy: #1E3A47;
+            --color-navy-deep: #152E3A;
+            --color-sky: #C9A96E;
+            --color-sky-light: #F5EBD8;
+            --color-sky-faint: #FDF6EC;
+            --color-white: #FFFFFF;
+            --color-bg: #FAFAF8;
+            --color-surface: #F4F2EE;
+            --color-surface-2: #ECEAE5;
+            --color-line: #E2DDD6;
+            --color-text: #1A1A18;
+            --color-text-muted: #666660;
+            --color-text-light: #9D9A93;
+            --color-accent: #C9A96E;
+            --color-warm: #E8D0CC;
+            --color-sage: #B2D5D1;
+            --color-olive: #EBF1AB;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.375rem;
+            --text-2xl: 1.75rem;
+            --text-3xl: 2.25rem;
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
+            --space-section: 120px;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-pill: 999px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --dur-fast: 180ms;
+            --dur-base: 280ms;
+            --dur-slow: 500ms;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            overflow-x: hidden;
+            font-size: var(--text-base);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ============================================================
+        NAV 
+        ============================================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            gap: 32px;
+            transition: all var(--dur-slow) var(--ease-in-out);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            top: 10px;
+            left: 16px;
+            right: 16px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-logo {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .nav-logo img {
+            height: 52px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links>li {
+            position: relative;
+        }
+
+        .nav-links>li>a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            font-size: var(--text-sm);
+            font-weight: 400;
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            transition: color var(--dur-fast) var(--ease-out),
+                background var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links>li>a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        /* Dropdown chevron */
+        .nav-links .has-dropdown>a::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: solid var(--color-text-muted);
+            border-width: 0 1.5px 1.5px 0;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links .has-dropdown:hover>a::after {
+            transform: rotate(225deg) translateY(-2px);
+        }
+
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-line);
+            list-style: none;
+            min-width: 220px;
+            padding: 6px;
+            padding-top: 10px;
+            z-index: 600;
+        }
+
+        .nav-links .has-dropdown:hover .nav-dropdown {
+            display: block;
+        }
+
+        .nav-dropdown li a {
+            display: block;
+            padding: 9px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .nav-dropdown li a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        /* ============================================================
+        BUTTONS — fill-sweep hover effect
+        ============================================================ */
+        .btn-primary,
+        .btn-white,
+        .btn-ghost,
+        .btn-outline,
+        .nav-cta,
+        .hero-email-btn,
+        .bento-link {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-ghost::before,
+        .btn-outline::before,
+        .nav-cta::before,
+        .hero-email-btn::before,
+        .bento-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before,
+        .nav-cta:hover::before,
+        .hero-email-btn:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline::before {
+            background: var(--color-sky-light);
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        .bento-link::before {
+            background: var(--color-sky);
+        }
+
+        .bento-link:hover::before {
+            transform: scaleX(1);
+        }
+
+        .bento-link:hover {
+            color: var(--color-white, #fff);
+        }
+
+        .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        .nav-cta {
+            flex-shrink: 0;
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 9px 20px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color var(--dur-fast);
+        }
+
+        .nav-burger {
+            display: none;
+            background: none;
+            border: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+            margin-left: auto;
+        }
+
+        .nav-burger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-navy);
+            border-radius: 2px;
+            transition: all var(--dur-base) var(--ease-out);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 490;
+            padding: 90px 24px 32px;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 16px;
+            font-size: var(--text-xl);
+            color: var(--color-text);
+            border-bottom: 1px solid var(--color-line);
+            font-family: var(--font-display);
+        }
+
+        .mobile-menu .mob-cta {
+            margin-top: 24px;
+            background: var(--color-navy);
+            color: var(--color-white);
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-lg);
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+        }
+
+        /* ============================================================
+           SCROLL REVEAL
+        ============================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal--delay-1 {
+            transition-delay: 0.08s;
+        }
+
+        .reveal--delay-2 {
+            transition-delay: 0.16s;
+        }
+
+        .reveal--delay-3 {
+            transition-delay: 0.24s;
+        }
+
+        .reveal--delay-4 {
+            transition-delay: 0.32s;
+        }
+
+        /* ============================================================
+           SHARED
+        ============================================================ */
+        .section-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        /* ============================================================
+           PAGE HERO
+        ============================================================ */
+        .page-hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: calc(72px + var(--space-2xl));
+            padding-left: max(48px, 6vw);
+            padding-right: max(48px, 6vw);
+            background: var(--color-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: 'AKC';
+            position: absolute;
+            bottom: -40px;
+            left: -20px;
+            font-family: var(--font-display);
+            font-size: clamp(200px, 28vw, 380px);
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(201, 169, 110, 0.04);
+            letter-spacing: -10px;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.6rem, 4.6vw, 5rem);
+            font-weight: 300;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 em {
+            font-style: italic;
+            color: var(--color-sky);
+            display: block;
+        }
+
+        .hero-divider {
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-sky), transparent);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-desc {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            max-width: 460px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            background: var(--color-navy);
+            color: var(--color-bg);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 27px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: transparent;
+            color: var(--color-navy);
+            border: 1px solid var(--color-line);
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-surface);
+            border-color: var(--color-sky);
+        }
+
+        .hero-photo-wrap {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+            cursor: zoom-in;
+        }
+
+        .hero-photo-wrap img {
+            width: 100%;
+            height: 460px;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: var(--radius-xl);
+            display: block;
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+
+        .hero-photo-wrap:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Lightbox overlay for expanded image */
+        .photo-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 24, 28, 0.82);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 5vw;
+            cursor: zoom-out;
+        }
+
+        .photo-lightbox.open {
+            display: flex;
+        }
+
+        .photo-lightbox img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-photo-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -24px;
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg) var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            z-index: 3;
+        }
+
+        .hero-photo-badge-num {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+        }
+
+        .hero-photo-badge-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-top: 6px;
+        }
+
+        @media (max-width: 960px) {
+            .hero-main {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .hero-photo-wrap img {
+                height: 340px;
+            }
+
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-photo-wrap {
+                display: none;
+            }
+        }
+
+        /* ============================================================
+           INFO STRIP
+        ============================================================ */
+        .info-strip {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-xl) max(48px, 6vw);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-xl);
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+
+        .info-item {
+            flex-shrink: 0;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
+        }
+
+        .info-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-bottom: 3px;
+        }
+
+        .info-value {
+            font-size: var(--text-sm);
+            color: var(--color-navy);
+        }
+
+        .info-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--color-line);
+        }
+
+        @media (max-width: 900px) {
+            .info-strip {
+                justify-content: flex-start;
+                padding: var(--space-lg) 24px;
+            }
+        }
+
+        /* ============================================================
+           MARKETS TABS SECTION
+        ============================================================ */
+        .tabs-section {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-white);
+        }
+
+        .tabs-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .tabs-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .tabs-header h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .tabs-header p {
+            margin-top: var(--space-md);
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            max-width: 640px;
+            line-height: 1.75;
+        }
+
+        .tab-nav {
+            display: flex;
+            gap: 0;
+            margin-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--color-line);
+            padding-bottom: 0;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--color-text-muted);
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .tab-btn:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .tab-btn.active {
+            color: var(--color-navy);
+            font-weight: 600;
+            border-bottom-color: var(--color-sky);
+            background: transparent;
+        }
+
+        .tab-btn-tag {
+            display: none;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: start;
+        }
+
+        .tab-content-left h3 {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 2.5vw, 2.25rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            margin-bottom: var(--space-lg);
+        }
+
+        .tab-content-left h3 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .tab-content-left p {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+        }
+
+        .tab-topics {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .tab-topics li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        .tab-topics li::before {
+            content: '';
+            flex-shrink: 0;
+            margin-top: 6px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-sky);
+        }
+
+        .tab-topics li strong {
+            color: var(--color-navy);
+            font-weight: 600;
+        }
+
+        .tab-cta-row {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .tab-bento {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .tab-bento-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow var(--dur-base), transform var(--dur-base), border-color var(--dur-base);
+        }
+
+        .tab-bento-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .tab-bento-card--wide {
+            grid-column: span 2;
+            background: var(--color-sky-faint);
+            border-color: rgba(201, 169, 110, 0.35);
+        }
+
+        .tab-bento-card--wide .tbc-num {
+            font-size: clamp(1.6rem, 2.6vw, 2.25rem);
+            color: var(--color-navy);
+        }
+
+        .tab-bento-card--wide .tbc-label {
+            color: var(--color-text-muted);
+        }
+
+        .tab-bento-card--accent {
+            background: var(--color-surface);
+            border-color: var(--color-line);
+        }
+
+        .tab-bento-card--image {
+            grid-column: span 2;
+            padding: 0;
+            height: 260px;
+            cursor: zoom-in;
+        }
+
+        .tab-bento-card--image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            border-radius: inherit;
+        }
+
+        .tbc-num {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 400;
+            color: var(--color-sky);
+            line-height: 1;
+            margin-bottom: var(--space-sm);
+        }
+
+        .tbc-label {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        .tbc-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .tbc-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--color-sky);
+            fill: none;
+            stroke-width: 1.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .tbc-title {
+            font-family: var(--font-display);
+            font-size: var(--text-base);
+            font-weight: 500;
+            color: var(--color-navy);
+            margin-bottom: 4px;
+        }
+
+        .tbc-desc {
+            font-size: var(--text-xs);
+            color: var(--color-text-muted);
+            line-height: 1.55;
+        }
+
+        @media (max-width: 900px) {
+            .tab-panel.active {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .tabs-section {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .tab-nav {
+                gap: 0;
+                overflow-x: auto;
+            }
+
+            .tab-btn {
+                flex: 0 0 auto;
+                padding: 10px 14px;
+                font-size: var(--text-xs);
+            }
+
+            .tab-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-bento-card--wide,
+            .tab-bento-card--image {
+                grid-column: span 1;
+            }
+        }
+
+        /* ============================================================
+           MAP LOCATIONS SECTION
+        ============================================================ */
+        .locations-section {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .locations-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .locations-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .locations-header h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+        }
+
+        .location-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: box-shadow var(--dur-base), transform var(--dur-base), border-color var(--dur-base);
+        }
+
+        .location-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .location-map {
+            width: 100%;
+            height: 220px;
+            border: 0;
+            display: block;
+            filter: saturate(0.85);
+        }
+
+        .location-body {
+            padding: var(--space-lg);
+        }
+
+        .location-tag {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-sm);
+        }
+
+        .location-body h3 {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 500;
+            color: var(--color-navy);
+            margin-bottom: var(--space-sm);
+        }
+
+        .location-body p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: var(--space-md);
+        }
+
+        .location-body p em {
+            display: block;
+            font-style: italic;
+            color: var(--color-navy);
+            margin-top: 2px;
+        }
+
+        @media (max-width: 1100px) {
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .locations-section {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ============================================================
+           PURPOSE STRIP
+        ============================================================ */
+        .purpose-strip {
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-2xl) max(48px, 6vw);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--space-2xl);
+            align-items: center;
+        }
+
+        .purpose-strip h2 {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.25;
+        }
+
+        .purpose-strip p {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .purpose-strip {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================================
+           VENDOR SECTION — light, two-up
+        ============================================================ */
+        .vendor-section {
+            background: var(--color-white);
+            padding: var(--space-section) max(48px, 6vw);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vendor-section::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.06) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .vendor-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+        }
+
+        .vendor-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow var(--dur-base), border-color var(--dur-base);
+        }
+
+        .vendor-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .vendor-card img {
+            width: 100%;
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-lg);
+            object-fit: cover;
+            max-height: 220px;
+        }
+
+        .vendor-card h3 {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            margin-bottom: var(--space-md);
+        }
+
+        .vendor-card h3 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .vendor-card p {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+        }
+
+        .vendor-card .tab-cta-row {
+            margin-top: auto;
+        }
+
+        @media (max-width: 900px) {
+            .vendor-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .vendor-section {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ============================================================
+           ASSISTANCE PROGRAMS — accordion-like bento
+        ============================================================ */
+        .programs-section {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .programs-header {
+            max-width: 720px;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .programs-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: var(--space-md);
+        }
+
+        .programs-header h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .programs-header p {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .programs-logos {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-2xl);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-2xl);
+            padding: var(--space-lg) var(--space-2xl);
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+        }
+
+        .programs-logos img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            flex: 1 1 0;
+            max-width: 180px;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+        }
+
+        .program-card--row {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: var(--space-lg);
+            align-items: start;
+        }
+
+        .program-card--row .program-card-icon {
+            margin-bottom: 0;
+        }
+
+        .program-card--row h3,
+        .program-card--row ul {
+            grid-column: 2;
+        }
+
+        @media (max-width: 700px) {
+            .program-card--row {
+                grid-template-columns: 1fr;
+            }
+
+            .program-card--row h3,
+            .program-card--row ul {
+                grid-column: 1;
+            }
+        }
+
+        .program-card--alert {
+            background: var(--color-sky-faint);
+            border-color: rgba(201, 169, 110, 0.35);
+        }
+
+        .program-card--wic {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: var(--space-2xl);
+            align-items: start;
+        }
+
+        .wic-price-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .wic-price-tile {
+            background: var(--color-sky-faint);
+            border: 1px solid rgba(201, 169, 110, 0.35);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+        }
+
+        .wic-price-num {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 400;
+            color: var(--color-sky);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .wic-price-label {
+            font-size: var(--text-xs);
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 900px) {
+            .program-card--wic {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .program-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+        }
+
+        .program-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201, 169, 110, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .program-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .program-card-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--color-sky);
+            fill: none;
+            stroke-width: 1.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .program-card h3 {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 500;
+            color: var(--color-navy);
+            margin-bottom: var(--space-sm);
+        }
+
+        .program-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .program-card ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .program-card ul li::before {
+            content: '';
+            flex-shrink: 0;
+            margin-top: 6px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-sky);
+        }
+
+        .program-card ul li strong {
+            color: var(--color-navy);
+            font-weight: 600;
+        }
+
+        .program-card ul li a {
+            color: var(--color-sky);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 900px) {
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .programs-section {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .programs-logos {
+                gap: var(--space-lg);
+                justify-content: center;
+            }
+        }
+
+        /* ============================================================
+           PERKS BENTO (Gift Cards / Stamp Cards)
+        ============================================================ */
+        .perks-section {
+            background: var(--color-white);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .perks-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .perks-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .perks-header h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .perks-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+        }
+
+        .perk-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow var(--dur-base), border-color var(--dur-base);
+        }
+
+        .perk-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .perk-card img {
+            width: 100%;
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-lg);
+            object-fit: cover;
+            max-height: 240px;
+        }
+
+        .perk-card h3 {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            margin-bottom: var(--space-md);
+        }
+
+        .perk-card p {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+        }
+
+        .perk-card .tab-cta-row {
+            margin-top: auto;
+        }
+
+        @media (max-width: 900px) {
+            .perks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .perks-section {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ============================================================
+           ABOUT THE MARKET / APPROACH SECTION
+        ============================================================ */
+        .approach-section {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .approach-inner {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            align-items: stretch;
+        }
+
+        .approach-text .section-label {
+            color: var(--color-sky);
+        }
+
+        .approach-text h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.25rem, 3.5vw, 3.25rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .approach-text h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .approach-text p {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+        }
+
+        .approach-bento {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 10px;
+            align-self: stretch;
+        }
+
+        .approach-stat {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base);
+        }
+
+        .approach-stat:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .approach-stat--wide {
+            grid-column: span 2;
+            background: var(--color-sky-faint);
+            border-color: rgba(201, 169, 110, 0.35);
+        }
+
+        .approach-stat--wide .approach-stat-num {
+            color: var(--color-navy);
+            font-size: clamp(1.6rem, 2.6vw, 2.25rem);
+        }
+
+        .approach-stat-num {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 400;
+            color: var(--color-sky);
+            line-height: 1;
+            margin-bottom: var(--space-sm);
+        }
+
+        .approach-stat-label {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 900px) {
+            .approach-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .approach-section {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .approach-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .approach-stat--wide {
+                grid-column: span 1;
+            }
+        }
+
+        /* ============================================================
+           VENDOR GALLERY STRIP
+        ============================================================ */
+        .gallery-section {
+            background: var(--color-white);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .gallery-header {
+            margin-bottom: var(--space-2xl);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+        }
+
+        .gallery-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .gallery-header h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-line);
+            transition: transform var(--dur-base) var(--ease-out);
+        }
+
+        .gallery-grid img:hover {
+            transform: translateY(-3px);
+        }
+
+        .gallery-events {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .gallery-events img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-line);
+            object-fit: cover;
+            max-height: 320px;
+        }
+
+        .gallery-cta-row {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .gallery-events {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-section {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ============================================================
+           EVENT CTA BANNER
+        ============================================================ */
+        .event-cta {
+            background: var(--color-surface);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .event-cta-inner {
+            background: var(--color-bg);
+            border: 1px solid rgba(201, 169, 110, 0.3);
+            border-radius: var(--radius-xl);
+            padding: var(--space-3xl) var(--space-section);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-xl);
+        }
+
+        .event-cta-text .section-label {
+            display: block;
+        }
+
+        .event-cta-text p:last-child {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.3;
+            margin-top: var(--space-sm);
+        }
+
+        .btn-navy {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: var(--radius-pill);
+            background: var(--color-navy);
+            color: var(--color-white);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-navy::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-navy:hover::before {
+            transform: scaleX(1);
+        }
+
+        @media (max-width: 768px) {
+            .event-cta-inner {
+                flex-direction: column;
+                text-align: center;
+                padding: var(--space-2xl);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .event-cta {
+                padding: 0 24px var(--space-2xl);
+            }
+        }
+
+        /* ============================================================
+           JOIN BANNER
+        ============================================================ */
+        .section-join {
+            background: var(--color-navy-deep);
+            padding: var(--space-section) max(48px, 6vw);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-join::before {
+            content: '';
+            position: absolute;
+            top: -160px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .join-eyebrow {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .join-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 4.5vw, 4rem);
+            font-weight: 300;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            color: var(--color-white);
+            margin-bottom: var(--space-lg);
+        }
+
+        .join-sub {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 520px;
+            margin: 0 auto var(--space-xl);
+        }
+
+        .join-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
+            transition: color var(--dur-fast);
+        }
+
+        .btn-white::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            padding: 13px 27px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            color: rgba(255, 255, 255, 0.85);
+            transition: color var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-ghost:hover {
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 600px) {
+            .section-join {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .join-actions {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+        }
+
+        /* ============================================================
+        FOOTER
+        ============================================================ */
+        .footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            padding: var(--space-2xl) max(40px, 5vw);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-brand img {
+            height: 48px;
+            width: auto;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            max-width: 260px;
+        }
+
+        .footer-col-title {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-contact p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .footer-contact a {
+            color: var(--color-sky);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 8px;
+            margin-top: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            transition: background var(--dur-fast), color var(--dur-fast);
+        }
+
+        .footer-social a:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .footer-partners {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) max(40px, 5vw);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            flex-wrap: wrap;
+        }
+
+        .footer-partners img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(20%);
+            transition: opacity var(--dur-fast);
+        }
+
+        .footer-partners img:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ============================================================
+    NAV
+    ============================================================ -->
+    <header class="nav" id="mainNav">
+        <div class="nav-logo">
+            <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="./index.html">Home</a></li>
+
+            <li class="has-dropdown">
+                <a href="#">About</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./our-team.html">Our Team</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Education</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./education-and-training.html">Education and Training</a></li>
+                    <li><a href="./literacy-workshops.html">Literacy Workshops</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                    <li><a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a></li>
+                    <li><a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a></li>
+                    <li><a href="./service-learning.html">Service Learning</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Programs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./events.html">Event Calendar</a></li>
+                    <li><a href="./program-participant.html">Program Participant</a></li>
+                    <li><a href="./farmers-market.html">Farmers' Market</a></li>
+                    <li><a href="./food-distribution.html">Food Distribution</a></li>
+                    <li><a href="./youth-programs.html">Youth Program</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./court-order-community-service.html">Court Order Community Service</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Clubs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./mdba-portal.html">MDBA Portal</a></li>
+                    <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
+                    <li><a href="./join-our-community">Join our community</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Join Us</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./get-involved.html">Get Involved</a></li>
+                    <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="https://ascendtials.org/sponsor/">Become a Sponsor</a></li>
+                    <li><a href="https://ascendtials.org/vendor-portal/">Vendor</a></li>
+                    <li><a href="./volunteer.html">Volunteer</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+        <a class="nav-cta" href="./support-us">Support Us</a>
+
+        <button class="nav-burger" id="navBurger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="./index.html">Home</a>
+
+        <a href="./about.html">About Us</a>
+        <a href="./our-team.html">Our Team</a>
+        <a href="./contact.html">Contact Us</a>
+
+        <a href="./education-and-training.html">Education and Training</a>
+        <a href="./literacy-workshops.html">Literacy Workshops</a>
+        <a href="./kemetic-yoga.html">Kemetic Yoga</a>
+        <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
+        <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
+        <a href="./service-learning.html">Service Learning</a>
+
+        <a href="./events.html">Event Calendar</a>
+        <a href="./program-participant.html">Program Participant</a>
+        <a href="./farmers-market.html">Farmers' Market</a>
+        <a href="./food-distribution.html">Food Distribution</a>
+        <a href="./youth-programs.html">Youth Program</a>
+        <a href="./environmental-programs.html">Environmental Programs</a>
+        <a href="./court-order-community-service.html">Court Order Community Service</a>
+
+        <a href="./mdba-portal.html">MDBA Portal</a>
+        <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+        <a href="./join-our-community">Join our community</a>
+
+        <a href="./get-involved.html">Get Involved</a>
+        <a href="./partner-with-us.html">Partner with Us</a>
+        <a href="https://ascendtials.org/sponsor/">Become a Sponsor</a>
+        <a href="https://ascendtials.org/vendor-portal/">Vendor</a>
+        <a href="./volunteer.html">Volunteer</a>
+
+        <a class="mob-cta" href="./support-us"> Support Us </a>
+    </div>
+
+    <!-- ============================================================
+    PAGE HERO
+    ============================================================ -->
+    <section class="page-hero">
+        <div class="hero-main">
+            <div class="hero-text">
+                <p class="hero-eyebrow">Programs</p>
+                <h1 class="hero-h1">
+                    ASCENDKemet Collective<br>
+                    <em>Certified Farmers' Markets</em>
+                </h1>
+                <div class="hero-divider"></div>
+                <p class="hero-desc">Fresh food, local vendors, and a welcoming community come together at our
+                    farmers' markets. Join us to shop, connect, and enjoy a vibrant local experience — we'll be
+                    returning regularly at these locations and look forward to seeing you!</p>
+                <div class="hero-cta-row">
+                    <a class="btn-primary" href="https://ascendtials.org/vendors/">
+                        Apply as a Vendor
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                    <a class="btn-outline" href="https://ascendtials.org/events/">View Event Calendar</a>
+                </div>
+            </div>
+
+            <div class="hero-photo-wrap reveal reveal--delay-1" data-lightbox="https://ascendtials.org/wp-content/uploads/2024/08/Our-Vendors-1.jpg">
+                <img src="https://ascendtials.org/wp-content/uploads/2024/08/Our-Vendors-1.jpg"
+                    alt="ASCENDKemet Collective Farmers' Market vendor">
+                <div class="hero-photo-badge">
+                    <div class="hero-photo-badge-num">3</div>
+                    <div class="hero-photo-badge-label">Weekly markets</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox for images -->
+    <div class="photo-lightbox" id="photoLightbox">
+        <img src="" alt="Expanded view" id="lightboxImg">
+    </div>
+
+    <!-- ============================================================
+    INFO STRIP
+    ============================================================ -->
+    <div class="info-strip">
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Audience</div>
+                <div class="info-value">Open to the Whole Community</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Locations</div>
+                <div class="info-value">Broadway Pier, City Heights & 5th Ave Landing</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <rect x="2" y="7" width="20" height="14" rx="2" />
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Accepted</div>
+                <div class="info-value">SNAP/EBT, WIC & SFMNP</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Bonus</div>
+                <div class="info-value">Kemetic Yoga at Select Markets</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    TABS — Our Three Weekly Markets
+    ============================================================ -->
+    <section class="tabs-section">
+        <div class="tabs-header reveal">
+            <span class="section-label">We Have Weekly Markets!</span>
+            <h2>Three markets,<br><em>one community</em></h2>
+            <p>Fresh food, local vendors, and a welcoming community come together at our farmers' markets. Join us to
+                shop, connect, and enjoy a vibrant local experience. We will be returning regularly at these locations
+                and we look forward to seeing you!</p>
+        </div>
+
+        <div class="tab-nav reveal reveal--delay-1" role="tablist">
+            <button class="tab-btn active" data-tab="broadway" role="tab" aria-selected="true">
+                Broadway Pier <span class="tab-btn-tag">Sundays</span>
+            </button>
+            <button class="tab-btn" data-tab="cityheights" role="tab" aria-selected="false">
+                City Heights <span class="tab-btn-tag">Saturdays</span>
+            </button>
+            <button class="tab-btn" data-tab="dockparty" role="tab" aria-selected="false">
+                Dock Party <span class="tab-btn-tag">Fridays</span>
+            </button>
+        </div>
+
+        <!-- ── Broadway Pier ── -->
+        <div class="tab-panel active" id="tab-broadway">
+            <div class="tab-content-left">
+                <h3>Broadway Pier <em>Farmers' Market</em></h3>
+                <p>Held every Sunday at Lane Field Park Market, right on the waterfront. Start your morning with
+                    Kemetic Yoga before browsing fresh produce, local vendors, and artisan goods.</p>
+                <ul class="tab-topics">
+                    <li><strong>Recurring:</strong> Every Sunday</li>
+                    <li><strong>Time:</strong> 10 AM – 4 PM (Kemetic Yoga at 11 AM)</li>
+                    <li><strong>Location:</strong> Lane Field Park Market, 1009 N Harbor Dr, San Diego, CA 92101</li>
+                </ul>
+                <div class="tab-cta-row">
+                    <a class="btn-primary" href="https://ascendtials.org/vendors/">
+                        Application Here
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                    <a class="btn-outline"
+                        href="https://www.google.com/maps/search/?api=1&query=1009+N+Harbor+Dr,+San+Diego,+CA+92101">Lane
+                        Field Park</a>
+                </div>
+            </div>
+            <div class="tab-bento">
+                <div class="tab-bento-card tab-bento-card--image" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/05/7.png">
+                    <img src="https://ascendtials.org/wp-content/uploads/2026/05/7.png"
+                        alt="Broadway Pier Farmers' Market flyer">
+                </div>
+                <div class="tab-bento-card tab-bento-card--accent">
+                    <div class="tbc-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    <div class="tbc-title">Kemetic Yoga</div>
+                    <div class="tbc-desc">Join the 11 AM session before the market opens — open to all.</div>
+                </div>
+                <div class="tab-bento-card">
+                    <div class="tbc-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                    </div>
+                    <div class="tbc-title">Waterfront Setting</div>
+                    <div class="tbc-desc">Located at Lane Field Park, on San Diego's downtown waterfront.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── City Heights ── -->
+        <div class="tab-panel" id="tab-cityheights">
+            <div class="tab-content-left">
+                <h3>City Heights <em>Farmers' Market</em></h3>
+                <p>Our Saturday market brings fresh produce and community connection to City Heights, with a
+                    morning Kemetic Yoga session to start the day grounded and energized.</p>
+                <ul class="tab-topics">
+                    <li><strong>Recurring:</strong> Every Saturday</li>
+                    <li><strong>Time:</strong> 9 AM – 1 PM (Kemetic Yoga at 10:30 AM)</li>
+                    <li><strong>Location:</strong> San Diego, CA 92105</li>
+                </ul>
+                <div class="tab-cta-row">
+                    <a class="btn-primary" href="https://ascendtials.org/vendors/">
+                        Application Here
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                    <a class="btn-outline"
+                        href="https://www.google.com/maps/search/?api=1&query=City+Heights,+San+Diego,+CA+92105">City
+                        Heights</a>
+                </div>
+            </div>
+            <div class="tab-bento">
+                <div class="tab-bento-card tab-bento-card--image" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/05/4-scaled.png">
+                    <img src="https://ascendtials.org/wp-content/uploads/2026/05/4-scaled.png"
+                        alt="City Heights Farmers' Market flyer">
+                </div>
+                <div class="tab-bento-card tab-bento-card--accent">
+                    <div class="tbc-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    <div class="tbc-title">Kemetic Yoga</div>
+                    <div class="tbc-desc">Join the 10:30 AM session before the market opens — open to all.</div>
+                </div>
+                <div class="tab-bento-card">
+                    <div class="tbc-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <div class="tbc-title">Community Hub</div>
+                    <div class="tbc-desc">A neighborhood gathering point in the heart of City Heights.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Dock Party ── -->
+        <div class="tab-panel" id="tab-dockparty">
+            <div class="tab-content-left">
+                <h3>Dock Party <em>at 5th Avenue Landing</em></h3>
+                <p>Wind down the week with our Friday Dock Party — food, vendors, and good vibes at 5th Avenue
+                    Landing on the Marina District waterfront.</p>
+                <ul class="tab-topics">
+                    <li><strong>Recurring:</strong> Weekly on Fridays</li>
+                    <li><strong>Time:</strong> 3 PM – 7 PM</li>
+                    <li><strong>Location:</strong> 5th Avenue Landing, 600 Convention Way, San Diego, CA 92101</li>
+                </ul>
+                <div class="tab-cta-row">
+                    <a class="btn-primary" href="https://ascendtials.org/vendors/">
+                        Application Here
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                    <a class="btn-outline"
+                        href="https://www.google.com/maps/search/?api=1&query=600+Convention+Way,+San+Diego,+CA+92101">5th
+                        Ave Landing</a>
+                </div>
+            </div>
+            <div class="tab-bento">
+                <div class="tab-bento-card tab-bento-card--image" data-lightbox="https://ascendtials.org/wp-content/uploads/2026/05/dock-party-may-29.jpeg">
+                    <img src="https://ascendtials.org/wp-content/uploads/2026/05/dock-party-may-29.jpeg"
+                        alt="Dock Party at 5th Avenue Landing flyer">
+                </div>
+                <div class="tab-bento-card tab-bento-card--accent">
+                    <div class="tbc-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" />
+                            <path d="M12 8v4l3 3" />
+                        </svg>
+                    </div>
+                    <div class="tbc-title">Friday Evenings</div>
+                    <div class="tbc-desc">A relaxed close to the week — 3 PM to 7 PM at the Marina District.</div>
+                </div>
+                <div class="tab-bento-card">
+                    <div class="tbc-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                    </div>
+                    <div class="tbc-title">5th Avenue Landing</div>
+                    <div class="tbc-desc">600 Convention Way — easy access from the Marina District.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    LOCATIONS / MAPS
+    ============================================================ -->
+    <section class="locations-section">
+        <div class="locations-header reveal">
+            <span class="section-label">Find Us</span>
+            <h2>Market <em>locations</em></h2>
+        </div>
+        <div class="locations-grid">
+            <div class="location-card reveal">
+                <iframe class="location-map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.832272620221!2d-117.1751068253244!3d32.71708438704823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d954ab59171dd9%3A0xcbd9878d7e49e41b!2s1009%20N%20Harbor%20Dr%2C%20San%20Diego%2C%20CA%2092101!5e0!3m2!1sen!2sus!4v1776285259365!5m2!1sen!2sus"
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="location-body">
+                    <div class="location-tag">ASCENDKemet Collective Certified Farmers' Market</div>
+                    <h3>Broadway Pier at Lane Field Park</h3>
+                    <p>1009 North Harbor Drive<br>San Diego, CA 92101<em>Sundays, 10AM – 4PM</em></p>
+                    <a class="btn-outline"
+                        href="https://www.google.com/maps/search/?api=1&query=1009+N+Harbor+Dr,+San+Diego,+CA+92101">Lane
+                        Field Park</a>
+                </div>
+            </div>
+            <div class="location-card reveal reveal--delay-1">
+                <iframe class="location-map"
+                    src="https://www.google.com/maps?q=City+Heights,+San+Diego,+CA+92105&output=embed" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="location-body">
+                    <div class="location-tag">ASCENDKemet Collective Certified Farmers' Market</div>
+                    <h3>City Heights Farmers' Market</h3>
+                    <p>City Heights<br>San Diego, CA 92105<em>Saturdays, 9AM – 1PM</em></p>
+                    <a class="btn-outline"
+                        href="https://www.google.com/maps/search/?api=1&query=City+Heights,+San+Diego,+CA+92105">City
+                        Heights</a>
+                </div>
+            </div>
+            <div class="location-card reveal reveal--delay-2">
+                <iframe class="location-map"
+                    src="https://www.google.com/maps?q=600+Convention+Way,+San+Diego,+CA+92101&output=embed"
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="location-body">
+                    <div class="location-tag">ASCENDKemet Collective Certified Farmers' Market</div>
+                    <h3>Dock Party at 5th Avenue Landing</h3>
+                    <p>600 Convention Way<br>San Diego, CA 92101<em>Fridays, 3PM – 7PM</em></p>
+                    <a class="btn-outline"
+                        href="https://www.google.com/maps/search/?api=1&query=600+Convention+Way,+San+Diego,+CA+92101">5th
+                        Ave Landing</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PURPOSE STRIP
+    ============================================================ -->
+    <div class="purpose-strip reveal">
+        <h2>Created by<br>and for the<br>BIPOC community.</h2>
+        <p>The ASCENDKemet Collective Certified Farmers' Market exists to celebrate and represent the BIPOC (Black,
+            Indigenous, and People of Color) community of San Diego through its local vendors, farmers, and artisans.
+            Rooted in cultural pride and ecological stewardship, our market uplifts the highly melanated diasporic
+            community while championing holistic living, bartering, and access to fresh, nutritious produce. Our
+            open-air market is more than a place to shop — it is a vibrant hub where locally grown and harvested foods
+            meet artistry, wellness, and reciprocity.</p>
+    </div>
+
+    <!-- ============================================================
+    VENDOR SECTION — Become a Vendor
+    ============================================================ -->
+    <section class="vendor-section">
+        <div class="tabs-header reveal" style="margin-bottom: var(--space-2xl);">
+            <span class="section-label">Become Part of Our Community</span>
+            <h2>Join the market<br>as a <em>vendor</em></h2>
+        </div>
+        <div class="vendor-grid">
+            <div class="vendor-card reveal">
+                <img src="https://ascendtials.org/wp-content/uploads/2025/12/ASCENDKemet-Collective-Become-a-vendor-with-us-logo.png"
+                    alt="ASCENDKemet Collective - Become a vendor with us">
+                <h3>Ready to join the market? <em>Fill out the interest form</em></h3>
+                <p>Are you a local farmer, artisan, or food vendor interested in joining our farmers' market? Fill
+                    out our vendor interest form to tell us about your products, business, and market goals. We'll
+                    review your information and get in touch with details on how to become part of our vibrant vendor
+                    community!</p>
+                <div class="tab-cta-row">
+                    <a class="btn-primary"
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSdcfuDllRPrTZz6qlDmwI8Hn4FZ9KlAViX8biJ32Ddy-DUotQ/viewform?usp=send_form">
+                        Vendor Interest Form
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="vendor-card reveal reveal--delay-1">
+                <h3>Take our <em>'How to Become a Vendor'</em> instructional</h3>
+                <p>Interested in becoming a vendor at the ASCENDtials Farmers' Markets? Our step-by-step guide makes it
+                    easy to get started. Whether you're a grower, artisan, food maker, or wellness practitioner, this
+                    instructional walks you through everything you need — from permits to setup — so you can join our
+                    community of vendors who nourish, uplift, and help preserve the well-being of our neighborhoods
+                    and our environment.</p>
+                <p style="margin-bottom: var(--space-lg);"><strong
+                        style="color: var(--color-navy);">Already a vendor?</strong> For vendors and artisans at our
+                    Marina District farmers' market location, please use the Payment button to swiftly make your
+                    vendor fee payments.</p>
+                <div class="tab-cta-row">
+                    <a class="btn-primary" href="https://ascendtials.org/become-a-vendor/">
+                        Take Instructional
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                    <a class="btn-outline" href="https://ascendtials.org/vendor-payment/">Already a Vendor? Payment</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    ASSISTANCE PROGRAMS
+    ============================================================ -->
+    <section class="programs-section">
+        <div class="programs-header reveal">
+            <span class="section-label">Available Programs</span>
+            <h2>Eat well <em>for less</em></h2>
+            <p>Research some of the available programs — SNAP/EBT, WIC, and SFMNP — that you may be eligible for. It's
+                worth the work; we accept these at our markets, so you may be able to save money!</p>
+        </div>
+
+        <div class="programs-logos reveal reveal--delay-1">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Snap-png.png"
+                alt="SNAP Supplemental Nutrition Assistance Program">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/12/wic-logo.png"
+                alt="California WIC Women, Infants & Children">
+            <img src="https://ascendtials.org/wp-content/uploads/2025/11/smfn-600x300.png"
+                alt="Senior Farmer's Market Nutrition Program">
+        </div>
+
+        <div class="programs-grid">
+            <div class="program-card program-card--alert program-card--row reveal" style="grid-column: span 2;">
+                <div class="program-card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="2" y="7" width="20" height="14" rx="2" />
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    </svg>
+                </div>
+                <h3>SNAP / EBT</h3>
+                <ul>
+                    <li>SNAP/EBT are most definitely accepted at our farmers' markets!</li>
+                    <li><strong>PSA:</strong> due to the ongoing Federal government shutdown, CalFresh (aka SNAP)
+                        benefits for the month of November will be delayed from being deposited onto your EBT card.
+                        For more information, check back for updates.</li>
+                    <li>For information on food resources, please visit the <a
+                            href="https://211sandiego.org/" target="_blank">211 San Diego website</a>.</li>
+                </ul>
+            </div>
+
+            <div class="program-card program-card--wic reveal reveal--delay-1">
+                <div>
+                    <div class="program-card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <h3>WIC (Women, Infants & Children) Program</h3>
+                    <ul>
+                        <li>You can use your WIC Card to shop for fresh produce at select farmers' markets.</li>
+                        <li>You can buy fresh and organic fruits & vegetables.</li>
+                        <li>Learn more about shopping with WIC at the farmers' market <a
+                                href="https://www.cdph.ca.gov/Programs/CFH/DWICSN/Pages/Program-Landing1.aspx"
+                                target="_blank">here</a>.</li>
+                    </ul>
+                </div>
+                <div class="wic-price-grid">
+                    <div class="wic-price-tile">
+                        <div class="wic-price-num">$26</div>
+                        <div class="wic-price-label">per month for children ages 1 to 5</div>
+                    </div>
+                    <div class="wic-price-tile">
+                        <div class="wic-price-num">$47</div>
+                        <div class="wic-price-label">per month for people who are pregnant and postpartum</div>
+                    </div>
+                    <div class="wic-price-tile">
+                        <div class="wic-price-num">$52</div>
+                        <div class="wic-price-label">per month for people who are breastfeeding</div>
+                    </div>
+                    <div class="wic-price-tile">
+                        <div class="wic-price-num">$78</div>
+                        <div class="wic-price-label">per month for individuals breastfeeding more than one infant</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-card reveal reveal--delay-2">
+                <div class="program-card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                    </svg>
+                </div>
+                <h3>SFMNP (Senior Farmers' Market Nutrition) Program</h3>
+                <ul>
+                    <li>Serves low-income seniors, ages 60+.</li>
+                    <li>Provides fresh, locally grown fruits, vegetables, herbs, and honey.</li>
+                    <li>Expands awareness and use of local farmers' markets & community programs.</li>
+                    <li>Stipend checks are issued to participants annually for use from May 1st to November 30th. May
+                        only be redeemed at WIC-authorized farmers' markets.</li>
+                </ul>
+            </div>
+
+            <div class="program-card reveal reveal--delay-3">
+                <div class="program-card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v6l4 2" />
+                    </svg>
+                </div>
+                <h3>Elder Stability Navigation</h3>
+                <ul>
+                    <li>20–30 minute diversion conversations.</li>
+                    <li>Identifying safe alternatives to shelter.</li>
+                    <li>Connecting elders to benefits, family, or temporary housing.</li>
+                    <li>Providing small, flexible support (gift cards, bus passes, groceries).</li>
+                </ul>
+            </div>
+
+            <div class="program-card program-card--row reveal reveal--delay-4" style="grid-column: span 2;">
+                <div class="program-card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                </div>
+                <h3>Elder Resource & Benefits Clinic</h3>
+                <ul>
+                    <li>Help elders apply for benefits (SSI, CalFresh, Medi-Cal, LIHEAP).</li>
+                    <li>Connect them to rental assistance programs.</li>
+                    <li>Provide transportation support.</li>
+                    <li>Offer housing navigation referrals.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PERKS — E-Gift Cards & Stamp Cards
+    ============================================================ -->
+    <section class="perks-section">
+        <div class="perks-header reveal">
+            <span class="section-label">Market Perks</span>
+            <h2>Give, save, <em>and earn</em></h2>
+        </div>
+        <div class="perks-grid">
+            <div class="perk-card reveal">
+                <img src="https://ascendtials.org/wp-content/uploads/2025/11/Good-For-1536x1187.png"
+                    alt="ASCENDKemet Collective Certified Farmers Markets Gift Card">
+                <h3>E-Gift Cards</h3>
+                <p>During this gift-giving season, give the gift of nourishment — ASCENDtials e-Gifts are now
+                    available. Check out our e-Gift Cards page for information for both customers and vendors, and
+                    more.</p>
+                <div class="tab-cta-row">
+                    <a class="btn-primary" href="https://ascendtials.org/e-gift-cards/">
+                        E-Gift Cards
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="perk-card reveal reveal--delay-1">
+                <img src="https://ascendtials.org/wp-content/uploads/elementor/thumbs/Farmers-Market-Stamp-Card-Promo-Flyer-1-rfx3h4bpsgzw9laqijpv10fp7g0dchxsssof1v66bs.png"
+                    alt="Stamp Cards - Want to earn $10 off at our Farmers' Market?">
+                <h3>Stamp Cards</h3>
+                <p>We're excited to introduce Stamp Cards, rewarding loyal shoppers! Customers earn a stamp with each
+                    purchase of $10 or more, and when they complete a side of the card, they receive $5 in market
+                    credit. This program encourages repeat visits, boosts vendor sales, and keeps our community
+                    engaged and coming back for more. Visit our farmers' market information booth to get yours
+                    today!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    GALLERY — Vendors & Community Events
+    ============================================================ -->
+    <section class="gallery-section">
+        <div class="gallery-header reveal">
+            <div>
+                <span class="section-label">Our Vendors & Performers</span>
+                <h2>Meet the <em>community</em></h2>
+            </div>
+        </div>
+
+        <div class="gallery-events">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/04/Kemetic-Yoga-Sundays.png"
+                alt="Kemetic Yoga Sundays event flyer">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/04/April-Promo-2026-Event-Flyers-Instagram-Post-45-2-1.png"
+                alt="April 2026 ASCENDtials community event flyer">
+        </div>
+
+        <div class="gallery-grid reveal reveal--delay-1">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/nessys-doughlites.png" alt="Nessy's Doughlites vendor">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/toros-churros.jpg" alt="Toro's Churros vendor">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/lumpia.jpg" alt="Lumpia vendor">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/sheabutter.png" alt="Shea butter vendor">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/kaspers-icecream-sandwich.webp"
+                alt="Kasper's Ice Cream Sandwich vendor">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/shjeabutterlove.png" alt="Shea Butter Love vendor">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/SUNNYDESIGNSBYV-1024x683.jpg"
+                alt="Sunny Designs by V vendor">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/babafoods.jpg" alt="Baba Foods vendor">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/drizzled_n_sprinkles.jpg"
+                alt="Drizzled n Sprinkles vendor">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/03/slice_Garage.jpg" alt="Slice Garage vendor">
+        </div>
+
+        <div class="gallery-cta-row reveal reveal--delay-2">
+            <a class="btn-primary" href="https://ascendtials.org/our-vendors/">
+                Our Vendors
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                </svg>
+            </a>
+            <a class="btn-outline" href="https://ascendtials.org/performers-2/">Our Performers</a>
+            <a class="btn-outline" href="https://ascendtials.org/vendors/">Apply to Showcase</a>
+            <a class="btn-outline"
+                href="https://docs.google.com/forms/d/e/1FAIpQLScYa04LHrE_Ej_7wFDv1kEDI9ULDpRBYDnu7376H8jl2UCDJQ/viewform?pli=1">Volunteer
+                with Us</a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    EVENT CTA
+    ============================================================ -->
+    <div class="event-cta">
+        <div class="event-cta-inner reveal">
+            <div class="event-cta-text">
+                <span class="section-label">Questions?</span>
+                <p>Have more questions about our<br>farmers' markets? Visit our FAQs page.</p>
+            </div>
+            <a class="btn-navy" href="https://ascendtials.org/faq/">
+                Visit FAQs
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    JOIN BANNER
+    ============================================================ -->
+    <section class="section-join reveal">
+        <span class="join-eyebrow">Get Involved</span>
+        <h2 class="join-h2">Ready to Make<br>a Real Difference?</h2>
+        <p class="join-sub">ASCENDtials is actively seeking volunteers, partners, and community members who believe in
+            the power of collective action.</p>
+        <div class="join-actions">
+            <a class="btn-white" href="https://ascendtials.org/volunteer/">Volunteer with Us</a>
+            <a class="btn-ghost" href="https://ascendtials.org/partner-with-ascendtials/">Partner with Us</a>
+            <a class="btn-ghost" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1">Donate</a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+
+                <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
+                    BIPOC community.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube"
+                        target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-ascendtials/" aria-label="LinkedIn" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                    <a href="https://x.com/ascendtials" aria-label="X / Twitter" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <div class="footer-col-title">Quick Links</div>
+                <ul class="footer-links">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="education-and-training.html">Education & Training</a></li>
+                    <li><a href="https://ascendtials.org/events/">Events Calendar</a></li>
+                    <li><a href="https://ascendtials.org/get-involved/">Get Involved</a></li>
+                    <li><a href="https://ascendtials.org/volunteer/volunteer-memberships/">Membership</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Programs</div>
+                <ul class="footer-links">
+                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./legal-aid-program.html">Legal Aid</a></li>
+                    <li><a href="./fellowship-program.html">Internships & Fellowships</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Contact</div>
+                <div class="footer-contact">
+                    <p>505 W Broadway<br>San Diego, CA 92101</p>
+                    <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Partners row -->
+        <div class="footer-partners">
+            <img src="assets/img/country-of-san-diego.png" alt="County of San Diego">
+            <img src="assets/img/Live-well-with-San-diego.png" alt="Live Well San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/02/candid-seal-platinum-2025.png"
+                alt="Candid Platinum 2025">
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 ASCENDtials. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="https://ascendtials.org/privacy-policy/">Privacy Policy</a>
+                <a href="https://ascendtials.org/vendor-application-terms-conditions/">Vendor Policy</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Nav scroll
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+        // Mobile menu
+        const burger = document.getElementById('navBurger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Image lightbox
+        const photoLightbox = document.getElementById('photoLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        document.querySelectorAll('[data-lightbox]').forEach(el => {
+            el.addEventListener('click', () => {
+                lightboxImg.src = el.dataset.lightbox;
+                photoLightbox.classList.add('open');
+            });
+        });
+        photoLightbox.addEventListener('click', () => photoLightbox.classList.remove('open'));
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.dataset.tab;
+
+                tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+                tabPanels.forEach(p => p.classList.remove('active'));
+
+                btn.classList.add('active');
+                btn.setAttribute('aria-selected', 'true');
+                document.getElementById('tab-' + target).classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

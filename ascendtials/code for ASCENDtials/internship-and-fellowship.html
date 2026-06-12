@@ -1,0 +1,2975 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship & Fellowship Programs – ASCENDtials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================================
+        DESIGN TOKENS
+        ============================================================ */
+        :root {
+            --color-navy: #1E3A47;
+            --color-navy-deep: #152E3A;
+            --color-sky: #C9A96E;
+            --color-sky-light: #F5EBD8;
+            --color-white: #FFFFFF;
+            --color-bg: #FAFAF8;
+            --color-surface: #F4F2EE;
+            --color-surface-2: #ECEAE5;
+            --color-line: #E2DDD6;
+            --color-text: #1A1A18;
+            --color-text-muted: #666660;
+            --color-text-light: #9D9A93;
+            --color-accent: #C9A96E;
+            --color-warm: #E8D0CC;
+            --color-sage: #B2D5D1;
+            --color-olive: #EBF1AB;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.375rem;
+            --text-2xl: 1.75rem;
+            --text-3xl: 2.25rem;
+            --text-hero: clamp(3rem, 6vw, 5.5rem);
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
+            --space-section: 120px;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-pill: 999px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --dur-fast: 180ms;
+            --dur-base: 280ms;
+            --dur-slow: 500ms;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            overflow-x: hidden;
+            font-size: var(--text-base);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal--delay-1 {
+            transition-delay: 0.08s;
+        }
+
+        .reveal--delay-2 {
+            transition-delay: 0.16s;
+        }
+
+        .reveal--delay-3 {
+            transition-delay: 0.24s;
+        }
+
+        .reveal--delay-4 {
+            transition-delay: 0.32s;
+        }
+
+        /* ── SHARED LABELS ── */
+        .section-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .section-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+            font-weight: 300;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        /* ── BUTTONS ── */
+        .btn-primary,
+        .btn-outline,
+        .btn-white,
+        .btn-ghost {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            border: 1px solid var(--color-line);
+        }
+
+        .btn-white {
+            background: var(--color-white);
+            color: var(--color-navy);
+            padding: 14px 28px;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-primary::before,
+        .btn-white::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before,
+        .btn-white:hover::before,
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-sky);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ============================================================
+        NAV
+        ============================================================ */
+        .btn-primary,
+        .btn-white,
+        .btn-ghost,
+        .btn-outline,
+        .nav-cta,
+        .bento-link {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-ghost::before,
+        .btn-outline::before,
+        .nav-cta::before,
+        .bento-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before,
+        .nav-cta:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline::before {
+            background: var(--color-sky-light);
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        .bento-link::before {
+            background: var(--color-sky);
+        }
+
+        .bento-link:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        .nav-cta {
+            flex-shrink: 0;
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 9px 20px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color var(--dur-fast);
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            gap: 32px;
+            transition: all var(--dur-slow) var(--ease-in-out);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            top: 10px;
+            left: 16px;
+            right: 16px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-logo {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .nav-logo img {
+            height: 52px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links>li {
+            position: relative;
+        }
+
+        .nav-links>li>a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            font-size: var(--text-sm);
+            font-weight: 400;
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links>li>a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-links .has-dropdown>a::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: solid var(--color-text-muted);
+            border-width: 0 1.5px 1.5px 0;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links .has-dropdown:hover>a::after {
+            transform: rotate(225deg) translateY(-2px);
+        }
+
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-line);
+            list-style: none;
+            min-width: 220px;
+            padding: 6px;
+            padding-top: 10px;
+            z-index: 600;
+        }
+
+        .nav-links .has-dropdown:hover .nav-dropdown {
+            display: block;
+        }
+
+        .nav-dropdown li a {
+            display: block;
+            padding: 9px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .nav-dropdown li a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-burger {
+            display: none;
+            background: none;
+            border: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+            margin-left: auto;
+        }
+
+        .nav-burger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-navy);
+            border-radius: 2px;
+            transition: all var(--dur-base) var(--ease-out);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 490;
+            padding: 90px 24px 32px;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 16px;
+            font-size: var(--text-xl);
+            color: var(--color-text);
+            border-bottom: 1px solid var(--color-line);
+            font-family: var(--font-display);
+        }
+
+        .mobile-menu .mob-cta {
+            margin-top: 24px;
+            background: var(--color-navy);
+            color: var(--color-white);
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-lg);
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+        }
+
+        /* ============================================================
+        PAGE HERO
+        ============================================================ */
+        .page-hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: calc(72px + var(--space-2xl));
+            padding-left: max(48px, 6vw);
+            padding-right: max(48px, 6vw);
+            background: var(--color-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: 'IFP';
+            position: absolute;
+            bottom: -60px;
+            left: -20px;
+            font-family: var(--font-display);
+            font-size: clamp(200px, 28vw, 380px);
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(201, 169, 110, 0.04);
+            letter-spacing: -10px;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 5vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.02;
+            letter-spacing: -2px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 em {
+            font-style: italic;
+            color: var(--color-sky);
+            display: block;
+        }
+
+        .hero-divider {
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-sky), transparent);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-desc {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            max-width: 440px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .page-hero .btn-white {
+            background: var(--color-navy);
+            color: var(--color-bg);
+        }
+
+        .page-hero .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .page-hero .btn-ghost {
+            background: transparent;
+            color: var(--color-navy);
+            border: 1px solid var(--color-line);
+        }
+
+        .page-hero .btn-ghost:hover {
+            background: var(--color-surface);
+            border-color: var(--color-sky);
+            color: var(--color-navy);
+        }
+
+        .hero-photo-wrap {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-photo-wrap img {
+            width: 100%;
+            height: 540px;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: var(--radius-xl);
+            display: block;
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+
+        .hero-photo-wrap:hover img {
+            transform: scale(1.02);
+        }
+
+        .hero-photo-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -24px;
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg) var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            z-index: 3;
+        }
+
+        .hero-photo-badge-num {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+        }
+
+        .hero-photo-badge-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-top: 6px;
+        }
+
+        @media (max-width: 960px) {
+            .hero-main {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .hero-photo-wrap img {
+                height: 380px;
+            }
+
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-photo-wrap {
+                display: none;
+            }
+        }
+
+        /* ============================================================
+        BREADCRUMB
+        ============================================================ */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: var(--space-md) max(48px, 6vw);
+            font-size: var(--text-xs);
+            color: var(--color-text-light);
+            border-bottom: 1px solid var(--color-line);
+            max-width: 100%;
+        }
+
+        .breadcrumb a {
+            color: var(--color-text-light);
+            transition: color var(--dur-fast);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--color-sky);
+        }
+
+        .breadcrumb-sep {
+            opacity: 0.4;
+        }
+
+        .breadcrumb-current {
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        /* ============================================================
+        INFO STRIP (stats)
+        ============================================================ */
+        .info-strip {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-xl) max(48px, 6vw);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2xl);
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .info-num {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 300;
+            color: var(--color-navy);
+            line-height: 1;
+        }
+
+        .info-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+        }
+
+        .info-divider {
+            width: 1px;
+            height: 48px;
+            background: var(--color-line);
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+        SECTION: HOW TO APPLY (steps)
+        ============================================================ */
+        .section-steps {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+
+        .steps-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .steps-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: start;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .steps-desc {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            padding-top: 8px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-md);
+        }
+
+        .step-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-base);
+        }
+
+        /* Bento spans */
+        .step-card:nth-child(1) {
+            grid-column: span 5;
+            min-height: 260px;
+        }
+
+        .step-card:nth-child(2) {
+            grid-column: span 7;
+            min-height: 260px;
+        }
+
+        .step-card:nth-child(3) {
+            grid-column: span 7;
+            min-height: 240px;
+        }
+
+        .step-card:nth-child(4) {
+            grid-column: span 5;
+            min-height: 240px;
+            background: var(--color-navy);
+            border-color: transparent;
+        }
+
+        .step-card:nth-child(4) .step-num {
+            color: rgba(201, 169, 110, 0.5);
+        }
+
+        .step-card:nth-child(4) .step-title {
+            color: var(--color-white);
+        }
+
+        .step-card:nth-child(4) .step-body {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .step-card:nth-child(4):hover {
+            border-color: var(--color-sky);
+        }
+
+        .step-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .step-num {
+            font-family: var(--font-display);
+            font-size: 4.5rem;
+            font-weight: 300;
+            line-height: 1;
+            color: var(--color-sky);
+            opacity: 0.3;
+            margin-bottom: var(--space-lg);
+            position: absolute;
+            top: var(--space-lg);
+            right: var(--space-xl);
+        }
+
+        .step-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            margin-bottom: var(--space-md);
+            line-height: 1.3;
+            padding-top: calc(4.5rem + var(--space-md));
+        }
+
+        .step-body {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        .steps-cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: var(--space-2xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-line);
+        }
+
+        @media (max-width: 960px) {
+            .steps-header {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .step-card:nth-child(n) {
+                grid-column: span 1;
+                min-height: 220px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step-card:nth-child(n) {
+                grid-column: span 1;
+            }
+
+            .section-steps {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: HIGHLIGHTS (3-column cards with images)
+        ============================================================ */
+        .section-highlights {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .highlights-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .highlights-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        .highlight-card {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            border: 1px solid var(--color-line);
+            transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+        }
+
+        .highlight-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .highlight-img-wrap {
+            overflow: hidden;
+        }
+
+        .highlight-img-wrap img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+
+        .highlight-card:hover .highlight-img-wrap img {
+            transform: scale(1.04);
+        }
+
+        .highlight-body {
+            padding: var(--space-xl);
+        }
+
+        .highlight-tag {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .highlight-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            margin-bottom: var(--space-md);
+            line-height: 1.3;
+        }
+
+        .highlight-text {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        /* Vendor card — wide */
+        .highlight-card--wide {
+            grid-column: span 3;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            overflow: hidden;
+        }
+
+        .highlight-card--wide .highlight-img-wrap img {
+            height: 100%;
+            min-height: 220px;
+        }
+
+        .highlight-card--wide .highlight-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @media (max-width: 960px) {
+            .highlights-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .highlight-card--wide {
+                grid-column: span 2;
+                grid-template-columns: 1fr;
+            }
+
+            .highlight-card--wide .highlight-img-wrap img {
+                height: 220px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .highlight-card--wide {
+                grid-column: span 1;
+            }
+
+            .section-highlights {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: FELLOWSHIP (navy dark bg)
+        ============================================================ */
+        .section-fellowship {
+            background: var(--color-navy-deep);
+            padding: var(--space-section) max(48px, 6vw);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-fellowship::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 40%, rgba(201, 169, 110, 0.06) 100%);
+            pointer-events: none;
+        }
+
+        .fellowship-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(80px, 8vw);
+            align-items: center;
+        }
+
+        .fellowship-text .section-label {
+            color: var(--color-sky);
+        }
+
+        .fellowship-text .section-h2 {
+            color: var(--color-white);
+        }
+
+        .fellowship-body {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.8;
+            margin-bottom: var(--space-xl);
+        }
+
+        .fellowship-detail {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .fellowship-detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+        }
+
+        .fellowship-detail-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-sky);
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        .fellowship-detail-text {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.65;
+        }
+
+        .fellowship-visual {
+            position: relative;
+        }
+
+        .fellow-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+        }
+
+        .fellow-card img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: filter var(--dur-slow) var(--ease-out);
+        }
+
+        .fellow-card:hover img {
+            filter: grayscale(0);
+        }
+
+        .fellow-card-caption {
+            padding: var(--space-lg) var(--space-xl);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .fellow-card-name {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-white);
+            margin-bottom: 4px;
+        }
+
+        .fellow-card-role {
+            font-size: var(--text-sm);
+            color: var(--color-sky);
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 960px) {
+            .fellowship-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .section-fellowship {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: CURRENT INTERNS
+        ============================================================ */
+        .section-interns {
+            padding: var(--space-section) max(48px, 6vw);
+            /* max-width: 1280px; */
+            margin: 0 auto;
+        }
+
+        .section-interns .interns-inner {
+            max-width: 100%;
+        }
+
+        .interns-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .interns-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-md);
+        }
+
+        .intern-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            transition: box-shadow var(--dur-fast), transform var(--dur-fast), border-color var(--dur-fast);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* bento spans: row1 = 3+3+3+3, row2 = 5+4 + open position 3 */
+        .intern-card:nth-child(1) {
+            grid-column: span 3;
+        }
+
+        .intern-card:nth-child(2) {
+            grid-column: span 3;
+        }
+
+        .intern-card:nth-child(3) {
+            grid-column: span 3;
+        }
+
+        .intern-card:nth-child(4) {
+            grid-column: span 3;
+        }
+
+        .intern-card:nth-child(5) {
+            grid-column: span 6;
+        }
+
+        .intern-card:nth-child(6) {
+            grid-column: span 6;
+            background: var(--color-surface);
+            border-style: dashed;
+        }
+
+        @media (max-width: 900px) {
+            .interns-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .intern-card:nth-child(n) {
+                grid-column: span 1;
+            }
+
+            .intern-card:nth-child(4) {
+                grid-column: span 2;
+            }
+
+            .intern-card:nth-child(5) {
+                grid-column: span 1;
+            }
+
+            .intern-card:nth-child(6) {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .interns-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .intern-card:nth-child(n) {
+                grid-column: span 1;
+            }
+        }
+
+        .intern-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .intern-name {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            margin-bottom: var(--space-sm);
+            line-height: 1.25;
+        }
+
+        .intern-role {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        .intern-tbd {
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+            font-style: italic;
+        }
+
+        .intern-card:nth-child(6) .intern-tbd {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-text-light);
+            font-style: italic;
+            margin-bottom: var(--space-sm);
+        }
+
+        .intern-card:nth-child(6) .intern-role {
+            font-size: var(--text-sm);
+            color: var(--color-sky);
+            font-weight: 500;
+        }
+
+        /* ============================================================
+        SECTION: OPEN POSITIONS
+        ============================================================ */
+        .section-positions {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .positions-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .positions-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: max(80px, 8vw);
+            align-items: start;
+        }
+
+        .positions-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-top: var(--space-lg);
+        }
+
+        .position-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-md);
+            font-size: var(--text-base);
+            color: var(--color-text);
+            transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+        }
+
+        .position-item:hover {
+            border-color: var(--color-sky);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .position-item::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .job-fair-card {
+            background: var(--color-navy);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            color: var(--color-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-fair-card::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            right: -40px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(201, 169, 110, 0.12);
+            pointer-events: none;
+        }
+
+        .job-fair-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .job-fair-eyebrow {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .job-fair-title {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: var(--space-lg);
+        }
+
+        .job-fair-body {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.7;
+            margin-bottom: var(--space-xl);
+        }
+
+        @media (max-width: 960px) {
+            .positions-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .section-positions {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: FAQ
+        ============================================================ */
+        .section-faq {
+            padding: var(--space-section) max(48px, 6vw);
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .faq-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: max(80px, 8vw);
+            align-items: start;
+        }
+
+        .faq-sticky {
+            position: sticky;
+            top: 100px;
+        }
+
+        .faq-intro {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-top: var(--space-lg);
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-lg);
+            padding: var(--space-lg) 0;
+            font-size: var(--text-base);
+            font-weight: 500;
+            color: var(--color-text);
+            cursor: pointer;
+            transition: color var(--dur-fast);
+            list-style: none;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            color: var(--color-sky);
+        }
+
+        .faq-question::after {
+            content: '+';
+            flex-shrink: 0;
+            font-size: var(--text-xl);
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+            transition: transform var(--dur-base) var(--ease-out);
+        }
+
+        .faq-item.open .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s var(--ease-out), padding 0.3s;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 600px;
+            padding-bottom: var(--space-lg);
+        }
+
+        @media (max-width: 960px) {
+            .faq-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-sticky {
+                position: static;
+            }
+
+            .section-faq {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: ALUMNI
+        ============================================================ */
+        .section-alumni {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .alumni-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .alumni-intro {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: max(64px, 6vw);
+            align-items: start;
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .alumni-intro-text {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+        }
+
+        .alumni-year-group {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .alumni-year {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .alumni-year-num {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 300;
+            color: var(--color-navy);
+            line-height: 1;
+        }
+
+        .alumni-year-line {
+            flex: 1;
+            height: 1px;
+            background: var(--color-line);
+        }
+
+        .alumni-categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-lg);
+        }
+
+        /* 6 cards: row 2 cards each span 2 to fill the 4-col row */
+        .alumni-categories.has-six .alumni-category-card:nth-child(5) {
+            grid-column: span 2;
+        }
+
+        .alumni-categories.has-six .alumni-category-card:nth-child(6) {
+            grid-column: span 2;
+        }
+
+        /* 3 cards: switch to 3-col so they fill the full row */
+        .alumni-categories.has-three {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .alumni-category-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            transition: box-shadow var(--dur-base), transform var(--dur-base);
+        }
+
+        .alumni-category-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .alumni-category-title {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .alumni-names {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .alumni-person {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .alumni-name {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--color-navy);
+        }
+
+        .alumni-role-location {
+            font-size: var(--text-xs);
+            color: var(--color-text-light);
+            line-height: 1.4;
+        }
+
+        @media (max-width: 960px) {
+            .alumni-intro {
+                grid-template-columns: 1fr;
+            }
+
+            .alumni-categories,
+            .alumni-categories.has-six,
+            .alumni-categories.has-three {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .alumni-categories .alumni-category-card:nth-child(n) {
+                grid-column: span 1;
+            }
+
+            .section-alumni {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        @media (max-width: 560px) {
+
+            .alumni-categories,
+            .alumni-categories.has-six,
+            .alumni-categories.has-three {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================================
+        SECTION: JOIN CTA
+        ============================================================ */
+        .section-join {
+            margin: 0 max(24px, 4vw) var(--space-section);
+            background: var(--color-navy);
+            border-radius: var(--radius-xl);
+            padding: var(--space-section) max(40px, 6vw);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: max(60px, 8vw);
+        }
+
+        .section-join::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .section-join::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: 30%;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(178, 213, 209, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .join-text {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .join-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .join-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 2.8vw, 3rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+            color: var(--color-white);
+            margin-bottom: var(--space-md);
+        }
+
+        .join-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .join-desc {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            max-width: 460px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .join-cta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 900px) {
+            .section-join {
+                flex-direction: column;
+                gap: var(--space-2xl);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section-join {
+                padding: var(--space-2xl) 24px;
+                margin-left: 16px;
+                margin-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        FOOTER
+        ============================================================ */
+        .footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            padding: var(--space-2xl) max(40px, 5vw);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-brand img {
+            height: 48px;
+            width: auto;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            max-width: 260px;
+        }
+
+        .footer-col-title {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-contact p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .footer-contact a {
+            color: var(--color-sky);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 8px;
+            margin-top: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            transition: background var(--dur-fast), color var(--dur-fast);
+        }
+
+        .footer-social a:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .footer-partners {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) max(40px, 5vw);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            flex-wrap: wrap;
+        }
+
+        .footer-partners img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(20%);
+            transition: opacity var(--dur-fast);
+        }
+
+        .footer-partners img:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ============================================================
+    NAV
+    ============================================================ -->
+    <header class="nav" id="mainNav">
+        <div class="nav-logo">
+            <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="./index.html">Home</a></li>
+
+            <li class="has-dropdown">
+                <a href="#">About</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./our-team.html">Our Team</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Education</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./education-and-training.html">Education and Training</a></li>
+                    <li><a href="./literacy-workshops.html">Literacy Workshops</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                    <li><a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a></li>
+                    <li><a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a></li>
+                    <li><a href="./service-learning.html">Service Learning</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Programs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./events.html">Event Calendar</a></li>
+                    <li><a href="./program-participant.html">Program Participant</a></li>
+                    <li><a href="./farmers-market.html">Farmers' Market</a></li>
+                    <li><a href="./food-distribution.html">Food Distribution</a></li>
+                    <li><a href="./youth-programs.html">Youth Program</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./court-order-community-service.html">Court Order Community Service</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Clubs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./mdba-portal.html">MDBA Portal</a></li>
+                    <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
+                    <li><a href="./join-our-community">Join our community</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Join Us</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./get-involved.html">Get Involved</a></li>
+                    <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="./volunteer.html">Volunteer</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+        <a class="nav-cta" href="./support-us">Support Us</a>
+        
+        <button class="nav-burger" id="navBurger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="./index.html">Home</a>
+
+        <a href="./about.html">About Us</a>
+        <a href="./our-team.html">Our Team</a>
+        <a href="./contact.html">Contact Us</a>
+
+        <a href="./education-and-training.html">Education and Training</a>
+        <a href="./literacy-workshops.html">Literacy Workshops</a>
+        <a href="./kemetic-yoga.html">Kemetic Yoga</a>
+        <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
+        <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
+        <a href="./service-learning.html">Service Learning</a>
+
+        <a href="./events.html">Event Calendar</a>
+        <a href="./program-participant.html">Program Participant</a>
+        <a href="./farmers-market.html">Farmers' Market</a>
+        <a href="./food-distribution.html">Food Distribution</a>
+        <a href="./youth-programs.html">Youth Program</a>
+        <a href="./environmental-programs.html">Environmental Programs</a>
+        <a href="./court-order-community-service.html">Court Order Community Service</a>
+
+        <a href="./mdba-portal.html">MDBA Portal</a>
+        <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+        <a href="./join-our-community">Join our community</a>
+
+        <a href="./get-involved.html">Get Involved</a>
+        <a href="./partner-with-us.html">Partner with Us</a>
+        <a href="./volunteer.html">Volunteer</a>
+
+        <a class="mob-cta" href="./support-us"> Support Us </a>
+    </div>
+
+    <!-- BREADCRUMB -->
+    <!-- <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="./index.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="./education-and-training.html">Education &amp; Training</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current">Internship &amp; Fellowship</span>
+    </nav> -->
+
+    <!-- ============================================================
+    PAGE HERO
+    ============================================================ -->
+    <section class="page-hero">
+        <div class="hero-main">
+            <div class="hero-text">
+                <span class="hero-eyebrow reveal">Education &amp; Training</span>
+                <h1 class="hero-h1 reveal reveal--delay-1">
+                    Internship &amp;
+                    <em>Fellowship</em>
+                    Programs
+                </h1>
+                <div class="hero-divider reveal reveal--delay-2"></div>
+                <p class="hero-desc reveal reveal--delay-2">
+                    Gain meaningful, hands-on experience while reconnecting with the natural world. Our programs bridge
+                    academic learning with community impact across environmental justice, education, and organizational
+                    development.
+                </p>
+                <div class="hero-cta-row reveal reveal--delay-3">
+                    <a href="https://forms.gle/wkvGGibQjPzFSuXj7" class="btn-white" target="_blank">Apply Now</a>
+                    <a href="#fellowship" class="btn-ghost">Fellowship Program</a>
+                </div>
+            </div>
+            <div class="hero-photo-wrap reveal reveal--delay-2">
+                <img src="https://ascendtials.org/wp-content/uploads/2025/11/internship-fellowship-hero-image-scaled.avif"
+                    alt="Internship and Fellowship Program">
+                <div class="hero-photo-badge">
+                    <div class="hero-photo-badge-num">12+</div>
+                    <div class="hero-photo-badge-label">Fellows Annually</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    INFO STRIP
+    ============================================================ -->
+    <div class="info-strip">
+        <div class="info-item">
+            <span class="info-num">All</span>
+            <span class="info-label">Majors Welcome</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <span class="info-num">20</span>
+            <span class="info-label">Hrs/Week Max</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <span class="info-num">3–6</span>
+            <span class="info-label">Month Terms</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <span class="info-num">12</span>
+            <span class="info-label">Annual Fellows</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <span class="info-num">SD</span>
+            <span class="info-label">San Diego-Based</span>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    HOW TO APPLY
+    ============================================================ -->
+    <section class="section-steps" id="apply">
+        <div class="steps-inner">
+            <div class="steps-header">
+                <div>
+                    <span class="section-label reveal">How to Apply</span>
+                    <h2 class="section-h2 reveal reveal--delay-1">Four steps to<br><em>begin your journey</em></h2>
+                </div>
+                <p class="steps-desc reveal reveal--delay-2">
+                    Our internship program welcomes students from all majors ready to explore a holistic,
+                    nature-centered
+                    approach to learning. The process is straightforward — explore tracks, submit your interest, and we
+                    take
+                    it from there.
+                </p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card reveal">
+                    <div class="step-num">01</div>
+                    <div class="step-title">Review Internship Tracks</div>
+                    <p class="step-body">Explore available pathways to understand roles, expectations, and skills you'll
+                        develop. Each track supports our mission in environmental justice, community education, and
+                        organizational development.</p>
+                </div>
+                <div class="step-card reveal reveal--delay-1">
+                    <div class="step-num">02</div>
+                    <div class="step-title">Submit Interest Form</div>
+                    <p class="step-body">Complete the online form so we can learn about your background, interests, and
+                        availability. This step places you into our review queue for consideration.</p>
+                </div>
+                <div class="step-card reveal reveal--delay-2">
+                    <div class="step-num">03</div>
+                    <div class="step-title">Await Initial Review</div>
+                    <p class="step-body">Our team reviews submissions weekly. Eligible applicants are invited to attend
+                        interviews to discuss the role, expectations, and team alignment.</p>
+                </div>
+                <div class="step-card reveal reveal--delay-3">
+                    <div class="step-num">04</div>
+                    <div class="step-title">Create Your Dashboard</div>
+                    <p class="step-body">If selected, you'll receive instructions to set up your ASCENDtials Dashboard —
+                        your central hub for signing your agreement, accessing onboarding materials, and program
+                        updates.
+                    </p>
+                </div>
+            </div>
+
+            <div class="steps-cta-row">
+                <a href="https://forms.gle/wkvGGibQjPzFSuXj7" class="btn-primary" target="_blank">Internship
+                    Application</a>
+                <a href="https://app.joinhandshake.com/login" class="btn-outline" target="_blank">Apply via
+                    Handshake</a>
+                <a href="https://ascendtials.org/volunteer/volunteer-memberships/" class="btn-outline"
+                    target="_blank">Create Dashboard Account</a>
+            </div><!-- /steps-cta-row -->
+        </div><!-- /steps-inner -->
+    </section>
+    <section class="section-highlights">
+        <div class="highlights-inner">
+            <div class="highlights-header">
+                <span class="section-label reveal">Program Highlights</span>
+                <h2 class="section-h2 reveal reveal--delay-1">What you'll<br><em>gain with us</em></h2>
+            </div>
+            <div class="highlights-grid">
+                <div class="highlight-card reveal">
+                    <div class="highlight-img-wrap">
+                        <img src="https://ascendtials.org/wp-content/uploads/2024/08/Holistic-Education-1024x728.jpg"
+                            alt="Holistic Education">
+                    </div>
+                    <div class="highlight-body">
+                        <span class="highlight-tag">Learning</span>
+                        <div class="highlight-title">Holistic Education</div>
+                        <p class="highlight-text">Connect with the elements — Earth, Fire, Water, and Air. This grounded
+                            approach deepens your understanding of their role in preserving both the environment and
+                            humanity.</p>
+                    </div>
+                </div>
+                <div class="highlight-card reveal reveal--delay-1">
+                    <div class="highlight-img-wrap">
+                        <img src="https://ascendtials.org/wp-content/uploads/2024/08/Practical-Experience-1024x728.jpg"
+                            alt="Practical Experience">
+                    </div>
+                    <div class="highlight-body">
+                        <span class="highlight-tag">Hands-On</span>
+                        <div class="highlight-title">Practical Experience</div>
+                        <p class="highlight-text">Support research in your chosen field, participate in literacy
+                            workshops, and engage in activities that promote sustainable practices and community impact.
+                        </p>
+                    </div>
+                </div>
+                <div class="highlight-card reveal reveal--delay-2">
+                    <div class="highlight-img-wrap">
+                        <img src="https://ascendtials.org/wp-content/uploads/2024/08/Community-Impact-1024x728.jpg"
+                            alt="Community Impact">
+                    </div>
+                    <div class="highlight-body">
+                        <span class="highlight-tag">Purpose</span>
+                        <div class="highlight-title">Community Impact</div>
+                        <p class="highlight-text">Your work helps bridge gaps in learning, offering a broader
+                            perspective on self-awareness and collective responsibility within San Diego's BIPOC
+                            communities.</p>
+                    </div>
+                </div>
+                <!-- Wide vendor card -->
+                <div class="highlight-card highlight-card--wide reveal">
+                    <div class="highlight-img-wrap">
+                        <img src="https://ascendtials.org/wp-content/uploads/2024/07/qtq80-aYyQsm-1024x683.jpeg"
+                            alt="Vendor Integration">
+                    </div>
+                    <div class="highlight-body">
+                        <span class="highlight-tag">New Opportunity</span>
+                        <div class="highlight-title">Vendor Integration at Farmers' Markets</div>
+                        <p class="highlight-text">As an intern or fellow, you can participate in our farmers' markets —
+                            one of ASCENDtials' most vibrant forms of community engagement. This integration lets you
+                            practice business development, sustainability, and community outreach skills in a real-world
+                            setting.</p>
+                        <a href="./become-a-vendor-internship-integration.html" class="btn-outline"
+                            style="margin-top: var(--space-lg);">Learn About Vendor Integration</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FELLOWSHIP
+    ============================================================ -->
+    <section class="section-fellowship" id="fellowship">
+        <div class="fellowship-inner">
+            <div class="fellowship-text">
+                <span class="section-label reveal">ASCEND Fellowship</span>
+                <h2 class="section-h2 reveal reveal--delay-1">Art, healing, and<br><em>ancient wisdom</em></h2>
+                <p class="fellowship-body reveal reveal--delay-2">
+                    Our ASCEND Fellowship annually selects up to 12 fellows from U.S. and international institutions to
+                    explore decolonization through art rooted in ancient Kemet. Participants engage deeply with healing,
+                    movement, and climate-centered work.
+                </p>
+                <div class="fellowship-detail reveal reveal--delay-2">
+                    <div class="fellowship-detail-item">
+                        <div class="fellowship-detail-dot"></div>
+                        <p class="fellowship-detail-text">Up to 12 fellows selected annually from U.S. and international
+                            institutions</p>
+                    </div>
+                    <div class="fellowship-detail-item">
+                        <div class="fellowship-detail-dot"></div>
+                        <p class="fellowship-detail-text">Healing sessions, Kemetic Yoga, and climate-centered
+                            activities throughout the program</p>
+                    </div>
+                    <div class="fellowship-detail-item">
+                        <div class="fellowship-detail-dot"></div>
+                        <p class="fellowship-detail-text">Culminates in a public exhibition showcasing fellows' work and
+                            impact</p>
+                    </div>
+                    <div class="fellowship-detail-item">
+                        <div class="fellowship-detail-dot"></div>
+                        <p class="fellowship-detail-text">2027 program accepting applicants in early 2026 — follow
+                            school-year calendar</p>
+                    </div>
+                </div>
+                <div class="reveal reveal--delay-3">
+                    <a href="./contact.html" class="btn-white">Express Interest</a>
+                </div>
+            </div>
+            <div class="fellowship-visual reveal reveal--delay-2">
+                <div class="fellow-card">
+                    <img src="https://ascendtials.org/wp-content/uploads/2024/07/monetnyree-1024x768.jpg"
+                        alt="Monet Nyree Panza — ASCENDtials Fellow">
+                    <div class="fellow-card-caption">
+                        <div class="fellow-card-name">Monet Nyree Panza</div>
+                        <div class="fellow-card-role">ASCENDtials Fellow · San Diego, CA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    CURRENT INTERNS
+    ============================================================ -->
+    <section class="section-interns" id="team">
+        <div class="interns-header">
+            <div>
+                <span class="section-label reveal">Current Team</span>
+                <h2 class="section-h2 reveal reveal--delay-1">Meet our<br><em>active interns</em></h2>
+            </div>
+        </div>
+        <div class="interns-grid">
+            <div class="intern-card reveal">
+                <div class="intern-name">Calypso Martellini</div>
+                <div class="intern-role">Grant Researcher Intern</div>
+            </div>
+            <div class="intern-card reveal reveal--delay-1">
+                <div class="intern-name">Alex Lee</div>
+                <div class="intern-role">Graphic Design Intern</div>
+            </div>
+            <div class="intern-card reveal reveal--delay-2">
+                <div class="intern-name">Ananya Almeida</div>
+                <div class="intern-role">Data &amp; Systems Intern</div>
+            </div>
+            <div class="intern-card reveal reveal--delay-3">
+                <div class="intern-name">Nicholas Lennox, Sheng Huang, Drew Biagan &amp; Tasnuva Rawshan</div>
+                <div class="intern-role">Business Development Interns</div>
+            </div>
+            <div class="intern-card reveal">
+                <div class="intern-name">Kaishuai Sun &amp; Kevin Wang</div>
+                <div class="intern-role">Web Programmer Interns</div>
+            </div>
+            <div class="intern-card reveal reveal--delay-1">
+                <div class="intern-tbd">Publishing / Editorial Lead</div>
+                <div class="intern-role" style="margin-top: 4px;">Position open — apply now</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    OPEN POSITIONS + JOB FAIR
+    ============================================================ -->
+    <section class="section-positions" id="positions">
+        <div class="positions-inner">
+            <div class="positions-layout">
+                <div>
+                    <span class="section-label reveal">Open Roles</span>
+                    <h2 class="section-h2 reveal reveal--delay-1">Available positions<br><em>for interns</em></h2>
+                    <div class="positions-list reveal reveal--delay-2">
+                        <div class="position-item">Event Coordinator and Social Media Lead</div>
+                        <div class="position-item">Poetry and Writing Club Intern</div>
+                        <div class="position-item">Book Club Intern</div>
+                        <div class="position-item">Videographer</div>
+                        <div class="position-item">Program Manager / Team Lead</div>
+                        <div class="position-item">Fundraising Coordinator</div>
+                    </div>
+                </div>
+                <div class="reveal reveal--delay-2">
+                    <div class="job-fair-card">
+                        <img class="job-fair-img"
+                            src="https://ascendtials.org/wp-content/uploads/2024/08/Job-fair-1024x728.jpg"
+                            alt="Monthly Job Fairs">
+                        <div class="job-fair-eyebrow">Monthly Event</div>
+                        <div class="job-fair-title">Online Job Fairs</div>
+                        <p class="job-fair-body">ASCENDtials hosts monthly online Job Fairs with a wide range of
+                            internship and volunteer opportunities across industries — copywriting, fundraising, grant
+                            writing, UX design, web programming, and more. Participate from anywhere.</p>
+                        <a href="./job-fair.html" class="btn-white">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FAQ
+    ============================================================ -->
+    <section class="section-faq" id="faq">
+        <div class="faq-layout">
+            <div class="faq-sticky">
+                <span class="section-label reveal">Common Questions</span>
+                <h2 class="section-h2 reveal reveal--delay-1">Internship<br><em>FAQs</em></h2>
+                <p class="faq-intro reveal reveal--delay-2">Everything you need to know before applying. Can't find your
+                    answer? Reach out to us directly.</p>
+                <a href="./contact.html" class="btn-outline"
+                    style="margin-top: var(--space-xl); display: inline-flex;">Contact Us</a>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">What are my hours?</div>
+                    <div class="faq-answer">You're expected to be available Monday–Friday between 11:00 a.m. and 2:00
+                        p.m. PST. Work is a combination of online and in-person workshops. If your internship is 10
+                        hours per week, a minimum of 3 hours per month will be in workshops. All hours must be
+                        documented weekly through the timekeeping app.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Are these paid positions?</div>
+                    <div class="faq-answer">These aren't paid positions. Students are able to receive academic credit,
+                        letters of reference, and valuable real-world skills and tools that last a lifetime.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What is the expected workload?</div>
+                    <div class="faq-answer">Most interns work up to 20 hours per week and are available from 10 a.m. to
+                        2 p.m. PDT. Internships follow a syllabus with expected outcomes, regular check-ins with
+                        mentors, and presentations/learning sessions with deliverables.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How long is the internship period?</div>
+                    <div class="faq-answer">Internships follow school terms and are three to six months in length. They
+                        end in June or after the semester ends.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Who do I contact when I need time off?</div>
+                    <div class="faq-answer">Notify your supervisor as soon as possible — ideally a few days in advance.
+                        If unavoidable with one day's notice, please secure your own substitute and inform your
+                        supervisor of the change.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do we have any major requirements or language prerequisites?</div>
+                    <div class="faq-answer">We allow students to apply based on interest and experience in the role.
+                        Each role specifies its own requirements. We require a resume and proof of enrollment from all
+                        applicants.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What is the social media policy?</div>
+                    <div class="faq-answer">Please don't spend time on social media during work hours, and refrain from
+                        posting about your internship or our organization on social media without prior approval.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What happens when my internship ends?</div>
+                    <div class="faq-answer">You'll complete an evaluation process with your lead and hiring manager.
+                        Once complete, you're encouraged to apply for any open positions. ASCENDtials considers all
+                        former interns and volunteers part of our Alumni community.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How often should I check in with my supervisor?</div>
+                    <div class="faq-answer">At least once a week. On your first day, you'll be given a recurring meeting
+                        time with your team lead and the hiring manager.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What if I'm overwhelmed?</div>
+                    <div class="faq-answer">Talk to your mentor to ensure you understand project expectations correctly,
+                        or speak with your lead to reevaluate expectations and your workload. Everyone here wants you to
+                        succeed.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    ALUMNI
+    ============================================================ -->
+    <section class="section-alumni" id="alumni">
+        <div class="alumni-inner">
+            <div class="alumni-intro">
+                <div>
+                    <span class="section-label reveal">Our Community</span>
+                    <h2 class="section-h2 reveal reveal--delay-1">Alumni<br><em>network</em></h2>
+                </div>
+                <p class="alumni-intro-text reveal reveal--delay-2">
+                    ASCENDtials considers all former employees and volunteers alumni of the organization. We continue
+                    building these relationships with community leaders — supporting them with resources, connecting
+                    them with members, and celebrating their growth beyond the program.
+                </p>
+            </div>
+
+            <!-- 2026 -->
+            <div class="alumni-year-group">
+                <div class="alumni-year reveal">
+                    <div class="alumni-year-num">2026</div>
+                    <div class="alumni-year-line"></div>
+                </div>
+                <div class="alumni-categories has-six">
+                    <div class="alumni-category-card reveal">
+                        <div class="alumni-category-title">Editorial / Publishing</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Ayden Halvorson</span><span
+                                    class="alumni-role-location">Editorial/Publishing Intern · San Diego</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Jocelyn Corona</span><span
+                                    class="alumni-role-location">Editorial/Publishing Support · Monterey Bay</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-1">
+                        <div class="alumni-category-title">Fundraising / Business Dev</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Kristina Montgomery</span><span
+                                    class="alumni-role-location">Fundraising Intern · Monterey Bay</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-2">
+                        <div class="alumni-category-title">Admin / Program Support</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Koby Ngoy</span><span
+                                    class="alumni-role-location">Program Support Coordination · Monterey Bay</span>
+                            </div>
+                            <div class="alumni-person"><span class="alumni-name">Riho Maekawa</span><span
+                                    class="alumni-role-location">Program Support Coordination · Monterey Bay</span>
+                            </div>
+                            <div class="alumni-person"><span class="alumni-name">Chad Goodwin</span><span
+                                    class="alumni-role-location">Program Support Coordination · San Diego</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Keri Bissette</span><span
+                                    class="alumni-role-location">Community Partnership Coordinator · New Orleans</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal">
+                        <div class="alumni-category-title">Marketing / Media</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Monica Um</span><span
+                                    class="alumni-role-location">Community Outreach Support · Monterey Bay</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-1">
+                        <div class="alumni-category-title">Research / Writing</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Josselyn Hernandez</span><span
+                                    class="alumni-role-location">Copywriter · California</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-2">
+                        <div class="alumni-category-title">Web Dev / UX Design</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Yashvi Patel</span><span
+                                    class="alumni-role-location">Web Developer Intern · New York</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Ruhan Pandit</span><span
+                                    class="alumni-role-location">Web Developer Intern · New York</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2025 abbreviated -->
+            <div class="alumni-year-group">
+                <div class="alumni-year reveal">
+                    <div class="alumni-year-num">2025</div>
+                    <div class="alumni-year-line"></div>
+                </div>
+                <div class="alumni-categories has-six">
+                    <div class="alumni-category-card reveal">
+                        <div class="alumni-category-title">Editorial / Publishing</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Carlotta Harold</span><span
+                                    class="alumni-role-location">Editorial/Publishing Intern · New Orleans</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Jhalla Edrisi</span><span
+                                    class="alumni-role-location">Editorial/Publishing Intern · San Antonio</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Margot Schiller</span><span
+                                    class="alumni-role-location">Editorial/Publishing Intern</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Kara Worrells</span><span
+                                    class="alumni-role-location">Editorial/Publishing Intern</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Indira Serna</span><span
+                                    class="alumni-role-location">Copywriter/Editor Intern</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-1">
+                        <div class="alumni-category-title">Fundraising / Business Dev</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Stephanie Tran</span><span
+                                    class="alumni-role-location">Fundraising Intern · California</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Harsha Sartandel</span><span
+                                    class="alumni-role-location">Business Development Volunteer · Atlanta</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Anais Mardirosian</span><span
+                                    class="alumni-role-location">Business Development Intern · Los Angeles</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Dalal Harajli</span><span
+                                    class="alumni-role-location">Business Development Intern · Michigan</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Kailar Ahn</span><span
+                                    class="alumni-role-location">Business Development Intern · New Jersey</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Ameila Badamjav</span><span
+                                    class="alumni-role-location">Business Development Intern · San Diego</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-2">
+                        <div class="alumni-category-title">Web Dev / UX Design</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Brennan Slate</span><span
+                                    class="alumni-role-location">Web Developer Volunteer · California</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Ranya Ghali</span><span
+                                    class="alumni-role-location">Web Developer Intern · New York</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Jamie Ip</span><span
+                                    class="alumni-role-location">UX Designer Volunteer · California</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Priscilla Diaz</span><span
+                                    class="alumni-role-location">Web Developer Intern · New York</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Adrian Olivas</span><span
+                                    class="alumni-role-location">Web Developer Volunteer · California</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal">
+                        <div class="alumni-category-title">Graphic Design</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Gisselle Cortez</span><span
+                                    class="alumni-role-location">Graphic Designer · Arizona</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Esra Turhan</span><span
+                                    class="alumni-role-location">Graphic Design Volunteer · Washington</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Luna Su</span><span
+                                    class="alumni-role-location">Graphic Design Intern · California</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Shaurya Kapoor</span><span
+                                    class="alumni-role-location">Graphic Design Volunteer · California</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Stephen Tobin</span><span
+                                    class="alumni-role-location">Graphic Design Volunteer · California</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-1">
+                        <div class="alumni-category-title">Admin / Program Support</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Matthew Ross</span><span
+                                    class="alumni-role-location">Program Support · California</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Tina Hall</span><span
+                                    class="alumni-role-location">Admin/Project Coordinator · California</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Mikayla Ewing</span><span
+                                    class="alumni-role-location">Admin/Project Coordinator · California</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-2">
+                        <div class="alumni-category-title">Research / Writing</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Linnea Sellers</span><span
+                                    class="alumni-role-location">Grant Assistant</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Vera Martinoska</span><span
+                                    class="alumni-role-location">Executive Editor · Worcester</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Kennadi Yates</span><span
+                                    class="alumni-role-location">Copywriter Volunteer · California</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2024 abbreviated -->
+            <div class="alumni-year-group">
+                <div class="alumni-year reveal">
+                    <div class="alumni-year-num">2024</div>
+                    <div class="alumni-year-line"></div>
+                </div>
+                <div class="alumni-categories has-six">
+                    <div class="alumni-category-card reveal">
+                        <div class="alumni-category-title">Web Dev / UX Design</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Saeko Shinozaki</span><span
+                                    class="alumni-role-location">UX Designer Volunteer Lead · Vancouver</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Suhird Giri</span><span
+                                    class="alumni-role-location">Web Programmer Intern Lead · Pullman</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Marcus Barton</span><span
+                                    class="alumni-role-location">UX Designer Volunteer · San Diego</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Andre Mani</span><span
+                                    class="alumni-role-location">Web Programmer Volunteer · Brazil</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Sophia Ramirez</span><span
+                                    class="alumni-role-location">UX Designer Intern · San Diego</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-1">
+                        <div class="alumni-category-title">Graphic Design / Book Club</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Hao Luong</span><span
+                                    class="alumni-role-location">Graphic Designer · San Diego</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Grace Kim</span><span
+                                    class="alumni-role-location">Graphic Designer · Seattle</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Marina Asoskova</span><span
+                                    class="alumni-role-location">Graphic Designer Lead · Israel</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Hanyi Wang</span><span
+                                    class="alumni-role-location">Book Club and Graphic Artist · San Diego</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-2">
+                        <div class="alumni-category-title">Editorial / Publishing</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Naomi Morrison</span><span
+                                    class="alumni-role-location">Editorial/Publishing Intern Lead · San Diego</span>
+                            </div>
+                            <div class="alumni-person"><span class="alumni-name">Teagan Nathe</span><span
+                                    class="alumni-role-location">Publishing Lead · Seattle</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Karen Edmond</span><span
+                                    class="alumni-role-location">Editor/Copyright Lead · Oregon</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Anya Kennelly</span><span
+                                    class="alumni-role-location">Editorial/Publishing Assistant · Santa Barbara</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal">
+                        <div class="alumni-category-title">Fundraising / Business Dev</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Rumaisha Chowdhury</span><span
+                                    class="alumni-role-location">Business Development Intern Lead · Toronto</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Hejun Ruan</span><span
+                                    class="alumni-role-location">Fundraising Lead · La Jolla</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Preranaa Balasubramanian</span><span
+                                    class="alumni-role-location">Fundraising Intern Lead · Livermore</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-1">
+                        <div class="alumni-category-title">Research / Writing</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Yen Nguyen</span><span
+                                    class="alumni-role-location">Grant Researcher/Writer · Washington</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Melissa Prado</span><span
+                                    class="alumni-role-location">Grant Researcher/Writer · San Diego</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Karthik Sivaswamy</span><span
+                                    class="alumni-role-location">Legal Support Volunteer Lead · La Jolla</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-2">
+                        <div class="alumni-category-title">Admin / Program Support</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Sayantani Guha</span><span
+                                    class="alumni-role-location">Volunteer Support Lead · San Diego</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Reona Bowles</span><span
+                                    class="alumni-role-location">Admin/Project Coordinator · San Diego</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Jacqueline Gamboa</span><span
+                                    class="alumni-role-location">Event Support · Oceanside</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2022 & 2023 compact -->
+            <div class="alumni-year-group">
+                <div class="alumni-year reveal">
+                    <div class="alumni-year-num">2023</div>
+                    <div class="alumni-year-line"></div>
+                </div>
+                <div class="alumni-categories has-three">
+                    <div class="alumni-category-card reveal">
+                        <div class="alumni-category-title">Admin / Program Support</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Robert Neblett</span><span
+                                    class="alumni-role-location">Program Manager · Houston</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Symone Farmer</span><span
+                                    class="alumni-role-location">Project Manager · Seattle</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Vrattika Bindal</span><span
+                                    class="alumni-role-location">Project Manager · San Francisco</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-1">
+                        <div class="alumni-category-title">Marketing / Media</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Aliyah Young</span><span
+                                    class="alumni-role-location">Social Media Marketing Lead · San Diego</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Diamond Tanner</span><span
+                                    class="alumni-role-location">Social Media Copywriter · Las Vegas</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Ananya Karan</span><span
+                                    class="alumni-role-location">Researcher/Social Media · India</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-2">
+                        <div class="alumni-category-title">Research / Writing</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Corey Moon</span><span
+                                    class="alumni-role-location">Student Researcher · New Jersey</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Joel Chu</span><span
+                                    class="alumni-role-location">Student Researcher · Singapore</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Chloe Huang</span><span
+                                    class="alumni-role-location">Researcher Intern · Tacoma</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alumni-year-group">
+                <div class="alumni-year reveal">
+                    <div class="alumni-year-num">2022</div>
+                    <div class="alumni-year-line"></div>
+                </div>
+                <div class="alumni-categories has-three">
+                    <div class="alumni-category-card reveal">
+                        <div class="alumni-category-title">Fundraising / Business Dev</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Rachelle Suissa</span><span
+                                    class="alumni-role-location">Development and Fund Manager · New York</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Allison Hjelle</span><span
+                                    class="alumni-role-location">Fundraising Coordinator · San Diego</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-1">
+                        <div class="alumni-category-title">Marketing / Media</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Lauren Cazell</span><span
+                                    class="alumni-role-location">Social Media Marketing Intern · New York</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Zoe Broussard</span><span
+                                    class="alumni-role-location">Communications Marketing Strategist · San Jose</span>
+                            </div>
+                            <div class="alumni-person"><span class="alumni-name">Micah Adams</span><span
+                                    class="alumni-role-location">Videographer · San Diego</span></div>
+                        </div>
+                    </div>
+                    <div class="alumni-category-card reveal reveal--delay-2">
+                        <div class="alumni-category-title">Web Dev / UX Design</div>
+                        <div class="alumni-names">
+                            <div class="alumni-person"><span class="alumni-name">Jada Alexander</span><span
+                                    class="alumni-role-location">Web Developer · Arizona</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Daniel Tang</span><span
+                                    class="alumni-role-location">Web Developer Intern · Cornell</span></div>
+                            <div class="alumni-person"><span class="alumni-name">Meghana Moodagopadi</span><span
+                                    class="alumni-role-location">Web Developer · Rhode Island</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    JOIN CTA
+    ============================================================ -->
+    <section class="section-join">
+        <div class="join-text">
+            <div class="join-label">Join the Team</div>
+            <h2 class="join-h2">Become one of<br><em>our interns</em></h2>
+            <p class="join-desc">Ready to explore a holistic, nature-centered approach to learning? Begin your journey
+                with ASCENDtials today.</p>
+            <div class="join-cta">
+                <a href="https://forms.gle/wkvGGibQjPzFSuXj7" class="btn-white" target="_blank">Apply Now</a>
+                <a href="https://app.joinhandshake.com/login" class="btn-ghost" target="_blank">Apply via Handshake</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+
+                <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
+                    BIPOC community.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube"
+                        target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-ascendtials/" aria-label="LinkedIn" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                    <a href="https://x.com/ascendtials" aria-label="X / Twitter" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Quick Links</div>
+                <ul class="footer-links">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./education-and-training.html">Education &amp; Training</a></li>
+                    <li><a href="./events.html">Events Calendar</a></li>
+                    <li><a href="https://ascendtials.org/get-involved/">Get Involved</a></li>
+                    <li><a href="https://ascendtials.org/ascendtials-membership-2024/">Membership</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Programs</div>
+                <ul class="footer-links">
+                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./legal-aid-program.html">Legal Aid</a></li>
+                    <li><a href="./internship-and-fellowship.html">Internships &amp; Fellowships</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Contact</div>
+                <div class="footer-contact">
+                    <p>505 W Broadway<br>San Diego, CA 92101</p>
+                    <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-partners">
+            <img src="assets/img/country-of-san-diego.png" alt="County of San Diego">
+            <img src="assets/img/Live-well-with-San-diego.png" alt="Live Well San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg"
+                alt="Candid Platinum 2025">
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 ASCENDtials. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Nav scroll
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+
+        // Mobile menu
+        const burger = document.getElementById('navBurger');
+        const mm = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => mm.classList.toggle('open'));
+        mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
+
+        // Scroll reveal
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.10 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.closest('.faq-item');
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+    </script>
+</body>
+
+</html>

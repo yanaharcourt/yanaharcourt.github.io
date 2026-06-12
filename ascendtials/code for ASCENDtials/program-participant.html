@@ -1,0 +1,2535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Participants – ASCENDtials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================================
+        DESIGN TOKENS
+        ============================================================ */
+        :root {
+            --color-navy: #1E3A47;
+            --color-navy-deep: #152E3A;
+            --color-sky: #C9A96E;
+            --color-sky-light: #F5EBD8;
+            --color-white: #FFFFFF;
+            --color-bg: #FAFAF8;
+            --color-surface: #F4F2EE;
+            --color-surface-2: #ECEAE5;
+            --color-line: #E2DDD6;
+            --color-text: #1A1A18;
+            --color-text-muted: #666660;
+            --color-text-light: #9D9A93;
+            --color-accent: #C9A96E;
+            --color-warm: #E8D0CC;
+            --color-sage: #B2D5D1;
+            --color-olive: #EBF1AB;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.375rem;
+            --text-2xl: 1.75rem;
+            --text-3xl: 2.25rem;
+            --text-hero: clamp(3rem, 6vw, 5.5rem);
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
+            --space-section: 120px;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-pill: 999px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --dur-fast: 180ms;
+            --dur-base: 280ms;
+            --dur-slow: 500ms;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            overflow-x: hidden;
+            font-size: var(--text-base);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal--delay-1 {
+            transition-delay: 0.08s;
+        }
+
+        .reveal--delay-2 {
+            transition-delay: 0.16s;
+        }
+
+        .reveal--delay-3 {
+            transition-delay: 0.24s;
+        }
+
+        .reveal--delay-4 {
+            transition-delay: 0.32s;
+        }
+
+        /* ── SHARED LABELS ── */
+        .section-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .section-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+            font-weight: 300;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        /* ── BUTTONS ── */
+        .btn-primary,
+        .btn-outline,
+        .btn-white,
+        .btn-ghost {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            border: 1px solid var(--color-line);
+        }
+
+        .btn-white {
+            background: var(--color-white);
+            color: var(--color-navy);
+            padding: 14px 28px;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-primary::before,
+        .btn-white::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before,
+        .btn-white:hover::before,
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-sky);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ============================================================
+        NAV
+        ============================================================ */
+        .nav-cta {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            flex-shrink: 0;
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 9px 20px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color var(--dur-fast);
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .nav-cta:hover::before {
+            transform: scaleX(1);
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            gap: 32px;
+            transition: all var(--dur-slow) var(--ease-in-out);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            top: 10px;
+            left: 16px;
+            right: 16px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-logo {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .nav-logo img {
+            height: 52px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links>li {
+            position: relative;
+        }
+
+        .nav-links>li>a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            font-size: var(--text-sm);
+            font-weight: 400;
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links>li>a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-links .has-dropdown>a::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: solid var(--color-text-muted);
+            border-width: 0 1.5px 1.5px 0;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links .has-dropdown:hover>a::after {
+            transform: rotate(225deg) translateY(-2px);
+        }
+
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-line);
+            list-style: none;
+            min-width: 220px;
+            padding: 6px;
+            padding-top: 10px;
+            z-index: 600;
+        }
+
+        .nav-links .has-dropdown:hover .nav-dropdown {
+            display: block;
+        }
+
+        .nav-dropdown li a {
+            display: block;
+            padding: 9px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .nav-dropdown li a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-burger {
+            display: none;
+            background: none;
+            border: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+            margin-left: auto;
+        }
+
+        .nav-burger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-navy);
+            border-radius: 2px;
+            transition: all var(--dur-base) var(--ease-out);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 490;
+            padding: 90px 24px 32px;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 16px;
+            font-size: var(--text-xl);
+            color: var(--color-text);
+            border-bottom: 1px solid var(--color-line);
+            font-family: var(--font-display);
+        }
+
+        .mobile-menu .mob-cta {
+            margin-top: 24px;
+            background: var(--color-navy);
+            color: var(--color-white);
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-lg);
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+        }
+
+        /* ============================================================
+        BREADCRUMB
+        ============================================================ */
+        .breadcrumb {
+            padding-top: 0;
+            padding-left: 0;
+            padding-right: 0;
+            padding-bottom: var(--space-lg);
+            background: transparent;
+        }
+
+        .breadcrumb-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+        }
+
+        .breadcrumb-inner a {
+            color: var(--color-text-light);
+            transition: color var(--dur-fast);
+        }
+
+        .breadcrumb-inner a:hover {
+            color: var(--color-sky);
+        }
+
+        .breadcrumb-inner .bc-sep {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--color-line);
+            flex-shrink: 0;
+        }
+
+        .breadcrumb-inner .bc-current {
+            color: var(--color-sky);
+        }
+
+        @media (max-width: 600px) {
+            .breadcrumb {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        /* ============================================================
+        PAGE HERO
+        ============================================================ */
+        .page-hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: calc(72px + var(--space-2xl));
+            padding-left: max(48px, 6vw);
+            padding-right: max(48px, 6vw);
+            background: var(--color-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: 'PP';
+            position: absolute;
+            bottom: -60px;
+            left: -20px;
+            font-family: var(--font-display);
+            font-size: clamp(200px, 28vw, 380px);
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(201, 169, 110, 0.04);
+            letter-spacing: -10px;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 5vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.02;
+            letter-spacing: -2px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 em {
+            font-style: italic;
+            color: var(--color-sky);
+            display: block;
+        }
+
+        .hero-divider {
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-sky), transparent);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-desc {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            max-width: 440px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-photo-wrap {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-photo-wrap img {
+            width: 100%;
+            height: 540px;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: var(--radius-xl);
+            display: block;
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+
+        .hero-photo-wrap:hover img {
+            transform: scale(1.02);
+        }
+
+        .hero-photo-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -24px;
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg) var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            z-index: 3;
+        }
+
+        .hero-photo-badge-num {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+        }
+
+        .hero-photo-badge-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-top: 6px;
+        }
+
+        @media (max-width: 960px) {
+            .hero-main {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .hero-photo-wrap img {
+                height: 380px;
+            }
+
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-photo-wrap {
+                display: none;
+            }
+        }
+
+        /* ============================================================
+        INFO STRIP (stats)
+        ============================================================ */
+        .info-strip {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-xl) max(48px, 6vw);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-2xl);
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .info-num {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 300;
+            color: var(--color-navy);
+            line-height: 1;
+        }
+
+        .info-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+        }
+
+        .info-divider {
+            width: 1px;
+            height: 48px;
+            background: var(--color-line);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 900px) {
+            .info-strip {
+                padding: var(--space-xl) 24px;
+                justify-content: flex-start;
+                gap: var(--space-xl);
+            }
+
+            .info-divider {
+                display: none;
+            }
+        }
+
+        /* ============================================================
+        SECTION: PATHWAYS (two-column intro cards)
+        ============================================================ */
+        .section-pathways {
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .pathways-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .pathways-header {
+            max-width: 720px;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .pathways-intro {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .pathways-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            align-items: stretch;
+        }
+
+        .pathway-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-base);
+        }
+
+        .pathway-card .pathway-desc {
+            flex: 1;
+        }
+
+        .pathway-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .pathway-tag {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .pathway-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            margin-bottom: var(--space-md);
+            line-height: 1.3;
+        }
+
+        .pathway-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            margin-bottom: var(--space-lg);
+        }
+
+        @media (max-width: 900px) {
+            .pathways-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-pathways {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: WHO QUALIFIES (bento grid)
+        ============================================================ */
+        .section-qualify {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .qualify-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .qualify-header {
+            max-width: 640px;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .qualify-header .pathways-intro {
+            margin-bottom: 0;
+        }
+
+        /* Bento grid: 2 rows of different card sizes */
+        .qualify-bento {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-md);
+        }
+
+        /* Row 1: one wide card left (8 col) + one tall card right (4 col, spans 2 rows) */
+        .qualify-bento-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-base);
+        }
+
+        .qualify-bento-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        /* Card 1: "Who this is for" — wide headline card */
+        .qualify-bento-card:nth-child(1) {
+            grid-column: span 8;
+            background: var(--color-navy);
+            border-color: transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 220px;
+        }
+
+        .qualify-bento-card:nth-child(1):hover {
+            transform: translateY(-3px);
+        }
+
+        /* Card 2: right tall card spans 2 rows */
+        .qualify-bento-card:nth-child(2) {
+            grid-column: span 4;
+            grid-row: span 2;
+            background: var(--color-sky-light);
+            border-color: rgba(201, 169, 110, 0.25);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cards 3-5: bottom row, split 4+4 within the 8 col */
+        .qualify-bento-card:nth-child(3) {
+            grid-column: span 4;
+        }
+
+        .qualify-bento-card:nth-child(4) {
+            grid-column: span 4;
+        }
+
+        /* Note card full width at bottom */
+        .qualify-bento-note {
+            grid-column: span 12;
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-lg) var(--space-xl);
+            font-size: var(--text-sm);
+            color: var(--color-navy);
+            line-height: 1.65;
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .qualify-bento-note-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
+        }
+
+        .qualify-bento-note a {
+            color: var(--color-navy);
+            text-decoration: underline;
+            text-decoration-color: var(--color-sky);
+        }
+
+        .qualify-bento-tag {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .qualify-bento-card:nth-child(1) .qualify-bento-tag {
+            color: rgba(201, 169, 110, 0.7);
+        }
+
+        .qualify-bento-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.25;
+            margin-bottom: var(--space-sm);
+        }
+
+        .qualify-bento-card:nth-child(1) .qualify-bento-title {
+            color: var(--color-white);
+            font-size: var(--text-2xl);
+        }
+
+        .qualify-bento-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        .qualify-bento-card:nth-child(1) .qualify-bento-desc {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .qualify-bento-card:nth-child(2) .qualify-bento-desc {
+            color: var(--color-navy);
+            opacity: 0.75;
+        }
+
+        .qualify-list-bento {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: var(--space-md);
+            flex: 1;
+        }
+
+        .qualify-list-bento li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: var(--text-sm);
+            color: var(--color-navy);
+            line-height: 1.6;
+        }
+
+        .qualify-list-bento li::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--color-sky);
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+
+        .qualify-bento-num {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+            margin-bottom: var(--space-sm);
+        }
+
+        @media (max-width: 960px) {
+            .qualify-bento-card:nth-child(1) {
+                grid-column: span 12;
+            }
+
+            .qualify-bento-card:nth-child(2) {
+                grid-column: span 12;
+                grid-row: span 1;
+            }
+
+            .qualify-bento-card:nth-child(3),
+            .qualify-bento-card:nth-child(4) {
+                grid-column: span 6;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section-qualify {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .qualify-bento-card:nth-child(n) {
+                grid-column: span 12;
+            }
+        }
+
+        /* ============================================================
+        SECTION: WHAT YOU'LL RECEIVE (standalone, full width bento)
+        ============================================================ */
+        .section-receive {
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .receive-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .receive-header {
+            max-width: 640px;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .receive-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-md);
+        }
+
+        .receive-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-base);
+        }
+
+        .receive-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        /* Card 1: featured wide card */
+        .receive-card:nth-child(1) {
+            grid-column: span 12;
+            background: var(--color-navy);
+            border-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .receive-card:nth-child(1):hover {
+            transform: none;
+        }
+
+        .receive-card:nth-child(2) {
+            grid-column: span 6;
+        }
+
+        .receive-card:nth-child(3) {
+            grid-column: span 6;
+        }
+
+        .receive-card:nth-child(4) {
+            grid-column: span 4;
+        }
+
+        .receive-card:nth-child(5) {
+            grid-column: span 4;
+        }
+
+        .receive-card:nth-child(6) {
+            grid-column: span 4;
+        }
+
+        .receive-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-lg);
+            color: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .receive-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 1.6;
+        }
+
+        .receive-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 400;
+            color: var(--color-navy);
+            margin-bottom: var(--space-sm);
+            line-height: 1.3;
+        }
+
+        .receive-card-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+        }
+
+        .receive-card:nth-child(1) .receive-card-title {
+            color: var(--color-white);
+            font-size: var(--text-2xl);
+        }
+
+        .receive-card:nth-child(1) .receive-card-desc {
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 440px;
+        }
+
+        .receive-card:nth-child(1) .receive-icon {
+            background: rgba(201, 169, 110, 0.18);
+            color: var(--color-sky);
+        }
+
+        @media (max-width: 768px) {
+            .receive-card:nth-child(n) {
+                grid-column: span 6;
+            }
+
+            .receive-card:nth-child(1) {
+                grid-column: span 12;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .receive-card:nth-child(n) {
+                grid-column: span 12;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section-receive {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: PATHWAY LEVELS (navy dark, 4-step)
+        ============================================================ */
+        .section-levels {
+            background: var(--color-navy-deep);
+            padding: var(--space-section) max(48px, 6vw);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-levels::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 40%, rgba(201, 169, 110, 0.06) 100%);
+            pointer-events: none;
+        }
+
+        .levels-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .levels-header {
+            max-width: 640px;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .levels-header .section-label {
+            color: var(--color-sky);
+        }
+
+        .levels-header .section-h2 {
+            color: var(--color-white);
+        }
+
+        .levels-desc {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+        }
+
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+        }
+
+        .level-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            transition: background var(--dur-base), border-color var(--dur-base), transform var(--dur-base) var(--ease-out);
+        }
+
+        .level-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(201, 169, 110, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .level-num {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+            margin-bottom: var(--space-lg);
+        }
+
+        .level-label {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-sm);
+        }
+
+        .level-title {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 400;
+            color: var(--color-white);
+            line-height: 1.35;
+        }
+
+        @media (max-width: 900px) {
+            .levels-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section-levels {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .levels-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================================
+        SECTION: FEES
+        ============================================================ */
+        .section-fees {
+            padding: var(--space-section) max(48px, 6vw);
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .fees-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+        }
+
+        .fees-desc {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            margin-bottom: var(--space-xl);
+        }
+
+        .fees-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+        }
+
+        .fee-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            text-align: center;
+            transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-base);
+        }
+
+        .fee-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .fee-card--wide {
+            grid-column: span 2;
+            background: var(--color-sky-light);
+            border-color: rgba(201, 169, 110, 0.3);
+        }
+
+        .fee-amount {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1;
+            margin-bottom: var(--space-sm);
+        }
+
+        .fee-label {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        .fee-card--wide .fee-label {
+            color: var(--color-navy);
+            font-style: italic;
+        }
+
+        @media (max-width: 960px) {
+            .fees-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section-fees {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: HOW TO ENROLL (steps)
+        ============================================================ */
+        .section-steps {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .steps-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .steps-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: start;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .steps-desc {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            padding-top: 8px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--space-md);
+        }
+
+        .step-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+            min-height: 220px;
+            transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-base);
+        }
+
+        .step-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .step-card:last-child {
+            background: var(--color-navy);
+            border-color: transparent;
+        }
+
+        .step-card:last-child .step-num {
+            color: rgba(201, 169, 110, 0.5);
+        }
+
+        .step-card:last-child .step-title {
+            color: var(--color-white);
+        }
+
+        .step-card:last-child:hover {
+            border-color: var(--color-sky);
+        }
+
+        .step-num {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1;
+            color: var(--color-sky);
+            opacity: 0.3;
+            margin-bottom: var(--space-lg);
+        }
+
+        .step-title {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.3;
+        }
+
+        @media (max-width: 960px) {
+            .steps-header {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section-steps {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .step-card {
+                min-height: 180px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: EXPECTATIONS (FAQ-style sticky layout)
+        ============================================================ */
+        .section-expect {
+            padding: var(--space-section) max(48px, 6vw);
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .expect-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: max(80px, 8vw);
+            align-items: start;
+        }
+
+        .expect-sticky {
+            position: sticky;
+            top: 100px;
+        }
+
+        .expect-intro {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-top: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .expect-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .expect-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-lg);
+            padding: var(--space-lg) 0;
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .expect-num {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1.4;
+            flex-shrink: 0;
+        }
+
+        .expect-text {
+            font-size: var(--text-base);
+            color: var(--color-text);
+            line-height: 1.65;
+            padding-top: 2px;
+        }
+
+        @media (max-width: 960px) {
+            .expect-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .expect-sticky {
+                position: static;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section-expect {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: JOIN CTA
+        ============================================================ */
+        .section-join {
+            margin: 0 max(24px, 4vw) var(--space-section);
+            background: var(--color-navy);
+            border-radius: var(--radius-xl);
+            padding: var(--space-section) max(40px, 6vw);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: max(60px, 8vw);
+        }
+
+        .section-join::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .section-join::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: 30%;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(178, 213, 209, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .join-text {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .join-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .join-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 2.8vw, 3rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+            color: var(--color-white);
+            margin-bottom: var(--space-md);
+        }
+
+        .join-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .join-desc {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            max-width: 460px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .join-cta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 900px) {
+            .section-join {
+                flex-direction: column;
+                gap: var(--space-2xl);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section-join {
+                padding: var(--space-2xl) 24px;
+                margin-left: 16px;
+                margin-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        FOOTER
+        ============================================================ */
+        .footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            padding: var(--space-2xl) max(40px, 5vw);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-brand img {
+            height: 48px;
+            width: auto;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            max-width: 260px;
+        }
+
+        .footer-col-title {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-contact p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .footer-contact a {
+            color: var(--color-sky);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 8px;
+            margin-top: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            transition: background var(--dur-fast), color var(--dur-fast);
+        }
+
+        .footer-social a:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .footer-partners {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) max(40px, 5vw);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            flex-wrap: wrap;
+        }
+
+        .footer-partners img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(20%);
+            transition: opacity var(--dur-fast);
+        }
+
+        .footer-partners img:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ============================================================
+    NAV
+    ============================================================ -->
+    <header class="nav" id="mainNav">
+        <div class="nav-logo">
+            <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="./index.html">Home</a></li>
+
+            <li class="has-dropdown">
+                <a href="#">About</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./our-team.html">Our Team</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Education</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./education-and-training.html">Education and Training</a></li>
+                    <li><a href="./literacy-workshops.html">Literacy Workshops</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                    <li><a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a></li>
+                    <li><a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a></li>
+                    <li><a href="./service-learning.html">Service Learning</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Programs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./events.html">Event Calendar</a></li>
+                    <li><a href="./program-participant.html">Program Participant</a></li>
+                    <li><a href="./farmers-market.html">Farmers' Market</a></li>
+                    <li><a href="./food-distribution.html">Food Distribution</a></li>
+                    <li><a href="./youth-programs.html">Youth Program</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./court-order-community-service.html">Court Order Community Service</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Clubs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./mdba-portal.html">MDBA Portal</a></li>
+                    <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
+                    <li><a href="./join-our-community">Join our community</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Join Us</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./get-involved.html">Get Involved</a></li>
+                    <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="./volunteer.html">Volunteer</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+        <a class="nav-cta" href="./support-us">Support Us</a>
+        
+        <button class="nav-burger" id="navBurger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="./index.html">Home</a>
+
+        <a href="./about.html">About Us</a>
+        <a href="./our-team.html">Our Team</a>
+        <a href="./contact.html">Contact Us</a>
+
+        <a href="./education-and-training.html">Education and Training</a>
+        <a href="./literacy-workshops.html">Literacy Workshops</a>
+        <a href="./kemetic-yoga.html">Kemetic Yoga</a>
+        <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
+        <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
+        <a href="./service-learning.html">Service Learning</a>
+
+        <a href="./events.html">Event Calendar</a>
+        <a href="./program-participant.html">Program Participant</a>
+        <a href="./farmers-market.html">Farmers' Market</a>
+        <a href="./food-distribution.html">Food Distribution</a>
+        <a href="./youth-programs.html">Youth Program</a>
+        <a href="./environmental-programs.html">Environmental Programs</a>
+        <a href="./court-order-community-service.html">Court Order Community Service</a>
+
+        <a href="./mdba-portal.html">MDBA Portal</a>
+        <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+        <a href="./join-our-community">Join our community</a>
+
+        <a href="./get-involved.html">Get Involved</a>
+        <a href="./partner-with-us.html">Partner with Us</a>
+        <a href="./volunteer.html">Volunteer</a>
+
+        <a class="mob-cta" href="./support-us"> Support Us </a>
+    </div>
+
+    <!-- ============================================================
+    PAGE HERO 
+    ============================================================ -->
+    <section class="page-hero">
+        <!-- breadcrumb inside hero -->
+        <!-- <nav class="breadcrumb" aria-label="Breadcrumb">
+            <div class="breadcrumb-inner">
+                <a href="./index.html">Home</a>
+                <span class="bc-sep"></span>
+                <a href="#">Programs</a>
+                <span class="bc-sep"></span>
+                <span class="bc-current">Program Participants</span>
+            </div>
+        </nav> -->
+
+        <div class="hero-main">
+            <div class="hero-text">
+                <span class="hero-eyebrow reveal">Programs</span>
+                <h1 class="hero-h1 reveal reveal--delay-1">Program<br><em>Participants</em></h1>
+                <div class="hero-divider reveal reveal--delay-2"></div>
+                <p class="hero-desc reveal reveal--delay-2">
+                    For individuals seeking structured learning, skill-building, and community engagement —
+                    a guided pathway for learners, emerging leaders, and changemakers.
+                </p>
+                <div class="hero-cta-row reveal reveal--delay-3">
+                    <a class="btn-primary"
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSdHT4bvD7Spi5PRTpksL_BaNHcD45MHGioCeIHFbcC8x782SA/viewform"
+                        target="_blank">
+                        Start Application
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                    <a class="btn-outline" href="#enroll">How to Enroll</a>
+                </div>
+            </div>
+            <div class="hero-photo-wrap reveal reveal--delay-2">
+                <img src="https://ascendtials.org/wp-content/uploads/2024/08/program-participants-hero.jpg"
+                    onerror="this.src='https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop'"
+                    alt="Program participants engaged in community learning">
+                <div class="hero-photo-badge">
+                    <div class="hero-photo-badge-num">4</div>
+                    <div class="hero-photo-badge-label">Pathway Levels</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    INFO STRIP
+    ============================================================ -->
+    <div class="info-strip">
+        <div class="info-item">
+            <span class="info-num">2</span>
+            <span class="info-label">Membership Pathways</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <span class="info-num">$25</span>
+            <span class="info-label">One-Time Enrollment</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <span class="info-num">$10</span>
+            <span class="info-label">Per Hour</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <span class="info-num">4</span>
+            <span class="info-label">Pathway Levels</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <span class="info-num">Sliding</span>
+            <span class="info-label">Scale Available</span>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    PATHWAYS
+    ============================================================ -->
+    <section class="section-pathways">
+        <div class="pathways-inner">
+            <div class="pathways-header">
+                <span class="section-label reveal">Two Pathways</span>
+                <h2 class="section-h2 reveal reveal--delay-1">A clear path<br><em>built for you</em></h2>
+                <p class="pathways-intro reveal reveal--delay-2">
+                    Our membership structure supports two different pathways to keep things accessible and clear —
+                    whether you're here to serve, or here to learn.
+                </p>
+            </div>
+            <div class="pathways-grid">
+                <div class="pathway-card reveal">
+                    <span class="pathway-tag">Service Pathway</span>
+                    <h3 class="pathway-title">Volunteering</h3>
+                    <p class="pathway-desc">Requires a Volunteer Membership — mandatory for all volunteers. Ideal for
+                        those who want to give their time in an open-ended way, contributing to events, markets, and
+                        community programs.</p>
+                    <a class="btn-outline" href="https://ascendtials.org/volunteer/volunteer-memberships/"
+                        target="_blank">Volunteer Memberships</a>
+                </div>
+                <div class="pathway-card reveal reveal--delay-1">
+                    <span class="pathway-tag">Learning + Community Pathway</span>
+                    <h3 class="pathway-title">Program Participation</h3>
+                    <p class="pathway-desc">Features Program Membership Levels — optional, for in-person program
+                        participants. Ideal for learners seeking structured education, hands-on experience, and pathway
+                        progression.</p>
+                    <a class="btn-outline" href="#enroll">How to Enroll</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    WHO QUALIFIES
+    ============================================================ -->
+    <section class="section-qualify">
+        <div class="qualify-inner">
+            <div class="qualify-header">
+                <span class="section-label reveal">Who Qualifies</span>
+                <h2 class="section-h2 reveal reveal--delay-1">Is this<br><em>pathway for you?</em></h2>
+                <p class="pathways-intro reveal reveal--delay-2">The Program Participant role is designed for
+                    individuals seeking structured learning — not volunteer hours.</p>
+            </div>
+            <div class="qualify-bento reveal reveal--delay-2">
+
+                <!-- Card 1: wide dark headline card -->
+                <div class="qualify-bento-card">
+                    <div class="qualify-bento-tag">Ideal For</div>
+                    <div class="qualify-bento-title">Learners, emerging leaders<br>& changemakers</div>
+                    <div class="qualify-bento-desc">Whether you're a student, a young adult, or a community member ready
+                        to grow — this pathway meets you where you are.</div>
+                </div>
+
+                <!-- Card 2: tall right card with full qualify list -->
+                <div class="qualify-bento-card">
+                    <div class="qualify-bento-tag">You Qualify If</div>
+                    <div class="qualify-bento-title">This sounds like you</div>
+                    <ul class="qualify-list-bento">
+                        <li>You're seeking structured learning, not just volunteer hours</li>
+                        <li>You're a student, young adult, or community member wanting hands-on experience</li>
+                        <li>You're exploring environmental, cultural, or wellness-based fields</li>
+                        <li>You want to contribute to community events while learning</li>
+                        <li>You prefer a guided, educational experience rather than open-ended volunteering</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: stat card -->
+                <div class="qualify-bento-card">
+                    <div class="qualify-bento-num">4</div>
+                    <div class="qualify-bento-tag">Pathway Levels</div>
+                    <div class="qualify-bento-desc">Progress through structured levels from beginner to deeper community
+                        involvement.</div>
+                </div>
+
+                <!-- Card 4: stat card -->
+                <div class="qualify-bento-card">
+                    <div class="qualify-bento-num">$25</div>
+                    <div class="qualify-bento-tag">One-Time Enrollment</div>
+                    <div class="qualify-bento-desc">Sliding scale available. A small fee covers materials and program
+                        coordination.</div>
+                </div>
+
+                <!-- Note bar -->
+                <div class="qualify-bento-note reveal reveal--delay-3">
+                    <div class="qualify-bento-note-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                    </div>
+                    <p><strong>Note:</strong> If you need court-ordered hours, please join the <a
+                            href="./court-order-community-service.html">Court-Ordered Community Service Program</a>
+                        instead.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    WHAT YOU'LL RECEIVE
+    ============================================================ -->
+    <section class="section-receive">
+        <div class="receive-inner">
+            <div class="receive-header">
+                <span class="section-label reveal">What You'll Receive</span>
+                <h2 class="section-h2 reveal reveal--delay-1">Built for growth,<br><em>step by step</em></h2>
+            </div>
+            <div class="receive-grid reveal reveal--delay-2">
+                <div class="receive-card">
+                    <div class="receive-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path
+                                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                        </svg>
+                    </div>
+                    <div class="receive-card-title">A Pathway Built for Growth</div>
+                    <div class="receive-card-desc">From guided learning modules and hands-on experience to completion
+                        documentation and progression toward deeper roles within ASCENDtials.</div>
+                </div>
+                <div class="receive-card">
+                    <div class="receive-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                        </svg>
+                    </div>
+                    <div class="receive-card-title">Guided Learning Modules</div>
+                    <div class="receive-card-desc">Structured modules and reflection prompts to deepen your
+                        understanding at every step.</div>
+                </div>
+                <div class="receive-card">
+                    <div class="receive-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                    </div>
+                    <div class="receive-card-title">Hands-On Experience</div>
+                    <div class="receive-card-desc">Markets, dock parties, cleanups, and youth activities — real
+                        community work, real learning.</div>
+                </div>
+                <div class="receive-card">
+                    <div class="receive-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <div class="receive-card-title">Skill-Building</div>
+                    <div class="receive-card-desc">Leadership, communication, and community engagement skills you'll
+                        carry forward.</div>
+                </div>
+                <div class="receive-card">
+                    <div class="receive-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                    </div>
+                    <div class="receive-card-title">Wellness &amp; Culture</div>
+                    <div class="receive-card-desc">Cultural and wellness education integrated into every program.</div>
+                </div>
+                <div class="receive-card">
+                    <div class="receive-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line x1="9" y1="13" x2="15" y2="13" />
+                            <line x1="9" y1="17" x2="15" y2="17" />
+                        </svg>
+                    </div>
+                    <div class="receive-card-title">Completion Documentation</div>
+                    <div class="receive-card-desc">Hours, activities, and learning outcomes — recorded for your records
+                        and future opportunities.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PARTICIPANT PATHWAY (LEVELS)
+    ============================================================ -->
+    <section class="section-levels">
+        <div class="levels-inner">
+            <div class="levels-header">
+                <span class="section-label reveal">Participant Pathway</span>
+                <h2 class="section-h2 reveal reveal--delay-1">A structured path<br><em>to deeper involvement</em></h2>
+                <p class="levels-desc reveal reveal--delay-2">Participants move through a structured pathway
+                    ensuring consistency, growth, and measurable outcomes.</p>
+            </div>
+            <div class="levels-grid">
+                <div class="level-card reveal">
+                    <div class="level-num">01</div>
+                    <div class="level-label">Level 1</div>
+                    <div class="level-title">Introduction &amp; Orientation</div>
+                </div>
+                <div class="level-card reveal reveal--delay-1">
+                    <div class="level-num">02</div>
+                    <div class="level-label">Level 2</div>
+                    <div class="level-title">Hands-On Learning &amp; Skill-Building</div>
+                </div>
+                <div class="level-card reveal reveal--delay-2">
+                    <div class="level-num">03</div>
+                    <div class="level-label">Level 3</div>
+                    <div class="level-title">Community Engagement &amp; Leadership</div>
+                </div>
+                <div class="level-card reveal reveal--delay-3">
+                    <div class="level-num">04</div>
+                    <div class="level-label">Level 4</div>
+                    <div class="level-title">Completion &amp; Reflection</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PROGRAM FEES
+    ============================================================ -->
+    <section class="section-fees">
+        <div class="fees-inner">
+            <div>
+                <span class="section-label reveal">Program Fees</span>
+                <h2 class="section-h2 reveal reveal--delay-1">Investing in<br><em>your learning</em></h2>
+                <p class="fees-desc reveal reveal--delay-2">Fees support instructional materials, staff facilitation,
+                    and program design. A sliding scale is available upon request — cost should never be a barrier to
+                    learning.</p>
+                <a class="btn-outline reveal reveal--delay-3"
+                    href="https://ascendtials.org/ascendtials-membership-2024/" target="_blank">View Full Fees
+                    Detail</a>
+            </div>
+            <div class="fees-grid reveal reveal--delay-2">
+                <div class="fee-card">
+                    <div class="fee-amount">$25</div>
+                    <div class="fee-label">One-time enrollment fee</div>
+                </div>
+                <div class="fee-card">
+                    <div class="fee-amount">$10</div>
+                    <div class="fee-label">Per hour of participation</div>
+                </div>
+                <div class="fee-card fee-card--wide">
+                    <div class="fee-amount">Sliding Scale</div>
+                    <div class="fee-label">Available upon request — reach out to discuss your situation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    HOW TO ENROLL
+    ============================================================ -->
+    <section class="section-steps" id="enroll">
+        <div class="steps-inner">
+            <div class="steps-header">
+                <div>
+                    <span class="section-label reveal">How to Enroll</span>
+                    <h2 class="section-h2 reveal reveal--delay-1">Five steps to<br><em>begin your journey</em></h2>
+                </div>
+                <p class="steps-desc reveal reveal--delay-2">
+                    ASCENDtials welcomes individuals seeking meaningful, culturally grounded learning experiences
+                    that uplift community and environment. Enrollment is simple from start to finish.
+                </p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card reveal">
+                    <div class="step-num">01</div>
+                    <div class="step-title">Submit Your Application</div>
+                </div>
+                <div class="step-card reveal reveal--delay-1">
+                    <div class="step-num">02</div>
+                    <div class="step-title">Attend a Brief Orientation Call</div>
+                </div>
+                <div class="step-card reveal reveal--delay-2">
+                    <div class="step-num">03</div>
+                    <div class="step-title">Pay the Enrollment Fee</div>
+                </div>
+                <div class="step-card reveal reveal--delay-3">
+                    <div class="step-num">04</div>
+                    <div class="step-title">Receive Your Welcome Packet</div>
+                </div>
+                <div class="step-card reveal reveal--delay-4">
+                    <div class="step-num">05</div>
+                    <div class="step-title">Begin Your Learning Pathway!</div>
+                </div>
+            </div>
+            <div class="steps-cta-row"
+                style="display:flex; gap:12px; flex-wrap:wrap; margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 1px solid var(--color-line);">
+                <a class="btn-primary"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdHT4bvD7Spi5PRTpksL_BaNHcD45MHGioCeIHFbcC8x782SA/viewform"
+                    target="_blank">Start Application</a>
+                <a class="btn-outline"
+                    href="https://www.ascendtials.org/wp-content/uploads/2021/07/ASCENDtials-Membership-1-2.pdf"
+                    target="_blank">Membership Responsibilities</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PARTICIPANT EXPECTATIONS
+    ============================================================ -->
+    <section class="section-expect">
+        <div class="expect-layout">
+            <div class="expect-sticky">
+                <span class="section-label reveal">Participant Expectations</span>
+                <h2 class="section-h2 reveal reveal--delay-1">A learning role,<br><em>not a volunteer role</em></h2>
+                <p class="expect-intro reveal reveal--delay-2">This is a learning role, not a volunteer role —
+                    expectations reflect that. Participants agree to the following.</p>
+                <a class="btn-outline reveal reveal--delay-3"
+                    href="https://www.ascendtials.org/wp-content/uploads/2021/07/ASCENDtials-Membership-1-2.pdf"
+                    target="_blank">Membership Responsibilities</a>
+            </div>
+            <div class="expect-list reveal reveal--delay-2">
+                <div class="expect-item">
+                    <div class="expect-num">01</div>
+                    <p class="expect-text">Attend scheduled sessions and arrive on time</p>
+                </div>
+                <div class="expect-item">
+                    <div class="expect-num">02</div>
+                    <p class="expect-text">Engage fully in learning activities</p>
+                </div>
+                <div class="expect-item">
+                    <div class="expect-num">03</div>
+                    <p class="expect-text">Complete reflection prompts and assignments</p>
+                </div>
+                <div class="expect-item">
+                    <div class="expect-num">04</div>
+                    <p class="expect-text">Follow ASCENDtials' community guidelines</p>
+                </div>
+                <div class="expect-item">
+                    <div class="expect-num">05</div>
+                    <p class="expect-text">Communicate respectfully with staff and peers</p>
+                </div>
+                <div class="expect-item">
+                    <div class="expect-num">06</div>
+                    <p class="expect-text">Represent ASCENDtials positively at public events</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    JOIN CTA
+    ============================================================ -->
+    <section class="section-join">
+        <div class="join-text">
+            <div class="join-label">Ready to Join?</div>
+            <h2 class="join-h2">Begin your<br><em>learning pathway</em></h2>
+            <p class="join-desc">ASCENDtials welcomes individuals seeking meaningful, culturally grounded learning
+                experiences that uplift community and environment.</p>
+            <div class="join-cta">
+                <a class="btn-white"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdHT4bvD7Spi5PRTpksL_BaNHcD45MHGioCeIHFbcC8x782SA/viewform"
+                    target="_blank">Enroll Now</a>
+                <a class="btn-ghost"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdHT4bvD7Spi5PRTpksL_BaNHcD45MHGioCeIHFbcC8x782SA/viewform"
+                    target="_blank">Start Application</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+
+                <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
+                    BIPOC community.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube"
+                        target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-ascendtials/" aria-label="LinkedIn" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                    <a href="https://x.com/ascendtials" aria-label="X / Twitter" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <div class="footer-col-title">Quick Links</div>
+                <ul class="footer-links">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="education-and-training.html">Education & Training</a></li>
+                    <li><a href="./events">Events Calendar</a></li>
+                    <li><a href="https://ascendtials.org/get-involved/">Get Involved</a></li>
+                    <li><a href="https://ascendtials.org/ascendtials-membership-2024/">Membership</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Programs</div>
+                <ul class="footer-links">
+                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./legal-aid-program.html">Legal Aid</a></li>
+                    <li><a href="./fellowship-program.html">Internships & Fellowships</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Contact</div>
+                <div class="footer-contact">
+                    <p>505 W Broadway<br>San Diego, CA 92101</p>
+                    <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
+                </div>
+                <!-- <div class="footer-candid mt-md">
+                <img src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg" alt="Candid Platinum Seal">
+                <span>EIN: 47-2451577</span>
+            </div> -->
+            </div>
+        </div>
+
+        <!-- Partners row -->
+        <div class="footer-partners">
+            <img src="assets/img/country-of-san-diego.png" alt="County of San Diego">
+            <img src="assets/img/Live-well-with-San-diego.png" alt="Live Well San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg"
+                alt="Candid Platinum 2025">
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 ASCENDtials. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Nav scroll
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+
+        // Mobile menu
+        const burger = document.getElementById('navBurger');
+        const mm = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => mm.classList.toggle('open'));
+        mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
+
+        // Scroll reveal
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.10 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+
+</html>

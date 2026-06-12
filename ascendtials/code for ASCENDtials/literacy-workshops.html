@@ -7,7 +7,9 @@
     <title>Literacy Workshops – ASCENDtials</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet">
     <style>
         /* ============================================================
            DESIGN TOKENS
@@ -52,9 +54,9 @@
             --radius-lg: 24px;
             --radius-xl: 32px;
             --radius-pill: 999px;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.06);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
-            --shadow-lg: 0 16px 48px rgba(0,0,0,0.10);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
             --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
             --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
             --dur-fast: 180ms;
@@ -62,8 +64,18 @@
             --dur-slow: 500ms;
         }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: var(--font-body);
             color: var(--color-text);
@@ -73,130 +85,350 @@
             line-height: 1.65;
             -webkit-font-smoothing: antialiased;
         }
-        img { display: block; max-width: 100%; }
-        button { cursor: pointer; font-family: inherit; }
-        a { text-decoration: none; color: inherit; }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
         /* ============================================================
-           NAV
+        NAV 
         ============================================================ */
         .nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
             background: var(--color-bg);
             border-bottom: 1px solid var(--color-line);
             height: 72px;
-            display: flex; align-items: center;
-            padding: 0 40px; gap: 32px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            gap: 32px;
             transition: all var(--dur-slow) var(--ease-in-out);
         }
+
         .nav.scrolled {
-            background: rgba(255,255,255,0.72);
+            background: rgba(255, 255, 255, 0.72);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
-            top: 10px; left: 16px; right: 16px;
+            top: 10px;
+            left: 16px;
+            right: 16px;
             border-radius: var(--radius-xl);
-            border: 1px solid rgba(255,255,255,0.5);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
         }
-        .nav-logo { margin-right: auto; display: flex; align-items: center; flex-shrink: 0; }
-        .nav-logo img { height: 52px; width: auto; }
-        .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
-        .nav-links > li { position: relative; }
-        .nav-links > li > a {
-            display: flex; align-items: center; gap: 4px;
+
+        .nav-logo {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .nav-logo img {
+            height: 52px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links>li {
+            position: relative;
+        }
+
+        .nav-links>li>a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
             padding: 8px 12px;
-            font-size: var(--text-sm); font-weight: 400;
+            font-size: var(--text-sm);
+            font-weight: 400;
             color: var(--color-text-muted);
             border-radius: var(--radius-sm);
-            transition: color var(--dur-fast), background var(--dur-fast);
+            transition: color var(--dur-fast) var(--ease-out),
+                background var(--dur-fast) var(--ease-out);
         }
-        .nav-links > li > a:hover { color: var(--color-navy); background: var(--color-surface); }
-        .nav-links .has-dropdown > a::after {
-            content: ''; width: 10px; height: 10px;
-            border: solid var(--color-text-muted); border-width: 0 1.5px 1.5px 0;
+
+        .nav-links>li>a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        /* Dropdown chevron */
+        .nav-links .has-dropdown>a::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: solid var(--color-text-muted);
+            border-width: 0 1.5px 1.5px 0;
             transform: rotate(45deg) translateY(-2px);
-            transition: transform var(--dur-fast);
+            transition: transform var(--dur-fast) var(--ease-out);
         }
-        .nav-links .has-dropdown:hover > a::after { transform: rotate(225deg) translateY(-2px); }
+
+        .nav-links .has-dropdown:hover>a::after {
+            transform: rotate(225deg) translateY(-2px);
+        }
+
         .nav-dropdown {
-            display: none; position: absolute; top: 100%; left: 0;
-            background: var(--color-bg); border-radius: var(--radius-md);
-            box-shadow: var(--shadow-lg); border: 1px solid var(--color-line);
-            list-style: none; min-width: 220px; padding: 6px; padding-top: 10px; z-index: 600;
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-line);
+            list-style: none;
+            min-width: 220px;
+            padding: 6px;
+            padding-top: 10px;
+            z-index: 600;
         }
-        .nav-links .has-dropdown:hover .nav-dropdown { display: block; }
+
+        .nav-links .has-dropdown:hover .nav-dropdown {
+            display: block;
+        }
+
         .nav-dropdown li a {
-            display: block; padding: 9px 14px;
-            font-size: var(--text-sm); color: var(--color-text-muted);
-            border-radius: var(--radius-sm); white-space: nowrap;
+            display: block;
+            padding: 9px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
             transition: color var(--dur-fast), background var(--dur-fast);
         }
-        .nav-dropdown li a:hover { color: var(--color-navy); background: var(--color-surface); }
+
+        .nav-dropdown li a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        /* ============================================================
+        BUTTONS — fill-sweep hover effect
+        ============================================================ */
+        .btn-primary,
+        .btn-white,
+        .btn-ghost,
+        .btn-outline,
+        .nav-cta,
+        .hero-email-btn,
+        .bento-link {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        /* Sweep fill layer */
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-ghost::before,
+        .btn-outline::before,
+        .nav-cta::before,
+        .hero-email-btn::before,
+        .bento-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before,
+        .nav-cta:hover::before,
+        .hero-email-btn:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Ghost/outline on dark bg: sweep white */
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline::before {
+            background: var(--color-sky-light);
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* bento-link sweep white */
+        .bento-link::before {
+            background: var(--color-sky);
+        }
+
+        .bento-link:hover::before {
+            transform: scaleX(1);
+        }
+
+        .bento-link:hover {
+            color: var(--color-white, #fff);
+        }
+
+        /* btn-white (on dark join section) */
+        .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
         .nav-cta {
-            position: relative; overflow: hidden; isolation: isolate; z-index: 0;
-            flex-shrink: 0; background: var(--color-navy); color: var(--color-bg);
-            padding: 9px 20px; border-radius: var(--radius-pill);
-            font-size: var(--text-sm); font-weight: 500; white-space: nowrap;
+            flex-shrink: 0;
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 9px 20px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
             transition: color var(--dur-fast);
         }
-        .nav-cta::before {
-            content: ''; position: absolute; inset: 0;
-            background: var(--color-sky); transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22,1,0.36,1);
-            z-index: -1; border-radius: inherit;
-        }
-        .nav-cta:hover::before { transform: scaleX(1); }
+
         .nav-burger {
-            display: none; background: none; border: none;
-            flex-direction: column; gap: 5px; padding: 6px; margin-left: auto;
+            display: none;
+            background: none;
+            border: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+            margin-left: auto;
         }
-        .nav-burger span { display: block; width: 24px; height: 2px; background: var(--color-navy); border-radius: 2px; }
+
+        .nav-burger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-navy);
+            border-radius: 2px;
+            transition: all var(--dur-base) var(--ease-out);
+        }
+
+        /* Mobile menu */
         .mobile-menu {
-            display: none; position: fixed; inset: 0;
-            background: var(--color-bg); z-index: 490;
-            padding: 90px 24px 32px; overflow-y: auto;
-            flex-direction: column; gap: 4px;
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 490;
+            padding: 90px 24px 32px;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 4px;
         }
-        .mobile-menu.open { display: flex; }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
         .mobile-menu a {
-            display: block; padding: 14px 16px;
-            font-size: var(--text-xl); color: var(--color-text);
+            display: block;
+            padding: 14px 16px;
+            font-size: var(--text-xl);
+            color: var(--color-text);
             border-bottom: 1px solid var(--color-line);
             font-family: var(--font-display);
         }
+
         .mobile-menu .mob-cta {
-            margin-top: 24px; background: var(--color-navy);
-            color: var(--color-white); text-align: center;
-            padding: 16px; border-radius: var(--radius-pill);
-            font-size: var(--text-lg); border-bottom: none;
+            margin-top: 24px;
+            background: var(--color-navy);
+            color: var(--color-white);
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-lg);
+            border-bottom: none;
         }
+
         @media (max-width: 900px) {
-            .nav-links, .nav-cta { display: none; }
-            .nav-burger { display: flex; }
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
         }
 
         /* ============================================================
            SCROLL REVEAL
         ============================================================ */
         .reveal {
-            opacity: 0; transform: translateY(28px);
+            opacity: 0;
+            transform: translateY(28px);
             transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
         }
-        .reveal.visible { opacity: 1; transform: none; }
-        .reveal--delay-1 { transition-delay: 0.08s; }
-        .reveal--delay-2 { transition-delay: 0.16s; }
-        .reveal--delay-3 { transition-delay: 0.24s; }
-        .reveal--delay-4 { transition-delay: 0.32s; }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal--delay-1 {
+            transition-delay: 0.08s;
+        }
+
+        .reveal--delay-2 {
+            transition-delay: 0.16s;
+        }
+
+        .reveal--delay-3 {
+            transition-delay: 0.24s;
+        }
+
+        .reveal--delay-4 {
+            transition-delay: 0.32s;
+        }
 
         /* ============================================================
            SHARED
         ============================================================ */
         .section-label {
             display: inline-block;
-            font-size: var(--text-xs); font-weight: 700;
-            letter-spacing: 2.5px; text-transform: uppercase;
-            color: var(--color-sky); margin-bottom: var(--space-md);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
         }
 
         /* ============================================================
@@ -213,116 +445,215 @@
             position: relative;
             overflow: hidden;
         }
+
         .page-hero::before {
             content: 'LIT';
             position: absolute;
-            bottom: -40px; left: -20px;
+            bottom: -40px;
+            left: -20px;
             font-family: var(--font-display);
             font-size: clamp(200px, 28vw, 380px);
-            font-weight: 700; line-height: 1;
-            color: rgba(201,169,110,0.04);
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(201, 169, 110, 0.04);
             letter-spacing: -10px;
-            pointer-events: none; user-select: none;
+            pointer-events: none;
+            user-select: none;
         }
+
         .hero-main {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: max(64px, 6vw);
             align-items: center;
-            max-width: 1280px; width: 100%; margin: 0 auto;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
             padding-bottom: var(--space-2xl);
             border-bottom: 1px solid var(--color-line);
         }
-        .hero-text { position: relative; z-index: 1; }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+
         .hero-eyebrow {
             display: inline-block;
-            font-size: var(--text-xs); font-weight: 700;
-            letter-spacing: 2.5px; text-transform: uppercase;
-            color: var(--color-sky); margin-bottom: var(--space-lg);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
         }
+
         .hero-h1 {
             font-family: var(--font-display);
             font-size: clamp(3rem, 5vw, 5.5rem);
-            font-weight: 300; line-height: 1.02;
-            letter-spacing: -2px; color: var(--color-navy);
+            font-weight: 300;
+            line-height: 1.02;
+            letter-spacing: -2px;
+            color: var(--color-navy);
             margin-bottom: var(--space-lg);
         }
-        .hero-h1 em { font-style: italic; color: var(--color-sky); display: block; }
+
+        .hero-h1 em {
+            font-style: italic;
+            color: var(--color-sky);
+            display: block;
+        }
+
         .hero-divider {
-            width: 48px; height: 2px;
+            width: 48px;
+            height: 2px;
             background: linear-gradient(90deg, var(--color-sky), transparent);
             margin-bottom: var(--space-lg);
         }
+
         .hero-desc {
-            font-size: var(--text-lg); color: var(--color-text-muted);
-            line-height: 1.75; max-width: 440px; margin-bottom: var(--space-xl);
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            max-width: 440px;
+            margin-bottom: var(--space-xl);
         }
-        .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+        .hero-cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
 
         /* Buttons for light hero */
         .btn-primary {
-            position: relative; overflow: hidden; isolation: isolate; z-index: 0;
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 14px 28px; border-radius: var(--radius-pill);
-            background: var(--color-navy); color: var(--color-bg);
-            font-size: var(--text-sm); font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            background: var(--color-navy);
+            color: var(--color-bg);
+            font-size: var(--text-sm);
+            font-weight: 500;
             transition: color var(--dur-fast);
         }
+
         .btn-primary::before {
-            content: ''; position: absolute; inset: 0;
-            background: var(--color-sky); transform: scaleX(0);
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
             transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22,1,0.36,1);
-            z-index: -1; border-radius: inherit;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
         }
-        .btn-primary:hover::before { transform: scaleX(1); }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
         .btn-outline {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 13px 27px; border-radius: var(--radius-pill);
-            font-size: var(--text-sm); font-weight: 500;
-            background: transparent; color: var(--color-navy);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 27px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: transparent;
+            color: var(--color-navy);
             border: 1px solid var(--color-line);
             transition: background var(--dur-fast), border-color var(--dur-fast);
         }
-        .btn-outline:hover { background: var(--color-surface); border-color: var(--color-sky); }
+
+        .btn-outline:hover {
+            background: var(--color-surface);
+            border-color: var(--color-sky);
+        }
 
         /* Hero right: photo */
         .hero-photo-wrap {
-            position: relative; z-index: 1; overflow: hidden;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
             border-radius: var(--radius-xl);
         }
+
         .hero-photo-wrap img {
-            width: 100%; height: 520px;
-            object-fit: cover; object-position: center top;
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            object-position: center top;
             border-radius: var(--radius-xl);
             display: block;
             transition: transform var(--dur-slow) var(--ease-out);
         }
-        .hero-photo-wrap:hover img { transform: scale(1.02); }
+
+        .hero-photo-wrap:hover img {
+            transform: scale(1.02);
+        }
+
         .hero-photo-badge {
-            position: absolute; bottom: -20px; left: -24px;
-            background: var(--color-white); border: 1px solid var(--color-line);
+            position: absolute;
+            bottom: -20px;
+            left: -24px;
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
             border-radius: var(--radius-lg);
             padding: var(--space-lg) var(--space-xl);
-            box-shadow: var(--shadow-lg); z-index: 3;
+            box-shadow: var(--shadow-lg);
+            z-index: 3;
         }
+
         .hero-photo-badge-num {
-            font-family: var(--font-display); font-size: 2.5rem;
-            font-weight: 300; color: var(--color-sky); line-height: 1;
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
         }
+
         .hero-photo-badge-label {
-            font-size: var(--text-xs); font-weight: 600;
-            letter-spacing: 1.5px; text-transform: uppercase;
-            color: var(--color-text-light); margin-top: 6px;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-top: 6px;
         }
+
         @media (max-width: 960px) {
-            .hero-main { grid-template-columns: 1fr; gap: var(--space-2xl); }
-            .hero-photo-wrap img { height: 380px; }
-            .hero-photo-badge { left: 16px; bottom: 16px; }
+            .hero-main {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .hero-photo-wrap img {
+                height: 380px;
+            }
+
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
+            }
         }
+
         @media (max-width: 600px) {
-            .page-hero { padding-left: 24px; padding-right: 24px; }
-            .hero-photo-wrap { display: none; }
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-photo-wrap {
+                display: none;
+            }
         }
 
         /* ============================================================
@@ -332,27 +663,61 @@
             background: var(--color-surface);
             border-bottom: 1px solid var(--color-line);
             padding: var(--space-xl) max(48px, 6vw);
-            display: flex; align-items: center;
+            display: flex;
+            align-items: center;
             justify-content: space-between;
-            gap: var(--space-xl); flex-wrap: wrap;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
         }
-        .info-item { display: flex; align-items: center; gap: 14px; }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
         .info-icon {
-            width: 40px; height: 40px; border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             background: var(--color-sky-light);
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; color: var(--color-sky);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
         }
+
         .info-label {
-            font-size: var(--text-xs); font-weight: 600;
-            letter-spacing: 1.5px; text-transform: uppercase;
-            color: var(--color-text-light); margin-bottom: 3px;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-bottom: 3px;
         }
-        .info-value { font-size: var(--text-sm); color: var(--color-navy); }
-        .info-divider { width: 1px; height: 40px; background: var(--color-line); }
+
+        .info-value {
+            font-size: var(--text-sm);
+            color: var(--color-navy);
+        }
+
+        .info-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--color-line);
+        }
+
         @media (max-width: 900px) {
-            .info-strip { flex-direction: column; align-items: flex-start; padding: var(--space-xl) 24px; }
-            .info-divider { display: none; }
+            .info-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--space-xl) 24px;
+            }
+
+            .info-divider {
+                display: none;
+            }
         }
 
         /* ============================================================
@@ -360,450 +725,568 @@
         ============================================================ */
         .tabs-section {
             padding: var(--space-section) max(48px, 6vw);
-            background: var(--color-bg);
+            background: var(--color-white);
         }
-        .tabs-header { margin-bottom: var(--space-2xl); }
+
+        .tabs-header {
+            margin-bottom: var(--space-2xl);
+        }
+
         .tabs-header h2 {
             font-family: var(--font-display);
             font-size: clamp(2rem, 3.5vw, 3rem);
-            font-weight: 400; color: var(--color-navy);
-            line-height: 1.1; letter-spacing: -1px;
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.1;
+            letter-spacing: -1px;
         }
-        .tabs-header h2 em { font-style: italic; color: var(--color-sky); }
+
+        .tabs-header h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
 
         /* Tab nav */
         .tab-nav {
-            display: flex; gap: 6px; flex-wrap: wrap;
+            display: flex;
+            gap: 0;
             margin-bottom: var(--space-2xl);
             border-bottom: 1px solid var(--color-line);
             padding-bottom: 0;
+            overflow-x: auto;
         }
+
         .tab-btn {
-            display: flex; align-items: center; gap: 8px;
-            padding: 12px 20px;
-            font-size: var(--text-sm); font-weight: 500;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            font-size: var(--text-sm);
+            font-weight: 500;
             color: var(--color-text-muted);
-            background: none; border: none;
+            background: none;
+            border: none;
             border-bottom: 2px solid transparent;
             margin-bottom: -1px;
             border-radius: var(--radius-sm) var(--radius-sm) 0 0;
             cursor: pointer;
+            white-space: nowrap;
             transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
         }
-        .tab-btn:hover { color: var(--color-navy); background: var(--color-surface); }
+
+        .tab-btn:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
         .tab-btn.active {
             color: var(--color-navy);
+            font-weight: 600;
             border-bottom-color: var(--color-sky);
             background: transparent;
         }
+
         .tab-btn-tag {
-            font-size: 10px; font-weight: 700;
-            letter-spacing: 1.2px; text-transform: uppercase;
-            padding: 2px 8px; border-radius: var(--radius-pill);
-            background: var(--color-sky-light); color: var(--color-sky);
-        }
-        .tab-btn.active .tab-btn-tag {
-            background: var(--color-sky); color: var(--color-white);
+            display: none;
         }
 
         /* Tab panels */
-        .tab-panel { display: none; }
-        .tab-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2xl); align-items: start; }
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: start;
+        }
 
         .tab-content-left h3 {
             font-family: var(--font-display);
             font-size: clamp(1.6rem, 2.5vw, 2.25rem);
-            font-weight: 400; color: var(--color-navy);
-            line-height: 1.15; letter-spacing: -0.5px;
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.15;
+            letter-spacing: -0.5px;
             margin-bottom: var(--space-lg);
         }
-        .tab-content-left h3 em { font-style: italic; color: var(--color-sky); }
+
+        .tab-content-left h3 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
         .tab-content-left p {
             font-size: var(--text-base);
             color: var(--color-text-muted);
-            line-height: 1.8; margin-bottom: var(--space-lg);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
         }
+
         .tab-topics {
             list-style: none;
-            display: flex; flex-direction: column; gap: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             margin-bottom: var(--space-xl);
         }
+
         .tab-topics li {
-            display: flex; align-items: flex-start; gap: 10px;
-            font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.5;
         }
+
         .tab-topics li::before {
             content: '';
-            flex-shrink: 0; margin-top: 6px;
-            width: 6px; height: 6px; border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 6px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
             background: var(--color-sky);
         }
-        .tab-cta-row { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+
+        .tab-cta-row {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
 
         /* Right side: bento mini-cards */
         .tab-bento {
-            display: grid; grid-template-columns: 1fr 1fr;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
+
         .tab-bento-card {
             background: var(--color-surface);
             border: 1px solid var(--color-line);
             border-radius: var(--radius-lg);
             padding: var(--space-lg);
-            position: relative; overflow: hidden;
+            position: relative;
+            overflow: hidden;
             transition: box-shadow var(--dur-base), transform var(--dur-base), border-color var(--dur-base);
         }
+
         .tab-bento-card:hover {
             box-shadow: var(--shadow-md);
             transform: translateY(-2px);
-            border-color: rgba(201,169,110,0.4);
+            border-color: rgba(201, 169, 110, 0.4);
         }
-        .tab-bento-card--wide { grid-column: span 2; background: var(--color-navy); border-color: transparent; }
-        .tab-bento-card--wide .tbc-num { color: var(--color-sky); }
-        .tab-bento-card--wide .tbc-label { color: rgba(255,255,255,0.65); }
-        .tab-bento-card--accent { background: var(--color-sky-faint); border-color: rgba(201,169,110,0.25); }
+
+        /* Wide top: elegant gold border, warm tint */
+        .tab-bento-card--wide {
+            grid-column: span 2;
+            background: var(--color-sky-faint);
+            border-color: rgba(201, 169, 110, 0.35);
+        }
+
+        .tab-bento-card--wide .tbc-num {
+            font-size: clamp(2rem, 3vw, 2.75rem);
+            color: var(--color-navy);
+        }
+
+        .tab-bento-card--wide .tbc-label {
+            color: var(--color-text-muted);
+        }
+
+        /* accent class — same as base */
+        .tab-bento-card--accent {
+            background: var(--color-surface);
+            border-color: var(--color-line);
+        }
+
         .tbc-num {
             font-family: var(--font-display);
-            font-size: var(--text-3xl); font-weight: 400;
-            color: var(--color-sky); line-height: 1;
+            font-size: var(--text-3xl);
+            font-weight: 400;
+            color: var(--color-sky);
+            line-height: 1;
             margin-bottom: var(--space-sm);
         }
+
         .tbc-label {
-            font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.5;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.5;
         }
+
         .tbc-icon {
-            width: 40px; height: 40px; border-radius: var(--radius-md);
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
             background: var(--color-sky-light);
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: var(--space-md);
         }
+
         .tbc-icon svg {
-            width: 20px; height: 20px;
-            stroke: var(--color-sky); fill: none;
-            stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+            width: 20px;
+            height: 20px;
+            stroke: var(--color-sky);
+            fill: none;
+            stroke-width: 1.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
+
         .tbc-title {
             font-family: var(--font-display);
-            font-size: var(--text-base); font-weight: 500;
-            color: var(--color-navy); margin-bottom: 4px;
+            font-size: var(--text-base);
+            font-weight: 500;
+            color: var(--color-navy);
+            margin-bottom: 4px;
         }
-        .tbc-desc { font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.55; }
+
+        .tbc-desc {
+            font-size: var(--text-xs);
+            color: var(--color-text-muted);
+            line-height: 1.55;
+        }
 
         @media (max-width: 900px) {
-            .tab-panel.active { grid-template-columns: 1fr; }
+            .tab-panel.active {
+                grid-template-columns: 1fr;
+            }
         }
+
         @media (max-width: 600px) {
-            .tabs-section { padding: var(--space-2xl) 24px; }
-            .tab-nav { gap: 4px; }
-            .tab-btn { padding: 10px 12px; font-size: var(--text-xs); }
-            .tab-bento { grid-template-columns: 1fr; }
-            .tab-bento-card--wide { grid-column: span 1; }
+            .tabs-section {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .tab-nav {
+                gap: 0;
+                overflow-x: auto;
+            }
+
+            .tab-btn {
+                flex: 0 0 auto;
+                padding: 10px 14px;
+                font-size: var(--text-xs);
+            }
+
+            .tab-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-bento-card--wide {
+                grid-column: span 1;
+            }
         }
 
         /* ============================================================
            PURPOSE STRIP
         ============================================================ */
         .purpose-strip {
-            background: var(--color-sky-faint);
-            border-top: 1px solid rgba(201,169,110,0.2);
-            border-bottom: 1px solid rgba(201,169,110,0.2);
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
             padding: var(--space-2xl) max(48px, 6vw);
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: var(--space-2xl);
             align-items: center;
         }
+
         .purpose-strip h2 {
             font-family: var(--font-display);
-            font-size: var(--text-2xl); font-weight: 400;
-            color: var(--color-navy); line-height: 1.25;
+            font-size: var(--text-2xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.25;
         }
+
         .purpose-strip p {
-            font-size: var(--text-lg); color: var(--color-text-muted); line-height: 1.8;
-        }
-        @media (max-width: 768px) { .purpose-strip { grid-template-columns: 1fr; } }
-
-        /* ============================================================
-           WORKSHOPS BENTO GRID
-        ============================================================ */
-        .workshops-section {
-            padding: var(--space-section) max(48px, 6vw);
-            background: var(--color-bg);
-        }
-        .workshops-header {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-2xl);
-            align-items: end;
-            margin-bottom: var(--space-3xl);
-            padding-bottom: var(--space-2xl);
-            border-bottom: 1px solid var(--color-line);
-        }
-        .workshops-header h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2.25rem, 3.5vw, 3.25rem);
-            font-weight: 400; color: var(--color-navy);
-            line-height: 1.1; letter-spacing: -1px;
-        }
-        .workshops-header h2 em { font-style: italic; color: var(--color-sky); }
-        .workshops-header p {
-            font-size: var(--text-lg); color: var(--color-text-muted);
-            line-height: 1.8; align-self: end;
-        }
-        @media (max-width: 768px) { .workshops-header { grid-template-columns: 1fr; } }
-
-        /* Bento grid */
-        .workshops-bento {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: auto auto;
-            gap: var(--space-md);
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.8;
         }
 
-        /* Card base */
-        .ws-card {
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--color-line);
-            background: var(--color-white);
-            padding: var(--space-xl);
-            display: flex; flex-direction: column; gap: var(--space-lg);
-            position: relative; overflow: hidden;
-            transition: box-shadow var(--dur-base) var(--ease-out),
-                        transform var(--dur-base) var(--ease-out),
-                        border-color var(--dur-base);
-        }
-        .ws-card:hover {
-            box-shadow: 0 8px 32px rgba(0,0,0,0.09);
-            transform: translateY(-3px);
-            border-color: rgba(201,169,110,0.4);
-        }
-        /* No top line on hover — removed ::after entirely */
-
-        /* Featured (navy) card */
-        .ws-card--featured {
-            background: var(--color-navy);
-            border-color: transparent; color: var(--color-white);
-        }
-        .ws-card--featured:hover { border-color: rgba(201,169,110,0.4); }
-        .ws-card--featured .ws-card-name { color: var(--color-white); }
-        .ws-card--featured .ws-card-desc { color: rgba(255,255,255,0.65); }
-        .ws-card--featured .ws-icon-wrap { background: rgba(255,255,255,0.1); }
-        .ws-card--featured .ws-icon-wrap svg { stroke: var(--color-sky); }
-        .ws-card--featured .ws-card-tag { background: rgba(201,169,110,0.2); color: var(--color-sky); }
-        .ws-card--featured .ws-card-topics li { color: rgba(255,255,255,0.65); }
-
-        /* Warm card */
-        .ws-card--warm { background: var(--color-sky-faint); border-color: rgba(201,169,110,0.2); }
-
-        /* Bento spans */
-        .ws-card--span2 { grid-column: span 2; }
-
-        /* Card internals */
-        .ws-icon-wrap {
-            width: 48px; height: 48px;
-            border-radius: var(--radius-md);
-            background: var(--color-sky-light);
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; align-self: flex-start;
-        }
-        .ws-icon-wrap svg {
-            width: 22px; height: 22px;
-            stroke: var(--color-sky); fill: none;
-            stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
-        }
-        .ws-card-tag {
-            display: inline-block;
-            font-size: 10px; font-weight: 700;
-            letter-spacing: 1.5px; text-transform: uppercase;
-            padding: 3px 10px; border-radius: var(--radius-pill);
-            background: var(--color-sky-light); color: var(--color-sky);
-            align-self: flex-start;
-        }
-        .ws-card-name {
-            font-family: var(--font-display);
-            font-size: var(--text-xl); font-weight: 400;
-            color: var(--color-navy); line-height: 1.25;
-        }
-        .ws-card-desc {
-            font-size: var(--text-sm); color: var(--color-text-muted);
-            line-height: 1.8; flex: 1;
-        }
-        .ws-card-topics {
-            list-style: none;
-            display: flex; flex-direction: column; gap: 6px;
-            margin-top: var(--space-sm);
-        }
-        .ws-card-topics li {
-            font-size: var(--text-sm); color: var(--color-text-muted);
-            display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;
-        }
-        .ws-card-topics li::before {
-            content: ''; flex-shrink: 0; margin-top: 7px;
-            width: 5px; height: 5px; border-radius: 50%;
-            background: var(--color-sky);
-        }
-        .ws-card-link {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-size: var(--text-sm); font-weight: 500;
-            color: var(--color-sky); margin-top: auto;
-            transition: gap var(--dur-fast);
-        }
-        .ws-card-link:hover { gap: 10px; }
-        .ws-card-link svg {
-            width: 14px; height: 14px;
-            stroke: currentColor; fill: none;
-            stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
-        }
-
-        @media (max-width: 960px) {
-            .workshops-bento { grid-template-columns: 1fr 1fr; }
-            .ws-card--span2 { grid-column: span 2; }
-        }
-        @media (max-width: 600px) {
-            .workshops-section { padding: var(--space-2xl) 24px; }
-            .workshops-bento { grid-template-columns: 1fr; }
-            .ws-card--span2 { grid-column: span 1; }
+        @media (max-width: 768px) {
+            .purpose-strip {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* ============================================================
-           APPROACH SECTION
+           APPROACH SECTION — light
         ============================================================ */
         .approach-section {
-            background: var(--color-navy-deep);
+            background: var(--color-white);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
             padding: var(--space-section) max(48px, 6vw);
-            position: relative; overflow: hidden;
+            position: relative;
+            overflow: hidden;
         }
+
         .approach-section::before {
-            content: ''; position: absolute;
-            top: -200px; right: -200px;
-            width: 700px; height: 700px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(201,169,110,0.07) 0%, transparent 65%);
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.06) 0%, transparent 65%);
             pointer-events: none;
         }
+
         .approach-inner {
-            position: relative; z-index: 1;
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: var(--space-3xl); align-items: start;
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            align-items: stretch;
+            /* both columns same height */
         }
-        .approach-text .section-label { color: var(--color-sky); }
+
+        .approach-text .section-label {
+            color: var(--color-sky);
+        }
+
         .approach-text h2 {
             font-family: var(--font-display);
             font-size: clamp(2.25rem, 3.5vw, 3.25rem);
-            font-weight: 300; color: var(--color-white);
-            line-height: 1.1; letter-spacing: -1px;
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.1;
+            letter-spacing: -1px;
             margin-bottom: var(--space-xl);
         }
-        .approach-text h2 em { font-style: italic; color: var(--color-sky); }
-        .approach-text p {
-            font-size: var(--text-lg); color: rgba(255,255,255,0.6);
-            line-height: 1.8; margin-bottom: var(--space-xl);
-        }
-        .approach-values { display: flex; flex-direction: column; gap: var(--space-md); }
-        .approach-value { display: flex; gap: var(--space-md); align-items: flex-start; }
-        .approach-value-icon {
-            width: 40px; height: 40px; flex-shrink: 0;
-            border-radius: var(--radius-md);
-            background: rgba(201,169,110,0.12);
-            display: flex; align-items: center; justify-content: center;
-        }
-        .approach-value-icon svg {
-            width: 18px; height: 18px;
-            stroke: var(--color-sky); fill: none;
-            stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
-        }
-        .approach-value-body strong {
-            display: block; font-size: var(--text-base); font-weight: 500;
-            color: var(--color-white); margin-bottom: 2px;
-        }
-        .approach-value-body span {
-            font-size: var(--text-sm); color: rgba(255,255,255,0.5); line-height: 1.6;
+
+        .approach-text h2 em {
+            font-style: italic;
+            color: var(--color-sky);
         }
 
-        /* Right: bento stats grid */
+        .approach-text p {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            margin-bottom: var(--space-xl);
+        }
+
+        .approach-values {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .approach-value {
+            display: flex;
+            gap: var(--space-md);
+            align-items: flex-start;
+        }
+
+        .approach-value-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: var(--radius-md);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .approach-value-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--color-sky);
+            fill: none;
+            stroke-width: 1.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .approach-value-body strong {
+            display: block;
+            font-size: var(--text-base);
+            font-weight: 500;
+            color: var(--color-navy);
+            margin-bottom: 2px;
+        }
+
+        .approach-value-body span {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        /* Right: bento stats grid — stretches to full column height */
         .approach-bento {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto auto;
+            grid-template-rows: auto 1fr 1fr;
             gap: 10px;
+            align-self: stretch;
         }
+
         .approach-stat {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
             border-radius: var(--radius-lg);
             padding: var(--space-xl);
-            transition: background var(--dur-base);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base);
         }
-        .approach-stat:hover { background: rgba(255,255,255,0.07); }
+
+        .approach-stat:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
         /* Wide top card */
         .approach-stat--wide {
             grid-column: span 2;
-            background: rgba(201,169,110,0.08);
-            border-color: rgba(201,169,110,0.2);
-        }
-        /* Tall left card */
-        .approach-stat--tall {
-            grid-row: span 2;
-            display: flex; flex-direction: column; justify-content: flex-end;
-            background: rgba(255,255,255,0.06);
-        }
-        .approach-stat-num {
-            font-family: var(--font-display);
-            font-size: var(--text-3xl); font-weight: 400;
-            color: var(--color-sky); line-height: 1;
-            margin-bottom: var(--space-sm);
-        }
-        .approach-stat-label {
-            font-size: var(--text-sm); color: rgba(255,255,255,0.55); line-height: 1.5;
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
         }
 
-        @media (max-width: 900px) { .approach-inner { grid-template-columns: 1fr; } }
+        .approach-stat--wide .approach-stat-num {
+            color: var(--color-sky);
+        }
+
+        .approach-stat--wide .approach-stat-label {
+            color: var(--color-text-muted);
+        }
+
+        /* Tall left card — same surface, justified to bottom */
+        .approach-stat--tall {
+            grid-row: span 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .approach-stat-num {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 400;
+            color: var(--color-sky);
+            line-height: 1;
+            margin-bottom: var(--space-sm);
+        }
+
+        .approach-stat-label {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 900px) {
+            .approach-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 600px) {
-            .approach-section { padding: var(--space-2xl) 24px; }
-            .approach-bento { grid-template-columns: 1fr; }
-            .approach-stat--wide, .approach-stat--tall { grid-column: span 1; grid-row: span 1; }
+            .approach-section {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .approach-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .approach-stat--wide,
+            .approach-stat--tall {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
         }
 
         /* ============================================================
            EVENT CTA BANNER
         ============================================================ */
         .event-cta {
-            background: var(--color-bg);
+            background: var(--color-surface);
             padding: var(--space-section) max(48px, 6vw);
         }
+
         .event-cta-inner {
-            background: var(--color-sky-faint);
-            border: 1px solid rgba(201,169,110,0.3);
+            background: var(--color-bg);
+            border: 1px solid rgba(201, 169, 110, 0.3);
             border-radius: var(--radius-xl);
             padding: var(--space-3xl) var(--space-section);
-            display: flex; align-items: center;
-            justify-content: space-between; gap: var(--space-xl);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-xl);
         }
-        .event-cta-text .section-label { display: block; }
+
+        .event-cta-text .section-label {
+            display: block;
+        }
+
         .event-cta-text p:last-child {
             font-family: var(--font-display);
-            font-size: var(--text-2xl); font-weight: 400;
-            color: var(--color-navy); line-height: 1.3; margin-top: var(--space-sm);
+            font-size: var(--text-2xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.3;
+            margin-top: var(--space-sm);
         }
+
         .btn-navy {
-            position: relative; overflow: hidden; isolation: isolate;
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 14px 32px; border-radius: var(--radius-pill);
-            background: var(--color-navy); color: var(--color-white);
-            font-size: var(--text-sm); font-weight: 500; white-space: nowrap;
-            flex-shrink: 0; transition: color var(--dur-fast);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: var(--radius-pill);
+            background: var(--color-navy);
+            color: var(--color-white);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: color var(--dur-fast);
         }
+
         .btn-navy::before {
-            content: ''; position: absolute; inset: 0;
-            background: var(--color-sky); transform: scaleX(0);
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
             transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22,1,0.36,1);
-            z-index: -1; border-radius: inherit;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
         }
-        .btn-navy:hover::before { transform: scaleX(1); }
+
+        .btn-navy:hover::before {
+            transform: scaleX(1);
+        }
+
         @media (max-width: 768px) {
-            .event-cta-inner { flex-direction: column; text-align: center; padding: var(--space-2xl); }
+            .event-cta-inner {
+                flex-direction: column;
+                text-align: center;
+                padding: var(--space-2xl);
+            }
         }
-        @media (max-width: 600px) { .event-cta { padding: 0 24px var(--space-2xl); } }
+
+        @media (max-width: 600px) {
+            .event-cta {
+                padding: 0 24px var(--space-2xl);
+            }
+        }
 
         /* ============================================================
            JOIN BANNER
@@ -811,164 +1294,350 @@
         .section-join {
             background: var(--color-navy-deep);
             padding: var(--space-section) max(48px, 6vw);
-            text-align: center; position: relative; overflow: hidden;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
+
         .section-join::before {
-            content: ''; position: absolute;
-            top: -160px; left: 50%; transform: translateX(-50%);
-            width: 600px; height: 600px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 70%);
+            content: '';
+            position: absolute;
+            top: -160px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 70%);
             pointer-events: none;
         }
+
         .join-eyebrow {
             display: inline-block;
-            font-size: var(--text-xs); font-weight: 700;
-            letter-spacing: 2.5px; text-transform: uppercase;
-            color: var(--color-sky); margin-bottom: var(--space-md);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
         }
+
         .join-h2 {
             font-family: var(--font-display);
             font-size: clamp(2.5rem, 4.5vw, 4rem);
-            font-weight: 300; letter-spacing: -1.5px;
-            line-height: 1.1; color: var(--color-white); margin-bottom: var(--space-lg);
+            font-weight: 300;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            color: var(--color-white);
+            margin-bottom: var(--space-lg);
         }
+
         .join-sub {
-            font-size: var(--text-lg); color: rgba(255,255,255,0.6);
-            max-width: 520px; margin: 0 auto var(--space-xl);
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 520px;
+            margin: 0 auto var(--space-xl);
         }
+
         .join-actions {
-            display: flex; align-items: center; justify-content: center;
-            gap: var(--space-md); flex-wrap: wrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
         }
+
         .btn-white {
-            position: relative; overflow: hidden; isolation: isolate;
-            display: inline-flex; align-items: center;
-            padding: 14px 28px; border-radius: var(--radius-pill);
-            font-size: var(--text-sm); font-weight: 500;
-            background: var(--color-white); color: var(--color-navy);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
             transition: color var(--dur-fast);
         }
+
         .btn-white::before {
-            content: ''; position: absolute; inset: 0;
-            background: var(--color-sky); transform: scaleX(0);
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
             transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22,1,0.36,1);
-            z-index: -1; border-radius: inherit;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
         }
-        .btn-white:hover::before { transform: scaleX(1); }
-        .btn-white:hover { color: var(--color-white); }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
         .btn-ghost {
-            display: inline-flex; align-items: center;
-            padding: 13px 27px; border-radius: var(--radius-pill);
-            font-size: var(--text-sm); font-weight: 500;
-            border: 1.5px solid rgba(255,255,255,0.35);
-            color: rgba(255,255,255,0.85);
+            display: inline-flex;
+            align-items: center;
+            padding: 13px 27px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            color: rgba(255, 255, 255, 0.85);
             transition: color var(--dur-fast), border-color var(--dur-fast);
         }
-        .btn-ghost:hover { border-color: rgba(255,255,255,0.7); }
+
+        .btn-ghost:hover {
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
         @media (max-width: 600px) {
-            .section-join { padding: var(--space-2xl) 24px; }
-            .join-actions { flex-direction: column; align-items: stretch; text-align: center; }
+            .section-join {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .join-actions {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
         }
 
         /* ============================================================
-           FOOTER
+        FOOTER
         ============================================================ */
         .footer {
             background: var(--color-surface);
             border-top: 1px solid var(--color-line);
-            padding: var(--space-section) max(40px, 5vw);
+            padding: var(--space-2xl) max(40px, 5vw);
         }
+
         .footer-grid {
             display: grid;
             grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
-            gap: var(--space-2xl); margin-bottom: var(--space-2xl);
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
         }
-        .footer-brand img { height: 48px; width: auto; margin-bottom: var(--space-md); }
-        .footer-brand p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.65; max-width: 260px; }
+
+        .footer-brand img {
+            height: 48px;
+            width: auto;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            max-width: 260px;
+        }
+
         .footer-col-title {
-            font-size: var(--text-xs); font-weight: 700;
-            letter-spacing: 2px; text-transform: uppercase;
-            color: var(--color-navy); margin-bottom: var(--space-lg);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
         }
-        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .footer-links a { font-size: var(--text-sm); color: var(--color-text-muted); transition: color var(--dur-fast); }
-        .footer-links a:hover { color: var(--color-sky); }
-        .footer-contact p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; margin-bottom: 8px; }
-        .footer-contact a { color: var(--color-sky); }
-        .footer-social { display: flex; gap: 8px; margin-top: var(--space-lg); flex-wrap: wrap; }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-contact p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .footer-contact a {
+            color: var(--color-sky);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 8px;
+            margin-top: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
         .footer-social a {
-            display: flex; align-items: center; justify-content: center;
-            width: 36px; height: 36px; border-radius: 50%;
-            background: var(--color-surface-2); color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
             transition: background var(--dur-fast), color var(--dur-fast);
         }
-        .footer-social a:hover { background: var(--color-accent); color: var(--color-white); }
+
+        .footer-social a:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
         .footer-partners {
-            display: flex; align-items: center; justify-content: space-around;
-            gap: var(--space-2xl); padding: var(--space-xl) max(40px,5vw);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) max(40px, 5vw);
             border-top: 1px solid var(--color-line);
-            border-bottom: 1px solid var(--color-line); flex-wrap: wrap;
+            border-bottom: 1px solid var(--color-line);
+            flex-wrap: wrap;
         }
-        .footer-partners img { height: 56px; width: auto; object-fit: contain; opacity: 0.7; filter: grayscale(20%); transition: opacity var(--dur-fast); }
-        .footer-partners img:hover { opacity: 1; }
+
+        .footer-partners img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(20%);
+            transition: opacity var(--dur-fast);
+        }
+
+        .footer-partners img:hover {
+            opacity: 1;
+        }
+
         .footer-bottom {
-            padding-top: var(--space-xl); border-top: 1px solid var(--color-line);
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: var(--space-md);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
         }
-        .footer-bottom p, .footer-bottom a { font-size: var(--text-sm); color: var(--color-text-light); }
-        .footer-bottom a:hover { color: var(--color-sky); }
-        .footer-bottom-links { display: flex; gap: var(--space-xl); }
-        @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--space-xl); } }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+        }
+
         @media (max-width: 600px) {
-            .footer-grid { grid-template-columns: 1fr; }
-            .footer-bottom { flex-direction: column; text-align: center; }
-            .footer-bottom-links { justify-content: center; }
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
         }
     </style>
 </head>
 
 <body>
-
     <!-- ============================================================
     NAV
     ============================================================ -->
     <header class="nav" id="mainNav">
         <div class="nav-logo">
-            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
-                alt="ASCENDtials Logo">
+            <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
         </div>
+
         <ul class="nav-links">
             <li><a href="./index.html">Home</a></li>
+
             <li class="has-dropdown">
                 <a href="#">About</a>
                 <ul class="nav-dropdown">
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="our-team.html">Our Team</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./our-team.html">Our Team</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
                 </ul>
             </li>
+
             <li class="has-dropdown">
                 <a href="#">Education</a>
                 <ul class="nav-dropdown">
-                    <li><a href="./education-and-training.html">Education & Training</a></li>
+                    <li><a href="./education-and-training.html">Education and Training</a></li>
                     <li><a href="./literacy-workshops.html">Literacy Workshops</a></li>
                     <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
-                    <li><a href="./from-whiteness-to-oneness.html">Whiteness To Oneness™</a></li>
+                    <li><a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a></li>
+                    <li><a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a></li>
+                    <li><a href="./service-learning.html">Service Learning</a></li>
                 </ul>
             </li>
+
             <li class="has-dropdown">
                 <a href="#">Programs</a>
                 <ul class="nav-dropdown">
                     <li><a href="./events.html">Event Calendar</a></li>
-                    <li><a href="./service-learning-programs.html">Service Learning</a></li>
-                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./program-participant.html">Program Participant</a></li>
+                    <li><a href="./farmers-market.html">Farmers' Market</a></li>
+                    <li><a href="./food-distribution.html">Food Distribution</a></li>
+                    <li><a href="./youth-programs.html">Youth Program</a></li>
                     <li><a href="./environmental-programs.html">Environmental Programs</a></li>
-                    <li><a href="./legal-aid-program.html">Legal Aid Programs</a></li>
-                    <li><a href="./fellowship-program.html">Internships & Fellowships</a></li>
+                    <li><a href="./court-order-community-service.html">Court Order Community Service</a></li>
                 </ul>
             </li>
+
+            <li class="has-dropdown">
+                <a href="#">Clubs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./mdba-portal.html">MDBA Portal</a></li>
+                    <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
+                    <li><a href="./join-our-community">Join our community</a></li>
+                </ul>
+            </li>
+
             <li class="has-dropdown">
                 <a href="#">Join Us</a>
                 <ul class="nav-dropdown">
@@ -977,11 +1646,15 @@
                     <li><a href="./volunteer.html">Volunteer</a></li>
                 </ul>
             </li>
+
         </ul>
-        <a class="nav-cta" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1">Support Us</a>
+
+        <a class="nav-cta" href="./support-us">Support Us</a>
+        
         <button class="nav-burger" id="navBurger" aria-label="Open menu">
             <span></span><span></span><span></span>
         </button>
+
     </header>
 
     <div class="mobile-menu" id="mobileMenu">
@@ -991,27 +1664,34 @@
         <a href="./our-team.html">Our Team</a>
         <a href="./contact.html">Contact Us</a>
 
-        <a href="./education-and-training.html">Education & Training</a>
+        <a href="./education-and-training.html">Education and Training</a>
         <a href="./literacy-workshops.html">Literacy Workshops</a>
         <a href="./kemetic-yoga.html">Kemetic Yoga</a>
-        <a href="./from-whiteness-to-oneness.html">Whiteness To Oneness™</a>
+        <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
+        <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
+        <a href="./service-learning.html">Service Learning</a>
 
         <a href="./events.html">Event Calendar</a>
-        <a href="./service-learning-programs.html">Service Learning</a>
-        <a href="./youth-programs.html">Youth Programs</a>
+        <a href="./program-participant.html">Program Participant</a>
+        <a href="./farmers-market.html">Farmers' Market</a>
+        <a href="./food-distribution.html">Food Distribution</a>
+        <a href="./youth-programs.html">Youth Program</a>
         <a href="./environmental-programs.html">Environmental Programs</a>
-        <a href="./legal-aid-program.html">Legal Aid Programs</a>
-        <a href="./fellowship-program.html">Internships & Fellowships</a>
+        <a href="./court-order-community-service.html">Court Order Community Service</a>
+
+        <a href="./mdba-portal.html">MDBA Portal</a>
+        <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+        <a href="./join-our-community">Join our community</a>
 
         <a href="./get-involved.html">Get Involved</a>
         <a href="./partner-with-us.html">Partner with Us</a>
         <a href="./volunteer.html">Volunteer</a>
 
-        <a class="mob-cta" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1">Support Us</a>
+        <a class="mob-cta" href="./support-us"> Support Us </a>
     </div>
 
     <!-- ============================================================
-    PAGE HERO 
+    PAGE HERO — light style
     ============================================================ -->
     <section class="page-hero">
         <div class="hero-main">
@@ -1023,12 +1703,15 @@
                     <em>Workshops</em>
                 </h1>
                 <div class="hero-divider"></div>
-                <p class="hero-desc">Equipping BIPOC adults with literacy across five vital areas — bridging the knowledge gaps created by oppressive systems.</p>
+                <p class="hero-desc">Equipping BIPOC adults with literacy across five vital areas — bridging the
+                    knowledge gaps created by oppressive systems.</p>
                 <div class="hero-cta-row">
                     <a class="btn-primary" href="https://ascendtials.org/event-landing-page/">
                         Browse Upcoming Events
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
                         </svg>
                     </a>
                     <a class="btn-outline" href="./ascendtials-education-and-training.html">All Programs</a>
@@ -1047,13 +1730,16 @@
         </div>
     </section>
 
-    <!-- INFO STRIP -->
+    <!-- ============================================================
+    INFO STRIP
+    ============================================================ -->
     <div class="info-strip">
         <div class="info-item">
             <div class="info-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
             </div>
             <div>
@@ -1065,8 +1751,8 @@
         <div class="info-item">
             <div class="info-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                    <rect x="2" y="7" width="20" height="14" rx="2"/>
-                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                    <rect x="2" y="7" width="20" height="14" rx="2" />
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
                 </svg>
             </div>
             <div>
@@ -1078,7 +1764,8 @@
         <div class="info-item">
             <div class="info-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                    <path
+                        d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                 </svg>
             </div>
             <div>
@@ -1090,8 +1777,8 @@
         <div class="info-item">
             <div class="info-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
                 </svg>
             </div>
             <div>
@@ -1121,9 +1808,6 @@
             <button class="tab-btn" data-tab="financial" role="tab" aria-selected="false">
                 Financial Literacy <span class="tab-btn-tag">Wealth</span>
             </button>
-            <!-- <button class="tab-btn" data-tab="spiritual" role="tab" aria-selected="false">
-                Spiritual Literacy <span class="tab-btn-tag">Healing</span>
-            </button> -->
             <button class="tab-btn" data-tab="cosmic" role="tab" aria-selected="false">
                 Cosmic Literacy <span class="tab-btn-tag">Ancestral</span>
             </button>
@@ -1133,18 +1817,28 @@
         <div class="tab-panel active" id="tab-civic">
             <div class="tab-content-left">
                 <h3>Civic Literacy</h3>
-                <p>Understand your rights, engage with local governance, and build collective power within your community. These workshops bridge the gap between policy and people — creating informed, empowered advocates.</p>
+                <p>Our civic workshops include discussions on our Whiteness to Oneness™ Curriculum alongside healing
+                    sessions that explore cultural elements. We use the Design Thinking process and the ancient Dogon
+                    creation process to bridge the gap between policy and people — creating informed, empowered
+                    advocates.</p>
                 <ul class="tab-topics">
+                    <li>Whiteness to Oneness™ Curriculum discussions</li>
+                    <li>Cultural healing sessions</li>
+                    <li>Design Thinking process</li>
+                    <li>Ancient Dogon creation process</li>
                     <li>Voting rights & civic engagement</li>
                     <li>Know your rights — legal literacy</li>
                     <li>Advocacy & community organizing</li>
                     <li>Local government & policy</li>
-                    <li>Understanding community boards & public comment</li>
                 </ul>
                 <div class="tab-cta-row">
                     <a class="btn-primary" href="https://ascendtials.org/civic-literacy-2/">
                         Learn More
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
                     </a>
                     <a class="btn-outline" href="https://ascendtials.org/event-landing-page/">See Upcoming Sessions</a>
                 </div>
@@ -1156,17 +1850,25 @@
                 </div>
                 <div class="tab-bento-card tab-bento-card--accent">
                     <div class="tbc-icon">
-                        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
                     </div>
-                    <div class="tbc-title">Know Your Rights</div>
-                    <div class="tbc-desc">Legal literacy tools to help you navigate systems built against you.</div>
+                    <div class="tbc-title">Design Thinking</div>
+                    <div class="tbc-desc">Human-centered problem solving applied to civic challenges in BIPOC
+                        communities.</div>
                 </div>
                 <div class="tab-bento-card">
                     <div class="tbc-icon">
-                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
                     </div>
-                    <div class="tbc-title">Community Organizing</div>
-                    <div class="tbc-desc">Skills to build collective action and lasting advocacy networks.</div>
+                    <div class="tbc-title">Whiteness to Oneness™</div>
+                    <div class="tbc-desc">Curriculum exploring cultural healing and collective liberation.</div>
                 </div>
             </div>
         </div>
@@ -1175,40 +1877,56 @@
         <div class="tab-panel" id="tab-environmental">
             <div class="tab-content-left">
                 <h3>Environmental Literacy</h3>
-                <p>Land stewardship, air quality, water guardianship — learn to read and protect the natural world through an environmental justice lens. Our workshops ground ecological knowledge in the lived realities of BIPOC communities.</p>
+                <p>As the climate warms and car exhaust pollutes our streets, we are learning that trees are more
+                    important than ever. Join us in our tree planting initiative at the ASCENDkemet Farmers' Market with
+                    our partners at Tree San Diego to help plant trees all across San Diego.</p>
+                <p>Join us in helping organize, set-up, and clean-up in places around our beautiful community. Sign up
+                    for any available session to aid us in our mission to create cleaner and safer environments.</p>
                 <ul class="tab-topics">
-                    <li>Environmental justice & community health</li>
-                    <li>Land stewardship and urban farming</li>
-                    <li>Air & water quality advocacy</li>
+                    <li>Tree planting with Tree San Diego</li>
+                    <li>ASCENDkemet Farmers' Market partnership</li>
+                    <li>Community clean-up & organizing events</li>
+                    <li>Air quality & environmental justice advocacy</li>
+                    <li>Land stewardship and urban ecology</li>
                     <li>Climate resilience in BIPOC neighborhoods</li>
-                    <li>Ancestral relationships with the natural world</li>
                 </ul>
                 <div class="tab-cta-row">
                     <a class="btn-primary" href="https://ascendtials.org/environmental-literacy-3/">
                         Learn More
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
                     </a>
                     <a class="btn-outline" href="https://ascendtials.org/event-landing-page/">See Upcoming Sessions</a>
                 </div>
             </div>
             <div class="tab-bento">
                 <div class="tab-bento-card tab-bento-card--wide">
-                    <div class="tbc-num">Earth</div>
-                    <div class="tbc-label">Reconnecting communities to the land, water, and air that sustains all life</div>
+                    <div class="tbc-num">Trees</div>
+                    <div class="tbc-label">Planting across San Diego with Tree San Diego — because trees are more
+                        important than ever</div>
                 </div>
                 <div class="tab-bento-card tab-bento-card--accent">
                     <div class="tbc-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" />
+                            <path
+                                d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
                     </div>
-                    <div class="tbc-title">Land Stewardship</div>
-                    <div class="tbc-desc">Hands-on workshops connecting ancestral wisdom with modern land care.</div>
+                    <div class="tbc-title">Tree Planting Initiative</div>
+                    <div class="tbc-desc">Hands-on planting events in partnership with Tree San Diego.</div>
                 </div>
                 <div class="tab-bento-card">
                     <div class="tbc-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                        </svg>
                     </div>
-                    <div class="tbc-title">Justice Lens</div>
-                    <div class="tbc-desc">Ecology education rooted in environmental justice and community health.</div>
+                    <div class="tbc-title">Community Clean-Up</div>
+                    <div class="tbc-desc">Organizing safer, cleaner spaces in neighborhoods we call home.</div>
                 </div>
             </div>
         </div>
@@ -1217,83 +1935,56 @@
         <div class="tab-panel" id="tab-financial">
             <div class="tab-content-left">
                 <h3>Financial Literacy</h3>
-                <p>Build generational wealth through practical financial education — budgeting, credit, investing, and entrepreneurship tailored for BIPOC communities. Close the wealth gap with tools designed for your reality.</p>
+                <p>Make informed decisions about your money. Our Generational Wealth Workshops offer a comprehensive
+                    approach to building and maintaining generational wealth, with a focus on land preservation and
+                    addressing trans-generational trauma.</p>
                 <ul class="tab-topics">
+                    <li>Generational Wealth Workshop series</li>
+                    <li>Land preservation strategies</li>
+                    <li>Addressing trans-generational financial trauma</li>
                     <li>Budgeting & personal finance fundamentals</li>
                     <li>Credit building & debt management</li>
-                    <li>Investing & wealth-building strategies</li>
                     <li>Black entrepreneurship & business ownership</li>
-                    <li>Generational wealth planning</li>
-                    <li>Navigating homeownership & real estate</li>
+                    <li>Investing & wealth-building strategies</li>
                 </ul>
                 <div class="tab-cta-row">
                     <a class="btn-primary" href="https://ascendtials.org/financial-literacy/">
                         Learn More
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
                     </a>
                     <a class="btn-outline" href="https://ascendtials.org/event-landing-page/">See Upcoming Sessions</a>
                 </div>
             </div>
             <div class="tab-bento">
                 <div class="tab-bento-card tab-bento-card--wide">
-                    <div class="tbc-num">Wealth</div>
-                    <div class="tbc-label">Building generational financial power in BIPOC communities</div>
+                    <div class="tbc-num">Generational</div>
+                    <div class="tbc-label">Wealth-building workshops focused on land preservation and healing financial
+                        trauma</div>
                 </div>
                 <div class="tab-bento-card tab-bento-card--accent">
                     <div class="tbc-icon">
-                        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <line x1="12" y1="1" x2="12" y2="23" />
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                        </svg>
                     </div>
-                    <div class="tbc-title">Credit & Investing</div>
-                    <div class="tbc-desc">Practical tools to build credit and begin investing on any income.</div>
+                    <div class="tbc-title">Generational Wealth</div>
+                    <div class="tbc-desc">Comprehensive approach to building wealth across generations, including land
+                        ownership.</div>
                 </div>
                 <div class="tab-bento-card">
                     <div class="tbc-icon">
-                        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <rect x="2" y="7" width="20" height="14" rx="2" />
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                        </svg>
                     </div>
-                    <div class="tbc-title">Entrepreneurship</div>
-                    <div class="tbc-desc">Support for BIPOC business owners at every stage of growth.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ── Spiritual Literacy ── -->
-        <div class="tab-panel" id="tab-spiritual">
-            <div class="tab-content-left">
-                <h3>Spiritual Literacy</h3>
-                <p>Reconnect with ancestral healing traditions, mindfulness, and cultural truth. A space for inner restoration rooted in African and Indigenous wisdom — reclaiming spiritual knowledge as a form of liberation.</p>
-                <ul class="tab-topics">
-                    <li>Ancestral healing traditions & practices</li>
-                    <li>Mindfulness & cultural meditation</li>
-                    <li>Kemetic & African spiritual systems</li>
-                    <li>Indigenous wisdom & land connection</li>
-                    <li>Healing from collective trauma</li>
-                    <li>Spiritual community circles</li>
-                </ul>
-                <div class="tab-cta-row">
-                    <a class="btn-primary" href="https://ascendtials.org/event-landing-page/">
-                        See Upcoming Sessions
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                    </a>
-                </div>
-            </div>
-            <div class="tab-bento">
-                <div class="tab-bento-card tab-bento-card--wide">
-                    <div class="tbc-num">Healing</div>
-                    <div class="tbc-label">Inner restoration rooted in African and Indigenous ancestral wisdom</div>
-                </div>
-                <div class="tab-bento-card tab-bento-card--accent">
-                    <div class="tbc-icon">
-                        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                    </div>
-                    <div class="tbc-title">Ancestral Traditions</div>
-                    <div class="tbc-desc">Reconnecting with healing practices carried through generations.</div>
-                </div>
-                <div class="tab-bento-card">
-                    <div class="tbc-icon">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                    </div>
-                    <div class="tbc-title">Community Circles</div>
-                    <div class="tbc-desc">Safe, affirming spaces for collective spiritual growth and sharing.</div>
+                    <div class="tbc-title">Trauma-Informed Finance</div>
+                    <div class="tbc-desc">Healing the cycle of financial trauma passed through generations.</div>
                 </div>
             </div>
         </div>
@@ -1302,41 +1993,60 @@
         <div class="tab-panel" id="tab-cosmic">
             <div class="tab-content-left">
                 <h3>Cosmic Literacy</h3>
-                <p>Explore the night sky through ancient Kemetic wisdom. Monthly star parties, telescope sessions, and cultural storytelling reconnect participants with the cosmos — restoring an ancestral relationship with the universe.</p>
+                <p>Our workshops aim to deepen knowledge of ancient astronomy and astrology. They include a new night
+                    sky course, evening Kemetic Yoga, and basic lessons on the constellations, cycles, life stages, and
+                    the moon.</p>
                 <ul class="tab-topics">
+                    <li>Ancient astronomy & astrology</li>
+                    <li>New night sky course</li>
+                    <li>Evening Kemetic Yoga sessions</li>
+                    <li>Constellations, cycles, and life stages</li>
+                    <li>Moon phases & celestial rhythms</li>
                     <li>Night Sky Star Party — every 2nd Saturday</li>
-                    <li>Ancient Kemet star knowledge & mythology</li>
                     <li>Guided telescope viewing for families</li>
-                    <li>Cosmic storytelling & cultural astronomy</li>
                     <li>21-day immersive course available</li>
-                    <li>Youth-led stargazing events</li>
                 </ul>
                 <div class="tab-cta-row">
                     <a class="btn-primary" href="https://ascendtials.org/cosmic-literacy-2/">
                         Learn More
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
                     </a>
-                    <a class="btn-outline" href="https://ascendtials.org/work-shops/cosmic-literacy-workshop/night-sky-education/">Night Sky Events</a>
+                    <a class="btn-outline"
+                        href="https://ascendtials.org/work-shops/cosmic-literacy-workshop/night-sky-education/">Night
+                        Sky Events</a>
                 </div>
             </div>
             <div class="tab-bento">
                 <div class="tab-bento-card tab-bento-card--wide">
                     <div class="tbc-num">21-day</div>
-                    <div class="tbc-label">Immersive Cosmic Literacy course connecting participants with Kemetic star knowledge</div>
+                    <div class="tbc-label">Immersive Cosmic Literacy course — ancient astronomy, astrology, and Kemetic
+                        star knowledge</div>
                 </div>
                 <div class="tab-bento-card tab-bento-card--accent">
                     <div class="tbc-icon">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
                     </div>
                     <div class="tbc-title">Star Parties</div>
-                    <div class="tbc-desc">Every 2nd Saturday — guided telescope viewing for all ages.</div>
+                    <div class="tbc-desc">Every 2nd Saturday — guided telescope viewing for all ages, families welcome.
+                    </div>
                 </div>
                 <div class="tab-bento-card">
                     <div class="tbc-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
                     </div>
-                    <div class="tbc-title">Kemetic Wisdom</div>
-                    <div class="tbc-desc">Ancient African astronomy woven into modern celestial exploration.</div>
+                    <div class="tbc-title">Kemetic Yoga</div>
+                    <div class="tbc-desc">Evening yoga sessions aligned with ancient Egyptian cosmic wisdom and
+                        celestial cycles.</div>
                 </div>
             </div>
         </div>
@@ -1347,135 +2057,30 @@
     ============================================================ -->
     <div class="purpose-strip reveal">
         <h2>A safe space<br>to share, heal,<br>and grow.</h2>
-        <p>Our workshops offer a grounded space for the BIPOC community to exchange experiences, reconnect with ancestral knowledge, and work collectively toward systemic change. Each session is experiential, youth-friendly, and rooted in environmental and social justice.</p>
+        <p>Our workshops offer a grounded space for the BIPOC community to exchange experiences, reconnect with
+            ancestral knowledge, and work collectively toward systemic change. Each session is experiential,
+            youth-friendly, and rooted in environmental and social justice.</p>
     </div>
 
     <!-- ============================================================
-    WORKSHOPS BENTO GRID
-    ============================================================ -->
-    <section class="workshops-section">
-        <div class="workshops-header">
-            <div class="reveal">
-                <span class="section-label">All Five Workshops</span>
-                <h2>Workshops that<br><em>restore & build</em></h2>
-            </div>
-            <p class="reveal reveal--delay-1">Each workshop type addresses a distinct literacy gap — from understanding your civic rights to reconnecting with the night sky and ancestral cosmology.</p>
-        </div>
-
-        <div class="workshops-bento">
-
-            <!-- Civic Literacy — featured large, spans 2 cols -->
-            <div class="ws-card ws-card--span2 ws-card--featured reveal">
-                <div class="ws-icon-wrap">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                        <polyline points="9 22 9 12 15 12 15 22"/>
-                    </svg>
-                </div>
-                <span class="ws-card-tag">Community</span>
-                <div class="ws-card-name">Civic Literacy</div>
-                <p class="ws-card-desc">Understand your rights, engage with local governance, and build collective power within your community. These workshops bridge the gap between policy and people.</p>
-                <ul class="ws-card-topics">
-                    <li>Voting rights & civic engagement</li>
-                    <li>Know your rights — legal literacy</li>
-                    <li>Advocacy & community organizing</li>
-                    <li>Local government & policy</li>
-                </ul>
-                <a class="ws-card-link" href="https://ascendtials.org/event-landing-page/">
-                    See upcoming sessions
-                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-            </div>
-
-            <!-- Environmental Literacy -->
-            <div class="ws-card ws-card--warm reveal reveal--delay-1">
-                <div class="ws-icon-wrap">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"/>
-                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                    </svg>
-                </div>
-                <span class="ws-card-tag">Ecology</span>
-                <div class="ws-card-name">Environmental Literacy</div>
-                <p class="ws-card-desc">Land stewardship, air quality, water guardianship — learn to read and protect the natural world through an environmental justice lens.</p>
-                <a class="ws-card-link" href="https://ascendtials.org/environmental-literacy-3/">
-                    Learn more
-                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-            </div>
-
-            <!-- Financial Literacy -->
-            <div class="ws-card reveal reveal--delay-1">
-                <div class="ws-icon-wrap">
-                    <svg viewBox="0 0 24 24">
-                        <line x1="12" y1="1" x2="12" y2="23"/>
-                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                    </svg>
-                </div>
-                <span class="ws-card-tag">Wealth</span>
-                <div class="ws-card-name">Financial Literacy</div>
-                <p class="ws-card-desc">Build generational wealth through practical financial education — budgeting, credit, investing, and entrepreneurship tailored for BIPOC communities.</p>
-                <a class="ws-card-link" href="https://ascendtials.org/financial-literacy/">
-                    Learn more
-                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-            </div>
-
-            <!-- Spiritual Literacy -->
-            <div class="ws-card reveal reveal--delay-2">
-                <div class="ws-icon-wrap">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
-                </div>
-                <span class="ws-card-tag">Healing</span>
-                <div class="ws-card-name">Spiritual Literacy</div>
-                <p class="ws-card-desc">Reconnect with ancestral healing traditions, mindfulness, and cultural truth. A space for inner restoration rooted in African and Indigenous wisdom.</p>
-                <a class="ws-card-link" href="https://ascendtials.org/event-landing-page/">
-                    Learn more
-                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-            </div>
-
-            <!-- Cosmic Literacy — spans 2 cols -->
-            <div class="ws-card ws-card--span2 ws-card--featured reveal reveal--delay-3">
-                <div class="ws-icon-wrap">
-                    <svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                    </svg>
-                </div>
-                <span class="ws-card-tag">Ancestral</span>
-                <div class="ws-card-name">Cosmic Literacy</div>
-                <p class="ws-card-desc">Explore the night sky through ancient Kemetic wisdom. Monthly star parties, telescope sessions, and cultural storytelling reconnect participants with the cosmos.</p>
-                <ul class="ws-card-topics">
-                    <li>Night Sky Star Party — every 2nd Saturday</li>
-                    <li>Ancient Kemet star knowledge</li>
-                    <li>Guided telescope viewing for families</li>
-                    <li>21-day immersive course available</li>
-                </ul>
-                <a class="ws-card-link" href="https://ascendtials.org/cosmic-literacy-2/">
-                    Explore Cosmic Literacy
-                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ============================================================
-         APPROACH SECTION
+    APPROACH SECTION
     ============================================================ -->
     <section class="approach-section">
         <div class="approach-inner">
             <div class="approach-text reveal">
                 <span class="section-label">Our Approach</span>
                 <h2>Rooted in culture,<br><em>built for healing</em></h2>
-                <p>Our workshops go beyond information transfer. They are living spaces — grounded in the reality of BIPOC experience and oriented toward collective liberation. Every session is designed to be accessible, affirming, and transformative.</p>
+                <p>Our workshops go beyond information transfer. They are living spaces — grounded in the reality of
+                    BIPOC experience and oriented toward collective liberation. Every session is designed to be
+                    accessible, affirming, and transformative.</p>
                 <div class="approach-values">
                     <div class="approach-value">
                         <div class="approach-value-icon">
-                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <svg viewBox="0 0 24 24">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
                         </div>
                         <div class="approach-value-body">
                             <strong>Community-centered</strong>
@@ -1484,16 +2089,22 @@
                     </div>
                     <div class="approach-value">
                         <div class="approach-value-icon">
-                            <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 8v4l3 3"/></svg>
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                                <path d="M12 8v4l3 3" />
+                            </svg>
                         </div>
                         <div class="approach-value-body">
                             <strong>Experiential & hands-on</strong>
-                            <span>Learning that moves beyond lectures — into dialogue, practice, and shared experience.</span>
+                            <span>Learning that moves beyond lectures — into dialogue, practice, and shared
+                                experience.</span>
                         </div>
                     </div>
                     <div class="approach-value">
                         <div class="approach-value-icon">
-                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
                         </div>
                         <div class="approach-value-body">
                             <strong>Youth-friendly</strong>
@@ -1507,7 +2118,8 @@
             <div class="approach-bento reveal reveal--delay-1">
                 <div class="approach-stat approach-stat--wide">
                     <div class="approach-stat-num">5</div>
-                    <div class="approach-stat-label">Literacy areas — Civic, Environmental, Financial, Spiritual, Cosmic</div>
+                    <div class="approach-stat-label">Literacy areas — Civic, Environmental, Financial, Spiritual, Cosmic
+                    </div>
                 </div>
                 <div class="approach-stat approach-stat--tall">
                     <div class="approach-stat-num">500+</div>
@@ -1526,7 +2138,7 @@
     </section>
 
     <!-- ============================================================
-         EVENT CTA
+    EVENT CTA
     ============================================================ -->
     <div class="event-cta">
         <div class="event-cta-inner reveal">
@@ -1536,20 +2148,23 @@
             </div>
             <a class="btn-navy" href="https://ascendtials.org/event-landing-page/">
                 View Event Calendar
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
                 </svg>
             </a>
         </div>
     </div>
 
     <!-- ============================================================
-         JOIN BANNER
+    JOIN BANNER
     ============================================================ -->
     <section class="section-join reveal">
         <span class="join-eyebrow">Get Involved</span>
         <h2 class="join-h2">Ready to Make<br>a Real Difference?</h2>
-        <p class="join-sub">ASCENDtials is actively seeking volunteers, partners, and community members who believe in the power of collective action.</p>
+        <p class="join-sub">ASCENDtials is actively seeking volunteers, partners, and community members who believe in
+            the power of collective action.</p>
         <div class="join-actions">
             <a class="btn-white" href="https://ascendtials.org/volunteer/">Volunteer with Us</a>
             <a class="btn-ghost" href="https://ascendtials.org/partner-with-ascendtials/">Partner with Us</a>
@@ -1558,50 +2173,65 @@
     </section>
 
     <!-- ============================================================
-         FOOTER
+    FOOTER
     ============================================================ -->
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-brand">
-                <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png" alt="ASCENDtials Logo">
-                <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's BIPOC community.</p>
+                <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+
+                <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
+                    BIPOC community.</p>
                 <div class="footer-social">
-                    <a href="https://www.facebook.com/ascendtials" aria-label="Facebook" target="_blank">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                    </a>
-                    <a href="https://www.instagram.com/ascendtials" aria-label="Instagram" target="_blank">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="2" width="20" height="20" rx="5"/>
-                            <circle cx="12" cy="12" r="4"/>
-                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                    <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                         </svg>
                     </a>
-                    <a href="https://www.youtube.com/@ascendtials" aria-label="YouTube" target="_blank">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
-                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/>
+                    <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
                         </svg>
                     </a>
-                    <a href="https://www.linkedin.com/company/ascendtials" aria-label="LinkedIn" target="_blank">
+                    <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube"
+                        target="_blank">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                            <rect x="2" y="9" width="4" height="12"/>
-                            <circle cx="4" cy="4" r="2"/>
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
                         </svg>
                     </a>
-                    <a href="https://twitter.com/ascendtials" aria-label="X / Twitter" target="_blank">
+                    <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-ascendtials/" aria-label="LinkedIn" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                    <a href="https://x.com/ascendtials" aria-label="X / Twitter" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                         </svg>
                     </a>
                 </div>
             </div>
+
             <div>
                 <div class="footer-col-title">Quick Links</div>
                 <ul class="footer-links">
-                    <li><a href="https://ascendtials.org/about-us-2024/">About Us</a></li>
-                    <li><a href="https://ascendtials.org/education-and-training-2024/">Education & Training</a></li>
-                    <li><a href="https://ascendtials.org/events/">Events Calendar</a></li>
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="education-and-training.html">Education & Training</a></li>
+                    <li><a href="./events">Events Calendar</a></li>
                     <li><a href="https://ascendtials.org/get-involved/">Get Involved</a></li>
                     <li><a href="https://ascendtials.org/ascendtials-membership-2024/">Membership</a></li>
                 </ul>
@@ -1609,11 +2239,11 @@
             <div>
                 <div class="footer-col-title">Programs</div>
                 <ul class="footer-links">
-                    <li><a href="https://ascendtials.org/youth-programs-2024/">Youth Programs</a></li>
-                    <li><a href="https://ascendtials.org/environmental-programs-2024/">Environmental Programs</a></li>
-                    <li><a href="https://ascendtials.org/legal-aid-program-2024/">Legal Aid</a></li>
-                    <li><a href="https://ascendtials.org/fellowship-program-2024/">Internships & Fellowships</a></li>
-                    <li><a href="https://ascendtials.org/kemetic-yoga-2024/">Kemetic Yoga</a></li>
+                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./legal-aid-program.html">Legal Aid</a></li>
+                    <li><a href="./fellowship-program.html">Internships & Fellowships</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
                 </ul>
             </div>
             <div>
@@ -1622,14 +2252,21 @@
                     <p>505 W Broadway<br>San Diego, CA 92101</p>
                     <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
                 </div>
+                <!-- <div class="footer-candid mt-md">
+                <img src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg" alt="Candid Platinum Seal">
+                <span>EIN: 47-2451577</span>
+            </div> -->
             </div>
         </div>
 
+        <!-- Partners row -->
         <div class="footer-partners">
-            <img src="https://ascendtials.org/wp-content/uploads/2024/10/country-of-san-diego.png" alt="County of San Diego">
-            <img src="https://ascendtials.org/wp-content/uploads/2024/10/Live-well-with-San-diego.png" alt="Live Well San Diego">
-            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png" alt="ASCENDtials">
-            <img src="https://ascendtials.org/wp-content/uploads/2026/02/candid-seal-platinum-2025.png" alt="Candid Platinum 2025">
+            <img src="assets/img/country-of-san-diego.png" alt="County of San Diego">
+            <img src="assets/img/Live-well-with-San-diego.png" alt="Live Well San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg"
+                alt="Candid Platinum 2025">
         </div>
 
         <div class="footer-bottom">
@@ -1637,7 +2274,7 @@
             <div class="footer-bottom-links">
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms of Use</a>
-                <a href="https://ascendtials.org/contact-us/">Contact</a>
+                <a href="./contact.html">Contact</a>
             </div>
         </div>
     </footer>
@@ -1680,4 +2317,5 @@
     </script>
 
 </body>
+
 </html>
