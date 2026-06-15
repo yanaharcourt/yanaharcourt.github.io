@@ -1604,7 +1604,7 @@
         }
 
         .tab-bento-card.wide {
-            grid-column: span 3;
+            grid-column: span 4;
         }
 
         .tab-bento-card.narrow {
@@ -2708,20 +2708,16 @@
                         <!-- Hero: image + text, no dark block -->
                         <div class="tab-page-hero">
                             <div class="tab-page-hero-img">
-                                <img src="https://ascendtials.org/wp-content/uploads/2024/08/kemetic-yoga.jpg"
+                                <img src="./assets/img/kemetic-yoga/Kemetic Yoga.jpg"
                                     onerror="this.parentElement.style.background='var(--color-navy-deep)'; this.style.display='none';"
                                     alt="Kemetic Yoga" class="lightbox-trigger">
                             </div>
                             <div class="tab-page-hero-text">
                                 <span class="section-label">Ancestral Wellness · Spiritual Practice</span>
                                 <h2>Kemetic Yoga<br><em>Ancient African roots</em></h2>
-                                <p>Kemetic Yoga is an ancient African Yoga art form that promotes African philosophy and
-                                    practices originating from the land of Kemet. This ancient practice emphasizes the
-                                    rejuvenation of the body and mind, providing BIPOC communities with cultural roots
-                                    that stem from their African origins.</p>
-                                <p>Our Kemetic Yoga sessions use our Whiteness to Oneness™ and KOS-Melanin-ology™
-                                    curricula at their foundation. We work to dismantle structural inequality and foster
-                                    constructive dialogue around Melanin and its purpose.</p>
+                                <p>Kemetic Yoga is an ancient African Yoga art form that promotes African philosophy and practices originating from the land of Kemet. This ancient practice emphasizes the rejuvenation of the body and mind, providing BIPOC communities with cultural roots that stem from their African origins.</p>
+                                <p>Our Kemetic Yoga sessions use our Whiteness to Oneness™ and KOS-Melanin-ology™ curricula at their foundation. We work to dismantle structural inequality and foster constructive dialogue around Melanin and its purpose.</p>
+
                                 <div class="tab-cta-row" style="padding-top:0;">
                                     <a href="./contact.html" class="btn-primary">
                                         Sign Up for a Session
@@ -2740,27 +2736,15 @@
                         <!-- What is Kemetic Yoga -->
                         <div class="tab-section">
                             <h3 class="tab-section-title">What is Kemetic Yoga?</h3>
-                            <div class="tab-section-body">
-                                <p>Kemetic Yoga is an ancient African Yoga art form that promotes African philosophy and
-                                    practices that originated from the land of Kemet. This ancient Yoga art form
-                                    emphasizes the rejuvenation of the body and mind as it attempts to provide BIPOC
-                                    communities with cultural roots that stem from its antique African origins.</p>
-                                <p>Kemetic Yoga preserves ancient African culture through deep breath techniques and
-                                    movements that activate the nervous system and place the mind into a flow state —
-                                    emitting alpha waves associated with deep relaxation, increased concentration, and
-                                    emotional balance. Thus, Kemetic Yoga's breath techniques and movements seek to
-                                    relieve stress symptoms while providing a deeper understanding of "oneness,"
-                                    alleviating the effects of mental health issues like depression and anxiety.</p>
-                                <p>Kemetic Yoga is innovative because it places an emphasis on the alignment of the
-                                    vertebral column while mimicking the geometric configuration of Egyptian pyramids
-                                    within its poses and movements. Its African origins are imperative to its success,
-                                    given that it provides African cultural traditions for BIPOC participants seeking to
-                                    reconnect with their African roots while mitigating the effects of anxiety and
-                                    stress from corporate jobs, school expectations, and beyond.</p>
-                                <p>Our program hopes to create a safe environment for participants willing to explore
-                                    themselves through Kemetic Yoga breathwork, movements, poses, postures, grounding,
-                                    and meditation — vital to strengthening the human body while increasing its
-                                    digestive system, flexibility, and endurance.</p>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:start;">
+                                <div>
+                                    <p style="color:var(--color-text-muted);line-height:1.75;margin-bottom:var(--space-md);">Kemetic Yoga is an ancient African Yoga art form that promotes African philosophy and practices that originated from the land of Kemet. This ancient Yoga art form emphasizes the rejuvenation of the body and mind as it attempts to provide BIPOC communities with cultural roots that stem from its antique African origins.</p>
+                                    <p style="color:var(--color-text-muted);line-height:1.75;">Kemetic Yoga preserves ancient African culture through deep breath techniques and movements that activate the nervous system and place the mind into a flow state — emitting alpha waves associated with deep relaxation, increased concentration, and emotional balance. Thus, Kemetic Yoga's breath techniques and movements seek to relieve stress symptoms while providing a deeper understanding of "oneness," alleviating the effects of mental health issues like depression and anxiety.</p>
+                                </div>
+                                <div>
+                                    <p style="color:var(--color-text-muted);line-height:1.75;margin-bottom:var(--space-md);">Kemetic Yoga is innovative because it places an emphasis on the alignment of the vertebral column while mimicking the geometric configuration of Egyptian pyramids within its poses and movements. Its African origins are imperative to its success, given that it provides African cultural traditions for BIPOC participants seeking to reconnect with their African roots while mitigating the effects of anxiety and stress from corporate jobs, school expectations, and beyond.</p>
+                                    <p style="color:var(--color-text-muted);line-height:1.75;">Our program hopes to create a safe environment for participants willing to explore themselves through Kemetic Yoga breathwork, movements, poses, postures, grounding, and meditation — vital to strengthening the human body while increasing its digestive system, flexibility, and endurance.</p>
+                                </div>
                             </div>
                         </div>
 
@@ -2769,12 +2753,11 @@
                             <h3 class="tab-section-title">Benefits of Practice</h3>
                             <div class="tab-bento-grid">
 
-                                <!-- Row 1: wide + narrow + narrow -->
-                                <div class="tab-bento-card wide dark">
+                                <!-- Row 1: wide (4 cols) + narrow (2 cols) -->
+                                <div class="tab-bento-card wide">
                                     <div class="tab-bento-icon">
                                         <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
                                             <path d="M12 8v4l3 3" />
                                         </svg>
                                     </div>
@@ -2786,15 +2769,16 @@
                                 <div class="tab-bento-card narrow">
                                     <div class="tab-bento-icon">
                                         <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                                         </svg>
                                     </div>
                                     <strong>Mental Health Support</strong>
                                     <span>Relieves stress, depression, and anxiety while cultivating emotional
                                         balance.</span>
                                 </div>
-                                <div class="tab-bento-card narrow gold">
+
+                                <!-- Row 2: three equal (2 cols each) -->
+                                <div class="tab-bento-card narrow">
                                     <div class="tab-bento-icon">
                                         <svg viewBox="0 0 24 24">
                                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
@@ -2804,8 +2788,6 @@
                                     <span>Reconnects BIPOC participants with African cultural traditions and the wisdom
                                         of their ancestors.</span>
                                 </div>
-
-                                <!-- Row 2: narrow + narrow + wide -->
                                 <div class="tab-bento-card narrow">
                                     <div class="tab-bento-icon">
                                         <svg viewBox="0 0 24 24">
@@ -2829,54 +2811,51 @@
                                     <span>A safe, affirming space for collective healing, cultural pride, and shared
                                         ancestral identity.</span>
                                 </div>
-                                <div class="tab-bento-card wide dark">
+
+                                <!-- Row 3: full width -->
+                                <div class="tab-bento-card full">
                                     <div class="tab-bento-icon">
                                         <svg viewBox="0 0 24 24">
                                             <circle cx="12" cy="12" r="3" />
-                                            <path
-                                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
                                         </svg>
                                     </div>
-                                    <strong>KOS-Melanin-ology™</strong>
-                                    <span>Encourages participants to explore Knowledge of Self through our proprietary
-                                        curriculum as a form of self-healing and empowerment. BIPOC-centered, all
-                                        backgrounds welcome.</span>
+                                    <div>
+                                        <strong>KOS-Melanin-ology™</strong>
+                                        <span>Encourages participants to explore Knowledge of Self through our proprietary
+                                            curriculum as a form of self-healing and empowerment. BIPOC-centered, all
+                                            backgrounds welcome.</span>
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
 
-                        <!-- Our curriculum -->
-                        <div class="tab-callout">
-                            <p><strong>Our curriculum foundation:</strong> Our Kemetic Yoga sessions use our Whiteness
-                                to Oneness™ and KOS-Melanin-ology™ curricula at their foundation. We work to dismantle
-                                structural inequality and foster constructive dialogue around Melanin and its purpose.
-                                Our program is geared toward BIPOC participants, but we welcome participants from all
-                                cultures and backgrounds.</p>
-                        </div>
+                        <!-- Our curriculum + Where & When — side by side -->
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:start;margin-bottom:var(--space-2xl);">
+                            <div>
+                                <h3 class="tab-section-title">Where &amp; When</h3>
+                                <div class="tab-section-body">
+                                    <p>Sessions are offered at the <strong>Marina District</strong> and other San Diego locations. Kemetic Yoga is also incorporated into our Fellowship Program, youth Park Takeover events, and our Cosmic Literacy workshops (evening sessions).</p>
+                                    <p>Our program creates a safe environment for participants willing to explore breathwork, movements, poses, postures, grounding, and meditation. Open to all — BIPOC-centered, all backgrounds welcome.</p>
+                                </div>
+                                <div class="tab-cta-row">
+                                    <a href="./contact.html" class="btn-primary">
+                                        Sign Up for a Session
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="5" y1="12" x2="19" y2="12" />
+                                            <polyline points="12 5 19 12 12 19" />
+                                        </svg>
+                                    </a>
+                                    <a href="./kemetic-yoga.html" class="btn-outline">Full Program Page</a>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-callout" style="margin-bottom:0;">
+                                <p><strong>Our curriculum foundation:</strong> Our Kemetic Yoga sessions use our Whiteness to Oneness™ and KOS-Melanin-ology™ curricula at their foundation. We work to dismantle structural inequality and foster constructive dialogue around Melanin and its purpose. Our program is geared toward BIPOC participants, but we welcome participants from all cultures and backgrounds.</p>
+                            </div>
 
-                        <!-- Where & When -->
-                        <div class="tab-section">
-                            <h3 class="tab-section-title">Where &amp; When</h3>
-                            <div class="tab-section-body">
-                                <p>Sessions are offered at the <strong>Marina District</strong> and other San Diego
-                                    locations. Kemetic Yoga is also incorporated into our Fellowship Program, youth Park
-                                    Takeover events, and our Cosmic Literacy workshops (evening sessions).</p>
-                                <p>Our program creates a safe environment for participants willing to explore
-                                    breathwork, movements, poses, postures, grounding, and meditation. Open to all —
-                                    BIPOC-centered, all backgrounds welcome.</p>
-                            </div>
-                            <div class="tab-cta-row">
-                                <a href="./contact.html" class="btn-primary">
-                                    Sign Up for a Session
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="5" y1="12" x2="19" y2="12" />
-                                        <polyline points="12 5 19 12 12 19" />
-                                    </svg>
-                                </a>
-                                <a href="./kemetic-yoga.html" class="btn-outline">Full Program Page</a>
-                            </div>
                         </div>
 
                     </div>
@@ -2891,18 +2870,15 @@
                         <!-- Hero -->
                         <div class="tab-page-hero">
                             <div class="tab-page-hero-img">
-                                <img src="https://ascendtials.org/wp-content/uploads/2024/08/hike-with-us.jpg"
+                                <img src="./assets/img/environmental-programs/hike.jpg"
                                     onerror="this.style.background='var(--color-surface)';this.removeAttribute('src')"
                                     alt="Hike with ASCENDtials">
                             </div>
                             <div class="tab-page-hero-text">
                                 <span class="section-label">Outdoor Experience</span>
                                 <h2>Hike with<br><em>ASCENDtials</em></h2>
-                                <p>ASCENDtials is hosting a hiking event for all skill levels, featuring guided tours of
-                                    hidden treasures and breathtaking views. Participants will be captivated by towering
-                                    mountains, waterfalls, and lush forests, while forming new bonds with fellow outdoor
-                                    enthusiasts. The event offers physical and mental benefits, creating lasting
-                                    memories and friendships.</p>
+                                <p>ASCENDtials is hosting a hiking event for all skill levels, featuring guided tours of hidden treasures and breathtaking views. Participants will be captivated by towering mountains, waterfalls, and lush forests, while forming new bonds with fellow outdoor enthusiasts. The event offers physical and mental benefits, creating lasting memories and friendships.</p>
+
                                 <div class="tab-cta-row" style="padding-top:0;">
                                     <a href="./contact.html" class="btn-primary">
                                         Sign Up
@@ -2941,10 +2917,7 @@
                                 </iframe>
                             </div>
                             <div class="tab-callout">
-                                <p><strong>Hike with Park Ranger</strong> — Join us for a guided hike with a local Park
-                                    Ranger through San Diego's stunning nature preserves. Experience breathtaking views,
-                                    learn about local ecology, and build community with fellow outdoor enthusiasts of
-                                    all skill levels.</p>
+                                <p><strong>Hike with Park Ranger</strong> — Join us for a guided hike with a local Park Ranger through San Diego's stunning nature preserves. Experience breathtaking views, learn about local ecology, and build community with fellow outdoor enthusiasts of all skill levels.</p>
                             </div>
                             <div class="tab-cta-row">
                                 <a href="./contact.html" class="btn-primary">
@@ -2971,19 +2944,16 @@
                         <!-- Hero -->
                         <div class="tab-page-hero">
                             <div class="tab-page-hero-img">
-                                <img src="https://ascendtials.org/wp-content/uploads/2026/02/highway.webp"
+                                <img src="./assets/img/environmental-programs/Highway cleanups.jpg"
                                     onerror="this.style.background='var(--color-surface)';this.removeAttribute('src')"
                                     alt="Highway Cleanups">
                             </div>
                             <div class="tab-page-hero-text">
                                 <span class="section-label">Environmental Action</span>
                                 <h2>Highway<br><em>Cleanups</em></h2>
-                                <p>Monthly cleanups are conducted for 9 highways and ramps, with volunteers provided
-                                    with safety equipment, trash grabbers, and bags. Reservations can be made via
-                                    scheduling and entire groups can reserve space.</p>
-                                <p>Cleanups are during the mornings on Saturdays and Sundays. For those wanting
-                                    unlimited access to cleanups, please sign up as a volunteer — then the schedule link
-                                    is made available to search dates. We look forward to connecting with you soon!</p>
+                                <p>Monthly cleanups are conducted for 9 highways and ramps, with volunteers provided with safety equipment, trash grabbers, and bags. Reservations can be made via scheduling and entire groups can reserve space.</p>
+                                
+                                <p>Cleanups are during the mornings on Saturdays and Sundays. For those wanting unlimited access to cleanups, please sign up as a volunteer — then the schedule link is made available to search dates. We look forward to connecting with you soon!</p>
                                 <div class="tab-cta-row" style="padding-top:0;">
                                     <a href="./contact.html" class="btn-primary">
                                         Sign Up &amp; Sign Waiver
@@ -3017,68 +2987,72 @@
                         <div class="tab-section">
                             <h3 class="tab-section-title">Clean with us — starting by signing our waiver</h3>
 
-                            <div class="tab-infobox">
-                                <div class="tab-infobox-title">Please Note — Before Your First Cleanup:</div>
-                                <ul class="tab-notes-list" style="margin-bottom:0;">
-                                    <li><span class="note-num">1</span><span>Please watch the safety video below before
-                                            all cleanups take place.</span></li>
-                                    <li><span class="note-num">2</span><span>All volunteers will be given their own
-                                            personal safety vests, goggles, gloves, trash grabbers, and bags.</span>
-                                    </li>
-                                    <li><span class="note-num">3</span><span>No more than 12 volunteers are allowed to
-                                            sign up for a single cleanup event.</span></li>
-                                    <li><span class="note-num">4</span><span>Volunteers may clean up as often as they
-                                            like — there is no cap on the number of times you clean up the
-                                            highway.</span></li>
-                                    <li><span class="note-num">5</span><span>Volunteers can request Letters of
-                                            Appreciation once cleanup is complete.</span></li>
-                                    <li><span class="note-num">6</span><span>Volunteers can sign up for group
-                                            cleanups.</span></li>
-                                    <li><span class="note-num">7</span><span>Please sign the waiver form before your
-                                            cleanup begins.</span></li>
-                                </ul>
-                            </div>
+                            <!-- two-col: bento notes + sign-up info -->
+                            <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:var(--space-xl);align-items:stretch;margin-bottom:var(--space-xl);">
 
-                            <div class="tab-section-body">
-                                <p>To sign up for our highway cleanups: please first sign up as a volunteer for
-                                    unlimited access to cleanups. Once signed up, please follow the instructions in the
-                                    confirmation message to access our cleanup events. We look forward to seeing you
-                                    there!</p>
-                                <p>After each cleanup, we will celebrate by having lunch together. Stay tuned for
-                                    details of upcoming cleanup events. Participation is free, but we accept donations
-                                    for supplies and lunch for the groups.</p>
-                            </div>
+                                <!-- Notes as bento cards -->
+                                <div style="display:flex;flex-direction:column;gap:10px;">
+                                    <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-sky);margin-bottom:4px;">Before Your First Cleanup</div>
+                                    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;">
 
-                            <!-- Safety Videos -->
-                            <h3 class="tab-section-title" style="margin-top: var(--space-xl);">Safety Videos</h3>
-                            <p
-                                style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-lg);">
-                                Please watch both safety videos before attending your first highway cleanup.</p>
-                            <div class="tab-video-grid">
-                                <div class="tab-video-wrap">
-                                    <iframe src="https://www.youtube.com/embed/UUE9mPZZvfo"
-                                        title="Highway Cleanup Safety Video 1"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen loading="lazy"></iframe>
+                                        <!-- 01 — wide (4 cols) dark -->
+                                        <div style="grid-column:span 4;background:var(--color-white);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:var(--space-lg);">
+                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;line-height:1;margin-bottom:8px;">01</div>
+                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">Watch the safety video below before all cleanups take place.</p>
+                                        </div>
+
+                                        <!-- 02 — narrow (2 cols) -->
+                                        <div style="grid-column:span 2;background:var(--color-white);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:var(--space-lg);">
+                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;line-height:1;margin-bottom:8px;">02</div>
+                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">All volunteers receive safety vests, goggles, gloves, trash grabbers, and bags.</p>
+                                        </div>
+
+                                        <!-- 03 — narrow (2 cols) -->
+                                        <div style="grid-column:span 2;background:var(--color-white);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:var(--space-lg);">
+                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;line-height:1;margin-bottom:8px;">03</div>
+                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">Max 12 volunteers per single cleanup event.</p>
+                                        </div>
+
+                                        <!-- 04 — wide (4 cols) gold -->
+                                        <div style="grid-column:span 4;background:var(--color-white);border:1px solid rgba(201,169,110,0.3);border-radius:var(--radius-md);padding:var(--space-lg);">
+                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;line-height:1;margin-bottom:8px;">04</div>
+                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">No cap on how often you can volunteer — come back as many times as you like.</p>
+                                        </div>
+
+                                        <!-- 05 — (3 cols) -->
+                                        <div style="grid-column:span 3;background:var(--color-white);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:var(--space-lg);">
+                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;line-height:1;margin-bottom:8px;">05</div>
+                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">Request a Letter of Appreciation once your cleanup is complete.</p>
+                                        </div>
+
+                                        <!-- 06 — (3 cols) -->
+                                        <div style="grid-column:span 3;background:var(--color-white);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:var(--space-lg);">
+                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;line-height:1;margin-bottom:8px;">06</div>
+                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">Group cleanups available — sign up with your team.</p>
+                                        </div>
+
+                                        <!-- 07 — full width dark -->
+                                        <div style="grid-column:span 6;background:var(--color-white);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:var(--space-md) var(--space-xl);display:flex;align-items:center;gap:var(--space-lg);">
+                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;flex-shrink:0;">07</div>
+                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">Please sign the waiver form before your cleanup begins.</p>
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div class="tab-video-wrap">
-                                    <iframe src="https://www.youtube.com/embed/HvgyPuZ_l4Y"
-                                        title="Highway Cleanup Safety Video 2"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen loading="lazy"></iframe>
-                                </div>
-                            </div>
 
-                            <div class="tab-cta-row">
-                                <a href="./contact.html" class="btn-primary">
-                                    Sign Up &amp; Sign Waiver
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="5" y1="12" x2="19" y2="12" />
-                                        <polyline points="12 5 19 12 12 19" />
-                                    </svg>
-                                </a>
-                                <a href="./volunteer.html" class="btn-outline">Become a Volunteer</a>
+                                <!-- Sign-up info -->
+                                <div style="background:var(--color-surface);border-radius:var(--radius-lg);padding:var(--space-xl);display:flex;flex-direction:column;justify-content:space-between;gap:var(--space-lg);">
+                                    <div>
+                                        <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-sky);margin-bottom:var(--space-md);">How to Sign Up</div>
+                                        <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.75;margin-bottom:var(--space-md);">Sign up as a volunteer for unlimited access to cleanups. Once registered, follow the instructions in the confirmation message to access our cleanup events.</p>
+                                        <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.75;">We look forward to seeing you there!</p>
+                                    </div>
+                                    <div style="border-top:1px solid var(--color-line);padding-top:var(--space-lg);">
+                                        <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-sky);margin-bottom:var(--space-md);">After the Cleanup</div>
+                                        <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.75;">We celebrate with lunch together! Participation is free — we accept donations for supplies and lunch for the groups.</p>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
@@ -3403,13 +3377,8 @@
 
                         <!-- Hero: image + text -->
                         <div class="tab-page-hero">
-                            <div class="tab-page-hero-img"
-                                style="background: var(--color-surface); display:flex; align-items:center; justify-content:center;">
-                                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--color-sky)"
-                                    stroke-width="0.6" opacity="0.4">
-                                    <path
-                                        d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3.5 9 10 7M12 12C12 7 17 4 22 5c0 5-3.5 9-10 7" />
-                                </svg>
+                            <div class="tab-page-hero-img">
+                                <img src="./assets/img/environmental-programs/Tree Planting.jpg"  alt="Kemetic Yoga practice">
                             </div>
                             <div class="tab-page-hero-text">
                                 <span class="section-label">Urban Forestry · "Leafing Our Legacy"</span>
@@ -3437,31 +3406,52 @@
                         <!-- Leafing Our Legacy -->
                         <div class="tab-section">
                             <h3 class="tab-section-title">Leaf Your Legacy — Free Tree Giveaway!</h3>
-                            <div class="tab-section-body">
-                                <p>As we mark a decade of dedication to cultivating San Diego's urban forest and
-                                    advocating for a sustainable future, we at ASCENDtials are thrilled to partner with
-                                    Tree San Diego on the "Leafing Our Legacy" initiative. This year-long celebration
-                                    will see us donating <strong>800 trees across San Diego</strong>, enriching our
-                                    green landscape and bridging environmental disparities.</p>
-                            </div>
 
-                            <div class="tab-infobox">
-                                <div class="tab-infobox-title">Event Details</div>
-                                <p><strong>When:</strong> Sunday, November 3rd, 2024 | 10:00 AM – 2:00 PM<br>
-                                    <strong>Where:</strong> ASCENDKemet Collective Certified Farmers' Market of City
-                                    Heights<br>
-                                    4325 Wightman St, San Diego, CA 92105
-                                </p>
-                                <p style="margin-top:12px;">Pick up your free tree and help us green San Diego! This is
-                                    more than just an event — it's a community effort to enhance sustainability and
-                                    protect our urban forests. Each month, we'll be hosting tree-distribution events
-                                    across the city.</p>
-                            </div>
-
-                            <div class="tab-section-body">
-                                <p>We will be distributing trees at our Farmers' Markets in <strong>City
+                            <!-- Intro + stat side by side -->
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:stretch;margin-bottom:var(--space-xl);">
+                                <div class="tab-section-body" style="margin-bottom:0;">
+                                    <p>As we mark a decade of dedication to cultivating San Diego's urban forest and
+                                        advocating for a sustainable future, we at ASCENDtials are thrilled to partner with
+                                        Tree San Diego on the "Leafing Our Legacy" initiative. This year-long celebration
+                                        will see us donating <strong>800 trees across San Diego</strong>, enriching our
+                                        green landscape and bridging environmental disparities.</p>
+                                    <p style="margin-top:var(--space-md);">We will be distributing trees at our Farmers' Markets in <strong>City
                                         Heights</strong> and the <strong>Marina District</strong>. Fill out the form to
-                                    reserve a tree. Stay tuned for upcoming dates!</p>
+                                        reserve a tree. Stay tuned for upcoming dates!</p>
+                                </div>
+
+                                <div style="background:var(--color-navy-deep);border-radius:var(--radius-lg);padding:var(--space-xl);display:flex;flex-direction:column;justify-content:center;gap:var(--space-lg);">
+                                    <div>
+                                        <div style="font-family:var(--font-display);font-size:3rem;font-weight:300;color:var(--color-sky);line-height:1;">800</div>
+                                        <div style="font-size:var(--text-sm);color:rgba(255,255,255,0.6);margin-top:4px;">trees donated across San Diego</div>
+                                    </div>
+                                    <div style="width:40px;height:1px;background:rgba(201,169,110,0.3);"></div>
+                                    <div>
+                                        <div style="font-size:var(--text-sm);font-weight:600;color:var(--color-white);margin-bottom:6px;">In partnership with</div>
+                                        <div style="font-size:var(--text-base);color:rgba(255,255,255,0.7);">Tree San Diego</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event Details card -->
+                            <div style="background:var(--color-surface);border:1px solid var(--color-line);border-radius:var(--radius-lg);padding:var(--space-xl);display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:start;">
+                                <div>
+                                    <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-sky);margin-bottom:var(--space-md);">Event Details</div>
+                                    <div style="display:flex;flex-direction:column;gap:var(--space-sm);">
+                                        <div style="display:flex;gap:12px;align-items:baseline;">
+                                            <span style="font-size:var(--text-sm);font-weight:600;color:var(--color-navy);min-width:52px;">When</span>
+                                            <span style="font-size:var(--text-sm);color:var(--color-text-muted);">Sunday, November 3rd, 2024 · 10:00 AM – 2:00 PM</span>
+                                        </div>
+                                        <div style="display:flex;gap:12px;align-items:baseline;">
+                                            <span style="font-size:var(--text-sm);font-weight:600;color:var(--color-navy);min-width:52px;">Where</span>
+                                            <span style="font-size:var(--text-sm);color:var(--color-text-muted);">ASCENDKemet Collective Certified Farmers' Market of City Heights<br>4325 Wightman St, San Diego, CA 92105</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-sky);margin-bottom:var(--space-md);">Monthly Distribution</div>
+                                    <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;">Pick up your free tree and help us green San Diego! This is more than just an event — it's a community effort to enhance sustainability and protect our urban forests. Each month, we'll be hosting tree-distribution events across the city.</p>
+                                </div>
                             </div>
                         </div>
 
