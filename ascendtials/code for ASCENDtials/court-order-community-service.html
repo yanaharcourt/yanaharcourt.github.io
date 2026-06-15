@@ -1,0 +1,2420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Court-Ordered Community Service – ASCENDtials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+        ============================================================ */
+        :root {
+            --color-navy: #1E3A47;
+            --color-navy-deep: #152E3A;
+            --color-sky: #C9A96E;
+            --color-sky-light: #F5EBD8;
+            --color-sky-faint: #FDF6EC;
+            --color-white: #FFFFFF;
+            --color-bg: #FAFAF8;
+            --color-surface: #F4F2EE;
+            --color-surface-2: #ECEAE5;
+            --color-line: #E2DDD6;
+            --color-text: #1A1A18;
+            --color-text-muted: #666660;
+            --color-text-light: #9D9A93;
+            --color-accent: #C9A96E;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.375rem;
+            --text-2xl: 1.75rem;
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
+            --space-section: 120px;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-pill: 999px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --dur-fast: 180ms;
+            --dur-base: 280ms;
+            --dur-slow: 500ms;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            overflow-x: hidden;
+            font-size: var(--text-base);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ============================================================
+           NAV
+        ============================================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            gap: 32px;
+            transition: all var(--dur-slow) var(--ease-in-out);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            top: 10px;
+            left: 16px;
+            right: 16px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-logo {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .nav-logo img {
+            height: 52px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links>li {
+            position: relative;
+        }
+
+        .nav-links>li>a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            font-size: var(--text-sm);
+            font-weight: 400;
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links>li>a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-links .has-dropdown>a::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: solid var(--color-text-muted);
+            border-width: 0 1.5px 1.5px 0;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links .has-dropdown:hover>a::after {
+            transform: rotate(225deg) translateY(-2px);
+        }
+
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-line);
+            list-style: none;
+            min-width: 220px;
+            padding: 6px;
+            padding-top: 10px;
+            z-index: 600;
+        }
+
+        .nav-links .has-dropdown:hover .nav-dropdown {
+            display: block;
+        }
+
+        .nav-dropdown li a {
+            display: block;
+            padding: 9px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .nav-dropdown li a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-cta {
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 9px 20px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color var(--dur-fast);
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .nav-cta:hover::before {
+            transform: scaleX(1);
+        }
+
+        .nav-burger {
+            display: none;
+            background: none;
+            border: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+            margin-left: auto;
+        }
+
+        .nav-burger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-navy);
+            border-radius: 2px;
+            transition: all var(--dur-base) var(--ease-out);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 490;
+            padding: 90px 24px 32px;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 16px;
+            font-size: var(--text-xl);
+            color: var(--color-text);
+            border-bottom: 1px solid var(--color-line);
+            font-family: var(--font-display);
+        }
+
+        .mobile-menu .mob-cta {
+            margin-top: 24px;
+            background: var(--color-navy);
+            color: var(--color-white);
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-lg);
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+        }
+
+        /* ============================================================
+           BUTTONS
+        ============================================================ */
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            background: var(--color-navy);
+            color: var(--color-bg);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 27px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: transparent;
+            color: var(--color-navy);
+            border: 1.5px solid var(--color-navy);
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            background: var(--color-white);
+            color: var(--color-navy);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-white::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        .btn-ghost {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 27px;
+            border-radius: var(--radius-pill);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: color var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.12);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ============================================================
+           SCROLL REVEAL
+        ============================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal--delay-1 {
+            transition-delay: 0.08s;
+        }
+
+        .reveal--delay-2 {
+            transition-delay: 0.16s;
+        }
+
+        .reveal--delay-3 {
+            transition-delay: 0.24s;
+        }
+
+        .reveal--delay-4 {
+            transition-delay: 0.32s;
+        }
+
+        /* ============================================================
+           SHARED
+        ============================================================ */
+        .section-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.2vw, 3rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: var(--color-navy);
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        /* ============================================================
+           HERO
+        ============================================================ */
+        .page-hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: calc(72px + var(--space-2xl));
+            padding-left: max(48px, 6vw);
+            padding-right: max(48px, 6vw);
+            background: var(--color-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: 'COCS';
+            position: absolute;
+            bottom: -40px;
+            left: -20px;
+            font-family: var(--font-display);
+            font-size: clamp(160px, 22vw, 300px);
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(201, 169, 110, 0.04);
+            letter-spacing: -8px;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.6rem, 4.6vw, 5rem);
+            font-weight: 300;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 em {
+            font-style: italic;
+            color: var(--color-sky);
+            display: block;
+        }
+
+        .hero-divider {
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-sky), transparent);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-desc {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            max-width: 480px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-photo-wrap {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+            cursor: zoom-in;
+        }
+
+        .hero-photo-wrap img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: var(--radius-xl);
+            display: block;
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+
+        .hero-photo-wrap:hover img {
+            transform: scale(1.02);
+        }
+
+        .hero-photo-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -24px;
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg) var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            z-index: 3;
+        }
+
+        .hero-photo-badge-num {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+        }
+
+        .hero-photo-badge-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-top: 6px;
+        }
+
+        @media (max-width: 960px) {
+            .hero-main {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .hero-photo-wrap img {
+                height: 340px;
+            }
+
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-photo-wrap {
+                display: none;
+            }
+        }
+
+        /* Lightbox */
+        .photo-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 24, 28, 0.82);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 5vw;
+            cursor: zoom-out;
+        }
+
+        .photo-lightbox.open {
+            display: flex;
+        }
+
+        .photo-lightbox img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ============================================================
+           INFO STRIP
+        ============================================================ */
+        .info-strip {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-xl) max(48px, 6vw);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-xl);
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+
+        .info-item {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
+        }
+
+        .info-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-bottom: 3px;
+        }
+
+        .info-value {
+            font-size: var(--text-sm);
+            color: var(--color-navy);
+            font-weight: 500;
+        }
+
+        .info-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--color-line);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 900px) {
+            .info-strip {
+                justify-content: flex-start;
+                padding: var(--space-lg) 24px;
+            }
+        }
+
+        /* ============================================================
+           SECTION WRAP
+        ============================================================ */
+        .section {
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .section-alt {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .section-navy {
+            background: var(--color-navy);
+        }
+
+        .section-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* ============================================================
+           PROGRAM OVERVIEW — 2-col with image
+        ============================================================ */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: start;
+        }
+
+        .overview-text p {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+        }
+
+        .notice-box {
+            margin-top: var(--space-xl);
+            background: var(--color-sky-faint);
+            border: 1px solid var(--color-sky-light);
+            border-left: 3px solid var(--color-sky);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg) var(--space-xl);
+        }
+
+        .notice-box p {
+            font-size: var(--text-sm);
+            color: var(--color-navy);
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .overview-img {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            cursor: zoom-in;
+        }
+
+        .overview-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 400px;
+            transition: transform 0.8s var(--ease-out);
+        }
+
+        .overview-img:hover img {
+            transform: scale(1.03);
+        }
+
+        @media (max-width: 900px) {
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-img {
+                order: -1;
+            }
+
+            .overview-img img {
+                min-height: 280px;
+            }
+        }
+
+        /* ============================================================
+           ELIGIBILITY — two column accept / not-accept
+        ============================================================ */
+        .eligibility-intro {
+            max-width: 680px;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .eligibility-intro p {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            margin-top: var(--space-md);
+        }
+
+        .eligibility-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+
+        .eligibility-card {
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl) var(--space-xl);
+            border: 1px solid var(--color-line);
+        }
+
+        .eligibility-card.accept {
+            background: var(--color-white);
+        }
+
+        .eligibility-card.reject {
+            background: var(--color-surface);
+        }
+
+        .elig-head {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .elig-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .elig-icon.accept {
+            background: rgba(201, 169, 110, 0.12);
+            color: var(--color-sky);
+        }
+
+        .elig-icon.reject {
+            background: rgba(30, 58, 71, 0.08);
+            color: var(--color-navy);
+        }
+
+        .elig-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 500;
+            color: var(--color-navy);
+        }
+
+        .elig-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .elig-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        .elig-list li::before {
+            content: '';
+            display: block;
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            margin-top: 1px;
+        }
+
+        .accept .elig-list li::before {
+            background: rgba(201, 169, 110, 0.15);
+            background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='%23C9A96E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .reject .elig-list li::before {
+            background: rgba(30, 58, 71, 0.08);
+            background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l8 8M9 1L1 9' stroke='%231E3A47' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        @media (max-width: 700px) {
+            .eligibility-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================================
+           SERVICE ACTIVITIES — bento
+        ============================================================ */
+        .activities-bento {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: auto auto;
+            gap: var(--space-md);
+        }
+
+        /* Row 1: two wide cards, each spans 3 of 6 cols */
+        .activity-card.wide {
+            grid-column: span 3;
+        }
+
+        /* Row 2: three equal cards, each spans 2 of 6 cols */
+        .activity-card.third {
+            grid-column: span 2;
+        }
+
+        .activity-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl) var(--space-xl);
+            transition: box-shadow var(--dur-base), transform var(--dur-base), border-color var(--dur-base);
+        }
+
+        .activity-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: var(--color-sky);
+        }
+
+        .activity-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: var(--color-sky-faint);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .activity-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 500;
+            color: var(--color-navy);
+            margin-bottom: var(--space-sm);
+            line-height: 1.3;
+        }
+
+        .activity-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+        }
+
+        @media (max-width: 960px) {
+            .activities-bento {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .activity-card.wide {
+                grid-column: span 2;
+            }
+
+            .activity-card.third {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .activities-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .activity-card.wide,
+            .activity-card.third {
+                grid-column: span 1;
+            }
+        }
+
+        /* ============================================================
+           REQUIREMENTS — 2-col list + verification box
+        ============================================================ */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: start;
+        }
+
+        .req-list-wrap p {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            margin-bottom: var(--space-xl);
+        }
+
+        .req-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .req-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.55;
+        }
+
+        .req-bullet {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1.5px solid var(--color-sky);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
+            margin-top: 2px;
+        }
+
+        .req-list li strong {
+            color: var(--color-navy);
+            font-weight: 600;
+        }
+
+        .verification-card {
+            background: var(--color-navy);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            color: var(--color-white);
+        }
+
+        .verification-card .section-label {
+            margin-bottom: var(--space-lg);
+        }
+
+        .verification-card h3 {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 300;
+            line-height: 1.2;
+            color: var(--color-white);
+            margin-bottom: var(--space-lg);
+        }
+
+        .verification-card h3 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .verification-card p {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.75;
+            margin-bottom: var(--space-xl);
+        }
+
+        .verif-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .verif-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .verif-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 900px) {
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================================
+           PARTNER SECTION
+        ============================================================ */
+        .partner-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: start;
+        }
+
+        .partner-text p {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            margin: var(--space-lg) 0;
+        }
+
+        .partner-why {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .partner-why-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base);
+        }
+
+        .partner-why-item:hover {
+            box-shadow: var(--shadow-sm);
+            border-color: var(--color-sky);
+        }
+
+        .partner-why-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-sky-faint);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .partner-why-title {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-navy);
+            margin-bottom: 4px;
+        }
+
+        .partner-why-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.55;
+        }
+
+        .partner-contact-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .partner-contact-card h3 {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .partner-contact-card h3 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .partner-contact-card p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            margin-bottom: var(--space-xl);
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: var(--text-sm);
+            color: var(--color-navy);
+            margin-bottom: var(--space-md);
+        }
+
+        .contact-detail svg {
+            color: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .contact-detail a {
+            color: var(--color-sky);
+            font-weight: 500;
+        }
+
+        @media (max-width: 900px) {
+            .partner-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================================
+           INTAKE STEPS
+        ============================================================ */
+        .intake-section {
+            background: var(--color-navy);
+        }
+
+        .intake-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .intake-head {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .intake-head .section-label {
+            color: rgba(201, 169, 110, 0.8);
+        }
+
+        .intake-head h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.2vw, 3rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: var(--color-white);
+        }
+
+        .intake-head h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .intake-head p {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: var(--space-lg);
+            max-width: 560px;
+        }
+
+        /* Intake bento: row 1 = 3 equal cols, row 2 = 2 equal cols spanning full width */
+        .intake-steps {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: var(--space-md);
+        }
+
+        /* Row 1: three cards, each 2 of 6 cols */
+        .intake-step:nth-child(1),
+        .intake-step:nth-child(2),
+        .intake-step:nth-child(3) {
+            grid-column: span 2;
+        }
+
+        /* Row 2: two cards, each 3 of 6 cols = exactly half */
+        .intake-step:nth-child(4) {
+            grid-column: span 3;
+        }
+
+        .intake-step:nth-child(5) {
+            grid-column: span 3;
+        }
+
+        .intake-step {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl) var(--space-xl);
+            transition: background var(--dur-base), border-color var(--dur-base);
+        }
+
+        .intake-step:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(201, 169, 110, 0.35);
+        }
+
+        .step-circle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px solid rgba(201, 169, 110, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            color: var(--color-sky);
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+        }
+
+        .step-title {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 400;
+            color: var(--color-white);
+            margin-bottom: var(--space-sm);
+            line-height: 1.3;
+        }
+
+        .step-desc {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.65;
+        }
+
+        .step-tag {
+            display: inline-block;
+            margin-top: var(--space-md);
+            padding: 5px 12px;
+            background: rgba(201, 169, 110, 0.12);
+            border: 1px solid rgba(201, 169, 110, 0.2);
+            border-radius: var(--radius-pill);
+            font-size: var(--text-xs);
+            color: var(--color-sky);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .intake-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .intake-step:nth-child(1),
+            .intake-step:nth-child(2),
+            .intake-step:nth-child(3),
+            .intake-step:nth-child(4),
+            .intake-step:nth-child(5) {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .intake-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .intake-cta {
+            margin-top: var(--space-2xl);
+            text-align: center;
+        }
+
+        .intake-cta p {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: var(--space-xl);
+        }
+
+        @media (max-width: 960px) {
+            .intake-steps {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .intake-steps::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .intake-steps {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .intake-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            padding: var(--space-2xl) max(48px, 6vw);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-brand img {
+            height: 48px;
+            width: auto;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            max-width: 260px;
+        }
+
+        .footer-col-title {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-contact p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .footer-contact a {
+            color: var(--color-sky);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 8px;
+            margin-top: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            transition: background var(--dur-fast), color var(--dur-fast);
+        }
+
+        .footer-social a:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .footer-partners {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) 0;
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            flex-wrap: wrap;
+        }
+
+        .footer-partners img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(20%);
+            transition: opacity var(--dur-fast);
+        }
+
+        .footer-partners img:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LIGHTBOX -->
+    <div class="photo-lightbox" id="photoLightbox">
+        <img src="" alt="Expanded view" id="lightboxImg">
+    </div>
+
+    <!-- NAV -->
+    <header class="nav" id="mainNav">
+        <div class="nav-logo">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="./index.html">Home</a></li>
+            <li class="has-dropdown">
+                <a href="#">About</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./our-team.html">Our Team</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Education</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./education-and-training.html">Education and Training</a></li>
+                    <li><a href="./literacy-workshops.html">Literacy Workshops</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                    <li><a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a></li>
+                    <li><a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a></li>
+                    <li><a href="./service-learning.html">Service Learning</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Programs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./events.html">Event Calendar</a></li>
+                    <li><a href="./program-participant.html">Program Participant</a></li>
+                    <li><a href="./farmers-market.html">Farmers' Markets</a></li>
+                    <li><a href="./food-distribution.html">Food Distribution</a></li>
+                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./court-ordered-community-service.html">Court-Ordered Community Service</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Clubs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./mdba-portal.html">MDBA Portal</a></li>
+                    <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
+                    <li><a href="./join-our-community">Join our Community</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Join Us</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./get-involved.html">Get Involved</a></li>
+                    <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="https://ascendtials.org/sponsor/">Become a Sponsor</a></li>
+                    <li><a href="https://ascendtials.org/vendor-portal/">Vendor</a></li>
+                    <li><a href="./volunteer.html">Volunteer</a></li>
+                </ul>
+            </li>
+        </ul>
+        <a class="nav-cta" href="./support-us">Support Us</a>
+        <button class="nav-burger" id="navBurger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About Us</a>
+        <a href="./our-team.html">Our Team</a>
+        <a href="./contact.html">Contact Us</a>
+        <a href="./education-and-training.html">Education and Training</a>
+        <a href="./literacy-workshops.html">Literacy Workshops</a>
+        <a href="./kemetic-yoga.html">Kemetic Yoga</a>
+        <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
+        <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
+        <a href="./service-learning.html">Service Learning</a>
+        <a href="./events.html">Event Calendar</a>
+        <a href="./program-participant.html">Program Participant</a>
+        <a href="./farmers-market.html">Farmers' Markets</a>
+        <a href="./food-distribution.html">Food Distribution</a>
+        <a href="./youth-programs.html">Youth Programs</a>
+        <a href="./environmental-programs.html">Environmental Programs</a>
+        <a href="./court-ordered-community-service.html">Court-Ordered Community Service</a>
+        <a href="./mdba-portal.html">MDBA Portal</a>
+        <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+        <a href="./get-involved.html">Get Involved</a>
+        <a href="./partner-with-us.html">Partner with Us</a>
+        <a href="./volunteer.html">Volunteer</a>
+        <a class="mob-cta" href="./support-us">Support Us</a>
+    </div>
+
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section class="page-hero">
+        <div class="hero-main">
+            <div class="hero-text reveal">
+                <span class="hero-eyebrow">A culturally grounded, community-centered pathway</span>
+                <h1 class="hero-h1">
+                    Court-Ordered
+                    <em>Community Service</em>
+                </h1>
+                <div class="hero-divider"></div>
+                <p class="hero-desc">Structured hours, restorative activities, and personal development for youth and
+                    adults with court-ordered community service requirements — rooted in accountability, education, and
+                    human dignity.</p>
+                <div class="hero-cta-row">
+                    <a class="btn-primary"
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSdBIyXWpcTUZHaz2ZzfZ-gVCyjn-XR0sePj2tYhbW5ook1Wmw/viewform"
+                        target="_blank">Start Intake Form</a>
+                    <a class="btn-outline" href="mailto:info@ascendtials.org">Contact Us</a>
+                </div>
+            </div>
+            <div class="hero-photo-wrap reveal reveal--delay-2" id="heroImgWrap">
+                <img src="https://ascendtials.org/wp-content/uploads/2026/06/vitaly-gariev-uDbDpt2BSss-unsplash-scaled.jpg"
+                    alt="Community service participant in the garden" id="heroImg">
+                <div class="hero-photo-badge">
+                    <div class="hero-photo-badge-num">501(c)(3)</div>
+                    <div class="hero-photo-badge-label">Verified Hours Provided</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         INFO STRIP
+    ============================================================ -->
+    <div class="info-strip">
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Eligibility</div>
+                <div class="info-value">Youth & Adults · Non-violent offenses</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Schedule</div>
+                <div class="info-value">Flexible · Based on availability</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Onboarding</div>
+                <div class="info-value">$45 donation · Waiver available</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <line x1="10" y1="9" x2="8" y2="9" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Documentation</div>
+                <div class="info-value">Certificates · Court-verified hours</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Location</div>
+                <div class="info-value">San Diego · City Heights & Waterfront</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         PROGRAM OVERVIEW
+    ============================================================ -->
+    <section class="section">
+        <div class="section-inner">
+            <div class="overview-grid">
+                <div class="overview-text reveal">
+                    <span class="section-label">Program Overview</span>
+                    <h2 class="section-title" style="margin-bottom: var(--space-xl);">A structured, <em>educational</em>
+                        pathway</h2>
+                    <p>ASCENDtials provides a structured, educational, and community-centered pathway for individuals
+                        completing court-ordered community service hours. This program supports personal growth,
+                        environmental stewardship, and community accountability while offering courts and partner
+                        agencies a reliable, transparent service option.</p>
+                    <p>Participants engage in meaningful work featuring a <strong>trauma-informed, culturally rooted
+                            curriculum</strong> that supports our mission to empower communities through education,
+                        sustainability, and civic engagement.</p>
+                    <div class="notice-box">
+                        <p>
+                            <svg style="display:inline;vertical-align:-3px;margin-right:8px;" width="15" height="15"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="12" y1="8" x2="12" y2="12" />
+                                <line x1="12" y1="16" x2="12.01" y2="16" />
+                            </svg>
+                            This program requires completion of an intake process before service begins.
+                        </p>
+                    </div>
+                </div>
+                <div class="overview-img reveal reveal--delay-2" id="overviewImgWrap">
+                    <img src="https://ascendtials.org/wp-content/uploads/2026/06/vitaly-gariev-uDbDpt2BSss-unsplash-scaled.jpg"
+                        alt="Community service program" id="overviewImg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         ELIGIBILITY
+    ============================================================ -->
+    <section class="section section-alt">
+        <div class="section-inner">
+            <div class="eligibility-intro reveal">
+                <span class="section-label">Ideal Participants & Eligibility</span>
+                <h2 class="section-title">Who we <em>accept</em></h2>
+                <p>ASCENDtials accepts individuals with non-violent, low-level offenses. Our program is highly ideal
+                    for: <strong>youth on probation, adults needing community service hours, diversion program
+                        participants, school-based referrals,</strong> and individuals needing structured, supervised
+                    hours.</p>
+            </div>
+            <div class="eligibility-grid">
+                <div class="eligibility-card accept reveal reveal--delay-1">
+                    <div class="elig-head">
+                        <div class="elig-icon accept">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.75">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </div>
+                        <div class="elig-title">Accepted Cases</div>
+                    </div>
+                    <ul class="elig-list">
+                        <li>Traffic violations</li>
+                        <li>Infractions</li>
+                        <li>Misdemeanors (non-violent)</li>
+                        <li>Failure to appear (case dependent)</li>
+                        <li>Other low-level offenses as approved</li>
+                    </ul>
+                </div>
+                <div class="eligibility-card reject reveal reveal--delay-2">
+                    <div class="elig-head">
+                        <div class="elig-icon reject">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.75">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </div>
+                        <div class="elig-title">Not Accepted</div>
+                    </div>
+                    <ul class="elig-list">
+                        <li>Violent offenses</li>
+                        <li>Sexual offenses</li>
+                        <li>Arson</li>
+                        <li>Crimes involving weapons</li>
+                        <li>Any offense deemed incompatible with our safety standards</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SERVICE OPPORTUNITIES
+    ============================================================ -->
+    <section class="section">
+        <div class="section-inner">
+            <div style="max-width:600px; margin-bottom: var(--space-2xl);" class="reveal">
+                <span class="section-label">Service Opportunities & Activities</span>
+                <h2 class="section-title">Hands-on tracks in the <em>community</em></h2>
+                <p
+                    style="margin-top:var(--space-lg); font-size:var(--text-base); color:var(--color-text-muted); line-height:1.75;">
+                    Participants may complete hours through various hands-on community tracks. Assignments depend on
+                    availability, skill level, and program needs.</p>
+            </div>
+            <div class="activities-bento">
+                <!-- Row 1: two wide cards -->
+                <div class="activity-card wide reveal">
+                    <div class="activity-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.6">
+                            <path d="M3 3h18v13H3zM8 20h8M12 16v4" />
+                            <path d="M7 8h.01M7 12h10M7 8h10" />
+                        </svg>
+                    </div>
+                    <div class="activity-title">Environmental Cleanups & Gardening</div>
+                    <p class="activity-desc">Beach and park cleanups, garden maintenance, urban greening, and ecological
+                        stewardship projects across San Diego's waterfront and community green spaces.</p>
+                </div>
+                <div class="activity-card wide reveal reveal--delay-1">
+                    <div class="activity-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.6">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                    </div>
+                    <div class="activity-title">Market Service & Community Events</div>
+                    <p class="activity-desc">Supporting ASCENDtials' certified farmers' markets, food distribution
+                        sites, and community events — setup, logistics, vendor coordination, and direct public
+                        engagement.</p>
+                </div>
+                <!-- Row 2: three equal cards -->
+                <div class="activity-card third reveal">
+                    <div class="activity-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.6">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 8v4M12 16h.01" />
+                        </svg>
+                    </div>
+                    <div class="activity-title">Cultural Education</div>
+                    <p class="activity-desc">Drumming, astronomy sessions, cooking, and culturally rooted programming
+                        that connects participants to community heritage and practical life skills.</p>
+                </div>
+                <div class="activity-card third reveal reveal--delay-1">
+                    <div class="activity-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.6">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <div class="activity-title">Youth & Family Programming</div>
+                    <p class="activity-desc">Supporting youth and family programs as supervised assistants — garden
+                        learning stations, wellness sessions, and community enrichment activities.</p>
+                </div>
+                <div class="activity-card third reveal reveal--delay-2">
+                    <div class="activity-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.6">
+                            <rect x="2" y="3" width="20" height="14" rx="2" />
+                            <path d="M8 21h8M12 17v4" />
+                        </svg>
+                    </div>
+                    <div class="activity-title">Workforce Development & Admin</div>
+                    <p class="activity-desc">Administrative support, data entry, outreach, and workforce development
+                        tasks that build transferable professional skills under staff supervision.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         REQUIREMENTS + VERIFICATION
+    ============================================================ -->
+    <section class="section section-alt">
+        <div class="section-inner">
+            <div class="requirements-grid">
+                <div class="req-list-wrap reveal">
+                    <span class="section-label">Program Requirements</span>
+                    <h2 class="section-title" style="margin-bottom:var(--space-xl);">What participants <em>must do</em>
+                    </h2>
+                    <p>All participants are expected to meet the following requirements to remain in good standing and
+                        have their hours count toward their court obligation.</p>
+                    <ul class="req-list">
+                        <li>
+                            <div class="req-bullet">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                                    <path d="M1 4l2.5 2.5L9 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            Complete the intake form and provide required documentation
+                        </li>
+                        <li>
+                            <div class="req-bullet">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                                    <path d="M1 4l2.5 2.5L9 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            Pay the onboarding donation (or request a waiver)
+                        </li>
+                        <li>
+                            <div class="req-bullet">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                                    <path d="M1 4l2.5 2.5L9 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            Attend orientation
+                        </li>
+                        <li>
+                            <div class="req-bullet">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                                    <path d="M1 4l2.5 2.5L9 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            Follow ASCENDtials' Code of Conduct
+                        </li>
+                        <li>
+                            <div class="req-bullet">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                                    <path d="M1 4l2.5 2.5L9 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            Track hours through the approved system
+                        </li>
+                        <li>
+                            <div class="req-bullet">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                                    <path d="M1 4l2.5 2.5L9 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <span><strong>Participate in weekly check-ins</strong></span>
+                        </li>
+                        <li>
+                            <div class="req-bullet">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                                    <path d="M1 4l2.5 2.5L9 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            Communicate schedule changes promptly
+                        </li>
+                        <li>
+                            <div class="req-bullet">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                                    <path d="M1 4l2.5 2.5L9 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            Complete all assigned tasks responsibly and respectfully
+                        </li>
+                    </ul>
+                </div>
+                <div class="verification-card reveal reveal--delay-2">
+                    <span class="section-label">Verification & Reporting</span>
+                    <h3>Documented hours, <em>court-ready</em></h3>
+                    <p>ASCENDtials provides official documentation for all completed service. All hours must be logged
+                        through the designated tracking system to be counted toward your court requirement.</p>
+                    <div class="verif-items">
+                        <div class="verif-item">
+                            <div class="verif-dot"></div>
+                            Verified community service hours
+                        </div>
+                        <div class="verif-item">
+                            <div class="verif-dot"></div>
+                            Certificates of completion
+                        </div>
+                        <div class="verif-item">
+                            <div class="verif-dot"></div>
+                            Attendance records
+                        </div>
+                        <div class="verif-item">
+                            <div class="verif-dot"></div>
+                            Direct communication with courts or probation officers upon request
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         PARTNER ORGANIZATIONS
+    ============================================================ -->
+    <section class="section">
+        <div class="section-inner">
+            <div class="partner-grid">
+                <div class="partner-text reveal">
+                    <span class="section-label">Partner Organization Info</span>
+                    <h2 class="section-title" style="margin-bottom:var(--space-lg);">Refer a client, <em>partner with
+                            us</em></h2>
+                    <p>Courts, probation departments, attorneys, and social service agencies may refer clients to
+                        ASCENDtials for community service completion. We provide a safe, structured, and
+                        community-centered environment for successful service completion.</p>
+                    <p>To establish a partnership, agencies may contact ASCENDtials directly for agreements, referral
+                        procedures, and program materials.</p>
+                    <div class="partner-why">
+                        <div class="partner-why-item">
+                            <div class="partner-why-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.75">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                    <polyline points="14 2 14 8 20 8" />
+                                    <line x1="16" y1="13" x2="8" y2="13" />
+                                    <line x1="16" y1="17" x2="8" y2="17" />
+                                </svg>
+                            </div>
+                            <div class="partner-why-text">
+                                <div class="partner-why-title">Reliable documentation and verified hours</div>
+                                <div class="partner-why-desc">We provide all records courts need — certificates,
+                                    attendance logs, and direct officer communication.</div>
+                            </div>
+                        </div>
+                        <div class="partner-why-item">
+                            <div class="partner-why-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.75">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                                    <path d="M16 2v4M8 2v4M3 10h18" />
+                                </svg>
+                            </div>
+                            <div class="partner-why-text">
+                                <div class="partner-why-title">Safe, supervised environment with flexible scheduling
+                                </div>
+                                <div class="partner-why-desc">All participants are supervised by staff. Scheduling
+                                    accommodates work, school, and family obligations.</div>
+                            </div>
+                        </div>
+                        <div class="partner-why-item">
+                            <div class="partner-why-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.75">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
+                            </div>
+                            <div class="partner-why-text">
+                                <div class="partner-why-title">Strong outcomes for youth and families</div>
+                                <div class="partner-why-desc">Our community-centered, restorative approach leads to
+                                    meaningful outcomes and reduced recidivism.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="partner-contact-card reveal reveal--delay-2">
+                    <h3>Get in <em>touch</em></h3>
+                    <p>For questions, partnership inquiries, or to establish a referral agreement, contact us directly.
+                        We're happy to provide program materials and discuss how we can work together.</p>
+                    <div class="contact-detail">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                        <span>Email: <a href="mailto:info@ascendtials.org">info@ascendtials.org</a></span>
+                    </div>
+                    <div class="contact-detail">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <circle cx="12" cy="12" r="10" />
+                            <path
+                                d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                        <span>Website: <a href="https://www.ascendtials.org"
+                                target="_blank">www.ascendtials.org</a></span>
+                    </div>
+                    <div class="contact-detail">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        <span>505 W Broadway, San Diego, CA 92101</span>
+                    </div>
+                    <a class="btn-primary" href="mailto:info@ascendtials.org"
+                        style="margin-top: var(--space-xl); width: 100%; justify-content: center;">Contact Us to
+                        Partner</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         INTAKE STEPS
+    ============================================================ -->
+    <section class="section intake-section">
+        <div class="section-inner intake-inner">
+            <div class="intake-head reveal">
+                <span class="section-label">Intake Process</span>
+                <h2>Five steps to <em>get started</em></h2>
+                <p>Follow these five steps to officially register and start logging your mandated service hours.</p>
+            </div>
+            <div class="intake-steps">
+                <div class="intake-step reveal">
+                    <div class="step-circle">1</div>
+                    <div class="step-title">Review Program Requirements</div>
+                    <p class="step-desc">Understand expectations, eligibility, and responsibilities before you begin.
+                    </p>
+                </div>
+                <div class="intake-step reveal reveal--delay-1">
+                    <div class="step-circle">2</div>
+                    <div class="step-title">Submit Intake Form</div>
+                    <p class="step-desc">Provide court documents, case details, and contact information for
+                        verification.</p>
+                </div>
+                <div class="intake-step reveal reveal--delay-2">
+                    <div class="step-circle">3</div>
+                    <div class="step-title">Onboarding Donation</div>
+                    <p class="step-desc">Complete the $45 donation on the Dashboard after verification is confirmed.</p>
+                    <span class="step-tag">Waiver available</span>
+                </div>
+                <div class="intake-step reveal reveal--delay-3">
+                    <div class="step-circle">4</div>
+                    <div class="step-title">Orientation</div>
+                    <p class="step-desc">Receive training on safety, expectations, and available service opportunities.
+                    </p>
+                </div>
+                <div class="intake-step reveal reveal--delay-4">
+                    <div class="step-circle">5</div>
+                    <div class="step-title">Begin Service</div>
+                    <p class="step-desc">Once approved, sign up for shifts through the volunteer portal and start
+                        logging hours.</p>
+                    <span class="step-tag">Volunteer portal</span>
+                </div>
+            </div>
+            <div class="intake-cta reveal">
+                <p>Once you have reviewed the program details, begin the intake process through our Volunteer Portal.
+                </p>
+                <a class="btn-white"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdBIyXWpcTUZHaz2ZzfZ-gVCyjn-XR0sePj2tYhbW5ook1Wmw/viewform"
+                    target="_blank">Start Intake Form</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                    alt="ASCENDtials Logo">
+                <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
+                    BIPOC community.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube"
+                        target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-ascendtials/" aria-label="LinkedIn" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                    <a href="https://x.com/ascendtials" aria-label="X / Twitter" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Quick Links</div>
+                <ul class="footer-links">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./education-and-training.html">Education & Training</a></li>
+                    <li><a href="https://ascendtials.org/events/">Events Calendar</a></li>
+                    <li><a href="https://ascendtials.org/get-involved/">Get Involved</a></li>
+                    <li><a href="https://ascendtials.org/volunteer/volunteer-memberships/">Membership</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Programs</div>
+                <ul class="footer-links">
+                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./farmers-market.html">Farmers' Markets</a></li>
+                    <li><a href="./food-distribution.html">Food Distribution</a></li>
+                    <li><a href="./court-ordered-community-service.html">Court-Ordered Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Contact</div>
+                <div class="footer-contact">
+                    <p>505 W Broadway<br>San Diego, CA 92101</p>
+                    <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-partners">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/10/country-of-san-diego.png"
+                alt="County of San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/10/Live-well-with-San-diego.png"
+                alt="Live Well San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/02/candid-seal-platinum-2025.png"
+                alt="Candid Platinum 2025">
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 ASCENDtials. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="https://ascendtials.org/privacy-policy/">Privacy Policy</a>
+                <a href="https://ascendtials.org/vendor-application-terms-conditions/">Vendor Policy</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Nav scroll pill
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+        // Mobile menu
+        const burger = document.getElementById('navBurger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+            });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Lightbox
+        const lightbox = document.getElementById('photoLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        document.querySelectorAll('.hero-photo-wrap, .overview-img').forEach(wrap => {
+            wrap.addEventListener('click', () => {
+                const img = wrap.querySelector('img');
+                lightboxImg.src = img.src;
+                lightbox.classList.add('open');
+            });
+        });
+        lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+    </script>
+</body>
+
+</html>
