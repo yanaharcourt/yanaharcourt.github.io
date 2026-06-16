@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Build My Spirit – ASCENDtials</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet">
     <style>
         /* ============================================================
-        DESIGN TOKENS
+           DESIGN TOKENS
         ============================================================ */
-        :root {
+         :root {
+            /* Brand */
             --color-navy: #1E3A47;
             --color-navy-deep: #152E3A;
             --color-sky: #C9A96E;
             --color-sky-light: #F5EBD8;
-            --color-sky-faint: #FBF6EE;
+
+            /* Neutrals */
             --color-white: #FFFFFF;
             --color-bg: #FAFAF8;
             --color-surface: #F4F2EE;
@@ -25,11 +30,18 @@
             --color-text: #1A1A18;
             --color-text-muted: #666660;
             --color-text-light: #9D9A93;
+
+            /* Accent */
             --color-accent: #C9A96E;
             --color-warm: #E8D0CC;
             --color-sage: #B2D5D1;
+            --color-olive: #EBF1AB;
+
+            /* Typography */
             --font-display: 'Playfair Display', Georgia, serif;
             --font-body: 'DM Sans', system-ui, sans-serif;
+
+            /* Type scale */
             --text-xs: 0.75rem;
             --text-sm: 0.875rem;
             --text-base: 1rem;
@@ -37,6 +49,9 @@
             --text-xl: 1.375rem;
             --text-2xl: 1.75rem;
             --text-3xl: 2.25rem;
+            --text-hero: clamp(3rem, 6vw, 5.5rem);
+
+            /* Spacing */
             --space-xs: 4px;
             --space-sm: 8px;
             --space-md: 16px;
@@ -45,14 +60,20 @@
             --space-2xl: 64px;
             --space-3xl: 96px;
             --space-section: 120px;
+
+            /* Radius */
             --radius-sm: 8px;
             --radius-md: 16px;
             --radius-lg: 24px;
             --radius-xl: 32px;
             --radius-pill: 999px;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.06);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
-            --shadow-lg: 0 16px 48px rgba(0,0,0,0.10);
+
+            /* Shadow */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+
+            /* Motion */
             --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
             --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
             --dur-fast: 180ms;
@@ -60,144 +81,516 @@
             --dur-slow: 500ms;
         }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-body); color: var(--color-text); background: var(--color-bg); overflow-x: hidden; font-size: var(--text-base); line-height: 1.65; -webkit-font-smoothing: antialiased; }
-        img { display: block; max-width: 100%; }
-        a { text-decoration: none; color: inherit; }
-        button { cursor: pointer; font-family: inherit; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            overflow-x: hidden;
+            font-size: var(--text-base);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
 
         /* ── REVEAL ── */
-        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out); }
-        .reveal.visible { opacity: 1; transform: none; }
-        .reveal--d1 { transition-delay: 0.08s; }
-        .reveal--d2 { transition-delay: 0.16s; }
-        .reveal--d3 { transition-delay: 0.24s; }
-        .reveal--d4 { transition-delay: 0.32s; }
-        .reveal--d5 { transition-delay: 0.40s; }
-        .reveal--d6 { transition-delay: 0.48s; }
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal--delay-1 {
+            transition-delay: 0.08s;
+        }
+
+        .reveal--delay-2 {
+            transition-delay: 0.16s;
+        }
+
+        .reveal--delay-3 {
+            transition-delay: 0.24s;
+        }
+
+        .reveal--delay-4 {
+            transition-delay: 0.32s;
+        }
 
         /* ── SHARED ── */
-        .section-label { display: inline-block; font-size: var(--text-xs); font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--color-sky); margin-bottom: var(--space-md); }
-        .section-h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 2.5vw, 2.5rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.5px; color: var(--color-navy); margin-bottom: var(--space-lg); }
-        .section-h2 em { font-style: italic; color: var(--color-sky); }
-        .section-body { font-size: var(--text-lg); color: var(--color-text-muted); line-height: 1.8; max-width: 68ch; }
-        .section-body p + p { margin-top: var(--space-md); }
+        .section-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
 
         /* ── BUTTONS ── */
-        .btn-primary, .btn-outline, .btn-white, .btn-ghost {
-            position: relative; overflow: hidden; isolation: isolate; z-index: 0;
-            display: inline-flex; align-items: center; gap: 8px;
-            border-radius: var(--radius-pill); font-size: var(--text-base); font-weight: 500;
-            cursor: pointer; border: none; transition: color var(--dur-fast);
-        }
-        .btn-primary { background: var(--color-navy); color: var(--color-bg); padding: 14px 28px; }
-        .btn-outline { background: transparent; color: var(--color-navy); padding: 13px 27px; border: 1px solid var(--color-line); }
-        .btn-white { background: var(--color-white); color: var(--color-navy); padding: 14px 28px; }
-        .btn-ghost { background: transparent; color: var(--color-white); padding: 13px 27px; border: 1px solid rgba(255,255,255,0.3); }
-        .btn-primary::before, .btn-white::before, .btn-outline::before, .btn-ghost::before {
-            content: ''; position: absolute; inset: 0; background: var(--color-sky);
-            transform: scaleX(0); transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22,1,0.36,1); z-index: -1; border-radius: inherit;
-        }
-        .btn-ghost::before { background: rgba(255,255,255,0.12); }
-        .btn-outline::before { background: var(--color-sky-light); }
-        .btn-primary:hover::before, .btn-white:hover::before, .btn-outline:hover::before, .btn-ghost:hover::before { transform: scaleX(1); }
-        .btn-white:hover, .btn-primary:hover { color: var(--color-white); }
-        .btn-outline:hover { border-color: var(--color-sky); }
-        .btn-ghost:hover { border-color: rgba(255,255,255,0.6); }
-        .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
-
-        /* ============================================================
-        NAV
-        ============================================================ */
-        .nav-cta { flex-shrink: 0; background: var(--color-navy); color: var(--color-bg); padding: 9px 20px; border-radius: var(--radius-pill); font-size: var(--text-sm); font-weight: 500; white-space: nowrap; transition: color var(--dur-fast); position: relative; overflow: hidden; isolation: isolate; }
-        .nav-cta::before { content: ''; position: absolute; inset: 0; background: var(--color-sky); transform: scaleX(0); transform-origin: left center; transition: transform 0.38s cubic-bezier(0.22,1,0.36,1); z-index: -1; border-radius: inherit; }
-        .nav-cta:hover::before { transform: scaleX(1); }
-        .nav-cta:hover { color: var(--color-white); }
-        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; background: var(--color-bg); border-bottom: 1px solid var(--color-line); height: 72px; display: flex; align-items: center; padding: 0 40px; gap: 32px; transition: all var(--dur-slow) var(--ease-in-out); }
-        .nav.scrolled { background: rgba(255,255,255,0.72); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); top: 10px; left: 16px; right: 16px; border-radius: var(--radius-xl); border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9); }
-        .nav-logo { margin-right: auto; display: flex; align-items: center; flex-shrink: 0; }
-        .nav-logo img { height: 52px; width: auto; }
-        .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
-        .nav-links > li { position: relative; }
-        .nav-links > li > a { display: flex; align-items: center; gap: 4px; padding: 8px 12px; font-size: var(--text-sm); font-weight: 400; color: var(--color-text-muted); border-radius: var(--radius-sm); transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out); }
-        .nav-links > li > a:hover { color: var(--color-navy); background: var(--color-surface); }
-        .nav-links .has-dropdown > a::after { content: ''; width: 10px; height: 10px; border: solid var(--color-text-muted); border-width: 0 1.5px 1.5px 0; transform: rotate(45deg) translateY(-2px); transition: transform var(--dur-fast) var(--ease-out); }
-        .nav-links .has-dropdown:hover > a::after { transform: rotate(225deg) translateY(-2px); }
-        .nav-dropdown { display: none; position: absolute; top: 100%; left: 0; background: var(--color-bg); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); border: 1px solid var(--color-line); list-style: none; min-width: 220px; padding: 6px; padding-top: 10px; z-index: 600; }
-        .nav-links .has-dropdown:hover .nav-dropdown { display: block; }
-        .nav-dropdown li a { display: block; padding: 9px 14px; font-size: var(--text-sm); color: var(--color-text-muted); border-radius: var(--radius-sm); white-space: nowrap; transition: color var(--dur-fast), background var(--dur-fast); }
-        .nav-dropdown li a:hover { color: var(--color-navy); background: var(--color-surface); }
-        .nav-burger { display: none; background: none; border: none; flex-direction: column; gap: 5px; padding: 6px; margin-left: auto; }
-        .nav-burger span { display: block; width: 24px; height: 2px; background: var(--color-navy); border-radius: 2px; transition: all var(--dur-base) var(--ease-out); }
-        .mobile-menu { display: none; position: fixed; inset: 0; background: var(--color-bg); z-index: 490; padding: 100px 32px 32px; flex-direction: column; gap: 8px; overflow-y: auto; }
-        .mobile-menu.open { display: flex; }
-        .mobile-menu a { font-size: var(--text-xl); font-weight: 400; color: var(--color-text); padding: 12px 0; border-bottom: 1px solid var(--color-line); }
-        .mobile-menu a:hover { color: var(--color-sky); }
-        .mobile-menu .mob-cta { margin-top: 24px; background: var(--color-navy); color: var(--color-white); text-align: center; padding: 16px; border-radius: var(--radius-pill); font-size: var(--text-lg); border-bottom: none; }
-        @media (max-width: 860px) { .nav-links, .nav-cta { display: none; } .nav-burger { display: flex; } }
-
-        /* ============================================================
-        HERO
-        ============================================================ */
-        .hero {
-            min-height: 100vh;
-            padding-top: 72px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .btn-primary {
             position: relative;
             overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            background: var(--color-navy);
+            color: var(--color-bg);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: color var(--dur-fast);
         }
-        .hero-left {
-            background: var(--color-navy-deep);
-            padding: clamp(60px, 8vw, 120px) clamp(32px, 5vw, 80px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+
+        .btn-outline {
             position: relative;
             overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 27px;
+            border-radius: var(--radius-pill);
+            background: transparent;
+            color: var(--color-navy);
+            border: 1px solid var(--color-line);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
         }
-        .hero-left::before {
+
+        .btn-white {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            background: var(--color-white);
+            color: var(--color-navy);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-ghost {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 27px;
+            border-radius: var(--radius-pill);
+            background: transparent;
+            color: var(--color-white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-outline::before,
+        .btn-ghost::before {
             content: '';
             position: absolute;
-            bottom: -100px; left: -100px;
-            width: 400px; height: 400px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%);
-            pointer-events: none;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
         }
-        .hero-eyebrow {
+
+        .btn-outline::before {
+            background: var(--color-sky-light);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-primary:hover::before,
+        .btn-white:hover::before,
+        .btn-outline:hover::before,
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary:hover,
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-sky);
+        }
+
+        .btn-ghost:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================================
+           NAV
+        ============================================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            height: 72px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: var(--space-xl);
+            padding: 0 40px;
+            gap: 32px;
+            transition: all var(--dur-slow) var(--ease-in-out);
         }
-        .hero-eyebrow-line { width: 40px; height: 1px; background: var(--color-sky); }
-        .hero-eyebrow span { font-size: var(--text-xs); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--color-sky); }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            top: 10px;
+            left: 16px;
+            right: 16px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 8px 24px rgba(0, 0, 0, .06), inset 0 1px 0 rgba(255, 255, 255, .9);
+        }
+
+        .nav-logo {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .nav-logo img {
+            height: 52px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links>li {
+            position: relative;
+        }
+
+        .nav-links>li>a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            font-size: var(--text-sm);
+            font-weight: 400;
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links>li>a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-links .has-dropdown>a::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: solid var(--color-text-muted);
+            border-width: 0 1.5px 1.5px 0;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links .has-dropdown:hover>a::after {
+            transform: rotate(225deg) translateY(-2px);
+        }
+
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-line);
+            list-style: none;
+            min-width: 220px;
+            padding: 6px;
+            padding-top: 10px;
+            z-index: 600;
+        }
+
+        .nav-links .has-dropdown:hover .nav-dropdown {
+            display: block;
+        }
+
+        .nav-dropdown li a {
+            display: block;
+            padding: 9px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .nav-dropdown li a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-cta {
+            flex-shrink: 0;
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 9px 20px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color var(--dur-fast);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .nav-cta:hover::before {
+            transform: scaleX(1);
+        }
+
+        .nav-cta:hover {
+            color: var(--color-white);
+        }
+
+        .nav-burger {
+            display: none;
+            background: none;
+            border: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+            margin-left: auto;
+        }
+
+        .nav-burger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-navy);
+            border-radius: 2px;
+            transition: all var(--dur-base) var(--ease-out);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 490;
+            padding: 90px 24px 32px;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 16px;
+            font-size: var(--text-xl);
+            color: var(--color-text);
+            border-bottom: 1px solid var(--color-line);
+            font-family: var(--font-display);
+        }
+
+        .mobile-menu .mob-cta {
+            margin-top: 24px;
+            background: var(--color-navy);
+            color: var(--color-white);
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-lg);
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+        }
+
+        /* ============================================================
+           PAGE HERO — identical to youth-programs
+        ============================================================ */
+        .page-hero {
+            padding-top: calc(72px + var(--space-2xl));
+            padding-left: max(48px, 6vw);
+            padding-right: max(48px, 6vw);
+            background: var(--color-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: 'BMS';
+            position: absolute;
+            bottom: -40px;
+            left: -20px;
+            font-family: var(--font-display);
+            font-size: clamp(200px, 28vw, 380px);
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(201, 169, 110, 0.04);
+            letter-spacing: -10px;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
         .hero-h1 {
             font-family: var(--font-display);
-            font-size: clamp(3rem, 5.5vw, 5.5rem);
+            font-size: clamp(2.6rem, 4.6vw, 5rem);
             font-weight: 300;
-            color: var(--color-white);
             line-height: 1.05;
             letter-spacing: -2px;
-            margin-bottom: var(--space-xl);
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
         }
-        .hero-h1 em { font-style: italic; color: var(--color-sky); }
+
+        .hero-h1 em {
+            font-style: italic;
+            color: var(--color-sky);
+            display: block;
+        }
+
+        .hero-divider {
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-sky), transparent);
+            margin-bottom: var(--space-lg);
+        }
+
         .hero-desc {
             font-size: var(--text-lg);
-            color: rgba(255,255,255,0.6);
-            line-height: 1.8;
-            max-width: 48ch;
-            margin-bottom: var(--space-2xl);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            max-width: 460px;
+            margin-bottom: var(--space-xl);
         }
-        .hero-stats {
+
+        .hero-stats-row {
             display: flex;
             gap: var(--space-2xl);
             padding-top: var(--space-xl);
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid var(--color-line);
         }
+
         .hero-stat-num {
             font-family: var(--font-display);
             font-size: 2rem;
@@ -205,73 +598,181 @@
             color: var(--color-sky);
             line-height: 1;
         }
-        .hero-stat-label { font-size: var(--text-xs); color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
 
-        .hero-right {
+        .hero-stat-label {
+            font-size: var(--text-xs);
+            color: var(--color-text-light);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 4px;
+        }
+
+        .hero-photo-wrap {
             position: relative;
+            z-index: 1;
             overflow: hidden;
+            border-radius: var(--radius-xl);
         }
-        .hero-right img {
-            width: 100%; height: 100%;
+
+        .hero-photo-wrap img {
+            width: 100%;
+            height: 520px;
             object-fit: cover;
+            object-position: center;
+            border-radius: var(--radius-xl);
             display: block;
+            transition: transform var(--dur-slow) var(--ease-out);
         }
-        .hero-right-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to right, rgba(21,46,58,0.35) 0%, transparent 50%);
+
+        .hero-photo-wrap:hover img {
+            transform: scale(1.02);
         }
-        /* floating badge */
-        .hero-badge {
+
+        .hero-photo-badge {
             position: absolute;
-            bottom: 40px; left: -24px;
+            bottom: -20px;
+            left: -24px;
             background: var(--color-white);
+            border: 1px solid var(--color-line);
             border-radius: var(--radius-lg);
             padding: var(--space-lg) var(--space-xl);
             box-shadow: var(--shadow-lg);
+            z-index: 3;
+        }
+
+        .hero-photo-badge-num {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+        }
+
+        .hero-photo-badge-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-top: 6px;
+        }
+
+        @media (max-width: 960px) {
+            .hero-main {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .hero-photo-wrap img {
+                height: 380px;
+            }
+
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-photo-wrap {
+                display: none;
+            }
+        }
+
+
+        /* ============================================================
+           INFO STRIP
+        ============================================================ */
+        .info-strip {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-lg) max(48px, 6vw);
             display: flex;
             align-items: center;
-            gap: 16px;
-            max-width: 280px;
+            justify-content: space-between;
+            gap: var(--space-lg);
+            flex-wrap: nowrap;
+            overflow-x: auto;
         }
-        .hero-badge-icon {
-            width: 44px; height: 44px;
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             background: var(--color-sky-light);
-            border-radius: var(--radius-md);
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
+        }
+
+        .info-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-bottom: 3px;
+        }
+
+        .info-value {
+            font-size: var(--text-sm);
+            color: var(--color-navy);
+        }
+
+        .info-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--color-line);
             flex-shrink: 0;
         }
-        .hero-badge-icon svg { width: 22px; height: 22px; stroke: var(--color-sky); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-        .hero-badge strong { display: block; font-size: var(--text-sm); font-weight: 600; color: var(--color-navy); }
-        .hero-badge span { font-size: var(--text-xs); color: var(--color-text-muted); }
 
         @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; min-height: auto; }
-            .hero-left { padding: 80px 32px 64px; }
-            .hero-right { aspect-ratio: 4/3; }
-            .hero-badge { display: none; }
+            .info-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--space-xl) 24px;
+            }
+
+            .info-divider {
+                display: none;
+            }
         }
 
         /* ============================================================
-        SECTION WRAPPER
+           OUR MISSION
         ============================================================ */
-        .section {
-            padding: var(--space-section) max(32px, 5vw);
-            max-width: 1280px;
-            margin: 0 auto;
+        .mission-section {
+            background: var(--color-white);
+            padding: var(--space-section) max(48px, 6vw);
         }
-        .section-full { padding: var(--space-section) 0; }
-        .section-bg { background: var(--color-surface); }
-        .section-dark { background: var(--color-navy-deep); }
 
-        /* ============================================================
-        MISSION — TWO COLUMN
-        ============================================================ */
-        .mission-grid {
+        .mission-inner {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: var(--space-2xl);
-            align-items: center;
+            gap: max(64px, 6vw);
+            align-items: start;
         }
+
+        /* Left column */
+        .mission-left {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
         .mission-img {
             border-radius: var(--radius-xl);
             overflow: hidden;
@@ -279,10 +780,23 @@
             background: var(--color-surface);
             position: relative;
         }
-        .mission-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        .mission-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+
+        .mission-img:hover img {
+            transform: scale(1.02);
+        }
+
         .mission-img-tag {
             position: absolute;
-            top: 20px; left: 20px;
+            top: 20px;
+            left: 20px;
             background: var(--color-navy);
             color: var(--color-white);
             font-size: var(--text-xs);
@@ -292,30 +806,191 @@
             padding: 6px 14px;
             border-radius: var(--radius-pill);
         }
-        .mission-text h2 {
+
+        .mission-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .m-stat {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg) var(--space-xl);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base);
+        }
+
+        .m-stat:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .m-stat.navy {
+            background: var(--color-navy);
+            border-color: transparent;
+        }
+
+        .m-stat.navy:hover {
+            border-color: transparent;
+        }
+
+        .m-stat-num {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .m-stat-lbl {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+        }
+
+        .m-stat.navy .m-stat-lbl {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Right column */
+        .mission-right {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            padding-top: var(--space-sm);
+        }
+
+        .mission-h2 {
             font-family: var(--font-display);
             font-size: clamp(2rem, 3vw, 3rem);
             font-weight: 300;
             color: var(--color-navy);
-            line-height: 1.15;
+            line-height: 1.1;
             letter-spacing: -0.5px;
-            margin-bottom: var(--space-lg);
         }
-        .mission-text h2 em { font-style: italic; color: var(--color-sky); }
-        .mission-text p { font-size: var(--text-lg); color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--space-lg); max-width: 56ch; }
 
-        @media (max-width: 860px) { .mission-grid { grid-template-columns: 1fr; } }
+        .mission-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .mission-body {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            max-width: 56ch;
+        }
+
+        /* Pillars */
+        .mission-pillars {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .m-pillar {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-sky-faint);
+            border: 1px solid rgba(201, 169, 110, 0.2);
+            border-radius: var(--radius-md);
+        }
+
+        .m-pillar-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--color-sky-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .m-pillar-icon svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--color-sky);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .m-pillar-title {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-navy);
+            display: block;
+        }
+
+        .m-pillar-sub {
+            font-size: var(--text-xs);
+            color: var(--color-text-muted);
+        }
+
+        @media (max-width: 960px) {
+            .mission-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .mission-section {
+                padding: var(--space-2xl) 24px;
+            }
+        }
 
         /* ============================================================
-        WHAT YOUTH EXPERIENCE — BENTO
+           MAET — WHAT YOUTH EXPERIENCE (BENTO)
         ============================================================ */
-        .bento-header { margin-bottom: var(--space-2xl); }
-        .bento {
+        .maet-section {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .maet-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .maet-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .maet-header h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .maet-header p {
+            margin-top: var(--space-md);
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            max-width: 600px;
+            line-height: 1.75;
+        }
+
+        .maet-bento {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 12px;
+            gap: 10px;
         }
-        .bento-card {
+
+        /* All cards white — uniform */
+        .mb {
             background: var(--color-white);
             border: 1px solid var(--color-line);
             border-radius: var(--radius-xl);
@@ -323,286 +998,1151 @@
             display: flex;
             flex-direction: column;
             gap: var(--space-md);
-            transition: box-shadow var(--dur-base), transform var(--dur-base);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
         }
-        .bento-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-        .bento-card.span-2 { grid-column: span 2; }
-        .bento-card.span-3 { grid-column: span 3; }
-        .bento-card.span-4 { grid-column: span 4; }
-        .bento-card.span-6 { grid-column: span 6; flex-direction: row; align-items: center; }
-        .bento-card.dark { background: var(--color-navy-deep); border-color: transparent; }
-        .bento-card.dark .bento-card-title { color: var(--color-white); }
-        .bento-card.dark .bento-card-text { color: rgba(255,255,255,0.6); }
-        .bento-card.gold { background: var(--color-sky-light); border-color: rgba(201,169,110,0.25); }
-        .bento-card.surface { background: var(--color-surface); }
-        .bento-emoji { font-size: 2rem; line-height: 1; }
-        .bento-icon {
-            width: 48px; height: 48px;
+
+        .mb:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201, 169, 110, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .mb.s3 {
+            grid-column: span 3;
+        }
+
+        .mb.s2 {
+            grid-column: span 2;
+        }
+
+        .mb.s1 {
+            grid-column: span 1;
+        }
+
+        .mb.s6 {
+            grid-column: span 6;
+            flex-direction: row;
+            align-items: center;
+            gap: var(--space-xl);
+        }
+
+        /* Only accent variant for the wide callout */
+        .mb.gold {
+            background: var(--color-sky-light);
+            border-color: rgba(201, 169, 110, 0.3);
+        }
+
+        .mb-icon {
+            width: 44px;
+            height: 44px;
             border-radius: var(--radius-md);
             background: var(--color-sky-light);
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
         }
-        .bento-card.dark .bento-icon { background: rgba(201,169,110,0.18); }
-        .bento-icon svg { width: 24px; height: 24px; stroke: var(--color-sky); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-        .bento-card-title { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 400; color: var(--color-navy); line-height: 1.3; }
-        .bento-card-text { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; max-width: 40ch; }
-        .bento-card.span-6 .bento-card-text { max-width: none; }
+
+        .mb.gold .mb-icon {
+            background: rgba(201, 169, 110, 0.35);
+        }
+
+        .mb-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--color-sky);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .mb-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 500;
+            color: var(--color-navy);
+            line-height: 1.3;
+        }
+
+        .mb-text {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
 
         @media (max-width: 1024px) {
-            .bento { grid-template-columns: repeat(4, 1fr); }
-            .bento-card.span-3 { grid-column: span 2; }
-            .bento-card.span-4 { grid-column: span 4; }
-            .bento-card.span-6 { grid-column: span 4; flex-direction: column; }
+            .maet-bento {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .mb.s3 {
+                grid-column: span 2;
+            }
+
+            .mb.s6 {
+                grid-column: span 4;
+                flex-direction: column;
+            }
         }
+
         @media (max-width: 640px) {
-            .bento { grid-template-columns: 1fr 1fr; }
-            .bento-card.span-2, .bento-card.span-3, .bento-card.span-4, .bento-card.span-6 { grid-column: span 2; flex-direction: column; }
+            .maet-bento {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .mb.s1,
+            .mb.s2,
+            .mb.s3,
+            .mb.s6 {
+                grid-column: span 2;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .maet-section {
+                padding: var(--space-2xl) 24px;
+            }
         }
 
         /* ============================================================
-        YOUTH VENDOR PATHWAY — DARK FULL-WIDTH
+           YOUTH VENDOR PATHWAY — dark full-width + bento right
         ============================================================ */
         .vendor-section {
             background: var(--color-navy-deep);
-            padding: var(--space-section) max(32px, 5vw);
+            padding: var(--space-section) max(48px, 6vw);
             position: relative;
             overflow: hidden;
         }
+
         .vendor-section::before {
             content: '';
             position: absolute;
-            top: -120px; right: -120px;
-            width: 500px; height: 500px;
+            top: -120px;
+            right: -120px;
+            width: 500px;
+            height: 500px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 65%);
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 65%);
             pointer-events: none;
         }
+
         .vendor-inner {
-            max-width: 1280px;
-            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: var(--space-2xl);
+            gap: max(64px, 6vw);
             align-items: center;
         }
-        .vendor-text .section-label { color: var(--color-sky); }
-        .vendor-text h2 { font-family: var(--font-display); font-size: clamp(2rem, 3vw, 3.25rem); font-weight: 300; color: var(--color-white); letter-spacing: -0.5px; line-height: 1.1; margin-bottom: var(--space-lg); }
-        .vendor-text h2 em { font-style: italic; color: var(--color-sky); }
-        .vendor-text p { font-size: var(--text-lg); color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: var(--space-lg); max-width: 52ch; }
-        .vendor-steps {
+
+        .vendor-label {
+            color: var(--color-sky);
+        }
+
+        .vendor-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3vw, 3.25rem);
+            font-weight: 300;
+            color: var(--color-white);
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+            margin-bottom: var(--space-lg);
+        }
+
+        .vendor-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .vendor-body {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+            max-width: 52ch;
+        }
+
+        /*
+         * Vendor bento — asymmetric on dark bg
+         *
+         * Desktop (2 col):
+         * [ 1 — col 1 ]  [ 2 — col 2       ]
+         * [ 3 — tall col 1 row 2-3 ] [ 4 col 2 row 2 ]
+         *                            [ ★ accent col 2 row 3 ]
+         */
+        .vendor-bento {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 10px;
+        }
+
+        /* base card */
+        .vb {
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl) var(--space-lg);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             flex-direction: column;
             gap: var(--space-md);
+            transition: background var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
         }
-        .vendor-step {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-lg);
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            transition: background var(--dur-base);
+
+        .vb:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(201, 169, 110, 0.3);
+            transform: translateY(-2px);
         }
-        .vendor-step:hover { background: rgba(255,255,255,0.09); }
-        .vendor-step-num {
-            width: 36px; height: 36px;
-            border-radius: 50%;
-            background: var(--color-sky);
-            color: var(--color-navy);
-            font-size: var(--text-sm);
+
+        /* card 1 — col 1 row 1 (normal) */
+        .vb-1 {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        /* card 2 — col 2 rows 1-2 (tall) */
+        .vb-2 {
+            grid-column: 2;
+            grid-row: 1 / 3;
+            background: rgba(201, 169, 110, 0.08);
+            border-color: rgba(201, 169, 110, 0.2);
+        }
+
+        .vb-2:hover {
+            background: rgba(201, 169, 110, 0.14);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        /* card 3 — col 1 rows 2-3 (tall) */
+        .vb-3 {
+            grid-column: 1;
+            grid-row: 2 / 4;
+        }
+
+        /* card 4 — col 2 row 3 (normal) */
+        .vb-4 {
+            grid-column: 2;
+            grid-row: 3;
+        }
+
+        /* accent bottom-right */
+        .vb-accent {
+            grid-column: 2;
+            grid-row: 3;
+            background: rgba(201, 169, 110, 0.14);
+            border-color: rgba(201, 169, 110, 0.3);
+            flex-direction: row;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .vb-accent:hover {
+            background: rgba(201, 169, 110, 0.22);
+            border-color: rgba(201, 169, 110, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .vb-num {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: rgba(201, 169, 110, 0.2);
+            color: var(--color-sky);
+            font-family: var(--font-display);
+            font-size: 1rem;
             font-weight: 700;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
         }
-        .vendor-step strong { display: block; font-size: var(--text-base); font-weight: 600; color: var(--color-white); margin-bottom: 4px; }
-        .vendor-step span { font-size: var(--text-sm); color: rgba(255,255,255,0.55); line-height: 1.6; }
 
-        @media (max-width: 860px) { .vendor-inner { grid-template-columns: 1fr; } }
+        .vb-2 .vb-num {
+            background: rgba(201, 169, 110, 0.3);
+            width: 48px;
+            height: 48px;
+            font-size: 1.2rem;
+        }
+
+        .vb-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-white);
+            line-height: 1.2;
+        }
+
+        .vb-2 .vb-title {
+            font-size: clamp(1.25rem, 2vw, 1.6rem);
+        }
+
+        .vb-3 .vb-title {
+            font-size: clamp(1.25rem, 2vw, 1.6rem);
+        }
+
+        .vb-accent .vb-title {
+            color: var(--color-sky);
+            font-size: var(--text-base);
+        }
+
+        .vb-body {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.65;
+        }
+
+        .vb-accent .vb-body {
+            font-size: var(--text-xs);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .vb-accent-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        @media (max-width: 1024px) {
+            .vendor-bento {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto;
+            }
+
+            .vb-1,
+            .vb-2,
+            .vb-3,
+            .vb-4 {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            .vb-accent {
+                grid-column: span 2;
+                flex-direction: row;
+            }
+        }
+
+        @media (max-width: 960px) {
+            .vendor-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .vendor-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .vb-accent {
+                grid-column: 1;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .vendor-section {
+                padding: var(--space-2xl) 24px;
+            }
+        }
 
         /* ============================================================
-        NIGHT SKY CAMP
+           NIGHT SKY SESSIONS
         ============================================================ */
-        .camp-grid {
+        .night-section {
+            background: var(--color-white);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .night-inner {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: var(--space-2xl);
-            align-items: center;
+            gap: max(64px, 6vw);
+            align-items: stretch;
         }
-        .camp-img {
+
+        .night-img-wrap {
             border-radius: var(--radius-xl);
             overflow: hidden;
-            aspect-ratio: 4/3;
             background: var(--color-navy-deep);
             position: relative;
+            min-height: 460px;
         }
-        .camp-img img { width: 100%; height: 100%; object-fit: cover; }
-        .camp-activities {
+
+        .night-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .night-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(21, 46, 58, 0.7) 0%, transparent 60%);
+        }
+
+        .night-img-label {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            padding: 10px 18px;
+            color: var(--color-white);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .night-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: var(--space-lg);
+        }
+
+        .night-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 2.8vw, 3rem);
+            font-weight: 300;
+            color: var(--color-navy);
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        .night-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .night-body {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            max-width: 52ch;
+        }
+
+        .camp-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--color-navy);
+            color: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 12px 20px;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            width: fit-content;
+        }
+
+        .camp-badge svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--color-sky);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        .camp-chips {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: var(--space-sm);
-            margin: var(--space-xl) 0;
+            gap: 8px;
         }
-        .camp-activity {
+
+        .camp-chip {
             display: flex;
             align-items: center;
             gap: 10px;
             font-size: var(--text-sm);
             color: var(--color-text-muted);
             background: var(--color-surface);
+            border: 1px solid var(--color-line);
             border-radius: var(--radius-md);
             padding: 10px 14px;
+            transition: border-color var(--dur-fast), background var(--dur-fast);
         }
-        .camp-activity span.dot {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: var(--color-sky);
+
+        .camp-chip:hover {
+            border-color: rgba(201, 169, 110, 0.4);
+            background: var(--color-sky-faint);
+        }
+
+        .camp-chip svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--color-sky);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
             flex-shrink: 0;
         }
 
-        @media (max-width: 860px) { .camp-grid { grid-template-columns: 1fr; } .camp-activities { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 960px) {
+            .night-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .night-img-wrap {
+                min-height: 280px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .night-section {
+                padding: var(--space-2xl) 24px;
+            }
+        }
 
         /* ============================================================
-        PARK TAKEOVER — EVENTS
+           ASCENDTIALS COMMUNITY EVENTS — matches youth-programs.html
         ============================================================ */
+        .community-events-section {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .community-events-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .community-events-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .community-events-header h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .community-events-header p {
+            margin-top: var(--space-md);
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            max-width: 600px;
+            line-height: 1.75;
+        }
+
         .events-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-md);
-            margin-top: var(--space-2xl);
+            gap: var(--space-lg);
         }
+
         .event-card {
             background: var(--color-white);
             border: 1px solid var(--color-line);
             border-radius: var(--radius-xl);
             overflow: hidden;
-            transition: box-shadow var(--dur-base), transform var(--dur-base);
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
         }
-        .event-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
-        .event-card-img {
-            aspect-ratio: 3/4;
-            background: var(--color-surface);
-            overflow: hidden;
-        }
-        .event-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease-out); }
-        .event-card:hover .event-card-img img { transform: scale(1.04); }
-        .event-card-body { padding: var(--space-lg); }
-        .event-card-tag { font-size: var(--text-xs); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--color-sky); margin-bottom: var(--space-sm); }
-        .event-card-title { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 400; color: var(--color-navy); line-height: 1.3; margin-bottom: var(--space-sm); }
-        .event-card-desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; margin-bottom: var(--space-lg); }
 
-        @media (max-width: 900px) { .events-grid { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 560px) { .events-grid { grid-template-columns: 1fr; } }
+        .event-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201, 169, 110, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .event-card-img {
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            cursor: zoom-in;
+            flex-shrink: 0;
+        }
+
+        .event-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+
+        .event-card:hover .event-card-img img {
+            transform: scale(1.04);
+        }
+
+        .event-card-body {
+            padding: var(--space-lg) var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .event-card-body h4 {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 500;
+            color: var(--color-navy);
+            margin-bottom: var(--space-sm);
+        }
+
+        .event-card-body p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-md);
+            flex: 1;
+        }
+
+        .event-card-body a {
+            align-self: flex-start;
+        }
+
+        @media (max-width: 900px) {
+            .events-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .community-events-section {
+                padding: var(--space-2xl) 24px;
+            }
+        }
 
         /* ============================================================
-        SCHOOL PARTNERSHIP
+           FOR SCHOOLS — white bento grid
         ============================================================ */
-        .partner-tiers {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: var(--space-md);
-            margin-top: var(--space-2xl);
-        }
-        .partner-tier {
+        .schools-section {
             background: var(--color-white);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .schools-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .schools-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .schools-header h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .schools-header p {
+            margin-top: var(--space-md);
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            max-width: 600px;
+            line-height: 1.75;
+        }
+
+        /*
+         * Schools bento — asymmetric 4-col grid, uniform card color
+         *
+         * Desktop (4 col):
+         * [ A tall col-1 row 1-2 ] [ B wide col 2-4 row 1     ]
+         *                          [ C col 2-3 row 2 ] [ D col 4 row 2 ]
+         */
+        .schools-bento {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 10px;
+        }
+
+        /* base card — all same surface color */
+        .sb {
+            background: var(--color-surface);
             border: 1px solid var(--color-line);
             border-radius: var(--radius-xl);
-            padding: var(--space-xl) var(--space-lg);
-            position: relative;
-            transition: box-shadow var(--dur-base), transform var(--dur-base);
+            padding: var(--space-xl) var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
         }
-        .partner-tier:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-        .partner-tier-letter {
-            width: 48px; height: 48px;
-            border-radius: 50%;
+
+        .sb:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201, 169, 110, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Card A — tall, col 1 spanning 2 rows */
+        .sb-a {
+            grid-column: 1;
+            grid-row: 1 / 3;
+            justify-content: flex-end;
+            min-height: 360px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sb-a::before {
+            content: 'A';
+            position: absolute;
+            top: -10px;
+            right: 16px;
+            font-family: var(--font-display);
+            font-size: 9rem;
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(201, 169, 110, 0.08);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* Card B — wide, col 2-4 row 1, horizontal layout */
+        .sb-b {
+            grid-column: 2 / 5;
+            grid-row: 1;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: var(--space-xl);
+        }
+
+        /* Card C — col 2-3 row 2 */
+        .sb-c {
+            grid-column: 2 / 4;
+            grid-row: 2;
+        }
+
+        /* Card D — col 4 row 2 */
+        .sb-d {
+            grid-column: 4;
+            grid-row: 2;
+        }
+
+        /* letter badge — same on all cards */
+        .sb-letter {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
             background: var(--color-sky-light);
             color: var(--color-sky);
             font-family: var(--font-display);
             font-size: var(--text-xl);
-            font-weight: 500;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: var(--space-lg);
-        }
-        .partner-tier h4 { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 400; color: var(--color-navy); margin-bottom: var(--space-sm); }
-        .partner-tier p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; }
-
-        @media (max-width: 900px) { .partner-tiers { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 560px) { .partner-tiers { grid-template-columns: 1fr; } }
-
-        /* ============================================================
-        CTA BANNER
-        ============================================================ */
-        .cta-banner {
-            background: var(--color-navy-deep);
-            border-radius: var(--radius-xl);
-            padding: var(--space-2xl) var(--space-section);
+            font-weight: 600;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: var(--space-2xl);
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .sb-tag {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+        }
+
+        .sb h4 {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.25;
+        }
+
+        .sb-b h4 {
+            font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+        }
+
+        .sb p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        /* "Start here" pill */
+        .sb-start-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--color-sky-light);
+            border: 1px solid rgba(201, 169, 110, 0.3);
+            border-radius: var(--radius-pill);
+            padding: 5px 12px;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            width: fit-content;
+            margin-bottom: var(--space-sm);
+        }
+
+        .schools-cta {
+            margin-top: var(--space-2xl);
+        }
+
+        @media (max-width: 1100px) {
+            .schools-bento {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+
+            .sb-b {
+                grid-column: 2 / 4;
+            }
+
+            .sb-c {
+                grid-column: 2 / 3;
+            }
+
+            .sb-d {
+                grid-column: 3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .schools-bento {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto;
+            }
+
+            .sb-a {
+                grid-column: span 2;
+                grid-row: auto;
+                min-height: auto;
+                justify-content: flex-start;
+                flex-direction: column;
+            }
+
+            .sb-b {
+                grid-column: span 2;
+                grid-row: auto;
+            }
+
+            .sb-c {
+                grid-column: 1;
+                grid-row: auto;
+            }
+
+            .sb-d {
+                grid-column: 2;
+                grid-row: auto;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .schools-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .sb-a,
+            .sb-b,
+            .sb-c,
+            .sb-d {
+                grid-column: 1;
+                grid-row: auto;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .schools-section {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ============================================================
+           JOIN BANNER — matches youth-programs section-join
+        ============================================================ */
+        .section-join {
+            background: var(--color-navy-deep);
+            padding: var(--space-section) max(48px, 6vw);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-lg);
             position: relative;
             overflow: hidden;
         }
-        .cta-banner::before {
+
+        .section-join::before {
             content: '';
-            position: absolute; top: -60px; right: 0;
-            width: 350px; height: 350px;
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(201,169,110,0.1) 0%, transparent 65%);
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 65%);
             pointer-events: none;
         }
-        .cta-banner-text h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 2.5vw, 2.5rem); font-weight: 300; color: var(--color-white); letter-spacing: -0.5px; margin-bottom: var(--space-sm); }
-        .cta-banner-text h2 em { font-style: italic; color: var(--color-sky); }
-        .cta-banner-text p { font-size: var(--text-base); color: rgba(255,255,255,0.55); max-width: 48ch; }
-        .cta-banner-btns { display: flex; gap: 12px; flex-shrink: 0; }
 
-        @media (max-width: 860px) { .cta-banner { flex-direction: column; padding: var(--space-xl); text-align: center; } .cta-banner-btns { justify-content: center; } }
+        .join-eyebrow {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+        }
+
+        .join-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3.5rem);
+            font-weight: 300;
+            color: var(--color-white);
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+
+        .join-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .join-sub {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.55);
+            max-width: 52ch;
+            line-height: 1.75;
+        }
+
+        .join-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        @media (max-width: 600px) {
+            .section-join {
+                padding: var(--space-2xl) 24px;
+            }
+        }
 
         /* ============================================================
-        BREADCRUMB
+           FOOTER
         ============================================================ */
-        .breadcrumb { padding: calc(72px + var(--space-lg)) max(32px, 5vw) var(--space-lg); max-width: 1280px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: var(--text-xs); color: var(--color-text-light); }
-        .breadcrumb a { color: var(--color-text-light); transition: color var(--dur-fast); }
-        .breadcrumb a:hover { color: var(--color-sky); }
-        .breadcrumb-sep { opacity: 0.5; }
+        .footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+        }
 
-        /* ============================================================
-        FOOTER
-        ============================================================ */
-        footer { background: var(--color-surface); border-top: 1px solid var(--color-line); padding: var(--space-section) max(40px, 5vw) var(--space-xl); }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-2xl); margin-bottom: var(--space-2xl); }
-        .footer-brand-logo { height: 52px; width: auto; margin-bottom: var(--space-lg); }
-        .footer-brand-desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.8; max-width: 28ch; margin-bottom: var(--space-xl); }
-        .footer-social { display: flex; gap: var(--space-md); }
-        .footer-social a { width: 36px; height: 36px; border-radius: var(--radius-md); background: var(--color-surface-2); display: flex; align-items: center; justify-content: center; transition: background var(--dur-fast), color var(--dur-fast); color: var(--color-text-muted); }
-        .footer-social a:hover { background: var(--color-navy); color: var(--color-white); }
-        .footer-col-title { font-size: var(--text-xs); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--color-navy); margin-bottom: var(--space-lg); }
-        .footer-links { list-style: none; display: flex; flex-direction: column; gap: var(--space-sm); }
-        .footer-links a { font-size: var(--text-sm); color: var(--color-text-muted); transition: color var(--dur-fast); }
-        .footer-links a:hover { color: var(--color-sky); }
-        .footer-contact p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.8; }
-        .footer-contact a { color: var(--color-sky); }
-        .footer-partners { display: flex; align-items: center; justify-content: space-around; gap: var(--space-2xl); padding: var(--space-xl) 0; border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); flex-wrap: wrap; margin-bottom: var(--space-xl); }
-        .footer-partners img { height: 40px; width: auto; object-fit: contain; opacity: 0.7; filter: grayscale(30%); transition: opacity var(--dur-fast), filter var(--dur-fast); }
-        .footer-partners img:hover { opacity: 1; filter: grayscale(0); }
-        .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: var(--space-lg); flex-wrap: wrap; }
-        .footer-bottom p { font-size: var(--text-xs); color: var(--color-text-light); }
-        .footer-bottom-links { display: flex; gap: var(--space-lg); }
-        .footer-bottom-links a { font-size: var(--text-xs); color: var(--color-text-light); transition: color var(--dur-fast); }
-        .footer-bottom-links a:hover { color: var(--color-sky); }
-        @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--space-2xl);
+            padding: var(--space-section) max(48px, 6vw) var(--space-2xl);
+        }
 
-        /* ── LIGHTBOX ── */
-        .lightbox-overlay { display: none; position: fixed; inset: 0; background: rgba(15,25,30,0.88); z-index: 9000; align-items: center; justify-content: center; padding: 24px; backdrop-filter: blur(8px); cursor: zoom-out; }
-        .lightbox-overlay.open { display: flex; }
-        .lightbox-overlay img { max-width: min(90vw, 1200px); max-height: 85vh; object-fit: contain; border-radius: var(--radius-lg); box-shadow: 0 32px 80px rgba(0,0,0,0.6); cursor: default; }
-        .lightbox-close { position: absolute; top: 20px; right: 24px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 44px; height: 44px; border-radius: 50%; font-size: 22px; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background var(--dur-fast); }
-        .lightbox-close:hover { background: rgba(255,255,255,0.2); }
-        .lightbox-trigger { cursor: zoom-in; }
+        .footer-brand img {
+            height: 52px;
+            width: auto;
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            max-width: 28ch;
+            margin-bottom: var(--space-xl);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-md);
+            background: var(--color-surface-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--dur-fast), color var(--dur-fast);
+            color: var(--color-text-muted);
+        }
+
+        .footer-social a:hover {
+            background: var(--color-navy);
+            color: var(--color-white);
+        }
+
+        .footer-col-title {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .footer-links a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-contact p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .footer-contact a {
+            color: var(--color-sky);
+        }
+
+        .footer-partners {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) max(48px, 6vw);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            flex-wrap: wrap;
+        }
+
+        .footer-partners img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(30%);
+            transition: opacity var(--dur-fast), filter var(--dur-fast);
+        }
+
+        .footer-partners img:hover {
+            opacity: 1;
+            filter: grayscale(0);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            padding: var(--space-xl) max(48px, 6vw);
+        }
+
+        .footer-bottom p {
+            font-size: var(--text-xs);
+            color: var(--color-text-light);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--space-lg);
+        }
+
+        .footer-bottom-links a {
+            font-size: var(--text-xs);
+            color: var(--color-text-light);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--color-sky);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* LIGHTBOX */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 25, 30, 0.88);
+            z-index: 9000;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            backdrop-filter: blur(8px);
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: min(90vw, 1200px);
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
+            cursor: default;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background var(--dur-fast);
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-trigger {
+            cursor: zoom-in;
+        }
     </style>
 </head>
+
 <body>
 
     <!-- NAV -->
@@ -610,8 +2150,10 @@
         <div class="nav-logo">
             <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
         </div>
+
         <ul class="nav-links">
             <li><a href="./index.html">Home</a></li>
+
             <li class="has-dropdown">
                 <a href="#">About</a>
                 <ul class="nav-dropdown">
@@ -620,6 +2162,7 @@
                     <li><a href="./contact.html">Contact Us</a></li>
                 </ul>
             </li>
+
             <li class="has-dropdown">
                 <a href="#">Education</a>
                 <ul class="nav-dropdown">
@@ -631,6 +2174,7 @@
                     <li><a href="./service-learning.html">Service Learning</a></li>
                 </ul>
             </li>
+
             <li class="has-dropdown">
                 <a href="#">Programs</a>
                 <ul class="nav-dropdown">
@@ -643,6 +2187,7 @@
                     <li><a href="./court-order-community-service.html">Court Order Community Service</a></li>
                 </ul>
             </li>
+
             <li class="has-dropdown">
                 <a href="#">Clubs</a>
                 <ul class="nav-dropdown">
@@ -651,6 +2196,7 @@
                     <li><a href="./join-our-community">Join our community</a></li>
                 </ul>
             </li>
+
             <li class="has-dropdown">
                 <a href="#">Join Us</a>
                 <ul class="nav-dropdown">
@@ -659,24 +2205,31 @@
                     <li><a href="./volunteer.html">Volunteer</a></li>
                 </ul>
             </li>
+
         </ul>
+
         <a class="nav-cta" href="./support-us">Support Us</a>
+
         <button class="nav-burger" id="navBurger" aria-label="Open menu">
             <span></span><span></span><span></span>
         </button>
+
     </header>
 
     <div class="mobile-menu" id="mobileMenu">
         <a href="./index.html">Home</a>
+
         <a href="./about.html">About Us</a>
         <a href="./our-team.html">Our Team</a>
         <a href="./contact.html">Contact Us</a>
+
         <a href="./education-and-training.html">Education and Training</a>
         <a href="./literacy-workshops.html">Literacy Workshops</a>
         <a href="./kemetic-yoga.html">Kemetic Yoga</a>
         <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
         <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
         <a href="./service-learning.html">Service Learning</a>
+
         <a href="./events.html">Event Calendar</a>
         <a href="./program-participant.html">Program Participant</a>
         <a href="./farmers-market.html">Farmers' Market</a>
@@ -684,400 +2237,711 @@
         <a href="./youth-programs.html">Youth Program</a>
         <a href="./environmental-programs.html">Environmental Programs</a>
         <a href="./court-order-community-service.html">Court Order Community Service</a>
+
         <a href="./mdba-portal.html">MDBA Portal</a>
         <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
         <a href="./join-our-community">Join our community</a>
+
         <a href="./get-involved.html">Get Involved</a>
         <a href="./partner-with-us.html">Partner with Us</a>
         <a href="./volunteer.html">Volunteer</a>
+
         <a class="mob-cta" href="./support-us">Support Us</a>
     </div>
 
-    <!-- ════════════════════════════════════════════════
-    HERO
-    ════════════════════════════════════════════════ -->
-    <section class="hero">
-        <div class="hero-left">
-            <div class="hero-eyebrow reveal">
-                <div class="hero-eyebrow-line"></div>
-                <span>Youth Programs · San Diego</span>
+    <!-- ============================================================
+HERO
+============================================================ -->
+    <section class="page-hero">
+        <div class="hero-main">
+            <div class="hero-text">
+                <span class="hero-eyebrow reveal">Youth Programs · San Diego</span>
+                <h1 class="hero-h1 reveal reveal--delay-1">
+                    Build<br><em>My Spirit</em>
+                </h1>
+                <div class="hero-divider reveal reveal--delay-1"></div>
+                <p class="hero-desc reveal reveal--delay-2">A before and after school program for low-income BIPOC youth
+                    ages 5–17 in San Diego — supporting them spiritually, mentally, and physically through nature,
+                    culture, and community.</p>
+                <div class="cta-row reveal reveal--delay-3">
+                    <a href="./contact.html" class="btn-primary">
+                        Enroll Your Child
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                    <a href="#maet" class="btn-outline">Explore Program</a>
+                </div>
+                <div class="hero-stats-row reveal reveal--delay-4">
+                    <div>
+                        <div class="hero-stat-num">5–17</div>
+                        <div class="hero-stat-label">Ages served</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-num">Free</div>
+                        <div class="hero-stat-label">No cost to attend</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-num">2×</div>
+                        <div class="hero-stat-label">Weekly locations</div>
+                    </div>
+                </div>
             </div>
-            <h1 class="hero-h1 reveal reveal--d1">
-                Build<br><em>My</em><br>Spirit
-            </h1>
-            <p class="hero-desc reveal reveal--d2">A before and after school program for low-income BIPOC youth ages 5–17 in San Diego — supporting them spiritually, mentally, and physically.</p>
-            <div class="cta-row reveal reveal--d3">
-                <a href="./contact.html" class="btn-white">
-                    Enroll Your Child
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-                <a href="#maet" class="btn-ghost">Explore Program</a>
-            </div>
-            <div class="hero-stats reveal reveal--d4">
-                <div>
-                    <div class="hero-stat-num">5–17</div>
-                    <div class="hero-stat-label">Ages served</div>
-                </div>
-                <div>
-                    <div class="hero-stat-num">Free</div>
-                    <div class="hero-stat-label">No cost to attend</div>
-                </div>
-                <div>
-                    <div class="hero-stat-num">2×</div>
-                    <div class="hero-stat-label">Weekly locations</div>
-                </div>
-            </div>
-        </div>
-        <div class="hero-right">
-            <img src="https://ascendtials.org/wp-content/uploads/elementor/thumbs/mugabi-owen-OSpTd6bOn2k-unsplash-scaled-rnsixqzwy5depv67bwm1jecifv3banjkba26kqfr2s.jpg"
-                 onerror="this.style.display='none'"
-                 alt="Build My Spirit youth program"
-                 class="lightbox-trigger">
-            <div class="hero-right-overlay"></div>
-            <div class="hero-badge reveal reveal--d3">
-                <div class="hero-badge-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3.5 9 10 7M12 12C12 7 17 4 22 5c0 5-3.5 9-10 7"/></svg>
-                </div>
-                <div>
-                    <strong>Before &amp; After School</strong>
-                    <span>BIPOC youth · City Heights &amp; Marina District</span>
+            <div class="hero-photo-wrap reveal reveal--delay-2">
+                <img src="https://ascendtials.org/wp-content/uploads/elementor/thumbs/mugabi-owen-OSpTd6bOn2k-unsplash-scaled-rnsixqzwy5depv67bwm1jecifv3banjkba26kqfr2s.jpg"
+                    onerror="this.style.background='var(--color-surface)'" alt="Build My Spirit youth program"
+                    class="lightbox-trigger">
+                <div class="hero-photo-badge">
+                    <div class="hero-photo-badge-num">BIPOC</div>
+                    <div class="hero-photo-badge-label">Youth &amp; Families · San Diego</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ════════════════════════════════════════════════
-    MISSION
-    ════════════════════════════════════════════════ -->
-    <div class="section">
-        <div class="mission-grid">
-            <div class="mission-img reveal">
-                <img src="https://ascendtials.org/wp-content/uploads/2024/08/Hero--1024x683.jpg"
-                     onerror="this.style.display='none'"
-                     alt="Build My Spirit program"
-                     class="lightbox-trigger">
-                <span class="mission-img-tag">Est. 2021 · San Diego</span>
+    <!-- ============================================================
+INFO STRIP
+============================================================ -->
+    <div class="info-strip">
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
             </div>
-            <div class="mission-text reveal reveal--d1">
+            <div>
+                <div class="info-label">Ages</div>
+                <div class="info-value">5–17 · Before &amp; After School</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">City Heights</div>
+                <div class="info-value">Wightman St · Saturdays 10 AM – 2 PM</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Marina District</div>
+                <div class="info-value">Broadway Pier · Fridays 3 – 7 PM</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Cost</div>
+                <div class="info-value">Free · No Cost to Families</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 12 20 22 4 22 4 12" />
+                    <rect x="2" y="7" width="20" height="5" />
+                    <path d="M12 22V7" />
+                    <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+                    <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Enrollment</div>
+                <div class="info-value">Open · Contact Us to Join</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+OUR MISSION
+============================================================ -->
+    <section class="mission-section">
+        <div class="mission-inner">
+            <div class="mission-left reveal">
+                <div class="mission-img">
+                    <img src="https://ascendtials.org/wp-content/uploads/2024/08/Hero--1024x683.jpg"
+                        onerror="this.style.background='var(--color-surface)'" alt="Build My Spirit program"
+                        class="lightbox-trigger">
+                    <span class="mission-img-tag">Est. 2021 · San Diego</span>
+                </div>
+                <div class="mission-stats">
+                    <div class="m-stat">
+                        <div class="m-stat-num">500+</div>
+                        <div class="m-stat-lbl">Youth served yearly</div>
+                    </div>
+                    <div class="m-stat">
+                        <div class="m-stat-num">3–17</div>
+                        <div class="m-stat-lbl">Ages in program</div>
+                    </div>
+                    <div class="m-stat navy">
+                        <div class="m-stat-num">$0</div>
+                        <div class="m-stat-lbl">Cost to families</div>
+                    </div>
+                    <div class="m-stat">
+                        <div class="m-stat-num">2021</div>
+                        <div class="m-stat-lbl">Program founded</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mission-right reveal reveal--delay-1">
                 <span class="section-label">Our Mission</span>
-                <h2>Empowering youth to <em>rise</em></h2>
-                <p>The Build My Spirit program is the cornerstone of our organization. We believe in empowering young people by fostering open dialogue around relevant issues. Our science-based education approach is fundamental to self-discovery and purpose.</p>
-                <p>Build My Spirit provides youth with knowledge about nature, their place in society, wellness tools, coping strategies, creative thinking, problem-solving, and overall quality of life. We use old wisdom and modern ideas to create programs that keep youth healthy, self-aware, and connected to their communities.</p>
-                <p>We prioritize instilling strong values and boundaries to protect our youth from life's challenges — equipping them with the knowledge and skills to thrive in existing systems while working toward dismantling inequalities.</p>
-                <div class="cta-row" style="margin-top: var(--space-xl);">
+                <h2 class="mission-h2">Empowering youth<br>to <em>rise</em></h2>
+                <p class="mission-body">The Build My Spirit program is the cornerstone of our organization. We believe
+                    in empowering young people by fostering open dialogue around relevant issues. Our science-based
+                    education approach is fundamental to self-discovery and purpose.</p>
+                <p class="mission-body">We use old wisdom and modern ideas to create programs that keep youth healthy,
+                    self-aware, and connected to their communities — equipping them to thrive in existing systems while
+                    working toward dismantling inequalities.</p>
+                <div class="mission-pillars">
+                    <div class="m-pillar">
+                        <div class="m-pillar-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3.5 9 10 7M12 12C12 7 17 4 22 5c0 5-3.5 9-10 7" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="m-pillar-title">Nature &amp; Earth Connection</span>
+                            <span class="m-pillar-sub">Garden science, ecology, and environmental stewardship</span>
+                        </div>
+                    </div>
+                    <div class="m-pillar">
+                        <div class="m-pillar-icon">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 8v4l3 3" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="m-pillar-title">Cultural Identity &amp; Wellness</span>
+                            <span class="m-pillar-sub">Kemetic yoga, ancestral storytelling, and mindfulness</span>
+                        </div>
+                    </div>
+                    <div class="m-pillar">
+                        <div class="m-pillar-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="m-pillar-title">Community &amp; Economic Literacy</span>
+                            <span class="m-pillar-sub">Youth vendor pathway, financial skills, public speaking</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cta-row">
                     <a href="./contact.html" class="btn-primary">
                         Get Involved
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
                     </a>
                     <a href="./volunteer.html" class="btn-outline">Volunteer</a>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ════════════════════════════════════════════════
-    MAET — MINI EARTHKEEPERS
-    ════════════════════════════════════════════════ -->
-    <div class="section-bg section-full" id="maet">
-        <div class="section">
-            <div class="bento-header reveal">
-                <span class="section-label">MAET · Mini ASCENDkemet Earthkeepers Teach Us</span>
-                <h2 class="section-h2">What youth <em>experience</em></h2>
-                <p class="section-body">MAET transforms our certified farmers' markets and waterfront parks into early learning ecosystems for BIPOC youth ages 3–17 — where children explore nature and science through activities that protect and preserve the earth and humankind, powered by community.</p>
+    <!-- ============================================================
+MAET — WHAT YOUTH EXPERIENCE
+============================================================ -->
+    <section class="maet-section" id="maet">
+        <div class="maet-header reveal">
+            <span class="section-label">MAET · Mini ASCENDkemet Earthkeepers Teach Us</span>
+            <h2>What youth <em>experience</em></h2>
+            <p>MAET transforms our certified farmers' markets and waterfront parks into early learning ecosystems for
+                BIPOC youth ages 3–17 — where children explore nature and science through activities that protect and
+                preserve the earth and humankind, powered by community.</p>
+        </div>
+
+        <div class="maet-bento">
+            <!-- Row 1 -->
+            <div class="mb s3 reveal">
+                <div class="mb-icon"><svg viewBox="0 0 24 24">
+                        <path d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3.5 9 10 7M12 12C12 7 17 4 22 5c0 5-3.5 9-10 7" />
+                    </svg></div>
+                <div class="mb-title">Garden-Based Learning</div>
+                <div class="mb-text">Ecological science exploring energy, materials, life, and change through hands in
+                    the soil. Youth grow, tend, and harvest — building responsibility and wonder alongside science
+                    literacy.</div>
+            </div>
+            <div class="mb s2 reveal reveal--delay-1">
+                <div class="mb-icon"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M18.37 2.63L14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 0 0-3-3z" />
+                        <path d="M2 22l5.5-5.5" />
+                    </svg></div>
+                <div class="mb-title">Kemetic Yoga</div>
+                <div class="mb-text">Movement and mindfulness rooted in ancestral practice and cultural identity.</div>
+            </div>
+            <div class="mb s1 reveal reveal--delay-2">
+                <div class="mb-icon"><svg viewBox="0 0 24 24">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                    </svg></div>
+                <div class="mb-title">Cultural Storytelling</div>
+                <div class="mb-text">Ancestral stories and traditional drumming connecting youth to their roots.</div>
             </div>
 
-            <div class="bento">
-                <!-- Row 1 -->
-                <div class="bento-card span-3 dark reveal">
-                    <div class="bento-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3.5 9 10 7M12 12C12 7 17 4 22 5c0 5-3.5 9-10 7"/></svg>
-                    </div>
-                    <div class="bento-card-title">Garden-Based Learning</div>
-                    <div class="bento-card-text">Ecological science exploring energy, materials, life, and change through hands in the soil. Youth grow, tend, and harvest — building responsibility and wonder alongside science literacy.</div>
-                </div>
-                <div class="bento-card span-2 gold reveal reveal--d1">
-                    <div class="bento-emoji">🧘🏾</div>
-                    <div class="bento-card-title">Kemetic Yoga</div>
-                    <div class="bento-card-text">Movement and mindfulness rooted in ancestral practice and cultural identity.</div>
-                </div>
-                <div class="bento-card span-1 reveal reveal--d2">
-                    <div class="bento-emoji">📖</div>
-                    <div class="bento-card-title">Cultural Storytelling</div>
-                    <div class="bento-card-text">Ancestral stories and traditional drumming connecting youth to where they come from.</div>
-                </div>
-
-                <!-- Row 2 -->
-                <div class="bento-card span-2 reveal reveal--d1">
-                    <div class="bento-emoji">🌊</div>
-                    <div class="bento-card-title">Beach Cleanups &amp; Water Science</div>
-                    <div class="bento-card-text">Stewardship in action while learning the science of our coasts and waterways.</div>
-                </div>
-                <div class="bento-card span-2 surface reveal reveal--d2">
-                    <div class="bento-emoji">✨</div>
-                    <div class="bento-card-title">Astronomy &amp; Night Sky</div>
-                    <div class="bento-card-text">Eyes on the stars — connecting cosmic cycles to ecological and cultural knowledge.</div>
-                </div>
-                <div class="bento-card span-2 dark reveal reveal--d3">
-                    <div class="bento-emoji">🥕</div>
-                    <div class="bento-card-title">Cultural Food Education</div>
-                    <div class="bento-card-text">Connecting ancestral foods to nutrition, community, and the markets youth help run.</div>
-                </div>
-
-                <!-- Row 3 — full-width callout -->
-                <div class="bento-card span-6 gold reveal">
-                    <div class="bento-icon">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                    </div>
-                    <div>
-                        <div class="bento-card-title">Open · Free · No registration required</div>
-                        <div class="bento-card-text">Monthly sessions plus a learning station every market day. City Heights / Wightman St (Saturdays 10 AM – 2 PM) and Marina District / Broadway Pier (Fridays 3 – 7 PM). SNAP/EBT, WIC, and SFMNP accepted.</div>
-                    </div>
+            <!-- Row 2 -->
+            <div class="mb s2 reveal reveal--delay-1">
+                <div class="mb-icon"><svg viewBox="0 0 24 24">
+                        <path d="M2.5 19.5l1.5-4.5 11-11a2.121 2.121 0 0 1 3 3l-11 11z" />
+                        <path d="M14 7l3 3" />
+                    </svg></div>
+                <div class="mb-title">Beach Cleanups &amp; Water Science</div>
+                <div class="mb-text">Stewardship in action while learning the science of our coasts and waterways.</div>
+            </div>
+            <div class="mb s2 reveal reveal--delay-2">
+                <div class="mb-icon"><svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="2" />
+                        <path
+                            d="M12 2v3m0 14v3M4.22 4.22l2.12 2.12m11.32 11.32 2.12 2.12M2 12h3m14 0h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" />
+                    </svg></div>
+                <div class="mb-title">Astronomy &amp; Night Sky</div>
+                <div class="mb-text">Eyes on the stars — connecting cosmic cycles to ecological and cultural knowledge.
                 </div>
             </div>
+            <div class="mb s2 reveal reveal--delay-3">
+                <div class="mb-icon"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg></div>
+                <div class="mb-title">Wellness &amp; Coping Tools</div>
+                <div class="mb-text">Science-based mental wellness tools, self-discovery, and community support systems.
+                </div>
+            </div>
+            <div class="mb s2 reveal reveal--delay-1">
+                <div class="mb-icon"><svg viewBox="0 0 24 24">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg></div>
+                <div class="mb-title">Cultural Food Education</div>
+                <div class="mb-text">Connecting ancestral foods to nutrition, community, and the markets youth help run.
+                </div>
+            </div>
+            <div class="mb s2 reveal reveal--delay-2">
+                <div class="mb-icon"><svg viewBox="0 0 24 24">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg></div>
+                <div class="mb-title">Leadership &amp; Purpose</div>
+                <div class="mb-text">Problem-solving, critical thinking, and community building to grow young leaders.
+                </div>
+            </div>
+            <div class="mb s2 reveal reveal--delay-3">
+                <div class="mb-icon"><svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <path d="M3 9h18M9 21V9" />
+                    </svg></div>
+                <div class="mb-title">Handcraft &amp; Art</div>
+                <div class="mb-text">Creative expression through traditional and contemporary handcraft, connecting
+                    culture and creativity.</div>
+            </div>
 
-            <div class="cta-row reveal" style="margin-top: var(--space-2xl);">
-                <a href="./contact.html" class="btn-primary">
-                    Sign Up for MAET
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-                <a href="./contact.html" class="btn-outline">Download One-Pager</a>
+            <!-- Full-width gold callout -->
+            <div class="mb s6 gold reveal">
+                <div class="mb-icon"><svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 8v4l3 3" />
+                    </svg></div>
+                <div>
+                    <div class="mb-title">Open · Free · No registration required</div>
+                    <div class="mb-text">Monthly sessions plus a learning station every market day. City Heights /
+                        Wightman St (Saturdays 10 AM – 2 PM) and Marina District / Broadway Pier (Fridays 3 – 7 PM).
+                        SNAP/EBT, WIC, and SFMNP accepted.</div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- ════════════════════════════════════════════════
-    YOUTH VENDOR PATHWAY
-    ════════════════════════════════════════════════ -->
+        <div class="cta-row reveal" style="margin-top: var(--space-2xl);">
+            <a href="./contact.html" class="btn-primary">
+                Sign Up for MAET
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                </svg>
+            </a>
+            <a href="./contact.html" class="btn-outline">Download One-Pager</a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+YOUTH VENDOR PATHWAY
+============================================================ -->
     <section class="vendor-section">
         <div class="vendor-inner">
             <div class="vendor-text reveal">
-                <span class="section-label">Signature Feature · Ages 10–17</span>
-                <h2>Youth Vendor<br><em>Pathway</em></h2>
-                <p>Youth ages 10–17 who complete a full program cycle become Youth Vendors at our certified farmers' markets — growing produce, crafting goods, and sharing their earthkeeping journey with the public.</p>
-                <p>Under staff supervision, they practice public speaking, financial literacy, and community building. Grow it, make it, bring it to market.</p>
-                <div class="cta-row" style="margin-top: var(--space-xl);">
+                <span class="section-label vendor-label">Signature Feature · Ages 10–17</span>
+                <h2 class="vendor-h2">Youth Vendor<br><em>Pathway</em></h2>
+                <p class="vendor-body">Youth ages 10–17 who complete a full program cycle become Youth Vendors at our
+                    certified farmers' markets — growing produce, crafting goods, and sharing their earthkeeping journey
+                    with the public.</p>
+                <p class="vendor-body">Under staff supervision, they practice public speaking, financial literacy, and
+                    community building. Grow it, make it, bring it to market.</p>
+                <div class="cta-row">
                     <a href="./contact.html" class="btn-white">
                         Join the Pathway
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
                     </a>
                     <a href="./farmers-market.html" class="btn-ghost">See Our Markets</a>
                 </div>
             </div>
-            <div class="vendor-steps reveal reveal--d1">
-                <div class="vendor-step">
-                    <div class="vendor-step-num">1</div>
-                    <div>
-                        <strong>Complete a Full Program Cycle</strong>
-                        <span>Participate in MAET sessions through the school year and build your earthkeeping foundation.</span>
+            <div class="vendor-bento reveal reveal--delay-1">
+
+                <!-- 1 — col 1 row 1 -->
+                <div class="vb vb-1">
+                    <div class="vb-num">1</div>
+                    <div class="vb-title">Complete a Full Program Cycle</div>
+                    <div class="vb-body">Participate in MAET sessions through the school year and build your
+                        earthkeeping foundation.</div>
+                </div>
+
+                <!-- 2 — col 2 rows 1-2 (tall accent) -->
+                <div class="vb vb-2">
+                    <div class="vb-num">2</div>
+                    <div class="vb-title">Grow &amp; Create</div>
+                    <div class="vb-body">Cultivate produce, craft handmade goods, and prepare your story to share with
+                        the community at our certified farmers' markets.</div>
+                </div>
+
+                <!-- 3 — col 1 rows 2-3 (tall) -->
+                <div class="vb vb-3">
+                    <div class="vb-num">3</div>
+                    <div class="vb-title">Bring It to Market</div>
+                    <div class="vb-body">Sell at our certified farmers' markets, practice public speaking with real
+                        customers, and build financial literacy skills that last a lifetime.</div>
+                </div>
+
+                <!-- 4 — col 2 row 3 (accent summary) -->
+                <div class="vb vb-accent">
+                    <div class="vb-num">&#9733;</div>
+                    <div class="vb-accent-text">
+                        <div class="vb-title">Ages 10–17 · Free</div>
+                        <div class="vb-body">No cost, no experience needed — just a full MAET cycle and the will to
+                            grow.</div>
                     </div>
                 </div>
-                <div class="vendor-step">
-                    <div class="vendor-step-num">2</div>
-                    <div>
-                        <strong>Grow &amp; Create</strong>
-                        <span>Cultivate produce, craft handmade goods, and prepare your story to share with the community.</span>
-                    </div>
-                </div>
-                <div class="vendor-step">
-                    <div class="vendor-step-num">3</div>
-                    <div>
-                        <strong>Bring It to Market</strong>
-                        <span>Sell at our certified farmers' markets, practice public speaking, and build real financial literacy skills.</span>
-                    </div>
-                </div>
-                <div class="vendor-step">
-                    <div class="vendor-step-num">4</div>
-                    <div>
-                        <strong>Lead &amp; Inspire</strong>
-                        <span>Become a peer mentor, community builder, and steward for younger earthkeepers in the program.</span>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- ════════════════════════════════════════════════
-    NIGHT SKY CAMP
-    ════════════════════════════════════════════════ -->
-    <div class="section">
-        <div class="camp-grid">
-            <div class="camp-img reveal">
+    <!-- ============================================================
+NIGHT SKY SESSIONS
+============================================================ -->
+    <section class="night-section">
+        <div class="night-inner">
+            <div class="night-img-wrap reveal">
                 <img src="https://ascendtials.org/wp-content/uploads/2026/03/qtq80-9svoti.jpeg"
-                     onerror="this.style.background='var(--color-navy-deep)'; this.style.display='none'"
-                     alt="Night Sky Youth Camp at Oak Oasis Park"
-                     class="lightbox-trigger">
+                    onerror="this.style.background='var(--color-navy-deep)'"
+                    alt="Night Sky Youth Camp at Oak Oasis Park" class="lightbox-trigger">
+                <div class="night-img-overlay"></div>
+                <div class="night-img-label">Oak Oasis Park · San Diego</div>
             </div>
-            <div class="reveal reveal--d1">
+            <div class="night-content reveal reveal--delay-1">
                 <span class="section-label">Night Sky Sessions</span>
-                <h2 class="section-h2" style="font-size: clamp(1.8rem, 2.8vw, 3rem); font-weight:300; letter-spacing:-0.5px; color: var(--color-navy); margin-bottom: var(--space-lg);">Night Sky <em>Youth Camp</em> at Oak Oasis Park</h2>
-                <p style="font-size: var(--text-lg); color: var(--color-text-muted); line-height:1.8; margin-bottom:var(--space-lg); max-width:52ch;">As part of our Build My Spirit framework, we offer Night Sky Sessions for youth during night sky viewing gatherings at Oak Oasis Park — extending the curriculum through astronomy-based learning and reflection.</p>
-                <p style="font-size: var(--text-lg); color: var(--color-text-muted); line-height:1.8; margin-bottom:var(--space-xl); max-width:52ch;">These evening sessions give children another opportunity to connect with the universe, cultural wisdom, and their role as young earthkeepers and stewards. An <strong>Upcoming Overnight Camp program</strong> is coming soon!</p>
-                <div class="camp-activities">
-                    <div class="camp-activity"><span class="dot"></span>Night sky viewings</div>
-                    <div class="camp-activity"><span class="dot"></span>Bonfire &amp; storytelling</div>
-                    <div class="camp-activity"><span class="dot"></span>Herbs &amp; healing methods</div>
-                    <div class="camp-activity"><span class="dot"></span>Kemetic yoga</div>
-                    <div class="camp-activity"><span class="dot"></span>Day &amp; night hikes</div>
-                    <div class="camp-activity"><span class="dot"></span>Tree planting</div>
-                    <div class="camp-activity"><span class="dot"></span>Scavenger hunts</div>
-                    <div class="camp-activity"><span class="dot"></span>Astronomy sessions</div>
+                <h2 class="night-h2">Night Sky <em>Youth Camp</em><br>at Oak Oasis Park</h2>
+                <p class="night-body">As part of our Build My Spirit framework, we offer Night Sky Sessions for youth
+                    during night sky viewing gatherings at Oak Oasis Park — extending the curriculum through
+                    astronomy-based learning and reflection.</p>
+                <p class="night-body">These evening sessions give children another opportunity to connect with the
+                    universe, cultural wisdom, and their role as young earthkeepers and stewards.</p>
+                <div class="camp-badge">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 8v4l3 3" />
+                    </svg>
+                    Overnight Camp program — coming soon!
+                </div>
+                <div class="camp-chips">
+                    <div class="camp-chip"><svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="2" />
+                            <path
+                                d="M12 2v3m0 14v3M4.22 4.22l2.12 2.12m11.32 11.32 2.12 2.12M2 12h3m14 0h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" />
+                        </svg>Night sky viewings</div>
+                    <div class="camp-chip"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m8 0h3a2 2 0 0 0 2-2v-3" />
+                        </svg>Bonfire &amp; storytelling</div>
+                    <div class="camp-chip"><svg viewBox="0 0 24 24">
+                            <path d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3.5 9 10 7M12 12C12 7 17 4 22 5c0 5-3.5 9-10 7" />
+                        </svg>Herbs &amp; healing methods</div>
+                    <div class="camp-chip"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M18.37 2.63L14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 0 0-3-3z" />
+                            <path d="M2 22l5.5-5.5" />
+                        </svg>Kemetic yoga</div>
+                    <div class="camp-chip"><svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>Day &amp; night hikes</div>
+                    <div class="camp-chip"><svg viewBox="0 0 24 24">
+                            <path d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3.5 9 10 7M12 12C12 7 17 4 22 5c0 5-3.5 9-10 7" />
+                        </svg>Tree planting</div>
+                    <div class="camp-chip"><svg viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>Scavenger hunts</div>
+                    <div class="camp-chip"><svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="2" />
+                            <path
+                                d="M12 2v3m0 14v3M4.22 4.22l2.12 2.12m11.32 11.32 2.12 2.12M2 12h3m14 0h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" />
+                        </svg>Astronomy sessions</div>
                 </div>
                 <div class="cta-row">
                     <a href="./contact.html" class="btn-primary">
                         Register for Camp
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
                     </a>
                     <a href="./contact.html" class="btn-outline">Learn More</a>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ════════════════════════════════════════════════
-    PARK TAKEOVER — COMMUNITY EVENTS
-    ════════════════════════════════════════════════ -->
-    <div class="section-bg section-full">
-        <div class="section">
-            <div class="reveal">
-                <span class="section-label">ASCENDtials Community Events</span>
-                <h2 class="section-h2">Park Takeover</h2>
-                <p class="section-body">Park Takeover is a gathering of Black families in San Diego parks — creating a joyful space for Black children to play and connect with peers. By bringing Black families together, Park Takeover fosters a sense of community and healing. Join us for free Kemetic Yoga sessions and holistic education tools!</p>
+    <!-- ============================================================
+ASCENDTIALS COMMUNITY EVENTS
+============================================================ -->
+    <section class="community-events-section">
+        <div class="community-events-header reveal">
+            <span class="section-label">ASCENDtials Community Events</span>
+            <h2>Programs in<br><em>the community</em></h2>
+            <p>Beyond our regular sessions, we partner with parks, markets, and community spaces to bring Build My
+                Spirit
+                experiences to more youth across San Diego.</p>
+        </div>
+
+        <div class="events-grid">
+            <div class="event-card reveal">
+                <div class="event-card-img">
+                    <img src="https://ascendtials.org/wp-content/uploads/2025/04/Park-Takeover-for-Nov-2-791x1024.png"
+                        alt="Park Takeover Series"
+                        data-lightbox="https://ascendtials.org/wp-content/uploads/2025/04/Park-Takeover-for-Nov-2-791x1024.png">
+                </div>
+                <div class="event-card-body">
+                    <h4>Park Takeover Series</h4>
+                    <p>ASCENDtials is partnering with Pepper Grove Park for our Park Takeover series — free Kemetic Yoga
+                        sessions and holistic education tools for the whole family.</p>
+                    <a class="btn-outline"
+                        href="https://www.eventbrite.com/e/kemetic-yoga-park-takeover-tickets-1986842925675?aff=oddtdtcreator#location">
+                        Learn More
+                    </a>
+                </div>
             </div>
-            <div class="events-grid">
-                <div class="event-card reveal reveal--d1">
-                    <div class="event-card-img">
-                        <img src="https://ascendtials.org/wp-content/uploads/2025/04/Park-Takeover-for-Nov-2-791x1024.png"
-                             onerror="this.style.display='none'"
-                             alt="Park Takeover November"
-                             class="lightbox-trigger">
-                    </div>
-                    <div class="event-card-body">
-                        <div class="event-card-tag">Park Takeover</div>
-                        <h3 class="event-card-title">Kemetic Yoga at Pepper Grove Park</h3>
-                        <p class="event-card-desc">Free Kemetic Yoga sessions and holistic education tools at Pepper Grove Park. All ages welcome — bring your family.</p>
-                        <a href="./contact.html" class="btn-primary" style="font-size: var(--text-sm); padding: 11px 22px;">
-                            RSVP
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                        </a>
-                    </div>
+
+            <div class="event-card reveal reveal--delay-1">
+                <div class="event-card-img">
+                    <img src="https://ascendtials.org/wp-content/uploads/2026/04/Park-Takeover-2-791x1024.png"
+                        alt="Kemetic Yoga April 22nd"
+                        data-lightbox="https://ascendtials.org/wp-content/uploads/2026/04/Park-Takeover-2-791x1024.png">
                 </div>
-                <div class="event-card reveal reveal--d2">
-                    <div class="event-card-img">
-                        <img src="https://ascendtials.org/wp-content/uploads/2026/04/Park-Takeover-2-791x1024.png"
-                             onerror="this.style.display='none'"
-                             alt="Park Takeover 2026"
-                             class="lightbox-trigger">
-                    </div>
-                    <div class="event-card-body">
-                        <div class="event-card-tag">Park Takeover</div>
-                        <h3 class="event-card-title">Community Healing in the Park</h3>
-                        <p class="event-card-desc">A gathering for Black families in San Diego. Play, connect, heal — together in the park with music, movement, and community.</p>
-                        <a href="./contact.html" class="btn-primary" style="font-size: var(--text-sm); padding: 11px 22px;">
-                            RSVP
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                        </a>
-                    </div>
+                <div class="event-card-body">
+                    <h4>Kemetic Yoga · April 22nd</h4>
+                    <p>Join us Wednesday April 22nd at 5pm at Pepper Grove Park — come for an hour of family fun and
+                        mindful movement in community.</p>
+                    <a class="btn-outline"
+                        href="https://www.eventbrite.com/e/kemetic-yoga-park-takeover-tickets-1986842925675?aff=oddtdtcreator#location">
+                        Learn More
+                    </a>
                 </div>
-                <div class="event-card reveal reveal--d3">
-                    <div class="event-card-img">
-                        <img src="https://ascendtials.org/wp-content/uploads/2025/05/May-2025-Ascendkemet-Collective-Certified-Farmers-Marina-District-683x1024.png"
-                             onerror="this.style.display='none'"
-                             alt="ASCENDkemet Farmers Market"
-                             class="lightbox-trigger">
-                    </div>
-                    <div class="event-card-body">
-                        <div class="event-card-tag">Farmers' Market</div>
-                        <h3 class="event-card-title">ASCENDkemet Certified Farmers' Market</h3>
-                        <p class="event-card-desc">City Heights every Saturday 10 AM – 2 PM and Marina District every Friday 3–7 PM. SNAP/EBT, WIC, and SFMNP accepted.</p>
-                        <a href="./farmers-market.html" class="btn-primary" style="font-size: var(--text-sm); padding: 11px 22px;">
-                            See Schedule
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                        </a>
-                    </div>
+            </div>
+
+            <div class="event-card reveal reveal--delay-2">
+                <div class="event-card-img">
+                    <img src="https://ascendtials.org/wp-content/uploads/2025/05/May-2025-Ascendkemet-Collective-Certified-Farmers-Marina-District-683x1024.png"
+                        alt="ASCENDkemet Certified Farmers Market"
+                        data-lightbox="https://ascendtials.org/wp-content/uploads/2025/05/May-2025-Ascendkemet-Collective-Certified-Farmers-Marina-District-683x1024.png">
+                </div>
+                <div class="event-card-body">
+                    <h4>ASCENDkemet Certified Farmers Market</h4>
+                    <p>Drop by the farmers' market and get local produce fresh from the farm — every Friday at the
+                        Marina District, 3–7 PM.</p>
+                    <a class="btn-outline"
+                        href="https://www.eventbrite.com/e/ascendkemet-collective-certified-farmers-market-of-city-heights-tickets-1126331932129">
+                        Learn More
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ════════════════════════════════════════════════
-    SCHOOL PARTNERSHIP
-    ════════════════════════════════════════════════ -->
-    <div class="section">
-        <div class="reveal">
+    <!-- ============================================================
+FOR SCHOOLS & EDUCATORS
+============================================================ -->
+    <section class="schools-section">
+        <div class="schools-header reveal">
             <span class="section-label">For Schools &amp; Educators</span>
-            <h2 class="section-h2">Partner with <em>MAET</em></h2>
-            <p class="section-body">MAET is actively building school partnerships through California's Farm to School program. Aligned with CDFA and CDE pillars, we help San Diego schools bring culturally rooted environmental education to their students — at whatever level fits your classroom. Start small or go all in.</p>
+            <h2>Partner with <em>MAET</em></h2>
+            <p>MAET is actively building school partnerships through California's Farm to School program. Aligned with
+                CDFA and CDE pillars, we help San Diego schools bring culturally rooted environmental education to their
+                students.</p>
         </div>
-        <div class="partner-tiers">
-            <div class="partner-tier reveal reveal--d1">
-                <div class="partner-tier-letter">A</div>
-                <h4>Market Field Trip</h4>
-                <p>Bring your class to a certified farmers' market for a hands-on learning visit. A perfect introduction to our ecosystem.</p>
+        <div class="schools-bento">
+            <!-- A — navy tall, col 1, spans rows 1-2 -->
+            <div class="sb sb-a reveal">
+                <div>
+                    <div class="sb-start-pill">★ Start here</div>
+                    <div class="sb-tag">Field trip</div>
+                    <h4>Market Field Trip</h4>
+                    <p>Bring your class to a certified farmers' market for a hands-on learning visit. A perfect
+                        introduction to our ecosystem — no commitment needed, just show up and explore together.</p>
+                </div>
+                <div class="sb-letter">A</div>
             </div>
-            <div class="partner-tier reveal reveal--d2">
-                <div class="partner-tier-letter">B</div>
-                <h4>In-School Session</h4>
-                <p>We come to you — a MAET-led session right inside your classroom. No travel required for students.</p>
+
+            <!-- B — warm wide, col 2-4, row 1 -->
+            <div class="sb sb-b reveal reveal--delay-1">
+                <div class="sb-letter">B</div>
+                <div>
+                    <div class="sb-tag">We come to you</div>
+                    <h4>In-School Session</h4>
+                    <p>A MAET-led session right inside your classroom. No travel required for students — we bring the
+                        earthkeeping curriculum directly to your school community and engage your class hands-on.</p>
+                </div>
             </div>
-            <div class="partner-tier reveal reveal--d3">
-                <div class="partner-tier-letter">C</div>
+
+            <!-- C — col 2-3, row 2 -->
+            <div class="sb sb-c reveal reveal--delay-2">
+                <div class="sb-letter">C</div>
+                <div class="sb-tag">Deep partnership</div>
                 <h4>Full Program Partnership</h4>
-                <p>A monthly cycle with curriculum integration, pre/post assessments, and a dedicated MAET educator.</p>
+                <p>A monthly cycle with curriculum integration, pre/post assessments, and a dedicated MAET educator
+                    embedded in your school community.</p>
             </div>
-            <div class="partner-tier reveal reveal--d4">
-                <div class="partner-tier-letter">D</div>
+
+            <!-- D — col 4, row 2 -->
+            <div class="sb sb-d reveal reveal--delay-3">
+                <div class="sb-letter">D</div>
+                <div class="sb-tag">In the cafeteria</div>
                 <h4>School Taste Test</h4>
-                <p>Youth-grown produce taste tests connecting food, culture, and nutrition — right in the cafeteria.</p>
+                <p>Youth-grown produce taste tests connecting food, culture, and nutrition right in the cafeteria.</p>
             </div>
         </div>
-        <div class="cta-row reveal" style="margin-top: var(--space-2xl);">
+        <div class="cta-row schools-cta reveal">
             <a href="./contact.html" class="btn-primary">
                 Partner with Us
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                </svg>
             </a>
             <a href="./contact.html" class="btn-outline">Request More Info</a>
         </div>
-    </div>
+    </section>
 
-    <!-- ════════════════════════════════════════════════
-    CTA BANNER
-    ════════════════════════════════════════════════ -->
-    <div class="section" style="padding-top: 0;">
-        <div class="cta-banner reveal">
-            <div class="cta-banner-text">
-                <h2>To protect our youth is to<br>protect our <em>future</em></h2>
-                <p>Interested in learning more about our youth programs or want to enroll your child? Please reach out — we'd love to help.</p>
-            </div>
-            <div class="cta-banner-btns">
-                <a href="./contact.html" class="btn-white">
-                    Connect with Us
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-                <a href="./volunteer.html" class="btn-ghost">Volunteer</a>
-            </div>
+    <!-- ============================================================
+JOIN BANNER
+============================================================ -->
+    <section class="section-join reveal">
+        <span class="join-eyebrow">Get Involved</span>
+        <h2 class="join-h2">To protect our youth is to<br>protect our <em>future</em></h2>
+        <p class="join-sub">Whether you're a parent, educator, school, or community partner — there's a place for you in
+            the Build My Spirit ecosystem.</p>
+        <div class="join-actions">
+            <a class="btn-white" href="./contact.html">Enroll Your Child</a>
+            <a class="btn-ghost" href="./contact.html">Partner with Us</a>
+            <a class="btn-ghost" href="./donation.html">Donate</a>
         </div>
+    </section>
+
+    <!-- ============================================================
+LIGHTBOX
+============================================================ -->
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+        <img src="" alt="Expanded view" id="lightboxImg">
     </div>
 
-    <!-- ════════════════════════════════════════════════
-    FOOTER
-    ════════════════════════════════════════════════ -->
-    <footer>
+    <!-- ============================================================
+FOOTER
+============================================================ -->
+    <footer class="footer">
         <div class="footer-grid">
-            <div>
-                <img src="./assets/img/logo.svg" class="footer-brand-logo" alt="ASCENDtials">
-                <p class="footer-brand-desc">Empowering BIPOC communities in San Diego through education, wellness, and environmental stewardship. Ascend to good.</p>
+            <div class="footer-brand">
+                <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                    alt="ASCENDtials Logo">
+                <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
+                    BIPOC community.</p>
                 <div class="footer-social">
-                    <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
                     </a>
-                    <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
                     </a>
-                    <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+                    <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube"
+                        target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+                        </svg>
                     </a>
-                    <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/></svg>
+                    <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-ascendtials/" aria-label="LinkedIn" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -1086,18 +2950,18 @@
                 <ul class="footer-links">
                     <li><a href="./about.html">About Us</a></li>
                     <li><a href="./education-and-training.html">Education &amp; Training</a></li>
-                    <li><a href="./events.html">Featured Events</a></li>
+                    <li><a href="./events.html">Events Calendar</a></li>
                     <li><a href="./get-involved.html">Get Involved</a></li>
-                    <li><a href="./volunteer.html">Volunteer</a></li>
+                    <li><a href="./volunteer.html">Membership</a></li>
                 </ul>
             </div>
             <div>
                 <div class="footer-col-title">Programs</div>
                 <ul class="footer-links">
+                    <li><a href="./farmers-market.html">Farmers' Markets</a></li>
+                    <li><a href="./food-distribution.html">Food Distribution</a></li>
                     <li><a href="./youth-programs.html">Youth Programs</a></li>
                     <li><a href="./environmental-programs.html">Environmental Programs</a></li>
-                    <li><a href="./farmers-market.html">Farmers' Market</a></li>
-                    <li><a href="./food-distribution.html">Food Distribution</a></li>
                     <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
                 </ul>
             </div>
@@ -1110,59 +2974,66 @@
             </div>
         </div>
         <div class="footer-partners">
-            <img src="assets/img/country-of-san-diego.png" alt="County of San Diego">
-            <img src="assets/img/Live-well-with-San-diego.png" alt="Live Well San Diego">
-            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png" alt="ASCENDtials">
-            <img src="https://ascendtials.org/wp-content/uploads/2026/02/candid-seal-platinum-2025.png" alt="Candid Platinum 2025">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/10/country-of-san-diego.png"
+                alt="County of San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/10/Live-well-with-San-diego.png"
+                alt="Live Well San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/02/candid-seal-platinum-2025.png"
+                alt="Candid Platinum 2025">
         </div>
         <div class="footer-bottom">
-            <p>© 2024 ASCENDtials. All rights reserved.</p>
+            <p>&copy; 2026 ASCENDtials. All rights reserved.</p>
             <div class="footer-bottom-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Use</a>
+                <a href="https://ascendtials.org/privacy-policy/">Privacy Policy</a>
+                <a href="https://ascendtials.org/vendor-application-terms-conditions/">Vendor Policy</a>
                 <a href="./contact.html">Contact</a>
             </div>
         </div>
     </footer>
 
-    <!-- LIGHTBOX -->
-    <div class="lightbox-overlay" id="lightboxOverlay">
-        <button class="lightbox-close" id="lightboxClose">✕</button>
-        <img src="" alt="" id="lightboxImg">
-    </div>
-
     <script>
-        /* NAV */
+        // Nav scroll
         const nav = document.getElementById('mainNav');
-        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+        });
+        // Mobile menu
         const burger = document.getElementById('navBurger');
-        const mm = document.getElementById('mobileMenu');
-        burger.addEventListener('click', () => mm.classList.toggle('open'));
-        mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
-
-        /* REVEAL */
-        const obs = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-        }, { threshold: 0.10 });
-        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-        /* LIGHTBOX */
-        const overlay  = document.getElementById('lightboxOverlay');
-        const lbImg    = document.getElementById('lightboxImg');
-        const lbClose  = document.getElementById('lightboxClose');
-
-        document.querySelectorAll('.lightbox-trigger').forEach(img => {
-            img.addEventListener('click', () => {
-                if (!img.naturalWidth) return;
-                lbImg.src = img.src;
-                lbImg.alt = img.alt;
-                overlay.classList.add('open');
-                document.body.style.overflow = 'hidden';
+        const mobileMenu = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(el => io.observe(el));
+        // Lightbox
+        const lightboxOverlay = document.getElementById('lightboxOverlay');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+        document.querySelectorAll('[data-lightbox]').forEach(el => {
+            el.addEventListener('click', () => {
+                lightboxImg.src = el.getAttribute('data-lightbox');
+                lightboxOverlay.classList.add('active');
             });
         });
-        function closeLB() { overlay.classList.remove('open'); document.body.style.overflow = ''; setTimeout(() => lbImg.src = '', 300); }
-        overlay.addEventListener('click', e => { if (e.target === overlay || e.target === lbClose) closeLB(); });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLB(); });
+        document.querySelectorAll('.lightbox-trigger').forEach(img => {
+            img.addEventListener('click', () => {
+                if (!img.src) return;
+                lightboxImg.src = img.src;
+                lightboxOverlay.classList.add('active');
+            });
+        });
+        lightboxOverlay.addEventListener('click', () => lightboxOverlay.classList.remove('active'));
+        lightboxClose.addEventListener('click', () => lightboxOverlay.classList.remove('active'));
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') lightboxOverlay.classList.remove('active');
+        });
     </script>
 </body>
+
 </html>

@@ -14,12 +14,14 @@
         /* ============================================================
            DESIGN TOKENS
         ============================================================ */
-        :root {
+         :root {
+            /* Brand */
             --color-navy: #1E3A47;
             --color-navy-deep: #152E3A;
             --color-sky: #C9A96E;
             --color-sky-light: #F5EBD8;
-            --color-sky-faint: #FDF6EC;
+
+            /* Neutrals */
             --color-white: #FFFFFF;
             --color-bg: #FAFAF8;
             --color-surface: #F4F2EE;
@@ -28,15 +30,28 @@
             --color-text: #1A1A18;
             --color-text-muted: #666660;
             --color-text-light: #9D9A93;
+
+            /* Accent */
             --color-accent: #C9A96E;
+            --color-warm: #E8D0CC;
+            --color-sage: #B2D5D1;
+            --color-olive: #EBF1AB;
+
+            /* Typography */
             --font-display: 'Playfair Display', Georgia, serif;
             --font-body: 'DM Sans', system-ui, sans-serif;
+
+            /* Type scale */
             --text-xs: 0.75rem;
             --text-sm: 0.875rem;
             --text-base: 1rem;
             --text-lg: 1.125rem;
             --text-xl: 1.375rem;
             --text-2xl: 1.75rem;
+            --text-3xl: 2.25rem;
+            --text-hero: clamp(3rem, 6vw, 5.5rem);
+
+            /* Spacing */
             --space-xs: 4px;
             --space-sm: 8px;
             --space-md: 16px;
@@ -45,14 +60,20 @@
             --space-2xl: 64px;
             --space-3xl: 96px;
             --space-section: 120px;
+
+            /* Radius */
             --radius-sm: 8px;
             --radius-md: 16px;
             --radius-lg: 24px;
             --radius-xl: 32px;
             --radius-pill: 999px;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07);
+
+            /* Shadow */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.06);
             --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
             --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+
+            /* Motion */
             --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
             --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
             --dur-fast: 180ms;
@@ -1646,11 +1667,12 @@
     <!-- NAV -->
     <header class="nav" id="mainNav">
         <div class="nav-logo">
-            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
-                alt="ASCENDtials Logo">
+            <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
         </div>
+
         <ul class="nav-links">
             <li><a href="./index.html">Home</a></li>
+
             <li class="has-dropdown">
                 <a href="#">About</a>
                 <ul class="nav-dropdown">
@@ -1659,6 +1681,7 @@
                     <li><a href="./contact.html">Contact Us</a></li>
                 </ul>
             </li>
+
             <li class="has-dropdown">
                 <a href="#">Education</a>
                 <ul class="nav-dropdown">
@@ -1670,67 +1693,79 @@
                     <li><a href="./service-learning.html">Service Learning</a></li>
                 </ul>
             </li>
+
             <li class="has-dropdown">
                 <a href="#">Programs</a>
                 <ul class="nav-dropdown">
                     <li><a href="./events.html">Event Calendar</a></li>
                     <li><a href="./program-participant.html">Program Participant</a></li>
-                    <li><a href="./farmers-market.html">Farmers' Markets</a></li>
+                    <li><a href="./farmers-market.html">Farmers' Market</a></li>
                     <li><a href="./food-distribution.html">Food Distribution</a></li>
-                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./youth-programs.html">Youth Program</a></li>
                     <li><a href="./environmental-programs.html">Environmental Programs</a></li>
-                    <li><a href="./court-ordered-community-service.html">Court-Ordered Community Service</a></li>
+                    <li><a href="./court-order-community-service.html">Court Order Community Service</a></li>
                 </ul>
             </li>
+
             <li class="has-dropdown">
                 <a href="#">Clubs</a>
                 <ul class="nav-dropdown">
                     <li><a href="./mdba-portal.html">MDBA Portal</a></li>
                     <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
-                    <li><a href="./join-our-community">Join our Community</a></li>
+                    <li><a href="./join-our-community">Join our community</a></li>
                 </ul>
             </li>
+
             <li class="has-dropdown">
                 <a href="#">Join Us</a>
                 <ul class="nav-dropdown">
                     <li><a href="./get-involved.html">Get Involved</a></li>
                     <li><a href="./partner-with-us.html">Partner with Us</a></li>
-                    <li><a href="https://ascendtials.org/sponsor/">Become a Sponsor</a></li>
-                    <li><a href="https://ascendtials.org/vendor-portal/">Vendor</a></li>
                     <li><a href="./volunteer.html">Volunteer</a></li>
                 </ul>
             </li>
+
         </ul>
+
         <a class="nav-cta" href="./support-us">Support Us</a>
+
         <button class="nav-burger" id="navBurger" aria-label="Open menu">
             <span></span><span></span><span></span>
         </button>
+
     </header>
 
     <div class="mobile-menu" id="mobileMenu">
         <a href="./index.html">Home</a>
+
         <a href="./about.html">About Us</a>
         <a href="./our-team.html">Our Team</a>
         <a href="./contact.html">Contact Us</a>
+
         <a href="./education-and-training.html">Education and Training</a>
         <a href="./literacy-workshops.html">Literacy Workshops</a>
         <a href="./kemetic-yoga.html">Kemetic Yoga</a>
         <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
         <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
         <a href="./service-learning.html">Service Learning</a>
+
         <a href="./events.html">Event Calendar</a>
         <a href="./program-participant.html">Program Participant</a>
-        <a href="./farmers-market.html">Farmers' Markets</a>
+        <a href="./farmers-market.html">Farmers' Market</a>
         <a href="./food-distribution.html">Food Distribution</a>
-        <a href="./youth-programs.html">Youth Programs</a>
+        <a href="./youth-programs.html">Youth Program</a>
         <a href="./environmental-programs.html">Environmental Programs</a>
-        <a href="./court-ordered-community-service.html">Court-Ordered Community Service</a>
+        <a href="./court-order-community-service.html">Court Order Community Service</a>
+
         <a href="./mdba-portal.html">MDBA Portal</a>
         <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+        <a href="./join-our-community">Join our community</a>
+
         <a href="./get-involved.html">Get Involved</a>
         <a href="./partner-with-us.html">Partner with Us</a>
         <a href="./volunteer.html">Volunteer</a>
-        <a class="mob-cta" href="./support-us">Support Us</a>
+
+        <a class="mob-ctчa" href="./support-us">Support Us</a>
     </div>
 
     <!-- ============================================================

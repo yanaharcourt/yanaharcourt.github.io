@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate – ASCENDtials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <style>
+
+        /* ============================================================
+           DESIGN TOKENS
+        ============================================================ */
+        :root {
+            /* Brand */
+            --color-navy:       #1E3A47;
+            --color-navy-deep:  #152E3A;
+            --color-sky:        #C9A96E;
+            --color-sky-light:  #F5EBD8;
+            /* Neutrals */
+            --color-white:      #FFFFFF;
+            --color-bg:         #FAFAF8;
+            --color-surface:    #F4F2EE;
+            --color-surface-2:  #ECEAE5;
+            --color-line:       #E2DDD6;
+            --color-text:       #1A1A18;
+            --color-text-muted: #666660;
+            --color-text-light: #9D9A93;
+            /* Accent */
+            --color-accent:     #C9A96E;
+            --color-warm:       #E8D0CC;
+            --color-sage:       #B2D5D1;
+            --color-olive:      #EBF1AB;
+            /* Typography */
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body:    'DM Sans', system-ui, sans-serif;
+            /* Type scale */
+            --text-xs:   0.75rem;
+            --text-sm:   0.875rem;
+            --text-base: 1rem;
+            --text-lg:   1.125rem;
+            --text-xl:   1.375rem;
+            --text-2xl:  1.75rem;
+            --text-3xl:  2.25rem;
+            --text-hero: clamp(3rem, 6vw, 5.5rem);
+            /* Spacing */
+            --space-xs:      4px;
+            --space-sm:      8px;
+            --space-md:      16px;
+            --space-lg:      24px;
+            --space-xl:      40px;
+            --space-2xl:     64px;
+            --space-3xl:     96px;
+            --space-section: 120px;
+            /* Radius */
+            --radius-sm:   8px;
+            --radius-md:   16px;
+            --radius-lg:   24px;
+            --radius-xl:   32px;
+            --radius-pill: 999px;
+            /* Shadow */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+            --shadow-lg: 0 16px 48px rgba(0,0,0,0.10);
+            /* Motion */
+            --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --dur-fast: 180ms;
+            --dur-base: 280ms;
+            --dur-slow: 500ms;
+        }
+
+        /* ============================================================
+           RESET & BASE
+        ============================================================ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html  { scroll-behavior: smooth; }
+        body  { font-family: var(--font-body); color: var(--color-text); background: var(--color-bg); overflow-x: hidden; font-size: var(--text-base); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+        img   { display: block; max-width: 100%; }
+        a     { text-decoration: none; color: inherit; }
+        button { cursor: pointer; font-family: inherit; }
+        ul    { list-style: none; }
+
+        /* ============================================================
+           SCROLL REVEAL
+        ============================================================ */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out); }
+        .reveal.visible { opacity: 1; transform: none; }
+        .reveal--delay-1 { transition-delay: 0.08s; }
+        .reveal--delay-2 { transition-delay: 0.16s; }
+        .reveal--delay-3 { transition-delay: 0.24s; }
+        .reveal--delay-4 { transition-delay: 0.32s; }
+        .reveal--delay-5 { transition-delay: 0.40s; }
+        .reveal--delay-6 { transition-delay: 0.48s; }
+
+        /* ============================================================
+           SHARED UTILITIES
+        ============================================================ */
+        .section-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        /* ============================================================
+           BUTTONS
+        ============================================================ */
+        .btn-primary,
+        .btn-outline,
+        .btn-white,
+        .btn-ghost {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: color var(--dur-fast);
+            border: none;
+        }
+        .btn-primary { padding: 14px 28px; background: var(--color-navy); color: var(--color-bg); }
+        .btn-outline { padding: 13px 27px; background: transparent; color: var(--color-navy); border: 1px solid var(--color-line); }
+        .btn-white   { padding: 14px 28px; background: var(--color-white); color: var(--color-navy); }
+        .btn-ghost   { padding: 13px 27px; background: transparent; color: var(--color-white); border: 1px solid rgba(255,255,255,0.3); }
+
+        .btn-primary::before,
+        .btn-outline::before,
+        .btn-white::before,
+        .btn-ghost::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0); transform-origin: left center;
+            transition: transform 0.38s var(--ease-out);
+            z-index: -1; border-radius: inherit;
+        }
+        .btn-outline::before { background: var(--color-sky-light); }
+        .btn-ghost::before   { background: rgba(255,255,255,0.12); }
+
+        .btn-primary:hover::before,
+        .btn-white:hover::before,
+        .btn-outline:hover::before,
+        .btn-ghost:hover::before { transform: scaleX(1); }
+
+        .btn-primary:hover,
+        .btn-white:hover  { color: var(--color-white); }
+        .btn-outline:hover { border-color: var(--color-sky); }
+        .btn-ghost:hover   { border-color: rgba(255,255,255,0.6); }
+
+        .btn-icon {
+            width: 14px; height: 14px;
+            stroke: currentColor; fill: none;
+            stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+        }
+
+        /* ============================================================
+           NAVIGATION
+        ============================================================ */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            height: 72px;
+            display: flex; align-items: center;
+            padding: 0 40px; gap: 32px;
+            transition: all var(--dur-slow) var(--ease-in-out);
+        }
+        .nav.scrolled {
+            background: rgba(255,255,255,0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            top: 10px; left: 16px; right: 16px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 2px 8px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06),
+                        inset 0 1px 0 rgba(255,255,255,.9);
+        }
+        .nav-logo { margin-right: auto; flex-shrink: 0; }
+        .nav-logo img { height: 52px; width: auto; }
+
+        .nav-links { display: flex; align-items: center; gap: 4px; }
+        .nav-links > li { position: relative; }
+        .nav-links > li > a {
+            display: flex; align-items: center; gap: 4px;
+            padding: 8px 12px;
+            font-size: var(--text-sm); font-weight: 400;
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            transition: color var(--dur-fast), background var(--dur-fast);
+        }
+        .nav-links > li > a:hover { color: var(--color-navy); background: var(--color-surface); }
+
+        .nav-links .has-dropdown > a::after {
+            content: '';
+            width: 10px; height: 10px;
+            border: solid var(--color-text-muted);
+            border-width: 0 1.5px 1.5px 0;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform var(--dur-fast);
+        }
+        .nav-links .has-dropdown:hover > a::after { transform: rotate(225deg) translateY(-2px); }
+
+        .nav-dropdown {
+            display: none;
+            position: absolute; top: 100%; left: 0;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-line);
+            min-width: 240px; padding: 6px; padding-top: 10px;
+            z-index: 600;
+        }
+        .nav-links .has-dropdown:hover .nav-dropdown { display: block; }
+        .nav-dropdown li a {
+            display: block; padding: 9px 14px;
+            font-size: var(--text-sm); color: var(--color-text-muted);
+            border-radius: var(--radius-sm); white-space: nowrap;
+            transition: color var(--dur-fast), background var(--dur-fast);
+        }
+        .nav-dropdown li a:hover { color: var(--color-navy); background: var(--color-surface); }
+
+        .nav-cta {
+            flex-shrink: 0; position: relative; overflow: hidden; isolation: isolate;
+            background: var(--color-navy); color: var(--color-bg);
+            padding: 9px 20px; border-radius: var(--radius-pill);
+            font-size: var(--text-sm); font-weight: 500; white-space: nowrap;
+            transition: color var(--dur-fast);
+        }
+        .nav-cta::before {
+            content: ''; position: absolute; inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0); transform-origin: left center;
+            transition: transform 0.38s var(--ease-out);
+            z-index: -1; border-radius: inherit;
+        }
+        .nav-cta:hover::before { transform: scaleX(1); }
+        .nav-cta:hover { color: var(--color-white); }
+
+        .nav-burger {
+            display: none; background: none; border: none;
+            flex-direction: column; gap: 5px; padding: 6px; margin-left: auto;
+        }
+        .nav-burger span { display: block; width: 24px; height: 2px; background: var(--color-navy); border-radius: 2px; }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none; position: fixed; inset: 0;
+            background: var(--color-bg); z-index: 490;
+            padding: 90px 24px 32px;
+            overflow-y: auto; flex-direction: column; gap: 4px;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            display: block; padding: 14px 16px;
+            font-size: var(--text-xl); color: var(--color-text);
+            border-bottom: 1px solid var(--color-line);
+            font-family: var(--font-display);
+        }
+        .mobile-menu .mob-cta {
+            margin-top: 24px; background: var(--color-navy); color: var(--color-white);
+            text-align: center; padding: 16px; border-radius: var(--radius-pill);
+            font-size: var(--text-lg); border-bottom: none;
+        }
+
+        @media (max-width: 1060px) { .nav-links, .nav-cta { display: none; } .nav-burger { display: flex; } }
+
+        /* ============================================================
+           HERO
+        ============================================================ */
+        .page-hero {
+            padding-top: calc(72px + var(--space-2xl));
+            padding-bottom: var(--space-2xl);
+            padding-left: max(48px, 6vw);
+            padding-right: max(48px, 6vw);
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            position: relative; overflow: hidden;
+        }
+        .page-hero::before {
+            content: 'GIVE';
+            position: absolute; bottom: -20px; right: -20px;
+            font-family: var(--font-display);
+            font-size: clamp(160px, 22vw, 320px);
+            font-weight: 700; line-height: 1; letter-spacing: -8px;
+            color: rgba(201,169,110,0.05);
+            pointer-events: none; user-select: none;
+        }
+        .hero-inner {
+            max-width: 1280px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw); align-items: center;
+        }
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: var(--text-xs); font-weight: 700;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+        .hero-h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.6rem, 4.2vw, 4.5rem);
+            font-weight: 300; line-height: 1.08; letter-spacing: -2px;
+            color: var(--color-navy); margin-bottom: var(--space-lg);
+        }
+        .hero-h1 em { font-style: italic; color: var(--color-sky); display: block; }
+        .hero-divider {
+            width: 48px; height: 2px;
+            background: linear-gradient(90deg, var(--color-sky), transparent);
+            margin-bottom: var(--space-lg);
+        }
+        .hero-desc {
+            font-size: var(--text-lg); color: var(--color-text-muted);
+            line-height: 1.75; max-width: 480px;
+            margin-bottom: var(--space-xl);
+        }
+        .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: var(--space-xl); }
+
+        /* ── Hero right — stats bento ── */
+        .hero-stats-bento {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .hs-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl) var(--space-lg);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+        }
+        .hs-card:hover { box-shadow: var(--shadow-md); border-color: rgba(201,169,110,0.4); transform: translateY(-2px); }
+        .hs-card--gold { background: var(--color-sky-light); border-color: rgba(201,169,110,0.25); }
+        .hs-card--navy {
+            background: var(--color-navy); border-color: transparent;
+            grid-column: span 2;
+            display: flex; align-items: center; gap: var(--space-xl);
+        }
+        .hs-card--navy:hover { border-color: transparent; box-shadow: var(--shadow-lg); }
+        .hs-num {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300;
+            color: var(--color-sky); line-height: 1; margin-bottom: 6px;
+        }
+        .hs-label {
+            font-size: var(--text-xs); font-weight: 600;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            color: var(--color-text-light);
+        }
+        .hs-card--navy .hs-label { color: rgba(255,255,255,0.5); }
+        .hs-shield {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: rgba(201,169,110,0.15);
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+            color: var(--color-sky);
+        }
+        .hs-shield svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .hs-navy-body { flex: 1; }
+        .hs-navy-body strong {
+            display: block; margin-bottom: 6px;
+            font-family: var(--font-display);
+            font-size: var(--text-xl); font-weight: 400; color: var(--color-white);
+        }
+        .hs-navy-body p { font-size: var(--text-sm); color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+        @media (max-width: 960px) { .hero-inner { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { .page-hero { padding-left: 24px; padding-right: 24px; } }
+
+        /* ============================================================
+           WAYS TO GIVE — 7-card bento
+        ============================================================ */
+        .give-section {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-white);
+        }
+        .give-header { margin-bottom: var(--space-2xl); }
+        .give-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400;
+            color: var(--color-navy); line-height: 1.1; letter-spacing: -1px;
+        }
+        .give-header h2 em { font-style: italic; color: var(--color-sky); }
+        .give-header p {
+            margin-top: var(--space-md);
+            font-size: var(--text-lg); color: var(--color-text-muted);
+            max-width: 600px; line-height: 1.75;
+        }
+
+        /*
+         * 7-card asymmetric bento — 4-col grid:
+         *
+         * [ donate-once col1-2 row1 ] [ children col3  ] [ env col4       ]
+         * [ monthly col1     ] [ vendors col2-3 ] [ bipoc col4 row2-3 ]
+         * [ join col1-2      ] [ movement col3  ]
+         */
+        .give-bento {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto auto auto;
+            gap: 10px;
+        }
+
+        /* BASE CARD */
+        .gc {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            display: flex; flex-direction: column; gap: var(--space-md);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+            position: relative; overflow: hidden;
+        }
+        .gc:hover { box-shadow: var(--shadow-md); border-color: rgba(201,169,110,0.4); transform: translateY(-2px); }
+
+        /* ── Donate Once — dark hero, col 1-2, row 1 ── */
+        .gc--once {
+            grid-column: 1 / 3; grid-row: 1;
+            background: var(--color-navy-deep);
+            border-color: transparent;
+            flex-direction: row; align-items: center;
+            gap: var(--space-2xl);
+        }
+        .gc--once:hover { border-color: rgba(201,169,110,0.2); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .gc--once-left { display: flex; flex-direction: column; gap: var(--space-md); flex: 1; }
+        .gc--once-right {
+            flex-shrink: 0;
+            font-family: var(--font-display);
+            font-size: 7rem; font-weight: 700; line-height: 1;
+            color: rgba(201,169,110,0.12);
+            user-select: none;
+        }
+
+        /* ── Children — col 3, row 1 ── */
+        .gc--children {
+            grid-column: 3; grid-row: 1;
+            min-height: 260px;
+        }
+
+        /* ── Environment — col 4, row 1 ── */
+        .gc--env {
+            grid-column: 4; grid-row: 1;
+        }
+
+        /* ── Monthly — col 1, row 2 ── */
+        .gc--monthly {
+            grid-column: 1; grid-row: 2;
+        }
+
+        /* ── Vendors — col 2-3, row 2 ── */
+        .gc--vendors {
+            grid-column: 2 / 4; grid-row: 2;
+            flex-direction: row; align-items: center;
+            gap: var(--space-xl);
+        }
+        .gc--vendors-text { display: flex; flex-direction: column; gap: var(--space-md); flex: 1; }
+
+        /* ── BIPOC Communities — col 4, rows 2-3; image card ── */
+        .gc--bipoc {
+            grid-column: 4; grid-row: 2 / 4;
+            border-color: transparent;
+            justify-content: flex-end;
+            min-height: 380px;
+        }
+        .gc--bipoc:hover { border-color: rgba(201,169,110,0.2); box-shadow: var(--shadow-lg); }
+        .gc--bipoc-content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: var(--space-md); }
+
+        /* ── Join the Movement — col 1-2, row 3 ── */
+        .gc--join {
+            grid-column: 1 / 3; grid-row: 3;
+            flex-direction: row; align-items: center; gap: var(--space-2xl);
+        }
+        .gc--join-text { flex: 1; display: flex; flex-direction: column; gap: var(--space-md); }
+
+        /* ── Movement quote — col 3, row 3 ── */
+        .gc--quote {
+            grid-column: 3; grid-row: 3;
+        }
+
+        /* ── SHARED INNER ELEMENTS ── */
+        .gc-icon {
+            width: 48px; height: 48px; border-radius: var(--radius-md);
+            background: var(--color-sky-light);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-sky); flex-shrink: 0;
+        }
+        .gc-icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+        .gc--once .gc-icon { background: rgba(201,169,110,0.18); }
+
+        .gc-tag { font-size: var(--text-xs); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-sky); }
+
+        .gc h3 { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 400; color: var(--color-navy); line-height: 1.25; }
+        .gc--once h3  { color: var(--color-white); font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 300; }
+        .gc--join h3  { font-size: clamp(1.4rem, 2vw, 1.85rem); }
+
+        .gc p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; }
+        .gc--once p  { color: rgba(255,255,255,0.6); font-size: var(--text-base); line-height: 1.8; }
+
+        /* CTA pill inside cards */
+        .gc-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: var(--text-sm); font-weight: 500;
+            color: var(--color-navy); border-radius: var(--radius-pill);
+            padding: 10px 20px; width: fit-content;
+            background: var(--color-sky-light);
+            border: 1px solid rgba(201,169,110,0.3);
+            transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast), transform var(--dur-fast);
+        }
+        .gc-cta:hover { background: var(--color-sky); color: var(--color-white); border-color: var(--color-sky); transform: translateX(3px); }
+        .gc-cta svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; transition: transform var(--dur-fast); }
+        .gc-cta:hover svg { transform: translateX(2px); }
+
+        .gc--once .gc-cta  { background: rgba(201,169,110,0.18); color: var(--color-sky); border-color: rgba(201,169,110,0.3); }
+        .gc--once .gc-cta:hover  { background: var(--color-sky); color: var(--color-white); }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .give-bento { grid-template-columns: 1fr 1fr 1fr; }
+            .gc--once    { grid-column: span 3; grid-row: auto; }
+            .gc--once-right { display: none; }
+            .gc--children { grid-column: 1; grid-row: auto; }
+            .gc--env      { grid-column: 2; grid-row: auto; }
+            .gc--monthly  { grid-column: 3; grid-row: auto; }
+            .gc--vendors  { grid-column: span 2; grid-row: auto; }
+            .gc--bipoc    { grid-column: 3; grid-row: auto; min-height: 280px; }
+            .gc--join     { grid-column: span 2; grid-row: auto; }
+            .gc--quote    { grid-column: 3; grid-row: auto; }
+        }
+        @media (max-width: 720px) {
+            .give-bento { grid-template-columns: 1fr 1fr; }
+            .gc--once    { flex-direction: column; grid-column: span 2; }
+            .gc--children, .gc--env, .gc--monthly, .gc--vendors, .gc--bipoc, .gc--join, .gc--quote {
+                grid-column: auto;
+            }
+            .gc--vendors  { flex-direction: column; }
+            .gc--join     { flex-direction: column; }
+            .gc--bipoc    { grid-column: span 2; min-height: 260px; }
+        }
+        @media (max-width: 520px) {
+            .give-bento { grid-template-columns: 1fr; }
+            .gc--once, .gc--bipoc, .gc--join, .gc--vendors { grid-column: 1; }
+        }
+        @media (max-width: 600px) { .give-section { padding: var(--space-2xl) 24px; } }
+
+
+        /* ============================================================
+           HERO MISSION TEXT (long body copy)
+        ============================================================ */
+        .hero-mission {
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+        .hero-mission-inner {
+            max-width: 900px; margin: 0 auto;
+            display: flex; flex-direction: column; gap: var(--space-xl);
+            text-align: center;
+        }
+        .hero-mission p {
+            font-size: var(--text-lg); color: var(--color-text-muted);
+            line-height: 1.85;
+        }
+        .hero-mission-cta {
+            display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+            margin-top: var(--space-md);
+        }
+        @media (max-width: 600px) { .hero-mission { padding: var(--space-2xl) 24px; } }
+
+        /* ============================================================
+           WISDOM FROM OUR ANCESTRY
+        ============================================================ */
+        .wisdom-section {
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+        .wisdom-inner {
+            max-width: 1280px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw); align-items: center;
+        }
+        .wisdom-text h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400;
+            color: var(--color-navy); line-height: 1.1; letter-spacing: -1px;
+            margin-bottom: var(--space-xl);
+        }
+        .wisdom-text p {
+            font-size: var(--text-lg); color: var(--color-text-muted);
+            line-height: 1.85;
+        }
+        .wisdom-img-wrap {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+        .wisdom-img-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: center;
+            display: block;
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+        .wisdom-img-wrap:hover img { transform: scale(1.04); }
+        @media (max-width: 900px) { .wisdom-inner { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { .wisdom-section { padding: var(--space-2xl) 24px; } }
+
+        /* ============================================================
+           EDUCATION & FARMERS MARKET — editorial split
+        ============================================================ */
+        .offers-section {
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+        .offers-grid {
+            max-width: 1280px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1px 1fr;
+            gap: max(48px, 5vw);
+            align-items: stretch;
+        }
+        .offers-divider {
+            width: 1px;
+            background: var(--color-line);
+            align-self: stretch;
+            display: block;
+        }
+        .offer-col {
+            display: flex; flex-direction: column;
+        }
+        .offer-col-label {
+            display: inline-block;
+            font-size: var(--text-xs); font-weight: 700;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: var(--color-sky); margin-bottom: var(--space-lg);
+        }
+        .offer-col h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 2.8vw, 2.5rem); font-weight: 300;
+            color: var(--color-navy); line-height: 1.1; letter-spacing: -1px;
+            margin-bottom: var(--space-xl);
+        }
+        .offer-col h2 em { font-style: italic; color: var(--color-sky); }
+        .offer-col p {
+            font-size: var(--text-base); color: var(--color-text-muted);
+            line-height: 1.85; margin-bottom: var(--space-lg);
+        }
+        .offer-col p:last-of-type { margin-bottom: var(--space-xl); }
+        .offer-actions {
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+        }
+        @media (max-width: 900px) {
+            .offers-grid { grid-template-columns: 1fr; }
+            .offers-divider { width: 100%; height: 1px; align-self: auto; }
+        }
+        @media (max-width: 600px) { .offers-section { padding: var(--space-2xl) 24px; } }
+        /* ============================================================
+           HOW IT WORKS
+        ============================================================ */
+        .how-section {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+        .how-header { margin-bottom: var(--space-2xl); }
+        .how-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; color: var(--color-navy); line-height: 1.1; letter-spacing: -1px; }
+        .how-header h2 em { font-style: italic; color: var(--color-sky); }
+
+        .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+        .how-step {
+            background: var(--color-white); border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl); padding: var(--space-xl);
+            position: relative; overflow: hidden;
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+        }
+        .how-step:hover { box-shadow: var(--shadow-md); border-color: rgba(201,169,110,0.4); transform: translateY(-2px); }
+        .how-step-num {
+            font-family: var(--font-display);
+            font-size: 5rem; font-weight: 300; line-height: 1;
+            color: rgba(201,169,110,0.15);
+            position: absolute; top: var(--space-lg); right: var(--space-xl);
+            user-select: none;
+        }
+        .how-step-icon {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--color-sky-light);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-sky); margin-bottom: var(--space-lg);
+        }
+        .how-step-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .how-step h3 { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 500; color: var(--color-navy); margin-bottom: var(--space-md); }
+        .how-step p  { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; }
+
+        @media (max-width: 900px)  { .how-steps { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 560px)  { .how-steps { grid-template-columns: 1fr; } .how-section { padding: var(--space-2xl) 24px; } }
+
+        /* ============================================================
+           CLOSING QUOTE
+        ============================================================ */
+        .quote-section {
+            background: var(--color-white);
+            padding: var(--space-section) max(48px, 6vw);
+            text-align: center;
+        }
+        .quote-inner  { max-width: 820px; margin: 0 auto; }
+        .quote-icon   { display: block; margin: 0 auto var(--space-lg); color: var(--color-sky); }
+        .quote-icon svg { width: 40px; height: 40px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+        .quote-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; font-style: italic;
+            color: var(--color-navy); line-height: 1.5; letter-spacing: -0.5px;
+            margin-bottom: var(--space-lg);
+        }
+        .quote-sub { font-size: var(--text-base); color: var(--color-text-muted); max-width: 56ch; margin: 0 auto var(--space-xl); line-height: 1.75; }
+        .quote-cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        @media (max-width: 600px) { .quote-section { padding: var(--space-2xl) 24px; } }
+
+        /* ============================================================
+           JOIN BANNER
+        ============================================================ */
+        .section-join {
+            background: var(--color-navy-deep);
+            padding: var(--space-section) max(48px, 6vw);
+            text-align: center;
+            display: flex; flex-direction: column; align-items: center; gap: var(--space-lg);
+            position: relative; overflow: hidden;
+        }
+        .section-join::before {
+            content: '';
+            position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+            width: 600px; height: 600px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .join-eyebrow { font-size: var(--text-xs); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--color-sky); }
+        .join-h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300; color: var(--color-white); line-height: 1.15; letter-spacing: -1px; }
+        .join-h2 em { font-style: italic; color: var(--color-sky); }
+        .join-sub { font-size: var(--text-lg); color: rgba(255,255,255,0.55); max-width: 52ch; line-height: 1.75; }
+        .join-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+        @media (max-width: 600px) { .section-join { padding: var(--space-2xl) 24px; } }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .footer { background: var(--color-surface); border-top: 1px solid var(--color-line); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-2xl); padding: var(--space-section) max(48px, 6vw) var(--space-2xl); }
+        .footer-brand img { height: 52px; width: auto; margin-bottom: var(--space-lg); }
+        .footer-brand p  { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.8; max-width: 28ch; margin-bottom: var(--space-xl); }
+        .footer-social   { display: flex; gap: var(--space-md); }
+        .footer-social a {
+            width: 36px; height: 36px; border-radius: var(--radius-md);
+            background: var(--color-surface-2);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-text-muted);
+            transition: background var(--dur-fast), color var(--dur-fast);
+        }
+        .footer-social a:hover { background: var(--color-navy); color: var(--color-white); }
+        .footer-col-title { font-size: var(--text-xs); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--color-navy); margin-bottom: var(--space-lg); }
+        .footer-links    { display: flex; flex-direction: column; gap: var(--space-sm); }
+        .footer-links a  { font-size: var(--text-sm); color: var(--color-text-muted); transition: color var(--dur-fast); }
+        .footer-links a:hover { color: var(--color-sky); }
+        .footer-contact p   { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.8; }
+        .footer-contact a   { color: var(--color-sky); }
+        .footer-partners {
+            display: flex; align-items: center; justify-content: space-around;
+            gap: var(--space-2xl); flex-wrap: wrap;
+            padding: var(--space-xl) max(48px, 6vw);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+        }
+        .footer-partners img { height: 40px; width: auto; object-fit: contain; opacity: 0.7; filter: grayscale(30%); transition: opacity var(--dur-fast), filter var(--dur-fast); }
+        .footer-partners img:hover { opacity: 1; filter: grayscale(0); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: var(--space-lg); flex-wrap: wrap; padding: var(--space-xl) max(48px, 6vw); }
+        .footer-bottom p { font-size: var(--text-xs); color: var(--color-text-light); }
+        .footer-bottom-links { display: flex; gap: var(--space-lg); }
+        .footer-bottom-links a { font-size: var(--text-xs); color: var(--color-text-light); transition: color var(--dur-fast); }
+        .footer-bottom-links a:hover { color: var(--color-sky); }
+        @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
+
+    </style>
+</head>
+<body>
+
+<!-- ============================================================
+NAV
+============================================================ -->
+<header class="nav" id="mainNav">
+    <div class="nav-logo">
+        <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="./index.html">Home</a></li>
+
+        <li class="has-dropdown">
+            <a href="#">About</a>
+            <ul class="nav-dropdown">
+                <li><a href="./about.html">About Us</a></li>
+                <li><a href="./our-team.html">Our Team</a></li>
+                <li><a href="./contact.html">Contact Us</a></li>
+            </ul>
+        </li>
+
+        <li class="has-dropdown">
+            <a href="#">Education</a>
+            <ul class="nav-dropdown">
+                <li><a href="./education-and-training.html">Education and Training</a></li>
+                <li><a href="./literacy-workshops.html">Literacy Workshops</a></li>
+                <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                <li><a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a></li>
+                <li><a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a></li>
+                <li><a href="./service-learning.html">Service Learning</a></li>
+            </ul>
+        </li>
+
+        <li class="has-dropdown">
+            <a href="#">Programs</a>
+            <ul class="nav-dropdown">
+                <li><a href="./events.html">Event Calendar</a></li>
+                <li><a href="./program-participant.html">Program Participant</a></li>
+                <li><a href="./farmers-market.html">Farmers' Market</a></li>
+                <li><a href="./food-distribution.html">Food Distribution</a></li>
+                <li><a href="./youth-programs.html">Youth Program</a></li>
+                <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                <li><a href="./court-order-community-service.html">Court Order Community Service</a></li>
+            </ul>
+        </li>
+
+        <li class="has-dropdown">
+            <a href="#">Clubs</a>
+            <ul class="nav-dropdown">
+                <li><a href="./mdba-portal.html">MDBA Portal</a></li>
+                <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
+                <li><a href="./join-our-community">Join our community</a></li>
+            </ul>
+        </li>
+
+        <li class="has-dropdown">
+            <a href="#">Join Us</a>
+            <ul class="nav-dropdown">
+                <li><a href="./get-involved.html">Get Involved</a></li>
+                <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                <li><a href="./volunteer.html">Volunteer</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <a class="nav-cta" href="./support-us">Support Us</a>
+
+    <button class="nav-burger" id="navBurger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="./index.html">Home</a>
+    <a href="./about.html">About Us</a>
+    <a href="./our-team.html">Our Team</a>
+    <a href="./contact.html">Contact Us</a>
+    <a href="./education-and-training.html">Education and Training</a>
+    <a href="./literacy-workshops.html">Literacy Workshops</a>
+    <a href="./kemetic-yoga.html">Kemetic Yoga</a>
+    <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
+    <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
+    <a href="./service-learning.html">Service Learning</a>
+    <a href="./events.html">Event Calendar</a>
+    <a href="./program-participant.html">Program Participant</a>
+    <a href="./farmers-market.html">Farmers' Market</a>
+    <a href="./food-distribution.html">Food Distribution</a>
+    <a href="./youth-programs.html">Youth Program</a>
+    <a href="./environmental-programs.html">Environmental Programs</a>
+    <a href="./court-order-community-service.html">Court Order Community Service</a>
+    <a href="./mdba-portal.html">MDBA Portal</a>
+    <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+    <a href="./join-our-community">Join our community</a>
+    <a href="./get-involved.html">Get Involved</a>
+    <a href="./partner-with-us.html">Partner with Us</a>
+    <a href="./volunteer.html">Volunteer</a>
+    <a class="mob-cta" href="./support-us">Support Us</a>
+</div>
+
+<!-- ============================================================
+HERO
+============================================================ -->
+<section class="page-hero">
+    <div class="hero-inner">
+
+        <div class="hero-text">
+            <span class="hero-eyebrow reveal">501(c)(3) Nonprofit · San Diego</span>
+            <h1 class="hero-h1 reveal reveal--delay-1">
+                Great futures<br>are built with<br><em>small charity.</em>
+            </h1>
+            <div class="hero-divider reveal reveal--delay-1"></div>
+            <p class="hero-desc reveal reveal--delay-2">
+                We're working hard to uplift BIPOC communities in Southern California through workshops, programs, and events that ignite real change in spaces that are not inclusive towards BIPOC people.
+            </p>
+            <div class="hero-cta-row reveal reveal--delay-3">
+                <a href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1?locale=en" target="_blank" class="btn-primary">
+                    Donate Now
+                    <svg class="btn-icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+                <a href="#ways-to-give" class="btn-outline">See All Ways to Give</a>
+            </div>
+        </div>
+
+        <div class="hero-stats-bento reveal reveal--delay-2">
+            <div class="hs-card">
+                <div class="hs-num">501(c)(3)</div>
+                <div class="hs-label">Tax-Exempt Status</div>
+            </div>
+            <div class="hs-card hs-card--gold">
+                <div class="hs-num">100%</div>
+                <div class="hs-label">Goes to Programs</div>
+            </div>
+            <div class="hs-card">
+                <div class="hs-num">2018</div>
+                <div class="hs-label">Serving San Diego</div>
+            </div>
+            <div class="hs-card">
+                <div class="hs-num">500+</div>
+                <div class="hs-label">Youth Served Yearly</div>
+            </div>
+            <div class="hs-card hs-card--navy">
+                <div class="hs-shield">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div class="hs-navy-body">
+                    <strong>Your gift is tax-deductible</strong>
+                    <p>ASCENDtials is a registered 501(c)(3) nonprofit. All donations are tax-deductible to the fullest extent of the law.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ============================================================
+HERO MISSION TEXT
+============================================================ -->
+<section class="hero-mission">
+    <div class="hero-mission-inner">
+        <p class="reveal">The goal is to rekindle a lost connection to truth, establishing a foundation for reciprocity as a guiding principle — one that we live by to protect and uplift ourselves. Through our experiences, we find direction, learning from the wisdom embedded in each moment. Respect for the planet and its resources is not just necessary but fundamental. Our actions foster genuine connection and real-time accountability, ensuring that we remain aligned with integrity.</p>
+        <p class="reveal reveal--delay-1">Communities flourish when they draw upon the wisdom of ancestors who understood the deep interconnection between humanity and nature. Inclusion in chaos serves no purpose; instead, leadership rooted in truth is essential to propel a nation forward. Distraction leads nowhere, but true peace of mind allows us to recognize the signs that matter most. As above, so below.</p>
+        <div class="hero-mission-cta reveal reveal--delay-2">
+            <a href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1?locale=en" target="_blank" class="btn-primary">
+                Donate Now
+                <svg class="btn-icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#ways-to-give" class="btn-outline">Other Ways to Support</a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+WISDOM FROM OUR ANCESTRY
+============================================================ -->
+<section class="wisdom-section">
+    <div class="wisdom-inner">
+        <div class="wisdom-text reveal">
+            <h2>Wisdom from<br>our ancestry</h2>
+            <p>Our elders, the keepers of wisdom, need reassurance that we will honor their knowledge — protect, preserve, and actively unlearn harmful habits that have calcified into generational structures sustaining the very issues we strive to dismantle.</p>
+        </div>
+        <div class="wisdom-img-wrap reveal reveal--delay-1">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/10/hands.png"
+                 alt="Hands holding the earth — wisdom and stewardship">
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+EDUCATION & FARMERS MARKET
+============================================================ -->
+<section class="offers-section">
+    <div class="offers-grid">
+        <div class="offer-col reveal">
+            <span class="offer-col-label">Education</span>
+            <h2>Our Education<br><em>Offerings</em></h2>
+            <p>Ongoing education in the fundamental elements — earth, air, water, fire, and the planet as a whole — is essential to sustaining life. Each day, committing to our individual role in stewardship is far more impactful than relying solely on industries to shoulder this responsibility or allowing those same industries to control the narrative and promote the truth. It's not balanced, therefore it's not the truth.</p>
+            <p>Investing in truth-based education cultivates genuine strength from an early age, reducing unnecessary burdens and shaping individuals who navigate life with greater resilience and less hardship. By prioritizing knowledge rooted in principles of nature, we empower future generations to build sustainable, meaningful lives.</p>
+            <div class="offer-actions">
+                <a href="./education-and-training.html" class="btn-outline">
+                    Explore Education
+                    <svg class="btn-icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="offers-divider"></div>
+        <div class="offer-col reveal reveal--delay-1">
+            <span class="offer-col-label">Community</span>
+            <h2>Our Farmers'<br><em>Markets</em></h2>
+            <p>When thoughtfully organized, markets create opportunities for people to live in alignment with these principles, engage with pressing issues firsthand, and contribute to meaningful change in real time.</p>
+            <p>Help us continue to build environments where truth is ever present and thriving for the sake of ourselves.</p>
+            <p>The markets reconnect us with the streets, bringing us face-to-face with people we might never encounter if we remained behind the wheel. It eliminates the cost of vehicle travel for shopping, encouraging us to walk more, spend time outdoors, and engage with our surroundings. It fosters real conversations, prompting us to set aside our phones and truly see who is present.</p>
+            <div class="offer-actions">
+                <a href="./farmers-market.html" class="btn-outline">
+                    Visit Our Markets
+                    <svg class="btn-icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+7 WAYS TO GIVE
+============================================================ -->
+<section class="give-section" id="ways-to-give">
+    <div class="give-header reveal">
+        <span class="section-label">7 Different Ways</span>
+        <h2>How you can<br><em>support our mission</em></h2>
+        <p>Every dollar you give goes directly to programs that change lives — from youth education to environmental stewardship. Choose the way that works best for you.</p>
+    </div>
+
+    <div class="give-bento">
+
+        <!-- 1. Donate Once — dark wide hero -->
+        <div class="gc gc--once reveal">
+            <div class="gc--once-left">
+                <div class="gc-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div class="gc-tag">One-time gift</div>
+                <h3>Donate Once</h3>
+                <p>Every single donation — no matter the size — helps us run programs, buy supplies, and show up for San Diego's BIPOC youth and families. Make a difference today.</p>
+                <a class="gc-cta" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1?locale=en&__embed_source=buy_btn_1O7QQfKPdzGaX2lnUTMK2gbq" target="_blank">
+                    Give Now
+                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+            <div class="gc--once-right">7×</div>
+        </div>
+
+        <!-- 2. Strengthen Children's Programs -->
+        <div class="gc gc--children reveal reveal--delay-1">
+            <div class="gc-icon">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="gc-tag">Youth programs</div>
+            <h3>Strengthen Our Children's Programs</h3>
+            <p>Help fund Build My Spirit and MAET — giving BIPOC youth ages 3–17 a space to connect with nature, culture, and community.</p>
+            <a class="gc-cta" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1?locale=en" target="_blank">
+                Support Youth
+                <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+        </div>
+
+        <!-- 3. Support Environmental Programs -->
+        <div class="gc gc--env reveal reveal--delay-2">
+            <div class="gc-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3.5 9 10 7M12 12C12 7 17 4 22 5c0 5-3.5 9-10 7"/></svg>
+            </div>
+            <div class="gc-tag">Environment</div>
+            <h3>Support Our Environmental Programs</h3>
+            <p>Fund beach cleanups, garden science, and ecological stewardship that connect youth to the earth.</p>
+            <a class="gc-cta" href="./environmental-programs.html">
+                Learn More
+                <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+        </div>
+
+        <!-- 4. Invest Monthly -->
+        <div class="gc gc--monthly reveal reveal--delay-1">
+            <div class="gc-icon">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="gc-tag">Recurring gift</div>
+            <h3>Invest Monthly</h3>
+            <p>Monthly giving is the most powerful way to support us — it helps us plan ahead, hire staff, and sustain programs year-round.</p>
+            <a class="gc-cta" href="https://buy.stripe.com/7sI29U62R5D23iocNd" target="_blank">
+                Give Monthly
+                <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+        </div>
+
+        <!-- 5. Support Small Businesses / Our Vendors -->
+        <div class="gc gc--vendors reveal reveal--delay-2">
+            <div class="gc-icon">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="gc--vendors-text">
+                <div class="gc-tag">Economic equity</div>
+                <h3>Support Small Businesses · Our Vendors</h3>
+                <p>Help our vendors thrive at certified farmers' markets. Your support fuels economic empowerment for BIPOC entrepreneurs across San Diego.</p>
+                <a class="gc-cta" href="https://ascendtials.org/contact-us/" target="_blank">
+                    Get in Touch
+                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- 6. BIPOC Communities — image card, tall -->
+        <div class="gc gc--bipoc reveal reveal--delay-3">
+            <div class="gc--bipoc-content">
+                <div class="gc-tag">Community</div>
+                <h3>BIPOC Communities</h3>
+                <p>Uplift San Diego's BIPOC families through holistic education, cultural events, and economic opportunities.</p>
+                <a class="gc-cta" href="./about.html">
+                    Learn More
+                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- 7a. Join the Movement — col 1-2 row 3 -->
+        <div class="gc gc--join reveal">
+            <div class="gc-icon">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <div class="gc--join-text">
+                <div class="gc-tag">Be part of something</div>
+                <h3>Join the Movement</h3>
+                <p>Become a sustaining supporter and help ASCENDtials build a thriving, equitable future for BIPOC communities across Southern California.</p>
+                <a class="gc-cta" href="./get-involved.html">
+                    Get Involved
+                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- 7b. Quote card — col 3, row 3 -->
+        <div class="gc gc--quote reveal reveal--delay-1">
+            <div class="gc-icon">
+                <svg viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+            </div>
+            <div class="gc-tag">Our promise</div>
+            <h3>Every dollar makes a difference</h3>
+            <p>Please consider donating today to support our mission. Your generosity will truly make a difference in the lives of others.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================================================
+HOW IT WORKS
+============================================================ -->
+<section class="how-section">
+    <div class="how-header reveal">
+        <span class="section-label">It's Simple</span>
+        <h2>How your donation<br><em>makes a difference</em></h2>
+    </div>
+    <div class="how-steps">
+        <div class="how-step reveal">
+            <div class="how-step-num">1</div>
+            <div class="how-step-icon">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <h3>Choose Your Impact</h3>
+            <p>Pick the area you care about most — youth programs, the environment, economic equity, or general support. Every gift goes where it's needed most.</p>
+        </div>
+        <div class="how-step reveal reveal--delay-1">
+            <div class="how-step-num">2</div>
+            <div class="how-step-icon">
+                <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            </div>
+            <h3>Give Securely</h3>
+            <p>We use Stripe — one of the world's most trusted payment platforms. Your information is always safe and protected.</p>
+        </div>
+        <div class="how-step reveal reveal--delay-2">
+            <div class="how-step-num">3</div>
+            <div class="how-step-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Watch It Grow</h3>
+            <p>Your generosity funds real programs, real people, and real change. We'll share stories of impact so you can see exactly where your gift goes.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+CLOSING QUOTE
+============================================================ -->
+<section class="quote-section">
+    <div class="quote-inner reveal">
+        <span class="quote-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+        </span>
+        <p class="quote-text">"Please consider donating today to support our mission. Your generosity will truly make a difference in the lives of others."</p>
+        <p class="quote-sub">Every dollar helps us show up — at the farmers' market, in the classroom, at the park — for BIPOC youth and families across San Diego.</p>
+        <div class="quote-cta-row">
+            <a class="btn-primary" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1?locale=en" target="_blank">
+                Donate Once
+                <svg class="btn-icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a class="btn-outline" href="https://buy.stripe.com/7sI29U62R5D23iocNd" target="_blank">Invest Monthly</a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+JOIN BANNER
+============================================================ -->
+<section class="section-join reveal">
+    <span class="join-eyebrow">Join the Movement</span>
+    <h2 class="join-h2">To protect our community<br>is to protect our <em>future</em></h2>
+    <p class="join-sub">Whether you give once, give monthly, or spread the word — you are part of what makes ASCENDtials possible.</p>
+    <div class="join-actions">
+        <a class="btn-white" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1?locale=en" target="_blank">Donate Now</a>
+        <a class="btn-ghost" href="./volunteer.html">Volunteer</a>
+        <a class="btn-ghost" href="./get-involved.html">Get Involved</a>
+    </div>
+</section>
+
+<!-- ============================================================
+FOOTER
+============================================================ -->
+<footer class="footer">
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+            <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's BIPOC community.</p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                </a>
+                <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+                </a>
+                <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/company/the-ascendtials/" aria-label="LinkedIn" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+            </div>
+        </div>
+        <div>
+            <div class="footer-col-title">Quick Links</div>
+            <ul class="footer-links">
+                <li><a href="./about.html">About Us</a></li>
+                <li><a href="./education-and-training.html">Education &amp; Training</a></li>
+                <li><a href="./events.html">Events Calendar</a></li>
+                <li><a href="./get-involved.html">Get Involved</a></li>
+                <li><a href="./volunteer.html">Membership</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-title">Programs</div>
+            <ul class="footer-links">
+                <li><a href="./farmers-market.html">Farmers' Markets</a></li>
+                <li><a href="./food-distribution.html">Food Distribution</a></li>
+                <li><a href="./youth-programs.html">Youth Programs</a></li>
+                <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-title">Contact</div>
+            <div class="footer-contact">
+                <p>505 W Broadway<br>San Diego, CA 92101</p>
+                <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-partners">
+        <img src="https://ascendtials.org/wp-content/uploads/2024/10/country-of-san-diego.png" alt="County of San Diego">
+        <img src="https://ascendtials.org/wp-content/uploads/2024/10/Live-well-with-San-diego.png" alt="Live Well San Diego">
+        <img src="./assets/img/logo.svg" alt="ASCENDtials">
+        <img src="https://ascendtials.org/wp-content/uploads/2026/02/candid-seal-platinum-2025.png" alt="Candid Platinum 2025">
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 ASCENDtials. All rights reserved.</p>
+        <div class="footer-bottom-links">
+            <a href="https://ascendtials.org/privacy-policy/">Privacy Policy</a>
+            <a href="https://ascendtials.org/vendor-application-terms-conditions/">Vendor Policy</a>
+            <a href="./contact.html">Contact</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Nav scroll
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+    // Mobile menu
+    const burger = document.getElementById('navBurger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
