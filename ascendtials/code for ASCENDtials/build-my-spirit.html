@@ -157,24 +157,10 @@
             margin-bottom: var(--space-md);
         }
 
-        /* ── BUTTONS ── */
-        .btn-primary {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            z-index: 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            background: var(--color-navy);
-            color: var(--color-bg);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            transition: color var(--dur-fast);
-        }
-
+        /* ── BUTTONS — unified across all pages ── */
+        .btn-primary,
+        .btn-white,
+        .btn-ghost,
         .btn-outline {
             position: relative;
             overflow: hidden;
@@ -183,54 +169,15 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 13px 27px;
             border-radius: var(--radius-pill);
-            background: transparent;
-            color: var(--color-navy);
-            border: 1px solid var(--color-line);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            transition: background var(--dur-fast), border-color var(--dur-fast);
+            font-size: var(--text-base);
+            cursor: pointer;
+            border: none;
         }
 
-        .btn-white {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            z-index: 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            background: var(--color-white);
-            color: var(--color-navy);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            transition: color var(--dur-fast);
-        }
-
-        .btn-ghost {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            z-index: 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            background: transparent;
-            color: var(--color-white);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            transition: color var(--dur-fast);
-        }
-
+        /* Sweep fill layer */
         .btn-primary::before,
         .btn-white::before,
-        .btn-outline::before,
         .btn-ghost::before {
             content: '';
             position: absolute;
@@ -244,30 +191,81 @@
         }
 
         .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
             background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
         }
 
-        .btn-ghost::before {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .btn-primary:hover::before,
-        .btn-white:hover::before,
-        .btn-outline:hover::before,
-        .btn-ghost:hover::before {
+        .btn-primary:hover::before {
             transform: scaleX(1);
         }
 
-        .btn-primary:hover,
-        .btn-white:hover {
-            color: var(--color-white);
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
         }
 
         .btn-outline:hover {
             border-color: var(--color-sky);
         }
 
+        .btn-white {
+            background: var(--color-white);
+            color: var(--color-navy);
+            padding: 14px 28px;
+            font-weight: 500;
+            transition: background var(--dur-fast);
+        }
+
+        .btn-white:hover {
+            background: var(--color-sky);
+            color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
         .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.6);
         }
 
@@ -275,6 +273,10 @@
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
+        }
+
+        .cta-row--spaced {
+            margin-top: var(--space-2xl);
         }
 
         /* ============================================================
@@ -2145,7 +2147,9 @@
 
 <body>
 
-    <!-- NAV -->
+    <!-- ============================================================
+    NAV
+    ============================================================ -->
     <header class="nav" id="mainNav">
         <div class="nav-logo">
             <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
@@ -2193,7 +2197,7 @@
                 <ul class="nav-dropdown">
                     <li><a href="./mdba-portal.html">MDBA Portal</a></li>
                     <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
-                    <li><a href="./join-our-community">Join our community</a></li>
+                    <li><a href="./join-our-community.html">Join our community</a></li>
                 </ul>
             </li>
 
@@ -2202,14 +2206,16 @@
                 <ul class="nav-dropdown">
                     <li><a href="./get-involved.html">Get Involved</a></li>
                     <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="./sponsor.html">Become a Sponsor</a></li>
+                    <li><a href="./vendor.html">Vendor</a></li>
                     <li><a href="./volunteer.html">Volunteer</a></li>
                 </ul>
             </li>
 
         </ul>
 
-        <a class="nav-cta" href="./support-us">Support Us</a>
-
+        <a class="nav-cta" href="./support-us.html">Support Us</a>
+        
         <button class="nav-burger" id="navBurger" aria-label="Open menu">
             <span></span><span></span><span></span>
         </button>
@@ -2240,13 +2246,15 @@
 
         <a href="./mdba-portal.html">MDBA Portal</a>
         <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
-        <a href="./join-our-community">Join our community</a>
+        <a href="./join-our-community.html">Join our community</a>
 
         <a href="./get-involved.html">Get Involved</a>
         <a href="./partner-with-us.html">Partner with Us</a>
+        <a href="./sponsor.html">Becone a sponsor</a>
+        <a href="./vendor.html">Vendor</a>
         <a href="./volunteer.html">Volunteer</a>
 
-        <a class="mob-cta" href="./support-us">Support Us</a>
+        <a class="mob-cta" href="./support-us.html"> Support Us </a>
     </div>
 
     <!-- ============================================================
@@ -2273,20 +2281,6 @@ HERO
                         </svg>
                     </a>
                     <a href="#maet" class="btn-outline">Explore Program</a>
-                </div>
-                <div class="hero-stats-row reveal reveal--delay-4">
-                    <div>
-                        <div class="hero-stat-num">5–17</div>
-                        <div class="hero-stat-label">Ages served</div>
-                    </div>
-                    <div>
-                        <div class="hero-stat-num">Free</div>
-                        <div class="hero-stat-label">No cost to attend</div>
-                    </div>
-                    <div>
-                        <div class="hero-stat-num">2×</div>
-                        <div class="hero-stat-label">Weekly locations</div>
-                    </div>
                 </div>
             </div>
             <div class="hero-photo-wrap reveal reveal--delay-2">
@@ -2589,7 +2583,7 @@ MAET — WHAT YOUTH EXPERIENCE
             </div>
         </div>
 
-        <div class="cta-row reveal" style="margin-top: var(--space-2xl);">
+        <div class="cta-row cta-row--spaced reveal">
             <a href="./contact.html" class="btn-primary">
                 Sign Up for MAET
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"

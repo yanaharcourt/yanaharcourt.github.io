@@ -1,0 +1,3063 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Involved – ASCENDtials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================================
+        DESIGN TOKENS
+        ============================================================ */
+        :root {
+            /* Brand */
+            --color-navy: #1E3A47;
+            --color-navy-deep: #152E3A;
+            --color-sky: #C9A96E;
+            --color-sky-light: #F5EBD8;
+
+            /* Neutrals */
+            --color-white: #FFFFFF;
+            --color-bg: #FAFAF8;
+            --color-surface: #F4F2EE;
+            --color-surface-2: #ECEAE5;
+            --color-line: #E2DDD6;
+            --color-text: #1A1A18;
+            --color-text-muted: #666660;
+            --color-text-light: #9D9A93;
+
+            /* Accent */
+            --color-accent: #C9A96E;
+            --color-warm: #E8D0CC;
+            --color-sage: #B2D5D1;
+            --color-olive: #EBF1AB;
+
+            /* Typography */
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+
+            /* Type scale */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.375rem;
+            --text-2xl: 1.75rem;
+            --text-3xl: 2.25rem;
+            --text-hero: clamp(3rem, 6vw, 5.5rem);
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
+            --space-section: 120px;
+
+            /* Radius */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-pill: 999px;
+
+            /* Shadow */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+
+            /* Motion */
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --dur-fast: 180ms;
+            --dur-base: 280ms;
+            --dur-slow: 500ms;
+        }
+
+        /* ============================================================
+        RESET
+        ============================================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            overflow-x: hidden;
+            font-size: var(--text-base);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ============================================================
+        NAV 
+        ============================================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            gap: 32px;
+            transition: all var(--dur-slow) var(--ease-in-out);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            top: 10px;
+            left: 16px;
+            right: 16px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-logo {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .nav-logo img {
+            height: 52px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links>li {
+            position: relative;
+        }
+
+        .nav-links>li>a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            font-size: var(--text-sm);
+            font-weight: 400;
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            transition: color var(--dur-fast) var(--ease-out),
+                background var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links>li>a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        /* Dropdown chevron */
+        .nav-links .has-dropdown>a::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: solid var(--color-text-muted);
+            border-width: 0 1.5px 1.5px 0;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links .has-dropdown:hover>a::after {
+            transform: rotate(225deg) translateY(-2px);
+        }
+
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-line);
+            list-style: none;
+            min-width: 220px;
+            padding: 6px;
+            padding-top: 10px;
+            z-index: 600;
+        }
+
+        .nav-links .has-dropdown:hover .nav-dropdown {
+            display: block;
+        }
+
+        .nav-dropdown li a {
+            display: block;
+            padding: 9px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .nav-dropdown li a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        /* ============================================================
+        BUTTONS — fill-sweep hover effect
+        ============================================================ */
+
+        .btn-primary,
+        .btn-white,
+        .btn-ghost,
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        /* btn-primary: navy bg → gold sweep */
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-white);
+        }
+
+        /* btn-white: navy bg on dark sections → gold sweep */
+        .btn-white {
+            background: var(--color-white);
+            color: var(--color-navy);
+        }
+
+        /* btn-outline: transparent with border → sky-light sweep */
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            border: 1px solid var(--color-line);
+        }
+
+        /* btn-ghost: transparent on dark bg → white sweep */
+        .btn-ghost {
+            background: transparent;
+            color: rgba(255, 255, 255, 0.85);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+        }
+
+        /* Sweep fill layer — shared */
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-ghost::before,
+        .btn-outline::before,
+        .nav-cta::before,
+        .hero-email-btn::before,
+        .bento-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before,
+        .nav-cta:hover::before,
+        .hero-email-btn:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Ghost on dark bg: sweep semi-white */
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost:hover {
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Outline: sweep sky-light */
+        .btn-outline::before {
+            background: var(--color-sky-light);
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-sky);
+        }
+
+        /* btn-white: sweep gold */
+        .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        /* bento-link: sweep gold */
+        .bento-link {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .bento-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .bento-link:hover::before {
+            transform: scaleX(1);
+        }
+
+        .bento-link:hover {
+            color: var(--color-white);
+        }
+
+        /* hero override: btn-white acts as primary on light bg */
+        .page-hero .btn-white {
+            background: var(--color-navy);
+            color: var(--color-bg);
+        }
+
+        .page-hero .btn-ghost {
+            background: transparent;
+            color: var(--color-navy);
+            border: 1px solid var(--color-line);
+        }
+
+        .page-hero .btn-ghost::before {
+            background: var(--color-sky-light);
+        }
+
+        .page-hero .btn-ghost:hover {
+            border-color: var(--color-sky);
+            color: var(--color-navy);
+        }
+
+        .nav-cta {
+            flex-shrink: 0;
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 9px 20px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color var(--dur-fast);
+        }
+
+        .nav-burger {
+            display: none;
+            background: none;
+            border: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+            margin-left: auto;
+        }
+
+        .nav-burger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-navy);
+            border-radius: 2px;
+            transition: all var(--dur-base) var(--ease-out);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 490;
+            padding: 90px 24px 32px;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 16px;
+            font-size: var(--text-xl);
+            color: var(--color-text);
+            border-bottom: 1px solid var(--color-line);
+            font-family: var(--font-display);
+        }
+
+        .mobile-menu .mob-cta {
+            margin-top: 24px;
+            background: var(--color-navy);
+            color: var(--color-white);
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-lg);
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+        }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal--delay-1 {
+            transition-delay: 0.08s;
+        }
+
+        .reveal--delay-2 {
+            transition-delay: 0.16s;
+        }
+
+        .reveal--delay-3 {
+            transition-delay: 0.24s;
+        }
+
+        .reveal--delay-4 {
+            transition-delay: 0.32s;
+        }
+
+        /* ── SECTION LABELS ── */
+        .section-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(var(--text-2xl), 4vw, 3rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        /* ============================================================
+        HERO
+        ============================================================ */
+        .page-hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: calc(72px + var(--space-2xl));
+            padding-left: max(48px, 6vw);
+            padding-right: max(48px, 6vw);
+            background: var(--color-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: 'JOIN';
+            position: absolute;
+            bottom: -60px;
+            left: -20px;
+            font-family: var(--font-display);
+            font-size: clamp(160px, 24vw, 340px);
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(201, 169, 110, 0.04);
+            letter-spacing: -10px;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 5vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.02;
+            letter-spacing: -2px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 em {
+            font-style: italic;
+            color: var(--color-sky);
+            display: block;
+        }
+
+        .hero-divider {
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-sky), transparent);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-desc {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            max-width: 440px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .page-hero .btn-white {
+            background: var(--color-navy);
+            color: var(--color-bg);
+        }
+
+        .page-hero .btn-ghost {
+            background: transparent;
+            color: var(--color-navy);
+            border: 1px solid var(--color-line);
+        }
+
+        .page-hero .btn-ghost:hover {
+            background: var(--color-surface);
+            border-color: var(--color-sky);
+            color: var(--color-navy);
+        }
+
+        /* Right-side abstract panel */
+        .hero-abstract {
+            position: relative;
+            z-index: 1;
+            height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(201, 169, 110, 0.18);
+        }
+
+        .hero-ring-1 {
+            width: 480px;
+            height: 480px;
+        }
+
+        .hero-ring-2 {
+            width: 360px;
+            height: 360px;
+            border-color: rgba(201, 169, 110, 0.28);
+        }
+
+        .hero-ring-3 {
+            width: 240px;
+            height: 240px;
+            border-color: rgba(201, 169, 110, 0.4);
+            border-width: 2px;
+        }
+
+        .hero-center-word {
+            font-family: var(--font-display);
+            font-size: clamp(80px, 10vw, 130px);
+            font-weight: 300;
+            letter-spacing: -4px;
+            color: rgba(30, 58, 71, 0.06);
+            position: absolute;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .hero-pill-cluster {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .hero-pill {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-pill);
+            padding: 10px 22px;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--color-navy);
+            box-shadow: var(--shadow-sm);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-pill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .hero-pill-dot.sage {
+            background: var(--color-sage);
+        }
+
+        .hero-pill-dot.warm {
+            background: var(--color-warm);
+        }
+
+        .hero-pill-dot.olive {
+            background: var(--color-olive);
+        }
+
+        /* hero badge */
+        .hero-photo-badge {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg) var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            z-index: 3;
+        }
+
+        .hero-photo-badge-num {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+        }
+
+        .hero-photo-badge-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-top: 6px;
+        }
+
+        @media (max-width: 960px) {
+            .hero-main {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-abstract {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ── INFO STRIP ── */
+        .info-strip {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-xl) max(48px, 6vw);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-xl);
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+
+        .info-item {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .info-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-bottom: 3px;
+        }
+
+        .info-value {
+            font-size: var(--text-sm);
+            color: var(--color-navy);
+        }
+
+        .info-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--color-line);
+        }
+
+        @media (max-width: 900px) {
+            .info-strip {
+                justify-content: flex-start;
+                padding: var(--space-lg) 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: HOW TO GET INVOLVED (big 4 paths)
+        ============================================================ */
+        .section-paths {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-white);
+        }
+
+        .paths-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: end;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .paths-header-right p {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            max-width: 480px;
+        }
+
+        .paths-bento {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 10px;
+        }
+
+        .path-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl) var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Card 1 — Volunteer: tall left, spans 2 rows */
+        .path-card:nth-child(1) {
+            grid-column: 1;
+            grid-row: 1 / 3;
+            background: var(--color-navy);
+            padding: var(--space-2xl) var(--space-xl);
+        }
+
+        .path-card:nth-child(1) .path-title {
+            color: var(--color-white);
+            font-size: var(--text-2xl);
+        }
+
+        .path-card:nth-child(1) .path-body {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: var(--text-base);
+        }
+
+        .path-card:nth-child(1) .path-num {
+            color: rgba(201, 169, 110, 0.2);
+            font-size: 5rem;
+        }
+
+        .path-card:nth-child(1) .path-icon {
+            background: rgba(201, 169, 110, 0.15);
+        }
+
+        .path-card:nth-child(1):hover {
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        /* Card 2 — Donate: top right */
+        .path-card:nth-child(2) {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        /* Card 3 — Member: top far-right */
+        .path-card:nth-child(3) {
+            grid-column: 3;
+            grid-row: 1;
+        }
+
+        /* Card 4 — Partner: wide bottom spanning 2 cols */
+        .path-card:nth-child(4) {
+            grid-column: 2 / 4;
+            grid-row: 2;
+            flex-direction: row;
+            align-items: center;
+            gap: var(--space-xl);
+        }
+
+        .path-card:nth-child(4) .path-num {
+            position: static;
+            font-size: 3rem;
+            flex-shrink: 0;
+            color: rgba(201, 169, 110, 0.2);
+        }
+
+        .path-card:nth-child(4) .path-body-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            flex: 1;
+        }
+
+        /* Wrap content for horizontal card */
+        .path-card:nth-child(4) .path-icon {
+            flex-shrink: 0;
+        }
+
+        .path-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .path-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
+        }
+
+        .path-icon svg {
+            stroke: var(--color-sky);
+        }
+
+        .path-num {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 300;
+            color: rgba(201, 169, 110, 0.15);
+            line-height: 1;
+            position: absolute;
+            top: var(--space-lg);
+            right: var(--space-xl);
+        }
+
+        .path-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.25;
+        }
+
+        .path-body {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            flex: 1;
+        }
+
+        .path-card .btn-outline {
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+
+        @media (max-width: 1024px) {
+            .paths-bento {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: unset;
+            }
+
+            .path-card:nth-child(1) {
+                grid-column: 1 / 3;
+                grid-row: unset;
+                flex-direction: row;
+                align-items: flex-start;
+                gap: var(--space-xl);
+            }
+
+            .path-card:nth-child(2),
+            .path-card:nth-child(3) {
+                grid-column: unset;
+                grid-row: unset;
+            }
+
+            .path-card:nth-child(4) {
+                grid-column: 1 / 3;
+                grid-row: unset;
+            }
+
+            .paths-header {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .paths-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .path-card:nth-child(1),
+            .path-card:nth-child(4) {
+                grid-column: 1;
+                flex-direction: column;
+            }
+
+            .section-paths {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: VOLUNTEER (dark background, two types)
+        ============================================================ */
+        .section-volunteer {
+            background: var(--color-navy);
+            padding: var(--space-section) max(48px, 6vw);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-volunteer::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.14) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .section-volunteer::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -60px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(178, 213, 209, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .vol-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .vol-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .vol-header .section-label {
+            color: rgba(201, 169, 110, 0.8);
+        }
+
+        .vol-header .section-h2 {
+            color: var(--color-white);
+        }
+
+        .vol-header p {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 600px;
+            line-height: 1.75;
+        }
+
+        .vol-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+        }
+
+        .vol-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            transition: background var(--dur-base);
+        }
+
+        .vol-card:hover {
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .vol-card-tag {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            background: rgba(201, 169, 110, 0.12);
+            border-radius: var(--radius-pill);
+            padding: 6px 14px;
+            margin-bottom: var(--space-lg);
+        }
+
+        .vol-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 400;
+            color: var(--color-white);
+            margin-bottom: var(--space-md);
+            line-height: 1.25;
+        }
+
+        .vol-card-body {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.75;
+        }
+
+        .vol-activities {
+            margin-top: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .vol-activity {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .vol-activity::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-sky);
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+
+        .vol-cta {
+            margin-top: var(--space-xl);
+        }
+
+        .vol-portal {
+            margin-top: var(--space-2xl);
+            background: rgba(201, 169, 110, 0.08);
+            border: 1px solid rgba(201, 169, 110, 0.2);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl) var(--space-2xl);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+
+        .vol-portal-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            color: var(--color-white);
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .vol-portal-desc {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.65;
+        }
+
+        .vol-portal-features {
+            display: flex;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            margin-top: var(--space-md);
+        }
+
+        .vol-feature {
+            font-size: var(--text-xs);
+            color: rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .vol-feature::before {
+            content: '✓';
+            color: var(--color-sky);
+            font-weight: 700;
+            font-size: 11px;
+        }
+
+        @media (max-width: 760px) {
+            .vol-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vol-portal {
+                grid-template-columns: 1fr;
+            }
+
+            .section-volunteer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: MEMBERSHIP
+        ============================================================ */
+        .section-membership {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-surface);
+        }
+
+        .mem-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .mem-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: start;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .mem-top p {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+        }
+
+        .mem-quote {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-style: italic;
+            color: var(--color-navy);
+            border-left: 3px solid var(--color-sky);
+            padding-left: var(--space-lg);
+            line-height: 1.5;
+        }
+
+        .mem-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        .mem-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl) var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            transition: box-shadow var(--dur-base), transform var(--dur-base);
+        }
+
+        .mem-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .mem-card.featured {
+            background: var(--color-navy);
+            border-color: var(--color-navy);
+        }
+
+        .mem-card-badge {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .mem-card .mem-card-badge {
+            color: var(--color-sky);
+        }
+
+        .mem-card.featured .mem-card-badge {
+            color: rgba(201, 169, 110, 0.8);
+        }
+
+        .mem-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.2;
+        }
+
+        .mem-card.featured .mem-card-title {
+            color: var(--color-white);
+        }
+
+        .mem-card-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            flex: 1;
+        }
+
+        .mem-card.featured .mem-card-desc {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .mem-card-perks {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .mem-card-perks li {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .mem-card.featured .mem-card-perks li {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .mem-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(201, 169, 110, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .mem-card.featured .mem-check {
+            background: rgba(201, 169, 110, 0.2);
+        }
+
+        .mem-check svg {
+            width: 10px;
+            height: 10px;
+            stroke: var(--color-sky);
+        }
+
+        .mem-card-action {
+            margin-top: auto;
+        }
+
+        .mem-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 24px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-surface);
+            color: var(--color-navy);
+            border: 1px solid var(--color-line);
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .mem-btn:hover {
+            background: var(--color-surface-2);
+            border-color: var(--color-sky);
+        }
+
+        .mem-card.featured .mem-btn {
+            background: var(--color-sky);
+            color: var(--color-navy);
+            border-color: var(--color-sky);
+        }
+
+        .mem-card.featured .mem-btn:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 900px) {
+            .mem-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .mem-top {
+                grid-template-columns: 1fr;
+            }
+
+            .section-membership {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: DONATE
+        ============================================================ */
+        .section-donate {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+
+        .donate-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: start;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .donate-text .section-h2 {
+            margin-bottom: var(--space-md);
+        }
+
+        .donate-text>p {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            margin-bottom: var(--space-xl);
+        }
+
+        .donate-ways {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .donate-way {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-line);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .donate-way:hover {
+            border-color: var(--color-sky);
+            background: var(--color-sky-light);
+        }
+
+        .donate-way-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .donate-way-title {
+            font-size: var(--text-base);
+            font-weight: 600;
+            color: var(--color-navy);
+            margin-bottom: 4px;
+        }
+
+        .donate-way-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        /* Donate card on right */
+        .donate-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: 0;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 100px;
+            overflow: hidden;
+        }
+
+        .donate-card-header {
+            background: var(--color-navy);
+            padding: var(--space-xl) var(--space-2xl) var(--space-lg);
+        }
+
+        .donate-card-eyebrow {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-sm);
+        }
+
+        .donate-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 400;
+            color: var(--color-white);
+            margin-bottom: 0;
+        }
+
+        .donate-card-body {
+            padding: var(--space-xl) var(--space-2xl);
+        }
+
+        .donate-card-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: var(--space-xl);
+        }
+
+        .donate-amounts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: var(--space-lg);
+        }
+
+        .donate-amount-btn {
+            padding: 12px 8px;
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-md);
+            background: var(--color-surface);
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            cursor: pointer;
+            transition: all var(--dur-fast);
+            text-align: center;
+        }
+
+        .donate-amount-btn:hover,
+        .donate-amount-btn.active {
+            border-color: var(--color-sky);
+            background: rgba(201, 169, 110, 0.08);
+        }
+
+        .donate-main-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 16px 28px;
+            border-radius: var(--radius-pill);
+            background: var(--color-navy);
+            color: var(--color-white);
+            font-size: var(--text-base);
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            margin-bottom: var(--space-md);
+            transition: opacity var(--dur-fast);
+            text-decoration: none;
+            font-family: var(--font-body);
+        }
+
+        .donate-main-btn:hover {
+            opacity: 0.85;
+        }
+
+        .donate-tax-note {
+            font-size: var(--text-xs);
+            color: var(--color-text-light);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .donate-tax-note a {
+            color: var(--color-sky);
+        }
+
+        .donate-divider {
+            height: 1px;
+            background: var(--color-line);
+            margin: var(--space-lg) 0;
+        }
+
+        .donate-gift-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: var(--space-md);
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-line);
+        }
+
+        .donate-gift-card-text {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+        }
+
+        .donate-gift-card-text a {
+            color: var(--color-sky);
+            font-weight: 500;
+        }
+
+        /* Donate impact stats */
+        .donate-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .donate-stat {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg) var(--space-xl);
+            text-align: center;
+        }
+
+        .donate-stat-num {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .donate-stat-label {
+            font-size: var(--text-xs);
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 900px) {
+            .donate-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .donate-card {
+                position: static;
+            }
+
+            .section-donate {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .donate-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================================
+        SECTION: WAYS TO SUPPORT (e-gift, partnership, newsletter)
+        ============================================================ */
+        .section-support {
+            background: var(--color-surface);
+            padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .support-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .support-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .support-header p {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            max-width: 640px;
+            line-height: 1.75;
+        }
+
+        /* ── Support bento: ряд 1 — 2 широкие, ряд 2 — 3 узкие, ряд 3 — 1 широкая ── */
+        .support-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: var(--space-md);
+        }
+
+        /* Ряд 1: карточки 1 и 2 — по полтора столбца */
+        .support-card:nth-child(1) {
+            grid-column: 1 / 3;
+        }
+
+        .support-card:nth-child(2) {
+            grid-column: 3 / 4;
+        }
+
+        /* Ряд 2: карточки 3, 4, 5 — по одному столбцу */
+        .support-card:nth-child(3) {
+            grid-column: 1 / 2;
+        }
+
+        .support-card:nth-child(4) {
+            grid-column: 2 / 3;
+        }
+
+        .support-card:nth-child(5) {
+            grid-column: 3 / 4;
+        }
+
+        /* Ряд 3: карточка 6 — на всю ширину горизонтальная */
+        .support-card:nth-child(6) {
+            grid-column: 1 / 4;
+            flex-direction: row;
+            align-items: center;
+            gap: var(--space-xl);
+        }
+
+        .support-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow var(--dur-base), transform var(--dur-base), border-color var(--dur-base);
+        }
+
+        .support-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .support-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-bottom: var(--space-lg);
+        }
+
+        .support-card:nth-child(6) .support-card-icon {
+            margin-bottom: 0;
+        }
+
+        .support-card-icon svg {
+            stroke: var(--color-sky);
+            fill: none;
+            stroke-width: 1.75;
+        }
+
+        .support-card-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .support-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            margin-bottom: var(--space-sm);
+        }
+
+        .support-card-body {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            flex: 1;
+            margin-bottom: var(--space-lg);
+        }
+
+        .support-card:nth-child(6) .support-card-body {
+            margin-bottom: var(--space-lg)
+        }
+
+        .support-card .btn-outline {
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        @media (max-width: 900px) {
+            .support-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .support-card:nth-child(1) {
+                grid-column: 1 / 3;
+            }
+
+            .support-card:nth-child(2),
+            .support-card:nth-child(3),
+            .support-card:nth-child(4),
+            .support-card:nth-child(5) {
+                grid-column: unset;
+            }
+
+            .support-card:nth-child(6) {
+                grid-column: 1 / 3;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .support-card:nth-child(n) {
+                grid-column: 1;
+                flex-direction: column;
+            }
+
+            .section-support {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: JOIN — CTA banner
+        ============================================================ */
+        .section-join {
+            margin: 0 max(24px, 4vw) var(--space-section);
+            background: linear-gradient(135deg, var(--color-navy) 0%, #2A4A5A 100%);
+            border-radius: var(--radius-xl);
+            padding: var(--space-section) max(40px, 6vw);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-join::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .section-join::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -60px;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(178, 213, 209, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .join-eyebrow {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            display: block;
+            margin-bottom: var(--space-lg);
+        }
+
+        .join-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(var(--text-2xl), 5vw, 3.5rem);
+            font-weight: 300;
+            color: var(--color-white);
+            line-height: 1.15;
+            margin-bottom: var(--space-lg);
+            letter-spacing: -0.5px;
+        }
+
+        .join-sub {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.65);
+            max-width: 570px;
+            margin: 0 auto var(--space-xl);
+            line-height: 1.7;
+        }
+
+        .join-actions {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================================
+        FOOTER
+        ============================================================ */
+        .footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            padding: var(--space-2xl) max(40px, 5vw);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-brand img {
+            height: 48px;
+            width: auto;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            max-width: 260px;
+        }
+
+        .footer-col-title {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-contact p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .footer-contact a {
+            color: var(--color-sky);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 8px;
+            margin-top: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            transition: background var(--dur-fast), color var(--dur-fast);
+        }
+
+        .footer-social a:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .footer-partners {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) max(40px, 5vw);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            flex-wrap: wrap;
+        }
+
+        .footer-partners img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(20%);
+            transition: opacity var(--dur-fast);
+        }
+
+        .footer-partners img:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+    NAV
+    ============================================================ -->
+    <header class="nav" id="mainNav">
+        <div class="nav-logo">
+            <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="./index.html">Home</a></li>
+
+            <li class="has-dropdown">
+                <a href="#">About</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./our-team.html">Our Team</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Education</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./education-and-training.html">Education and Training</a></li>
+                    <li><a href="./literacy-workshops.html">Literacy Workshops</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                    <li><a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a></li>
+                    <li><a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a></li>
+                    <li><a href="./service-learning.html">Service Learning</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Programs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./events.html">Event Calendar</a></li>
+                    <li><a href="./program-participant.html">Program Participant</a></li>
+                    <li><a href="./farmers-market.html">Farmers' Market</a></li>
+                    <li><a href="./food-distribution.html">Food Distribution</a></li>
+                    <li><a href="./youth-programs.html">Youth Program</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./court-order-community-service.html">Court Order Community Service</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Clubs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./mdba-portal.html">MDBA Portal</a></li>
+                    <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
+                    <li><a href="./join-our-community.html">Join our community</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Join Us</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./get-involved.html">Get Involved</a></li>
+                    <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="./sponsor.html">Become a Sponsor</a></li>
+                    <li><a href="./vendor.html">Vendor</a></li>
+                    <li><a href="./volunteer.html">Volunteer</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+        <a class="nav-cta" href="./support-us.html">Support Us</a>
+        
+        <button class="nav-burger" id="navBurger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="./index.html">Home</a>
+
+        <a href="./about.html">About Us</a>
+        <a href="./our-team.html">Our Team</a>
+        <a href="./contact.html">Contact Us</a>
+
+        <a href="./education-and-training.html">Education and Training</a>
+        <a href="./literacy-workshops.html">Literacy Workshops</a>
+        <a href="./kemetic-yoga.html">Kemetic Yoga</a>
+        <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
+        <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
+        <a href="./service-learning.html">Service Learning</a>
+
+        <a href="./events.html">Event Calendar</a>
+        <a href="./program-participant.html">Program Participant</a>
+        <a href="./farmers-market.html">Farmers' Market</a>
+        <a href="./food-distribution.html">Food Distribution</a>
+        <a href="./youth-programs.html">Youth Program</a>
+        <a href="./environmental-programs.html">Environmental Programs</a>
+        <a href="./court-order-community-service.html">Court Order Community Service</a>
+
+        <a href="./mdba-portal.html">MDBA Portal</a>
+        <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+        <a href="./join-our-community.html">Join our community</a>
+
+        <a href="./get-involved.html">Get Involved</a>
+        <a href="./partner-with-us.html">Partner with Us</a>
+        <a href="./sponsor.html">Becone a sponsor</a>
+        <a href="./vendor.html">Vendor</a>
+        <a href="./volunteer.html">Volunteer</a>
+
+        <a class="mob-cta" href="./support-us.html"> Support Us </a>
+    </div>
+
+    <!-- ============================================================
+    HERO
+    ============================================================ -->
+    <section class="page-hero">
+        <div class="hero-main">
+            <div class="hero-text">
+                <div class="hero-eyebrow">Community & Action</div>
+                <h1 class="hero-h1">Get<br><em>Involved</em></h1>
+                <div class="hero-divider"></div>
+                <p class="hero-desc">Help ASCENDtials grow and expand our positive impact on communities and the world —
+                    by volunteering, donating, or joining as a member.</p>
+                <div class="hero-cta-row">
+                    <a class="btn-primary" href="#volunteer">Volunteer</a>
+                    <a class="btn-ghost" href="#donate">Donate</a>
+                    <a class="btn-ghost" href="#membership">Join as Member</a>
+                </div>
+            </div>
+
+            <!-- Abstract typographic right panel -->
+            <div class="hero-abstract reveal reveal--delay-1">
+                <div class="hero-ring hero-ring-1"></div>
+                <div class="hero-ring hero-ring-2"></div>
+                <div class="hero-ring hero-ring-3"></div>
+                <div class="hero-center-word">ACT</div>
+                <div class="hero-pill-cluster">
+                    <div class="hero-pill">
+                        <div class="hero-pill-dot"></div>
+                        Volunteer
+                    </div>
+                    <div class="hero-pill">
+                        <div class="hero-pill-dot sage"></div>
+                        Donate
+                    </div>
+                    <div class="hero-pill">
+                        <div class="hero-pill-dot warm"></div>
+                        Become a Member
+                    </div>
+                    <div class="hero-pill">
+                        <div class="hero-pill-dot olive"></div>
+                        Partner With Us
+                    </div>
+                </div>
+                <div class="hero-photo-badge">
+                    <div class="hero-photo-badge-num">4</div>
+                    <div class="hero-photo-badge-label">Ways to Help</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFO STRIP -->
+    <div class="info-strip">
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Community</div>
+                <div class="info-value">BIPOC-centered</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Location</div>
+                <div class="info-value">San Diego, CA & Remote</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                    <path d="M8 21h8" />
+                    <path d="M12 17v4" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Format</div>
+                <div class="info-value">In-Person & Remote</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path
+                        d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">501(c)(3)</div>
+                <div class="info-value">Tax-deductible Gifts</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    SECTION: 4 PATHS
+    ============================================================ -->
+    <section class="section-paths">
+        <div class="paths-header">
+            <div>
+                <span class="section-label reveal">Many Ways to Contribute</span>
+                <h2 class="section-h2 reveal">Choose your<br><em>path to impact</em></h2>
+            </div>
+            <div class="paths-header-right">
+                <p class="reveal">There are so many ways to get involved with ASCENDtials — from hands-on volunteering
+                    and giving financially, to joining our community as a member or becoming a partner organization.</p>
+            </div>
+        </div>
+
+        <div class="paths-bento">
+            <div class="path-card reveal">
+                <div class="path-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.75">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    </svg>
+                </div>
+                <span class="path-num">01</span>
+                <div class="path-title">Volunteer</div>
+                <p class="path-body">Give your time and skills — remotely or in-person — at cleanups, markets,
+                    workshops, and community events across San Diego.</p>
+                <a class="btn-ghost" href="#volunteer">Get started →</a>
+            </div>
+
+            <div class="path-card reveal reveal--delay-1">
+                <div class="path-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.75">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                </div>
+                <span class="path-num">02</span>
+                <div class="path-title">Donate</div>
+                <p class="path-body">Your financial support — one-time or recurring — sustains our mission, programs,
+                    and community impact directly.</p>
+                <a class="btn-outline" href="#donate">Give today →</a>
+            </div>
+
+            <div class="path-card reveal reveal--delay-2">
+                <div class="path-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.75">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                </div>
+                <span class="path-num">03</span>
+                <div class="path-title">Become a Member</div>
+                <p class="path-body">Join our community — gain access to exclusive content, events, workshops, and tools
+                    while supporting ASCENDtials' ongoing programs.</p>
+                <a class="btn-outline" href="#membership">Join now →</a>
+            </div>
+
+            <div class="path-card reveal reveal--delay-3">
+                <div class="path-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.75">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M2 12h20" />
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                    </svg>
+                </div>
+                <span class="path-num">04</span>
+                <div class="path-body-wrap">
+                    <div class="path-title">Partner with Us</div>
+                    <p class="path-body">Collaborate with ASCENDtials as an organization, company, civic entity, or
+                        community group — co-creating lasting impact together.</p>
+                    <a class="btn-outline" href="https://ascendtials.org/community/">Explore →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SECTION: VOLUNTEER
+    ============================================================ -->
+    <section class="section-volunteer" id="volunteer">
+        <div class="vol-inner">
+            <div class="vol-header reveal">
+                <span class="section-label">Volunteer</span>
+                <h2 class="section-h2">Show up for<br><em>your community</em></h2>
+                <p>Help ASCENDtials grow and expand our positive impact on communities and the world. Whether you
+                    contribute your skills remotely or join us in the field — your service matters.</p>
+            </div>
+
+            <div class="vol-grid">
+                <!-- Remote -->
+                <div class="vol-card reveal">
+                    <span class="vol-card-tag">Remote</span>
+                    <div class="vol-card-title">Remote Team Volunteers</div>
+                    <p class="vol-card-body">Contribute your skills from anywhere — weekly or long term — supporting our
+                        team in communications, outreach, program development, operations, and administrative tasks.</p>
+                    <div class="vol-activities">
+                        <div class="vol-activity">Communications & social media</div>
+                        <div class="vol-activity">Program development & research</div>
+                        <div class="vol-activity">Operations & administrative support</div>
+                        <div class="vol-activity">Outreach and community engagement</div>
+                    </div>
+                    <div class="vol-cta">
+                        <a class="btn-ghost" href="https://ascendtials.org/volunteer/">Sign Up to Volunteer</a>
+                    </div>
+                </div>
+
+                <!-- In-person -->
+                <div class="vol-card reveal reveal--delay-1">
+                    <span class="vol-card-tag">In-Person</span>
+                    <div class="vol-card-title">Community Volunteers</div>
+                    <p class="vol-card-body">Join us onsite at our farmers' markets, food distributions, garden
+                        projects, and beach and highway cleanups. Connect directly with youth, community, and the
+                        environment.</p>
+                    <div class="vol-activities">
+                        <div class="vol-activity">Farmers' Markets (TBD schedule)</div>
+                        <div class="vol-activity">Food distributions & garden projects</div>
+                        <div class="vol-activity">Beach & highway cleanups</div>
+                        <div class="vol-activity">Youth mentorship & event support</div>
+                    </div>
+                    <div class="vol-cta">
+                        <a class="btn-ghost" href="https://ascendtials.org/volunteer/">Sign Up to Volunteer</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Volunteer Portal -->
+            <div class="vol-portal reveal">
+                <div>
+                    <div class="vol-portal-title">Volunteer Portal — Your Hub for Service</div>
+                    <p class="vol-portal-desc">Sign up, complete onboarding, contribute with heart, and watch your hours
+                        grow. This portal is your path to service: one-time donation or waiver setup, hour tracking,
+                        appreciation letters, newsletter signup, and a living checklist that orients you to our tools
+                        and team.</p>
+                    <div class="vol-portal-features">
+                        <div class="vol-feature">Activity Calendar</div>
+                        <div class="vol-feature">Upload Proof of Service</div>
+                        <div class="vol-feature">Track Hours & Progress</div>
+                        <div class="vol-feature">Appreciation Letters</div>
+                        <div class="vol-feature">Monthly Presentations</div>
+                        <div class="vol-feature">Waiver Option Available</div>
+                    </div>
+                </div>
+                <div style="flex-shrink:0;">
+                    <a class="btn-white" href="https://ascendtials.org/volunteer/" style="white-space:nowrap;">Access
+                        the Portal →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SECTION: MEMBERSHIP
+    ============================================================ -->
+    <section class="section-membership" id="membership">
+        <div class="mem-inner">
+            <div class="mem-top">
+                <div>
+                    <span class="section-label reveal">Membership</span>
+                    <h2 class="section-h2 reveal">Become part of<br><em>our community</em></h2>
+                    <p class="reveal">Become an ASCENDtials member and gain access to exclusive content, education
+                        tools, events, workshops, and sessions — with benefits that grow with your commitment.</p>
+                </div>
+                <div class="reveal reveal--delay-1">
+                    <p class="mem-quote">"Your membership donation is not a fee — it's a shared commitment to sustaining
+                        the work we do together. We're grateful you're here."</p>
+                </div>
+            </div>
+
+            <div class="mem-cards">
+                <!-- Student -->
+                <div class="mem-card reveal">
+                    <div class="mem-card-badge">Student</div>
+                    <div class="mem-card-title">Student Membership</div>
+                    <p class="mem-card-desc">Free membership for students who want to engage with our literacy programs,
+                        workshops, and learning community.</p>
+                    <ul class="mem-card-perks">
+                        <li>
+                            <span class="mem-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="2,6 5,9 10,3" />
+                                </svg></span>
+                            Access to all events & workshops
+                        </li>
+                        <li>
+                            <span class="mem-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="2,6 5,9 10,3" />
+                                </svg></span>
+                            ASCENDtNews newsletter
+                        </li>
+                        <li>
+                            <span class="mem-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="2,6 5,9 10,3" />
+                                </svg></span>
+                            Community connection
+                        </li>
+                        <li>
+                            <span class="mem-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="2,6 5,9 10,3" />
+                                </svg></span>
+                            Volunteer portal access
+                        </li>
+                    </ul>
+                    <div class="mem-card-action">
+                        <a class="mem-btn" href="https://ascendtials.org/contact/">Contact Us — Free</a>
+                    </div>
+                </div>
+
+                <!-- Annual – Featured -->
+                <div class="mem-card featured reveal reveal--delay-1">
+                    <div class="mem-card-badge">Most Popular</div>
+                    <div class="mem-card-title">Annual Membership</div>
+                    <p class="mem-card-desc">Full access to ASCENDtials membership benefits for one year — exclusive
+                        content, tools, and community events.</p>
+                    <ul class="mem-card-perks">
+                        <li>
+                            <span class="mem-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="2,6 5,9 10,3" />
+                                </svg></span>
+                            Exclusive content & education tools
+                        </li>
+                        <li>
+                            <span class="mem-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="2,6 5,9 10,3" />
+                                </svg></span>
+                            All events, workshops & sessions
+                        </li>
+                        <li>
+                            <span class="mem-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="2,6 5,9 10,3" />
+                                </svg></span>
+                            ASCENDtNews newsletter
+                        </li>
+                        <li>
+                            <span class="mem-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="2,6 5,9 10,3" />
+                                </svg></span>
+                            Healing sessions & club access
+                        </li>
+                        <li>
+                            <span class="mem-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="2,6 5,9 10,3" />
+                                </svg></span>
+                            Priority registration for programs
+                        </li>
+                    </ul>
+                    <div class="mem-card-action">
+                        <a class="mem-btn" href="https://ascendtials.org/product/ascendtials-membership/">Join — 1
+                            Year</a>
+                    </div>
+                </div>
+
+                <!-- Auto-recurring -->
+                <div class="mem-card reveal reveal--delay-2">
+                    <div class="mem-card-badge">Auto-Recurring</div>
+                    <div class="mem-card-title">Sustaining Membership</div>
+                    <p class="mem-card-desc">Support ASCENDtials continuously with a recurring monthly or annual
+                        subscription — the most impactful way to contribute.</p>
+                    <ul class="mem-card-perks">
+                        <li>
+                            <span class="mem-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="2,6 5,9 10,3" />
+                                </svg></span>
+                            All annual membership benefits
+                        </li>
+                        <li>
+                            <span class="mem-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="2,6 5,9 10,3" />
+                                </svg></span>
+                            Automatic renewal — no interruption
+                        </li>
+                        <li>
+                            <span class="mem-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="2,6 5,9 10,3" />
+                                </svg></span>
+                            Sustains long-term programming
+                        </li>
+                        <li>
+                            <span class="mem-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="2,6 5,9 10,3" />
+                                </svg></span>
+                            Cancel anytime
+                        </li>
+                    </ul>
+                    <div class="mem-card-action">
+                        <a class="mem-btn" href="https://ascendtials.org/ascendtials-membership-2024/">Membership
+                            Page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SECTION: DONATE
+    ============================================================ -->
+    <section class="section-donate" id="donate">
+        <div class="donate-inner">
+            <div class="donate-text">
+                <span class="section-label reveal">Donate</span>
+                <h2 class="section-h2 reveal">Your gift fuels<br><em>real change</em></h2>
+                <p class="reveal">Donate to help support ASCENDtials' mission and impact. Every contribution — large or
+                    small — goes directly toward programs, events, and community empowerment in San Diego's BIPOC
+                    communities.</p>
+
+                <div class="donate-stats reveal">
+                    <div class="donate-stat">
+                        <div class="donate-stat-num">10+</div>
+                        <div class="donate-stat-label">Programs funded<br>annually</div>
+                    </div>
+                    <div class="donate-stat">
+                        <div class="donate-stat-num">501(c)(3)</div>
+                        <div class="donate-stat-label">Tax-deductible<br>nonprofit</div>
+                    </div>
+                    <div class="donate-stat">
+                        <div class="donate-stat-num">100%</div>
+                        <div class="donate-stat-label">Goes to community<br>programs</div>
+                    </div>
+                </div>
+
+                <div class="donate-ways">
+                    <div class="donate-way reveal">
+                        <div class="donate-way-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.75">
+                                <rect x="1" y="4" width="22" height="16" rx="2" />
+                                <line x1="1" y1="10" x2="23" y2="10" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="donate-way-title">One-Time Donation</div>
+                            <div class="donate-way-desc">Make a single gift of any amount via Stripe — fast, secure, and
+                                tax-deductible as a 501(c)(3) nonprofit.</div>
+                        </div>
+                    </div>
+                    <div class="donate-way reveal reveal--delay-1">
+                        <div class="donate-way-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.75">
+                                <path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0" />
+                                <path d="M12 8v4l3 3" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="donate-way-title">Recurring Gift</div>
+                            <div class="donate-way-desc">Set up a monthly donation to provide sustained support for our
+                                literacy workshops, environmental programs, and youth initiatives.</div>
+                        </div>
+                    </div>
+                    <div class="donate-way reveal reveal--delay-2">
+                        <div class="donate-way-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.75">
+                                <path d="M20 12V22H4V12" />
+                                <path d="M22 7H2v5h20V7z" />
+                                <path d="M12 22V7" />
+                                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+                                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="donate-way-title">e-Gift Card</div>
+                            <div class="donate-way-desc">Purchase an e-gift card for a friend, family member, or loved
+                                one — a meaningful way to spread impact and introduce others to our mission.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Donate Card -->
+            <div class="donate-card reveal reveal--delay-1">
+                <div class="donate-card-header">
+                    <div class="donate-card-eyebrow">Make a Donation</div>
+                    <div class="donate-card-title">Support Our Mission</div>
+                </div>
+                <div class="donate-card-body">
+                    <p class="donate-card-desc">ASCENDtials is a 501(c)(3) nonprofit. Your donation is tax-deductible
+                        and goes directly toward BIPOC community empowerment in San Diego.</p>
+
+                    <div class="donate-amounts">
+                        <button class="donate-amount-btn" onclick="setAmount(this)">$10</button>
+                        <button class="donate-amount-btn active" onclick="setAmount(this)">$25</button>
+                        <button class="donate-amount-btn" onclick="setAmount(this)">$50</button>
+                        <button class="donate-amount-btn" onclick="setAmount(this)">$100</button>
+                        <button class="donate-amount-btn" onclick="setAmount(this)">$250</button>
+                        <button class="donate-amount-btn" onclick="setAmount(this)">Other</button>
+                    </div>
+
+                    <a href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1" target="_blank" class="donate-main-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                        Donate Now
+                    </a>
+                    <div class="donate-tax-note">
+                        Secure payment via Stripe. ASCENDtials EIN: 47-2451577.<br>
+                        <a href="https://ascendtials.org/contact/" target="_blank">Questions? Contact us.</a>
+                    </div>
+
+                    <div class="donate-divider"></div>
+
+                    <div class="donate-gift-card">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75" style="flex-shrink:0;color:var(--color-sky)">
+                            <path d="M20 12V22H4V12" />
+                            <path d="M22 7H2v5h20V7z" />
+                            <path d="M12 22V7" />
+                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+                        </svg>
+                        <div class="donate-gift-card-text">
+                            Give the gift of impact — <a
+                                href="https://ascendtials.org/get-involved/ways-to-support/">purchase an e-Gift Card</a>
+                            for someone you love.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SECTION: ADDITIONAL WAYS TO SUPPORT
+    ============================================================ -->
+    <section class="section-support" id="more-ways">
+        <div class="support-inner">
+            <div class="support-header">
+                <span class="section-label reveal">More Ways to Give</span>
+                <h2 class="section-h2 reveal">Every action<br><em>counts</em></h2>
+                <p class="reveal">Beyond volunteering and donating, there are many more ways to show your support and
+                    help us build stronger communities.</p>
+            </div>
+
+            <div class="support-grid">
+                <!-- Card 1 — wide (cols 1-2) -->
+                <div class="support-card reveal">
+                    <div class="support-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                    </div>
+                    <div class="support-card-content">
+                        <div class="support-card-title">Subscribe to Newsletter</div>
+                        <p class="support-card-body">Join our ASCENDtNews newsletter for monthly updates on vendor
+                            spotlights, youth voices, market news, healing sessions, and upcoming events — your dose of
+                            inspiration and impact.</p>
+                        <a class="btn-outline" href="https://ascendtials.org/community/">Subscribe →</a>
+                    </div>
+                </div>
+
+                <!-- Card 2 — narrow (col 3) -->
+                <div class="support-card reveal reveal--delay-1">
+                    <div class="support-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="8.5" cy="7" r="4" />
+                            <line x1="20" y1="8" x2="20" y2="14" />
+                            <line x1="23" y1="11" x2="17" y2="11" />
+                        </svg>
+                    </div>
+                    <div class="support-card-content">
+                        <div class="support-card-title">Become a Partner</div>
+                        <p class="support-card-body">We work with community organizations, companies, civic entities,
+                            and
+                            social justice groups through collaboration and co-creation. Contact us to explore how we
+                            can
+                            work together.</p>
+                        <a class="btn-outline" href="https://ascendtials.org/community/">Partner with Us →</a>
+                    </div>
+                </div>
+
+                <!-- Card 3 — narrow (col 1) -->
+                <div class="support-card reveal reveal--delay-2">
+                    <div class="support-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path
+                                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                        </svg>
+                    </div>
+                    <div class="support-card-content">
+                        <div class="support-card-title">Apply for Internship</div>
+                        <p class="support-card-body">ASCENDtials' Service Learning Program offers real-time volunteer
+                            and
+                            internship roles — providing students with practical opportunities that build professional
+                            experience in the community.</p>
+                        <a class="btn-outline" href="https://ascendtials.org/internship-fellowship-program/">Apply →</a>
+                    </div>
+                </div>
+
+                <!-- Card 4 — wide (cols 2-3) -->
+                <div class="support-card reveal">
+                    <div class="support-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                    </div>
+                    <div class="support-card-content">
+                        <div class="support-card-title">Attend an Event</div>
+                        <p class="support-card-body">Attend our healing sessions, literacy workshops, farmers' markets,
+                            Kemetic yoga classes, or club gatherings. Your participation strengthens our community and
+                            sustains our programming.</p>
+                        <a class="btn-outline" href="https://ascendtials.org/events/">View Events →</a>
+                    </div>
+                </div>
+
+                <!-- Card 5 — wide (cols 1-2) -->
+                <div class="support-card reveal reveal--delay-1">
+                    <div class="support-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <path
+                                d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+                        </svg>
+                    </div>
+                    <div class="support-card-content">
+                        <div class="support-card-title">Spread the Word</div>
+                        <p class="support-card-body">Share our mission with your network. Follow us on social media,
+                            share our events, and help us reach more BIPOC community members who can benefit from our
+                            programs and services.</p>
+                        <a class="btn-outline" href="https://www.instagram.com/the_ascendtials/">Follow Us →</a>
+                    </div>
+                </div>
+
+                <!-- Card 6 — narrow (col 3) -->
+                <div class="support-card reveal reveal--delay-2">
+                    <div class="support-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75">
+                            <rect x="2" y="7" width="20" height="14" rx="2" />
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                        </svg>
+                    </div>
+                    <div class="support-card-content">
+                        <div class="support-card-title">Legal Aid Volunteering</div>
+                        <p class="support-card-body">We welcome practicing lawyers and recent law graduates to volunteer
+                            in
+                            our Legal Support Program — focused on pro bono services and community engagement.</p>
+                        <a class="btn-outline" href="https://ascendtials.org/community/programs/">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    JOIN CTA
+    ============================================================ -->
+    <section class="section-join reveal">
+        <span class="join-eyebrow">Ready to Make a Difference?</span>
+        <h2 class="join-h2">Your involvement creates<br>lasting change</h2>
+        <p class="join-sub">Whether you give an hour, a dollar, or a year — every contribution helps us uplift San
+            Diego's BIPOC community through education, environmental stewardship, and empowerment.</p>
+        <div class="join-actions">
+            <a class="btn-white" href="https://ascendtials.org/volunteer/">Volunteer Now</a>
+            <a class="btn-ghost" href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1">Donate Today</a>
+            <a class="btn-ghost" href="https://ascendtials.org/ascendtials-membership-2024/">Become a Member</a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+
+                <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
+                    BIPOC community.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube"
+                        target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-ascendtials/" aria-label="LinkedIn" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                    <a href="https://x.com/ascendtials" aria-label="X / Twitter" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <div class="footer-col-title">Quick Links</div>
+                <ul class="footer-links">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="education-and-training.html">Education & Training</a></li>
+                    <li><a href="./events">Events Calendar</a></li>
+                    <li><a href="https://ascendtials.org/get-involved/">Get Involved</a></li>
+                    <li><a href="https://ascendtials.org/ascendtials-membership-2024/">Membership</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Programs</div>
+                <ul class="footer-links">
+                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./legal-aid-program.html">Legal Aid</a></li>
+                    <li><a href="./fellowship-program.html">Internships & Fellowships</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Contact</div>
+                <div class="footer-contact">
+                    <p>505 W Broadway<br>San Diego, CA 92101</p>
+                    <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
+                </div>
+                <!-- <div class="footer-candid mt-md">
+                <img src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg" alt="Candid Platinum Seal">
+                <span>EIN: 47-2451577</span>
+            </div> -->
+            </div>
+        </div>
+
+        <!-- Partners row -->
+        <div class="footer-partners">
+            <img src="assets/img/country-of-san-diego.png" alt="County of San Diego">
+            <img src="assets/img/Live-well-with-San-diego.png" alt="Live Well San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg"
+                alt="Candid Platinum 2025">
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 ASCENDtials. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Nav scroll pill
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+
+        // Mobile menu
+        const burger = document.getElementById('navBurger');
+        const mm = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => mm.classList.toggle('open'));
+        mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
+
+        // Reveal on scroll
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.10 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // Donate amount buttons
+        function setAmount(btn) {
+            document.querySelectorAll('.donate-amount-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

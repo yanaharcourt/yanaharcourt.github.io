@@ -242,29 +242,29 @@
         }
 
         /* ============================================================
-        BUTTONS — fill-sweep hover effect
+        BUTTONS — unified across all pages
         ============================================================ */
         .btn-primary,
         .btn-white,
         .btn-ghost,
-        .btn-outline,
-        .nav-cta,
-        .hero-email-btn,
-        .bento-link {
+        .btn-outline {
             position: relative;
             overflow: hidden;
             isolation: isolate;
             z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            cursor: pointer;
+            border: none;
         }
 
         /* Sweep fill layer */
         .btn-primary::before,
         .btn-white::before,
-        .btn-ghost::before,
-        .btn-outline::before,
-        .nav-cta::before,
-        .hero-email-btn::before,
-        .bento-link::before {
+        .btn-ghost::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -276,13 +276,72 @@
             border-radius: inherit;
         }
 
-        .btn-primary:hover::before,
-        .nav-cta:hover::before,
-        .hero-email-btn:hover::before {
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
             transform: scaleX(1);
         }
 
-        /* Ghost/outline on dark bg: sweep white */
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-sky);
+        }
+
+        .btn-white {
+            background: var(--color-white);
+            color: var(--color-navy);
+            padding: 14px 28px;
+            font-weight: 500;
+            transition: background var(--dur-fast);
+        }
+
+        .btn-white:hover {
+            background: var(--color-sky);
+            color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
         .btn-ghost::before {
             background: rgba(255, 255, 255, 0.12);
         }
@@ -291,38 +350,9 @@
             transform: scaleX(1);
         }
 
-        .btn-outline::before {
-            background: var(--color-sky-light);
-        }
-
-        .btn-outline:hover::before {
-            transform: scaleX(1);
-        }
-
-        /* bento-link sweep white */
-        .bento-link::before {
-            background: var(--color-sky);
-        }
-
-        .bento-link:hover::before {
-            transform: scaleX(1);
-        }
-
-        .bento-link:hover {
-            color: var(--color-white, #fff);
-        }
-
-        /* btn-white (on dark join section) */
-        .btn-white::before {
-            background: var(--color-sky);
-        }
-
-        .btn-white:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-white:hover {
-            color: var(--color-white);
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
         }
 
         .nav-cta {
@@ -544,48 +574,7 @@
             flex-wrap: wrap;
         }
 
-        .hero-btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--color-sky);
-            color: var(--color-navy-deep);
-            font-family: var(--font-body);
-            font-size: var(--text-sm);
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            border: none;
-            cursor: pointer;
-            transition: background var(--dur-base), transform var(--dur-fast);
-        }
 
-        .hero-btn-primary:hover {
-            background: #dbb97e;
-            transform: translateY(-1px);
-        }
-
-        .hero-btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: transparent;
-            color: rgba(255, 255, 255, 0.8);
-            font-family: var(--font-body);
-            font-size: var(--text-sm);
-            font-weight: 400;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            border: 1.5px solid rgba(255, 255, 255, 0.22);
-            cursor: pointer;
-            transition: border-color var(--dur-base), color var(--dur-base);
-        }
-
-        .hero-btn-secondary:hover {
-            border-color: rgba(201, 169, 110, 0.55);
-            color: var(--color-sky);
-        }
 
         /* ---- RIGHT COLUMN — image frame ---- */
         .hero-right {
@@ -774,8 +763,8 @@
                 flex-direction: column;
             }
 
-            .hero-btn-primary,
-            .hero-btn-secondary {
+            .btn-primary,
+            .btn-ghost {
                 text-align: center;
                 justify-content: center;
             }
@@ -991,6 +980,11 @@
 
         .m-card-icon svg {
             color: var(--color-sky);
+        }
+
+        .m-card-icon--inline {
+            flex-shrink: 0;
+            margin-bottom: 0;
         }
 
         .m-card-num {
@@ -1328,6 +1322,13 @@
             font-size: var(--text-sm);
             color: var(--color-text-muted);
             line-height: 1.6;
+        }
+
+        .maat-card-inner {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            flex: 1;
         }
 
         /* Wide card desc always visible */
@@ -1674,6 +1675,16 @@
             align-items: flex-end;
         }
 
+        .founder-photo-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            z-index: 0;
+        }
+
         .founder-photo-card::before {
             content: '';
             position: absolute;
@@ -1864,56 +1875,7 @@
             flex-wrap: wrap;
         }
 
-        .btn-white {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            display: inline-flex;
-            align-items: center;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            background: var(--color-white);
-            color: var(--color-navy);
-            transition: color var(--dur-fast);
-        }
 
-        .btn-white::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--color-sky);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
-        }
-
-        .btn-white:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-white:hover {
-            color: var(--color-white);
-        }
-
-        .btn-ghost {
-            display: inline-flex;
-            align-items: center;
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            border: 1.5px solid rgba(255, 255, 255, 0.35);
-            color: rgba(255, 255, 255, 0.85);
-            transition: color var(--dur-fast), border-color var(--dur-fast);
-        }
-
-        .btn-ghost:hover {
-            border-color: rgba(255, 255, 255, 0.7);
-        }
 
         @media (max-width: 600px) {
             .join-actions {
@@ -2147,7 +2109,7 @@
                 <ul class="nav-dropdown">
                     <li><a href="./mdba-portal.html">MDBA Portal</a></li>
                     <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
-                    <li><a href="./join-our-community">Join our community</a></li>
+                    <li><a href="./join-our-community.html">Join our community</a></li>
                 </ul>
             </li>
 
@@ -2156,13 +2118,15 @@
                 <ul class="nav-dropdown">
                     <li><a href="./get-involved.html">Get Involved</a></li>
                     <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="./sponsor.html">Become a Sponsor</a></li>
+                    <li><a href="./vendor.html">Vendor</a></li>
                     <li><a href="./volunteer.html">Volunteer</a></li>
                 </ul>
             </li>
 
         </ul>
 
-        <a class="nav-cta" href="./support-us">Support Us</a>
+        <a class="nav-cta" href="./support-us.html">Support Us</a>
         
         <button class="nav-burger" id="navBurger" aria-label="Open menu">
             <span></span><span></span><span></span>
@@ -2194,13 +2158,15 @@
 
         <a href="./mdba-portal.html">MDBA Portal</a>
         <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
-        <a href="./join-our-community">Join our community</a>
+        <a href="./join-our-community.html">Join our community</a>
 
         <a href="./get-involved.html">Get Involved</a>
         <a href="./partner-with-us.html">Partner with Us</a>
+        <a href="./sponsor.html">Becone a sponsor</a>
+        <a href="./vendor.html">Vendor</a>
         <a href="./volunteer.html">Volunteer</a>
 
-        <a class="mob-cta" href="./support-us"> Support Us </a>
+        <a class="mob-cta" href="./support-us.html"> Support Us </a>
     </div>
 
     <!-- ============================================================
@@ -2221,21 +2187,20 @@
                     consciousness — weaving together wellness, cultural wisdom, and environmental stewardship to build
                     thriving BIPOC communities.</p>
                 <div class="hero-ctas reveal reveal--delay-4">
-                    <a href="#mission" class="hero-btn-primary">Our Mission</a>
-                    <a href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1" class="hero-btn-secondary">Support Our
-                        Work</a>
+                    <a href="#mission" class="btn-ghost">Our Mission</a>
+                    <a href="https://donate.stripe.com/5kAg0K1MBghGcSYcN1" class="btn-ghost">Support Our Work</a>
                 </div>
             </div>
 
             <!-- Right: large image with floating overlays -->
             <div class="hero-right reveal reveal--delay-2">
                 <div class="hero-img-frame">
-                    <!-- Community/founder image — replace src with real photo -->
+                    <!-- Community/founder image -->
                     <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&q=80&auto=format&fit=crop"
                         alt="ASCENDtials community members gathering">
                     <div class="hero-img-overlay"></div>
 
-                    <!-- Floating badge — bottom left -->
+                    <!-- Floating badge  -->
                     <div class="hero-badge">
                         <div class="hero-badge-icon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2330,18 +2295,13 @@
             <div class="reveal">
                 <span class="section-label">Our Mission</span>
                 <h2 class="section-h2">Thoughtful tools for<br><em>lasting change</em></h2>
-                <p class="pull-quote">We seek Oneness that builds capacity and environmental care — ensuring that
-                    service is both restorative and transformative.</p>
+                <p class="pull-quote">We seek Oneness that builds capacity and environmental care — ensuring that service is both restorative and transformative.</p>
                 <div class="body-text">
-                    <p>ASCENDtials provides thoughtful, holistic, and educative tools, economic initiatives, and
-                        collaborative partnerships that use principles and practical activities to advance cultural
-                        wisdom, food equity, and sustainable community development.</p>
-                    <p>Through our expanded role as a Maintenance Assessment District administrator, we support local
-                        businesses, enhance public spaces, and foster inclusive economic growth that reflects the
-                        cultural integrity and wellness of the communities we serve.</p>
-                    <p>By blending wellness, volunteerism, and environmental stewardship, ASCENDtials empowers
-                        individuals and communities to thrive while building scalable models that can be replicated
-                        across states.</p>
+                    <p>ASCENDtials provides thoughtful, holistic, and educative tools, economic initiatives, and collaborative partnerships that use principles and practical activities to advance cultural wisdom, food equity, and sustainable community development.</p>
+                    
+                    <p>Through our expanded role as a Maintenance Assessment District administrator, we support local businesses, enhance public spaces, and foster inclusive economic growth that reflects the cultural integrity and wellness of the communities we serve.</p>
+                    
+                    <p>By blending wellness, volunteerism, and environmental stewardship, ASCENDtials empowers individuals and communities to thrive while building scalable models that can be replicated across states.</p>
                 </div>
             </div>
 
@@ -2357,8 +2317,7 @@
                     </div>
                     <div>
                         <div class="m-card-title">Cultural Wisdom</div>
-                        <p class="m-card-body">Centering African philosophies and ancestral teachings as the foundation
-                            of everything we do — a living practice, not a theory.</p>
+                        <p class="m-card-body">Centering African philosophies and ancestral teachings as the foundation of everything we do — a living practice, not a theory.</p>
                     </div>
                 </div>
 
@@ -2366,8 +2325,7 @@
                 <div class="m-card reveal reveal--delay-2">
                     <div class="m-card-num">01</div>
                     <div class="m-card-title">Food Equity</div>
-                    <p class="m-card-body">Advancing access to nutritious, culturally resonant food as a fundamental
-                        right for every community member.</p>
+                    <p class="m-card-body">Advancing access to nutritious, culturally resonant food as a fundamental right for every community member.</p>
                 </div>
 
                 <!-- Accent card — Sustainable Development -->
@@ -2379,14 +2337,12 @@
                         </svg>
                     </div>
                     <div class="m-card-title">Sustainable<br>Development</div>
-                    <p class="m-card-body">Building scalable community models grounded in environmental stewardship and
-                        long-term resilience.</p>
+                    <p class="m-card-body">Building scalable community models grounded in environmental stewardship and long-term resilience.</p>
                 </div>
 
                 <!-- Small card — MAD -->
-                <div class="m-card reveal reveal--delay-4"
-                    style="grid-column: 1 / -1; display: flex; align-items: center; gap: var(--space-lg); background: var(--color-surface-2); border-color: var(--color-line);">
-                    <div class="m-card-icon" style="flex-shrink:0; margin-bottom:0;">
+                <div class="m-card m-card--wide reveal reveal--delay-4">
+                    <div class="m-card-icon m-card-icon--inline">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round">
                             <circle cx="12" cy="12" r="10" />
@@ -2396,8 +2352,7 @@
                     </div>
                     <div>
                         <div class="m-card-title">MAD Administrator</div>
-                        <p class="m-card-body">Supporting local businesses and enhancing public spaces as a Maintenance
-                            Assessment District administrator across Southern California.</p>
+                        <p class="m-card-body">Supporting local businesses and enhancing public spaces as a Maintenance Assessment District administrator across Southern California.</p>
                     </div>
                 </div>
 
@@ -2417,48 +2372,39 @@
                     <span class="section-label">Our Vision for Change</span>
                     <h2 class="vision-h2">Thriving communities<br><em>woven with purpose</em></h2>
                 </div>
-                <p class="vision-desc reveal reveal--delay-1">ASCENDtials envisions communities where wellness, cultural
-                    wisdom, and environmental stewardship are woven into everyday life — creating spaces that honor
-                    cultural integrity and foster Oneness with nature. Through our MAD administrator role, we strengthen
-                    local businesses and build capacity for long-term community resilience.</p>
+                <p class="vision-desc reveal reveal--delay-1">ASCENDtials envisions communities where wellness, cultural wisdom, and environmental stewardship are woven into everyday life — creating spaces that honor cultural integrity and foster Oneness with nature. Through our MAD administrator role, we strengthen local businesses and build capacity for long-term community resilience.</p>
             </div>
 
             <div class="vision-pillars">
                 <div class="v-pillar reveal">
                     <div class="v-pillar-num">01</div>
                     <div class="v-pillar-title">Food Equity</div>
-                    <p class="v-pillar-body">Ensuring every community has equitable access to nutritious, culturally
-                        appropriate food through systemic programs and partnerships.</p>
+                    <p class="v-pillar-body">Ensuring every community has equitable access to nutritious, culturally appropriate food through systemic programs and partnerships.</p>
                 </div>
                 <div class="v-pillar reveal reveal--delay-1">
                     <div class="v-pillar-num">02</div>
                     <div class="v-pillar-title">Sustainable Development</div>
-                    <p class="v-pillar-body">Creating lasting infrastructure — physical, social, and economic — that
-                        communities can own and grow for generations.</p>
+                    <p class="v-pillar-body">Creating lasting infrastructure — physical, social, and economic — that communities can own and grow for generations.</p>
                 </div>
                 <div class="v-pillar reveal reveal--delay-2">
                     <div class="v-pillar-num">03</div>
                     <div class="v-pillar-title">Inclusive Growth</div>
-                    <p class="v-pillar-body">Advancing economic opportunity through MAD administration — strengthening
-                        local businesses and enhancing public spaces.</p>
+                    <p class="v-pillar-body">Advancing economic opportunity through MAD administration — strengthening local businesses and enhancing public spaces.</p>
                 </div>
                 <div class="v-pillar reveal reveal--delay-3">
                     <div class="v-pillar-num">04</div>
                     <div class="v-pillar-title">Cultural Integrity</div>
-                    <p class="v-pillar-body">Honoring the cultural identity of every community as the non-negotiable
-                        foundation of all programming and partnerships.</p>
+                    <p class="v-pillar-body">Honoring the cultural identity of every community as the non-negotiable foundation of all programming and partnerships.</p>
                 </div>
                 <div class="v-pillar reveal reveal--delay-4">
                     <div class="v-pillar-num">05</div>
                     <div class="v-pillar-title">Environmental Care</div>
-                    <p class="v-pillar-body">Building reciprocal relationships between communities and the natural world
-                        through stewardship, education, and shared practice.</p>
+                    <p class="v-pillar-body">Building reciprocal relationships between communities and the natural world through stewardship, education, and shared practice.</p>
                 </div>
                 <div class="v-pillar reveal reveal--delay-2">
                     <div class="v-pillar-num">06</div>
                     <div class="v-pillar-title">Long-Term Resilience</div>
-                    <p class="v-pillar-body">Designing scalable models that build community capacity and can be
-                        replicated to serve BIPOC communities across the nation.</p>
+                    <p class="v-pillar-body">Designing scalable models that build community capacity and can be replicated to serve BIPOC communities across the nation.</p>
                 </div>
             </div>
 
@@ -2474,11 +2420,7 @@
             <div class="maat-header reveal">
                 <span class="section-label">Truth &amp; Transformation</span>
                 <h2 class="section-h2">Guided by the<br><em>Seven Principles of Maat</em></h2>
-                <p class="maat-intro">African philosophies and principles are at our core. We turn to the wisdom of our
-                    ancestors from Kemet — the indigenous name given to ancient Egypt — to guide us. They founded a
-                    system that not only imitates nature but provides a deeper understanding of our Oneness, true
-                    nature, and unity with all things in existence. It is through their teachings that we will find
-                    truth and transformation.</p>
+                <p class="maat-intro">African philosophies and principles are at our core. We turn to the wisdom of our ancestors from Kemet — the indigenous name given to ancient Egypt — to guide us. They founded a system that not only imitates nature but provides a deeper understanding of our Oneness, true nature, and unity with all things in existence. It is through their teachings that we will find truth and transformation.</p>
             </div>
 
             <div class="maat-grid">
@@ -2572,7 +2514,7 @@
 
                 <!-- 7: Oneness — full-width dark with quote -->
                 <div class="maat-card reveal reveal--delay-3">
-                    <div style="display:flex;align-items:center;gap:var(--space-lg);flex:1;">
+                    <div class="maat-card-inner">
                         <svg class="maat-card-icon" viewBox="0 0 36 36" fill="none" stroke="#C9A96E" stroke-width="1.5"
                             stroke-linecap="round">
                             <circle cx="18" cy="18" r="4" />
@@ -2585,12 +2527,10 @@
                         <div>
                             <div class="maat-card-name">Oneness</div>
                             <div class="maat-card-sub">Amen</div>
-                            <div class="maat-card-desc">Recognizing our unity with all living things and the cosmos —
-                                the principle that binds all others together.</div>
+                            <div class="maat-card-desc">Recognizing our unity with all living things and the cosmos — the principle that binds all others together.</div>
                         </div>
                     </div>
-                    <div class="maat-card-oneness-quote">"A system that not only imitates nature but provides a deeper
-                        understanding of our unity with all things in existence."</div>
+                    <div class="maat-card-oneness-quote">"A system that not only imitates nature but provides a deeper understanding of our unity with all things in existence."</div>
                 </div>
 
             </div>
@@ -2689,10 +2629,9 @@
 
             <div class="founder-photo-wrap reveal">
                 <div class="founder-photo-card">
-                    <img src="./assets/img/about-us/Mika.png" alt="Mika, Founder & Director of ASCENDtials"
-                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
+                    <img src="./assets/img/about-us/Mika.png" alt="Mika, Founder & Director of ASCENDtials" class="founder-photo-img">
                     <!-- <div class="founder-letter" style="z-index:1;">M</div> -->
-                    <div class="founder-badge" style="z-index:2;">
+                    <div class="founder-badge">
                         <div class="founder-badge-tag">Our Founder</div>
                         <div class="founder-badge-name">Mika</div>
                     </div>

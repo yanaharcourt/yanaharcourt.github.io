@@ -1,0 +1,2753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clubs & Community Groups – ASCENDtials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================================
+        DESIGN TOKENS
+        ============================================================ */
+        :root {
+            --color-navy: #1E3A47;
+            --color-navy-deep: #152E3A;
+            --color-sky: #C9A96E;
+            --color-sky-light: #F5EBD8;
+            --color-white: #FFFFFF;
+            --color-bg: #FAFAF8;
+            --color-surface: #F4F2EE;
+            --color-surface-2: #ECEAE5;
+            --color-line: #E2DDD6;
+            --color-text: #1A1A18;
+            --color-text-muted: #666660;
+            --color-text-light: #9D9A93;
+            --color-accent: #C9A96E;
+            --color-warm: #E8D0CC;
+            --color-sage: #B2D5D1;
+            --color-olive: #EBF1AB;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.375rem;
+            --text-2xl: 1.75rem;
+            --text-3xl: 2.25rem;
+            --text-hero: clamp(3rem, 5vw, 5.5rem);
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
+            --space-section: 120px;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-pill: 999px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --dur-fast: 180ms;
+            --dur-base: 280ms;
+            --dur-slow: 500ms;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            overflow-x: hidden;
+            font-size: var(--text-base);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal--delay-1 {
+            transition-delay: 0.08s;
+        }
+
+        .reveal--delay-2 {
+            transition-delay: 0.16s;
+        }
+
+        .reveal--delay-3 {
+            transition-delay: 0.24s;
+        }
+
+        .reveal--delay-4 {
+            transition-delay: 0.32s;
+        }
+
+        /* ── SHARED LABELS ── */
+        .btn-wrap-sm {
+            margin-top: 8px;
+        }
+
+        .btn-wrap-xl {
+            margin-top: var(--space-xl);
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .section-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+            font-weight: 300;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        /* ── BUTTONS — unified across all pages ── */
+        .btn-primary,
+        .btn-white,
+        .btn-ghost,
+        .btn-outline {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Sweep fill layer */
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-ghost::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-sky);
+        }
+
+        .btn-white {
+            background: var(--color-white);
+            color: var(--color-navy);
+            padding: 14px 28px;
+            font-weight: 500;
+            transition: background var(--dur-fast);
+        }
+
+        .btn-white:hover {
+            background: var(--color-sky);
+            color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ============================================================
+        NAV
+        ============================================================ */
+        .nav-cta {
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 9px 20px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color var(--dur-fast);
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .nav-cta:hover::before {
+            transform: scaleX(1);
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            gap: 32px;
+            transition: all var(--dur-slow) var(--ease-in-out);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            top: 10px;
+            left: 16px;
+            right: 16px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-logo {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .nav-logo img {
+            height: 52px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links>li {
+            position: relative;
+        }
+
+        .nav-links>li>a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            font-size: var(--text-sm);
+            font-weight: 400;
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links>li>a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-links .has-dropdown>a::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: solid var(--color-text-muted);
+            border-width: 0 1.5px 1.5px 0;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links .has-dropdown:hover>a::after {
+            transform: rotate(225deg) translateY(-2px);
+        }
+
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            padding-top: 8px;
+            background: transparent;
+            min-width: 220px;
+            list-style: none;
+            z-index: 600;
+        }
+
+        .nav-dropdown::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-line);
+            z-index: -1;
+        }
+
+        .nav-links .has-dropdown:hover .nav-dropdown {
+            display: block;
+        }
+
+        .nav-dropdown li {
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-dropdown li a {
+            display: block;
+            padding: 9px 14px;
+            margin: 0 4px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .nav-dropdown li a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-dropdown li:first-child a {
+            margin-top: 4px;
+        }
+
+        .nav-dropdown li:last-child a {
+            margin-bottom: 4px;
+        }
+
+        .nav-burger {
+            display: none;
+            background: none;
+            border: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+            margin-left: auto;
+        }
+
+        .nav-burger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-navy);
+            border-radius: 2px;
+            transition: all var(--dur-base) var(--ease-out);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 490;
+            padding: 90px 24px 32px;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 16px;
+            font-size: var(--text-xl);
+            color: var(--color-text);
+            border-bottom: 1px solid var(--color-line);
+            font-family: var(--font-display);
+        }
+
+        .mobile-menu .mob-cta {
+            margin-top: 24px;
+            background: var(--color-navy);
+            color: var(--color-white);
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-lg);
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+        }
+
+        /* ============================================================
+        PAGE HERO
+        ============================================================ */
+        .page-hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: calc(72px + var(--space-2xl));
+            padding-left: max(48px, 6vw);
+            padding-right: max(48px, 6vw);
+            background: var(--color-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: 'CG';
+            position: absolute;
+            bottom: -60px;
+            left: -20px;
+            font-family: var(--font-display);
+            font-size: clamp(200px, 28vw, 380px);
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(201, 169, 110, 0.04);
+            letter-spacing: -10px;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 {
+            font-family: var(--font-display);
+            font-size: var(--text-hero);
+            font-weight: 300;
+            line-height: 1.02;
+            letter-spacing: -2px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 em {
+            font-style: italic;
+            color: var(--color-sky);
+            display: block;
+        }
+
+        .hero-divider {
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-sky), transparent);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-desc {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            max-width: 440px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-photo-wrap {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+        }
+
+        .hero-photo-wrap img {
+            width: 100%;
+            height: 540px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: var(--radius-xl);
+            display: block;
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+
+        .hero-photo-wrap:hover img {
+            transform: scale(1.02);
+        }
+
+        .hero-photo-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -24px;
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg) var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            z-index: 3;
+        }
+
+        .hero-photo-badge-num {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+        }
+
+        .hero-photo-badge-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-top: 6px;
+        }
+
+        @media (max-width: 960px) {
+            .hero-main {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .hero-photo-wrap img {
+                height: 380px;
+            }
+
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-photo-wrap {
+                display: none;
+            }
+        }
+
+        /* ============================================================
+        INFO STRIP
+        ============================================================ */
+        .info-strip {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-xl) max(48px, 6vw);
+        }
+
+        .info-strip-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+        }
+
+        .his-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1 1 200px;
+        }
+
+        .his-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
+        }
+
+        .his-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-bottom: 3px;
+        }
+
+        .his-value {
+            font-size: var(--text-sm);
+            color: var(--color-navy);
+        }
+
+        .his-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--color-line);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .his-divider {
+                display: none;
+            }
+
+            .info-strip {
+                padding: var(--space-xl) 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: CLUBS OVERVIEW — bento grid
+        ============================================================ */
+        .section-clubs {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+
+        .clubs-header {
+            max-width: 1280px;
+            margin: 0 auto var(--space-2xl);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: end;
+        }
+
+        .clubs-header-desc {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            padding-top: 8px;
+        }
+
+        .clubs-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-md);
+        }
+
+        .club-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-base);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .club-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        /* Asymmetric bento spans */
+        .club-card:nth-child(1) {
+            grid-column: span 7;
+            min-height: 320px;
+        }
+
+        .club-card:nth-child(2) {
+            grid-column: span 5;
+            min-height: 320px;
+        }
+
+        .club-card:nth-child(3) {
+            grid-column: span 4;
+            min-height: 280px;
+        }
+
+        .club-card:nth-child(4) {
+            grid-column: span 4;
+            min-height: 280px;
+        }
+
+        .club-card:nth-child(5) {
+            grid-column: span 4;
+            min-height: 280px;
+        }
+
+        .club-card:nth-child(6) {
+            grid-column: span 5;
+            min-height: 260px;
+        }
+
+        .club-card:nth-child(7) {
+            grid-column: span 7;
+            min-height: 260px;
+            background: var(--color-navy);
+            border-color: transparent;
+        }
+
+        .club-card--navy .club-tag,
+        .club-card:nth-child(7) .club-tag {
+            background: rgba(201, 169, 110, 0.18);
+            color: var(--color-sky);
+        }
+
+        .club-card:nth-child(7) .club-icon-wrap {
+            background: rgba(201, 169, 110, 0.15);
+            color: var(--color-sky);
+        }
+
+        .club-card:nth-child(7) .club-title {
+            color: var(--color-white);
+        }
+
+        .club-card:nth-child(7) .club-body {
+            color: rgba(255, 255, 255, 0.62);
+        }
+
+        .club-card:nth-child(7) .club-detail {
+            color: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .club-card:nth-child(7):hover {
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+
+        .club-tag {
+            display: inline-block;
+            align-self: flex-start;
+            padding: 4px 12px;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            background: var(--color-sky-light);
+            border-radius: var(--radius-pill);
+        }
+
+        .club-icon-wrap {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .club-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+        }
+
+        .club-body {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            flex: 1;
+        }
+
+        .club-detail {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            padding-top: var(--space-sm);
+            border-top: 1px solid var(--color-line);
+            margin-top: auto;
+        }
+
+        .club-detail svg {
+            flex-shrink: 0;
+        }
+
+        .club-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-sky);
+            margin-top: auto;
+            align-self: flex-start;
+            transition: gap var(--dur-fast);
+        }
+
+        .club-link:hover {
+            gap: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .clubs-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .club-card:nth-child(n) {
+                grid-column: auto;
+                min-height: 240px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .clubs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .clubs-header {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .section-clubs {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: MDBA WATERFRONT CLUB — full feature
+        ============================================================ */
+        .section-mdba {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-surface);
+        }
+
+        .mdba-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+        }
+
+        .mdba-text {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .mdba-text p {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .mdba-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: var(--space-sm);
+        }
+
+        .mdba-benefit {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: var(--space-md);
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-md);
+            transition: border-color var(--dur-base), transform var(--dur-base);
+        }
+
+        .mdba-benefit:hover {
+            border-color: rgba(201, 169, 110, 0.4);
+            transform: translateX(4px);
+        }
+
+        .mdba-benefit-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-sky);
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .mdba-benefit-text {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .mdba-benefit-text strong {
+            color: var(--color-navy);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .mdba-photo-stack {
+            position: relative;
+        }
+
+        .mdba-photo-main {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            border-radius: var(--radius-xl);
+            display: block;
+        }
+
+        .mdba-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--color-navy);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+            color: var(--color-white);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mdba-badge-num {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+        }
+
+        .mdba-badge-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+            margin-top: 6px;
+        }
+
+        @media (max-width: 960px) {
+            .mdba-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .mdba-photo-main {
+                height: 360px;
+            }
+
+            .mdba-badge {
+                right: 0;
+                bottom: 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section-mdba {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: POETRY & WRITING CLUB — editorial 2-col
+        ============================================================ */
+        .section-writing {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+
+        .writing-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: start;
+        }
+
+        .writing-body p {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            margin-bottom: var(--space-md);
+        }
+
+        .pull-quote {
+            font-family: var(--font-display);
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            font-style: italic;
+            color: var(--color-navy);
+            line-height: 1.55;
+            border-left: 3px solid var(--color-sky);
+            padding-left: var(--space-lg);
+            margin: var(--space-xl) 0;
+        }
+
+        .writing-bento {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .wb-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+        }
+
+        .wb-card:hover {
+            box-shadow: var(--shadow-sm);
+            border-color: rgba(201, 169, 110, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .wb-card:first-child {
+            grid-column: 1 / -1;
+            background: var(--color-navy);
+            border-color: transparent;
+        }
+
+        .wb-card:last-child {
+            grid-column: 1 / -1;
+        }
+
+        .wb-card:first-child .wb-title {
+            color: var(--color-white);
+        }
+
+        .wb-card:first-child .wb-body {
+            color: rgba(255, 255, 255, 0.62);
+        }
+
+        .wb-card:first-child .wb-icon {
+            background: rgba(201, 169, 110, 0.15);
+            color: var(--color-sky);
+        }
+
+        .wb-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            margin-bottom: var(--space-sm);
+        }
+
+        .wb-title {
+            font-family: var(--font-display);
+            font-size: var(--text-base);
+            font-weight: 500;
+            color: var(--color-navy);
+            margin-bottom: 4px;
+        }
+
+        .wb-body {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 960px) {
+            .writing-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .writing-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .wb-card:first-child {
+                grid-column: 1;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section-writing {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: BOOK CLUB
+        ============================================================ */
+        .section-book {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-surface);
+        }
+
+        .book-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+        }
+
+        .book-visual {
+            position: relative;
+        }
+
+        .book-photo {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            border-radius: var(--radius-xl);
+        }
+
+        .book-overlay-card {
+            position: absolute;
+            top: 32px;
+            right: -24px;
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg) var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            max-width: 200px;
+        }
+
+        .book-overlay-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-bottom: 4px;
+        }
+
+        .book-overlay-value {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            color: var(--color-navy);
+            line-height: 1.3;
+        }
+
+        .book-text {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .book-text p {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .book-schedule {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: var(--space-xl);
+            background: var(--color-navy);
+            border-radius: var(--radius-xl);
+        }
+
+        .book-schedule-title {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            color: var(--color-white);
+            margin-bottom: var(--space-sm);
+        }
+
+        .book-schedule-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .book-schedule-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .book-schedule-text {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        @media (max-width: 960px) {
+            .book-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .book-photo {
+                height: 320px;
+            }
+
+            .book-overlay-card {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section-book {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: GARDEN CLUB
+        ============================================================ */
+        .section-garden {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+
+        .garden-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+        }
+
+        .garden-text {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .garden-text p {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .garden-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .g-stat {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            transition: border-color var(--dur-base);
+        }
+
+        .g-stat:hover {
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .g-stat-num {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--color-navy);
+            line-height: 1;
+        }
+
+        .g-stat-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-top: 4px;
+        }
+
+        .garden-photo {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            border-radius: var(--radius-xl);
+        }
+
+        @media (max-width: 960px) {
+            .garden-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .garden-photo {
+                height: 320px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section-garden {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: NEWSLETTER
+        ============================================================ */
+        .section-newsletter {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-navy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-newsletter::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(201, 169, 110, 0.10) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .newsletter-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+        }
+
+        .nl-eyebrow {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .nl-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            font-weight: 300;
+            color: var(--color-white);
+            line-height: 1.2;
+            margin-bottom: var(--space-lg);
+        }
+
+        .nl-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .nl-body {
+            font-size: var(--text-base);
+            color: rgba(255, 255, 255, 0.62);
+            line-height: 1.8;
+        }
+
+        .nl-features {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .nl-feature {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .nl-feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(201, 169, 110, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .nl-feature-text {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .nl-feature-text strong {
+            color: var(--color-white);
+            display: block;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .nl-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .nl-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nl-input {
+            flex: 1;
+            padding: 14px 18px;
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            color: var(--color-text);
+            background: var(--color-white);
+            border: 1.5px solid transparent;
+            border-radius: var(--radius-pill);
+            outline: none;
+            transition: border-color var(--dur-fast);
+        }
+
+        .nl-input:focus {
+            border-color: var(--color-sky);
+        }
+
+        .nl-submit {
+            padding: 14px 28px;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-navy);
+            background: var(--color-sky);
+            border-radius: var(--radius-pill);
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: opacity var(--dur-base);
+        }
+
+        .nl-submit:hover {
+            opacity: 0.88;
+        }
+
+        .nl-note {
+            font-size: var(--text-xs);
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        @media (max-width: 960px) {
+            .newsletter-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .nl-input-group {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section-newsletter {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ============================================================
+        SECTION: INTEREST FORM CTA
+        ============================================================ */
+        .section-join {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-surface);
+        }
+
+        .join-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+        }
+
+        .join-text {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .join-text p {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .join-ctas {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .join-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .join-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 400;
+            color: var(--color-navy);
+        }
+
+        .join-card-body {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        .join-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .join-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px var(--space-md);
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-md);
+            transition: border-color var(--dur-base), transform var(--dur-base);
+        }
+
+        .join-option:hover {
+            border-color: rgba(201, 169, 110, 0.4);
+            transform: translateX(4px);
+        }
+
+        .join-option-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .join-option-label {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--color-navy);
+        }
+
+        @media (max-width: 960px) {
+            .join-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section-join {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ============================================================
+        FOOTER
+        ============================================================ */
+        .footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            padding: var(--space-2xl) max(40px, 5vw);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-brand img {
+            height: 48px;
+            width: auto;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            max-width: 260px;
+        }
+
+        .footer-col-title {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-contact p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .footer-contact a {
+            color: var(--color-sky);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 8px;
+            margin-top: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            transition: background var(--dur-fast), color var(--dur-fast);
+        }
+
+        .footer-social a:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .footer-partners {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) 0;
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            flex-wrap: wrap;
+        }
+
+        .footer-partners img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(30%);
+            transition: opacity var(--dur-fast), filter var(--dur-fast);
+        }
+
+        .footer-partners img:hover {
+            opacity: 1;
+            filter: grayscale(0);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--space-lg);
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom p {
+            font-size: var(--text-xs);
+            color: var(--color-text-light);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--space-lg);
+        }
+
+        .footer-bottom-links a {
+            font-size: var(--text-xs);
+            color: var(--color-text-light);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--color-sky);
+        }
+
+        @media (max-width: 860px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <header class="nav" id="mainNav">
+        <div class="nav-logo">
+            <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="./index.html">Home</a></li>
+            <li class="has-dropdown">
+                <a href="#">About</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./our-team.html">Our Team</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Education</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./education-and-training.html">Education and Training</a></li>
+                    <li><a href="./literacy-workshops.html">Literacy Workshops</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                    <li><a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a></li>
+                    <li><a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a></li>
+                    <li><a href="./service-learning.html">Service Learning</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Programs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./events.html">Event Calendar</a></li>
+                    <li><a href="./program-participant.html">Program Participant</a></li>
+                    <li><a href="./farmers-market.html">Farmers' Market</a></li>
+                    <li><a href="./food-distribution.html">Food Distribution</a></li>
+                    <li><a href="./youth-programs.html">Youth Program</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./court-order-community-service.html">Court Order Community Service</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Clubs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./mdba-portal.html">MDBA Portal</a></li>
+                    <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
+                    <li><a href="./join-our-community.html">Join our community</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Join Us</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./get-involved.html">Get Involved</a></li>
+                    <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="./sponsor.html">Become a Sponsor</a></li>
+                    <li><a href="./vendor.html">Vendor</a></li>
+                    <li><a href="./volunteer.html">Volunteer</a></li>
+                </ul>
+            </li>
+        </ul>
+        <a class="nav-cta" href="./support-us.html">Support Us</a>
+        <button class="nav-burger" id="navBurger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About Us</a>
+        <a href="./our-team.html">Our Team</a>
+        <a href="./contact.html">Contact Us</a>
+        <a href="./education-and-training.html">Education and Training</a>
+        <a href="./literacy-workshops.html">Literacy Workshops</a>
+        <a href="./kemetic-yoga.html">Kemetic Yoga</a>
+        <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
+        <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
+        <a href="./service-learning.html">Service Learning</a>
+        <a href="./events.html">Event Calendar</a>
+        <a href="./program-participant.html">Program Participant</a>
+        <a href="./farmers-market.html">Farmers' Market</a>
+        <a href="./food-distribution.html">Food Distribution</a>
+        <a href="./youth-programs.html">Youth Program</a>
+        <a href="./environmental-programs.html">Environmental Programs</a>
+        <a href="./court-order-community-service.html">Court Order Community Service</a>
+        <a href="./mdba-portal.html">MDBA Portal</a>
+        <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+        <a href="./join-our-community.html">Join our community</a>
+        <a href="./get-involved.html">Get Involved</a>
+        <a href="./partner-with-us.html">Partner with Us</a>
+        <a href="./sponsor.html">Become a Sponsor</a>
+        <a href="./vendor.html">Vendor</a>
+        <a href="./volunteer.html">Volunteer</a>
+        <a class="mob-cta" href="./support-us.html">Support Us</a>
+    </div>
+
+    <!-- ============================================================
+    HERO
+    ============================================================ -->
+    <section class="page-hero">
+        <div class="hero-main">
+            <div class="hero-text reveal">
+                <div class="hero-eyebrow">Clubs &amp; Community Groups</div>
+                <h1 class="hero-h1">Where Community<br><em>Comes Together</em></h1>
+                <div class="hero-divider"></div>
+                <p class="hero-desc">Our clubs are open to all who seek inspiration, dialogue, and community-building.
+                    Whether you're an artist, vendor, farmer, writer, reader, poet, or changemaker — there's a place for
+                    you here, on land and on water.</p>
+                <div class="hero-cta-row">
+                    <a class="btn-primary" href="#interest-form">Join a Club</a>
+                    <a class="btn-outline" href="#clubs">Explore All Clubs</a>
+                </div>
+            </div>
+            <div class="hero-photo-wrap reveal reveal--delay-2">
+                <img src="./assets/img/clubs/Book-club.jpg" alt="ASCENDtials Community"
+                    onerror="this.style.background='#1E3A47'; this.style.minHeight='540px';">
+                <div class="hero-photo-badge">
+                    <div class="hero-photo-badge-num">5+</div>
+                    <div class="hero-photo-badge-label">Active Clubs</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFO STRIP -->
+    <div class="info-strip reveal">
+        <div class="info-strip-inner">
+            <div class="his-item">
+                <div class="his-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="his-label">Clubs</div>
+                    <div class="his-value">5+ Active Clubs</div>
+                </div>
+            </div>
+            <div class="his-divider"></div>
+            <div class="his-item">
+                <div class="his-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="his-label">Locations</div>
+                    <div class="his-value">Land &amp; Water</div>
+                </div>
+            </div>
+            <div class="his-divider"></div>
+            <div class="his-item">
+                <div class="his-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="his-label">Membership</div>
+                    <div class="his-value">Open to Everyone</div>
+                </div>
+            </div>
+            <div class="his-divider"></div>
+            <div class="his-item">
+                <div class="his-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="his-label">Sessions</div>
+                    <div class="his-value">Monthly &amp; Regular</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ============================================================
+    ALL CLUBS — BENTO GRID
+    ============================================================ -->
+    <section class="section-clubs" id="clubs">
+        <div class="clubs-header reveal">
+            <div>
+                <div class="section-label">Our Community Clubs</div>
+                <h2 class="section-h2">A Space For Every<br><em>Voice &amp; Passion</em></h2>
+            </div>
+            <p class="clubs-header-desc">From waterfront yacht outings to community gardens, poetry sessions to book
+                discussions — ASCENDtials clubs are spaces where inspiration meets action and community is built.</p>
+        </div>
+
+        <div class="clubs-grid">
+            <!-- 1: MDBA Waterfront -->
+            <div class="club-card reveal">
+                <div class="club-tag">New · On Water</div>
+                <div class="club-icon-wrap">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 20a2 2 0 002 2h16a2 2 0 002-2" />
+                        <path d="M7 20l4-16h2l4 16" />
+                        <path d="M6 8h12" />
+                    </svg>
+                </div>
+                <div class="club-title">MDBA Waterfront Club</div>
+                <div class="club-body">Where luxury meets purpose on the water. Our newest club is dedicated to monthly
+                    excursions, dock parties, and water-based volunteerism. Whether you're a boat owner, wellness
+                    enthusiast, or community builder — this club is for you.</div>
+                <div class="club-detail">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    Monthly Dock &amp; Dine · Yacht Outings · Water Volunteerism
+                </div>
+                <a class="club-link" href="./mdba-portal.html">
+                    Learn more
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- 2: Poetry & Writing (navy) -->
+            <div class="club-card reveal reveal--delay-1">
+                <div class="club-tag">Expression</div>
+                <div class="club-icon-wrap">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                    </svg>
+                </div>
+                <div class="club-title">Poetry &amp; Writing Club</div>
+                <div class="club-body">A company-run writers' club that writes on social topics impacting the BIPOC
+                    community. Writers are divided into two groups — high school students and adults — meeting monthly
+                    to discuss writing, share feedback, and publish work.</div>
+                <div class="club-detail">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                    </svg>
+                    High School &amp; Adult Groups · Published Work
+                </div>
+                <a class="club-link"
+                    href="https://ascendtials.org/education/work-shops/civic-literacy-workshop/poetry-and-writing-club/">
+                    Sign up
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- 3: Book Club -->
+            <div class="club-card reveal">
+                <div class="club-tag">Reading</div>
+                <div class="club-icon-wrap">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
+                    </svg>
+                </div>
+                <div class="club-title">Book Club</div>
+                <div class="club-body">Explore stories that spark dialogue and deepen understanding. We gather to
+                    discuss powerful books — recent reads include <em>The High Desert</em> by James Spooner — sharing
+                    perspectives that challenge and inspire.</div>
+                <div class="club-detail">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    Monthly Discussions · All Welcome
+                </div>
+                <a class="club-link" href="#interest-form">
+                    Join the club
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- 4: Garden Club (warm) -->
+            <div class="club-card reveal reveal--delay-1">
+                <div class="club-tag">Nature</div>
+                <div class="club-icon-wrap">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22V12" />
+                        <path d="M5 12C5 6.48 8.58 2 12 2s7 4.48 7 10H5z" />
+                    </svg>
+                </div>
+                <div class="club-title">Garden Club</div>
+                <div class="club-body">Fresh fruits, vegetables, and herbs — grown together and harvested together. Our
+                    garden is located in sunny Bonita inside Sweetwater Summit Regional Park, with two pesticide-free
+                    20×20 plots for all food staples.</div>
+                <div class="club-detail">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Sweetwater Summit Regional Park, Bonita
+                </div>
+                <a class="club-link" href="https://ascendtials.org/garden-club/">
+                    Learn more
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- 5: Civic Literacy -->
+            <div class="club-card reveal reveal--delay-2">
+                <div class="club-tag">Civic</div>
+                <div class="club-icon-wrap">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path
+                            d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                    </svg>
+                </div>
+                <div class="club-title">Civic Literacy Workshop</div>
+                <div class="club-body">Develop critical consciousness, healing, and self-knowledge through writing and
+                    discussion. Sessions are accompanied by a performing artist who inspires the group with artful
+                    expression and background music before writing begins.</div>
+                <div class="club-detail">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                    </svg>
+                    BIPOC Community · Published Submissions
+                </div>
+                <a class="club-link" href="./literacy-workshops.html">
+                    Learn more
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- 6: Kemetic Yoga -->
+            <div class="club-card reveal">
+                <div class="club-tag">Wellness</div>
+                <div class="club-icon-wrap">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8h1a4 4 0 010 8h-1" />
+                        <path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z" />
+                        <line x1="6" y1="1" x2="6" y2="4" />
+                        <line x1="10" y1="1" x2="10" y2="4" />
+                        <line x1="14" y1="1" x2="14" y2="4" />
+                    </svg>
+                </div>
+                <div class="club-title">Kemetic Yoga</div>
+                <div class="club-body">Reconnect with ancestral healing through our Sunday yoga sessions on the lawn.
+                    Kemetic Yoga brings awareness to body and breath, helping participants identify with their ancestors
+                    and remember who they truly are.</div>
+                <div class="club-detail">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    Every Sunday · WorldBeat Cultural Center
+                </div>
+                <a class="club-link" href="./kemetic-yoga.html">
+                    Learn more
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- 7: Suggest a Club (navy) -->
+            <div class="club-card reveal reveal--delay-1">
+                <div class="club-tag">Open Call</div>
+                <div class="club-icon-wrap">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="16" />
+                        <line x1="8" y1="12" x2="16" y2="12" />
+                    </svg>
+                </div>
+                <div class="club-title">Suggest a New Club</div>
+                <div class="club-body">Don't see a club that speaks to your passion? We invite you to suggest a new one.
+                    ASCENDtials is always open to expanding our community offerings — from culinary arts to
+                    environmental activism to tech and beyond. Fill out our Interest Form to share your idea and
+                    volunteer as a facilitator.</div>
+                <a class="club-link" href="#interest-form">
+                    Submit your idea
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    MDBA WATERFRONT CLUB — DEEP FEATURE
+    ============================================================ -->
+    <section class="section-mdba">
+        <div class="mdba-inner reveal">
+            <div class="mdba-text">
+                <div class="section-label">Featured Club</div>
+                <h2 class="section-h2">MDBA Waterfront Club<br><em>Luxury Meets Purpose</em></h2>
+                <p>Where the Marina District comes alive. The MDBA Waterfront Club is our newest community experience,
+                    designed for boat owners, wellness enthusiasts, cultural explorers, and community builders who want
+                    to connect on the water with intention.</p>
+                <p>Monthly Dock &amp; Dine experiences, yacht outings with professional captains, cultural tastings,
+                    stewardship programming, and waterfront networking — all grounded in community care.</p>
+                <div class="mdba-benefits">
+                    <div class="mdba-benefit">
+                        <div class="mdba-benefit-dot"></div>
+                        <div class="mdba-benefit-text"><strong>Monthly Dock &amp; Dine</strong>Waterfront gatherings
+                            with food, culture, and community at the marina.</div>
+                    </div>
+                    <div class="mdba-benefit">
+                        <div class="mdba-benefit-dot"></div>
+                        <div class="mdba-benefit-text"><strong>Yacht Outings</strong>Curated water excursions with
+                            designated captains and safety briefings.</div>
+                    </div>
+                    <div class="mdba-benefit">
+                        <div class="mdba-benefit-dot"></div>
+                        <div class="mdba-benefit-text"><strong>Cultural Tastings</strong>Food and drink experiences that
+                            celebrate the richness of our communities.</div>
+                    </div>
+                    <div class="mdba-benefit">
+                        <div class="mdba-benefit-dot"></div>
+                        <div class="mdba-benefit-text"><strong>Stewardship &amp; Water Education</strong>Sailing,
+                            astronomy, and environmental programming on the water.</div>
+                    </div>
+                    <div class="mdba-benefit">
+                        <div class="mdba-benefit-dot"></div>
+                        <div class="mdba-benefit-text"><strong>Wellness on Water</strong>Yoga, healing arts, and
+                            mindfulness experiences in the marina setting.</div>
+                    </div>
+                </div>
+                <div class="btn-wrap-sm">
+                    <a class="btn-primary" href="./mdba-portal.html">Explore MDBA Portal</a>
+                </div>
+            </div>
+            <div class="mdba-photo-stack reveal reveal--delay-2">
+                <img class="mdba-photo-main" src="./assets/img/mdba/private-yachts-port.jpg" alt="MDBA Waterfront Club"
+                    onerror="this.style.background='#1E3A47'; this.style.minHeight='520px'; this.style.display='block';">
+                <div class="mdba-badge">
+                    <div class="mdba-badge-num">$65</div>
+                    <div class="mdba-badge-label">/ month</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    POETRY & WRITING CLUB
+    ============================================================ -->
+    <section class="section-writing">
+        <div class="writing-inner reveal">
+            <div>
+                <div class="section-label">Expression &amp; Justice</div>
+                <h2 class="section-h2">Poetry &amp; Writing Club<br><em>Write to Change the World</em></h2>
+                <blockquote class="pull-quote">"You are about to embark on an exciting experiential journey into
+                    critical consciousness, healing, and self-knowledge."</blockquote>
+                <div class="writing-body">
+                    <p>The ASCENDtials Poetry &amp; Writing Club is a company-run writers' club focused on social topics
+                        that impact the BIPOC community. Writers are divided into high school and adult groups, meeting
+                        monthly or every other month.</p>
+                    <p>A moderator ensures rich feedback is exchanged, and a performing artist opens each session —
+                        sharing a piece to inspire writing on topics from political representation to human rights. All
+                        submissions can be published if submitted by the weekly deadline.</p>
+                    <p>Starting in August 2022, ASCENDtials launched a Writer's Group for the BIPOC community with a
+                        main objective of generating influential writers whose literature creates change around social
+                        justice issues.</p>
+                </div>
+                <div class="btn-wrap-xl">
+                    <a class="btn-primary"
+                        href="https://ascendtials.org/education/work-shops/civic-literacy-workshop/poetry-and-writing-club/">Join
+                        the Writing Club</a>
+                </div>
+            </div>
+            <div class="writing-bento">
+                <div class="wb-card">
+                    <div class="wb-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 8v4l3 3" />
+                        </svg>
+                    </div>
+                    <div class="wb-title">Monthly Sessions</div>
+                    <div class="wb-body">Meet monthly or every other month. Sessions open with live performance to spark
+                        writing on issues that matter most.</div>
+                </div>
+                <div class="wb-card">
+                    <div class="wb-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                        </svg>
+                    </div>
+                    <div class="wb-title">Two Groups</div>
+                    <div class="wb-body">High school students and adult writers each have their own group for focused,
+                        relevant discussions.</div>
+                </div>
+                <div class="wb-card">
+                    <div class="wb-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 20h9" />
+                            <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                        </svg>
+                    </div>
+                    <div class="wb-title">Get Published</div>
+                    <div class="wb-body">All submissions can be published on the blog — submit by Wednesday after each
+                        Friday session.</div>
+                </div>
+                <div class="wb-card">
+                    <div class="wb-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg>
+                    </div>
+                    <div class="wb-title">Earn Credit</div>
+                    <div class="wb-body">Club members receive session credit. Sign up as a Poetry &amp; Writing Club
+                        member to access ongoing sessions.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    BOOK CLUB
+    ============================================================ -->
+    <section class="section-book">
+        <div class="book-inner reveal">
+            <div class="book-visual">
+                <img class="book-photo" src="./assets/img/clubs/Book-club.jpg" alt="ASCENDtials Book Club"
+                    onerror="this.style.background='#F4F2EE'; this.style.display='block';">
+                <div class="book-overlay-card">
+                    <div class="book-overlay-label">Current Read</div>
+                    <div class="book-overlay-value">The High Desert<br>by James Spooner</div>
+                </div>
+            </div>
+            <div class="book-text">
+                <div class="section-label">Reading &amp; Dialogue</div>
+                <h2 class="section-h2">Book Club<br><em>Stories That Spark Change</em></h2>
+                <p>Explore stories that spark dialogue and deepen understanding. Our Book Club brings community members
+                    together around powerful narratives — sharing perspectives that challenge, heal, and inspire.</p>
+                <p>Our recent read: <strong>The High Desert</strong> by James Spooner. Join us every Sunday on the lawn
+                    for discussion and community connection.</p>
+                <div class="book-schedule">
+                    <div class="book-schedule-title">How to Participate</div>
+                    <div class="book-schedule-item">
+                        <div class="book-schedule-dot"></div>
+                        <div class="book-schedule-text">Fill out the Interest Form to join the book club</div>
+                    </div>
+                    <div class="book-schedule-item">
+                        <div class="book-schedule-dot"></div>
+                        <div class="book-schedule-text">Receive the current book selection and session link</div>
+                    </div>
+                    <div class="book-schedule-item">
+                        <div class="book-schedule-dot"></div>
+                        <div class="book-schedule-text">Join monthly discussions — all perspectives welcome</div>
+                    </div>
+                    <div class="book-schedule-item">
+                        <div class="book-schedule-dot"></div>
+                        <div class="book-schedule-text">Suggest titles and help shape future reading lists</div>
+                    </div>
+                </div>
+                <a class="btn-primary" href="#interest-form">Join the Book Club</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    GARDEN CLUB
+    ============================================================ -->
+    <section class="section-garden">
+        <div class="garden-inner reveal">
+            <div class="garden-text">
+                <div class="section-label">Grow Together</div>
+                <h2 class="section-h2">Garden Club<br><em>From Soil to Table</em></h2>
+                <p>Do you need access to fresh fruits, vegetables, and herbs you can grow yourself — pesticide-free?
+                    ASCENDtials is offering this opportunity to grow together. Our garden is located in sunny Bonita,
+                    inside the beautiful Sweetwater Summit Regional Park.</p>
+                <p>The park boasts 500 acres with modern campsites, a seasonal splash pad, play areas, an exercise
+                    course, rentable picnic areas, a community room, an outdoor amphitheater, and fishing at Sweetwater
+                    Reservoir. We work together and harvest together.</p>
+                <div class="garden-stats">
+                    <div class="g-stat">
+                        <div class="g-stat-num">2</div>
+                        <div class="g-stat-label">Garden Plots</div>
+                    </div>
+                    <div class="g-stat">
+                        <div class="g-stat-num">20×20</div>
+                        <div class="g-stat-label">Feet Per Plot</div>
+                    </div>
+                    <div class="g-stat">
+                        <div class="g-stat-num">500</div>
+                        <div class="g-stat-label">Acre Park</div>
+                    </div>
+                    <div class="g-stat">
+                        <div class="g-stat-num">0</div>
+                        <div class="g-stat-label">Pesticides</div>
+                    </div>
+                </div>
+                <div class="btn-wrap-sm">
+                    <a class="btn-primary" href="./assets/img/clubs/Book-club.jpg">Join the Garden Club</a>
+                </div>
+            </div>
+            <div class="reveal reveal--delay-2">
+                <img class="garden-photo" src="./assets/img/clubs/Garden-club.jpg" alt="ASCENDtials Garden Club"
+                    onerror="this.style.background='#F4F2EE'; this.style.display='block'; this.style.minHeight='480px'; this.style.borderRadius='var(--radius-xl)';">
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    NEWSLETTER
+    ============================================================ -->
+    <section class="section-newsletter">
+        <div class="newsletter-inner reveal">
+            <div>
+                <div class="nl-eyebrow">Stay Connected</div>
+                <h2 class="nl-h2">Our Monthly<br><em>Newsletter</em></h2>
+                <p class="nl-body">Stay connected with updates, stories, and opportunities. Our newsletter features
+                    vendor spotlights, youth voices, market news, and upcoming events. It's your monthly dose of
+                    inspiration and impact.</p>
+            </div>
+            <div>
+                <div class="nl-features">
+                    <div class="nl-feature">
+                        <div class="nl-feature-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                            </svg>
+                        </div>
+                        <div class="nl-feature-text"><strong>Vendor Spotlights</strong>Stories from our Farmers' Market
+                            community and small business partners.</div>
+                    </div>
+                    <div class="nl-feature">
+                        <div class="nl-feature-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 20h9" />
+                                <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                            </svg>
+                        </div>
+                        <div class="nl-feature-text"><strong>Youth Voices</strong>Writing and perspectives from our
+                            young community members.</div>
+                    </div>
+                    <div class="nl-feature">
+                        <div class="nl-feature-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                        </div>
+                        <div class="nl-feature-text"><strong>Upcoming Events</strong>Market news, club sessions, and
+                            community opportunities each month.</div>
+                    </div>
+                </div>
+                <div class="nl-form">
+                    <div class="nl-input-group">
+                        <input class="nl-input" type="email" placeholder="Your email address">
+                        <button class="nl-submit">Subscribe</button>
+                    </div>
+                    <p class="nl-note">Monthly newsletter. No spam. Unsubscribe anytime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    INTEREST FORM / JOIN CTA
+    ============================================================ -->
+    <section class="section-join" id="interest-form">
+        <div class="join-inner reveal">
+            <div class="join-text">
+                <div class="section-label">Get Involved</div>
+                <h2 class="section-h2">Ready to Join,<br><em>Suggest, or Facilitate?</em></h2>
+                <p>Fill out our Interest Form to join a club, suggest a new one, or volunteer as a facilitator. We'll be
+                    in touch to welcome you into the community.</p>
+                <p>Whether you're a first-timer or a seasoned community builder, there is a place for you here at
+                    ASCENDtials — on land and on water.</p>
+                <div class="join-ctas">
+                    <a class="btn-primary" href="https://ascendtials.org/clubs/#interest-form" target="_blank">Fill Out
+                        Interest Form</a>
+                    <a class="btn-outline" href="./volunteer.html">Volunteer with Us</a>
+                </div>
+            </div>
+            <div class="join-card reveal reveal--delay-2">
+                <div class="section-label">Interest Form Options</div>
+                <h3 class="join-card-title">What would you like to do?</h3>
+                <p class="join-card-body">Let us know how you'd like to participate and we'll connect you with the right
+                    club or opportunity.</p>
+                <div class="join-options">
+                    <div class="join-option">
+                        <div class="join-option-dot"></div>
+                        <div class="join-option-label">Join an existing club</div>
+                    </div>
+                    <div class="join-option">
+                        <div class="join-option-dot"></div>
+                        <div class="join-option-label">Suggest a new club</div>
+                    </div>
+                    <div class="join-option">
+                        <div class="join-option-dot"></div>
+                        <div class="join-option-label">Volunteer as a facilitator</div>
+                    </div>
+                    <div class="join-option">
+                        <div class="join-option-dot"></div>
+                        <div class="join-option-label">Subscribe to the newsletter</div>
+                    </div>
+                    <div class="join-option">
+                        <div class="join-option-dot"></div>
+                        <div class="join-option-label">Learn about MDBA Waterfront Club</div>
+                    </div>
+                </div>
+                <a class="btn-primary" href="https://ascendtials.org/clubs/" target="_blank">Open Interest Form</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+                <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
+                    BIPOC community.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube"
+                        target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-ascendtials/" aria-label="LinkedIn" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                    <a href="https://x.com/ascendtials" aria-label="X / Twitter" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Clubs</div>
+                <ul class="footer-links">
+                    <li><a href="./mdba-portal.html">MDBA Waterfront Club</a></li>
+                    <li><a
+                            href="https://ascendtials.org/education/work-shops/civic-literacy-workshop/poetry-and-writing-club/">Poetry
+                            &amp; Writing Club</a></li>
+                    <li><a href="https://ascendtials.org/garden-club/">Garden Club</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                    <li><a href="#interest-form">Book Club</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Quick Links</div>
+                <ul class="footer-links">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./events.html">Events Calendar</a></li>
+                    <li><a href="./get-involved.html">Get Involved</a></li>
+                    <li><a href="./volunteer.html">Volunteer</a></li>
+                    <li><a href="./support-us.html">Support Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Contact</div>
+                <div class="footer-contact">
+                    <p>505 W Broadway<br>San Diego, CA 92101</p>
+                    <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-partners">
+            <img src="assets/img/country-of-san-diego.png" alt="County of San Diego">
+            <img src="assets/img/Live-well-with-San-diego.png" alt="Live Well San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg"
+                alt="Candid Platinum 2025">
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 ASCENDtials. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Nav scroll
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+        // Mobile menu
+        const burger = document.getElementById('navBurger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+
+</html>

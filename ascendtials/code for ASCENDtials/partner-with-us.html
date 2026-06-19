@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner With Us – ASCENDtials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+        ============================================================ */
+        :root {
+            --color-navy: #1E3A47;
+            --color-navy-deep: #152E3A;
+            --color-sky: #C9A96E;
+            --color-sky-light: #F5EBD8;
+
+            --color-white: #FFFFFF;
+            --color-bg: #FAFAF8;
+            --color-surface: #F4F2EE;
+            --color-surface-2: #ECEAE5;
+            --color-line: #E2DDD6;
+            --color-text: #1A1A18;
+            --color-text-muted: #666660;
+            --color-text-light: #9D9A93;
+
+            --color-accent: #C9A96E;
+            --color-warm: #E8D0CC;
+            --color-sage: #B2D5D1;
+            --color-olive: #EBF1AB;
+
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.375rem;
+            --text-2xl: 1.75rem;
+            --text-3xl: 2.25rem;
+            --text-hero: clamp(3rem, 6vw, 5.5rem);
+
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
+            --space-section: 120px;
+
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-pill: 999px;
+
+            --shadow-sm: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+            --shadow-lg: 0 16px 48px rgba(0,0,0,.10);
+
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --dur-fast: 180ms;
+            --dur-base: 280ms;
+            --dur-slow: 500ms;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            overflow-x: hidden;
+            font-size: var(--text-base);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+        img { display: block; max-width: 100%; }
+        a { text-decoration: none; color: inherit; }
+        button { cursor: pointer; font-family: inherit; }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+        }
+        .reveal.visible { opacity: 1; transform: none; }
+        .reveal--delay-1 { transition-delay: 0.08s; }
+        .reveal--delay-2 { transition-delay: 0.16s; }
+        .reveal--delay-3 { transition-delay: 0.24s; }
+        .reveal--delay-4 { transition-delay: 0.32s; }
+
+        /* ── SHARED ── */
+        .section-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        /* ── BUTTONS ── */
+        .btn-primary {
+            position: relative; overflow: hidden; isolation: isolate; z-index: 0;
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 28px; border-radius: var(--radius-pill);
+            background: var(--color-navy); color: var(--color-bg);
+            font-size: var(--text-sm); font-weight: 500; transition: color var(--dur-fast);
+        }
+        .btn-primary::before {
+            content: ''; position: absolute; inset: 0; background: var(--color-sky);
+            transform: scaleX(0); transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22,1,0.36,1); z-index: -1; border-radius: inherit;
+        }
+        .btn-primary:hover::before { transform: scaleX(1); }
+
+        .btn-outline {
+            position: relative; overflow: hidden; isolation: isolate;
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 13px 27px; border-radius: var(--radius-pill);
+            font-size: var(--text-sm); font-weight: 500;
+            background: transparent; color: var(--color-navy);
+            border: 1px solid var(--color-line);
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+        .btn-outline::before {
+            content: ''; position: absolute; inset: 0; background: var(--color-sky-light);
+            transform: scaleX(0); transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22,1,0.36,1); z-index: -1; border-radius: inherit;
+        }
+        .btn-outline:hover::before { transform: scaleX(1); }
+        .btn-outline:hover { border-color: var(--color-sky); }
+
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 13px 27px; border-radius: var(--radius-pill);
+            font-size: var(--text-sm); font-weight: 500;
+            border: 1.5px solid rgba(255,255,255,.35); color: rgba(255,255,255,.85);
+            position: relative; overflow: hidden; isolation: isolate;
+            transition: color var(--dur-fast), border-color var(--dur-fast);
+        }
+        .btn-ghost::before {
+            content: ''; position: absolute; inset: 0; background: rgba(255,255,255,.12);
+            transform: scaleX(0); transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22,1,0.36,1); z-index: -1; border-radius: inherit;
+        }
+        .btn-ghost:hover::before { transform: scaleX(1); }
+        .btn-ghost:hover { border-color: rgba(255,255,255,.7); }
+
+        /* ============================================================
+           NAV
+        ============================================================ */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+            background: var(--color-bg); border-bottom: 1px solid var(--color-line);
+            height: 72px; display: flex; align-items: center;
+            padding: 0 40px; gap: 32px;
+            transition: all var(--dur-slow) var(--ease-in-out);
+        }
+        .nav.scrolled {
+            background: rgba(255,255,255,.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            top: 10px; left: 16px; right: 16px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255,255,255,.5);
+            box-shadow: 0 2px 8px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.9);
+        }
+        .nav-logo { margin-right: auto; display: flex; align-items: center; flex-shrink: 0; }
+        .nav-logo img { height: 52px; width: auto; }
+        .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+        .nav-links > li { position: relative; }
+        .nav-links > li > a {
+            display: flex; align-items: center; gap: 4px; padding: 8px 12px;
+            font-size: var(--text-sm); font-weight: 400; color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+        }
+        .nav-links > li > a:hover { color: var(--color-navy); background: var(--color-surface); }
+        .nav-links .has-dropdown > a::after {
+            content: ''; width: 10px; height: 10px;
+            border: solid var(--color-text-muted); border-width: 0 1.5px 1.5px 0;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform var(--dur-fast) var(--ease-out);
+        }
+        .nav-links .has-dropdown:hover > a::after { transform: rotate(225deg) translateY(-2px); }
+        .nav-dropdown {
+            display: none; position: absolute; top: 100%; left: 0;
+            background: var(--color-bg); border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg); border: 1px solid var(--color-line);
+            list-style: none; min-width: 220px; padding: 6px; padding-top: 10px; z-index: 600;
+        }
+        .nav-links .has-dropdown:hover .nav-dropdown { display: block; }
+        .nav-dropdown li a {
+            display: block; padding: 9px 14px; font-size: var(--text-sm);
+            color: var(--color-text-muted); border-radius: var(--radius-sm);
+            white-space: nowrap; transition: color var(--dur-fast), background var(--dur-fast);
+        }
+        .nav-dropdown li a:hover { color: var(--color-navy); background: var(--color-surface); }
+        .nav-cta {
+            flex-shrink: 0; background: var(--color-navy); color: var(--color-bg);
+            padding: 9px 20px; border-radius: var(--radius-pill);
+            font-size: var(--text-sm); font-weight: 500; white-space: nowrap;
+            position: relative; overflow: hidden; isolation: isolate;
+            transition: color var(--dur-fast);
+        }
+        .nav-cta::before {
+            content: ''; position: absolute; inset: 0; background: var(--color-sky);
+            transform: scaleX(0); transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22,1,0.36,1); z-index: -1; border-radius: inherit;
+        }
+        .nav-cta:hover::before { transform: scaleX(1); }
+        .nav-burger {
+            display: none; background: none; border: none;
+            flex-direction: column; gap: 5px; padding: 6px; margin-left: auto;
+        }
+        .nav-burger span {
+            display: block; width: 24px; height: 2px;
+            background: var(--color-navy); border-radius: 2px;
+            transition: all var(--dur-base) var(--ease-out);
+        }
+        .mobile-menu {
+            display: none; position: fixed; inset: 0; background: var(--color-bg);
+            z-index: 490; padding: 90px 24px 32px; overflow-y: auto;
+            flex-direction: column; gap: 4px;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            display: block; padding: 14px 16px; font-size: var(--text-xl);
+            color: var(--color-text); border-bottom: 1px solid var(--color-line);
+            font-family: var(--font-display);
+        }
+        .mobile-menu .mob-cta {
+            margin-top: 24px; background: var(--color-navy); color: var(--color-white);
+            text-align: center; padding: 16px; border-radius: var(--radius-pill);
+            font-size: var(--text-lg); border-bottom: none;
+        }
+        @media (max-width: 900px) {
+            .nav-links, .nav-cta { display: none; }
+            .nav-burger { display: flex; }
+        }
+
+        /* ============================================================
+           PAGE HERO — light variant (Programs section style)
+        ============================================================ */
+        .page-hero {
+            padding-top: calc(72px + var(--space-2xl));
+            padding-left: max(48px, 6vw);
+            padding-right: max(48px, 6vw);
+            background: var(--color-bg);
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: 'PARTNER';
+            position: absolute;
+            bottom: -40px; left: -20px;
+            font-family: var(--font-display);
+            font-size: clamp(120px, 18vw, 260px);
+            font-weight: 700; line-height: 1;
+            color: rgba(201,169,110,0.04);
+            letter-spacing: -10px;
+            pointer-events: none; user-select: none;
+        }
+        .hero-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--color-line);
+        }
+        .hero-text { position: relative; z-index: 1; }
+        .hero-eyebrow {
+            display: inline-block; font-size: var(--text-xs); font-weight: 700;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: var(--color-sky); margin-bottom: var(--space-lg);
+        }
+        .hero-h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.6rem, 4.6vw, 5rem);
+            font-weight: 300; line-height: 1.05; letter-spacing: -2px;
+            color: var(--color-navy); margin-bottom: var(--space-lg);
+        }
+        .hero-h1 em { font-style: italic; color: var(--color-sky); display: block; }
+        .hero-divider {
+            width: 48px; height: 2px;
+            background: linear-gradient(90deg, var(--color-sky), transparent);
+            margin-bottom: var(--space-lg);
+        }
+        .hero-desc {
+            font-size: var(--text-lg); color: var(--color-text-muted);
+            line-height: 1.75; max-width: 460px; margin-bottom: var(--space-xl);
+        }
+        .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+        .hero-photo-wrap {
+            position: relative; z-index: 1; overflow: hidden;
+            border-radius: var(--radius-xl);
+        }
+        .hero-photo-wrap img {
+            width: 100%; height: 520px; object-fit: cover; object-position: center;
+            border-radius: var(--radius-xl); display: block;
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+        .hero-photo-wrap:hover img { transform: scale(1.02); }
+        .hero-photo-badge {
+            position: absolute; bottom: -20px; left: -24px;
+            background: var(--color-white); border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg); padding: var(--space-lg) var(--space-xl);
+            box-shadow: var(--shadow-lg); z-index: 3;
+        }
+        .hero-photo-badge-num {
+            font-family: var(--font-display); font-size: 2.5rem;
+            font-weight: 300; color: var(--color-sky); line-height: 1;
+        }
+        .hero-photo-badge-label {
+            font-size: var(--text-xs); font-weight: 600; letter-spacing: 1.5px;
+            text-transform: uppercase; color: var(--color-text-light); margin-top: 6px;
+        }
+
+        @media (max-width: 960px) {
+            .hero-main { grid-template-columns: 1fr; gap: var(--space-2xl); }
+            .hero-photo-wrap img { height: 380px; }
+            .hero-photo-badge { left: 16px; bottom: 16px; }
+        }
+        @media (max-width: 600px) {
+            .page-hero { padding-left: 24px; padding-right: 24px; }
+            .hero-photo-wrap { display: none; }
+        }
+
+        /* ============================================================
+           INFO STRIP
+        ============================================================ */
+        .info-strip {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-lg) max(48px, 6vw);
+            display: flex; align-items: center;
+            justify-content: space-between;
+            gap: var(--space-lg); flex-wrap: nowrap; overflow-x: auto;
+        }
+        .info-item { display: flex; align-items: center; gap: 14px; }
+        .info-icon {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--color-sky-light); display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0;
+            color: var(--color-sky);
+        }
+        .info-label {
+            font-size: var(--text-xs); font-weight: 600; letter-spacing: 1.5px;
+            text-transform: uppercase; color: var(--color-text-light); margin-bottom: 3px;
+        }
+        .info-value { font-size: var(--text-sm); color: var(--color-navy); }
+        .info-divider { width: 1px; height: 40px; background: var(--color-line); flex-shrink: 0; }
+        @media (max-width: 900px) {
+            .info-strip { flex-direction: column; align-items: flex-start; padding: var(--space-xl) 24px; }
+            .info-divider { display: none; }
+        }
+
+        /* ============================================================
+           PARTNERSHIP TYPES — BENTO GRID
+        ============================================================ */
+        .types-section {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-white);
+        }
+        .types-header { margin-bottom: var(--space-2xl); }
+        .types-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400; color: var(--color-navy);
+            line-height: 1.1; letter-spacing: -1px;
+        }
+        .types-header h2 em { font-style: italic; color: var(--color-sky); }
+        .types-header p {
+            margin-top: var(--space-md); font-size: var(--text-lg);
+            color: var(--color-text-muted); max-width: 600px; line-height: 1.75;
+        }
+
+        .types-bento {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 10px;
+        }
+
+        .type-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+        }
+        .type-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201,169,110,.4);
+            transform: translateY(-2px);
+        }
+        .type-card-icon {
+            width: 48px; height: 48px; border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: var(--space-lg); flex-shrink: 0;
+        }
+        .type-card-icon.gold { background: var(--color-sky-light); color: var(--color-sky); }
+        .type-card-icon.sage { background: rgba(178,213,209,.25); color: #4A9E98; }
+        .type-card-icon.warm { background: rgba(232,208,204,.35); color: #B87C74; }
+        .type-card-icon.olive { background: rgba(235,241,171,.4); color: #7A8A20; }
+
+        .type-card h3 {
+            font-family: var(--font-display);
+            font-size: var(--text-xl); font-weight: 400;
+            color: var(--color-navy); margin-bottom: var(--space-sm); line-height: 1.2;
+        }
+        .type-card p {
+            font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7;
+        }
+
+        /* Wide card: col 1–2, row 1 */
+        .type-card--wide {
+            grid-column: 1 / 3; grid-row: 1;
+            display: grid; grid-template-columns: auto 1fr;
+            gap: var(--space-xl); align-items: start;
+            background: var(--color-surface);
+            border-color: rgba(201,169,110,.3);
+        }
+        .type-card--wide .type-card-icon { margin-bottom: 0; }
+        .type-card--wide h3 { font-size: var(--text-2xl); }
+
+        /* Tall navy card: col 3, rows 1–2 */
+        .type-card--tall {
+            grid-column: 3; grid-row: 1 / 3;
+            background: var(--color-navy); border-color: transparent;
+            color: var(--color-white); padding: 0; overflow: hidden;
+        }
+        .type-card--tall:hover { border-color: transparent; }
+        .type-card--tall .tall-img {
+            width: 100%; object-fit: cover;
+            height: 260px; display: block;
+        }
+        .type-card--tall .tall-body {
+            padding: var(--space-xl);
+            display: flex; flex-direction: column; gap: var(--space-md);
+            flex: 1;
+        }
+        .type-card--tall .tall-label {
+            font-size: var(--text-xs); font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase; color: rgba(201,169,110,.8);
+        }
+        .type-card--tall h3 { color: var(--color-white); font-size: var(--text-xl); }
+        .type-card--tall p { color: rgba(255,255,255,.7); font-size: var(--text-sm); line-height: 1.7; }
+
+        /* Bottom row: 3 equal cards */
+        .type-card--b1 { grid-column: 1; grid-row: 2; }
+        .type-card--b2 { grid-column: 2; grid-row: 2; }
+
+        @media (max-width: 960px) {
+            .types-bento {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto auto;
+            }
+            .type-card--wide { grid-column: 1 / 3; grid-row: 1; }
+            .type-card--tall { grid-column: 1 / 3; grid-row: 2; }
+            .type-card--b1 { grid-column: 1; grid-row: 3; }
+            .type-card--b2 { grid-column: 2; grid-row: 3; }
+        }
+        @media (max-width: 600px) {
+            .types-bento { grid-template-columns: 1fr; }
+            .type-card--wide { grid-column: 1; grid-row: auto; display: block; }
+            .type-card--tall { grid-column: 1; grid-row: auto; }
+            .type-card--b1, .type-card--b2 { grid-column: 1; grid-row: auto; }
+            .types-section { padding-left: 24px; padding-right: 24px; }
+        }
+
+        /* ============================================================
+           ALUMNI SECTION — two-column
+        ============================================================ */
+        .alumni-section {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+        .alumni-inner {
+            max-width: 1280px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw); align-items: start;
+        }
+        .alumni-text .section-label { display: block; }
+        .alumni-text h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400; color: var(--color-navy);
+            line-height: 1.1; letter-spacing: -1px;
+            margin-bottom: var(--space-lg);
+        }
+        .alumni-text h2 em { font-style: italic; color: var(--color-sky); }
+        .alumni-text p {
+            font-size: var(--text-lg); color: var(--color-text-muted);
+            line-height: 1.75; margin-bottom: var(--space-lg);
+        }
+
+        .alumni-benefits {
+            display: flex; flex-direction: column; gap: 12px;
+            margin-bottom: var(--space-xl);
+        }
+        .alumni-benefit {
+            display: flex; align-items: flex-start; gap: 14px;
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base);
+        }
+        .alumni-benefit:hover {
+            box-shadow: var(--shadow-sm);
+            border-color: rgba(201,169,110,.4);
+        }
+        .alumni-benefit-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--color-sky); flex-shrink: 0; margin-top: 6px;
+        }
+        .alumni-benefit p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.65; margin: 0; }
+        .alumni-benefit strong { color: var(--color-navy); display: block; margin-bottom: 2px; }
+
+        .alumni-visual {
+            position: relative;
+        }
+        .alumni-img-wrap {
+            border-radius: var(--radius-xl); overflow: hidden;
+        }
+        .alumni-img-wrap img {
+            width: 100%; height: 480px; object-fit: cover;
+            border-radius: var(--radius-xl);
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+        .alumni-img-wrap:hover img { transform: scale(1.02); }
+        .alumni-quote-card {
+            position: absolute; bottom: -24px; right: -24px;
+            background: var(--color-navy); border-radius: var(--radius-lg);
+            padding: var(--space-xl); max-width: 280px;
+            box-shadow: var(--shadow-lg); z-index: 2;
+        }
+        .alumni-quote-card blockquote {
+            font-family: var(--font-display); font-style: italic;
+            font-size: var(--text-lg); color: var(--color-white);
+            line-height: 1.5; margin-bottom: var(--space-md);
+        }
+        .alumni-quote-card cite {
+            font-size: var(--text-xs); font-weight: 600; letter-spacing: 1.5px;
+            text-transform: uppercase; color: var(--color-sky); font-style: normal;
+        }
+
+        @media (max-width: 960px) {
+            .alumni-inner { grid-template-columns: 1fr; }
+            .alumni-quote-card { position: static; margin-top: var(--space-lg); max-width: 100%; }
+        }
+        @media (max-width: 600px) {
+            .alumni-section { padding-left: 24px; padding-right: 24px; }
+            .alumni-img-wrap img { height: 300px; }
+        }
+
+        /* ============================================================
+           WAYS TO ENGAGE — 3-col cards
+        ============================================================ */
+        .engage-section {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-surface);
+        }
+        .engage-header { text-align: center; max-width: 700px; margin: 0 auto var(--space-2xl); }
+        .engage-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400; color: var(--color-navy);
+            line-height: 1.1; letter-spacing: -1px; margin-bottom: var(--space-md);
+        }
+        .engage-header h2 em { font-style: italic; color: var(--color-sky); }
+        .engage-header p { font-size: var(--text-lg); color: var(--color-text-muted); line-height: 1.75; }
+
+        .engage-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 1280px; margin: 0 auto;
+        }
+        .engage-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            display: flex; flex-direction: column; gap: var(--space-md);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+        }
+        .engage-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201,169,110,.4);
+            transform: translateY(-2px);
+        }
+        .engage-card-num {
+            font-family: var(--font-display); font-size: 3rem;
+            font-weight: 300; color: rgba(201,169,110,.3); line-height: 1;
+        }
+        .engage-card h3 {
+            font-family: var(--font-display); font-size: var(--text-xl);
+            font-weight: 400; color: var(--color-navy); line-height: 1.2;
+        }
+        .engage-card p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; flex: 1; }
+        .engage-card a {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: var(--text-sm); font-weight: 500; color: var(--color-sky);
+            margin-top: auto; transition: gap var(--dur-fast);
+        }
+        .engage-card a:hover { gap: 10px; }
+
+        @media (max-width: 900px) {
+            .engage-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .engage-grid { grid-template-columns: 1fr; }
+            .engage-section { padding-left: 24px; padding-right: 24px; }
+        }
+
+        /* ============================================================
+           CTA BANNER
+        ============================================================ */
+        .cta-banner {
+            background: var(--color-navy);
+            padding: var(--space-section) max(48px, 6vw);
+            position: relative; overflow: hidden;
+        }
+        .cta-banner::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(201,169,110,.12), transparent 65%);
+            pointer-events: none;
+        }
+        .cta-banner-inner {
+            max-width: 1280px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr auto;
+            gap: var(--space-2xl); align-items: center; position: relative; z-index: 1;
+        }
+        .cta-banner-eyebrow {
+            font-size: var(--text-xs); font-weight: 700; letter-spacing: 2.5px;
+            text-transform: uppercase; color: rgba(201,169,110,.8); margin-bottom: var(--space-md);
+        }
+        .cta-banner h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400; color: var(--color-white);
+            line-height: 1.1; letter-spacing: -1px; margin-bottom: var(--space-md);
+        }
+        .cta-banner h2 em { font-style: italic; color: var(--color-sky); }
+        .cta-banner p { font-size: var(--text-lg); color: rgba(255,255,255,.7); line-height: 1.7; max-width: 520px; }
+        .cta-banner-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+
+        @media (max-width: 800px) {
+            .cta-banner-inner { grid-template-columns: 1fr; }
+            .cta-banner-actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+        }
+        @media (max-width: 600px) {
+            .cta-banner { padding-left: 24px; padding-right: 24px; }
+        }
+
+        /* ============================================================
+           FAQ
+        ============================================================ */
+        .section-faq {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+        .faq-layout {
+            max-width: 1280px; margin: 0 auto;
+            display: grid; grid-template-columns: 360px 1fr;
+            gap: max(64px, 6vw); align-items: start;
+        }
+        .faq-sticky { position: sticky; top: 96px; }
+        .faq-sticky h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            font-weight: 400; color: var(--color-navy); line-height: 1.1;
+            letter-spacing: -0.5px; margin-bottom: var(--space-md);
+        }
+        .faq-sticky h2 em { font-style: italic; color: var(--color-sky); }
+        .faq-intro { font-size: var(--text-base); color: var(--color-text-muted); line-height: 1.75; }
+        .faq-list { display: flex; flex-direction: column; gap: 0; }
+        .faq-item { border-bottom: 1px solid var(--color-line); }
+        .faq-question {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: var(--space-lg) 0; cursor: pointer;
+            font-size: var(--text-base); font-weight: 500; color: var(--color-navy);
+            gap: var(--space-md); transition: color var(--dur-fast);
+        }
+        .faq-question:hover { color: var(--color-sky); }
+        .faq-question::after {
+            content: ''; flex-shrink: 0; width: 20px; height: 20px;
+            border-radius: 50%; background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23666660' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: center;
+            transition: transform var(--dur-fast);
+        }
+        .faq-item.open .faq-question::after { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s var(--ease-out), padding 0.3s;
+            font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.8;
+        }
+        .faq-item.open .faq-answer { max-height: 400px; padding-bottom: var(--space-lg); }
+        @media (max-width: 900px) {
+            .faq-layout { grid-template-columns: 1fr; }
+            .faq-sticky { position: static; }
+        }
+        @media (max-width: 600px) {
+            .section-faq { padding-left: 24px; padding-right: 24px; }
+        }
+
+        /* ============================================================
+        FOOTER
+        ============================================================ */
+        .footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            padding: var(--space-2xl) max(40px, 5vw);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-brand img {
+            height: 48px;
+            width: auto;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            max-width: 260px;
+        }
+
+        .footer-col-title {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-contact p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .footer-contact a {
+            color: var(--color-sky);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 8px;
+            margin-top: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            transition: background var(--dur-fast), color var(--dur-fast);
+        }
+
+        .footer-social a:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .footer-partners {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) max(40px, 5vw);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            flex-wrap: wrap;
+        }
+
+        .footer-partners img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(20%);
+            transition: opacity var(--dur-fast);
+        }
+
+        .footer-partners img:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+           PARTNERSHIP TYPES — DETAILED (5 types from original)
+        ============================================================ */
+        .ptypes-section {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+        .ptypes-header {
+            max-width: 1280px; margin: 0 auto var(--space-2xl);
+            text-align: center;
+        }
+        .ptypes-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400; color: var(--color-navy);
+            line-height: 1.1; letter-spacing: -1px; margin-bottom: var(--space-md);
+        }
+        .ptypes-header h2 em { font-style: italic; color: var(--color-sky); }
+        .ptypes-header p { font-size: var(--text-lg); color: var(--color-text-muted); line-height: 1.75; max-width: 560px; margin: 0 auto; }
+
+        /* Top row: 2 cards */
+        .ptypes-top {
+            max-width: 1280px; margin: 0 auto var(--space-md);
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+        }
+        /* Bottom row: 3 cards */
+        .ptypes-bottom {
+            max-width: 1280px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+        }
+        .ptype-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            display: flex; flex-direction: column; gap: var(--space-md);
+            transition: box-shadow var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+        }
+        .ptype-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201,169,110,.4);
+            transform: translateY(-2px);
+        }
+        .ptype-card-icon {
+            width: 44px; height: 44px; border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .ptype-card-icon.gold { background: rgba(201,169,110,.12); color: var(--color-sky); }
+        .ptype-card-icon.sage { background: rgba(178,213,209,.2); color: #4A8F8A; }
+        .ptype-card-icon.warm { background: rgba(232,208,204,.3); color: #B06060; }
+        .ptype-card-icon.olive { background: rgba(235,241,171,.3); color: #7A8A20; }
+        .ptype-card-icon.navy { background: rgba(30,58,71,.08); color: var(--color-navy); }
+        .ptype-card h3 {
+            font-family: var(--font-display);
+            font-size: var(--text-xl); font-weight: 400; color: var(--color-navy); line-height: 1.2;
+        }
+        .ptype-card p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; flex: 1; }
+        .ptype-card ul {
+            list-style: none; padding: 0; margin: 0;
+            display: flex; flex-direction: column; gap: 6px;
+        }
+        .ptype-card ul li {
+            font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.5;
+            padding-left: 16px; position: relative;
+        }
+        .ptype-card ul li::before {
+            content: ''; position: absolute; left: 0; top: 8px;
+            width: 5px; height: 5px; border-radius: 50%;
+            background: var(--color-sky);
+        }
+        .ptype-card .ptype-btn {
+            margin-top: auto; align-self: flex-start;
+        }
+        @media (max-width: 900px) {
+            .ptypes-top { grid-template-columns: 1fr; }
+            .ptypes-bottom { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .ptypes-bottom { grid-template-columns: 1fr; }
+            .ptypes-section { padding-left: 24px; padding-right: 24px; }
+        }
+
+        /* ============================================================
+           WHY PARTNER
+        ============================================================ */
+        .why-section {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-surface);
+        }
+        .why-inner {
+            max-width: 1280px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: max(64px, 6vw);
+            align-items: start;
+        }
+        .why-left h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400; color: var(--color-navy);
+            line-height: 1.1; letter-spacing: -1px; margin-bottom: var(--space-lg);
+        }
+        .why-left h2 em { font-style: italic; color: var(--color-sky); }
+        .why-left p { font-size: var(--text-lg); color: var(--color-text-muted); line-height: 1.75; }
+        .why-list {
+            list-style: none; padding: 0; margin: var(--space-xl) 0 0;
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .why-list li {
+            display: flex; align-items: flex-start; gap: 12px;
+            font-size: var(--text-base); color: var(--color-text); line-height: 1.6;
+        }
+        .why-list li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 20px; height: 20px; margin-top: 2px;
+            border-radius: 50%;
+            background: rgba(201,169,110,.15);
+            border: 1.5px solid var(--color-sky);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23C9A96E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: center;
+        }
+        .why-callout {
+            background: var(--color-white);
+            border: 1px solid rgba(201,169,110,.35);
+            border-left: 3px solid var(--color-sky);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg) var(--space-xl);
+        }
+        .why-callout-title {
+            font-size: var(--text-sm); font-weight: 600; color: var(--color-navy);
+            margin-bottom: 8px;
+        }
+        .why-callout p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.75; }
+
+        @media (max-width: 900px) {
+            .why-inner { grid-template-columns: 1fr; }
+            .why-section { padding-left: 24px; padding-right: 24px; }
+        }
+
+        /* ============================================================
+           PARTNERSHIP PROCESS — 7 steps
+        ============================================================ */
+        .process-section {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+        .process-header {
+            max-width: 1280px; margin: 0 auto var(--space-2xl);
+            text-align: center;
+        }
+        .process-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400; color: var(--color-navy);
+            line-height: 1.1; letter-spacing: -1px; margin-bottom: var(--space-md);
+        }
+        .process-header h2 em { font-style: italic; color: var(--color-sky); }
+
+        .process-steps {
+            max-width: 1280px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+        }
+        .process-steps-row2 {
+            max-width: 1280px; margin: 10px auto 0;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+        }
+        .process-step {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            position: relative;
+            transition: box-shadow var(--dur-base), border-color var(--dur-base);
+        }
+        .process-step:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(201,169,110,.4);
+        }
+        .process-step-num {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: var(--color-navy); color: var(--color-white);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-display); font-size: var(--text-sm); font-weight: 400;
+            margin-bottom: var(--space-md);
+        }
+        .process-step h4 {
+            font-family: var(--font-display);
+            font-size: var(--text-lg); font-weight: 400; color: var(--color-navy);
+            margin-bottom: 8px; line-height: 1.2;
+        }
+        .process-step p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; }
+
+        @media (max-width: 900px) {
+            .process-steps { grid-template-columns: 1fr 1fr; }
+            .process-steps-row2 { grid-template-columns: 1fr 1fr; margin-top: 0; }
+        }
+        @media (max-width: 600px) {
+            .process-steps, .process-steps-row2 { grid-template-columns: 1fr; }
+            .process-section { padding-left: 24px; padding-right: 24px; }
+        }
+
+        /* ============================================================
+           PARTNERS WALL
+        ============================================================ */
+        .partners-wall-section {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-surface);
+        }
+        .partners-wall-inner {
+            max-width: 1280px; margin: 0 auto;
+            display: grid; grid-template-columns: auto 1fr; gap: max(64px, 6vw);
+            align-items: center;
+        }
+        .partners-wall-logo-grid {
+            border-radius: var(--radius-xl);
+            max-width: 420px;
+        }
+        .partners-wall-logo-grid img {
+            width: 100%; border-radius: var(--radius-md);
+            object-fit: contain;
+        }
+        .partners-wall-text { display: flex; flex-direction: column; gap: var(--space-lg); }
+        .partners-wall-text h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            font-weight: 400; color: var(--color-navy);
+            line-height: 1.1; letter-spacing: -1px;
+        }
+        .partners-wall-text h2 em { font-style: italic; color: var(--color-sky); }
+        .partners-wall-text blockquote {
+            font-style: italic; font-size: var(--text-lg);
+            color: var(--color-text-muted); line-height: 1.75;
+            border-left: 3px solid var(--color-sky);
+            padding-left: var(--space-lg);
+        }
+        .partners-wall-text p { font-size: var(--text-base); color: var(--color-text-muted); line-height: 1.75; }
+
+        @media (max-width: 900px) {
+            .partners-wall-inner { grid-template-columns: 1fr; }
+            .partners-wall-logo-grid { max-width: 100%; }
+            .partners-wall-section { padding-left: 24px; padding-right: 24px; }
+        }
+
+        /* ============================================================
+           IMPACT CTA
+        ============================================================ */
+        .impact-cta-section {
+            padding: var(--space-2xl) max(48px, 6vw);
+            background: var(--color-navy);
+            text-align: center;
+        }
+        .impact-cta-inner {
+            max-width: 700px; margin: 0 auto;
+            display: flex; flex-direction: column; align-items: center; gap: var(--space-lg);
+        }
+        .impact-cta-section h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 400; color: var(--color-white);
+            line-height: 1.2; letter-spacing: -0.5px;
+        }
+        .impact-cta-section h2 em { font-style: italic; color: var(--color-sky); }
+        .impact-cta-section p { font-size: var(--text-lg); color: rgba(255,255,255,.7); line-height: 1.7; }
+
+        @media (max-width: 600px) {
+            .impact-cta-section { padding-left: 24px; padding-right: 24px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+    NAV
+    ============================================================ -->
+    <header class="nav" id="mainNav">
+        <div class="nav-logo">
+            <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="./index.html">Home</a></li>
+
+            <li class="has-dropdown">
+                <a href="#">About</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./our-team.html">Our Team</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Education</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./education-and-training.html">Education and Training</a></li>
+                    <li><a href="./literacy-workshops.html">Literacy Workshops</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                    <li><a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a></li>
+                    <li><a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a></li>
+                    <li><a href="./service-learning.html">Service Learning</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Programs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./events.html">Event Calendar</a></li>
+                    <li><a href="./program-participant.html">Program Participant</a></li>
+                    <li><a href="./farmers-market.html">Farmers' Market</a></li>
+                    <li><a href="./food-distribution.html">Food Distribution</a></li>
+                    <li><a href="./youth-programs.html">Youth Program</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./court-order-community-service.html">Court Order Community Service</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Clubs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./mdba-portal.html">MDBA Portal</a></li>
+                    <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
+                    <li><a href="./join-our-community.html">Join our community</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Join Us</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./get-involved.html">Get Involved</a></li>
+                    <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="./sponsor.html">Become a Sponsor</a></li>
+                    <li><a href="./vendor.html">Vendor</a></li>
+                    <li><a href="./volunteer.html">Volunteer</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+        <a class="nav-cta" href="./support-us.html">Support Us</a>
+        
+        <button class="nav-burger" id="navBurger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="./index.html">Home</a>
+
+        <a href="./about.html">About Us</a>
+        <a href="./our-team.html">Our Team</a>
+        <a href="./contact.html">Contact Us</a>
+
+        <a href="./education-and-training.html">Education and Training</a>
+        <a href="./literacy-workshops.html">Literacy Workshops</a>
+        <a href="./kemetic-yoga.html">Kemetic Yoga</a>
+        <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
+        <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
+        <a href="./service-learning.html">Service Learning</a>
+
+        <a href="./events.html">Event Calendar</a>
+        <a href="./program-participant.html">Program Participant</a>
+        <a href="./farmers-market.html">Farmers' Market</a>
+        <a href="./food-distribution.html">Food Distribution</a>
+        <a href="./youth-programs.html">Youth Program</a>
+        <a href="./environmental-programs.html">Environmental Programs</a>
+        <a href="./court-order-community-service.html">Court Order Community Service</a>
+
+        <a href="./mdba-portal.html">MDBA Portal</a>
+        <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+        <a href="./join-our-community.html">Join our community</a>
+
+        <a href="./get-involved.html">Get Involved</a>
+        <a href="./partner-with-us.html">Partner with Us</a>
+        <a href="./sponsor.html">Becone a sponsor</a>
+        <a href="./vendor.html">Vendor</a>
+        <a href="./volunteer.html">Volunteer</a>
+
+        <a class="mob-cta" href="./support-us.html"> Support Us </a>
+    </div>
+
+    <!-- ============================================================
+    HERO
+    ============================================================ -->
+    <section class="page-hero">
+        <div class="hero-main">
+            <div class="hero-text">
+                <span class="hero-eyebrow reveal">Join Us</span>
+                <h1 class="hero-h1 reveal reveal--delay-1">
+                    Partner with
+                    <em>ASCENDtials</em>
+                </h1>
+                <div class="hero-divider reveal reveal--delay-2"></div>
+                <p class="hero-desc reveal reveal--delay-2">
+                    Together we build stronger communities. Whether you're a business, institution, civic organization,
+                    or returning community member — there's a place for you in our network.
+                </p>
+                <div class="hero-cta-row reveal reveal--delay-3">
+                    <a class="btn-primary" href="mailto:info@ascendtials.org">
+                        Start a Conversation
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                    <a class="btn-outline" href="./get-involved.html">Get Involved</a>
+                </div>
+            </div>
+            <div class="hero-photo-wrap reveal reveal--delay-2">
+                <img src="./assets/img/partner-with-us/partner-with-us.jpg"
+                    alt="ASCENDtials community partners collaborating">
+                <div class="hero-photo-badge">
+                    <div class="hero-photo-badge-num">10+</div>
+                    <div class="hero-photo-badge-label">Active Partnerships</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    INFO STRIP
+    ============================================================ -->
+    <div class="info-strip reveal">
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Partnership Types</div>
+                <div class="info-value">Corporate · Civic · Community · Alumni</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Location</div>
+                <div class="info-value">San Diego, CA · Southern California</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Established</div>
+                <div class="info-value">Since 2014 · 501(c)(3) Nonprofit</div>
+            </div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.1a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Contact</div>
+                <div class="info-value"><a href="mailto:info@ascendtials.org" style="color:var(--color-sky)">info@ascendtials.org</a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    PARTNERSHIP TYPES — BENTO
+    ============================================================ -->
+    <section class="types-section">
+        <div class="types-header reveal">
+            <span class="section-label">How We Work Together</span>
+            <h2>Partnership <em>opportunities</em></h2>
+            <p>We collaborate with community organizations, companies, civic entities, and social justice groups through an approach built on co-creation and shared purpose.</p>
+        </div>
+
+        <div class="types-bento">
+            <!-- Wide card: Corporate Sponsorship -->
+            <div class="type-card type-card--wide reveal">
+                <div class="type-card-icon gold">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                </div>
+                <div>
+                    <h3>Corporate Sponsorship</h3>
+                    <p>Support our farmers' markets, food distributions, youth programs, and education initiatives. In return, gain visibility with our growing community, co-branding opportunities, and a chance to demonstrate authentic community investment in San Diego's BIPOC neighborhoods.</p>
+                </div>
+            </div>
+
+            <!-- Tall navy card: Community photo -->
+            <div class="type-card type-card--tall reveal reveal--delay-1">
+                <img class="tall-img"
+                    src="https://ascendtials.org/wp-content/uploads/2025/05/qtq80-YFa8hJ-1024x773.jpeg"
+                    alt="ASCENDtials community event">
+                <div class="tall-body">
+                    <span class="tall-label">Our Community</span>
+                    <h3>Real impact, real people</h3>
+                    <p>Every partnership directly serves our neighbors — from food-insecure families in City Heights to youth seeking mentorship and environmental advocates protecting our shared land.</p>
+                </div>
+            </div>
+
+            <!-- B1: Civic & Institutional -->
+            <div class="type-card type-card--b1 reveal reveal--delay-1">
+                <div class="type-card-icon sage">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <h3>Civic & Institutional</h3>
+                <p>We partner with government agencies, schools, and public institutions — like our existing collaborations with the City of San Diego (Adopt-A-Highway) and I Love A Clean San Diego (Adopt-A-Beach).</p>
+            </div>
+
+            <!-- B2: Social Justice Organizations -->
+            <div class="type-card type-card--b2 reveal reveal--delay-2">
+                <div class="type-card-icon warm">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </div>
+                <h3>Social Justice Organizations</h3>
+                <p>We join forces with groups aligned with our mission — co-hosting events, sharing resources, and amplifying each other's work in education, environmental justice, and community wellness.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PARTNERSHIP TYPES — DETAILED (5 types from original)
+    ============================================================ -->
+    <section class="ptypes-section" id="partnership-types">
+        <div class="ptypes-header reveal">
+            <span class="section-label">Partnership Types</span>
+            <h2>Five ways to <em>partner with us</em></h2>
+            <p>From hosting events to co-creating curriculum — choose the partnership model that fits your organization's strengths and goals.</p>
+        </div>
+
+        <!-- Row 1: 2 wide cards -->
+        <div class="ptypes-top">
+            <!-- Program Partners -->
+            <div class="ptype-card reveal">
+                <div class="ptype-card-icon sage">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                </div>
+                <h3>Program Partners</h3>
+                <p>Schools, youth groups, community centers, environmental organizations, and wellness programs. Opportunities include:</p>
+                <ul>
+                    <li>Markets &amp; Distributions</li>
+                    <li>Cleanups &amp; Garden projects</li>
+                    <li>Night, day-time &amp; Youth camps</li>
+                    <li>Workshops &amp; Curriculum</li>
+                </ul>
+                <a class="btn-outline ptype-btn" href="mailto:info@ascendtials.org">
+                    Become a Partner
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+
+            <!-- Event Partners -->
+            <div class="ptype-card reveal reveal--delay-1">
+                <div class="ptype-card-icon gold">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+                <h3>Event Partners</h3>
+                <p>Organizations that co-host or support ASCENDtials events. Examples include:</p>
+                <ul>
+                    <li>Community cleanups</li>
+                    <li>Food distributions</li>
+                    <li>Cultural events</li>
+                    <li>Environmental activations</li>
+                </ul>
+                <a class="btn-outline ptype-btn" href="mailto:info@ascendtials.org">
+                    Host an Event with Us
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Row 2: 3 cards -->
+        <div class="ptypes-bottom">
+            <!-- Sponsorship Partners -->
+            <div class="ptype-card reveal">
+                <div class="ptype-card-icon warm">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                </div>
+                <h3>Sponsorship Partners</h3>
+                <p>Businesses, foundations, and individuals who support ASCENDtials financially. Opportunities include:</p>
+                <ul>
+                    <li>Program &amp; Event sponsorship</li>
+                    <li>Youth camp scholarships</li>
+                    <li>Market sponsorship</li>
+                </ul>
+                <a class="btn-outline ptype-btn" href="mailto:info@ascendtials.org">
+                    Explore Sponsorships
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+
+            <!-- Strategic Partners -->
+            <div class="ptype-card reveal reveal--delay-1">
+                <div class="ptype-card-icon olive">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <h3>Strategic Partners</h3>
+                <p>Organizations that co-design or co-deliver long-term initiatives. Examples include:</p>
+                <ul>
+                    <li>Curriculum development</li>
+                    <li>Environmental justice coalitions</li>
+                    <li>Youth leadership pipeline</li>
+                </ul>
+                <a class="btn-outline ptype-btn" href="mailto:info@ascendtials.org">
+                    Start a Partnership
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+
+            <!-- Board & Advisory Partners -->
+            <div class="ptype-card reveal reveal--delay-2">
+                <div class="ptype-card-icon navy">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3>Board &amp; Advisory Partners</h3>
+                <p>Individuals who provide governance, expertise, and leadership to help guide ASCENDtials' mission and long-term strategy.</p>
+                <a class="btn-outline ptype-btn" href="mailto:info@ascendtials.org">
+                    Join Our Board
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    WHY PARTNER WITH ASCENDTIALS
+    ============================================================ -->
+    <section class="why-section" id="why-partner">
+        <div class="why-inner">
+            <div class="why-left">
+                <span class="section-label reveal">Why Partner</span>
+                <h2 class="reveal reveal--delay-1">Why partner with<br><em>ASCENDtials?</em></h2>
+                <p class="reveal reveal--delay-2">We build relationships grounded in shared purpose, transparent accountability, and real community impact in Southern California.</p>
+                <ul class="why-list reveal reveal--delay-3">
+                    <li>Community-centered programming</li>
+                    <li>Environmental and cultural education</li>
+                    <li>Youth empowerment</li>
+                    <li>Strong operational systems</li>
+                    <li>Grant-ready documentation</li>
+                    <li>Clear agreements and expectations</li>
+                    <li>Impact tracking and reporting</li>
+                </ul>
+            </div>
+            <div class="reveal reveal--delay-1">
+                <div class="why-callout">
+                    <div class="why-callout-title">Partnership Agreement Requirement</div>
+                    <p>All ASCENDtials partnerships require a signed Partnership Agreement. This ensures clarity, alignment, and accountability for both parties and supports accurate reporting for grants and impact measurement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    OUR PARTNERSHIP PROCESS — 7 steps
+    ============================================================ -->
+    <section class="process-section" id="process">
+        <div class="process-header reveal">
+            <span class="section-label">How It Works</span>
+            <h2>Our partnership <em>process</em></h2>
+        </div>
+
+        <div class="process-steps">
+            <div class="process-step reveal">
+                <div class="process-step-num">1</div>
+                <h4>Submit Form</h4>
+                <p>Partners complete a form for describing goals and areas of interest.</p>
+            </div>
+            <div class="process-step reveal reveal--delay-1">
+                <div class="process-step-num">2</div>
+                <h4>Introductory Call</h4>
+                <p>We explore goals, values, and potential partnering pathways together.</p>
+            </div>
+            <div class="process-step reveal reveal--delay-2">
+                <div class="process-step-num">3</div>
+                <h4>Internal Review</h4>
+                <p>We assess capacity, alignment, and program fit internally.</p>
+            </div>
+            <div class="process-step reveal reveal--delay-3">
+                <div class="process-step-num">4</div>
+                <h4>Agreement Signed</h4>
+                <p>Partners receive a formal agreement outlining from both parties.</p>
+            </div>
+        </div>
+        <div class="process-steps-row2">
+            <div class="process-step reveal">
+                <div class="process-step-num">5</div>
+                <h4>Onboarding</h4>
+                <p>Partners are introduced to the program team and workflow.</p>
+            </div>
+            <div class="process-step reveal reveal--delay-1">
+                <div class="process-step-num">6</div>
+                <h4>Tracking &amp; Reporting</h4>
+                <p>We track participation and impact for all partners.</p>
+            </div>
+            <div class="process-step reveal reveal--delay-2">
+                <div class="process-step-num">7</div>
+                <h4>Renewal</h4>
+                <p>We revisit the partnership annually or after activities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    START YOUR PARTNERSHIP CTA
+    ============================================================ -->
+    <section class="cta-banner" id="start-partnership">
+        <div class="cta-banner-inner">
+            <div>
+                <div class="cta-banner-eyebrow reveal">Start Your Partnership</div>
+                <h2 class="reveal reveal--delay-1">Start your partnership<br><em>with ASCENDtials</em></h2>
+                <p class="reveal reveal--delay-2">
+                    If your organization is ready to collaborate, share resources, or build a joint initiative with us, let's connect.
+                </p>
+            </div>
+            <div class="cta-banner-actions reveal reveal--delay-2">
+                <a class="btn-ghost" href="mailto:info@ascendtials.org">Submit Partnership Interest Form</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PARTNERS WALL — Thank you to our partners
+    ============================================================ -->
+    <section class="partners-wall-section" id="our-partners">
+        <div class="partners-wall-inner">
+            <div class="partners-wall-logo-grid reveal">
+                <img src="./assets/img/partner-with-us/ASCENDtials-Sponsors.png"
+                    alt="ASCENDtials partner organizations logos">
+            </div>
+            <div class="partners-wall-text">
+                <span class="section-label reveal">Our Partners</span>
+                <h2 class="reveal reveal--delay-1">Thank you to our partners<br>for your <em>continued support</em></h2>
+                <blockquote class="reveal reveal--delay-2">"New and continued relationships with local leaders and community members allow us to create the change we seek."</blockquote>
+                <p class="reveal reveal--delay-2">We continue to improve the quality of education, food, environment, and value of services and offerings in our neighborhoods. Feel empowered and advocate for your community today!</p>
+                <p class="reveal reveal--delay-3">ASCENDtials wants to thank all our partners and their contributions to improving the lives of everyone within our communities. Nothing is possible without your support. To partner with us, contact us today!</p>
+                <div class="reveal reveal--delay-4">
+                    <a class="btn-primary" href="./contact.html">
+                        Contact Us
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    IMPACT PAGE CTA
+    ============================================================ -->
+    <section class="impact-cta-section">
+        <div class="impact-cta-inner">
+            <h2 class="reveal">Check out our <em>Impact page</em> and get a closer look at our sponsors</h2>
+            <div class="reveal reveal--delay-1">
+                <a class="btn-ghost" href="https://ascendtials.org/impact/" target="_blank">
+                    Impact Page
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    ALUMNI SECTION
+    ============================================================ -->
+    <section class="alumni-section">
+        <div class="alumni-inner">
+            <div class="alumni-text">
+                <span class="section-label reveal">Alumni Program</span>
+                <h2 class="reveal reveal--delay-1">Once ASCENDtials,<br><em>always family</em></h2>
+                <p class="reveal reveal--delay-2">
+                    ASCENDtials considers all former employees and volunteers to be Alumni of the organization.
+                    We hope to continue building these relationships with community leaders, supporting them
+                    with access to our resources, and connecting them with our members and financial supporters.
+                </p>
+                <p class="reveal reveal--delay-2">
+                    Join our organization as a contributor, member, or employee and stay connected to the movement you helped build.
+                </p>
+
+                <div class="alumni-benefits reveal reveal--delay-3">
+                    <div class="alumni-benefit">
+                        <div class="alumni-benefit-dot"></div>
+                        <div>
+                            <p><strong>Priority Event Access</strong>Benefits for future events, including early registration and exclusive invitations to community gatherings.</p>
+                        </div>
+                    </div>
+                    <div class="alumni-benefit">
+                        <div class="alumni-benefit-dot"></div>
+                        <div>
+                            <p><strong>Newsletter & Updates</strong>Stay informed on programs, milestones, and opportunities to re-engage with the community.</p>
+                        </div>
+                    </div>
+                    <div class="alumni-benefit">
+                        <div class="alumni-benefit-dot"></div>
+                        <div>
+                            <p><strong>Gifts & Gear Discounts</strong>Receive ASCENDtials gifts and enjoy discounts on gear and products as a thank-you for your service.</p>
+                        </div>
+                    </div>
+                    <div class="alumni-benefit">
+                        <div class="alumni-benefit-dot"></div>
+                        <div>
+                            <p><strong>Resource Network Access</strong>Stay connected to our growing network of members, supporters, and community leaders.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal reveal--delay-4">
+                    <a class="btn-primary" href="mailto:info@ascendtials.org">
+                        Reconnect with Us
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="alumni-visual reveal reveal--delay-1">
+                <div class="alumni-img-wrap">
+                    <img src="https://ascendtials.org/wp-content/uploads/2024/09/Beans-1024x728.jpg"
+                        alt="ASCENDtials volunteers at community event">
+                </div>
+                <div class="alumni-quote-card">
+                    <blockquote>"Thank you for your support!"</blockquote>
+                    <cite>— The ASCENDtials Team</cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    WAYS TO ENGAGE
+    ============================================================ -->
+    <section class="engage-section">
+        <div class="engage-header reveal">
+            <span class="section-label">Get Started</span>
+            <h2>Three ways to <em>engage</em></h2>
+            <p>Whether you bring funding, time, or expertise — there's a meaningful role waiting for you within our community.</p>
+        </div>
+
+        <div class="engage-grid">
+            <div class="engage-card reveal">
+                <div class="engage-card-num">01</div>
+                <h3>Become a Contributor</h3>
+                <p>Support our programs financially — from sponsoring a food distribution event to funding youth education initiatives. Every contribution is tax-deductible and directly serves our community.</p>
+                <a href="./support-us.html">
+                    Make a Contribution
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+            <div class="engage-card reveal reveal--delay-1">
+                <div class="engage-card-num">02</div>
+                <h3>Become a Member</h3>
+                <p>Join as an organizational or individual member. Access events, our newsletter, resources, and build meaningful relationships with other community stakeholders shaping San Diego's future.</p>
+                <a href="https://ascendtials.org/ascendtials-membership-2024/" target="_blank">
+                    Explore Membership
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+            <div class="engage-card reveal reveal--delay-2">
+                <div class="engage-card-num">03</div>
+                <h3>Join Our Team</h3>
+                <p>Bring your professional skills to a mission-driven environment. We have opportunities for employees, interns, fellows, and skilled volunteers across programs, communications, and outreach.</p>
+                <a href="./volunteer.html">
+                    See Opportunities
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    CTA BANNER
+    ============================================================ -->
+    <section class="cta-banner">
+        <div class="cta-banner-inner">
+            <div>
+                <div class="cta-banner-eyebrow reveal">Ready to Partner?</div>
+                <h2 class="reveal reveal--delay-1">Let's build something<br><em>meaningful together</em></h2>
+                <p class="reveal reveal--delay-2">
+                    Reach out to discuss how your organization can align with ASCENDtials' mission of critical
+                    consciousness, community wellness, and environmental justice in Southern California.
+                </p>
+            </div>
+            <div class="cta-banner-actions reveal reveal--delay-2">
+                
+                <a class="btn-ghost" href="./contact.html">Contact Page</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FAQ
+    ============================================================ -->
+    <section class="section-faq" id="faq">
+        <div class="faq-layout">
+            <div class="faq-sticky">
+                <span class="section-label reveal">Questions?</span>
+                <h2 class="reveal reveal--delay-1">Partnership <em>FAQs</em></h2>
+                <p class="faq-intro reveal reveal--delay-2">Everything you need to know about working with ASCENDtials. Can't find your answer? Write to us at <a href="mailto:info@ascendtials.org" style="color:var(--color-sky);">info@ascendtials.org</a>.</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">What kinds of organizations do you partner with?</div>
+                    <div class="faq-answer">We partner with a wide range of organizations — community nonprofits, corporations, civic entities (like city agencies), schools, social justice groups, and individual professionals. If your values align with critical consciousness, community empowerment, and environmental care, we'd love to talk.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How does a corporate sponsorship work?</div>
+                    <div class="faq-answer">Corporate sponsors typically support specific programs or events — such as our farmers' markets, food distributions, or youth programs. In return, sponsors receive co-branding, recognition in our communications, and the opportunity to participate directly in community events. Reach out to discuss a package tailored to your goals.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Are donations to ASCENDtials tax-deductible?</div>
+                    <div class="faq-answer">Yes. ASCENDtials is a registered 501(c)(3) nonprofit organization (EIN 47-2451577), so all qualifying contributions are tax-deductible to the fullest extent allowed by law. We are a Candid Platinum-rated organization.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What is the Alumni Program?</div>
+                    <div class="faq-answer">ASCENDtials considers all former employees and volunteers to be lifelong Alumni. Alumni receive priority event access, our newsletter, gifts, gear discounts, and continued access to our resource network. We believe in maintaining these relationships with community leaders long after their formal role has ended.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How do we get started?</div>
+                    <div class="faq-answer">Simply reach out via email at info@ascendtials.org or use our Contact page. We'll schedule a conversation to learn about your organization, discuss mutual goals, and explore the best partnership structure for your needs. We look forward to hearing from you.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+
+                <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
+                    BIPOC community.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube"
+                        target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-ascendtials/" aria-label="LinkedIn" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                    <a href="https://x.com/ascendtials" aria-label="X / Twitter" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <div class="footer-col-title">Quick Links</div>
+                <ul class="footer-links">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="education-and-training.html">Education & Training</a></li>
+                    <li><a href="./events">Events Calendar</a></li>
+                    <li><a href="https://ascendtials.org/get-involved/">Get Involved</a></li>
+                    <li><a href="https://ascendtials.org/ascendtials-membership-2024/">Membership</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Programs</div>
+                <ul class="footer-links">
+                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./legal-aid-program.html">Legal Aid</a></li>
+                    <li><a href="./fellowship-program.html">Internships & Fellowships</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Contact</div>
+                <div class="footer-contact">
+                    <p>505 W Broadway<br>San Diego, CA 92101</p>
+                    <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
+                </div>
+                <!-- <div class="footer-candid mt-md">
+                <img src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg" alt="Candid Platinum Seal">
+                <span>EIN: 47-2451577</span>
+            </div> -->
+            </div>
+        </div>
+
+        <!-- Partners row -->
+        <div class="footer-partners">
+            <img src="assets/img/country-of-san-diego.png" alt="County of San Diego">
+            <img src="assets/img/Live-well-with-San-diego.png" alt="Live Well San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/candid-seal-platinum-2023-150x150-2.jpg"
+                alt="Candid Platinum 2025">
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 ASCENDtials. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* ── NAV ── */
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
+        const burger = document.getElementById('navBurger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+        /* ── REVEAL ── */
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+        /* ── FAQ ── */
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.closest('.faq-item');
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+    </script>
+</body>
+</html>

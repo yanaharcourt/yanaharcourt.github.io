@@ -14,7 +14,7 @@
         /* ============================================================
            DESIGN TOKENS
         ============================================================ */
-         :root {
+        :root {
             /* Brand */
             --color-navy: #1E3A47;
             --color-navy-deep: #152E3A;
@@ -337,10 +337,11 @@
             }
         }
 
-        /* ============================================================
-           BUTTONS
-        ============================================================ */
-        .btn-primary {
+        /* ── BUTTONS — unified across all pages ── */
+        .btn-primary,
+        .btn-white,
+        .btn-ghost,
+        .btn-outline {
             position: relative;
             overflow: hidden;
             isolation: isolate;
@@ -348,16 +349,16 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 28px;
             border-radius: var(--radius-pill);
-            background: var(--color-navy);
-            color: var(--color-bg);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            transition: color var(--dur-fast);
+            font-size: var(--text-base);
+            cursor: pointer;
+            border: none;
         }
 
-        .btn-primary::before {
+        /* Sweep fill layer */
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-ghost::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -367,28 +368,6 @@
             transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
             z-index: -1;
             border-radius: inherit;
-        }
-
-        .btn-primary:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-outline {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            z-index: 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            background: transparent;
-            color: var(--color-navy);
-            border: 1.5px solid var(--color-navy);
-            transition: color var(--dur-fast);
         }
 
         .btn-outline::before {
@@ -403,74 +382,62 @@
             border-radius: inherit;
         }
 
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
         .btn-outline:hover::before {
             transform: scaleX(1);
         }
 
+        .btn-outline:hover {
+            border-color: var(--color-sky);
+        }
+
         .btn-white {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            z-index: 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
             background: var(--color-white);
             color: var(--color-navy);
-            font-size: var(--text-sm);
+            padding: 14px 28px;
             font-weight: 500;
-            transition: color var(--dur-fast);
-        }
-
-        .btn-white::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--color-sky);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
-        }
-
-        .btn-white:hover::before {
-            transform: scaleX(1);
+            transition: background var(--dur-fast);
         }
 
         .btn-white:hover {
+            background: var(--color-sky);
             color: var(--color-white);
         }
 
+        /* Ghost — for use on dark backgrounds */
         .btn-ghost {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            z-index: 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            background: transparent;
+            color: var(--color-white);
             padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            border: 1.5px solid rgba(255, 255, 255, 0.35);
-            color: rgba(255, 255, 255, 0.85);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            transition: color var(--dur-fast), border-color var(--dur-fast);
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
         }
 
         .btn-ghost::before {
-            content: '';
-            position: absolute;
-            inset: 0;
             background: rgba(255, 255, 255, 0.12);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
         }
 
         .btn-ghost:hover::before {
@@ -478,7 +445,14 @@
         }
 
         .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .btn-primary--full {
+            margin-top: var(--space-xl);
+            width: 100%;
+            justify-content: center;
         }
 
         /* ============================================================
@@ -536,6 +510,14 @@
         .section-title em {
             font-style: italic;
             color: var(--color-sky);
+        }
+
+        .section-title--mb-xl {
+            margin-bottom: var(--space-xl);
+        }
+
+        .section-title--mb-lg {
+            margin-bottom: var(--space-lg);
         }
 
         /* ============================================================
@@ -852,6 +834,12 @@
             font-weight: 500;
         }
 
+        .notice-icon {
+            display: inline;
+            vertical-align: -3px;
+            margin-right: 8px;
+        }
+
         .overview-img {
             border-radius: var(--radius-xl);
             overflow: hidden;
@@ -998,6 +986,18 @@
             .eligibility-grid {
                 grid-template-columns: 1fr;
             }
+        }
+
+        .section-intro {
+            max-width: 600px;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-intro-body {
+            margin-top: var(--space-lg);
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.75;
         }
 
         /* ============================================================
@@ -1664,7 +1664,9 @@
         <img src="" alt="Expanded view" id="lightboxImg">
     </div>
 
-    <!-- NAV -->
+    <!-- ============================================================
+    NAV
+    ============================================================ -->
     <header class="nav" id="mainNav">
         <div class="nav-logo">
             <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
@@ -1712,7 +1714,7 @@
                 <ul class="nav-dropdown">
                     <li><a href="./mdba-portal.html">MDBA Portal</a></li>
                     <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
-                    <li><a href="./join-our-community">Join our community</a></li>
+                    <li><a href="./join-our-community.html">Join our community</a></li>
                 </ul>
             </li>
 
@@ -1721,13 +1723,15 @@
                 <ul class="nav-dropdown">
                     <li><a href="./get-involved.html">Get Involved</a></li>
                     <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="./sponsor.html">Become a Sponsor</a></li>
+                    <li><a href="./vendor.html">Vendor</a></li>
                     <li><a href="./volunteer.html">Volunteer</a></li>
                 </ul>
             </li>
 
         </ul>
 
-        <a class="nav-cta" href="./support-us">Support Us</a>
+        <a class="nav-cta" href="./support-us.html">Support Us</a>
 
         <button class="nav-burger" id="navBurger" aria-label="Open menu">
             <span></span><span></span><span></span>
@@ -1759,13 +1763,15 @@
 
         <a href="./mdba-portal.html">MDBA Portal</a>
         <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
-        <a href="./join-our-community">Join our community</a>
+        <a href="./join-our-community.html">Join our community</a>
 
         <a href="./get-involved.html">Get Involved</a>
         <a href="./partner-with-us.html">Partner with Us</a>
+        <a href="./sponsor.html">Becone a sponsor</a>
+        <a href="./vendor.html">Vendor</a>
         <a href="./volunteer.html">Volunteer</a>
 
-        <a class="mob-ctчa" href="./support-us">Support Us</a>
+        <a class="mob-cta" href="./support-us.html"> Support Us </a>
     </div>
 
     <!-- ============================================================
@@ -1882,7 +1888,7 @@
             <div class="overview-grid">
                 <div class="overview-text reveal">
                     <span class="section-label">Program Overview</span>
-                    <h2 class="section-title" style="margin-bottom: var(--space-xl);">A structured, <em>educational</em>
+                    <h2 class="section-title section-title--mb-xl">A structured, <em>educational</em>
                         pathway</h2>
                     <p>ASCENDtials provides a structured, educational, and community-centered pathway for individuals
                         completing court-ordered community service hours. This program supports personal growth,
@@ -1893,8 +1899,8 @@
                         sustainability, and civic engagement.</p>
                     <div class="notice-box">
                         <p>
-                            <svg style="display:inline;vertical-align:-3px;margin-right:8px;" width="15" height="15"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg class="notice-icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
                                 <circle cx="12" cy="12" r="10" />
                                 <line x1="12" y1="8" x2="12" y2="12" />
                                 <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -1971,11 +1977,10 @@
     ============================================================ -->
     <section class="section">
         <div class="section-inner">
-            <div style="max-width:600px; margin-bottom: var(--space-2xl);" class="reveal">
+            <div class="section-intro reveal">
                 <span class="section-label">Service Opportunities & Activities</span>
                 <h2 class="section-title">Hands-on tracks in the <em>community</em></h2>
-                <p
-                    style="margin-top:var(--space-lg); font-size:var(--text-base); color:var(--color-text-muted); line-height:1.75;">
+                <p class="section-intro-body">
                     Participants may complete hours through various hands-on community tracks. Assignments depend on
                     availability, skill level, and program needs.</p>
             </div>
@@ -2056,7 +2061,7 @@
             <div class="requirements-grid">
                 <div class="req-list-wrap reveal">
                     <span class="section-label">Program Requirements</span>
-                    <h2 class="section-title" style="margin-bottom:var(--space-xl);">What participants <em>must do</em>
+                    <h2 class="section-title section-title--mb-xl">What participants <em>must do</em>
                     </h2>
                     <p>All participants are expected to meet the following requirements to remain in good standing and
                         have their hours count toward their court obligation.</p>
@@ -2171,7 +2176,7 @@
             <div class="partner-grid">
                 <div class="partner-text reveal">
                     <span class="section-label">Partner Organization Info</span>
-                    <h2 class="section-title" style="margin-bottom:var(--space-lg);">Refer a client, <em>partner with
+                    <h2 class="section-title section-title--mb-lg">Refer a client, <em>partner with
                             us</em></h2>
                     <p>Courts, probation departments, attorneys, and social service agencies may refer clients to
                         ASCENDtials for community service completion. We provide a safe, structured, and
@@ -2257,8 +2262,7 @@
                         </svg>
                         <span>505 W Broadway, San Diego, CA 92101</span>
                     </div>
-                    <a class="btn-primary" href="mailto:info@ascendtials.org"
-                        style="margin-top: var(--space-xl); width: 100%; justify-content: center;">Contact Us to
+                    <a class="btn-primary btn-primary--full" href="mailto:info@ascendtials.org">Contact Us to
                         Partner</a>
                 </div>
             </div>

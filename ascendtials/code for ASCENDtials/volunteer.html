@@ -1,0 +1,3290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer – ASCENDtials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================================
+        DESIGN TOKENS
+        ============================================================ */
+        :root {
+            --color-navy: #1E3A47;
+            --color-navy-deep: #152E3A;
+            --color-sky: #C9A96E;
+            --color-sky-light: #F5EBD8;
+
+            --color-white: #FFFFFF;
+            --color-bg: #FAFAF8;
+            --color-surface: #F4F2EE;
+            --color-surface-2: #ECEAE5;
+            --color-line: #E2DDD6;
+            --color-text: #1A1A18;
+            --color-text-muted: #666660;
+            --color-text-light: #9D9A93;
+
+            --color-accent: #C9A96E;
+
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.375rem;
+            --text-2xl: 1.75rem;
+            --text-3xl: 2.25rem;
+
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-section: 120px;
+
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-pill: 999px;
+
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --dur-fast: 180ms;
+            --dur-base: 280ms;
+            --dur-slow: 500ms;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            overflow-x: hidden;
+            font-size: var(--text-base);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal--delay-1 {
+            transition-delay: 0.08s;
+        }
+
+        .reveal--delay-2 {
+            transition-delay: 0.16s;
+        }
+
+        .reveal--delay-3 {
+            transition-delay: 0.24s;
+        }
+
+        .reveal--delay-4 {
+            transition-delay: 0.32s;
+        }
+
+        /* ── SHARED ── */
+        .section-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .section-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+            font-weight: 300;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        /* ── BUTTONS ── */
+        .btn-primary,
+        .btn-outline,
+        .btn-white,
+        .btn-ghost,
+        .nav-cta {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            border: 1px solid var(--color-line);
+        }
+
+        .btn-white {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            border: 1px solid var(--color-line);
+        }
+
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-outline::before,
+        .btn-ghost::before,
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before,
+        .btn-white:hover::before,
+        .nav-cta:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline::before,
+        .btn-ghost::before {
+            background: var(--color-sky-light);
+        }
+
+        .btn-outline:hover::before,
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline:hover,
+        .btn-ghost:hover {
+            border-color: var(--color-sky);
+        }
+
+        .btn-join-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--color-white);
+            color: var(--color-navy);
+            padding: 14px 32px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: background var(--dur-fast), color var(--dur-fast);
+        }
+
+        .btn-join-primary:hover {
+            background: var(--color-sky);
+            color: var(--color-white);
+        }
+
+        .btn-join-ghost {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.75);
+            padding: 13px 31px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            cursor: pointer;
+            transition: border-color var(--dur-fast), color var(--dur-fast);
+        }
+
+        .btn-join-ghost:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            color: var(--color-white);
+        }
+
+        /* ============================================================
+        NAV
+        ============================================================ */
+        .nav-cta {
+            flex-shrink: 0;
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 9px 20px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-line);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            gap: 32px;
+            transition: all var(--dur-slow) var(--ease-in-out);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            top: 10px;
+            left: 16px;
+            right: 16px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-logo {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .nav-logo img {
+            height: 52px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links>li {
+            position: relative;
+        }
+
+        .nav-links>li>a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            font-size: var(--text-sm);
+            font-weight: 400;
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links>li>a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-links .has-dropdown>a::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: solid var(--color-text-muted);
+            border-width: 0 1.5px 1.5px 0;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform var(--dur-fast) var(--ease-out);
+        }
+
+        .nav-links .has-dropdown:hover>a::after {
+            transform: rotate(225deg) translateY(-2px);
+        }
+
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-line);
+            list-style: none;
+            min-width: 220px;
+            padding: 6px;
+            padding-top: 10px;
+            z-index: 600;
+        }
+
+        .nav-links .has-dropdown:hover .nav-dropdown {
+            display: block;
+        }
+
+        .nav-dropdown li a {
+            display: block;
+            padding: 9px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .nav-dropdown li a:hover {
+            color: var(--color-navy);
+            background: var(--color-surface);
+        }
+
+        .nav-burger {
+            display: none;
+            background: none;
+            border: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+            margin-left: auto;
+        }
+
+        .nav-burger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-navy);
+            border-radius: 2px;
+            transition: all var(--dur-base) var(--ease-out);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 490;
+            padding: 90px 24px 32px;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 16px;
+            font-size: var(--text-xl);
+            color: var(--color-text);
+            border-bottom: 1px solid var(--color-line);
+            font-family: var(--font-display);
+        }
+
+        .mobile-menu .mob-cta {
+            margin-top: 24px;
+            background: var(--color-navy);
+            color: var(--color-white);
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-lg);
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+        }
+
+        /* ============================================================
+        HERO
+        ============================================================ */
+        .page-hero {
+            padding-top: calc(72px + var(--space-2xl));
+            padding-left: max(48px, 6vw);
+            padding-right: max(48px, 6vw);
+            background: var(--color-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: 'VO';
+            position: absolute;
+            bottom: -60px;
+            left: -20px;
+            font-family: var(--font-display);
+            font-size: clamp(200px, 28vw, 380px);
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(201, 169, 110, 0.04);
+            letter-spacing: -10px;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 5vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.02;
+            letter-spacing: -2px;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-h1 em {
+            font-style: italic;
+            color: var(--color-sky);
+            display: block;
+        }
+
+        .hero-divider {
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-sky), transparent);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-desc {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            max-width: 440px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-photo-wrap {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+        }
+
+        .hero-photo-wrap img {
+            width: 100%;
+            height: 540px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: var(--radius-xl);
+            display: block;
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+
+        .hero-photo-wrap:hover img {
+            transform: scale(1.02);
+        }
+
+        .hero-photo-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -24px;
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg) var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            z-index: 3;
+        }
+
+        .hero-photo-badge-num {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+        }
+
+        .hero-photo-badge-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-top: 6px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-main {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-photo-wrap img {
+                height: 380px;
+            }
+
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-photo-wrap {
+                display: none;
+            }
+        }
+
+        /* ── INFO STRIP ── */
+        .info-strip {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-line);
+            padding: var(--space-xl) max(48px, 6vw);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-lg);
+            flex-wrap: nowrap;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .info-num {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 300;
+            color: var(--color-navy);
+            line-height: 1;
+        }
+
+        .info-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+        }
+
+        .info-divider {
+            width: 1px;
+            height: 48px;
+            background: var(--color-line);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 600px) {
+            .info-strip {
+                padding-left: 24px;
+                padding-right: 24px;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: var(--space-md);
+            }
+
+            .info-divider {
+                display: none;
+            }
+        }
+
+        /* ============================================================
+        WHY VOLUNTEER — stacked bento sections
+        ============================================================ */
+        .section-why {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+
+        .section-why-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* — block header shared — */
+        .why-block {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .why-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .why-block-header {
+            margin-bottom: var(--space-xl);
+        }
+
+        .why-col-label {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+            display: block;
+        }
+
+        .why-col-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+            font-weight: 300;
+            color: var(--color-navy);
+            line-height: 1.2;
+        }
+
+        .why-col-title em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        /* — bento: What you give — 12-col grid — */
+        .why-bento {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-md);
+        }
+
+        .why-item {
+            display: flex;
+            gap: var(--space-md);
+            align-items: flex-start;
+            padding: var(--space-xl);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--color-line);
+            background: var(--color-surface);
+            transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-base);
+        }
+
+        .why-item:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        /* asymmetric spans: 7 | 5  /  5 | 7 */
+        .why-item:nth-child(1) {
+            grid-column: span 7;
+        }
+
+        .why-item:nth-child(2) {
+            grid-column: span 5;
+        }
+
+        .why-item:nth-child(3) {
+            grid-column: span 5;
+        }
+
+        .why-item:nth-child(4) {
+            grid-column: span 7;
+        }
+
+        .why-item-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
+        }
+
+        .why-item-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .why-item-body {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .why-item-title {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 400;
+            color: var(--color-navy);
+        }
+
+        .why-item-text {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+        }
+
+        /* — bento: What you gain — 12-col grid — */
+        .gain-bento {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-md);
+        }
+
+        .gain-card {
+            background: var(--color-navy);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base);
+            border: 1px solid transparent;
+        }
+
+        .gain-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+        }
+
+        /* spans: 3|3|3|3 row1, then 5|7 row2 */
+        .gain-card:nth-child(1) {
+            grid-column: span 3;
+        }
+
+        .gain-card:nth-child(2) {
+            grid-column: span 3;
+        }
+
+        .gain-card:nth-child(3) {
+            grid-column: span 3;
+        }
+
+        .gain-card:nth-child(4) {
+            grid-column: span 3;
+        }
+
+        .gain-card:nth-child(5) {
+            grid-column: span 5;
+            background: var(--color-surface);
+            border-color: var(--color-line);
+        }
+
+        .gain-card:nth-child(5) .gain-card-icon {
+            background: var(--color-sky-light);
+            color: var(--color-sky);
+        }
+
+        .gain-card:nth-child(5) .gain-card-title {
+            color: var(--color-navy);
+        }
+
+        .gain-card:nth-child(5) .gain-card-text {
+            color: var(--color-text-muted);
+        }
+
+        .gain-card:nth-child(6) {
+            grid-column: span 7;
+            background: rgba(201, 169, 110, 0.12);
+            border-color: rgba(201, 169, 110, 0.3);
+        }
+
+        .gain-card:nth-child(6) .gain-card-title {
+            color: var(--color-navy);
+        }
+
+        .gain-card:nth-child(6) .gain-card-text {
+            color: var(--color-text-muted);
+        }
+
+        .gain-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            background: rgba(201, 169, 110, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            flex-shrink: 0;
+        }
+
+        .gain-card-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .gain-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 400;
+            color: var(--color-white);
+        }
+
+        .gain-card-text {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+
+            .why-item:nth-child(1),
+            .why-item:nth-child(2),
+            .why-item:nth-child(3),
+            .why-item:nth-child(4) {
+                grid-column: span 6;
+            }
+
+            .gain-card:nth-child(1),
+            .gain-card:nth-child(2) {
+                grid-column: span 6;
+            }
+
+            .gain-card:nth-child(3),
+            .gain-card:nth-child(4) {
+                grid-column: span 6;
+            }
+
+            .gain-card:nth-child(5) {
+                grid-column: span 12;
+            }
+
+            .gain-card:nth-child(6) {
+                grid-column: span 12;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .why-bento,
+            .gain-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .why-item:nth-child(n),
+            .gain-card:nth-child(n) {
+                grid-column: span 1;
+            }
+
+            .section-why {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        PATHWAYS BENTO
+        ============================================================ */
+        .section-pathways {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-surface);
+        }
+
+        .section-pathways-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .pathways-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .pathways-header p {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+            max-width: 600px;
+            margin-top: var(--space-md);
+        }
+
+        /* 12-column asymmetric bento */
+        .pathways-bento {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-md);
+        }
+
+        /* row 1: 5 | 7  /  row 2: 7 | 5 */
+        .pathway-card:nth-child(1) {
+            grid-column: span 5;
+            min-height: 320px;
+        }
+
+        .pathway-card:nth-child(2) {
+            grid-column: span 7;
+            min-height: 320px;
+        }
+
+        .pathway-card:nth-child(3) {
+            grid-column: span 7;
+            min-height: 300px;
+        }
+
+        .pathway-card:nth-child(4) {
+            grid-column: span 5;
+            min-height: 300px;
+        }
+
+        .pathway-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pathway-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        .pathway-card.navy {
+            background: var(--color-navy);
+            border-color: var(--color-navy);
+        }
+
+        .pathway-card.navy:hover {
+            border-color: var(--color-sky);
+        }
+
+        /* large ghost number in corner */
+        .pathway-card::before {
+            content: attr(data-num);
+            position: absolute;
+            top: var(--space-lg);
+            right: var(--space-xl);
+            font-family: var(--font-display);
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--color-sky);
+            opacity: 0.07;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .pathway-card.navy::before {
+            opacity: 0.12;
+        }
+
+        .pathway-card-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
+        }
+
+        .pathway-card.navy .pathway-card-icon {
+            background: rgba(201, 169, 110, 0.15);
+        }
+
+        .pathway-card-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .pathway-card-body {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .pathway-card-tag {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+        }
+
+        .pathway-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.2;
+        }
+
+        .pathway-card.navy .pathway-card-title {
+            color: var(--color-white);
+        }
+
+        .pathway-card-text {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        .pathway-card.navy .pathway-card-text {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .pathway-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .pathway-bullets li {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: flex-start;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .pathway-card.navy .pathway-bullets li {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .pathway-bullets li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-sky);
+            flex-shrink: 0;
+            margin-top: 6px;
+        }
+
+        .pathway-badge {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: var(--radius-pill);
+            background: var(--color-sky-light);
+            color: var(--color-sky);
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        .pathway-card.navy .pathway-badge {
+            background: rgba(201, 169, 110, 0.2);
+            color: var(--color-sky);
+        }
+
+        @media (max-width: 960px) {
+            .pathways-bento {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .pathway-card:nth-child(n) {
+                grid-column: span 1;
+                min-height: 280px;
+            }
+
+            .section-pathways {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .pathways-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .pathway-card:nth-child(n) {
+                grid-column: span 1;
+                min-height: auto;
+            }
+        }
+
+        /* ============================================================
+        ONBOARDING STEPS
+        ============================================================ */
+        .section-steps {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+
+        .section-steps-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: start;
+        }
+
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-top: var(--space-xl);
+        }
+
+        .step-item {
+            display: flex;
+            gap: var(--space-lg);
+            padding-bottom: var(--space-xl);
+            position: relative;
+        }
+
+        .step-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            bottom: 0;
+            width: 1px;
+            background: var(--color-line);
+        }
+
+        .step-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-sky-light);
+            border: 2px solid var(--color-sky);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
+            font-weight: 700;
+            font-size: var(--text-sm);
+            z-index: 1;
+            position: relative;
+        }
+
+        .step-content {
+            padding-top: 8px;
+        }
+
+        .step-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            margin-bottom: 6px;
+        }
+
+        .step-text {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        /* Portal card */
+        .portal-card {
+            background: var(--color-navy);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            position: sticky;
+            top: 96px;
+        }
+
+        .portal-card-label {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(201, 169, 110, 0.8);
+        }
+
+        .portal-card-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+            font-weight: 300;
+            color: var(--color-white);
+            line-height: 1.2;
+        }
+
+        .portal-card-title em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .portal-card-text {
+            font-size: var(--text-base);
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.7;
+        }
+
+        .portal-card-divider {
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .portal-feature {
+            display: flex;
+            gap: var(--space-md);
+            align-items: flex-start;
+        }
+
+        .portal-feature-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: rgba(201, 169, 110, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
+        }
+
+        .portal-feature-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .portal-feature-text {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.6;
+        }
+
+        .portal-feature-text strong {
+            color: var(--color-white);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .portal-donation {
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px solid rgba(201, 169, 110, 0.25);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+        }
+
+        .portal-donation-amount {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+            margin-bottom: var(--space-sm);
+        }
+
+        .portal-donation-label {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.5;
+        }
+
+        .portal-waiver {
+            font-size: var(--text-xs);
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: var(--space-sm);
+            font-style: italic;
+        }
+
+        .portal-cta {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .btn-portal-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--color-sky);
+            color: var(--color-white);
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: opacity var(--dur-fast);
+        }
+
+        .btn-portal-primary:hover {
+            opacity: 0.88;
+        }
+
+        .btn-portal-ghost {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 13px 27px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: border-color var(--dur-fast), color var(--dur-fast);
+        }
+
+        .btn-portal-ghost:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            color: var(--color-white);
+        }
+
+        @media (max-width: 900px) {
+            .section-steps-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .portal-card {
+                position: static;
+            }
+
+            .section-steps {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        MEMBERSHIP TABLE
+        ============================================================ */
+        .section-membership {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-surface);
+        }
+
+        .section-membership-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .membership-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .membership-table-wrap {
+            overflow-x: auto;
+        }
+
+        .membership-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            border: 1px solid var(--color-line);
+        }
+
+        .membership-table th {
+            background: var(--color-navy);
+            color: var(--color-white);
+            padding: 16px 20px;
+            text-align: left;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .membership-table th:first-child {
+            border-radius: 0;
+        }
+
+        .membership-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--color-line);
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .membership-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .membership-table tr:hover td {
+            background: var(--color-surface);
+        }
+
+        .membership-table td:first-child {
+            font-weight: 500;
+            color: var(--color-navy);
+            white-space: nowrap;
+        }
+
+        .membership-table td:nth-child(2) {
+            color: var(--color-sky);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .membership-note {
+            margin-top: var(--space-xl);
+            padding: var(--space-lg) var(--space-xl);
+            background: var(--color-sky-light);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(201, 169, 110, 0.3);
+        }
+
+        .membership-note p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        .membership-note strong {
+            color: var(--color-navy);
+        }
+
+        @media (max-width: 600px) {
+            .section-membership {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        ACCESSIBILITY SECTION
+        ============================================================ */
+        .section-access {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-navy-deep);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-access::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 40%, rgba(201, 169, 110, 0.06) 100%);
+            pointer-events: none;
+        }
+
+        .section-access-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: max(64px, 6vw);
+            align-items: center;
+        }
+
+
+        .access-label {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(201, 169, 110, 0.8);
+            margin-bottom: var(--space-md);
+        }
+
+        .access-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3vw, 3rem);
+            font-weight: 300;
+            color: var(--color-white);
+            line-height: 1.15;
+            margin-bottom: var(--space-lg);
+        }
+
+        .access-title em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .access-text {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.75;
+            margin-bottom: var(--space-xl);
+        }
+
+        .access-values {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .access-value {
+            display: flex;
+            gap: var(--space-md);
+            align-items: flex-start;
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .access-value-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            background: rgba(201, 169, 110, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
+        }
+
+        .access-value-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .access-value-text {
+            font-size: var(--text-base);
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.65;
+        }
+
+        .access-value-text strong {
+            color: var(--color-white);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .access-quote {
+            border-left: 3px solid var(--color-sky);
+            padding-left: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .access-quote-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.3rem, 2vw, 1.8rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--color-white);
+            line-height: 1.5;
+        }
+
+        .access-pill-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .access-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: var(--radius-pill);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .access-pill svg {
+            color: var(--color-sky);
+            width: 14px;
+            height: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .section-access-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .section-access {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        PORTAL FEATURES
+        ============================================================ */
+        .section-portal-features {
+            padding: var(--space-section) max(48px, 6vw);
+            background: var(--color-bg);
+        }
+
+        .section-portal-features-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .portal-features-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: end;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .portal-features-header p {
+            color: var(--color-text-muted);
+            font-size: var(--text-lg);
+            line-height: 1.75;
+        }
+
+        /* 12-col bento for portal features */
+        .portal-features-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-md);
+        }
+
+        /* row 1: 4|4|4  →  row 2: 5|7 */
+        .portal-features-grid .portal-feature-card:nth-child(1) {
+            grid-column: span 4;
+        }
+
+        .portal-features-grid .portal-feature-card:nth-child(2) {
+            grid-column: span 4;
+        }
+
+        .portal-features-grid .portal-feature-card:nth-child(3) {
+            grid-column: span 4;
+        }
+
+        .portal-features-grid .portal-feature-card:nth-child(4) {
+            grid-column: span 7;
+        }
+
+        .portal-features-grid .portal-feature-card:nth-child(5) {
+            grid-column: span 5;
+        }
+
+        .portal-features-grid .portal-feature-card:nth-child(6) {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: var(--space-2xl);
+            align-items: center;
+            background: var(--color-white);
+        }
+
+        .portal-feature-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-base);
+        }
+
+        .portal-feature-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 110, 0.4);
+        }
+
+        /* card 5 (Letters) gets navy dark treatment */
+        .portal-features-grid .portal-feature-card:nth-child(5) {
+            background: var(--color-navy);
+            border-color: var(--color-navy);
+        }
+
+        .portal-features-grid .portal-feature-card:nth-child(5) .portal-feature-card-icon {
+            background: rgba(201, 169, 110, 0.15);
+            color: var(--color-sky);
+        }
+
+        .portal-features-grid .portal-feature-card:nth-child(5) .portal-feature-card-title {
+            color: var(--color-white);
+        }
+
+        .portal-features-grid .portal-feature-card:nth-child(5) .portal-feature-card-text {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .portal-features-grid .portal-feature-card:nth-child(5):hover {
+            border-color: var(--color-sky);
+        }
+
+        .portal-feature-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+        }
+
+        .portal-feature-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.25;
+        }
+
+        .portal-feature-card-text {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        .automated-card {
+            margin-top: var(--space-md);
+            background: var(--color-navy);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+
+        .automated-card-label {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(201, 169, 110, 0.8);
+            margin-bottom: var(--space-md);
+        }
+
+        .automated-card-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 2vw, 2rem);
+            font-weight: 300;
+            color: var(--color-white);
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+        }
+
+        .automated-card-title em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .automated-items {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .automated-item {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .automated-item svg {
+            color: var(--color-sky);
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+        }
+
+        .calendly-box {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            text-align: center;
+        }
+
+        .calendly-box-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(201, 169, 110, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            margin: 0 auto;
+        }
+
+        .calendly-box-icon svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .calendly-box-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+        }
+
+        .calendly-box-text {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .btn-calendly {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--color-sky);
+            color: var(--color-white);
+            padding: 13px 24px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: opacity var(--dur-fast);
+        }
+
+        .btn-calendly:hover {
+            opacity: 0.88;
+        }
+
+        @media (max-width: 900px) {
+            .portal-features-header {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .portal-features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .portal-features-grid .portal-feature-card:nth-child(n) {
+                grid-column: span 1;
+            }
+
+            .portal-features-grid .portal-feature-card:nth-child(6) {
+                grid-column: span 2;
+                grid-template-columns: 1fr;
+            }
+
+            .automated-card {
+                grid-template-columns: 1fr;
+            }
+
+            .section-portal-features {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .portal-features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portal-features-grid .portal-feature-card:nth-child(6) {
+                grid-column: span 1;
+            }
+        }
+
+        /* ============================================================
+        JOIN CTA
+        ============================================================ */
+        .section-join {
+            background: var(--color-navy);
+            padding: var(--space-section) max(48px, 6vw);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-join::before {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .join-inner {
+            max-width: 640px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .join-label {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(201, 169, 110, 0.8);
+            margin-bottom: var(--space-md);
+        }
+
+        .join-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 300;
+            color: var(--color-white);
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: var(--space-lg);
+        }
+
+        .join-h2 em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .join-desc {
+            font-size: var(--text-lg);
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.75;
+            margin-bottom: var(--space-xl);
+        }
+
+        .join-cta {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 600px) {
+            .section-join {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        FOOTER
+        ============================================================ */
+        .footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            padding: var(--space-2xl) max(40px, 5vw);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-brand img {
+            height: 48px;
+            width: auto;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            max-width: 260px;
+        }
+
+        .footer-col-title {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-navy);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color var(--dur-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-contact p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .footer-contact a {
+            color: var(--color-sky);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 8px;
+            margin-top: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            transition: background var(--dur-fast), color var(--dur-fast);
+        }
+
+        .footer-social a:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .footer-partners {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) max(40px, 5vw);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            flex-wrap: wrap;
+        }
+
+        .footer-partners img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(20%);
+            transition: opacity var(--dur-fast);
+        }
+
+        .footer-partners img:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-sky);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <header class="nav" id="mainNav">
+        <div class="nav-logo">
+            <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="./index.html">Home</a></li>
+            <li class="has-dropdown">
+                <a href="#">About</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./our-team.html">Our Team</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Education</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./education-and-training.html">Education and Training</a></li>
+                    <li><a href="./literacy-workshops.html">Literacy Workshops</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                    <li><a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a></li>
+                    <li><a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a></li>
+                    <li><a href="./service-learning.html">Service Learning</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Programs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./events.html">Event Calendar</a></li>
+                    <li><a href="./program-participant.html">Program Participant</a></li>
+                    <li><a href="./farmers-market.html">Farmers' Market</a></li>
+                    <li><a href="./food-distribution.html">Food Distribution</a></li>
+                    <li><a href="./youth-programs.html">Youth Program</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./court-order-community-service.html">Court Order Community Service</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Clubs</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./mdba-portal.html">MDBA Portal</a></li>
+                    <li><a href="./clubs-and-community-groups.html">Clubs and Community Groups</a></li>
+                    <li><a href="./join-our-community.html">Join our community</a></li>
+                </ul>
+            </li>
+            <li class="has-dropdown">
+                <a href="#">Join Us</a>
+                <ul class="nav-dropdown">
+                    <li><a href="./get-involved.html">Get Involved</a></li>
+                    <li><a href="./partner-with-us.html">Partner with Us</a></li>
+                    <li><a href="./sponsor.html">Become a Sponsor</a></li>
+                    <li><a href="./vendor.html">Vendor</a></li>
+                    <li><a href="./volunteer.html">Volunteer</a></li>
+                </ul>
+            </li>
+        </ul>
+        <a class="nav-cta" href="./support-us.html">Support Us</a>
+        <button class="nav-burger" id="navBurger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About Us</a>
+        <a href="./our-team.html">Our Team</a>
+        <a href="./contact.html">Contact Us</a>
+        <a href="./education-and-training.html">Education and Training</a>
+        <a href="./literacy-workshops.html">Literacy Workshops</a>
+        <a href="./kemetic-yoga.html">Kemetic Yoga</a>
+        <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
+        <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
+        <a href="./service-learning.html">Service Learning</a>
+        <a href="./events.html">Event Calendar</a>
+        <a href="./program-participant.html">Program Participant</a>
+        <a href="./farmers-market.html">Farmers' Market</a>
+        <a href="./food-distribution.html">Food Distribution</a>
+        <a href="./youth-programs.html">Youth Program</a>
+        <a href="./environmental-programs.html">Environmental Programs</a>
+        <a href="./court-order-community-service.html">Court Order Community Service</a>
+        <a href="./mdba-portal.html">MDBA Portal</a>
+        <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+        <a href="./join-our-community.html">Join our community</a>
+        <a href="./get-involved.html">Get Involved</a>
+        <a href="./partner-with-us.html">Partner with Us</a>
+        <a href="./sponsor.html">Become a Sponsor</a>
+        <a href="./vendor.html">Vendor</a>
+        <a href="./volunteer.html">Volunteer</a>
+        <a class="mob-cta" href="./support-us.html">Support Us</a>
+    </div>
+
+    <!-- ============================================================
+    HERO
+    ============================================================ -->
+    <section class="page-hero">
+        <div class="hero-main">
+            <div class="hero-text reveal">
+                <span class="hero-eyebrow">Volunteer Portal</span>
+                <h1 class="hero-h1">
+                    Serve. Learn.
+                    <em>Heal. Uplift.</em>
+                </h1>
+                <div class="hero-divider"></div>
+                <p class="hero-desc">Our volunteers are healers, helpers, and community builders who support families,
+                    youth, and neighborhoods across San Diego. Whether you join us remotely or in person, you become
+                    part of a collective effort to restore balance and uplift those we serve.</p>
+                <div class="hero-cta-row">
+                    <a href="https://ascendtials.org/volunteer/volunteer-memberships/" class="btn-white"
+                        target="_blank">Sign Up Now</a>
+                    <a href="#pathways" class="btn-ghost">Explore Pathways</a>
+                </div>
+            </div>
+
+            <div class="hero-photo-wrap reveal reveal--delay-1">
+                <img src="https://ascendtials.org/wp-content/uploads/2024/08/DSC_0399-scaled.jpg"
+                    alt="ASCENDtials volunteers in the community"
+                    onerror="this.src='https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=80'">
+                <div class="hero-photo-badge">
+                    <div class="hero-photo-badge-num">40<span style="font-size:1.4rem">min</span></div>
+                    <div class="hero-photo-badge-label">Onboarding Session</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFO STRIP -->
+    <div class="info-strip">
+        <div class="info-item">
+            <div class="info-num">2</div>
+            <div class="info-label">Ways to Volunteer</div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-num">4</div>
+            <div class="info-label">Volunteer Pathways</div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-num">$25</div>
+            <div class="info-label">One-Time Donation</div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-num">Mon</div>
+            <div class="info-label">Onboarding Mon &amp; Thu</div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <div class="info-num">SD</div>
+            <div class="info-label">San Diego Based</div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    WHY VOLUNTEER — stacked bento
+    ============================================================ -->
+    <section class="section-why">
+        <div class="section-why-inner">
+
+            <!-- Block 1: Your Contribution -->
+            <div class="why-block reveal">
+                <div class="why-block-header">
+                    <span class="why-col-label">Your Contribution</span>
+                    <h2 class="why-col-title">Why volunteer with <em>ASCENDtials</em></h2>
+                </div>
+                <div class="why-bento">
+                    <div class="why-item reveal">
+                        <div class="why-item-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <div class="why-item-body">
+                            <div class="why-item-title">Youth Mentorship</div>
+                            <div class="why-item-text">Support youth through learning stations and mentorship programs
+                                across San Diego</div>
+                        </div>
+                    </div>
+                    <div class="why-item reveal reveal--delay-1">
+                        <div class="why-item-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                            </svg>
+                        </div>
+                        <div class="why-item-body">
+                            <div class="why-item-title">Food &amp; Culture</div>
+                            <div class="why-item-text">Bring fresh food and cultural programming to families who need it
+                                most</div>
+                        </div>
+                    </div>
+                    <div class="why-item reveal reveal--delay-2">
+                        <div class="why-item-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                        </div>
+                        <div class="why-item-body">
+                            <div class="why-item-title">Wellness &amp; Environment</div>
+                            <div class="why-item-text">Strengthen wellness and environmental awareness throughout City
+                                Heights and beyond</div>
+                        </div>
+                    </div>
+                    <div class="why-item reveal reveal--delay-1">
+                        <div class="why-item-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="2" y1="12" x2="22" y2="12" />
+                                <path
+                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                            </svg>
+                        </div>
+                        <div class="why-item-body">
+                            <div class="why-item-title">Inclusive Spaces</div>
+                            <div class="why-item-text">Build inclusive spaces where families thrive and expand access to
+                                healing and education</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Block 2: What You Gain -->
+            <div class="why-block reveal">
+                <div class="why-block-header">
+                    <span class="why-col-label">What You Gain</span>
+                    <h2 class="why-col-title">In return, you <em>grow with us</em></h2>
+                </div>
+                <div class="gain-bento">
+                    <div class="gain-card reveal">
+                        <div class="gain-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                        </div>
+                        <div class="gain-card-title">Leadership Experience</div>
+                        <div class="gain-card-text">Develop real skills leading programs and community initiatives</div>
+                    </div>
+                    <div class="gain-card reveal reveal--delay-1">
+                        <div class="gain-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                            </svg>
+                        </div>
+                        <div class="gain-card-title">Service Hours</div>
+                        <div class="gain-card-text">Logged automatically with official letters and certificates</div>
+                    </div>
+                    <div class="gain-card reveal reveal--delay-2">
+                        <div class="gain-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 5.5 5.5l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 15.3z" />
+                            </svg>
+                        </div>
+                        <div class="gain-card-title">Training &amp; Mentorship</div>
+                        <div class="gain-card-text">Onboarding, tools, and ongoing support from the ASCENDtials team
+                        </div>
+                    </div>
+                    <div class="gain-card reveal reveal--delay-3">
+                        <div class="gain-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <div class="gain-card-title">Supportive Team</div>
+                        <div class="gain-card-text">A mission-driven community invested in your growth and impact</div>
+                    </div>
+                    <div class="gain-card reveal">
+                        <div class="gain-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 20h9" />
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                            </svg>
+                        </div>
+                        <div class="gain-card-title">Portfolio &amp; References</div>
+                        <div class="gain-card-text">Build a documented record of community impact with letters of
+                            recommendation available</div>
+                    </div>
+                    <div class="gain-card reveal reveal--delay-1">
+                        <div class="gain-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                            </svg>
+                        </div>
+                        <div class="gain-card-title">Real-World Skill Growth</div>
+                        <div class="gain-card-text">From communications and outreach to environmental stewardship —
+                            build capabilities that transfer everywhere</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PATHWAYS BENTO
+    ============================================================ -->
+    <section class="section-pathways" id="pathways">
+        <div class="section-pathways-inner">
+            <div class="pathways-header reveal">
+                <span class="section-label">Choose Your Pathway</span>
+                <h2 class="section-h2">Find your role in<br><em>the community</em></h2>
+                <p>Choose the pathway that aligns with your interests, skills, and availability. All pathways begin with
+                    a 40-minute onboarding session held every Monday and Thursday.</p>
+            </div>
+
+            <div class="pathways-bento">
+                <div class="pathway-card reveal" data-num="01">
+                    <div class="pathway-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                    </div>
+                    <div class="pathway-card-body">
+                        <div class="pathway-card-tag">In-Person</div>
+                        <div class="pathway-card-title">Community Events &amp; Markets</div>
+                        <div class="pathway-card-text">Be on the ground at our Farmers' Markets and public activations —
+                            helping setup, engaging with community members, supporting vendors, and tracking hours
+                            through Track It Forward.</div>
+                        <ul class="pathway-bullets">
+                            <li>Assist with setup and breakdown at MDBA Markets</li>
+                            <li>Support vendors and community partners</li>
+                            <li>Engage with attendees and track hours</li>
+                        </ul>
+                        <span class="pathway-badge">Single · Family · Group · Court-Ordered · Company</span>
+                    </div>
+                </div>
+
+                <div class="pathway-card navy reveal reveal--delay-1" data-num="02">
+                    <div class="pathway-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                        </svg>
+                    </div>
+                    <div class="pathway-card-body">
+                        <div class="pathway-card-tag">In-Person</div>
+                        <div class="pathway-card-title">Youth Education &amp; Workshops</div>
+                        <div class="pathway-card-text">Work directly with young people at retreats and learning
+                            sessions. Help facilitators manage materials, coordinate logistics, and support hands-on
+                            activities that inspire the next generation.</div>
+                        <ul class="pathway-bullets">
+                            <li>Assist facilitators at youth retreats and workshops</li>
+                            <li>Help manage materials and logistics</li>
+                            <li>Support hands-on learning activities</li>
+                        </ul>
+                        <span class="pathway-badge">Single · Family · Group · Company</span>
+                    </div>
+                </div>
+
+                <div class="pathway-card reveal" data-num="03">
+                    <div class="pathway-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12c0-2.76 1.12-5.26 2.93-7.07" />
+                            <path d="M12 8v4l3 3" />
+                        </svg>
+                    </div>
+                    <div class="pathway-card-body">
+                        <div class="pathway-card-tag">In-Person</div>
+                        <div class="pathway-card-title">Environmental Stewardship</div>
+                        <div class="pathway-card-text">Get outside and make a tangible difference. Join shoreline
+                            cleanups, sustainability projects, and environmental education efforts that protect San
+                            Diego's natural spaces for future generations.</div>
+                        <ul class="pathway-bullets">
+                            <li>Join shoreline cleanups and sustainability projects</li>
+                            <li>Support environmental education programs</li>
+                            <li>Help maintain community green spaces</li>
+                        </ul>
+                        <span class="pathway-badge">All Membership Types · Court-Ordered</span>
+                    </div>
+                </div>
+
+                <div class="pathway-card reveal reveal--delay-1" data-num="04">
+                    <div class="pathway-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                        </svg>
+                    </div>
+                    <div class="pathway-card-body">
+                        <div class="pathway-card-tag">Remote</div>
+                        <div class="pathway-card-title">Remote &amp; Administrative Support</div>
+                        <div class="pathway-card-text">Contribute your skills from anywhere in the world. Support our
+                            communications, outreach, research, data entry, and program operations — making a real
+                            difference without needing to be on-site.</div>
+                        <ul class="pathway-bullets">
+                            <li>Communications and outreach campaigns</li>
+                            <li>Research and data entry</li>
+                            <li>Program support from anywhere</li>
+                        </ul>
+                        <span class="pathway-badge">Remote Volunteers · Single · Company</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    ONBOARDING STEPS
+    ============================================================ -->
+    <section class="section-steps">
+        <div class="section-steps-inner">
+            <div>
+                <div class="reveal">
+                    <span class="section-label">Your Volunteer Journey</span>
+                    <h2 class="section-h2">Getting started<br>is <em>simple</em></h2>
+                    <p style="color: var(--color-text-muted); font-size: var(--text-lg); line-height: 1.75;">We've
+                        designed a simple, supportive onboarding process to help you get started with confidence. Here's
+                        what to expect.</p>
+                </div>
+
+                <div class="steps-list">
+                    <div class="step-item reveal">
+                        <div class="step-dot">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Explore Volunteer Pathways</div>
+                            <div class="step-text">Choose the role that aligns with your interests, skills, and
+                                availability. Review the four pathways above and decide whether you'd like to volunteer
+                                in-person or remotely.</div>
+                        </div>
+                    </div>
+                    <div class="step-item reveal reveal--delay-1">
+                        <div class="step-dot">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Select Your Volunteer Membership</div>
+                            <div class="step-text">ASCENDtials uses a one-time $25 membership donation model to sustain
+                                the tools and resources that make your volunteer experience possible. A waiver option is
+                                available — no explanation required. Remote volunteers complete this before onboarding;
+                                in-person volunteers during onboarding.</div>
+                        </div>
+                    </div>
+                    <div class="step-item reveal reveal--delay-2">
+                        <div class="step-dot">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Create Your Volunteer Portal Account</div>
+                            <div class="step-text">Your portal gives you access to training, communication tools, hour
+                                tracking, program materials, appreciation letters, and a living checklist that orients
+                                you to our tools and team.</div>
+                        </div>
+                    </div>
+                    <div class="step-item reveal reveal--delay-3">
+                        <div class="step-dot">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Attend Onboarding (40 Minutes)</div>
+                            <div class="step-text">We meet every Monday and Thursday for a brief orientation. This
+                                40-minute session introduces you to our mission, programs, expectations, tools, and next
+                                steps. All volunteers complete onboarding before beginning their pathway.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal reveal--delay-1">
+                <div class="portal-card">
+                    <div class="portal-card-label">Volunteer Portal</div>
+                    <div class="portal-card-title">Your path to <em>service starts here</em></div>
+                    <div class="portal-card-text">Sign up, complete onboarding, contribute with heart, and watch your
+                        hours grow. This portal is your hub for everything — training, hour tracking, appreciation
+                        letters, and team communications.</div>
+                    <div class="portal-card-divider"></div>
+
+                    <div class="portal-donation">
+                        <div class="portal-donation-amount">$25</div>
+                        <div class="portal-donation-label">One-time membership donation — covers onboarding materials
+                            and helps sustain free community programming for families.</div>
+                        <div class="portal-waiver">Waiver available to all who need it. No explanation required.
+                            Court-ordered service not eligible for waiver.</div>
+                    </div>
+
+                    <div class="portal-feature">
+                        <div class="portal-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 11 12 14 22 4" />
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                            </svg>
+                        </div>
+                        <div class="portal-feature-text">
+                            <strong>Automatic hour tracking</strong>
+                            Real-time progress updates and auto-generated appreciation letters
+                        </div>
+                    </div>
+                    <div class="portal-feature">
+                        <div class="portal-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 11 12 14 22 4" />
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                            </svg>
+                        </div>
+                        <div class="portal-feature-text">
+                            <strong>Activity calendar &amp; sign-up</strong>
+                            Register for cleanups, markets, workshops, and events
+                        </div>
+                    </div>
+                    <div class="portal-feature">
+                        <div class="portal-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 11 12 14 22 4" />
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                            </svg>
+                        </div>
+                        <div class="portal-feature-text">
+                            <strong>Photo and proof uploads</strong>
+                            Submit documentation, PDFs, and confirmations directly in your portal
+                        </div>
+                    </div>
+
+                    <div class="portal-cta">
+                        <a href="https://ascendtials.org/volunteer/volunteer-memberships/" class="btn-portal-primary"
+                            target="_blank">Sign Up Now</a>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScYa04LHrE_Ej_7wFDv1kEDI9ULDpRBYDnu7376H8jl2UCDJQ/viewform"
+                            class="btn-portal-ghost" target="_blank">Volunteer Application Form</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    MEMBERSHIP TABLE
+    ============================================================ -->
+    <section class="section-membership">
+        <div class="section-membership-inner">
+            <div class="membership-header reveal">
+                <span class="section-label">Membership Levels</span>
+                <h2 class="section-h2">Find the right<br><em>membership for you</em></h2>
+                <p
+                    style="color: var(--color-text-muted); font-size: var(--text-lg); line-height: 1.75; max-width: 600px; margin-top: var(--space-md);">
+                    Every volunteer and participant joins under a membership type that determines portal access and
+                    available features.</p>
+            </div>
+
+            <div class="membership-table-wrap reveal">
+                <table class="membership-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Access</th>
+                            <th>Features</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Remote Teammate</td>
+                            <td>Volunteer Portal</td>
+                            <td>Dashboard, hour tracking, training tools, remote operations access</td>
+                        </tr>
+                        <tr>
+                            <td>In-Person Volunteer</td>
+                            <td>Volunteer Portal</td>
+                            <td>Dashboard, hour tracking, training tools, event sign-up</td>
+                        </tr>
+                        <tr>
+                            <td>Single</td>
+                            <td>Participant Membership Portal</td>
+                            <td>Calendar, uploads, events, workshops, stewardship activities, and learning sessions</td>
+                        </tr>
+                        <tr>
+                            <td>Family</td>
+                            <td>Participant Membership Portal</td>
+                            <td>Up to 4 linked accounts with shared portal access</td>
+                        </tr>
+                        <tr>
+                            <td>Court-Ordered</td>
+                            <td>Volunteer Portal</td>
+                            <td>Required hours tracking, proof uploads, auto-generated completion letters</td>
+                        </tr>
+                        <tr>
+                            <td>Company</td>
+                            <td>Participant Membership Portal</td>
+                            <td>Group access, team tracking, and company community service documentation</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="membership-note reveal">
+                <p><strong>Monthly Presentation Requirement:</strong> Each team delivers a monthly presentation
+                    summarizing their progress, contributions, and learning over the previous four weeks. Teams share
+                    key accomplishments, challenges, data insights, and one story or observation that illustrates the
+                    real-world value of their efforts — strengthening cross-team understanding and connecting individual
+                    roles to ASCENDtials' broader mission.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    ACCESSIBILITY & VALUES
+    ============================================================ -->
+    <section class="section-access">
+        <div class="section-access-inner">
+            <div class="access-left reveal">
+                <div class="access-label">Accessibility &amp; Waivers</div>
+                <h2 class="access-title">Community service for <em>everyone</em></h2>
+                <p class="access-text">We believe volunteering should remain accessible to all, regardless of financial
+                    circumstances. No one is turned away from serving their community.</p>
+                <div class="access-values">
+                    <div class="access-value">
+                        <div class="access-value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                        </div>
+                        <div class="access-value-text">
+                            <strong>Donation Waivers Available</strong>
+                            If you experience financial hardship, request a waiver after onboarding. No explanation is
+                            required — your dignity and access come first.
+                        </div>
+                    </div>
+                    <div class="access-value">
+                        <div class="access-value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                            </svg>
+                        </div>
+                        <div class="access-value-text">
+                            <strong>A Shared Investment</strong>
+                            Your membership donation is not a fee — it's a shared commitment to sustaining the work we
+                            do together. It helps maintain technology, training coordination, and keeps programs free
+                            for families.
+                        </div>
+                    </div>
+                    <div class="access-value">
+                        <div class="access-value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <div class="access-value-text">
+                            <strong>Built on Shared Care</strong>
+                            Your service helps create healing, learning, and empowerment for families across San Diego.
+                            We're grateful you're here.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="access-right reveal reveal--delay-1">
+                <div class="access-quote">
+                    <div class="access-quote-text">"No one is turned away from serving their community."</div>
+                </div>
+                <div class="access-pill-group">
+                    <div class="access-pill">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 11 12 14 22 4" />
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                        </svg>
+                        Waiver Available
+                    </div>
+                    <div class="access-pill">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 11 12 14 22 4" />
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                        </svg>
+                        No Explanation Required
+                    </div>
+                    <div class="access-pill">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 11 12 14 22 4" />
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                        </svg>
+                        Dignity First
+                    </div>
+                    <div class="access-pill">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 11 12 14 22 4" />
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                        </svg>
+                        Remote or In-Person
+                    </div>
+                    <div class="access-pill">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 11 12 14 22 4" />
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                        </svg>
+                        Court-Ordered Welcome
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PORTAL FEATURES + AUTOMATED SYSTEM
+    ============================================================ -->
+    <section class="section-portal-features">
+        <div class="section-portal-features-inner">
+            <div class="portal-features-header">
+                <div class="reveal">
+                    <span class="section-label">Portal Features</span>
+                    <h2 class="section-h2">Everything in<br><em>one place</em></h2>
+                </div>
+                <p class="reveal reveal--delay-1">Your volunteer portal is built to make service easy — from the moment
+                    you sign up to the day you download your completion letter. All managed automatically, so you can
+                    focus on what matters.</p>
+            </div>
+
+            <div class="portal-features-grid">
+                <!-- row 1: 4 | 4 | 4 -->
+                <div class="portal-feature-card reveal">
+                    <div class="portal-feature-card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7" />
+                            <rect x="14" y="3" width="7" height="7" />
+                            <rect x="14" y="14" width="7" height="7" />
+                            <rect x="3" y="14" width="7" height="7" />
+                        </svg>
+                    </div>
+                    <div class="portal-feature-card-title">Dashboard Home</div>
+                    <div class="portal-feature-card-text">Welcome screen with quick links, announcements, orientation
+                        checklist, and a living overview of your progress and upcoming activities.</div>
+                </div>
+                <div class="portal-feature-card reveal reveal--delay-1">
+                    <div class="portal-feature-card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                    </div>
+                    <div class="portal-feature-card-title">Activity Calendar</div>
+                    <div class="portal-feature-card-text">Sign up directly for cleanups, farmers' markets, workshops,
+                        and community events. See what's upcoming and reserve your spot.</div>
+                </div>
+                <div class="portal-feature-card reveal reveal--delay-2">
+                    <div class="portal-feature-card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 16 12 12 8 16" />
+                            <line x1="12" y1="12" x2="12" y2="21" />
+                            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
+                        </svg>
+                    </div>
+                    <div class="portal-feature-card-title">Upload Proof</div>
+                    <div class="portal-feature-card-text">Submit photos, PDFs, and confirmations directly in the portal.
+                        Court-ordered volunteers can upload all required documentation here.</div>
+                </div>
+
+                <!-- row 2: 7 | 5 -->
+                <div class="portal-feature-card reveal">
+                    <div class="portal-feature-card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                        </svg>
+                    </div>
+                    <div class="portal-feature-card-title">My Progress</div>
+                    <div class="portal-feature-card-text">Track hours, activities, and completion milestones. See your
+                        volunteer journey visualized and stay motivated as you grow.</div>
+                </div>
+                <div class="portal-feature-card reveal reveal--delay-1">
+                    <div class="portal-feature-card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
+                        </svg>
+                    </div>
+                    <div class="portal-feature-card-title">Letters &amp; Documents</div>
+                    <div class="portal-feature-card-text">Download auto-generated appreciation letters and certificates
+                        when requirements are met. Court-ordered letters issued automatically at completion.</div>
+                </div>
+
+                <!-- row 3: full-width two-col card (Newsletter + CTA) -->
+                <div class="portal-feature-card reveal">
+                    <div>
+                        <div class="portal-feature-card-icon" style="margin-bottom: var(--space-lg);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                            </svg>
+                        </div>
+                        <div class="portal-feature-card-title">Monthly Newsletter</div>
+                        <div class="portal-feature-card-text" style="margin-top: var(--space-sm);">Stay connected with
+                            updates, announcements, and stories from across the ASCENDtials volunteer and community
+                            network.</div>
+                    </div>
+                    <div class="calendly-box">
+                        <div class="calendly-box-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                        </div>
+                        <div class="calendly-box-title">Have Questions?</div>
+                        <div class="calendly-box-text">Set up a 30-minute meeting with our team. We're happy to walk you
+                            through pathways, portal access, and anything else before you sign up.</div>
+                        <a href="https://calendly.com/hr-ascendtials/30min" class="btn-calendly" target="_blank">
+                            Schedule a Meeting
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                                <polyline points="12 5 19 12 12 19" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- automated strip -->
+            <div class="automated-card reveal" style="margin-top: var(--space-md);">
+                <div class="automated-card-left">
+                    <div class="automated-card-label">Automated System</div>
+                    <div class="automated-card-title">Your portal works<br><em>for you</em></div>
+                    <div class="automated-items">
+                        <div class="automated-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9 11 12 14 22 4" />
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                            </svg>
+                            Automatic signup confirmations and reminders
+                        </div>
+                        <div class="automated-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9 11 12 14 22 4" />
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                            </svg>
+                            Upload confirmations and admin notifications
+                        </div>
+                        <div class="automated-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9 11 12 14 22 4" />
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                            </svg>
+                            Real-time hour tracking and progress updates
+                        </div>
+                        <div class="automated-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9 11 12 14 22 4" />
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                            </svg>
+                            Auto-generated letters when requirements are met
+                        </div>
+                        <div class="automated-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9 11 12 14 22 4" />
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                            </svg>
+                            Monthly newsletter and program updates
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:var(--space-md); align-items:flex-start;">
+                    <div
+                        style="font-size:var(--text-xs); font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:rgba(201,169,110,0.8);">
+                        Ready to Begin?</div>
+                    <div
+                        style="font-family:var(--font-display); font-size:clamp(1.3rem,2vw,1.8rem); font-weight:300; color:var(--color-white); line-height:1.3;">
+                        Sign up in minutes.<br><em style="color:var(--color-sky);">Start making an impact.</em></div>
+                    <a href="https://ascendtials.org/volunteer/volunteer-memberships/" class="btn-portal-primary"
+                        target="_blank" style="margin-top:var(--space-sm);">Sign Up Now →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    JOIN CTA
+    ============================================================ -->
+    <section class="section-join">
+        <div class="join-inner">
+            <div class="join-label">Join the Community</div>
+            <h2 class="join-h2">Ready to serve,<br><em>heal, and uplift?</em></h2>
+            <p class="join-desc">Your service helps create healing, learning, and empowerment for families across San
+                Diego. We're grateful you're here, and we look forward to welcoming you into the ASCENDtials community.
+            </p>
+            <div class="join-cta">
+                <a href="https://ascendtials.org/volunteer/volunteer-memberships/" class="btn-join-primary"
+                    target="_blank">Sign Up Now</a>
+                <a href="https://calendly.com/hr-ascendtials/30min" class="btn-join-ghost" target="_blank">Book a
+                    Meeting First</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
+                <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
+                    BIPOC community.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/theAscendt9/" aria-label="Facebook" target="_blank"><svg
+                            width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg></a>
+                    <a href="https://www.instagram.com/the_ascendtials/" aria-label="Instagram" target="_blank"><svg
+                            width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg></a>
+                    <a href="https://www.youtube.com/channel/UCD40i1vmia6duUqBBDyO-7w" aria-label="YouTube"
+                        target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+                        </svg></a>
+                    <a href="https://www.tiktok.com/@ascendtials" aria-label="TikTok" target="_blank"><svg width="18"
+                            height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                        </svg></a>
+                    <a href="https://www.linkedin.com/company/the-ascendtials/" aria-label="LinkedIn"
+                        target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg></a>
+                    <a href="https://x.com/ascendtials" aria-label="X / Twitter" target="_blank"><svg width="18"
+                            height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg></a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Quick Links</div>
+                <ul class="footer-links">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./education-and-training.html">Education &amp; Training</a></li>
+                    <li><a href="./events.html">Events Calendar</a></li>
+                    <li><a href="https://ascendtials.org/get-involved/">Get Involved</a></li>
+                    <li><a href="https://ascendtials.org/ascendtials-membership-2024/">Membership</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Programs</div>
+                <ul class="footer-links">
+                    <li><a href="./youth-programs.html">Youth Programs</a></li>
+                    <li><a href="./environmental-programs.html">Environmental Programs</a></li>
+                    <li><a href="./legal-aid-program.html">Legal Aid</a></li>
+                    <li><a href="./internship-and-fellowship.html">Internships &amp; Fellowships</a></li>
+                    <li><a href="./kemetic-yoga.html">Kemetic Yoga</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Contact</div>
+                <div class="footer-contact">
+                    <p>505 W Broadway<br>San Diego, CA 92101</p>
+                    <p><a href="mailto:info@ascendtials.org">info@ascendtials.org</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-partners">
+            <img src="assets/img/country-of-san-diego.png" alt="County of San Diego">
+            <img src="assets/img/Live-well-with-San-diego.png" alt="Live Well San Diego">
+            <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
+                alt="ASCENDtials">
+            <img src="https://ascendtials.org/wp-content/uploads/2026/02/candid-seal-platinum-2025.png"
+                alt="Candid Platinum 2025">
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 ASCENDtials. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="https://ascendtials.org/privacy-policy/">Privacy Policy</a>
+                <a href="https://ascendtials.org/wp-content/uploads/2023/02/Untitled-document.pdf">Terms &amp;
+                    Conditions</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+
+        const burger = document.getElementById('navBurger');
+        const mm = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => mm.classList.toggle('open'));
+        mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
+
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.10 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+
+</body>
+
+</html>
