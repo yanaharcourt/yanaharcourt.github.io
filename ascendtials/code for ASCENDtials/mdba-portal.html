@@ -428,43 +428,130 @@
             flex-wrap: wrap;
         }
 
-        .btn-primary {
+        /* ── BUTTONS — unified across all pages ── */
+        .btn-primary,
+        .btn-white,
+        .btn-ghost,
+        .btn-outline {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 28px;
-            font-size: var(--text-sm);
-            font-weight: 600;
-            color: var(--color-white);
-            background: var(--color-navy);
             border-radius: var(--radius-pill);
-            border: none;
-            transition: opacity var(--dur-base);
+            font-size: var(--text-base);
             cursor: pointer;
+            border: none;
         }
 
-        .btn-primary:hover {
-            opacity: 0.85;
+        /* Sweep fill layer */
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-ghost::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
         }
 
-        .btn-ghost-light {
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-sky);
+        }
+
+        .btn-white {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
             padding: 14px 28px;
+            border-radius: var(--radius-pill);
             font-size: var(--text-sm);
             font-weight: 500;
+            background: var(--color-white);
             color: var(--color-navy);
-            background: transparent;
-            border-radius: var(--radius-pill);
-            border: 1.5px solid var(--color-line);
-            transition: border-color var(--dur-base), background var(--dur-base);
+            transition: color var(--dur-fast);
         }
 
-        .btn-ghost-light:hover {
-            border-color: var(--color-sky);
-            background: var(--color-surface);
+        .btn-white::before {
+            background: var(--color-sky);
         }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+
 
         /* Hero right: photo */
         .hero-visual {
@@ -1083,24 +1170,7 @@
             line-height: 1.7;
         }
 
-        .btn-navy {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            align-self: flex-start;
-            font-size: var(--text-sm);
-            font-weight: 600;
-            color: var(--color-white);
-            background: var(--color-navy);
-            border-radius: var(--radius-pill);
-            border: none;
-            transition: opacity var(--dur-base);
-        }
 
-        .btn-navy:hover {
-            opacity: 0.85;
-        }
 
         .commitment-card {
             grid-column: 1 / -1;
@@ -1253,6 +1323,10 @@
             min-height: 120px;
         }
 
+        .form-textarea--tall {
+            min-height: 80px;
+        }
+
         .form-select-wrap {
             position: relative;
         }
@@ -1278,6 +1352,10 @@
             color: var(--color-navy);
             padding-bottom: var(--space-sm);
             border-bottom: 1px solid var(--color-line);
+        }
+
+        .required-mark {
+            color: var(--color-sky);
         }
 
         .checkbox-group {
@@ -1456,42 +1534,7 @@
             flex-wrap: wrap;
         }
 
-        .btn-white {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            font-size: var(--text-sm);
-            font-weight: 600;
-            color: var(--color-navy);
-            background: var(--color-white);
-            border-radius: var(--radius-pill);
-            border: none;
-            transition: opacity var(--dur-base);
-        }
 
-        .btn-white:hover {
-            opacity: 0.9;
-        }
-
-        .btn-ghost-gold {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            font-size: var(--text-sm);
-            font-weight: 500;
-            color: var(--color-sky);
-            background: transparent;
-            border-radius: var(--radius-pill);
-            border: 1.5px solid rgba(201, 169, 110, 0.4);
-            transition: border-color var(--dur-base), background var(--dur-base);
-        }
-
-        .btn-ghost-gold:hover {
-            border-color: var(--color-sky);
-            background: rgba(201, 169, 110, 0.08);
-        }
 
         @media (max-width: 560px) {
             .section-join {
@@ -1788,7 +1831,7 @@
                     information, and resources needed to guide the Marina District's future.</p>
                 <div class="hero-actions">
                     <a class="btn-primary" href="#apply">Apply to Join the Board</a>
-                    <a class="btn-ghost-light" href="https://mdbasd.org/login/">Already a Member? Login</a>
+                    <a class="btn-outline" href="https://mdbasd.org/login/">Already a Member? Login</a>
                 </div>
             </div>
             <div class="hero-visual">
@@ -2137,7 +2180,7 @@
                 <h3>New Member Onboarding</h3>
                 <p>If you've recently been accepted to the board, this section will guide you through your first steps —
                     resources, responsibilities, and everything you need to get started.</p>
-                <a class="btn-navy" href="https://mdbasd.org/login/">Start Onboarding</a>
+                <a class="btn-primary" href="https://mdbasd.org/login/">Start Onboarding</a>
             </div>
             <div class="member-card member-card--login">
                 <div class="member-card-icon">
@@ -2150,7 +2193,7 @@
                 <h3>Board Member Login</h3>
                 <p>Access meeting notes, governance documents, and internal resources through the secure board member
                     portal. Your login was provided upon acceptance.</p>
-                <a class="btn-navy" href="https://mdbasd.org/login/">Login to Portal</a>
+                <a class="btn-primary" href="https://mdbasd.org/login/">Login to Portal</a>
             </div>
             <div class="commitment-card">
                 <div class="commitment-icon">
@@ -2308,7 +2351,7 @@
 
                 <div class="form-group">
                     <label class="form-label" for="accessibility">Any accessibility needs or accommodations?</label>
-                    <textarea class="form-textarea" id="accessibility" style="min-height:80px;"
+                    <textarea class="form-textarea form-textarea--tall" id="accessibility"
                         placeholder="Please let us know if you have any needs we should be aware of..."></textarea>
                 </div>
 
@@ -2358,7 +2401,7 @@
                     </a>
                 </div>
 
-                <div class="form-section-title">Agreements <span style="color:var(--color-sky)">*</span></div>
+                <div class="form-section-title">Agreements <span class="required-mark">*</span></div>
                 <div class="checkbox-group">
                     <label class="checkbox-item"><input type="checkbox" required> <span class="checkbox-label">I
                             acknowledge that this membership includes monthly Dock &amp; Dine experiences and year-round
@@ -2394,8 +2437,8 @@
             believe in the power of collective waterfront stewardship.</p>
         <div class="join-actions">
             <a class="btn-white" href="./volunteer.html">Volunteer with Us</a>
-            <a class="btn-ghost-gold" href="./partner-with-us.html">Partner with Us</a>
-            <a class="btn-ghost-gold" href="./support-us.html">Donate</a>
+            <a class="btn-ghost" href="./partner-with-us.html">Partner with Us</a>
+            <a class="btn-ghost" href="./support-us.html">Donate</a>
         </div>
     </section>
 

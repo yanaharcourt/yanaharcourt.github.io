@@ -298,27 +298,28 @@
         /* ============================================================
         BUTTONS — fill-sweep hover effect
         ============================================================ */
+        /* ── BUTTONS — unified across all pages ── */
         .btn-primary,
         .btn-white,
         .btn-ghost,
-        .btn-outline,
-        .nav-cta,
-        .hero-email-btn,
-        .bento-link {
+        .btn-outline {
             position: relative;
             overflow: hidden;
             isolation: isolate;
             z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            cursor: pointer;
+            border: none;
         }
 
         /* Sweep fill layer */
         .btn-primary::before,
         .btn-white::before,
-        .btn-ghost::before,
-        .btn-outline::before,
-        .nav-cta::before,
-        .hero-email-btn::before,
-        .bento-link::before {
+        .btn-ghost::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -330,43 +331,61 @@
             border-radius: inherit;
         }
 
-        .btn-primary:hover::before,
-        .nav-cta:hover::before,
-        .hero-email-btn:hover::before {
-            transform: scaleX(1);
-        }
-
-        /* Ghost/outline on dark bg: sweep white */
-        .btn-ghost::before {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .btn-ghost:hover::before {
-            transform: scaleX(1);
-        }
-
         .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
             background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
         }
 
         .btn-outline:hover::before {
             transform: scaleX(1);
         }
 
-        /* bento-link sweep white */
-        .bento-link::before {
-            background: var(--color-sky);
+        .btn-outline:hover {
+            border-color: var(--color-sky);
         }
 
-        .bento-link:hover::before {
-            transform: scaleX(1);
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
+            transition: color var(--dur-fast);
         }
 
-        .bento-link:hover {
-            color: var(--color-white, #fff);
-        }
-
-        /* btn-white (on dark join section) */
         .btn-white::before {
             background: var(--color-sky);
         }
@@ -377,6 +396,29 @@
 
         .btn-white:hover {
             color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
         }
 
         .nav-cta {
@@ -459,70 +501,7 @@
             }
         }
 
-        /* ── BUTTON BASE STYLES ── */
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            background: var(--color-navy);
-            color: var(--color-bg);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            transition: color var(--dur-fast);
-        }
 
-        .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            background: transparent;
-            color: var(--color-navy);
-            border: 1px solid var(--color-line);
-            transition: background var(--dur-fast), border-color var(--dur-fast);
-        }
-
-        .btn-outline:hover {
-            background: var(--color-surface);
-            border-color: var(--color-sky);
-        }
-
-        .btn-white {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            background: var(--color-white);
-            color: var(--color-navy);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            transition: color var(--dur-fast);
-        }
-
-        .btn-ghost {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            background: transparent;
-            color: var(--color-white);
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            transition: background var(--dur-fast), border-color var(--dur-fast);
-        }
-
-        .btn-ghost:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
 
         /* ════════════════════════════════════════════════════════════
            BREADCRUMB
@@ -666,28 +645,6 @@
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-        }
-
-        /* Light hero button overrides */
-        .page-hero .btn-white {
-            background: var(--color-navy);
-            color: var(--color-bg);
-        }
-
-        .page-hero .btn-white::before {
-            background: var(--color-sky);
-        }
-
-        .page-hero .btn-ghost {
-            background: transparent;
-            color: var(--color-navy);
-            border: 1px solid var(--color-line);
-        }
-
-        .page-hero .btn-ghost:hover {
-            background: var(--color-surface);
-            border-color: var(--color-sky);
-            color: var(--color-navy);
         }
 
         /* Right panel — photo */
@@ -1586,6 +1543,10 @@
             margin-bottom: var(--space-xl);
         }
 
+        .volunteer-desc--pull {
+            margin-top: -20px;
+        }
+
         .volunteer-cta-row {
             display: flex;
             gap: 12px;
@@ -2038,8 +1999,8 @@
                 <p class="hero-desc">An ancient practice rooted in the land of Kemet — reconnecting our community with
                     ancestral wisdom, breathwork, and the healing power of movement.</p>
                 <div class="hero-cta-row">
-                    <a class="btn-white reveal reveal--delay-2" href="#events">Upcoming Sessions</a>
-                    <a class="btn-ghost reveal reveal--delay-3" href="#volunteer">Teach With Us</a>
+                    <a class="btn-primary reveal reveal--delay-2" href="#events">Upcoming Sessions</a>
+                    <a class="btn-outline reveal reveal--delay-3" href="#volunteer">Teach With Us</a>
                 </div>
             </div>
 
@@ -2429,7 +2390,7 @@
                     practice with neighbors, families, and youth across San Diego. Each week we offer free yoga sessions
                     at our farmers' markets and community events — and we need passionate instructors to help expand
                     this work.</p>
-                <p class="volunteer-desc reveal" style="margin-top: -20px;">Whether you're newly certified or have years
+                <p class="volunteer-desc volunteer-desc--pull reveal">Whether you're newly certified or have years
                     of experience, this is a supportive space to grow your teaching skills, connect with new students,
                     and bring wellness directly into the heart of our community.</p>
                 <div class="volunteer-cta-row reveal">

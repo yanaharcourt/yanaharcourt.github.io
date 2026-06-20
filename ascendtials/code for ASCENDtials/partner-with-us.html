@@ -111,52 +111,128 @@
         }
 
         /* ── BUTTONS ── */
+        /* ── BUTTONS — unified across all pages ── */
+        .btn-primary,
+        .btn-white,
+        .btn-ghost,
+        .btn-outline {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Sweep fill layer */
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-ghost::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
         .btn-primary {
-            position: relative; overflow: hidden; isolation: isolate; z-index: 0;
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 14px 28px; border-radius: var(--radius-pill);
-            background: var(--color-navy); color: var(--color-bg);
-            font-size: var(--text-sm); font-weight: 500; transition: color var(--dur-fast);
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
         }
-        .btn-primary::before {
-            content: ''; position: absolute; inset: 0; background: var(--color-sky);
-            transform: scaleX(0); transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22,1,0.36,1); z-index: -1; border-radius: inherit;
-        }
-        .btn-primary:hover::before { transform: scaleX(1); }
 
         .btn-outline {
-            position: relative; overflow: hidden; isolation: isolate;
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 13px 27px; border-radius: var(--radius-pill);
-            font-size: var(--text-sm); font-weight: 500;
-            background: transparent; color: var(--color-navy);
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
             border: 1px solid var(--color-line);
+            text-align: center;
             transition: background var(--dur-fast), border-color var(--dur-fast);
         }
-        .btn-outline::before {
-            content: ''; position: absolute; inset: 0; background: var(--color-sky-light);
-            transform: scaleX(0); transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22,1,0.36,1); z-index: -1; border-radius: inherit;
-        }
-        .btn-outline:hover::before { transform: scaleX(1); }
-        .btn-outline:hover { border-color: var(--color-sky); }
 
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-sky);
+        }
+
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
+            transition: color var(--dur-fast);
+        }
+
+        .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
         .btn-ghost {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 13px 27px; border-radius: var(--radius-pill);
-            font-size: var(--text-sm); font-weight: 500;
-            border: 1.5px solid rgba(255,255,255,.35); color: rgba(255,255,255,.85);
-            position: relative; overflow: hidden; isolation: isolate;
-            transition: color var(--dur-fast), border-color var(--dur-fast);
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
         }
+
         .btn-ghost::before {
-            content: ''; position: absolute; inset: 0; background: rgba(255,255,255,.12);
-            transform: scaleX(0); transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22,1,0.36,1); z-index: -1; border-radius: inherit;
+            background: rgba(255, 255, 255, 0.12);
         }
-        .btn-ghost:hover::before { transform: scaleX(1); }
-        .btn-ghost:hover { border-color: rgba(255,255,255,.7); }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
 
         /* ============================================================
            NAV
@@ -693,6 +769,7 @@
         }
         .faq-sticky h2 em { font-style: italic; color: var(--color-sky); }
         .faq-intro { font-size: var(--text-base); color: var(--color-text-muted); line-height: 1.75; }
+        .link-sky { color: var(--color-sky); }
         .faq-list { display: flex; flex-direction: column; gap: 0; }
         .faq-item { border-bottom: 1px solid var(--color-line); }
         .faq-question {
@@ -1352,7 +1429,7 @@
             </div>
             <div>
                 <div class="info-label">Contact</div>
-                <div class="info-value"><a href="mailto:info@ascendtials.org" style="color:var(--color-sky)">info@ascendtials.org</a></div>
+                <div class="info-value"><a href="mailto:info@ascendtials.org" class="link-sky">info@ascendtials.org</a></div>
             </div>
         </div>
     </div>
@@ -1785,7 +1862,7 @@
             <div class="faq-sticky">
                 <span class="section-label reveal">Questions?</span>
                 <h2 class="reveal reveal--delay-1">Partnership <em>FAQs</em></h2>
-                <p class="faq-intro reveal reveal--delay-2">Everything you need to know about working with ASCENDtials. Can't find your answer? Write to us at <a href="mailto:info@ascendtials.org" style="color:var(--color-sky);">info@ascendtials.org</a>.</p>
+                <p class="faq-intro reveal reveal--delay-2">Everything you need to know about working with ASCENDtials. Can't find your answer? Write to us at <a href="mailto:info@ascendtials.org" class="link-sky">info@ascendtials.org</a>.</p>
             </div>
             <div class="faq-list">
                 <div class="faq-item">

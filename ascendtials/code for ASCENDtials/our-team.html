@@ -244,27 +244,28 @@
         /* ============================================================
         BUTTONS — fill-sweep hover effect
         ============================================================ */
+        /* ── BUTTONS — unified across all pages ── */
         .btn-primary,
         .btn-white,
         .btn-ghost,
-        .btn-outline,
-        .nav-cta,
-        .hero-email-btn,
-        .bento-link {
+        .btn-outline {
             position: relative;
             overflow: hidden;
             isolation: isolate;
             z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            cursor: pointer;
+            border: none;
         }
 
         /* Sweep fill layer */
         .btn-primary::before,
         .btn-white::before,
-        .btn-ghost::before,
-        .btn-outline::before,
-        .nav-cta::before,
-        .hero-email-btn::before,
-        .bento-link::before {
+        .btn-ghost::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -276,43 +277,61 @@
             border-radius: inherit;
         }
 
-        .btn-primary:hover::before,
-        .nav-cta:hover::before,
-        .hero-email-btn:hover::before {
-            transform: scaleX(1);
-        }
-
-        /* Ghost/outline on dark bg: sweep white */
-        .btn-ghost::before {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .btn-ghost:hover::before {
-            transform: scaleX(1);
-        }
-
         .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
             background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
         }
 
         .btn-outline:hover::before {
             transform: scaleX(1);
         }
 
-        /* bento-link sweep white */
-        .bento-link::before {
-            background: var(--color-sky);
+        .btn-outline:hover {
+            border-color: var(--color-sky);
         }
 
-        .bento-link:hover::before {
-            transform: scaleX(1);
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
+            transition: color var(--dur-fast);
         }
 
-        .bento-link:hover {
-            color: var(--color-white, #fff);
-        }
-
-        /* btn-white (on dark join section) */
         .btn-white::before {
             background: var(--color-sky);
         }
@@ -323,6 +342,29 @@
 
         .btn-white:hover {
             color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
         }
 
         .nav-cta {
@@ -912,7 +954,7 @@
 
         /* Warm accent card */
         .t-card--warm {
-            background: var(--color-sky-light);
+            background: var(--color-white);
             border-color: rgba(201, 169, 110, 0.2);
         }
 
@@ -1044,37 +1086,7 @@
             margin-bottom: var(--space-xl);
         }
 
-        .btn-primary {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            background: var(--color-navy);
-            color: var(--color-white);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            transition: color var(--dur-fast);
-        }
 
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--color-sky);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
-        }
-
-        .btn-primary:hover::before {
-            transform: scaleX(1);
-        }
 
         /* Board visual — abstract card stack */
         .board-visual {
@@ -1194,6 +1206,11 @@
             flex-shrink: 0;
         }
 
+        .bstack-badge--light {
+            background: var(--color-sky-light);
+            color: var(--color-sky);
+        }
+
         .bstack-item:nth-child(3) .bstack-badge {
             background: rgba(201, 169, 110, 0.2);
             color: var(--color-sky);
@@ -1258,56 +1275,7 @@
             flex-wrap: wrap;
         }
 
-        .btn-white {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            display: inline-flex;
-            align-items: center;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            background: var(--color-white);
-            color: var(--color-navy);
-            transition: color var(--dur-fast);
-        }
 
-        .btn-white::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--color-sky);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
-        }
-
-        .btn-white:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-white:hover {
-            color: var(--color-white);
-        }
-
-        .btn-ghost {
-            display: inline-flex;
-            align-items: center;
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            border: 1.5px solid rgba(255, 255, 255, 0.35);
-            color: rgba(255, 255, 255, 0.85);
-            transition: color var(--dur-fast), border-color var(--dur-fast);
-        }
-
-        .btn-ghost:hover {
-            border-color: rgba(255, 255, 255, 0.7);
-        }
 
         /* ============================================================
         FOOTER
@@ -1782,7 +1750,7 @@
             <div class="panel-intro">
                 <div class="panel-intro-left reveal">
                     <span class="section-label">Our Volunteers</span>
-                    <h2>Driven by Passion,<br>Powered by<br><em style="font-style:italic;">Community</em></h2>
+                    <h2>Driven by Passion,<br>Powered by<br><em>Community</em></h2>
                 </div>
                 <div class="panel-intro-right reveal reveal--delay-1">
                     <p>
@@ -1962,7 +1930,7 @@
                                 <div class="bstack-name">Open Position</div>
                                 <div class="bstack-role">Join Our Board</div>
                             </div>
-                            <div class="bstack-badge" style="background:var(--color-sky-light);color:var(--color-sky)">
+                            <div class="bstack-badge bstack-badge--light">
                                 Apply</div>
                         </div>
                     </div>

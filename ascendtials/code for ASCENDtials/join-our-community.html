@@ -229,15 +229,26 @@
         }
 
         .btn-white {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
             background: var(--color-white);
             color: var(--color-navy);
-            padding: 14px 28px;
-            font-weight: 500;
-            transition: background var(--dur-fast);
+            transition: color var(--dur-fast);
+        }
+        
+        .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
         }
 
         .btn-white:hover {
-            background: var(--color-sky);
             color: var(--color-white);
         }
 
