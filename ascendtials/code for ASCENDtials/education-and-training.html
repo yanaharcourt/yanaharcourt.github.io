@@ -213,28 +213,6 @@
             flex-wrap: wrap;
         }
 
-        /* Override btn-white and btn-ghost for light hero */
-        .page-hero .btn-white {
-            background: var(--color-navy);
-            color: var(--color-bg);
-        }
-
-        .page-hero .btn-white::before {
-            background: var(--color-sky);
-        }
-
-        .page-hero .btn-ghost {
-            background: transparent;
-            color: var(--color-navy);
-            border: 1px solid var(--color-line);
-        }
-
-        .page-hero .btn-ghost:hover {
-            background: var(--color-surface);
-            border-color: var(--color-sky);
-            color: var(--color-navy);
-        }
-
         /* Photo side */
         .hero-photo-wrap {
             position: relative;
@@ -316,67 +294,126 @@
         }
 
         /* ── BUTTON BASE STYLES ── */
-        .btn-primary {
+        /* ── BUTTONS — unified across all pages ── */
+        .btn-primary,
+        .btn-white,
+        .btn-ghost,
+        .btn-outline {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 28px;
             border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Sweep fill layer */
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-ghost::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
             background: var(--color-navy);
             color: var(--color-bg);
-            font-size: var(--text-sm);
+            padding: 14px 28px;
             font-weight: 500;
+            text-align: center;
             transition: color var(--dur-fast);
         }
 
         .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
             background: transparent;
             color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
             border: 1px solid var(--color-line);
+            text-align: center;
             transition: background var(--dur-fast), border-color var(--dur-fast);
         }
 
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
         .btn-outline:hover {
-            background: var(--color-surface);
             border-color: var(--color-sky);
         }
 
         .btn-white {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
             padding: 14px 28px;
             border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
             background: var(--color-white);
             color: var(--color-navy);
-            font-size: var(--text-sm);
-            font-weight: 500;
             transition: color var(--dur-fast);
         }
+        
+        .btn-white::before {
+            background: var(--color-sky);
+        }
 
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
         .btn-ghost {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
             background: transparent;
             color: var(--color-white);
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            transition: background var(--dur-fast), border-color var(--dur-fast);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
         }
 
         .btn-ghost:hover {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.6);
         }
 
@@ -432,6 +469,13 @@
         .section-h2 em {
             font-style: italic;
             color: var(--color-sky);
+        }
+
+        .section-lead {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            max-width: 580px;
+            line-height: 1.75;
         }
 
         /* ============================================================
@@ -557,89 +601,7 @@
             background: var(--color-surface);
         }
 
-        /* ============================================================
-        BUTTONS — fill-sweep hover effect
-        ============================================================ */
-        .btn-primary,
-        .btn-white,
-        .btn-ghost,
-        .btn-outline,
-        .nav-cta,
-        .hero-email-btn,
-        .bento-link {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            z-index: 0;
-        }
 
-        /* Sweep fill layer */
-        .btn-primary::before,
-        .btn-white::before,
-        .btn-ghost::before,
-        .btn-outline::before,
-        .nav-cta::before,
-        .hero-email-btn::before,
-        .bento-link::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--color-sky);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
-        }
-
-        .btn-primary:hover::before,
-        .nav-cta:hover::before,
-        .hero-email-btn:hover::before {
-            transform: scaleX(1);
-        }
-
-        /* Ghost/outline on dark bg: sweep white */
-        .btn-ghost::before {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .btn-ghost:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-outline::before {
-            background: var(--color-sky-light);
-        }
-
-        .btn-outline:hover::before {
-            transform: scaleX(1);
-        }
-
-        /* bento-link sweep white */
-        .bento-link::before {
-            background: var(--color-sky);
-        }
-
-        .bento-link:hover::before {
-            transform: scaleX(1);
-        }
-
-        .bento-link:hover {
-            color: var(--color-white, #fff);
-        }
-
-        /* btn-white (on dark join section) */
-        .btn-white::before {
-            background: var(--color-sky);
-        }
-
-        .btn-white:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-white:hover {
-            color: var(--color-white);
-        }
 
         .nav-cta {
             flex-shrink: 0;
@@ -1333,7 +1295,6 @@
             grid-template-columns: 1fr 1fr;
             gap: var(--space-2xl);
             align-items: center;
-            max-width: 1280px;
             margin: 0 auto;
         }
 
@@ -2075,8 +2036,8 @@
                 <p class="hero-desc">Learning pathways rooted in culture, ecology, and community wealth — reconnecting
                     participants with land and building real-world skills.</p>
                 <div class="hero-cta-row">
-                    <a class="btn-white" href="#overview">Explore Programs</a>
-                    <a class="btn-ghost" href="https://ascendtials.org/internship-fellowship-program/">Apply for
+                    <a class="btn-primary" href="#overview">Explore Programs</a>
+                    <a class="btn-outline" href="https://ascendtials.org/internship-fellowship-program/">Apply for
                         Internship</a>
                 </div>
             </div>
@@ -2228,8 +2189,7 @@
         <div class="lit-header">
             <span class="section-label reveal">Category 01</span>
             <h2 class="section-h2 reveal">Literacy Workshops</h2>
-            <p style="font-size:var(--text-lg);color:var(--color-text-muted);max-width:580px;line-height:1.75;"
-                class="reveal">Restoring ancestral knowledge and deepening understanding of land, water, air, and
+            <p class="section-lead reveal">Restoring ancestral knowledge and deepening understanding of land, water, air, and
                 cultural truth. Experiential, youth-friendly, and rooted in environmental justice.</p>
         </div>
         <div class="lit-grid">
@@ -2395,8 +2355,7 @@
         <div class="courses-header">
             <span class="section-label reveal">Category 04</span>
             <h2 class="section-h2 reveal">Courses</h2>
-            <p style="font-size:var(--text-lg);color:var(--color-text-muted);max-width:560px;line-height:1.75;"
-                class="reveal">Self-paced & instructor-led learning blending cultural literacy, ecological knowledge,
+            <p class="section-lead reveal">Self-paced & instructor-led learning blending cultural literacy, ecological knowledge,
                 entrepreneurship, and practical skill-building.</p>
         </div>
         <div class="courses-bento">

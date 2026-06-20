@@ -244,26 +244,28 @@
         /* ============================================================
         BUTTONS — fill-sweep hover effect
         ============================================================ */
+        /* ── BUTTONS — unified across all pages ── */
         .btn-primary,
         .btn-white,
         .btn-ghost,
-        .btn-outline,
-        .nav-cta,
-        .hero-email-btn,
-        .bento-link {
+        .btn-outline {
             position: relative;
             overflow: hidden;
             isolation: isolate;
             z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            cursor: pointer;
+            border: none;
         }
 
+        /* Sweep fill layer */
         .btn-primary::before,
         .btn-white::before,
-        .btn-ghost::before,
-        .btn-outline::before,
-        .nav-cta::before,
-        .hero-email-btn::before,
-        .bento-link::before {
+        .btn-ghost::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -275,40 +277,61 @@
             border-radius: inherit;
         }
 
-        .btn-primary:hover::before,
-        .nav-cta:hover::before,
-        .hero-email-btn:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-ghost::before {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .btn-ghost:hover::before {
-            transform: scaleX(1);
-        }
-
         .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
             background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
         }
 
         .btn-outline:hover::before {
             transform: scaleX(1);
         }
 
-        .bento-link::before {
-            background: var(--color-sky);
+        .btn-outline:hover {
+            border-color: var(--color-sky);
         }
 
-        .bento-link:hover::before {
-            transform: scaleX(1);
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
+            transition: color var(--dur-fast);
         }
-
-        .bento-link:hover {
-            color: var(--color-white, #fff);
-        }
-
+        
         .btn-white::before {
             background: var(--color-sky);
         }
@@ -319,6 +342,29 @@
 
         .btn-white:hover {
             color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
         }
 
         .nav-cta {
@@ -538,57 +584,7 @@
             flex-wrap: wrap;
         }
 
-        .btn-primary {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            z-index: 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            background: var(--color-navy);
-            color: var(--color-bg);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            transition: color var(--dur-fast);
-        }
 
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--color-sky);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
-        }
-
-        .btn-primary:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            background: transparent;
-            color: var(--color-navy);
-            border: 1px solid var(--color-line);
-            transition: background var(--dur-fast), border-color var(--dur-fast);
-        }
-
-        .btn-outline:hover {
-            background: var(--color-surface);
-            border-color: var(--color-sky);
-        }
 
         .hero-photo-wrap {
             position: relative;
@@ -1261,6 +1257,18 @@
             margin-top: auto;
         }
 
+        .vendor-note {
+            margin-bottom: var(--space-lg);
+        }
+
+        .vendor-note__label {
+            color: var(--color-navy);
+        }
+
+        .btn-outline--mt {
+            margin-top: var(--space-xl);
+        }
+
         @media (max-width: 900px) {
             .vendor-grid {
                 grid-template-columns: 1fr;
@@ -1334,6 +1342,10 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: var(--space-lg);
+        }
+
+        .program-card--full {
+            grid-column: span 2;
         }
 
         .program-card--row {
@@ -2070,56 +2082,7 @@
             flex-wrap: wrap;
         }
 
-        .btn-white {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            display: inline-flex;
-            align-items: center;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            background: var(--color-white);
-            color: var(--color-navy);
-            transition: color var(--dur-fast);
-        }
 
-        .btn-white::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--color-sky);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
-        }
-
-        .btn-white:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-white:hover {
-            color: var(--color-white);
-        }
-
-        .btn-ghost {
-            display: inline-flex;
-            align-items: center;
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            border: 1.5px solid rgba(255, 255, 255, 0.35);
-            color: rgba(255, 255, 255, 0.85);
-            transition: color var(--dur-fast), border-color var(--dur-fast);
-        }
-
-        .btn-ghost:hover {
-            border-color: rgba(255, 255, 255, 0.7);
-        }
 
         @media (max-width: 600px) {
             .section-join {
@@ -2769,7 +2732,7 @@
     VENDOR SECTION — Become a Vendor
     ============================================================ -->
     <section class="vendor-section">
-        <div class="tabs-header reveal" style="margin-bottom: var(--space-2xl);">
+        <div class="tabs-header tabs-header--mb reveal">
             <span class="section-label">Become Part of Our Community</span>
             <h2>Join the market<br>as a <em>vendor</em></h2>
         </div>
@@ -2801,8 +2764,7 @@
                     instructional walks you through everything you need — from permits to setup — so you can join our
                     community of vendors who nourish, uplift, and help preserve the well-being of our neighborhoods
                     and our environment.</p>
-                <p style="margin-bottom: var(--space-lg);"><strong
-                        style="color: var(--color-navy);">Already a vendor?</strong> For vendors and artisans at our
+                <p class="vendor-note"><strong class="vendor-note__label">Already a vendor?</strong> For vendors and artisans at our
                     Marina District farmers' market location, please use the Payment button to swiftly make your
                     vendor fee payments.</p>
                 <div class="tab-cta-row">
@@ -2841,7 +2803,7 @@
         </div>
 
         <div class="programs-grid">
-            <div class="program-card program-card--alert program-card--row reveal" style="grid-column: span 2;">
+            <div class="program-card program-card--alert program-card--row program-card--full reveal">
                 <div class="program-card-icon">
                     <svg viewBox="0 0 24 24">
                         <rect x="2" y="7" width="20" height="14" rx="2" />
@@ -2929,7 +2891,7 @@
                 </ul>
             </div>
 
-            <div class="program-card program-card--row reveal reveal--delay-4" style="grid-column: span 2;">
+            <div class="program-card program-card--row program-card--full reveal reveal--delay-4">
                 <div class="program-card-icon">
                     <svg viewBox="0 0 24 24">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -3049,8 +3011,7 @@
                 <h2 class="reveal reveal--delay-1">Market<br><em>FAQs</em></h2>
                 <p class="faq-intro reveal reveal--delay-2">Everything you need to know before you visit. Can't find
                     your answer? Reach out to us directly.</p>
-                <a href="./contact.html" class="btn-outline"
-                    style="margin-top: var(--space-xl); display: inline-flex;">Contact Us</a>
+                <a href="./contact.html" class="btn-outline btn-outline--mt">Contact Us</a>
             </div>
             <div class="faq-list">
                 <div class="faq-item">

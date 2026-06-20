@@ -379,7 +379,11 @@
             margin-bottom: var(--space-md);
         }
 
-        .btn-primary {
+        /* ── BUTTONS — unified across all pages ── */
+        .btn-primary,
+        .btn-white,
+        .btn-ghost,
+        .btn-outline {
             position: relative;
             overflow: hidden;
             isolation: isolate;
@@ -387,16 +391,16 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 28px;
             border-radius: var(--radius-pill);
-            background: var(--color-navy);
-            color: var(--color-bg);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            transition: color var(--dur-fast);
+            font-size: var(--text-base);
+            cursor: pointer;
+            border: none;
         }
 
-        .btn-primary::before {
+        /* Sweep fill layer */
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-ghost::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -406,27 +410,6 @@
             transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
             z-index: -1;
             border-radius: inherit;
-        }
-
-        .btn-primary:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            background: transparent;
-            color: var(--color-navy);
-            border: 1px solid var(--color-line);
-            transition: background var(--dur-fast), border-color var(--dur-fast);
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
         }
 
         .btn-outline::before {
@@ -441,6 +424,29 @@
             border-radius: inherit;
         }
 
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
         .btn-outline:hover::before {
             transform: scaleX(1);
         }
@@ -449,6 +455,54 @@
             border-color: var(--color-sky);
         }
 
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
+            transition: color var(--dur-fast);
+        }
+        
+        .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Page-specific navy button */
         .btn-navy {
             position: relative;
             overflow: hidden;
@@ -460,10 +514,12 @@
             border-radius: var(--radius-pill);
             background: var(--color-navy);
             color: var(--color-white);
-            font-size: var(--text-sm);
+            font-size: var(--text-base);
             font-weight: 500;
             white-space: nowrap;
             flex-shrink: 0;
+            cursor: pointer;
+            border: none;
             transition: color var(--dur-fast);
         }
 
@@ -481,78 +537,6 @@
 
         .btn-navy:hover::before {
             transform: scaleX(1);
-        }
-
-        .btn-white {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            background: var(--color-white);
-            color: var(--color-navy);
-            transition: color var(--dur-fast);
-        }
-
-        .btn-white::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--color-sky);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
-        }
-
-        .btn-white:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-white:hover {
-            color: var(--color-white);
-        }
-
-        .btn-ghost {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            border: 1.5px solid rgba(255, 255, 255, 0.35);
-            color: rgba(255, 255, 255, 0.85);
-            transition: color var(--dur-fast), border-color var(--dur-fast);
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-        }
-
-        .btn-ghost::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(255, 255, 255, 0.12);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
-        }
-
-        .btn-ghost:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-ghost:hover {
-            border-color: rgba(255, 255, 255, 0.7);
         }
 
         /* ============================================================
@@ -855,8 +839,9 @@
         .offer-card--wide {
             grid-column: 1 / 3;
             grid-row: 1;
-            background: var(--color-sky-faint);
-            border-color: rgba(201, 169, 110, 0.3);
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
             display: grid;
             grid-template-columns: auto 1fr;
             gap: var(--space-xl);
@@ -915,8 +900,9 @@
         .offer-card--yoga {
             grid-column: 1 / 3;
             grid-row: 3;
-            background: var(--color-sky-faint);
-            border-color: rgba(201, 169, 110, 0.2);
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-xl);
             display: flex;
             align-items: center;
             gap: var(--space-xl);
@@ -1210,6 +1196,18 @@
             font-size: var(--text-sm);
             color: var(--color-text-muted);
             line-height: 1.6;
+        }
+
+        .details-stat-num--sky {
+            color: var(--color-sky);
+        }
+
+        .details-stat-label--light {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .details-stat-label--mb {
+            margin-bottom: 16px;
         }
 
         .details-stat--accent .details-stat-label {
@@ -1518,6 +1516,11 @@
             grid-row: span 2;
         }
 
+        .vendor-row--accent {
+            border-color: rgba(201, 169, 110, 0.3);
+            background: var(--color-sky-faint);
+        }
+
         @media (max-width: 900px) {
             .core-partners {
                 grid-template-columns: 1fr 1fr;
@@ -1616,6 +1619,22 @@
             width: 100%;
             height: 240px;
             object-fit: cover;
+        }
+
+        .involved-card-img--top {
+            object-position: center top;
+        }
+
+        .vendors-intro {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: var(--space-lg);
+            max-width: 700px;
+        }
+
+        .text-navy {
+            color: var(--color-navy);
         }
 
         .involved-card-body {
@@ -1717,6 +1736,13 @@
             border-radius: var(--radius-xl);
             padding: var(--space-xl);
             position: relative;
+        }
+
+        .step-card-note {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 12px;
         }
 
         .step-num {
@@ -2282,6 +2308,39 @@
             background: var(--color-white);
             border-top: 1px solid var(--color-line);
             padding: var(--space-section) max(48px, 6vw);
+        }
+
+        .recap-intro {
+            margin-bottom: var(--space-lg);
+        }
+
+        .recap-heading {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400;
+            color: var(--color-navy);
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: var(--space-lg);
+        }
+
+        .recap-heading em {
+            font-style: italic;
+            color: var(--color-sky);
+        }
+
+        .art-exchange-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            font-size: var(--text-sm);
+            color: var(--color-sky);
+            font-weight: 500;
+        }
+
+        .link-sky {
+            color: var(--color-sky);
         }
 
         .recap-grid {
@@ -3149,7 +3208,7 @@
                 <p>Bring a piece of art — drawing, painting, poem, or handmade item — and exchange it with a neighbor.
                     Creativity meets community.</p>
                 <a href="https://www.eventbrite.com/e/ascendtials-food-distribution-event-tickets-1310781565949?aff=oddtdtcreator"
-                    style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:var(--text-sm);color:var(--color-sky);font-weight:500;">
+                    class="art-exchange-link">
                     Join the exchange
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -3190,7 +3249,7 @@
                         <div><strong>12 PM – 1 PM</strong> — arrive any time within the window.</div>
                     </li>
                 </ul>
-                <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <div class="cta-row">
                     <a class="btn-primary"
                         href="https://www.eventbrite.com/e/ascendtials-food-distribution-event-tickets-1310781565949?aff=oddtdtcreator">
                         Register on Eventbrite
@@ -3215,8 +3274,8 @@
                     <div class="details-stat-label">Community resource vendors on-site each event</div>
                 </div>
                 <div class="details-stat details-stat--accent">
-                    <div class="details-stat-num" style="color:var(--color-sky);">2026 Upcoming Dates</div>
-                    <div class="details-stat-label" style="color:rgba(255,255,255,0.6); margin-bottom: 16px;">Second
+                    <div class="details-stat-num details-stat-num--sky">2026 Upcoming Dates</div>
+                    <div class="details-stat-label details-stat-label--light details-stat-label--mb">Second
                         Friday of each month — 12 PM to 1 PM</div>
                     <div class="dates-fill-grid">
                         <div class="date-pill">July 10</div>
@@ -3324,9 +3383,8 @@
         </div>
 
         <!-- Community resource vendors -->
-        <p
-            style="font-size:var(--text-base); color:var(--color-text-muted); line-height:1.7; margin-bottom:var(--space-lg); max-width:700px;">
-            We also host <strong style="color:var(--color-navy);">community resource vendors</strong> who provide
+        <p class="vendors-intro">
+            We also host <strong class="text-navy">community resource vendors</strong> who provide
             wraparound support for families at every distribution.</p>
         <span class="vendors-label reveal">Community Resource Vendors — On-Site Every Month</span>
         <div class="vendor-table">
@@ -3351,8 +3409,7 @@
                 <h4>Black Women SD</h4>
                 <p>Connecting Black women more deeply in San Diego through community, resources, and sisterhood.</p>
             </div>
-            <div class="vendor-row reveal reveal--delay-1"
-                style="border-color:rgba(201,169,110,0.3); background:var(--color-sky-faint);">
+            <div class="vendor-row vendor-row--accent reveal reveal--delay-1">
                 <h4>…and more each month</h4>
                 <p>Additional partners rotate monthly to meet the evolving needs of our community. Interested in being a
                     resource vendor? Reach out!</p>
@@ -3372,7 +3429,7 @@
         <div class="involved-grid">
             <div class="involved-card reveal">
                 <img src="https://ascendtials.org/wp-content/uploads/2026/05/June-FoodDis-Freestore-Flyers-2026-768x994.png"
-                    alt="Sign up to receive food flyer" style="object-position: center top;">
+                    alt="Sign up to receive food flyer" class="involved-card-img--top">
                 <div class="involved-card-body">
                     <h3>Sign Up to <em>Receive Food</em></h3>
                     <p>If you or your family would like to receive groceries at our next distribution, complete this
@@ -3414,7 +3471,7 @@
 
             <div class="involved-card reveal reveal--delay-1">
                 <img src="https://ascendtials.org/wp-content/uploads/2025/06/21-Become-A-Sponsor_large.png"
-                    alt="Become a sponsor" style="object-position: center top;">
+                    alt="Become a sponsor" class="involved-card-img--top">
                 <div class="involved-card-body">
                     <h3>Become a <em>Sponsor</em></h3>
                     <p>Interested in joining the monthly distribution as a sponsor? Whether you can provide food, water,
@@ -3477,8 +3534,7 @@
                     </svg>
                 </div>
                 <h3>Drop-Off Location & Time</h3>
-                <p
-                    style="font-size:var(--text-sm); color:var(--color-text-muted); line-height:1.7; margin-bottom:12px;">
+                <p class="step-card-note">
                     Officer Jeremy Henwood Memorial Park<br>3975 Wightman Street, San Diego, CA 92105</p>
                 <ul>
                     <li>Drop-off window: Day-of event (TBA)</li>
@@ -3599,11 +3655,9 @@
     ============================================================ -->
     <section class="recap-section">
         <!-- Intro text: full-width above the grid -->
-        <div class="reveal" style="margin-bottom: var(--space-lg);">
+        <div class="reveal recap-intro">
             <span class="section-label">2025 Year in Review</span>
-            <h2
-                style="font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:400;color:var(--color-navy);line-height:1.1;letter-spacing:-1px;margin-bottom:var(--space-lg);">
-                Thank you for an<br><em style="font-style:italic;color:var(--color-sky);">incredible year</em></h2>
+            <h2 class="recap-heading">Thank you for an<br><em>incredible year</em></h2>
             <!-- <p style="font-size:var(--text-base);color:var(--color-text-muted);line-height:1.8;margin-bottom:0;">In 2025, our community came together in powerful ways. Thanks to your generosity, partnership, and volunteer spirit, we hosted six food distributions — each one providing essential support to our neighbors.</p> -->
         </div>
 
@@ -3722,7 +3776,7 @@
                 <h2 class="reveal reveal--delay-1">Food Distribution<br><em>FAQs</em></h2>
                 <p class="faq-intro reveal reveal--delay-2">Everything you need to know before you visit. Can't find
                     your answer? Reach out to us directly at <a href="mailto:info@ascendtials.org"
-                        style="color:var(--color-sky);">info@ascendtials.org</a>.</p>
+                        class="link-sky">info@ascendtials.org</a>.</p>
             </div>
             <div class="faq-list">
                 <div class="faq-item">

@@ -173,10 +173,11 @@
         }
 
         /* ── BUTTONS ── */
+        /* ── BUTTONS — unified across all pages ── */
         .btn-primary,
-        .btn-outline,
         .btn-white,
-        .btn-ghost {
+        .btn-ghost,
+        .btn-outline {
             position: relative;
             overflow: hidden;
             isolation: isolate;
@@ -186,40 +187,14 @@
             gap: 8px;
             border-radius: var(--radius-pill);
             font-size: var(--text-base);
-            font-weight: 500;
             cursor: pointer;
             border: none;
-            transition: color var(--dur-fast);
         }
 
-        .btn-primary {
-            background: var(--color-navy);
-            color: var(--color-bg);
-            padding: 14px 28px;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--color-navy);
-            padding: 13px 27px;
-            border: 1px solid var(--color-line);
-        }
-
-        .btn-white {
-            background: var(--color-white);
-            color: var(--color-navy);
-            padding: 14px 28px;
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--color-white);
-            padding: 13px 27px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
+        /* Sweep fill layer */
         .btn-primary::before,
-        .btn-white::before {
+        .btn-white::before,
+        .btn-ghost::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -243,8 +218,29 @@
             border-radius: inherit;
         }
 
-        .btn-primary:hover::before,
-        .btn-white:hover::before,
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
         .btn-outline:hover::before {
             transform: scaleX(1);
         }
@@ -253,72 +249,26 @@
             border-color: var(--color-sky);
         }
 
-        .btn-ghost:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.6);
+        .btn-outline--mt-lg {
+            margin-top: var(--space-lg);
         }
 
-        /* ============================================================
-        NAV
-        ============================================================ */
-        .btn-primary,
-        .btn-white,
-        .btn-ghost,
-        .btn-outline,
-        .nav-cta,
-        .bento-link {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            z-index: 0;
+        .btn-outline--mt {
+            margin-top: var(--space-xl);
         }
 
-        .btn-primary::before,
-        .btn-white::before,
-        .btn-ghost::before,
-        .btn-outline::before,
-        .nav-cta::before,
-        .bento-link::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--color-sky);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
+            transition: color var(--dur-fast);
         }
-
-        .btn-primary:hover::before,
-        .nav-cta:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-ghost::before {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .btn-ghost:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-outline::before {
-            background: var(--color-sky-light);
-        }
-
-        .btn-outline:hover::before {
-            transform: scaleX(1);
-        }
-
-        .bento-link::before {
-            background: var(--color-sky);
-        }
-
-        .bento-link:hover::before {
-            transform: scaleX(1);
-        }
-
+        
         .btn-white::before {
             background: var(--color-sky);
         }
@@ -329,6 +279,29 @@
 
         .btn-white:hover {
             color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
         }
 
         .nav-cta {
@@ -619,27 +592,6 @@
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-        }
-
-        .page-hero .btn-white {
-            background: var(--color-navy);
-            color: var(--color-bg);
-        }
-
-        .page-hero .btn-white::before {
-            background: var(--color-sky);
-        }
-
-        .page-hero .btn-ghost {
-            background: transparent;
-            color: var(--color-navy);
-            border: 1px solid var(--color-line);
-        }
-
-        .page-hero .btn-ghost:hover {
-            background: var(--color-surface);
-            border-color: var(--color-sky);
-            color: var(--color-navy);
         }
 
         .hero-photo-wrap {
@@ -1323,6 +1275,10 @@
             font-size: var(--text-sm);
             color: var(--color-text-muted);
             line-height: 1.5;
+        }
+
+        .intern-role--mt {
+            margin-top: 4px;
         }
 
         .intern-tbd {
@@ -2129,8 +2085,8 @@
                     development.
                 </p>
                 <div class="hero-cta-row reveal reveal--delay-3">
-                    <a href="https://forms.gle/wkvGGibQjPzFSuXj7" class="btn-white" target="_blank">Apply Now</a>
-                    <a href="#fellowship" class="btn-ghost">Fellowship Program</a>
+                    <a href="https://forms.gle/wkvGGibQjPzFSuXj7" class="btn-primary" target="_blank">Apply Now</a>
+                    <a href="#fellowship" class="btn-outline">Fellowship Program</a>
                 </div>
             </div>
             <div class="hero-photo-wrap reveal reveal--delay-2">
@@ -2292,8 +2248,7 @@
                             one of ASCENDtials' most vibrant forms of community engagement. This integration lets you
                             practice business development, sustainability, and community outreach skills in a real-world
                             setting.</p>
-                        <a href="./become-a-vendor-internship-integration.html" class="btn-outline"
-                            style="margin-top: var(--space-lg);">Learn About Vendor Integration</a>
+                        <a href="./become-a-vendor-internship-integration.html" class="btn-outline btn-outline--mt-lg">Learn About Vendor Integration</a>
                     </div>
                 </div>
             </div>
@@ -2385,7 +2340,7 @@
             </div>
             <div class="intern-card reveal reveal--delay-1">
                 <div class="intern-tbd">Publishing / Editorial Lead</div>
-                <div class="intern-role" style="margin-top: 4px;">Position open — apply now</div>
+                <div class="intern-role intern-role--mt">Position open — apply now</div>
             </div>
         </div>
     </section>
@@ -2435,8 +2390,7 @@
                 <h2 class="section-h2 reveal reveal--delay-1">Internship<br><em>FAQs</em></h2>
                 <p class="faq-intro reveal reveal--delay-2">Everything you need to know before applying. Can't find your
                     answer? Reach out to us directly.</p>
-                <a href="./contact.html" class="btn-outline"
-                    style="margin-top: var(--space-xl); display: inline-flex;">Contact Us</a>
+                <a href="./contact.html" class="btn-outline btn-outline--mt">Contact Us</a>
             </div>
             <div class="faq-list">
                 <div class="faq-item">

@@ -248,63 +248,28 @@
         BUTTONS — fill-sweep hover effect
         ============================================================ */
 
+        /* ── BUTTONS — unified across all pages ── */
         .btn-primary,
         .btn-white,
         .btn-ghost,
         .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            font-family: var(--font-body);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            cursor: pointer;
-            border: none;
-            text-decoration: none;
-            white-space: nowrap;
             position: relative;
             overflow: hidden;
             isolation: isolate;
             z-index: 0;
-            transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-base);
+            cursor: pointer;
+            border: none;
         }
 
-        /* btn-primary: navy bg → gold sweep */
-        .btn-primary {
-            background: var(--color-navy);
-            color: var(--color-white);
-        }
-
-        /* btn-white: navy bg on dark sections → gold sweep */
-        .btn-white {
-            background: var(--color-white);
-            color: var(--color-navy);
-        }
-
-        /* btn-outline: transparent with border → sky-light sweep */
-        .btn-outline {
-            background: transparent;
-            color: var(--color-navy);
-            border: 1px solid var(--color-line);
-        }
-
-        /* btn-ghost: transparent on dark bg → white sweep */
-        .btn-ghost {
-            background: transparent;
-            color: rgba(255, 255, 255, 0.85);
-            border: 1.5px solid rgba(255, 255, 255, 0.35);
-        }
-
-        /* Sweep fill layer — shared */
+        /* Sweep fill layer */
         .btn-primary::before,
         .btn-white::before,
-        .btn-ghost::before,
-        .btn-outline::before,
-        .nav-cta::before,
-        .hero-email-btn::before,
-        .bento-link::before {
+        .btn-ghost::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -316,28 +281,39 @@
             border-radius: inherit;
         }
 
-        .btn-primary:hover::before,
-        .nav-cta:hover::before,
-        .hero-email-btn:hover::before {
-            transform: scaleX(1);
-        }
-
-        /* Ghost on dark bg: sweep semi-white */
-        .btn-ghost::before {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .btn-ghost:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-ghost:hover {
-            border-color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Outline: sweep sky-light */
         .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
             background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
         }
 
         .btn-outline:hover::before {
@@ -348,7 +324,18 @@
             border-color: var(--color-sky);
         }
 
-        /* btn-white: sweep gold */
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
+            transition: color var(--dur-fast);
+        }
+        
         .btn-white::before {
             background: var(--color-sky);
         }
@@ -359,6 +346,29 @@
 
         .btn-white:hover {
             color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
         }
 
         /* bento-link: sweep gold */
@@ -386,27 +396,6 @@
 
         .bento-link:hover {
             color: var(--color-white);
-        }
-
-        /* hero override: btn-white acts as primary on light bg */
-        .page-hero .btn-white {
-            background: var(--color-navy);
-            color: var(--color-bg);
-        }
-
-        .page-hero .btn-ghost {
-            background: transparent;
-            color: var(--color-navy);
-            border: 1px solid var(--color-line);
-        }
-
-        .page-hero .btn-ghost::before {
-            background: var(--color-sky-light);
-        }
-
-        .page-hero .btn-ghost:hover {
-            border-color: var(--color-sky);
-            color: var(--color-navy);
         }
 
         .nav-cta {
@@ -635,23 +624,6 @@
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-        }
-
-        .page-hero .btn-white {
-            background: var(--color-navy);
-            color: var(--color-bg);
-        }
-
-        .page-hero .btn-ghost {
-            background: transparent;
-            color: var(--color-navy);
-            border: 1px solid var(--color-line);
-        }
-
-        .page-hero .btn-ghost:hover {
-            background: var(--color-surface);
-            border-color: var(--color-sky);
-            color: var(--color-navy);
         }
 
         /* Right-side abstract panel */
@@ -1245,6 +1217,14 @@
             font-size: 11px;
         }
 
+        .vol-portal-cta {
+            flex-shrink: 0;
+        }
+
+        .btn-white--nowrap {
+            white-space: nowrap;
+        }
+
         @media (max-width: 760px) {
             .vol-grid {
                 grid-template-columns: 1fr;
@@ -1650,6 +1630,11 @@
             background: var(--color-surface);
             border-radius: var(--radius-md);
             border: 1px solid var(--color-line);
+        }
+
+        .donate-gift-icon {
+            flex-shrink: 0;
+            color: var(--color-sky);
         }
 
         .donate-gift-card-text {
@@ -2247,8 +2232,8 @@
                     by volunteering, donating, or joining as a member.</p>
                 <div class="hero-cta-row">
                     <a class="btn-primary" href="#volunteer">Volunteer</a>
-                    <a class="btn-ghost" href="#donate">Donate</a>
-                    <a class="btn-ghost" href="#membership">Join as Member</a>
+                    <a class="btn-outline" href="#donate">Donate</a>
+                    <a class="btn-outline" href="#membership">Join as Member</a>
                 </div>
             </div>
 
@@ -2491,8 +2476,8 @@
                         <div class="vol-feature">Waiver Option Available</div>
                     </div>
                 </div>
-                <div style="flex-shrink:0;">
-                    <a class="btn-white" href="https://ascendtials.org/volunteer/" style="white-space:nowrap;">Access
+                <div class="vol-portal-cta">
+                    <a class="btn-white btn-white--nowrap" href="https://ascendtials.org/volunteer/">Access
                         the Portal →</a>
                 </div>
             </div>
@@ -2765,7 +2750,7 @@
 
                     <div class="donate-gift-card">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.75" style="flex-shrink:0;color:var(--color-sky)">
+                            stroke-width="1.75" class="donate-gift-icon">
                             <path d="M20 12V22H4V12" />
                             <path d="M22 7H2v5h20V7z" />
                             <path d="M12 22V7" />

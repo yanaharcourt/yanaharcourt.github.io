@@ -173,10 +173,11 @@
         }
 
         /* ── BUTTONS ── */
+        /* ── BUTTONS — unified across all pages ── */
         .btn-primary,
-        .btn-outline,
         .btn-white,
-        .btn-ghost {
+        .btn-ghost,
+        .btn-outline {
             position: relative;
             overflow: hidden;
             isolation: isolate;
@@ -186,41 +187,13 @@
             gap: 8px;
             border-radius: var(--radius-pill);
             font-size: var(--text-base);
-            font-weight: 500;
             cursor: pointer;
             border: none;
-            transition: color var(--dur-fast);
         }
 
-        .btn-primary {
-            background: var(--color-navy);
-            color: var(--color-bg);
-            padding: 14px 28px;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--color-navy);
-            padding: 13px 27px;
-            border: 1px solid var(--color-line);
-        }
-
-        .btn-white {
-            background: var(--color-white);
-            color: var(--color-navy);
-            padding: 14px 28px;
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--color-white);
-            padding: 13px 27px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
+        /* Sweep fill layer */
         .btn-primary::before,
         .btn-white::before,
-        .btn-outline::before,
         .btn-ghost::before {
             content: '';
             position: absolute;
@@ -233,31 +206,93 @@
             border-radius: inherit;
         }
 
-        .btn-ghost::before {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
         .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
             background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
         }
 
-        .btn-primary:hover::before,
-        .btn-white:hover::before,
-        .btn-outline:hover::before,
-        .btn-ghost:hover::before {
+        .btn-primary:hover::before {
             transform: scaleX(1);
         }
 
-        .btn-white:hover,
-        .btn-primary:hover {
-            color: var(--color-white);
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
         }
 
         .btn-outline:hover {
             border-color: var(--color-sky);
         }
 
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
+            transition: color var(--dur-fast);
+        }
+        
+        .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
         .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.6);
         }
 
@@ -578,31 +613,6 @@
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-        }
-
-        .page-hero .btn-white {
-            background: var(--color-navy);
-            color: var(--color-bg);
-        }
-
-        .page-hero .btn-white::before {
-            background: var(--color-sky);
-        }
-
-        .page-hero .btn-ghost {
-            background: transparent;
-            color: var(--color-navy);
-            border: 1px solid var(--color-line);
-        }
-
-        .page-hero .btn-ghost:hover {
-            background: var(--color-surface);
-            border-color: var(--color-sky);
-            color: var(--color-navy);
-        }
-
-        .page-hero .btn-ghost::before {
-            background: var(--color-sky-light);
         }
 
         .hero-photo-wrap {
@@ -1356,6 +1366,10 @@
             margin-bottom: var(--space-lg);
         }
 
+        .tab-section-body--flush {
+            margin-bottom: 0;
+        }
+
         .tab-section-body p+p {
             margin-top: var(--space-md);
         }
@@ -1397,6 +1411,10 @@
             border-radius: var(--radius-xl);
             padding: var(--space-xl) var(--space-2xl);
             margin-bottom: var(--space-2xl);
+        }
+
+        .tab-callout--flush {
+            margin-bottom: 0;
         }
 
         .tab-callout p {
@@ -1495,6 +1513,261 @@
             gap: 12px;
             flex-wrap: wrap;
             padding-top: var(--space-xl);
+        }
+
+        .tab-cta-row--flush {
+            padding-top: 0;
+        }
+
+        .tab-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
+        .tab-two-col--stretch {
+            align-items: stretch;
+        }
+
+        .tab-two-col--mb {
+            margin-bottom: var(--space-xl);
+        }
+
+        .tab-sub-heading {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--color-navy);
+            margin-bottom: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .tab-body-p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+        }
+
+        .tab-body-p--mb {
+            margin-bottom: var(--space-md);
+        }
+
+        .tab-body-p--mt {
+            margin-top: var(--space-md);
+        }
+
+        .tab-video-wrap {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            aspect-ratio: 16/7;
+            margin-bottom: var(--space-xl);
+        }
+
+        .tab-video-iframe {
+            border: 0;
+            display: block;
+        }
+
+        /* Cleanup prep bento */
+        .cleanup-prep-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: var(--space-xl);
+            align-items: stretch;
+            margin-bottom: var(--space-xl);
+        }
+
+        .cleanup-notes-col {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .cleanup-notes-heading {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: 4px;
+        }
+
+        .cleanup-bento {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+        }
+
+        .cleanup-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+        }
+
+        .cleanup-card--gold {
+            border-color: rgba(201, 169, 110, 0.3);
+        }
+
+        .cleanup-card--row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            padding: var(--space-md) var(--space-xl);
+        }
+
+        .cleanup-card--4col { grid-column: span 4; }
+        .cleanup-card--2col { grid-column: span 2; }
+        .cleanup-card--3col { grid-column: span 3; }
+        .cleanup-card--6col { grid-column: span 6; }
+
+        .cleanup-card-num {
+            font-size: 1.4rem;
+            font-family: var(--font-display);
+            color: var(--color-sky);
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .cleanup-card-num--shrink {
+            flex-shrink: 0;
+            margin-bottom: 0;
+        }
+
+        .cleanup-card-text {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .cleanup-signup-col {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: var(--space-lg);
+        }
+
+        .cleanup-signup-heading {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .cleanup-signup-body {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.75;
+        }
+
+        .cleanup-signup-body--mb {
+            margin-bottom: var(--space-md);
+        }
+
+        .cleanup-after-section {
+            border-top: 1px solid var(--color-line);
+            padding-top: var(--space-lg);
+        }
+
+        /* Tree distribution */
+        .tree-stat-card {
+            background: var(--color-navy-deep);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: var(--space-lg);
+        }
+
+        .tree-stat-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--color-sky);
+            line-height: 1;
+        }
+
+        .tree-stat-label {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 4px;
+        }
+
+        .tree-stat-divider {
+            width: 40px;
+            height: 1px;
+            background: rgba(201, 169, 110, 0.3);
+        }
+
+        .tree-stat-partner-label {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-white);
+            margin-bottom: 6px;
+        }
+
+        .tree-stat-partner-name {
+            font-size: var(--text-base);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Event details card */
+        .event-details-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
+        .event-details-label {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-sky);
+            margin-bottom: var(--space-md);
+        }
+
+        .event-details-rows {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .event-details-row {
+            display: flex;
+            gap: 12px;
+            align-items: baseline;
+        }
+
+        .event-details-key {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-navy);
+            min-width: 52px;
+        }
+
+        .event-details-val {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+        }
+
+        /* Inline link accent */
+        .link-sky {
+            color: var(--color-sky);
         }
 
         .tab-dark-hero {
@@ -2476,8 +2749,8 @@
                 <p class="hero-desc">We connect San Diego's BIPOC communities with the land, ecological knowledge, and
                     environmental justice tools they need to heal, grow, and thrive.</p>
                 <div class="hero-cta-row">
-                    <a href="#programs" class="btn-white">Explore Programs</a>
-                    <a href="./contact.html" class="btn-ghost">Get Involved</a>
+                    <a href="#programs" class="btn-primary">Explore Programs</a>
+                    <a href="./contact.html" class="btn-outline">Get Involved</a>
                 </div>
             </div>
             <div class="hero-photo-wrap reveal reveal--delay-1">
@@ -2626,7 +2899,7 @@
                             advocates, and stewards in their own communities</div>
                     </div>
                 </div>
-                <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <div class="cta-row">
                     <a href="./contact.html" class="btn-white">Partner with Us</a>
                     <a href="./support-us.html" class="btn-ghost">Donate</a>
                 </div>
@@ -2741,7 +3014,7 @@
                                 <p>Kemetic Yoga is an ancient African Yoga art form that promotes African philosophy and practices originating from the land of Kemet. This ancient practice emphasizes the rejuvenation of the body and mind, providing BIPOC communities with cultural roots that stem from their African origins.</p>
                                 <p>Our Kemetic Yoga sessions use our Whiteness to Oneness™ and KOS-Melanin-ology™ curricula at their foundation. We work to dismantle structural inequality and foster constructive dialogue around Melanin and its purpose.</p>
 
-                                <div class="tab-cta-row" style="padding-top:0;">
+                                <div class="tab-cta-row tab-cta-row--flush">
                                     <a href="./contact.html" class="btn-primary">
                                         Sign Up for a Session
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -2759,14 +3032,14 @@
                         <!-- What is Kemetic Yoga -->
                         <div class="tab-section">
                             <h3 class="tab-section-title">What is Kemetic Yoga?</h3>
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:start;">
+                            <div class="tab-two-col">
                                 <div>
-                                    <p style="color:var(--color-text-muted);line-height:1.75;margin-bottom:var(--space-md);">Kemetic Yoga is an ancient African Yoga art form that promotes African philosophy and practices that originated from the land of Kemet. This ancient Yoga art form emphasizes the rejuvenation of the body and mind as it attempts to provide BIPOC communities with cultural roots that stem from its antique African origins.</p>
-                                    <p style="color:var(--color-text-muted);line-height:1.75;">Kemetic Yoga preserves ancient African culture through deep breath techniques and movements that activate the nervous system and place the mind into a flow state — emitting alpha waves associated with deep relaxation, increased concentration, and emotional balance. Thus, Kemetic Yoga's breath techniques and movements seek to relieve stress symptoms while providing a deeper understanding of "oneness," alleviating the effects of mental health issues like depression and anxiety.</p>
+                                    <p class="tab-body-p tab-body-p--mb">Kemetic Yoga is an ancient African Yoga art form that promotes African philosophy and practices that originated from the land of Kemet. This ancient Yoga art form emphasizes the rejuvenation of the body and mind as it attempts to provide BIPOC communities with cultural roots that stem from its antique African origins.</p>
+                                    <p class="tab-body-p">Kemetic Yoga preserves ancient African culture through deep breath techniques and movements that activate the nervous system and place the mind into a flow state — emitting alpha waves associated with deep relaxation, increased concentration, and emotional balance. Thus, Kemetic Yoga's breath techniques and movements seek to relieve stress symptoms while providing a deeper understanding of "oneness," alleviating the effects of mental health issues like depression and anxiety.</p>
                                 </div>
                                 <div>
-                                    <p style="color:var(--color-text-muted);line-height:1.75;margin-bottom:var(--space-md);">Kemetic Yoga is innovative because it places an emphasis on the alignment of the vertebral column while mimicking the geometric configuration of Egyptian pyramids within its poses and movements. Its African origins are imperative to its success, given that it provides African cultural traditions for BIPOC participants seeking to reconnect with their African roots while mitigating the effects of anxiety and stress from corporate jobs, school expectations, and beyond.</p>
-                                    <p style="color:var(--color-text-muted);line-height:1.75;">Our program hopes to create a safe environment for participants willing to explore themselves through Kemetic Yoga breathwork, movements, poses, postures, grounding, and meditation — vital to strengthening the human body while increasing its digestive system, flexibility, and endurance.</p>
+                                    <p class="tab-body-p tab-body-p--mb">Kemetic Yoga is innovative because it places an emphasis on the alignment of the vertebral column while mimicking the geometric configuration of Egyptian pyramids within its poses and movements. Its African origins are imperative to its success, given that it provides African cultural traditions for BIPOC participants seeking to reconnect with their African roots while mitigating the effects of anxiety and stress from corporate jobs, school expectations, and beyond.</p>
+                                    <p class="tab-body-p">Our program hopes to create a safe environment for participants willing to explore themselves through Kemetic Yoga breathwork, movements, poses, postures, grounding, and meditation — vital to strengthening the human body while increasing its digestive system, flexibility, and endurance.</p>
                                 </div>
                             </div>
                         </div>
@@ -2855,7 +3128,7 @@
                         </div>
 
                         <!-- Our curriculum + Where & When — side by side -->
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:start;margin-bottom:var(--space-2xl);">
+                        <div class="tab-two-col tab-two-col--mb">
                             <div>
                                 <h3 class="tab-section-title">Where &amp; When</h3>
                                 <div class="tab-section-body">
@@ -2875,7 +3148,7 @@
                                 </div>
                             </div>
                             
-                            <div class="tab-callout" style="margin-bottom:0;">
+                            <div class="tab-callout tab-callout--flush">
                                 <p><strong>Our curriculum foundation:</strong> Our Kemetic Yoga sessions use our Whiteness to Oneness™ and KOS-Melanin-ology™ curricula at their foundation. We work to dismantle structural inequality and foster constructive dialogue around Melanin and its purpose. Our program is geared toward BIPOC participants, but we welcome participants from all cultures and backgrounds.</p>
                             </div>
 
@@ -2902,7 +3175,7 @@
                                 <h2>Hike with<br><em>ASCENDtials</em></h2>
                                 <p>ASCENDtials is hosting a hiking event for all skill levels, featuring guided tours of hidden treasures and breathtaking views. Participants will be captivated by towering mountains, waterfalls, and lush forests, while forming new bonds with fellow outdoor enthusiasts. The event offers physical and mental benefits, creating lasting memories and friendships.</p>
 
-                                <div class="tab-cta-row" style="padding-top:0;">
+                                <div class="tab-cta-row tab-cta-row--flush">
                                     <a href="./contact.html" class="btn-primary">
                                         Sign Up
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -2931,10 +3204,10 @@
                             </div>
                             <!-- Embedded map of the hiking area (Oakzanita Cnty Preserve area) -->
                             <div
-                                style="border-radius: var(--radius-xl); overflow: hidden; aspect-ratio: 16/7; margin-bottom: var(--space-xl);">
+                                class="tab-video-wrap">
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26622.3!2d-116.837!3d32.853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d9e4f0b0000001%3A0x1!2sOakzanita+County+Preserve%2C+CA!5e0!3m2!1sen!2sus!4v1"
-                                    width="100%" height="100%" style="border:0; display:block;" allowfullscreen=""
+                                    width="100%" height="100%" class="tab-video-iframe" allowfullscreen=""
                                     loading="lazy" referrerpolicy="no-referrer-when-downgrade"
                                     title="Hiking with Park Ranger — ASCENDtials">
                                 </iframe>
@@ -2977,7 +3250,7 @@
                                 <p>Monthly cleanups are conducted for 9 highways and ramps, with volunteers provided with safety equipment, trash grabbers, and bags. Reservations can be made via scheduling and entire groups can reserve space.</p>
                                 
                                 <p>Cleanups are during the mornings on Saturdays and Sundays. For those wanting unlimited access to cleanups, please sign up as a volunteer — then the schedule link is made available to search dates. We look forward to connecting with you soon!</p>
-                                <div class="tab-cta-row" style="padding-top:0;">
+                                <div class="tab-cta-row tab-cta-row--flush">
                                     <a href="./contact.html" class="btn-primary">
                                         Sign Up &amp; Sign Waiver
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -3011,68 +3284,68 @@
                             <h3 class="tab-section-title">Clean with us — starting by signing our waiver</h3>
 
                             <!-- two-col: bento notes + sign-up info -->
-                            <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:var(--space-xl);align-items:stretch;margin-bottom:var(--space-xl);">
+                            <div class="cleanup-prep-grid">
 
                                 <!-- Notes as bento cards -->
-                                <div style="display:flex;flex-direction:column;gap:10px;">
-                                    <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-sky);margin-bottom:4px;">Before Your First Cleanup</div>
-                                    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;">
+                                <div class="cleanup-notes-col">
+                                    <div class="cleanup-notes-heading">Before Your First Cleanup</div>
+                                    <div class="cleanup-bento">
 
                                         <!-- 01 — wide (4 cols) dark -->
-                                        <div style="grid-column:span 4;background:var(--color-white);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:var(--space-lg);">
-                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;line-height:1;margin-bottom:8px;">01</div>
-                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">Watch the safety video below before all cleanups take place.</p>
+                                        <div class="cleanup-card cleanup-card--4col">
+                                            <div class="cleanup-card-num">01</div>
+                                            <p class="cleanup-card-text">Watch the safety video below before all cleanups take place.</p>
                                         </div>
 
                                         <!-- 02 — narrow (2 cols) -->
-                                        <div style="grid-column:span 2;background:var(--color-white);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:var(--space-lg);">
-                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;line-height:1;margin-bottom:8px;">02</div>
-                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">All volunteers receive safety vests, goggles, gloves, trash grabbers, and bags.</p>
+                                        <div class="cleanup-card cleanup-card--2col">
+                                            <div class="cleanup-card-num">02</div>
+                                            <p class="cleanup-card-text">All volunteers receive safety vests, goggles, gloves, trash grabbers, and bags.</p>
                                         </div>
 
                                         <!-- 03 — narrow (2 cols) -->
-                                        <div style="grid-column:span 2;background:var(--color-white);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:var(--space-lg);">
-                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;line-height:1;margin-bottom:8px;">03</div>
-                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">Max 12 volunteers per single cleanup event.</p>
+                                        <div class="cleanup-card cleanup-card--2col">
+                                            <div class="cleanup-card-num">03</div>
+                                            <p class="cleanup-card-text">Max 12 volunteers per single cleanup event.</p>
                                         </div>
 
                                         <!-- 04 — wide (4 cols) gold -->
-                                        <div style="grid-column:span 4;background:var(--color-white);border:1px solid rgba(201,169,110,0.3);border-radius:var(--radius-md);padding:var(--space-lg);">
-                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;line-height:1;margin-bottom:8px;">04</div>
-                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">No cap on how often you can volunteer — come back as many times as you like.</p>
+                                        <div class="cleanup-card cleanup-card--4col cleanup-card--gold">
+                                            <div class="cleanup-card-num">04</div>
+                                            <p class="cleanup-card-text">No cap on how often you can volunteer — come back as many times as you like.</p>
                                         </div>
 
                                         <!-- 05 — (3 cols) -->
-                                        <div style="grid-column:span 3;background:var(--color-white);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:var(--space-lg);">
-                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;line-height:1;margin-bottom:8px;">05</div>
-                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">Request a Letter of Appreciation once your cleanup is complete.</p>
+                                        <div class="cleanup-card cleanup-card--3col">
+                                            <div class="cleanup-card-num">05</div>
+                                            <p class="cleanup-card-text">Request a Letter of Appreciation once your cleanup is complete.</p>
                                         </div>
 
                                         <!-- 06 — (3 cols) -->
-                                        <div style="grid-column:span 3;background:var(--color-white);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:var(--space-lg);">
-                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;line-height:1;margin-bottom:8px;">06</div>
-                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">Group cleanups available — sign up with your team.</p>
+                                        <div class="cleanup-card cleanup-card--3col">
+                                            <div class="cleanup-card-num">06</div>
+                                            <p class="cleanup-card-text">Group cleanups available — sign up with your team.</p>
                                         </div>
 
                                         <!-- 07 — full width dark -->
-                                        <div style="grid-column:span 6;background:var(--color-white);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:var(--space-md) var(--space-xl);display:flex;align-items:center;gap:var(--space-lg);">
-                                            <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-sky);font-weight:300;flex-shrink:0;">07</div>
-                                            <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0;">Please sign the waiver form before your cleanup begins.</p>
+                                        <div class="cleanup-card cleanup-card--6col cleanup-card--row">
+                                            <div class="cleanup-card-num cleanup-card-num--shrink">07</div>
+                                            <p class="cleanup-card-text">Please sign the waiver form before your cleanup begins.</p>
                                         </div>
 
                                     </div>
                                 </div>
 
                                 <!-- Sign-up info -->
-                                <div style="background:var(--color-surface);border-radius:var(--radius-lg);padding:var(--space-xl);display:flex;flex-direction:column;justify-content:space-between;gap:var(--space-lg);">
+                                <div class="cleanup-signup-col">
                                     <div>
-                                        <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-sky);margin-bottom:var(--space-md);">How to Sign Up</div>
-                                        <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.75;margin-bottom:var(--space-md);">Sign up as a volunteer for unlimited access to cleanups. Once registered, follow the instructions in the confirmation message to access our cleanup events.</p>
-                                        <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.75;">We look forward to seeing you there!</p>
+                                        <div class="cleanup-signup-heading">How to Sign Up</div>
+                                        <p class="cleanup-signup-body cleanup-signup-body--mb">Sign up as a volunteer for unlimited access to cleanups. Once registered, follow the instructions in the confirmation message to access our cleanup events.</p>
+                                        <p class="cleanup-signup-body">We look forward to seeing you there!</p>
                                     </div>
-                                    <div style="border-top:1px solid var(--color-line);padding-top:var(--space-lg);">
-                                        <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-sky);margin-bottom:var(--space-md);">After the Cleanup</div>
-                                        <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.75;">We celebrate with lunch together! Participation is free — we accept donations for supplies and lunch for the groups.</p>
+                                    <div class="cleanup-after-section">
+                                        <div class="cleanup-signup-heading">After the Cleanup</div>
+                                        <p class="cleanup-signup-body">We celebrate with lunch together! Participation is free — we accept donations for supplies and lunch for the groups.</p>
                                     </div>
                                 </div>
 
@@ -3103,7 +3376,7 @@
                                     our shores, remove harmful litter, and restore the health of coastal ecosystems.</p>
                                 <p>Whether you're a first-time volunteer or a regular steward of the coast, you'll find
                                     community, purpose, and a cleaner beach at the end of your morning.</p>
-                                <div class="tab-cta-row" style="padding-top:0;">
+                                <div class="tab-cta-row tab-cta-row--flush">
                                     <a href="./contact.html" class="btn-primary">
                                         Sign Up
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -3203,7 +3476,7 @@
                                     together. Our garden, in Bonita's Sweetwater Summit Park, is more than a food
                                     source. It's a vibrant space for learning, connection, and caring for the
                                     environment.</p>
-                                <div class="tab-cta-row" style="padding-top:0;">
+                                <div class="tab-cta-row tab-cta-row--flush">
                                     <a href="./contact.html" class="btn-primary">
                                         Join as a Member
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -3234,9 +3507,7 @@
                         <div class="tab-section">
                             <h3 class="tab-section-title">What to Expect as a Garden Project Member</h3>
 
-                            <h4
-                                style="font-family:var(--font-display); font-size:var(--text-xl); font-weight:400; color:var(--color-navy); margin-bottom:var(--space-md); margin-top:var(--space-xl);">
-                                Shared Commitments</h4>
+                            <h4 class="tab-sub-heading">Shared Commitments</h4>
                             <div class="tab-benefits-grid">
                                 <div class="tab-benefit-card">
                                     <div class="tab-benefit-icon">
@@ -3274,9 +3545,7 @@
                                 </div>
                             </div>
 
-                            <h4
-                                style="font-family:var(--font-display); font-size:var(--text-xl); font-weight:400; color:var(--color-navy); margin-bottom:var(--space-md); margin-top:var(--space-xl);">
-                                Membership Privileges</h4>
+                            <h4 class="tab-sub-heading">Membership Privileges</h4>
                             <div class="tab-benefits-grid">
                                 <div class="tab-benefit-card">
                                     <div class="tab-benefit-icon">
@@ -3411,7 +3680,7 @@
                                     lungs, exchanging large amounts of carbon dioxide for oxygen. They improve air
                                     quality, provide habitat for wildlife, reduce stormwater runoff, and cool off our
                                     cities.</p>
-                                <div class="tab-cta-row" style="padding-top:0;">
+                                <div class="tab-cta-row tab-cta-row--flush">
                                     <a href="./contact.html" class="btn-primary">
                                         Reserve a Free Tree
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -3431,49 +3700,49 @@
                             <h3 class="tab-section-title">Leaf Your Legacy — Free Tree Giveaway!</h3>
 
                             <!-- Intro + stat side by side -->
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:stretch;margin-bottom:var(--space-xl);">
-                                <div class="tab-section-body" style="margin-bottom:0;">
+                            <div class="tab-two-col tab-two-col--stretch tab-two-col--mb">
+                                <div class="tab-section-body tab-section-body--flush">
                                     <p>As we mark a decade of dedication to cultivating San Diego's urban forest and
                                         advocating for a sustainable future, we at ASCENDtials are thrilled to partner with
                                         Tree San Diego on the "Leafing Our Legacy" initiative. This year-long celebration
                                         will see us donating <strong>800 trees across San Diego</strong>, enriching our
                                         green landscape and bridging environmental disparities.</p>
-                                    <p style="margin-top:var(--space-md);">We will be distributing trees at our Farmers' Markets in <strong>City
+                                    <p class="tab-body-p--mt">We will be distributing trees at our Farmers' Markets in <strong>City
                                         Heights</strong> and the <strong>Marina District</strong>. Fill out the form to
                                         reserve a tree. Stay tuned for upcoming dates!</p>
                                 </div>
 
-                                <div style="background:var(--color-navy-deep);border-radius:var(--radius-lg);padding:var(--space-xl);display:flex;flex-direction:column;justify-content:center;gap:var(--space-lg);">
+                                <div class="tree-stat-card">
                                     <div>
-                                        <div style="font-family:var(--font-display);font-size:3rem;font-weight:300;color:var(--color-sky);line-height:1;">800</div>
-                                        <div style="font-size:var(--text-sm);color:rgba(255,255,255,0.6);margin-top:4px;">trees donated across San Diego</div>
+                                        <div class="tree-stat-number">800</div>
+                                        <div class="tree-stat-label">trees donated across San Diego</div>
                                     </div>
-                                    <div style="width:40px;height:1px;background:rgba(201,169,110,0.3);"></div>
+                                    <div class="tree-stat-divider"></div>
                                     <div>
-                                        <div style="font-size:var(--text-sm);font-weight:600;color:var(--color-white);margin-bottom:6px;">In partnership with</div>
-                                        <div style="font-size:var(--text-base);color:rgba(255,255,255,0.7);">Tree San Diego</div>
+                                        <div class="tree-stat-partner-label">In partnership with</div>
+                                        <div class="tree-stat-partner-name">Tree San Diego</div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Event Details card -->
-                            <div style="background:var(--color-surface);border:1px solid var(--color-line);border-radius:var(--radius-lg);padding:var(--space-xl);display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:start;">
+                            <div class="event-details-card">
                                 <div>
-                                    <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-sky);margin-bottom:var(--space-md);">Event Details</div>
-                                    <div style="display:flex;flex-direction:column;gap:var(--space-sm);">
-                                        <div style="display:flex;gap:12px;align-items:baseline;">
-                                            <span style="font-size:var(--text-sm);font-weight:600;color:var(--color-navy);min-width:52px;">When</span>
-                                            <span style="font-size:var(--text-sm);color:var(--color-text-muted);">Sunday, November 3rd, 2024 · 10:00 AM – 2:00 PM</span>
+                                    <div class="event-details-label">Event Details</div>
+                                    <div class="event-details-rows">
+                                        <div class="event-details-row">
+                                            <span class="event-details-key">When</span>
+                                            <span class="event-details-val">Sunday, November 3rd, 2024 · 10:00 AM – 2:00 PM</span>
                                         </div>
-                                        <div style="display:flex;gap:12px;align-items:baseline;">
-                                            <span style="font-size:var(--text-sm);font-weight:600;color:var(--color-navy);min-width:52px;">Where</span>
-                                            <span style="font-size:var(--text-sm);color:var(--color-text-muted);">ASCENDKemet Collective Certified Farmers' Market of City Heights<br>4325 Wightman St, San Diego, CA 92105</span>
+                                        <div class="event-details-row">
+                                            <span class="event-details-key">Where</span>
+                                            <span class="event-details-val">ASCENDKemet Collective Certified Farmers' Market of City Heights<br>4325 Wightman St, San Diego, CA 92105</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
-                                    <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-sky);margin-bottom:var(--space-md);">Monthly Distribution</div>
-                                    <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;">Pick up your free tree and help us green San Diego! This is more than just an event — it's a community effort to enhance sustainability and protect our urban forests. Each month, we'll be hosting tree-distribution events across the city.</p>
+                                    <div class="event-details-label">Monthly Distribution</div>
+                                    <p class="tab-body-p">Pick up your free tree and help us green San Diego! This is more than just an event — it's a community effort to enhance sustainability and protect our urban forests. Each month, we'll be hosting tree-distribution events across the city.</p>
                                 </div>
                             </div>
                         </div>
@@ -3544,7 +3813,7 @@
                     <span class="section-label">Questions</span>
                     <h2 class="section-h2">Common <em>questions</em></h2>
                     <p class="faq-intro">Have more questions? <a href="./contact.html"
-                            style="color:var(--color-sky);">Reach out to us</a> — we'd love to hear from you.</p>
+                            class="link-sky">Reach out to us</a> — we'd love to hear from you.</p>
                 </div>
                 <div class="faq-list reveal reveal--delay-1">
                     <div class="faq-item">
