@@ -1552,6 +1552,748 @@
                 gap: var(--space-xl);
             }
         }
+
+    /* ============================================================
+    1280px — large desktop / small desktop
+    ============================================================ */
+    @media (max-width: 1280px) {
+        .hero-inner {
+            padding: var(--space-2xl) max(32px, 4vw);
+            gap: max(40px, 5vw);
+        }
+    
+        .team-section {
+            padding: var(--space-section) max(32px, 4vw);
+        }
+    
+        .teams-cta-block {
+            padding: var(--space-2xl) var(--space-2xl);
+        }
+    }
+    
+    /* ============================================================
+    1024px — landscape tablet / small laptop
+    ============================================================ */
+    @media (max-width: 1024px) {
+        .nav {
+            padding: 0 24px;
+        }
+    
+        .nav.scrolled {
+            left: 12px;
+            right: 12px;
+        }
+    
+        .hero-inner {
+            padding: var(--space-2xl) 24px;
+            gap: var(--space-2xl);
+        }
+    
+        .hero-img-frame img {
+            height: 420px;
+        }
+    
+        .hero-stats {
+            gap: var(--space-xl);
+        }
+    
+        .team-section {
+            padding: var(--space-2xl) 24px;
+        }
+    
+        .footer {
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+    
+        .footer-partners {
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+    
+        /* Bento teams — 6 columns at this point, cards span half */
+        .bento-teams {
+            grid-template-columns: repeat(6, 1fr);
+        }
+    
+        .t-card--c4,
+        .t-card--c5,
+        .t-card--c7,
+        .t-card--c6 {
+            grid-column: span 3;
+        }
+    
+        .board-layout {
+            gap: var(--space-xl);
+        }
+    
+        .board-visual {
+            height: 340px;
+        }
+    
+        .teams-cta-block {
+            padding: var(--space-xl);
+            gap: var(--space-lg);
+        }
+    }
+    
+    /* ============================================================
+    768px — portrait tablet
+    ============================================================ */
+    @media (max-width: 768px) {
+    
+        /* Nav */
+        .nav {
+            padding: 0 20px;
+            height: 64px;
+        }
+    
+        .nav.scrolled {
+            top: 8px;
+            left: 12px;
+            right: 12px;
+        }
+    
+        .nav-logo img {
+            height: 44px;
+        }
+    
+        .nav-links,
+        .nav-cta {
+            display: none;
+        }
+    
+        .nav-burger {
+            display: flex;
+        }
+    
+        /* Page hero: фото вверху, текст снизу */
+        .page-hero {
+            min-height: auto;
+        }
+    
+        .hero-inner {
+            grid-template-columns: 1fr;
+            padding: 96px 20px var(--space-2xl);
+            gap: var(--space-2xl);
+        }
+    
+        .hero-left {
+            order: 2;
+        }
+    
+        .hero-right {
+            order: 1;
+            justify-content: flex-start;
+        }
+    
+        .hero-h1 {
+            font-size: clamp(2.25rem, 7vw, 3rem);
+            letter-spacing: -1px;
+        }
+    
+        .hero-desc {
+            font-size: var(--text-base);
+            max-width: 100%;
+        }
+    
+        .hero-img-frame img {
+            height: 340px;
+        }
+    
+        .hero-tag {
+            right: 16px;
+            top: 16px;
+        }
+    
+        .hero-badge {
+            left: 0;
+            bottom: -16px;
+        }
+    
+        .hero-stats {
+            gap: var(--space-xl);
+        }
+    
+        /* Tab section */
+        .team-section {
+            padding: var(--space-2xl) 20px;
+        }
+    
+        .tab-row {
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            margin-left: -20px;
+            margin-right: -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+    
+        .tab-row::-webkit-scrollbar {
+            display: none;
+        }
+    
+        .tab-pill {
+            flex-shrink: 0;
+        }
+    
+        .panel-intro {
+            grid-template-columns: 1fr;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-2xl);
+        }
+    
+        /* Bento teams — 2 columns, wide cards full width */
+        .bento-teams {
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+    
+        .t-card--c4,
+        .t-card--c5,
+        .t-card--c7,
+        .t-card--c6 {
+            grid-column: span 1;
+        }
+    
+        .teams-cta-block {
+            flex-direction: column;
+            text-align: center;
+            padding: var(--space-xl);
+        }
+    
+        /* Board panel */
+        .board-layout {
+            grid-template-columns: 1fr;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+    
+        .board-visual {
+            height: 300px;
+        }
+    
+        /* Footer */
+        .footer {
+            padding: var(--space-2xl) 20px;
+        }
+    
+        .footer-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+        }
+    
+        .footer-partners {
+            gap: var(--space-xl);
+            padding: var(--space-lg) 20px;
+        }
+    
+        .footer-partners img {
+            height: 44px;
+        }
+    
+        /* Join */
+        .section-join {
+            padding: var(--space-2xl) 20px;
+        }
+    
+        .join-h2 {
+            font-size: clamp(var(--text-xl), 6vw, var(--text-2xl));
+        }
+    
+        .join-actions {
+            flex-direction: column;
+            align-items: stretch;
+        }
+    
+        .btn-white,
+        .btn-ghost {
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    }
+    
+    /* ============================================================
+    390px — iPhone 12/13/14 (standard)
+    ============================================================ */
+    @media (max-width: 390px) {
+        .nav {
+            padding: 0 18px;
+        }
+
+        .nav.scrolled {
+            left: 7px;
+            right: 7px;
+        }
+
+        .hero-inner {
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+
+        .hero-h1 {
+            font-size: clamp(1.9375rem, 8.8vw, 2.375rem);
+        }
+
+        .hero-img-frame img {
+            height: 240px;
+        }
+
+        .hero-stat-num {
+            font-size: var(--text-xl);
+        }
+
+        .team-section {
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+
+        .tab-row {
+            margin-left: -18px;
+            margin-right: -18px;
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+
+        .panel-intro-left h2 {
+            font-size: clamp(1.8125rem, 7.6vw, 2.125rem);
+        }
+
+        .board-visual {
+            height: 240px;
+        }
+
+        .board-left h2 {
+            font-size: clamp(1.8125rem, 7.6vw, 2.125rem);
+        }
+
+        .section-join {
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+
+        .footer {
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+
+        .footer-partners {
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+    }
+
+    /* ============================================================
+    414px — iPhone Plus / large phones (portrait)
+    ============================================================ */
+    @media (max-width: 414px) {
+        .nav {
+            padding: 0 20px;
+        }
+    
+        .nav.scrolled {
+            left: 8px;
+            right: 8px;
+        }
+    
+        .hero-inner {
+            padding: 88px 20px var(--space-xl);
+            gap: var(--space-xl);
+        }
+    
+        .hero-h1 {
+            font-size: clamp(2rem, 9vw, 2.5rem);
+            letter-spacing: -0.5px;
+            margin-bottom: var(--space-lg);
+        }
+    
+        .hero-desc {
+            font-size: var(--text-base);
+            margin-bottom: var(--space-lg);
+        }
+    
+        .hero-img-frame img {
+            height: 260px;
+        }
+    
+        .hero-badge {
+            padding: 14px 18px;
+            min-width: 0;
+            gap: 10px;
+        }
+    
+        .hero-badge-num {
+            font-size: var(--text-xl);
+        }
+    
+        .hero-tag {
+            padding: 8px 14px;
+        }
+    
+        .hero-stats {
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+        }
+    
+        .hero-stat-num {
+            font-size: var(--text-2xl);
+        }
+    
+        .team-section {
+            padding: var(--space-xl) 20px;
+        }
+    
+        .tab-row {
+            margin-left: -20px;
+            margin-right: -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    
+        .panel-intro-left h2 {
+            font-size: clamp(1.875rem, 8vw, 2.25rem);
+        }
+    
+        .panel-intro-right p {
+            font-size: var(--text-base);
+        }
+    
+        .bento-teams {
+            grid-template-columns: 1fr;
+        }
+    
+        .teams-cta-block {
+            padding: var(--space-lg);
+        }
+    
+        .teams-cta-block-text p:last-child {
+            font-size: var(--text-xl);
+        }
+    
+        .btn-cta-gold {
+            width: 100%;
+            justify-content: center;
+        }
+    
+        .board-left h2 {
+            font-size: clamp(1.875rem, 8vw, 2.25rem);
+        }
+    
+        .board-visual {
+            height: 260px;
+        }
+    
+        .bstack-item {
+            padding: var(--space-md) var(--space-lg);
+        }
+    
+        .section-join {
+            padding: var(--space-xl) 20px;
+        }
+    
+        .join-sub {
+            font-size: var(--text-base);
+        }
+    
+        .footer {
+            padding: var(--space-xl) 20px;
+        }
+    
+        .footer-grid {
+            grid-template-columns: 1fr;
+            gap: var(--space-lg);
+        }
+    
+        .footer-brand p {
+            max-width: 100%;
+        }
+    
+        .footer-bottom {
+            flex-direction: column;
+            text-align: center;
+            gap: var(--space-sm);
+        }
+    
+        .footer-bottom-links {
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+    
+        .footer-partners {
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            padding: var(--space-lg) 20px;
+        }
+    
+        .footer-partners img {
+            height: 36px;
+        }
+    }
+    
+    /* ============================================================
+    375px — iPhone SE / standard iPhone
+    ============================================================ */
+    @media (max-width: 375px) {
+        .nav {
+            padding: 0 16px;
+        }
+    
+        .nav.scrolled {
+            left: 6px;
+            right: 6px;
+        }
+    
+        .nav-logo img {
+            height: 40px;
+        }
+    
+        .hero-inner {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    
+        .hero-h1 {
+            font-size: clamp(1.875rem, 9.5vw, 2.25rem);
+        }
+    
+        .hero-img-frame img {
+            height: 220px;
+        }
+    
+        .hero-stat-num {
+            font-size: var(--text-xl);
+        }
+    
+        .team-section {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    
+        .tab-row {
+            margin-left: -16px;
+            margin-right: -16px;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    
+        .t-card {
+            padding: var(--space-lg);
+        }
+    
+        .board-visual {
+            height: 220px;
+        }
+    
+        .section-join {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    
+        .footer {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    
+        .footer-partners {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    }
+    
+    /* ============================================================
+    360px — standard Android (Samsung Galaxy etc.)
+    ============================================================ */
+    @media (max-width: 360px) {
+        .nav {
+            padding: 0 16px;
+        }
+    
+        .hero-inner {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    
+        .hero-h1 {
+            font-size: 1.75rem;
+            letter-spacing: -0.5px;
+        }
+    
+        .hero-eyebrow {
+            letter-spacing: 1.5px;
+        }
+    
+        .hero-img-frame img {
+            height: 200px;
+        }
+    
+        .team-section {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    
+        .panel-intro-left h2 {
+            font-size: 1.625rem;
+        }
+    
+        .board-left h2 {
+            font-size: 1.625rem;
+        }
+    
+        .board-visual {
+            height: 200px;
+        }
+    
+        .section-join {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    
+        .join-h2 {
+            font-size: var(--text-xl);
+        }
+    
+        .footer {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    
+        .footer-partners {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    }
+    
+    /* ============================================================
+    320px — iPhone SE (1st gen) / minimum screen
+    ============================================================ */
+    @media (max-width: 320px) {
+        .nav {
+            padding: 0 12px;
+            height: 60px;
+        }
+    
+        .nav-logo img {
+            height: 36px;
+        }
+    
+        .hero-inner {
+            padding-left: 12px;
+            padding-right: 12px;
+            padding-top: 80px;
+        }
+    
+        .hero-h1 {
+            font-size: 1.625rem;
+        }
+    
+        .hero-desc {
+            font-size: var(--text-sm);
+        }
+    
+        .hero-img-frame img {
+            height: 180px;
+        }
+    
+        .hero-badge {
+            padding: 12px 14px;
+            gap: 8px;
+        }
+    
+        .hero-badge-num {
+            font-size: var(--text-lg);
+        }
+    
+        .hero-badge-label {
+            font-size: 0.65rem;
+        }
+    
+        .hero-stats {
+            gap: var(--space-md);
+        }
+    
+        .hero-stat-num {
+            font-size: var(--text-lg);
+        }
+    
+        .team-section {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+    
+        .tab-row {
+            margin-left: -12px;
+            margin-right: -12px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+    
+        .tab-pill {
+            padding: 8px 18px;
+            font-size: var(--text-xs);
+        }
+    
+        .panel-intro-left h2,
+        .board-left h2 {
+            font-size: var(--text-2xl);
+        }
+    
+        .t-card {
+            padding: var(--space-md);
+        }
+    
+        .board-visual {
+            height: 170px;
+        }
+    
+        .bstack-item {
+            padding: var(--space-sm) var(--space-md);
+        }
+    
+        .bstack-name {
+            font-size: var(--text-xs);
+        }
+    
+        .teams-cta-block-text p:last-child {
+            font-size: var(--text-lg);
+        }
+    
+        .section-join {
+            padding: var(--space-lg) 12px;
+        }
+    
+        .join-h2 {
+            font-size: var(--text-lg);
+        }
+    
+        .join-sub {
+            font-size: var(--text-sm);
+        }
+    
+        .btn-white,
+        .btn-ghost {
+            font-size: var(--text-sm);
+            padding: 12px 20px;
+        }
+    
+        .footer {
+            padding: var(--space-xl) 12px;
+        }
+    
+        .footer-partners {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+    
+        .footer-partners img {
+            height: 30px;
+        }
+    }
     </style>
 </head>
 

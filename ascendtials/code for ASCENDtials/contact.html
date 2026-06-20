@@ -1188,6 +1188,580 @@
                 text-align: center;
             }
         }
+        /* ============================================================
+        1280px — large desktop / small desktop
+        ============================================================ */
+        @media (max-width: 1280px) {
+            .page-hero {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+        
+            .contact-section {
+                padding: var(--space-section) max(32px, 4vw);
+                gap: max(48px, 6vw);
+            }
+        
+            .hero-visual {
+                width: min(480px, 34vw);
+            }
+        
+            .hero-card {
+                left: -120px;
+            }
+        }
+        
+        /* ============================================================
+        1024px — landscape tablet / small laptop
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 24px;
+            }
+        
+            .nav.scrolled {
+                left: 12px;
+                right: 12px;
+            }
+        
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+                gap: var(--space-xl);
+            }
+        
+            .hero-photo {
+                height: 440px;
+            }
+        
+            .hero-visual {
+                width: min(420px, 36vw);
+            }
+        
+            .hero-card {
+                left: -80px;
+                width: 300px;
+            }
+        
+            .contact-section {
+                padding: var(--space-2xl) 24px;
+            }
+        
+            .office-strip {
+                padding: var(--space-xl) 24px;
+            }
+        
+            .section-join {
+                padding: var(--space-2xl) 24px;
+            }
+        
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+        
+        /* ============================================================
+        768px — portrait tablet
+        ============================================================ */
+        @media (max-width: 768px) {
+        
+            /* Nav */
+            .nav {
+                padding: 0 20px;
+                height: 64px;
+            }
+        
+            .nav.scrolled {
+                top: 8px;
+                left: 12px;
+                right: 12px;
+            }
+        
+            .nav-logo img {
+                height: 44px;
+            }
+        
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+        
+            .nav-burger {
+                display: flex;
+            }
+        
+            /* Page hero — photo hidden, text full-width */
+            .page-hero {
+                flex-direction: column;
+                padding-top: 96px;
+                padding-bottom: var(--space-2xl);
+                padding-left: 20px;
+                padding-right: 20px;
+                min-height: auto;
+                gap: var(--space-lg);
+            }
+        
+            .hero-visual {
+                display: none;
+            }
+        
+            .hero-content {
+                max-width: 100%;
+            }
+        
+            .hero-h1 {
+                font-size: clamp(2.25rem, 7vw, 3rem);
+                letter-spacing: -1px;
+            }
+        
+            .hero-desc {
+                font-size: var(--text-base);
+                max-width: 100%;
+            }
+        
+            .hero-stats {
+                gap: var(--space-lg);
+                flex-wrap: wrap;
+            }
+        
+            /* Form section */
+            .contact-section {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+                padding: var(--space-2xl) 20px;
+            }
+        
+            .contact-sidebar {
+                position: static;
+            }
+        
+            .gform-wrapper iframe {
+                min-height: 760px;
+            }
+        
+            /* Office strip */
+            .office-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--space-xl) 20px;
+            }
+        
+            .office-divider {
+                display: none;
+            }
+        
+            /* Join */
+            .section-join {
+                padding: var(--space-2xl) 20px;
+            }
+        
+            .join-h2 {
+                font-size: clamp(var(--text-xl), 6vw, var(--text-2xl));
+            }
+        
+            .join-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        
+            .btn-white,
+            .btn-ghost {
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto;
+                text-align: center;
+            }
+        
+            /* Footer */
+            .footer {
+                padding: var(--space-2xl) 20px;
+            }
+        
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+        
+            .footer-partners {
+                gap: var(--space-xl);
+                padding: var(--space-lg) 20px;
+            }
+        
+            .footer-partners img {
+                height: 44px;
+            }
+        }
+        
+        /* ============================================================
+        414px — iPhone Plus / large phones (portrait)
+        ============================================================ */
+        @media (max-width: 414px) {
+            .nav {
+                padding: 0 20px;
+            }
+        
+            .nav.scrolled {
+                left: 8px;
+                right: 8px;
+            }
+        
+            .page-hero {
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 88px;
+                gap: var(--space-md);
+            }
+        
+            .hero-h1 {
+                font-size: clamp(2rem, 9vw, 2.5rem);
+                letter-spacing: -0.5px;
+            }
+        
+            .hero-desc {
+                font-size: var(--text-base);
+            }
+        
+            .hero-stats {
+                gap: var(--space-md);
+                padding-top: var(--space-lg);
+                margin-top: var(--space-lg);
+            }
+        
+            .hero-stat-sep {
+                display: none;
+            }
+        
+            .contact-section {
+                padding: var(--space-xl) 20px;
+            }
+        
+            .sidebar-h2 {
+                font-size: clamp(1.625rem, 7vw, 2rem);
+            }
+        
+            .topic-pills {
+                gap: 6px;
+            }
+        
+            .topic-pill {
+                padding: 6px 14px;
+                font-size: var(--text-xs);
+            }
+        
+            .gform-wrapper iframe {
+                min-height: 680px;
+            }
+        
+            .office-strip {
+                padding: var(--space-lg) 20px;
+            }
+        
+            .section-join {
+                padding: var(--space-xl) 20px;
+            }
+        
+            .join-sub {
+                font-size: var(--text-base);
+            }
+        
+            .footer {
+                padding: var(--space-xl) 20px;
+            }
+        
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+        
+            .footer-brand p {
+                max-width: 100%;
+            }
+        
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+            }
+        
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+        
+            .footer-partners {
+                flex-wrap: wrap;
+                gap: var(--space-md);
+                padding: var(--space-lg) 20px;
+            }
+        
+            .footer-partners img {
+                height: 36px;
+            }
+        }
+        
+        /* ============================================================
+        390px — iPhone 12/13/14 (standard)
+        ============================================================ */
+        @media (max-width: 390px) {
+            .nav {
+                padding: 0 18px;
+            }
+
+            .nav.scrolled {
+                left: 7px;
+                right: 7px;
+            }
+
+            .page-hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.9375rem, 8.8vw, 2.375rem);
+            }
+
+            .hero-stat-num {
+                font-size: 1.75rem;
+            }
+
+            .contact-section {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .sidebar-h2 {
+                font-size: clamp(1.6875rem, 6.8vw, 2rem);
+            }
+
+            .gform-wrapper iframe {
+                min-height: 700px;
+            }
+
+            .office-strip {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-join {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer-partners {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        /* ============================================================
+        375px — iPhone SE / standard iPhone
+        ============================================================ */
+        @media (max-width: 375px) {
+            .nav {
+                padding: 0 16px;
+            }
+        
+            .nav.scrolled {
+                left: 6px;
+                right: 6px;
+            }
+        
+            .nav-logo img {
+                height: 40px;
+            }
+        
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .hero-h1 {
+                font-size: clamp(1.875rem, 9.5vw, 2.25rem);
+            }
+        
+            .hero-stat-num {
+                font-size: 1.625rem;
+            }
+        
+            .contact-section {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .office-strip {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+        
+        /* ============================================================
+        360px — standard Android (Samsung Galaxy etc.)
+        ============================================================ */
+        @media (max-width: 360px) {
+            .nav {
+                padding: 0 16px;
+            }
+        
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .hero-h1 {
+                font-size: 1.75rem;
+                letter-spacing: -0.5px;
+            }
+        
+            .hero-tag {
+                letter-spacing: 1.5px;
+            }
+        
+            .contact-section {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .sidebar-h2 {
+                font-size: 1.5rem;
+            }
+        
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .join-h2 {
+                font-size: var(--text-xl);
+            }
+        
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+        
+        /* ============================================================
+        320px — iPhone SE (1st gen) / minimum screen
+        ============================================================ */
+        @media (max-width: 320px) {
+            .nav {
+                padding: 0 12px;
+                height: 60px;
+            }
+        
+            .nav-logo img {
+                height: 36px;
+            }
+        
+            .page-hero {
+                padding-left: 12px;
+                padding-right: 12px;
+                padding-top: 80px;
+            }
+        
+            .hero-h1 {
+                font-size: 1.625rem;
+            }
+        
+            .hero-desc {
+                font-size: var(--text-sm);
+            }
+        
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: var(--space-sm);
+            }
+        
+            .hero-stat-num {
+                font-size: var(--text-xl);
+            }
+        
+            .contact-section {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        
+            .sidebar-h2 {
+                font-size: var(--text-2xl);
+            }
+        
+            .sidebar-desc {
+                font-size: var(--text-sm);
+            }
+        
+            .gform-wrapper iframe {
+                min-height: 620px;
+            }
+        
+            .office-strip {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        
+            .section-join {
+                padding: var(--space-lg) 12px;
+            }
+        
+            .join-h2 {
+                font-size: var(--text-lg);
+            }
+        
+            .join-sub {
+                font-size: var(--text-sm);
+            }
+        
+            .btn-white,
+            .btn-ghost {
+                font-size: var(--text-sm);
+                padding: 12px 20px;
+            }
+        
+            .footer {
+                padding: var(--space-xl) 12px;
+            }
+        
+            .footer-partners {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        
+            .footer-partners img {
+                height: 30px;
+            }
+        }
     </style>
 </head>
 

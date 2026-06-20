@@ -2066,6 +2066,799 @@
                 padding-right: 24px;
             }
         }
+
+        /* ============================================================
+        1280px — large desktop / small desktop
+        ============================================================ */
+        @media (max-width: 1280px) {
+            .hero-inner {
+                padding: var(--space-2xl) max(32px, 4vw);
+                gap: max(40px, 5vw);
+            }
+        
+            .mission-inner,
+            .vision-inner,
+            .maat-inner,
+            .equity-inner,
+            .founder-inner {
+                gap: max(48px, 6vw);
+            }
+        
+            .section-mission,
+            .section-vision,
+            .section-maat,
+            .section-equity,
+            .section-founder,
+            .section-join {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+        
+            .info-strip {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+        }
+        
+        /* ============================================================
+        1024px — landscape tablet / small laptop
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 24px;
+            }
+        
+            .nav.scrolled {
+                left: 12px;
+                right: 12px;
+            }
+        
+            .hero-inner {
+                padding: var(--space-2xl) 24px;
+                gap: var(--space-2xl);
+            }
+        
+            .hero-img-frame img {
+                height: 440px;
+            }
+        
+            .info-strip {
+                padding: var(--space-xl) 24px;
+                gap: var(--space-lg);
+            }
+        
+            .section-mission,
+            .section-vision,
+            .section-maat,
+            .section-equity,
+            .section-founder {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        
+            .section-join {
+                padding: var(--space-2xl) 24px;
+            }
+        
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        
+            .maat-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        
+            .maat-card:nth-child(2) {
+                grid-column: 2 / 4;
+            }
+        
+            .maat-card:nth-child(4) {
+                grid-column: 1 / 3;
+            }
+        
+            .maat-card:nth-child(7) {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--space-xl);
+            }
+        
+            .maat-card:nth-child(7) .maat-card-oneness-quote {
+                max-width: 100%;
+                border-left: none;
+                padding-left: 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.12);
+                padding-top: var(--space-md);
+            }
+        }
+        
+        /* ============================================================
+        768px — portrait tablet
+        ============================================================ */
+        @media (max-width: 768px) {
+        
+            /* Nav */
+            .nav {
+                padding: 0 20px;
+                height: 64px;
+            }
+        
+            .nav.scrolled {
+                top: 8px;
+                left: 12px;
+                right: 12px;
+            }
+        
+            .nav-logo img {
+                height: 44px;
+            }
+        
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+        
+            .nav-burger {
+                display: flex;
+            }
+        
+            /* Page hero: фото вверху, текст под ним */
+            .page-hero {
+                min-height: auto;
+            }
+        
+            .hero-inner {
+                grid-template-columns: 1fr;
+                padding: 96px 20px var(--space-2xl);
+                gap: var(--space-2xl);
+            }
+        
+            .hero-left {
+                order: 2;
+                padding-left: 0;
+            }
+        
+            .hero-right {
+                order: 1;
+                justify-content: flex-start;
+            }
+        
+            .hero-h1 {
+                font-size: clamp(2.25rem, 7vw, 3rem);
+                letter-spacing: -1px;
+            }
+        
+            .hero-desc {
+                font-size: var(--text-base);
+                max-width: 100%;
+            }
+        
+            .hero-ctas {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        
+            .btn-primary,
+            .btn-ghost {
+                text-align: center;
+                justify-content: center;
+            }
+        
+            .hero-img-frame img {
+                height: 360px;
+            }
+        
+            .hero-tag {
+                right: 16px;
+                top: 16px;
+            }
+        
+            .hero-badge {
+                left: 0;
+                bottom: -16px;
+            }
+        
+            /* Info strip */
+            .info-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--space-xl) 20px;
+            }
+        
+            .info-divider {
+                display: none;
+            }
+        
+            /* Mission */
+            .section-mission {
+                padding: var(--space-2xl) 20px;
+            }
+        
+            .mission-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+        
+            .mission-cards {
+                padding-top: 0;
+            }
+        
+            /* Vision */
+            .section-vision {
+                padding: var(--space-2xl) 20px;
+            }
+        
+            .vision-top {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+        
+            .vision-pillars {
+                grid-template-columns: 1fr 1fr;
+            }
+        
+            /* Maat */
+            .section-maat {
+                padding: var(--space-2xl) 20px;
+            }
+        
+            .maat-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        
+            .maat-card:nth-child(1),
+            .maat-card:nth-child(2),
+            .maat-card:nth-child(3),
+            .maat-card:nth-child(4),
+            .maat-card:nth-child(5),
+            .maat-card:nth-child(6) {
+                grid-column: auto;
+                grid-row: auto;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        
+            .maat-card:nth-child(2) .maat-card-icon,
+            .maat-card:nth-child(4) .maat-card-icon {
+                margin-bottom: var(--space-md);
+            }
+        
+            .maat-card:nth-child(7) {
+                grid-column: 1 / -1;
+            }
+        
+            .maat-quote-band {
+                flex-direction: column;
+                gap: var(--space-lg);
+                padding: var(--space-xl) 24px;
+            }
+        
+            .maat-quote-sep {
+                width: 100%;
+                height: 1px;
+                align-self: auto;
+            }
+        
+            .maat-quote-source {
+                max-width: 100%;
+            }
+        
+            /* Equity */
+            .section-equity {
+                padding: var(--space-2xl) 20px;
+            }
+        
+            .equity-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+        
+            /* Founder */
+            .section-founder {
+                padding: var(--space-2xl) 20px;
+            }
+        
+            .founder-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+        
+            .founder-photo-card {
+                aspect-ratio: 4/3;
+            }
+        
+            /* Join */
+            .section-join {
+                padding: var(--space-2xl) 20px;
+            }
+        
+            .join-h2 {
+                font-size: clamp(var(--text-xl), 6vw, var(--text-2xl));
+            }
+        
+            .join-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        
+            .btn-white,
+            .btn-ghost {
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto;
+                text-align: center;
+            }
+        
+            /* Footer */
+            .footer {
+                padding: var(--space-2xl) 20px;
+            }
+        
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+        
+            .footer-partners {
+                gap: var(--space-xl);
+                padding: var(--space-lg) 20px;
+            }
+        
+            .footer-partners img {
+                height: 44px;
+            }
+        }
+        
+        /* ============================================================
+        414px — iPhone Plus / large phones (portrait)
+        ============================================================ */
+        @media (max-width: 414px) {
+            .nav {
+                padding: 0 20px;
+            }
+        
+            .nav.scrolled {
+                left: 8px;
+                right: 8px;
+            }
+        
+            .hero-inner {
+                padding: 88px 20px var(--space-xl);
+                gap: var(--space-xl);
+            }
+        
+            .hero-eyebrow {
+                margin-bottom: var(--space-md);
+            }
+        
+            .hero-h1 {
+                font-size: clamp(2rem, 9vw, 2.5rem);
+                letter-spacing: -0.5px;
+                margin-bottom: var(--space-lg);
+            }
+        
+            .hero-desc {
+                font-size: var(--text-base);
+                margin-bottom: var(--space-xl);
+            }
+        
+            .hero-img-frame img {
+                height: 280px;
+            }
+        
+            .hero-badge {
+                padding: 14px 18px;
+                min-width: 0;
+                gap: 10px;
+            }
+        
+            .hero-badge-num {
+                font-size: var(--text-xl);
+            }
+        
+            .hero-tag {
+                padding: 8px 14px;
+            }
+        
+            .info-strip {
+                padding: var(--space-lg) 20px;
+                gap: var(--space-lg);
+            }
+        
+            .section-mission,
+            .section-vision,
+            .section-maat,
+            .section-equity,
+            .section-founder {
+                padding: var(--space-xl) 20px;
+            }
+        
+            .vision-pillars {
+                grid-template-columns: 1fr;
+            }
+        
+            .maat-grid {
+                grid-template-columns: 1fr;
+            }
+        
+            .maat-card:nth-child(n) {
+                grid-column: 1 / -1;
+            }
+        
+            .maat-quote-band {
+                padding: var(--space-lg) 20px;
+            }
+        
+            .maat-quote-band::before {
+                display: none;
+            }
+        
+            .eq-card-row {
+                grid-template-columns: 1fr;
+            }
+        
+            .founder-pill {
+                top: -10px;
+                right: -8px;
+                padding: 7px 14px;
+            }
+        
+            .founder-badge {
+                padding: var(--space-lg);
+            }
+        
+            .section-join {
+                padding: var(--space-xl) 20px;
+            }
+        
+            .join-sub {
+                font-size: var(--text-base);
+            }
+        
+            .footer {
+                padding: var(--space-xl) 20px;
+            }
+        
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+        
+            .footer-brand p {
+                max-width: 100%;
+            }
+        
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+            }
+        
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+        
+            .footer-partners {
+                flex-wrap: wrap;
+                gap: var(--space-md);
+                padding: var(--space-lg) 20px;
+            }
+        
+            .footer-partners img {
+                height: 36px;
+            }
+        }
+        
+        /* ============================================================
+        390px — iPhone 12/13/14 (standard)
+        ============================================================ */
+        @media (max-width: 390px) {
+            .nav {
+                padding: 0 18px;
+            }
+
+            .nav.scrolled {
+                left: 7px;
+                right: 7px;
+            }
+
+            .hero-inner {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.9375rem, 8.8vw, 2.375rem);
+            }
+
+            .hero-img-frame img {
+                height: 260px;
+            }
+
+            .info-strip {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-mission,
+            .section-vision,
+            .section-maat,
+            .section-equity,
+            .section-founder {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-join {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer-partners {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .m-card-num {
+                font-size: 2.375rem;
+            }
+
+            .v-pillar-num {
+                font-size: clamp(2.125rem, 6.2vw, 2.625rem);
+            }
+
+            .founder-letter {
+                font-size: clamp(6.5rem, 16.5vw, 10.5rem);
+            }
+        }
+        
+        /* ============================================================
+        375px — iPhone SE / standard iPhone
+        ============================================================ */
+        @media (max-width: 375px) {
+            .nav {
+                padding: 0 16px;
+            }
+        
+            .nav.scrolled {
+                left: 6px;
+                right: 6px;
+            }
+        
+            .nav-logo img {
+                height: 40px;
+            }
+        
+            .hero-inner {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .hero-h1 {
+                font-size: clamp(1.875rem, 9.5vw, 2.25rem);
+            }
+        
+            .hero-img-frame img {
+                height: 240px;
+            }
+        
+            .info-strip {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .section-mission,
+            .section-vision,
+            .section-maat,
+            .section-equity,
+            .section-founder {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .m-card-num {
+                font-size: 2.25rem;
+            }
+        
+            .v-pillar-num {
+                font-size: clamp(2rem, 6vw, 2.5rem);
+            }
+        
+            .founder-letter {
+                font-size: clamp(6rem, 16vw, 10rem);
+            }
+        }
+        
+        /* ============================================================
+        360px — standard Android (Samsung Galaxy etc.)
+        ============================================================ */
+        @media (max-width: 360px) {
+            .nav {
+                padding: 0 16px;
+            }
+        
+            .hero-inner {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .hero-h1 {
+                font-size: 1.75rem;
+                letter-spacing: -0.5px;
+            }
+        
+            .hero-eyebrow {
+                letter-spacing: 1.5px;
+            }
+        
+            .hero-img-frame img {
+                height: 220px;
+            }
+        
+            .section-mission,
+            .section-vision,
+            .section-maat,
+            .section-equity,
+            .section-founder {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .section-h2 {
+                font-size: 1.625rem;
+            }
+        
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .join-h2 {
+                font-size: var(--text-xl);
+            }
+        
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        
+            .maat-card-name {
+                font-size: var(--text-lg);
+            }
+        }
+        
+        /* ============================================================
+        320px — iPhone SE (1st gen) / minimum screen
+        ============================================================ */
+        @media (max-width: 320px) {
+            .nav {
+                padding: 0 12px;
+                height: 60px;
+            }
+        
+            .nav-logo img {
+                height: 36px;
+            }
+        
+            .hero-inner {
+                padding-left: 12px;
+                padding-right: 12px;
+                padding-top: 80px;
+            }
+        
+            .hero-h1 {
+                font-size: 1.625rem;
+            }
+        
+            .hero-desc {
+                font-size: var(--text-sm);
+            }
+        
+            .hero-img-frame img {
+                height: 200px;
+            }
+        
+            .hero-badge {
+                padding: 12px 14px;
+                gap: 8px;
+            }
+        
+            .hero-badge-num {
+                font-size: var(--text-lg);
+            }
+        
+            .hero-badge-label {
+                font-size: 0.65rem;
+            }
+        
+            .info-strip {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        
+            .section-mission,
+            .section-vision,
+            .section-maat,
+            .section-equity,
+            .section-founder {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        
+            .section-h2 {
+                font-size: var(--text-2xl);
+            }
+        
+            .m-card,
+            .v-pillar,
+            .maat-card,
+            .eq-card {
+                padding: var(--space-lg);
+            }
+        
+            .section-join {
+                padding: var(--space-lg) 12px;
+            }
+        
+            .join-h2 {
+                font-size: var(--text-lg);
+            }
+        
+            .join-sub {
+                font-size: var(--text-sm);
+            }
+        
+            .btn-white,
+            .btn-ghost {
+                font-size: var(--text-sm);
+                padding: 12px 20px;
+            }
+        
+            .footer {
+                padding: var(--space-xl) 12px;
+            }
+        
+            .footer-partners {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        
+            .footer-partners img {
+                height: 30px;
+            }
+        }
     </style>
 </head>
 

@@ -14,7 +14,7 @@
         /* ============================================================
         DESIGN TOKENS
         ============================================================ */
-         :root {
+        :root {
             /* Brand */
             --color-navy: #1E3A47;
             --color-navy-deep: #152E3A;
@@ -381,7 +381,7 @@
             color: var(--color-navy);
             transition: color var(--dur-fast);
         }
-        
+
         .btn-white::before {
             background: var(--color-sky);
         }
@@ -1565,13 +1565,26 @@
             color: var(--color-sky);
         }
 
+        .c-card-badge {
+            margin-bottom: 4px;
+        }
+
         .c-card-num {
+            position: absolute;
+            top: var(--space-lg);
+            right: var(--space-lg);
             font-family: var(--font-display);
             font-size: 6rem;
             font-weight: 300;
             color: rgba(30, 58, 71, 0.055);
             line-height: 1;
-            margin-bottom: 8px;
+            margin-bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .c-card:has(.c-card-price) .c-card-num {
+            top: 64px;
         }
 
         .c-card--navy .c-card-num {
@@ -1584,7 +1597,10 @@
             font-weight: 400;
             color: var(--color-navy);
             line-height: 1.2;
+            margin-top: var(--space-md);
             margin-bottom: var(--space-sm);
+            position: relative;
+            z-index: 1;
         }
 
         .c-card--navy .c-card-title {
@@ -1909,6 +1925,869 @@
                 padding-right: 24px;
             }
         }
+
+       /* ============================================================
+        1280px — large desktop / small desktop
+        ============================================================ */
+        @media (max-width: 1280px) {
+            .page-hero {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .hero-main {
+                gap: max(48px, 5vw);
+            }
+
+            .section-overview {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .section-literacy {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .section-workforce {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .section-service {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .section-courses {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .courses-bento {
+                grid-template-rows: 280px 240px;
+            }
+        }
+
+        /* ============================================================
+        1024px — landscape tablet / small laptop
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 24px;
+            }
+
+            .nav.scrolled {
+                left: 12px;
+                right: 12px;
+            }
+
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-photo-wrap img {
+                height: 420px;
+            }
+
+            .info-strip {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .section-overview {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .section-literacy {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .section-workforce {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .section-service {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .section-courses {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .courses-bento {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto;
+            }
+
+            .c-card:nth-child(n) {
+                grid-column: span 1;
+                min-height: 300px;
+            }
+
+            .section-join {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        768px — portrait tablet
+        ============================================================ */
+        @media (max-width: 768px) {
+
+            /* Nav */
+            .nav {
+                padding: 0 20px;
+                height: 64px;
+            }
+
+            .nav.scrolled {
+                top: 8px;
+                left: 12px;
+                right: 12px;
+            }
+
+            .nav-logo img {
+                height: 44px;
+            }
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+
+            /* Hero */
+            .page-hero {
+                padding-top: calc(64px + var(--space-xl));
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero-main {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .hero-h1 {
+                font-size: clamp(2.25rem, 7vw, 3rem);
+                letter-spacing: -1px;
+            }
+
+            .hero-desc {
+                font-size: var(--text-base);
+                max-width: 100%;
+            }
+
+            .hero-photo-wrap img {
+                height: 340px;
+            }
+
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
+            }
+
+            /* Info strip */
+            .info-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--space-xl) 20px;
+            }
+
+            .info-divider {
+                display: none;
+            }
+
+            /* Overview */
+            .section-overview {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .overview-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .overview-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .o-card:nth-child(n),
+            .o-card--wide {
+                grid-column: 1;
+                grid-row: auto;
+            }
+
+            .o-card:nth-child(1),
+            .o-card--wide {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            /* Literacy */
+            .section-literacy {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .lit-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto;
+            }
+
+            .lit-card:nth-child(n) {
+                grid-column: span 1;
+                min-height: 200px;
+            }
+
+            .lit-card:nth-child(1),
+            .lit-card:nth-child(2) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            /* Workforce */
+            .section-workforce {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .workforce-top {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+
+            .v-pillars {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            /* Service learning */
+            .section-service {
+                grid-template-columns: 1fr;
+                padding: var(--space-2xl) 20px;
+                gap: var(--space-xl);
+            }
+
+            .service-text::before {
+                display: none;
+            }
+
+            /* .sv-badge duplicates the first .sv-stat ("2 Program tracks")
+               and on mobile its absolute position overlaps the activity
+               list text — hide it instead of repositioning it. */
+            .sv-badge {
+                display: none;
+            }
+
+            /* Courses */
+            .section-courses {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .c-card-title {
+                max-width: calc(100% - 64px);
+            }
+
+            .c-card-badge {
+                top: 16px;
+                left: 16px;
+            }
+
+            .c-card-price {
+                top: 16px;
+                right: 16px;
+            }
+
+            .c-card-num {
+                font-size: 2.75rem;
+                top: 52px;
+                right: 14px;
+            }
+            
+            .c-card:has(.c-card-price) .c-card-num {
+                top: 80px;
+            }
+        }
+
+        /* ============================================================
+        414px — iPhone Plus / large phones (portrait)
+        ============================================================ */
+        @media (max-width: 414px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav.scrolled {
+                left: 8px;
+                right: 8px;
+            }
+
+            .page-hero {
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: calc(64px + var(--space-lg));
+            }
+
+            .hero-h1 {
+                font-size: clamp(2rem, 9vw, 2.5rem);
+                letter-spacing: -0.5px;
+            }
+
+            .hero-desc {
+                font-size: var(--text-base);
+            }
+
+            /* Photo hidden on small phones — matches existing 600px rule */
+            .hero-photo-wrap {
+                display: none;
+            }
+
+            .hero-cta-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .info-strip {
+                padding: var(--space-lg) 20px;
+            }
+
+            .section-overview {
+                padding: var(--space-xl) 20px;
+            }
+
+            .o-card-num {
+                font-size: 1.8rem;
+            }
+
+            .section-literacy {
+                padding: var(--space-xl) 20px;
+            }
+
+            .lit-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lit-card-num {
+                font-size: 2.75rem;
+            }
+
+            .section-workforce {
+                padding: var(--space-xl) 20px;
+            }
+
+            .v-pillars {
+                grid-template-columns: 1fr;
+            }
+
+            .section-service {
+                padding: var(--space-xl) 20px;
+            }
+
+            .sv-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .sv-stat {
+                padding: var(--space-lg) var(--space-md);
+            }
+
+            .sv-stat-num {
+                font-size: 2rem;
+            }
+
+            .section-courses {
+                padding: var(--space-xl) 20px;
+            }
+
+            .courses-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .c-card:nth-child(n) {
+                min-height: 260px;
+            }
+
+            .c-card-body {
+                padding: var(--space-lg);
+            }
+
+            .c-card-title {
+                max-width: calc(100% - 56px);
+            }
+
+            .c-card-badge {
+                font-size: 11px;
+                padding: 4px 12px;
+            }
+
+            .c-card-num {
+                font-size: 3.5rem;
+                top: 14px;
+                right: 14px;
+            }
+
+            .c-card:has(.c-card-price) .c-card-num {
+                top: 48px;
+            }
+
+            .section-join {
+                margin: 0 8px var(--space-xl);
+                padding: var(--space-xl) 20px;
+            }
+
+            .join-sub {
+                font-size: var(--text-base);
+            }
+
+            .footer {
+                padding: var(--space-xl) 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+
+            .footer-partners {
+                flex-wrap: wrap;
+                gap: var(--space-md);
+                padding: var(--space-lg) 20px;
+            }
+
+            .footer-partners img {
+                height: 36px;
+            }
+        }
+
+        /* ============================================================
+        390px — iPhone 12/13/14 (standard)
+        ============================================================ */
+        @media (max-width: 390px) {
+            .nav {
+                padding: 0 18px;
+            }
+
+            .nav.scrolled {
+                left: 7px;
+                right: 7px;
+            }
+
+            .page-hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.9375rem, 8.8vw, 2.375rem);
+            }
+
+            .info-strip {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-overview {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-literacy {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-workforce {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-service {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .sv-stat-num {
+                font-size: 1.875rem;
+            }
+
+            .section-courses {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .c-card-title {
+                max-width: calc(100% - 52px);
+            }
+
+            .c-card-num {
+                font-size: 2.5rem;
+                top: 52px;
+            }
+
+            .section-join {
+                margin-left: 7px;
+                margin-right: 7px;
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer-partners {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        /* ============================================================
+        375px — iPhone SE / standard iPhone
+        ============================================================ */
+        @media (max-width: 375px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .nav.scrolled {
+                left: 6px;
+                right: 6px;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.875rem, 9.5vw, 2.25rem);
+            }
+
+            .info-strip {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-overview {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-literacy {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-workforce {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-service {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-courses {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .c-card-title {
+                max-width: calc(100% - 48px);
+            }
+            
+            .c-card-num {
+                font-size: 2.25rem;
+                top: 50px;
+            }
+
+            .c-card-title {
+                font-size: var(--text-lg);
+            }
+
+            .section-join {
+                margin-left: 6px;
+                margin-right: 6px;
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        360px — standard Android (Samsung Galaxy etc.)
+        ============================================================ */
+        @media (max-width: 360px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .hero-h1 {
+                font-size: 1.75rem;
+                letter-spacing: -0.5px;
+            }
+
+            .hero-eyebrow {
+                letter-spacing: 1.5px;
+            }
+
+            .info-strip {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-overview {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-literacy {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-h2 {
+                font-size: 1.625rem;
+            }
+
+            .section-workforce {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-service {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .sv-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .sv-stat {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            .sv-stat:last-child {
+                border-bottom: none;
+            }
+
+            .section-courses {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .c-card-title {
+                max-width: calc(100% - 44px);
+            }
+
+            .c-card-num {
+                font-size: 2rem;
+                top: 48px;
+                right: 12px;
+            }
+            
+            .c-card:has(.c-card-price) .c-card-num {
+                top: 76px;
+            }
+
+            .c-card-title {
+                font-size: var(--text-lg);
+            }
+
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .join-h2 {
+                font-size: var(--text-xl);
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        320px — iPhone SE (1st gen) / minimum screen
+        ============================================================ */
+        @media (max-width: 320px) {
+            .nav {
+                padding: 0 12px;
+                height: 60px;
+            }
+
+            .nav-logo img {
+                height: 36px;
+            }
+
+            .page-hero {
+                padding-left: 12px;
+                padding-right: 12px;
+                padding-top: calc(60px + var(--space-md));
+            }
+
+            .hero-h1 {
+                font-size: 1.625rem;
+            }
+
+            .hero-desc {
+                font-size: var(--text-sm);
+            }
+
+            .info-strip {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .section-overview {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .o-card,
+            .lit-card,
+            .v-pillar {
+                padding: var(--space-lg);
+            }
+
+            .section-literacy {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .section-h2 {
+                font-size: var(--text-2xl);
+            }
+
+            .section-workforce {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .v-pillar-num {
+                font-size: clamp(2rem, 6vw, 2.5rem);
+            }
+
+            .section-service {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .edu-pillar {
+                font-size: var(--text-xs);
+                padding: 5px 12px;
+            }
+
+            .section-courses {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .c-card-body {
+                padding: var(--space-lg);
+            }
+
+            .c-card-title {
+                max-width: calc(100% - 40px);
+            }
+
+            .c-card-num {
+                font-size: 1.75rem;
+                top: 46px;
+            }
+
+            .section-join {
+                padding: var(--space-lg) 12px;
+            }
+
+            .join-h2 {
+                font-size: var(--text-lg);
+            }
+
+            .join-sub {
+                font-size: var(--text-sm);
+            }
+
+            .btn-white,
+            .btn-ghost {
+                font-size: var(--text-sm);
+                padding: 12px 20px;
+            }
+
+            .footer {
+                padding: var(--space-xl) 12px;
+            }
+
+            .footer-partners {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .footer-partners img {
+                height: 30px;
+            }
+        }
     </style>
 </head>
 
@@ -1981,7 +2860,7 @@
         </ul>
 
         <a class="nav-cta" href="./support-us.html">Support Us</a>
-        
+
         <button class="nav-burger" id="navBurger" aria-label="Open menu">
             <span></span><span></span><span></span>
         </button>
@@ -2189,7 +3068,8 @@
         <div class="lit-header">
             <span class="section-label reveal">Category 01</span>
             <h2 class="section-h2 reveal">Literacy Workshops</h2>
-            <p class="section-lead reveal">Restoring ancestral knowledge and deepening understanding of land, water, air, and
+            <p class="section-lead reveal">Restoring ancestral knowledge and deepening understanding of land, water,
+                air, and
                 cultural truth. Experiential, youth-friendly, and rooted in environmental justice.</p>
         </div>
         <div class="lit-grid">
@@ -2355,7 +3235,8 @@
         <div class="courses-header">
             <span class="section-label reveal">Category 04</span>
             <h2 class="section-h2 reveal">Courses</h2>
-            <p class="section-lead reveal">Self-paced & instructor-led learning blending cultural literacy, ecological knowledge,
+            <p class="section-lead reveal">Self-paced & instructor-led learning blending cultural literacy, ecological
+                knowledge,
                 entrepreneurship, and practical skill-building.</p>
         </div>
         <div class="courses-bento">
@@ -2429,7 +3310,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <img src="./assets/img/logo.svg" alt="ASCENDtials Logo">
-                
+
                 <p>A 501(c)(3) nonprofit offering holistic educational tools and training programs to uplift San Diego's
                     BIPOC community.</p>
                 <div class="footer-social">
