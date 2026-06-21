@@ -686,6 +686,10 @@
                 gap: var(--space-2xl);
             }
 
+            .hero-photo-wrap {
+                order: -1;
+            }
+
             .hero-photo-wrap img {
                 height: 380px;
             }
@@ -702,8 +706,20 @@
                 padding-right: 24px;
             }
 
-            .hero-photo-wrap {
+            .hero-photo-wrap img {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
                 display: none;
+            }
+            .hero-cta-row {
+                flex-direction: column;
+                align-items: stretch;
             }
         }
 
@@ -1687,6 +1703,14 @@
             .involved-section {
                 padding: var(--space-2xl) 24px;
             }
+        }
+
+        @media (max-width: 390px) {
+            .involved-card .tab-cta-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
         }
 
         /* ============================================================
@@ -2683,6 +2707,14 @@
                 flex-direction: column;
                 align-items: stretch;
             }
+
+            .btn-white,
+            .btn-ghost {
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto;
+                text-align: center;
+            }
         }
 
         /* ============================================================
@@ -2863,9 +2895,43 @@
         }
 
         /* ============================================================
+        1024px — планшет landscape / небольшой ноутбук
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 24px;
+            }
+
+            .nav.scrolled {
+                left: 12px;
+                right: 12px;
+            }
+        }
+
+        /* ============================================================
         768px — portrait tablet
         ============================================================ */
         @media (max-width: 768px) {
+
+            .nav {
+                padding: 0 20px;
+                height: 64px;
+            }
+
+            .nav.scrolled {
+                top: 8px;
+                left: 12px;
+                right: 12px;
+            }
+
+            .nav-logo img {
+                height: 44px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(2.25rem, 7vw, 3rem);
+                letter-spacing: -1px;
+            }
 
             .details-stat--accent .dates-fill-grid {
                 grid-template-columns: 1fr;
@@ -2898,6 +2964,24 @@
         414px — iPhone Plus / large phones (portrait)
         ============================================================ */
         @media (max-width: 414px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav.scrolled {
+                left: 8px;
+                right: 8px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(2rem, 9vw, 2.5rem);
+                letter-spacing: -0.5px;
+            }
+
+            .hero-photo-wrap img {
+                height: 280px;
+            }
+
             .details-stat--accent .dates-fill-grid {
                 gap: 6px;
             }
@@ -2924,6 +3008,23 @@
                 390px — iPhone 12/13/14 (standard)
                 ============================================================ */
         @media (max-width: 390px) {
+            .nav {
+                padding: 0 18px;
+            }
+
+            .nav.scrolled {
+                left: 7px;
+                right: 7px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.9375rem, 9.2vw, 2.375rem);
+            }
+
+            .hero-photo-wrap img {
+                height: 260px;
+            }
+
             .details-stat--accent .date-pill {
                 padding: 9px 10px;
             }
@@ -2933,6 +3034,27 @@
         375px — iPhone SE / standard iPhone
         ============================================================ */
         @media (max-width: 375px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .nav.scrolled {
+                left: 6px;
+                right: 6px;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.875rem, 9.5vw, 2.25rem);
+            }
+
+            .hero-photo-wrap img {
+                height: 240px;
+            }
+
             .location-tile--map {
                 min-height: 220px;
             }
@@ -2946,6 +3068,15 @@
         360px — standard Android (Samsung Galaxy etc.)
         ============================================================ */
         @media (max-width: 360px) {
+            .hero-h1 {
+                font-size: 1.75rem;
+                letter-spacing: -0.5px;
+            }
+
+            .hero-photo-wrap img {
+                height: 220px;
+            }
+
             .details-stat--accent .date-pill {
                 font-size: 0.7rem;
                 padding: 8px 8px;
@@ -2960,6 +3091,23 @@
         320px — iPhone SE (1st gen) / minimum screen
         ============================================================ */
         @media (max-width: 320px) {
+            .nav {
+                padding: 0 12px;
+                height: 60px;
+            }
+
+            .nav-logo img {
+                height: 36px;
+            }
+
+            .hero-h1 {
+                font-size: 1.625rem;
+            }
+
+            .hero-photo-wrap img {
+                height: 200px;
+            }
+
             .location-tile--map {
                 min-height: 200px;
             }

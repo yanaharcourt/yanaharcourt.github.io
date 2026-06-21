@@ -644,6 +644,10 @@
                 gap: var(--space-2xl);
             }
 
+            .hero-photo-wrap {
+                order: -1;
+            }
+
             .hero-photo-wrap img {
                 height: 380px;
             }
@@ -660,11 +664,27 @@
                 padding-right: 24px;
             }
 
-            .hero-photo-wrap {
-                display: none;
+            .hero-photo-wrap img {
+                height: 300px;
             }
         }
 
+         @media (max-width: 390px) {
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
+                display: none;
+            }
+            .hero-cta-row  {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .tab-cta-row  {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+        
         /* ============================================================
            INFO STRIP
         ============================================================ */
@@ -1368,6 +1388,14 @@
                 align-items: stretch;
                 text-align: center;
             }
+
+            .btn-white,
+            .btn-ghost {
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto;
+                text-align: center;
+            }
         }
 
         /* ============================================================
@@ -1550,10 +1578,6 @@
                 padding-right: max(32px, 4vw);
             }
         
-            .hero-h1 {
-                font-size: 5.5rem;
-            }
-        
             .info-strip {
                 padding-left: max(32px, 4vw);
                 padding-right: max(32px, 4vw);
@@ -1619,10 +1643,6 @@
                 padding-right: 24px;
             }
         
-            .hero-h1 {
-                font-size: 4.75rem;
-            }
-        
             .info-strip {
                 padding-left: 24px;
                 padding-right: 24px;
@@ -1680,7 +1700,7 @@
         ============================================================ */
         @media (max-width: 768px) {
             .hero-h1 {
-                font-size: 4.125rem;
+                font-size: clamp(2.25rem, 7vw, 3rem);
                 letter-spacing: -1px;
             }
         
@@ -1725,12 +1745,16 @@
             }
         
             .hero-h1 {
-                font-size: 3.625rem;
+                font-size: clamp(2rem, 9vw, 2.5rem);
                 letter-spacing: -0.5px;
             }
         
             .hero-desc {
                 font-size: var(--text-base);
+            }
+        
+            .hero-photo-wrap img {
+                height: 280px;
             }
         
             .info-strip {
@@ -1865,7 +1889,11 @@
             }
         
             .hero-h1 {
-                font-size: 3.125rem;
+                font-size: clamp(1.9375rem, 9.2vw, 2.375rem);
+            }
+        
+            .hero-photo-wrap img {
+                height: 260px;
             }
         
             .info-strip {
@@ -1943,7 +1971,11 @@
             }
         
             .hero-h1 {
-                font-size: 2.75rem;
+                font-size: clamp(1.875rem, 9.5vw, 2.25rem);
+            }
+        
+            .hero-photo-wrap img {
+                height: 240px;
             }
         
             .info-strip {
@@ -2012,12 +2044,16 @@
             }
         
             .hero-h1 {
-                font-size: 2.375rem;
+                font-size: 1.75rem;
                 letter-spacing: -0.5px;
             }
         
             .hero-eyebrow {
                 letter-spacing: 1.5px;
+            }
+        
+            .hero-photo-wrap img {
+                height: 220px;
             }
         
             .info-strip {
@@ -2105,11 +2141,15 @@
             }
         
             .hero-h1 {
-                font-size: 2.125rem;
+                font-size: 1.625rem;
             }
         
             .hero-desc {
                 font-size: var(--text-sm);
+            }
+        
+            .hero-photo-wrap img {
+                height: 200px;
             }
         
             .info-strip {

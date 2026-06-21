@@ -667,6 +667,10 @@
                 gap: var(--space-2xl);
             }
 
+            .hero-photo-wrap {
+                order: -1;
+            }
+
             .hero-photo-wrap img {
                 height: 340px;
             }
@@ -683,7 +687,23 @@
                 padding-right: 24px;
             }
 
-            .hero-photo-wrap {
+            .hero-photo-wrap img {
+                height: 260px;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .hero-cta-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+        }
+
+        @media (max-width: 390px) {
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
                 display: none;
             }
         }
@@ -1606,6 +1626,13 @@
             }
         }
 
+        @media (max-width: 414px) {
+            .tab-cta-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
         /* ============================================================
            ABOUT THE MARKET / APPROACH SECTION
         ============================================================ */
@@ -1940,6 +1967,13 @@
 
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 414px) {
+            .gallery-cta-row {
+                flex-direction: column;
+                align-items: stretch;
             }
         }
 
@@ -2589,6 +2623,10 @@
                 font-size: var(--text-base);
             }
         
+            .hero-photo-wrap img {
+                height: 240px;
+            }
+        
             .info-strip {
                 padding: var(--space-lg) 20px;
             }
@@ -2735,7 +2773,11 @@
             }
         
             .hero-h1 {
-                font-size: clamp(1.9375rem, 8.8vw, 2.375rem);
+                font-size: clamp(1.9375rem, 9.2vw, 2.375rem);
+            }
+        
+            .hero-photo-wrap img {
+                height: 220px;
             }
         
             .info-strip {
@@ -2825,6 +2867,10 @@
                 font-size: clamp(1.875rem, 9.5vw, 2.25rem);
             }
         
+            .hero-photo-wrap img {
+                height: 200px;
+            }
+        
             .info-strip {
                 padding-left: 16px;
                 padding-right: 16px;
@@ -2906,6 +2952,10 @@
         
             .hero-eyebrow {
                 letter-spacing: 1.5px;
+            }
+        
+            .hero-photo-wrap img {
+                height: 180px;
             }
         
             .info-strip {
@@ -3016,6 +3066,10 @@
         
             .hero-desc {
                 font-size: var(--text-sm);
+            }
+        
+            .hero-photo-wrap img {
+                height: 160px;
             }
         
             .info-strip {

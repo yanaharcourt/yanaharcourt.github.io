@@ -268,6 +268,10 @@
                 gap: var(--space-2xl);
             }
 
+            .hero-photo-wrap {
+                order: -1;
+            }
+
             .hero-photo-wrap img {
                 height: 380px;
             }
@@ -288,8 +292,8 @@
                 gap: 24px;
             }
 
-            .hero-photo-wrap {
-                display: none;
+            .hero-photo-wrap img {
+                height: 300px;
             }
         }
 
@@ -2106,6 +2110,7 @@
             .hero-photo-badge {
                 left: 16px;
                 bottom: 16px;
+                display: none;
             }
 
             /* Info strip */
@@ -2251,6 +2256,20 @@
                 margin-top: 0;
                 max-width: none;
             }
+
+            /* Join CTA buttons stack to equal width on mobile */
+            .join-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-white,
+            .btn-ghost {
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto;
+                text-align: center;
+            }
         }
 
         /* ============================================================
@@ -2281,9 +2300,9 @@
                 font-size: var(--text-base);
             }
 
-            /* Photo hidden on small phones — matches existing 600px rule */
-            .hero-photo-wrap {
-                display: none;
+            /* Photo height scales down on small phones — matches about.html pattern */
+            .hero-photo-wrap img {
+                height: 280px;
             }
 
             .hero-cta-row {
@@ -2434,8 +2453,12 @@
                 padding-right: 18px;
             }
 
+            .hero-photo-wrap img {
+                height: 260px;
+            }
+
             .hero-h1 {
-                font-size: clamp(1.9375rem, 8.8vw, 2.375rem);
+                font-size: clamp(1.9375rem, 9.2vw, 2.375rem);
             }
 
             .info-strip {
@@ -2520,6 +2543,10 @@
                 font-size: clamp(1.875rem, 9.5vw, 2.25rem);
             }
 
+            .hero-photo-wrap img {
+                height: 240px;
+            }
+
             .info-strip {
                 padding-left: 16px;
                 padding-right: 16px;
@@ -2596,6 +2623,10 @@
 
             .hero-eyebrow {
                 letter-spacing: 1.5px;
+            }
+
+            .hero-photo-wrap img {
+                height: 220px;
             }
 
             .info-strip {
@@ -2698,6 +2729,10 @@
 
             .hero-desc {
                 font-size: var(--text-sm);
+            }
+
+            .hero-photo-wrap img {
+                height: 200px;
             }
 
             .info-strip {
