@@ -2862,6 +2862,116 @@
             vertical-align: middle;
         }
 
+        /* ============================================================
+        768px — portrait tablet
+        ============================================================ */
+        @media (max-width: 768px) {
+
+            .details-stat--accent .dates-fill-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: none;
+                gap: 8px;
+            }
+        
+            .location-bento {
+                grid-template-columns: 1fr;
+            }
+        
+            .location-tile--map {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        
+            .location-tile--accent {
+                grid-column: span 1;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        
+            .location-tile--accent .btn-primary {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        /* ============================================================
+        414px — iPhone Plus / large phones (portrait)
+        ============================================================ */
+        @media (max-width: 414px) {
+            .details-stat--accent .dates-fill-grid {
+                gap: 6px;
+            }
+        
+            .details-stat--accent .date-pill {
+                padding: 10px 12px;
+                font-size: var(--text-xs);
+            }
+        
+            .location-tile {
+                padding: var(--space-lg);
+            }
+        
+            .location-tile--map {
+                min-height: 240px;
+            }
+        
+            .location-tile--map iframe {
+                min-height: 240px;
+            }
+        }
+        
+        /* ============================================================
+                390px — iPhone 12/13/14 (standard)
+                ============================================================ */
+        @media (max-width: 390px) {
+            .details-stat--accent .date-pill {
+                padding: 9px 10px;
+            }
+        }
+        
+        /* ============================================================
+        375px — iPhone SE / standard iPhone
+        ============================================================ */
+        @media (max-width: 375px) {
+            .location-tile--map {
+                min-height: 220px;
+            }
+        
+            .location-tile--map iframe {
+                min-height: 220px;
+            }
+        }
+        
+        /* ============================================================
+        360px — standard Android (Samsung Galaxy etc.)
+        ============================================================ */
+        @media (max-width: 360px) {
+            .details-stat--accent .date-pill {
+                font-size: 0.7rem;
+                padding: 8px 8px;
+            }
+        
+            .location-tile {
+                padding: var(--space-md);
+            }
+        }
+        
+        /* ============================================================
+        320px — iPhone SE (1st gen) / minimum screen
+        ============================================================ */
+        @media (max-width: 320px) {
+            .location-tile--map {
+                min-height: 200px;
+            }
+        
+            .location-tile--map iframe {
+                min-height: 200px;
+            }
+        
+            .location-tile {
+                padding: var(--space-sm);
+            }
+        }
         
     </style>
 </head>
