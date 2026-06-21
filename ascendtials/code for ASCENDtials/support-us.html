@@ -171,51 +171,26 @@
         /* ============================================================
            BUTTONS
         ============================================================ */
+        /* ── BUTTONS — unified across all pages ── */
         .btn-primary,
-        .btn-outline,
         .btn-white,
-        .btn-ghost {
+        .btn-ghost,
+        .btn-outline {
             position: relative;
             overflow: hidden;
             isolation: isolate;
+            z-index: 0;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            transition: color var(--dur-fast);
+            font-size: var(--text-base);
+            cursor: pointer;
             border: none;
         }
 
-        .btn-primary {
-            padding: 14px 28px;
-            background: var(--color-navy);
-            color: var(--color-bg);
-        }
-
-        .btn-outline {
-            padding: 13px 27px;
-            background: transparent;
-            color: var(--color-navy);
-            border: 1px solid var(--color-line);
-        }
-
-        .btn-white {
-            padding: 14px 28px;
-            background: var(--color-white);
-            color: var(--color-navy);
-        }
-
-        .btn-ghost {
-            padding: 13px 27px;
-            background: transparent;
-            color: var(--color-white);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
+        /* Sweep fill layer */
         .btn-primary::before,
-        .btn-outline::before,
         .btn-white::before,
         .btn-ghost::before {
             content: '';
@@ -224,36 +199,98 @@
             background: var(--color-sky);
             transform: scaleX(0);
             transform-origin: left center;
-            transition: transform 0.38s var(--ease-out);
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
             z-index: -1;
             border-radius: inherit;
         }
 
         .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
             background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
         }
 
-        .btn-ghost::before {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .btn-primary:hover::before,
-        .btn-white:hover::before,
-        .btn-outline:hover::before,
-        .btn-ghost:hover::before {
+        .btn-primary:hover::before {
             transform: scaleX(1);
         }
 
-        .btn-primary:hover,
-        .btn-white:hover {
-            color: var(--color-white);
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
         }
 
         .btn-outline:hover {
             border-color: var(--color-sky);
         }
 
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
+            transition: color var(--dur-fast);
+        }
+
+        .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
         .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.6);
         }
 

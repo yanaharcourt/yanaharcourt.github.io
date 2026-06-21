@@ -379,7 +379,11 @@
             margin-bottom: var(--space-md);
         }
 
-        .btn-primary {
+        /* ── BUTTONS — unified across all pages ── */
+        .btn-primary,
+        .btn-white,
+        .btn-ghost,
+        .btn-outline {
             position: relative;
             overflow: hidden;
             isolation: isolate;
@@ -387,16 +391,16 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 28px;
             border-radius: var(--radius-pill);
-            background: var(--color-navy);
-            color: var(--color-bg);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            transition: color var(--dur-fast);
+            font-size: var(--text-base);
+            cursor: pointer;
+            border: none;
         }
 
-        .btn-primary::before {
+        /* Sweep fill layer */
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-ghost::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -406,27 +410,6 @@
             transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
             z-index: -1;
             border-radius: inherit;
-        }
-
-        .btn-primary:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            background: transparent;
-            color: var(--color-navy);
-            border: 1px solid var(--color-line);
-            transition: background var(--dur-fast), border-color var(--dur-fast);
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
         }
 
         .btn-outline::before {
@@ -441,6 +424,29 @@
             border-radius: inherit;
         }
 
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
         .btn-outline:hover::before {
             transform: scaleX(1);
         }
@@ -449,47 +455,9 @@
             border-color: var(--color-sky);
         }
 
-        .btn-navy {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 32px;
-            border-radius: var(--radius-pill);
-            background: var(--color-navy);
-            color: var(--color-white);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            white-space: nowrap;
-            flex-shrink: 0;
-            transition: color var(--dur-fast);
-        }
-
-        .btn-navy::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--color-sky);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
-        }
-
-        .btn-navy:hover::before {
-            transform: scaleX(1);
-        }
-
         .btn-white {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
             padding: 14px 28px;
             border-radius: var(--radius-pill);
             font-size: var(--text-sm);
@@ -500,15 +468,7 @@
         }
 
         .btn-white::before {
-            content: '';
-            position: absolute;
-            inset: 0;
             background: var(--color-sky);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
         }
 
         .btn-white:hover::before {
@@ -519,32 +479,18 @@
             color: var(--color-white);
         }
 
+        /* Ghost — for use on dark backgrounds */
         .btn-ghost {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            background: transparent;
+            color: var(--color-white);
             padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            border: 1.5px solid rgba(255, 255, 255, 0.35);
-            color: rgba(255, 255, 255, 0.85);
-            transition: color var(--dur-fast), border-color var(--dur-fast);
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
         }
 
         .btn-ghost::before {
-            content: '';
-            position: absolute;
-            inset: 0;
             background: rgba(255, 255, 255, 0.12);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
         }
 
         .btn-ghost:hover::before {
@@ -552,7 +498,8 @@
         }
 
         .btn-ghost:hover {
-            border-color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
         }
 
         /* ============================================================
@@ -1202,7 +1149,7 @@
             margin-bottom: var(--space-sm);
         }
 
-        .details-stat--accent .details-stat-num {
+        .details-stat-num--sky {
             color: var(--color-sky);
         }
 
@@ -1210,6 +1157,24 @@
             font-size: var(--text-sm);
             color: var(--color-text-muted);
             line-height: 1.6;
+        }
+
+        .details-stat-label--light {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .details-stat-label--mb {
+            margin-bottom: 16px;
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .cta-row--mt {
+            margin-top: var(--space-xl);
         }
 
         .details-stat--accent .details-stat-label {
@@ -1223,6 +1188,10 @@
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(2, 1fr);
             gap: 10px;
+        }
+
+        .dates-fill-grid--1row {
+            grid-template-rows: repeat(1, 1fr);
         }
 
         .details-stat--accent .date-pill {
@@ -2430,7 +2399,7 @@
         }
 
         .ye-card {
-            background: var(--color-white);
+            background: var(--color-surface);
             border: 1px solid var(--color-line);
             border-radius: var(--radius-xl);
             padding: var(--space-xl);
@@ -3678,7 +3647,7 @@
                             earthkeeping story.</div>
                     </li>
                 </ul>
-                <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <div class="cta-row">
                     <a class="btn-primary" href="https://ascendtials.org/elementor-32086/">
                         Sign Up for Mini Earthkeepers
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3703,12 +3672,12 @@
                     <div class="details-stat-label">Certified farmers' market sites every week</div>
                 </div>
                 <div class="details-stat details-stat--accent">
-                    <div class="details-stat-num" style="color:var(--color-sky);">Powered by Build My Spirit</div>
-                    <div class="details-stat-label" style="color:rgba(255,255,255,0.6); margin-bottom: 16px;">MAET is
+                    <div class="details-stat-num details-stat-num--sky">Powered by Build My Spirit</div>
+                    <div class="details-stat-label details-stat-label--light details-stat-label--mb">MAET is
                         rooted in African heritage and environmental stewardship — blending ecological science with
                         ancestral wisdom so young people see themselves as earthkeepers and stewards of their
                         communities.</div>
-                    <div class="dates-fill-grid" style="grid-template-rows: repeat(1, 1fr);">
+                    <div class="dates-fill-grid dates-fill-grid--1row">
                         <div class="date-pill">Free</div>
                         <div class="date-pill">Donation-Based</div>
                         <div class="date-pill">No Registration</div>
@@ -3847,7 +3816,7 @@
                 </div>
 
                 <p class="night-sky-upcoming">Upcoming Overnight Camp program!</p>
-                <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <div class="cta-row">
                     <a class="btn-primary"
                         href="https://ascendtials.org/youth-programs/night-sky-youth-camp-at-oakoasis/">
                         Learn More
@@ -3940,7 +3909,7 @@
                 <p>Build My Spirit is a before and after school program for low-income BIPOC youth ages 5&ndash;17 in San Diego. The program provides children with activities that support them spiritually, mentally, and physically.</p>
 
                 <p>The key to all this is empowering the disadvantaged, and dismantling the unseen barriers of inequality — giving every child a foundation to grow from.</p>
-                <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top: var(--space-xl);">
+                <div class="cta-row cta-row--mt">
                     <a class="btn-primary" href="./build-my-spirit.html">
                         Read More
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"

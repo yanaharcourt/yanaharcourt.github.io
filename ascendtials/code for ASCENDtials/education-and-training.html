@@ -1926,7 +1926,10 @@
             }
         }
 
-       /* ============================================================
+        /* ============================================================
+        RESPONSIVE — full cascade 1280 → 1024 → 768 → 414 → 390 → 375 → 360 → 320
+        ============================================================ */
+        /* ============================================================
         1280px — large desktop / small desktop
         ============================================================ */
         @media (max-width: 1280px) {
@@ -2200,28 +2203,53 @@
                 padding: var(--space-2xl) 20px;
             }
 
-            .c-card-title {
-                max-width: calc(100% - 64px);
+            /* .c-card-body was absolutely positioned (inset:0,
+               justify-content:flex-end) which locks card height
+               to the fixed grid-row height — text gets clipped or
+               crowds the badge/number no matter what margin is
+               added. Switch to normal flex flow on mobile, same
+               pattern as .lit-card, so the card grows to fit its
+               content instead of the content being squeezed into
+               a fixed box. */
+            .c-card {
+                min-height: 0 !important;
+                height: auto;
             }
 
-            .c-card-badge {
-                top: 16px;
-                left: 16px;
+            .c-card-body {
+                position: static;
+                inset: auto;
+                justify-content: flex-start;
+                gap: var(--space-sm);
+                padding: var(--space-lg);
+            }
+
+            .c-card-badge,
+            .c-card-price {
+                position: static;
+                display: inline-block;
+                align-self: flex-start;
             }
 
             .c-card-price {
-                top: 16px;
-                right: 16px;
+                margin-left: 8px;
             }
 
             .c-card-num {
-                font-size: 2.75rem;
-                top: 52px;
-                right: 14px;
+                position: absolute;
+                top: var(--space-md);
+                right: var(--space-lg);
+                font-size: 3.5rem;
+                margin-bottom: 0;
             }
-            
+
             .c-card:has(.c-card-price) .c-card-num {
-                top: 80px;
+                top: var(--space-md);
+            }
+
+            .c-card-title {
+                margin-top: 0;
+                max-width: none;
             }
         }
 
@@ -2320,15 +2348,12 @@
             }
 
             .c-card:nth-child(n) {
-                min-height: 260px;
+                min-height: 0;
             }
 
             .c-card-body {
                 padding: var(--space-lg);
-            }
-
-            .c-card-title {
-                max-width: calc(100% - 56px);
+                gap: 4px;
             }
 
             .c-card-badge {
@@ -2337,13 +2362,13 @@
             }
 
             .c-card-num {
-                font-size: 3.5rem;
-                top: 14px;
-                right: 14px;
+                font-size: 3rem;
+                top: var(--space-md);
+                right: var(--space-md);
             }
 
             .c-card:has(.c-card-price) .c-card-num {
-                top: 48px;
+                top: var(--space-md);
             }
 
             .section-join {
@@ -2447,13 +2472,8 @@
                 padding-right: 18px;
             }
 
-            .c-card-title {
-                max-width: calc(100% - 52px);
-            }
-
             .c-card-num {
-                font-size: 2.5rem;
-                top: 52px;
+                font-size: 3rem;
             }
 
             .section-join {
@@ -2530,13 +2550,8 @@
                 padding-right: 16px;
             }
 
-            .c-card-title {
-                max-width: calc(100% - 48px);
-            }
-            
             .c-card-num {
-                font-size: 2.25rem;
-                top: 50px;
+                font-size: 2.75rem;
             }
 
             .c-card-title {
@@ -2630,18 +2645,8 @@
                 padding-right: 16px;
             }
 
-            .c-card-title {
-                max-width: calc(100% - 44px);
-            }
-
             .c-card-num {
-                font-size: 2rem;
-                top: 48px;
-                right: 12px;
-            }
-            
-            .c-card:has(.c-card-price) .c-card-num {
-                top: 76px;
+                font-size: 2.5rem;
             }
 
             .c-card-title {
@@ -2748,13 +2753,8 @@
                 padding: var(--space-lg);
             }
 
-            .c-card-title {
-                max-width: calc(100% - 40px);
-            }
-
             .c-card-num {
-                font-size: 1.75rem;
-                top: 46px;
+                font-size: 2.25rem;
             }
 
             .section-join {

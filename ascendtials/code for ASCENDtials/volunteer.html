@@ -158,12 +158,27 @@
             color: var(--color-sky);
         }
 
+        .section-lead {
+            color: var(--color-text-muted);
+            font-size: var(--text-lg);
+            line-height: 1.75;
+        }
+
+        .section-lead--mt {
+            max-width: 600px;
+            margin-top: var(--space-md);
+        }
+
+        .btn-primary--mt-sm {
+            margin-top: var(--space-sm);
+        }
+
         /* ── BUTTONS ── */
+        /* ── BUTTONS — unified across all pages ── */
         .btn-primary,
-        .btn-outline,
         .btn-white,
         .btn-ghost,
-        .nav-cta {
+        .btn-outline {
             position: relative;
             overflow: hidden;
             isolation: isolate;
@@ -173,43 +188,14 @@
             gap: 8px;
             border-radius: var(--radius-pill);
             font-size: var(--text-base);
-            font-weight: 500;
             cursor: pointer;
             border: none;
-            transition: color var(--dur-fast);
         }
 
-        .btn-primary {
-            background: var(--color-navy);
-            color: var(--color-bg);
-            padding: 14px 28px;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--color-navy);
-            padding: 13px 27px;
-            border: 1px solid var(--color-line);
-        }
-
-        .btn-white {
-            background: var(--color-navy);
-            color: var(--color-bg);
-            padding: 14px 28px;
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--color-navy);
-            padding: 13px 27px;
-            border: 1px solid var(--color-line);
-        }
-
+        /* Sweep fill layer */
         .btn-primary::before,
         .btn-white::before,
-        .btn-outline::before,
-        .btn-ghost::before,
-        .nav-cta::before {
+        .btn-ghost::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -221,68 +207,97 @@
             border-radius: inherit;
         }
 
-        .btn-primary:hover::before,
-        .btn-white:hover::before,
-        .nav-cta:hover::before {
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
             transform: scaleX(1);
         }
 
-        .btn-outline::before,
-        .btn-ghost::before {
-            background: var(--color-sky-light);
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
         }
 
-        .btn-outline:hover::before,
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-sky);
+        }
+
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
+            transition: color var(--dur-fast);
+        }
+
+        .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
         .btn-ghost:hover::before {
             transform: scaleX(1);
         }
 
-        .btn-outline:hover,
         .btn-ghost:hover {
-            border-color: var(--color-sky);
-        }
-
-        .btn-join-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: var(--color-white);
-            color: var(--color-navy);
-            padding: 14px 32px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-base);
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: background var(--dur-fast), color var(--dur-fast);
-        }
-
-        .btn-join-primary:hover {
-            background: var(--color-sky);
-            color: var(--color-white);
-        }
-
-        .btn-join-ghost {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: transparent;
-            color: rgba(255, 255, 255, 0.75);
-            padding: 13px 31px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-base);
-            font-weight: 500;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            cursor: pointer;
-            transition: border-color var(--dur-fast), color var(--dur-fast);
-        }
-
-        .btn-join-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.6);
-            color: var(--color-white);
         }
+
+
 
         /* ============================================================
         NAV
@@ -612,6 +627,10 @@
             font-weight: 300;
             color: var(--color-sky);
             line-height: 1;
+        }
+
+        .badge-unit {
+            font-size: 1.4rem;
         }
 
         .hero-photo-badge-label {
@@ -1405,46 +1424,7 @@
             gap: var(--space-sm);
         }
 
-        .btn-portal-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: var(--color-sky);
-            color: var(--color-white);
-            padding: 14px 28px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-base);
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: opacity var(--dur-fast);
-        }
 
-        .btn-portal-primary:hover {
-            opacity: 0.88;
-        }
-
-        .btn-portal-ghost {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: transparent;
-            color: rgba(255, 255, 255, 0.7);
-            padding: 13px 27px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-base);
-            font-weight: 500;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: border-color var(--dur-fast), color var(--dur-fast);
-        }
-
-        .btn-portal-ghost:hover {
-            border-color: rgba(255, 255, 255, 0.5);
-            color: var(--color-white);
-        }
 
         @media (max-width: 900px) {
             .section-steps-inner {
@@ -1836,6 +1816,10 @@
             color: var(--color-sky);
         }
 
+        .portal-feature-card-icon--mb {
+            margin-bottom: var(--space-lg);
+        }
+
         .portal-feature-card-title {
             font-family: var(--font-display);
             font-size: var(--text-xl);
@@ -1850,8 +1834,11 @@
             line-height: 1.7;
         }
 
+        .portal-feature-card-text--mt {
+            margin-top: var(--space-sm);
+        }
+
         .automated-card {
-            margin-top: var(--space-md);
             background: var(--color-navy);
             border-radius: var(--radius-lg);
             padding: var(--space-xl);
@@ -1859,6 +1846,37 @@
             grid-template-columns: 1fr 1fr;
             gap: var(--space-xl);
             align-items: center;
+        }
+
+        .automated-card--mt {
+            margin-top: var(--space-md);
+        }
+
+        .automated-card-right {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            align-items: flex-start;
+        }
+
+        .automated-eyebrow {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(201, 169, 110, 0.8);
+        }
+
+        .automated-headline {
+            font-family: var(--font-display);
+            font-size: clamp(1.3rem, 2vw, 1.8rem);
+            font-weight: 300;
+            color: var(--color-white);
+            line-height: 1.3;
+        }
+
+        .text-sky {
+            color: var(--color-sky);
         }
 
         .automated-card-label {
@@ -1946,25 +1964,7 @@
             line-height: 1.6;
         }
 
-        .btn-calendly {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: var(--color-sky);
-            color: var(--color-white);
-            padding: 13px 24px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: opacity var(--dur-fast);
-        }
 
-        .btn-calendly:hover {
-            opacity: 0.88;
-        }
 
         @media (max-width: 900px) {
             .portal-features-header {
@@ -2367,9 +2367,9 @@
                     youth, and neighborhoods across San Diego. Whether you join us remotely or in person, you become
                     part of a collective effort to restore balance and uplift those we serve.</p>
                 <div class="hero-cta-row">
-                    <a href="https://ascendtials.org/volunteer/volunteer-memberships/" class="btn-white"
+                    <a href="https://ascendtials.org/volunteer/volunteer-memberships/" class="btn-primary"
                         target="_blank">Sign Up Now</a>
-                    <a href="#pathways" class="btn-ghost">Explore Pathways</a>
+                    <a href="#pathways" class="btn-outline">Explore Pathways</a>
                 </div>
             </div>
 
@@ -2378,7 +2378,7 @@
                     alt="ASCENDtials volunteers in the community"
                     onerror="this.src='https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=80'">
                 <div class="hero-photo-badge">
-                    <div class="hero-photo-badge-num">40<span style="font-size:1.4rem">min</span></div>
+                    <div class="hero-photo-badge-num">40<span class="badge-unit">min</span></div>
                     <div class="hero-photo-badge-label">Onboarding Session</div>
                 </div>
             </div>
@@ -2693,7 +2693,7 @@
                 <div class="reveal">
                     <span class="section-label">Your Volunteer Journey</span>
                     <h2 class="section-h2">Getting started<br>is <em>simple</em></h2>
-                    <p style="color: var(--color-text-muted); font-size: var(--text-lg); line-height: 1.75;">We've
+                    <p class="section-lead">We've
                         designed a simple, supportive onboarding process to help you get started with confidence. Here's
                         what to expect.</p>
                 </div>
@@ -2797,10 +2797,10 @@
                     </div>
 
                     <div class="portal-cta">
-                        <a href="https://ascendtials.org/volunteer/volunteer-memberships/" class="btn-portal-primary"
+                        <a href="https://ascendtials.org/volunteer/volunteer-memberships/" class="btn-primary"
                             target="_blank">Sign Up Now</a>
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLScYa04LHrE_Ej_7wFDv1kEDI9ULDpRBYDnu7376H8jl2UCDJQ/viewform"
-                            class="btn-portal-ghost" target="_blank">Volunteer Application Form</a>
+                            class="btn-ghost" target="_blank">Volunteer Application Form</a>
                     </div>
                 </div>
             </div>
@@ -2815,8 +2815,7 @@
             <div class="membership-header reveal">
                 <span class="section-label">Membership Levels</span>
                 <h2 class="section-h2">Find the right<br><em>membership for you</em></h2>
-                <p
-                    style="color: var(--color-text-muted); font-size: var(--text-lg); line-height: 1.75; max-width: 600px; margin-top: var(--space-md);">
+                <p class="section-lead section-lead--mt">
                     Every volunteer and participant joins under a membership type that determines portal access and
                     available features.</p>
             </div>
@@ -3067,7 +3066,7 @@
                 <!-- row 3: full-width two-col card (Newsletter + CTA) -->
                 <div class="portal-feature-card reveal">
                     <div>
-                        <div class="portal-feature-card-icon" style="margin-bottom: var(--space-lg);">
+                        <div class="portal-feature-card-icon portal-feature-card-icon--mb">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
@@ -3075,7 +3074,7 @@
                             </svg>
                         </div>
                         <div class="portal-feature-card-title">Monthly Newsletter</div>
-                        <div class="portal-feature-card-text" style="margin-top: var(--space-sm);">Stay connected with
+                        <div class="portal-feature-card-text portal-feature-card-text--mt">Stay connected with
                             updates, announcements, and stories from across the ASCENDtials volunteer and community
                             network.</div>
                     </div>
@@ -3092,7 +3091,7 @@
                         <div class="calendly-box-title">Have Questions?</div>
                         <div class="calendly-box-text">Set up a 30-minute meeting with our team. We're happy to walk you
                             through pathways, portal access, and anything else before you sign up.</div>
-                        <a href="https://calendly.com/hr-ascendtials/30min" class="btn-calendly" target="_blank">
+                        <a href="https://calendly.com/hr-ascendtials/30min" class="btn-primary" target="_blank">
                             Schedule a Meeting
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
@@ -3105,7 +3104,7 @@
             </div>
 
             <!-- automated strip -->
-            <div class="automated-card reveal" style="margin-top: var(--space-md);">
+            <div class="automated-card automated-card--mt reveal">
                 <div class="automated-card-left">
                     <div class="automated-card-label">Automated System</div>
                     <div class="automated-card-title">Your portal works<br><em>for you</em></div>
@@ -3147,15 +3146,11 @@
                         </div>
                     </div>
                 </div>
-                <div style="display:flex; flex-direction:column; gap:var(--space-md); align-items:flex-start;">
-                    <div
-                        style="font-size:var(--text-xs); font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:rgba(201,169,110,0.8);">
-                        Ready to Begin?</div>
-                    <div
-                        style="font-family:var(--font-display); font-size:clamp(1.3rem,2vw,1.8rem); font-weight:300; color:var(--color-white); line-height:1.3;">
-                        Sign up in minutes.<br><em style="color:var(--color-sky);">Start making an impact.</em></div>
-                    <a href="https://ascendtials.org/volunteer/volunteer-memberships/" class="btn-portal-primary"
-                        target="_blank" style="margin-top:var(--space-sm);">Sign Up Now →</a>
+                <div class="automated-card-right">
+                    <div class="automated-eyebrow">Ready to Begin?</div>
+                    <div class="automated-headline">Sign up in minutes.<br><em class="text-sky">Start making an impact.</em></div>
+                    <a href="https://ascendtials.org/volunteer/volunteer-memberships/" class="btn-primary btn-primary--mt-sm"
+                        target="_blank">Sign Up Now →</a>
                 </div>
             </div>
         </div>
@@ -3172,9 +3167,9 @@
                 Diego. We're grateful you're here, and we look forward to welcoming you into the ASCENDtials community.
             </p>
             <div class="join-cta">
-                <a href="https://ascendtials.org/volunteer/volunteer-memberships/" class="btn-join-primary"
+                <a href="https://ascendtials.org/volunteer/volunteer-memberships/" class="btn-white"
                     target="_blank">Sign Up Now</a>
-                <a href="https://calendly.com/hr-ascendtials/30min" class="btn-join-ghost" target="_blank">Book a
+                <a href="https://calendly.com/hr-ascendtials/30min" class="btn-ghost" target="_blank">Book a
                     Meeting First</a>
             </div>
         </div>

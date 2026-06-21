@@ -125,12 +125,11 @@
         .section-h2 em { font-style: italic; color: var(--color-sky); }
 
         /* ── BUTTONS ── */
+        /* ── BUTTONS — unified across all pages ── */
         .btn-primary,
-        .btn-outline,
         .btn-white,
         .btn-ghost,
-        .nav-cta,
-        .bento-link {
+        .btn-outline {
             position: relative;
             overflow: hidden;
             isolation: isolate;
@@ -140,18 +139,14 @@
             gap: 8px;
             border-radius: var(--radius-pill);
             font-size: var(--text-base);
-            font-weight: 500;
             cursor: pointer;
             border: none;
-            transition: color var(--dur-fast);
         }
 
-        .btn-primary { background: var(--color-navy); color: var(--color-bg); padding: 14px 28px; }
-        .btn-outline { background: transparent; color: var(--color-navy); padding: 13px 27px; border: 1px solid var(--color-line); }
-        .btn-white { background: var(--color-navy); color: var(--color-bg); padding: 14px 28px; }
-        .btn-ghost { background: transparent; color: var(--color-navy); padding: 13px 27px; border: 1px solid var(--color-line); }
-
-        .btn-primary::before, .btn-white::before, .btn-ghost::before, .btn-outline::before, .nav-cta::before, .bento-link::before {
+        /* Sweep fill layer */
+        .btn-primary::before,
+        .btn-white::before,
+        .btn-ghost::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -163,30 +158,98 @@
             border-radius: inherit;
         }
 
-        .btn-primary:hover::before, .btn-white:hover::before, .nav-cta:hover::before { transform: scaleX(1); }
-        .btn-outline::before, .btn-ghost::before { background: var(--color-sky-light); }
-        .btn-outline:hover::before, .btn-ghost:hover::before { transform: scaleX(1); }
-        .btn-outline:hover, .btn-ghost:hover { border-color: var(--color-sky); }
-        .bento-link::before { background: var(--color-sky); }
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-sky);
+        }
+
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
+            transition: color var(--dur-fast);
+        }
+
+        .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-white:hover {
+            color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
         .bento-link:hover::before { transform: scaleX(1); }
 
-        .btn-join-primary {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            background: var(--color-white); color: var(--color-navy);
-            padding: 14px 32px; border-radius: var(--radius-pill);
-            font-size: var(--text-base); font-weight: 500; border: none; cursor: pointer;
-            transition: background var(--dur-fast), color var(--dur-fast);
-        }
-        .btn-join-primary:hover { background: var(--color-sky); color: var(--color-white); }
 
-        .btn-join-ghost {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            background: transparent; color: rgba(255,255,255,0.75);
-            padding: 13px 31px; border-radius: var(--radius-pill);
-            font-size: var(--text-base); font-weight: 500; border: 1px solid rgba(255,255,255,0.25); cursor: pointer;
-            transition: border-color var(--dur-fast), color var(--dur-fast);
-        }
-        .btn-join-ghost:hover { border-color: rgba(255,255,255,0.6); color: var(--color-white); }
 
         /* ============================================================
         NAV
@@ -482,6 +545,19 @@
         .market-detail-text { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
         .market-detail-text strong { color: var(--color-text); font-weight: 500; display: block; margin-bottom: 2px; }
 
+        .address-note {
+            color: var(--color-text-light);
+            font-size: 0.8rem;
+        }
+
+        .market-values-desc {
+            color: var(--color-text-muted);
+            font-size: var(--text-lg);
+            line-height: 1.75;
+            max-width: 640px;
+            margin-top: var(--space-md);
+        }
+
         @media (max-width: 780px) {
             .markets-header { grid-template-columns: 1fr; gap: var(--space-lg); }
             .markets-grid { grid-template-columns: 1fr; }
@@ -633,23 +709,7 @@
         .course-feature-text strong { color: var(--color-white); display: block; margin-bottom: 2px; }
 
         .course-cta { display: flex; flex-direction: column; gap: var(--space-sm); }
-        .btn-course-primary {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            background: var(--color-sky); color: var(--color-white);
-            padding: 14px 28px; border-radius: var(--radius-pill);
-            font-size: var(--text-base); font-weight: 500; border: none; cursor: pointer;
-            transition: opacity var(--dur-fast);
-        }
-        .btn-course-primary:hover { opacity: 0.88; }
 
-        .btn-course-ghost {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            background: transparent; color: rgba(255,255,255,0.7);
-            padding: 13px 27px; border-radius: var(--radius-pill);
-            font-size: var(--text-base); font-weight: 500; border: 1px solid rgba(255,255,255,0.2); cursor: pointer;
-            transition: border-color var(--dur-fast), color var(--dur-fast);
-        }
-        .btn-course-ghost:hover { border-color: rgba(255,255,255,0.5); color: var(--color-white); }
 
         @media (max-width: 900px) {
             .section-permits-inner { grid-template-columns: 1fr; gap: var(--space-2xl); }
@@ -733,6 +793,13 @@
         }
 
         .apply-steps { display: flex; flex-direction: column; gap: 0; margin-top: var(--space-xl); }
+
+        .apply-desc {
+            color: var(--color-text-muted);
+            font-size: var(--text-lg);
+            line-height: 1.75;
+            margin-bottom: var(--space-xl);
+        }
 
         .apply-step {
             display: flex; gap: var(--space-lg); padding-bottom: var(--space-xl);
@@ -1051,8 +1118,8 @@
                 <div class="hero-divider"></div>
                 <p class="hero-desc">Join the ASCENDKemet Collective Certified Farmers' Markets — a vibrant, BIPOC-centered marketplace in San Diego. We welcome farmers, artisans, food makers, and community vendors year-round.</p>
                 <div class="hero-cta-row">
-                    <a href="#apply" class="btn-white">Apply Now</a>
-                    <a href="#markets" class="btn-ghost">See Market Locations</a>
+                    <a href="#apply" class="btn-primary">Apply Now</a>
+                    <a href="#markets" class="btn-outline">See Market Locations</a>
                 </div>
             </div>
 
@@ -1171,7 +1238,7 @@
                             <div class="market-detail-text">
                                 <strong>Location</strong>
                                 4325 Wightman St, San Diego, CA 92105<br>
-                                <span style="color: var(--color-text-light); font-size: 0.8rem;">(between 43rd and Fairmount Ave)</span>
+                                <span class="address-note">(between 43rd and Fairmount Ave)</span>
                             </div>
                         </div>
                         <div class="market-detail-row">
@@ -1212,7 +1279,7 @@
                     <span class="section-label">Who We're Looking For</span>
                     <h2 class="section-h2">We're actively<br><em>seeking vendors</em></h2>
                 </div>
-                <p class="reveal" style="color: var(--color-text-muted); font-size: var(--text-lg); line-height: 1.75; max-width: 640px; margin-top: var(--space-md);">Our market celebrates holistic living and the BIPOC community of San Diego. Vendors identify with community values, fresh produce, and principled products for mind, body, and spirit.</p>
+                <p class="market-values-desc reveal">Our market celebrates holistic living and the BIPOC community of San Diego. Vendors identify with community values, fresh produce, and principled products for mind, body, and spirit.</p>
             </div>
 
             <div class="seek-bento">
@@ -1392,8 +1459,8 @@
                         </div>
                     </div>
                     <div class="course-cta">
-                        <a href="https://ascendtials.org/become-a-vendor-course/" class="btn-course-primary" target="_blank">Start the Vendor Course</a>
-                        <a href="mailto:ascendkemetcollectivemarkets@ascendtials.org" class="btn-course-ghost">Email Us a Question</a>
+                        <a href="https://ascendtials.org/become-a-vendor-course/" class="btn-primary" target="_blank">Start the Vendor Course</a>
+                        <a href="mailto:ascendkemetcollectivemarkets@ascendtials.org" class="btn-ghost">Email Us a Question</a>
                     </div>
                 </div>
             </div>
@@ -1528,7 +1595,7 @@
                 <div class="reveal">
                     <span class="section-label">How to Apply</span>
                     <h2 class="section-h2">Your path to<br><em>becoming a vendor</em></h2>
-                    <p style="color: var(--color-text-muted); font-size: var(--text-lg); line-height: 1.75; margin-bottom: var(--space-xl);">The market manager will review your application and contact you if selected. Here's what to expect.</p>
+                    <p class="apply-desc">The market manager will review your application and contact you if selected. Here's what to expect.</p>
                 </div>
 
                 <div class="apply-steps">
@@ -1599,8 +1666,8 @@
             <h2 class="join-h2">Become part of<br><em>our community</em></h2>
             <p class="join-desc">Local farmers are the heart of our community. We're committed to creating a vibrant space where vendors can share their fresh, high-quality products with the people of San Diego.</p>
             <div class="join-cta">
-                <a href="https://ascendtials.org/vendor-portal/" class="btn-join-primary" target="_blank">Apply to Become a Vendor</a>
-                <a href="./farmers-market.html" class="btn-join-ghost">See Our Markets</a>
+                <a href="https://ascendtials.org/vendor-portal/" class="btn-white" target="_blank">Apply to Become a Vendor</a>
+                <a href="./farmers-market.html" class="btn-ghost">See Our Markets</a>
             </div>
         </div>
     </section>

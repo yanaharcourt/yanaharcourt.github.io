@@ -299,41 +299,6 @@
         /* ============================================================
         NAV
         ============================================================ */
-        .nav-cta {
-            flex-shrink: 0;
-            background: var(--color-navy);
-            color: var(--color-bg);
-            padding: 9px 20px;
-            border-radius: var(--radius-pill);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            white-space: nowrap;
-            transition: color var(--dur-fast);
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-        }
-
-        .nav-cta::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--color-sky);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: -1;
-            border-radius: inherit;
-        }
-
-        .nav-cta:hover::before {
-            transform: scaleX(1);
-        }
-
-        .nav-cta:hover {
-            color: var(--color-white);
-        }
-
         .nav {
             position: fixed;
             top: 0;
@@ -359,7 +324,8 @@
             right: 16px;
             border-radius: var(--radius-xl);
             border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
         }
 
         .nav-logo {
@@ -394,7 +360,8 @@
             font-weight: 400;
             color: var(--color-text-muted);
             border-radius: var(--radius-sm);
-            transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+            transition: color var(--dur-fast) var(--ease-out),
+                background var(--dur-fast) var(--ease-out);
         }
 
         .nav-links>li>a:hover {
@@ -402,6 +369,7 @@
             background: var(--color-surface);
         }
 
+        /* Dropdown chevron */
         .nav-links .has-dropdown>a::after {
             content: '';
             width: 10px;
@@ -451,6 +419,42 @@
             background: var(--color-surface);
         }
 
+        .nav-cta {
+            flex-shrink: 0;
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 9px 20px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color var(--dur-fast);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-sky);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
+        }
+
+        .nav-cta:hover::before {
+            transform: scaleX(1);
+        }
+
+        .nav-cta:hover {
+            color: var(--color-white);
+        }
+
         .nav-burger {
             display: none;
             background: none;
@@ -470,16 +474,17 @@
             transition: all var(--dur-base) var(--ease-out);
         }
 
+        /* Mobile menu */
         .mobile-menu {
             display: none;
             position: fixed;
             inset: 0;
             background: var(--color-bg);
             z-index: 490;
-            padding: 100px 32px 32px;
-            flex-direction: column;
-            gap: 8px;
+            padding: 90px 24px 32px;
             overflow-y: auto;
+            flex-direction: column;
+            gap: 4px;
         }
 
         .mobile-menu.open {
@@ -487,11 +492,12 @@
         }
 
         .mobile-menu a {
+            display: block;
+            padding: 14px 16px;
             font-size: var(--text-xl);
-            font-weight: 400;
             color: var(--color-text);
-            padding: 12px 0;
             border-bottom: 1px solid var(--color-line);
+            font-family: var(--font-display);
         }
 
         .mobile-menu a:hover {
@@ -509,7 +515,7 @@
             border-bottom: none;
         }
 
-        @media (max-width: 860px) {
+        @media (max-width: 900px) {
 
             .nav-links,
             .nav-cta {
@@ -2612,6 +2618,824 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* ============================================================
+        1280px — large desktop / small desktop
+        ============================================================ */
+@media (max-width: 1280px) {
+    .page-hero {
+        padding-left: max(32px, 4vw);
+        padding-right: max(32px, 4vw);
+    }
+ 
+    .info-strip {
+        padding-left: max(32px, 4vw);
+        padding-right: max(32px, 4vw);
+    }
+ 
+    .section-intro {
+        padding-left: max(32px, 4vw);
+        padding-right: max(32px, 4vw);
+    }
+ 
+    .section-programs {
+        padding-left: max(32px, 4vw);
+        padding-right: max(32px, 4vw);
+    }
+ 
+    .section-feature {
+        padding-left: max(32px, 4vw);
+        padding-right: max(32px, 4vw);
+    }
+ 
+    .section-highlights {
+        padding-left: max(32px, 4vw);
+        padding-right: max(32px, 4vw);
+    }
+ 
+    .section-faq {
+        padding-left: max(32px, 4vw);
+        padding-right: max(32px, 4vw);
+    }
+ 
+    .prog-tab-bar-sticky {
+        margin-left: calc(-1 * max(32px, 4vw));
+        margin-right: calc(-1 * max(32px, 4vw));
+        padding-left: max(32px, 4vw);
+        padding-right: max(32px, 4vw);
+    }
+}
+ 
+/* ============================================================
+        1024px — landscape tablet / small laptop
+        ============================================================ */
+@media (max-width: 1024px) {
+    .nav {
+        padding: 0 24px;
+    }
+ 
+    .nav.scrolled {
+        left: 12px;
+        right: 12px;
+    }
+ 
+    .page-hero {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+ 
+    .breadcrumb {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+ 
+    .info-strip {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+ 
+    .section-intro {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+ 
+    .section-programs {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+ 
+    .section-feature {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+ 
+    .section-highlights {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+ 
+    .prog-tab-bar-sticky {
+        margin-left: -24px;
+        margin-right: -24px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+ 
+    .cleanup-prep-grid {
+        grid-template-columns: 1fr;
+    }
+ 
+    .event-details-card {
+        grid-template-columns: 1fr;
+    }
+ 
+    .section-faq {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+ 
+    .section-join {
+        margin-left: 24px;
+        margin-right: 24px;
+    }
+ 
+    .footer {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+ 
+    .footer-partners {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+ 
+/* ============================================================
+        768px — portrait tablet
+        ============================================================ */
+@media (max-width: 768px) {
+ 
+    /* Nav — burger already switches at 900px in the base CSS;
+       these just refine sizing at this width too */
+    .nav {
+        padding: 0 20px;
+        height: 64px;
+    }
+ 
+    .nav.scrolled {
+        top: 8px;
+        left: 12px;
+        right: 12px;
+    }
+ 
+    .nav-logo img {
+        height: 44px;
+    }
+ 
+    .prog-tab-bar-sticky {
+        top: 65px;
+    }
+ 
+    /* Hero */
+    .page-hero {
+        padding-top: calc(64px + var(--space-xl));
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+ 
+    .hero-h1 {
+        font-size: clamp(2.25rem, 7vw, 3rem);
+        letter-spacing: -1px;
+    }
+ 
+    .hero-desc {
+        font-size: var(--text-base);
+        max-width: 100%;
+    }
+ 
+    /* Breadcrumb */
+    .breadcrumb {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+ 
+    /* Info strip */
+    .info-strip {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+ 
+    /* Intro */
+    .section-intro {
+        padding: var(--space-2xl) 20px;
+    }
+ 
+    /* Programs */
+    .section-programs {
+        padding: var(--space-2xl) 20px;
+    }
+ 
+    .cta-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    /* Dark feature */
+    .section-feature {
+        padding: var(--space-2xl) 20px;
+    }
+ 
+    .feature-img-card img {
+        height: 320px;
+    }
+ 
+    /* Highlights / tabs */
+    .section-highlights {
+        padding: var(--space-2xl) 20px;
+    }
+ 
+    .tab-dark-hero {
+        padding: var(--space-lg);
+    }
+ 
+    .tab-photo-strip img {
+        height: 160px;
+    }
+ 
+    .tab-two-col,
+    .tab-two-col--stretch {
+        grid-template-columns: 1fr;
+    }
+ 
+    .cleanup-bento {
+        grid-template-columns: repeat(2, 1fr);
+    }
+ 
+    .cleanup-card--4col,
+    .cleanup-card--3col,
+    .cleanup-card--2col,
+    .cleanup-card--6col {
+        grid-column: span 2;
+    }
+ 
+    .cleanup-card--row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
+ 
+    /* FAQ */
+    .section-faq {
+        padding: var(--space-2xl) 20px;
+    }
+ 
+    /* Join */
+    .section-join {
+        margin-left: 16px;
+        margin-right: 16px;
+        padding: var(--space-2xl) 24px;
+    }
+ 
+    .join-h2 {
+        font-size: clamp(var(--text-xl), 6vw, var(--text-2xl));
+    }
+ 
+    .join-cta {
+        flex-direction: column;
+        align-items: stretch;
+    }
+ 
+    .btn-white,
+    .btn-ghost {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+        text-align: center;
+    }
+ 
+    /* Footer */
+    .footer {
+        padding: var(--space-2xl) 20px;
+    }
+ 
+    .footer-partners {
+        gap: var(--space-xl);
+        padding: var(--space-lg) 20px;
+    }
+ 
+    .footer-partners img {
+        height: 32px;
+    }
+}
+ 
+/* ============================================================
+        414px — iPhone Plus / large phones (portrait)
+        ============================================================ */
+@media (max-width: 414px) {
+    .nav {
+        padding: 0 20px;
+    }
+ 
+    .nav.scrolled {
+        left: 8px;
+        right: 8px;
+    }
+ 
+    .page-hero {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: calc(64px + var(--space-lg));
+    }
+ 
+    .hero-h1 {
+        font-size: clamp(2rem, 9vw, 2.5rem);
+        letter-spacing: -0.5px;
+    }
+ 
+    .hero-desc {
+        font-size: var(--text-base);
+    }
+ 
+    .breadcrumb {
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 11px;
+    }
+ 
+    .info-strip {
+        padding: var(--space-lg) 20px;
+    }
+ 
+    .section-intro {
+        padding: var(--space-xl) 20px;
+    }
+ 
+    .section-programs {
+        padding: var(--space-xl) 20px;
+    }
+ 
+    .prog-num {
+        font-size: 3.5rem;
+    }
+ 
+    .section-feature {
+        padding: var(--space-xl) 20px;
+    }
+ 
+    .feature-img-card img {
+        height: 260px;
+    }
+ 
+    .feature-img-caption {
+        padding: var(--space-md) var(--space-lg);
+    }
+ 
+    .section-highlights {
+        padding: var(--space-xl) 20px;
+    }
+ 
+    .hb-card-icon {
+        height: 120px;
+    }
+ 
+    .tab-dark-hero {
+        padding: var(--space-md);
+    }
+ 
+    .tab-benefits-grid {
+        grid-template-columns: 1fr;
+    }
+ 
+    .tab-price-grid {
+        grid-template-columns: 1fr;
+    }
+ 
+    .tab-photo-strip img {
+        height: 130px;
+    }
+ 
+    .cleanup-bento {
+        grid-template-columns: 1fr;
+    }
+ 
+    .cleanup-card--4col,
+    .cleanup-card--3col,
+    .cleanup-card--2col,
+    .cleanup-card--6col {
+        grid-column: span 1;
+    }
+ 
+    .event-details-card {
+        padding: var(--space-lg);
+    }
+ 
+    .tree-stat-card {
+        padding: var(--space-lg);
+    }
+ 
+    .section-faq {
+        padding: var(--space-xl) 20px;
+    }
+ 
+    .faq-question {
+        font-size: var(--text-sm);
+    }
+ 
+    .section-join {
+        margin: 0 8px var(--space-xl);
+        padding: var(--space-xl) 20px;
+    }
+ 
+    .join-desc {
+        font-size: var(--text-base);
+    }
+ 
+    .footer {
+        padding: var(--space-xl) 20px;
+    }
+ 
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+ 
+    .footer-brand p {
+        max-width: 100%;
+    }
+ 
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-sm);
+    }
+ 
+    .footer-bottom-links {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+    }
+ 
+    .footer-partners {
+        flex-wrap: wrap;
+        gap: var(--space-md);
+        padding: var(--space-lg) 20px;
+    }
+ 
+    .footer-partners img {
+        height: 28px;
+    }
+}
+ 
+/* ============================================================
+        390px — iPhone 12/13/14 (standard)
+        ============================================================ */
+@media (max-width: 390px) {
+    .nav {
+        padding: 0 18px;
+    }
+ 
+    .nav.scrolled {
+        left: 7px;
+        right: 7px;
+    }
+ 
+    .page-hero {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+ 
+    .hero-h1 {
+        font-size: clamp(1.9375rem, 8.8vw, 2.375rem);
+    }
+ 
+    .breadcrumb {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+ 
+    .info-strip {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+ 
+    .section-intro {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+ 
+    .section-programs {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+ 
+    .section-feature {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+ 
+    .section-highlights {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+ 
+    .section-faq {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+ 
+    .section-join {
+        margin-left: 7px;
+        margin-right: 7px;
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+ 
+    .footer {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+ 
+    .footer-partners {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+ 
+/* ============================================================
+        375px — iPhone SE / standard iPhone
+        ============================================================ */
+@media (max-width: 375px) {
+    .nav {
+        padding: 0 16px;
+    }
+ 
+    .nav.scrolled {
+        left: 6px;
+        right: 6px;
+    }
+ 
+    .nav-logo img {
+        height: 40px;
+    }
+ 
+    .page-hero {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .hero-h1 {
+        font-size: clamp(1.875rem, 9.5vw, 2.25rem);
+    }
+ 
+    .breadcrumb {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .info-strip {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .section-intro {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .section-programs {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .section-feature {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .section-highlights {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .section-faq {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .section-join {
+        margin-left: 6px;
+        margin-right: 6px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .footer {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .footer-partners {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+ 
+/* ============================================================
+        360px — standard Android (Samsung Galaxy etc.)
+        ============================================================ */
+@media (max-width: 360px) {
+    .nav {
+        padding: 0 16px;
+    }
+ 
+    .page-hero {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .hero-h1 {
+        font-size: 1.75rem;
+        letter-spacing: -0.5px;
+    }
+ 
+    .hero-eyebrow {
+        letter-spacing: 1.5px;
+    }
+ 
+    .breadcrumb {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .info-strip {
+        padding-left: 16px;
+        padding-right: 16px;
+        grid-template-columns: 1fr;
+        gap: var(--space-lg) 0;
+    }
+ 
+    .section-intro {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .section-h2 {
+        font-size: 1.625rem;
+    }
+ 
+    .section-programs {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .section-feature {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .section-highlights {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .tab-benefit-card,
+    .tab-bento-card {
+        padding: var(--space-md);
+    }
+ 
+    .section-faq {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .section-join {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .join-h2 {
+        font-size: var(--text-xl);
+    }
+ 
+    .footer {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+ 
+    .footer-partners {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+ 
+/* ============================================================
+        320px — iPhone SE (1st gen) / minimum screen
+        ============================================================ */
+@media (max-width: 320px) {
+    .nav {
+        padding: 0 12px;
+        height: 60px;
+    }
+ 
+    .nav-logo img {
+        height: 36px;
+    }
+ 
+    .page-hero {
+        padding-left: 12px;
+        padding-right: 12px;
+        padding-top: calc(60px + var(--space-md));
+    }
+ 
+    .hero-h1 {
+        font-size: 1.625rem;
+    }
+ 
+    .hero-desc {
+        font-size: var(--text-sm);
+    }
+ 
+    .breadcrumb {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+ 
+    .info-strip {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+ 
+    .info-num {
+        font-size: var(--text-2xl);
+    }
+ 
+    .section-intro {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+ 
+    .section-h2 {
+        font-size: var(--text-2xl);
+    }
+ 
+    .section-programs {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+ 
+    .prog-card {
+        padding: var(--space-lg);
+    }
+ 
+    .section-feature {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+ 
+    .feature-img-card img {
+        height: 220px;
+    }
+ 
+    .section-highlights {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+ 
+    .hb-card-body {
+        padding: var(--space-lg);
+    }
+ 
+    .tab-dark-hero h2 {
+        font-size: var(--text-2xl);
+    }
+ 
+    .cleanup-signup-col,
+    .tree-stat-card {
+        padding: var(--space-lg);
+    }
+ 
+    .section-faq {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+ 
+    .faq-question {
+        font-size: var(--text-xs);
+        padding: var(--space-md) 0;
+    }
+ 
+    .section-join {
+        padding: var(--space-lg) 12px;
+    }
+ 
+    .join-h2 {
+        font-size: var(--text-lg);
+    }
+ 
+    .join-desc {
+        font-size: var(--text-sm);
+    }
+ 
+    .btn-white,
+    .btn-ghost {
+        font-size: var(--text-sm);
+        padding: 12px 20px;
+    }
+ 
+    .footer {
+        padding: var(--space-xl) 12px;
+    }
+ 
+    .footer-partners {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+ 
+    .footer-partners img {
+        height: 26px;
+    }
+}
     </style>
 </head>
 

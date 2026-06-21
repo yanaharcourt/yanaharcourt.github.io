@@ -169,11 +169,11 @@
         }
 
         /* ── BUTTONS ── */
+        /* ── BUTTONS — unified across all pages ── */
         .btn-primary,
-        .btn-outline,
         .btn-white,
         .btn-ghost,
-        .nav-cta {
+        .btn-outline {
             position: relative;
             overflow: hidden;
             isolation: isolate;
@@ -182,50 +182,19 @@
             align-items: center;
             gap: 8px;
             border-radius: var(--radius-pill);
-            font-weight: 500;
+            font-size: var(--text-base);
             cursor: pointer;
             border: none;
-            transition: color var(--dur-fast);
         }
 
-        .btn-primary {
-            background: var(--color-navy);
-            color: var(--color-bg);
-            padding: 14px 28px;
-            font-size: var(--text-base);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--color-navy);
-            padding: 13px 27px;
-            font-size: var(--text-base);
-            border: 1px solid var(--color-line);
-        }
-
-        .btn-white {
-            background: var(--color-white);
-            color: var(--color-navy);
-            padding: 14px 28px;
-            font-size: var(--text-base);
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--color-white);
-            padding: 13px 27px;
-            font-size: var(--text-base);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
+        /* Sweep fill layer */
         .btn-primary::before,
         .btn-white::before,
-        .btn-outline::before,
-        .btn-ghost::before,
-        .nav-cta::before {
+        .btn-ghost::before {
             content: '';
             position: absolute;
             inset: 0;
+            background: var(--color-sky);
             transform: scaleX(0);
             transform-origin: left center;
             transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
@@ -233,31 +202,42 @@
             border-radius: inherit;
         }
 
-        .btn-primary::before {
-            background: var(--color-sky);
-        }
-
-        .btn-white::before {
-            background: var(--color-sky);
-        }
-
         .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
             background: var(--color-sky-light);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+            border-radius: inherit;
         }
 
-        .btn-ghost::before {
-            background: rgba(255, 255, 255, 0.12);
+        .btn-primary:hover::before {
+            transform: scaleX(1);
         }
 
-        .nav-cta::before {
-            background: var(--color-sky);
+        .btn-primary {
+            background: var(--color-navy);
+            color: var(--color-bg);
+            padding: 14px 28px;
+            font-weight: 500;
+            text-align: center;
+            transition: color var(--dur-fast);
         }
 
-        .btn-primary:hover::before,
-        .btn-white:hover::before,
-        .btn-outline:hover::before,
-        .btn-ghost:hover::before,
-        .nav-cta:hover::before {
+        .btn-outline {
+            background: transparent;
+            color: var(--color-navy);
+            padding: 13px 27px;
+            font-weight: 500;
+            border: 1px solid var(--color-line);
+            text-align: center;
+            transition: background var(--dur-fast), border-color var(--dur-fast);
+        }
+
+        .btn-outline:hover::before {
             transform: scaleX(1);
         }
 
@@ -265,8 +245,51 @@
             border-color: var(--color-sky);
         }
 
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            background: var(--color-white);
+            color: var(--color-navy);
+            transition: color var(--dur-fast);
+        }
+
+        .btn-white::before {
+            background: var(--color-sky);
+        }
+
+        .btn-white:hover::before {
+            transform: scaleX(1);
+        }
+
         .btn-white:hover {
             color: var(--color-white);
+        }
+
+        /* Ghost — for use on dark backgrounds */
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-white);
+            padding: 13px 27px;
+            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .btn-ghost::before {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-ghost:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
         }
 
         /* ============================================================
@@ -757,6 +780,10 @@
             color: var(--color-text-muted);
             line-height: 1.8;
             margin-bottom: var(--space-xl);
+        }
+
+        .btn-outline--sm {
+            font-size: var(--text-sm);
         }
 
         @media (max-width: 960px) {
@@ -1343,10 +1370,35 @@
         }
 
         .donut-legend-dot {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             flex-shrink: 0;
+        }
+
+        .donut-dot--navy   { background: #1E3A47; }
+        .donut-dot--gold   { background: #C9A96E; }
+        .donut-dot--teal   { background: #B2D5D1; }
+        .donut-dot--neutral { background: #E2DDD6; border: 1px solid #ccc; }
+
+        .donut-segment {
+            transition: stroke-dasharray 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .donut-segment--d1 {
+            transition: stroke-dasharray 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+        }
+
+        .donut-segment--d2 {
+            transition: stroke-dasharray 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+        }
+
+        .donut-segment--d3 {
+            transition: stroke-dasharray 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+        }
+
+        .demo-header {
+            margin-bottom: var(--space-2xl);
         }
 
         .donut-legend-name {
@@ -1491,6 +1543,10 @@
             box-shadow: var(--shadow-sm);
             border-color: var(--color-sky);
             transform: translateY(-2px);
+        }
+
+        .uni-card--wide {
+            grid-column: span 2;
         }
 
         .uni-card-dot {
@@ -2351,7 +2407,7 @@
                     society and nature. We will also equip them to be competitive in the job market. We want them to be
                     self-starters who solve problems, not create them.
                 </p>
-                <p class="what-body-text" style="font-size: var(--text-base);">
+                <p class="what-body-text">
                     Students can choose from sessions that explore various aspects of nature — Earth, Fire, Water, and
                     Air. All four factors necessitate deeper investigation and comprehension. Our programs attempt to
                     take into account a comprehensive view of education across all four elements. Sessions are totally
@@ -2536,7 +2592,7 @@
                         <div class="pillar-card--featured-body">Where academic study meets real-world community impact —
                             bridging knowledge and lived experience across all four elements of nature.</div>
                         <a href="https://ascendtials.org/wp-content/uploads/2024/06/Environmental-Service-Learning-Programming-0319-2024.docx.pdf"
-                            class="btn-outline" target="_blank" style="font-size: var(--text-sm);">Read Program
+                            class="btn-outline btn-outline--sm" target="_blank">Read Program
                             Brief</a>
                     </div>
                 </div>
@@ -2576,7 +2632,7 @@
     ============================================================ -->
     <section class="section-demographics" id="demographics">
         <div class="demo-inner">
-            <div style="margin-bottom: var(--space-2xl);">
+            <div class="demo-header">
                 <span class="section-label reveal">Our Team</span>
                 <h2 class="section-h2 reveal reveal--delay-1">Demographics of<br><em>current team</em></h2>
             </div>
@@ -2589,16 +2645,16 @@
                             <circle cx="160" cy="160" r="110" fill="none" stroke="#F4F2EE" stroke-width="40" />
                             <circle id="d-pacific" cx="160" cy="160" r="110" fill="none" stroke="#1E3A47"
                                 stroke-width="40" stroke-dasharray="0 691" stroke-dashoffset="173" data-val="381"
-                                style="transition: stroke-dasharray 1.2s cubic-bezier(0.22,1,0.36,1);" />
+                                class="donut-segment" />
                             <circle id="d-eastern" cx="160" cy="160" r="110" fill="none" stroke="#C9A96E"
                                 stroke-width="40" stroke-dasharray="0 691" stroke-dashoffset="-208" data-val="194"
-                                style="transition: stroke-dasharray 1.2s cubic-bezier(0.22,1,0.36,1) 0.1s;" />
+                                class="donut-segment donut-segment--d1" />
                             <circle id="d-central" cx="160" cy="160" r="110" fill="none" stroke="#B2D5D1"
                                 stroke-width="40" stroke-dasharray="0 691" stroke-dashoffset="-402" data-val="77"
-                                style="transition: stroke-dasharray 1.2s cubic-bezier(0.22,1,0.36,1) 0.2s;" />
+                                class="donut-segment donut-segment--d2" />
                             <circle id="d-other" cx="160" cy="160" r="110" fill="none" stroke="#E2DDD6"
                                 stroke-width="40" stroke-dasharray="0 691" stroke-dashoffset="-479" data-val="40"
-                                style="transition: stroke-dasharray 1.2s cubic-bezier(0.22,1,0.36,1) 0.3s;" />
+                                class="donut-segment donut-segment--d3" />
                         </svg>
                         <div class="donut-center">
                             <div class="donut-center-num">161</div>
@@ -2608,23 +2664,22 @@
                 </div>
                 <div class="donut-legend">
                     <div class="donut-legend-item">
-                        <div class="donut-legend-dot" style="background:#1E3A47; width:14px; height:14px;"></div>
+                        <div class="donut-legend-dot donut-dot--navy"></div>
                         <span class="donut-legend-name">Pacific</span>
                         <span class="donut-legend-val">88</span>
                     </div>
                     <div class="donut-legend-item">
-                        <div class="donut-legend-dot" style="background:#C9A96E; width:14px; height:14px;"></div>
+                        <div class="donut-legend-dot donut-dot--gold"></div>
                         <span class="donut-legend-name">Eastern</span>
                         <span class="donut-legend-val">45</span>
                     </div>
                     <div class="donut-legend-item">
-                        <div class="donut-legend-dot" style="background:#B2D5D1; width:14px; height:14px;"></div>
+                        <div class="donut-legend-dot donut-dot--teal"></div>
                         <span class="donut-legend-name">Central</span>
                         <span class="donut-legend-val">18</span>
                     </div>
                     <div class="donut-legend-item">
-                        <div class="donut-legend-dot"
-                            style="background:#E2DDD6; border:1px solid #ccc; width:14px; height:14px;"></div>
+                        <div class="donut-legend-dot donut-dot--neutral"></div>
                         <span class="donut-legend-name">Other regions</span>
                         <span class="donut-legend-val">10</span>
                     </div>
@@ -2684,7 +2739,7 @@
                         <div class="uni-card-dot"></div>
                         <span class="uni-card-name">New York University</span>
                     </div>
-                    <div class="uni-card" style="grid-column: span 2;">
+                    <div class="uni-card uni-card--wide">
                         <div class="uni-card-dot"></div>
                         <span class="uni-card-name">Fordham University</span>
                     </div>

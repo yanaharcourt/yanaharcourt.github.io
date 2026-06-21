@@ -913,6 +913,454 @@
                 align-items: flex-start;
             }
         }
+        /* ============================================================
+        RESPONSIVE — cascade 1280 → 1024 → 768 → 414 → 390 → 375 → 360 → 320
+        ============================================================ */
+
+        /* ============================================================
+        1280px — large desktop / small desktop
+        ============================================================ */
+        @media (max-width: 1280px) {
+            .page-hero {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .info-strip {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .calendar-section {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .section-join {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+        }
+
+        /* ============================================================
+        1024px — landscape tablet / small laptop
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 24px;
+            }
+
+            .nav.scrolled {
+                left: 12px;
+                right: 12px;
+            }
+
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .info-strip {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .calendar-section {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .calendar-frame-wrap iframe {
+                min-height: 780px;
+            }
+
+            .section-join {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        768px — portrait tablet
+        ============================================================ */
+        @media (max-width: 768px) {
+
+            /* Nav */
+            .nav {
+                padding: 0 20px;
+                height: 64px;
+            }
+
+            .nav.scrolled {
+                top: 8px;
+                left: 12px;
+                right: 12px;
+            }
+
+            .nav-logo img {
+                height: 44px;
+            }
+
+            /* Hero */
+            .page-hero {
+                padding-top: calc(64px + var(--space-2xl));
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(2.25rem, 7vw, 3rem);
+                letter-spacing: -1px;
+            }
+
+            .hero-desc {
+                font-size: var(--text-base);
+                max-width: 100%;
+            }
+
+            /* Info strip */
+            .info-strip {
+                padding: var(--space-xl) 20px;
+            }
+
+            /* Calendar */
+            .calendar-section {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .calendar-frame-wrap iframe {
+                min-height: 700px;
+            }
+
+            /* Join */
+            .section-join {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .join-h2 {
+                font-size: clamp(var(--text-xl), 6vw, var(--text-2xl));
+            }
+
+            /* Footer */
+            .footer {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .footer-partners {
+                gap: var(--space-xl);
+            }
+
+            .footer-partners img {
+                height: 36px;
+            }
+        }
+
+        /* ============================================================
+        414px — iPhone Plus / large phones (portrait)
+        ============================================================ */
+        @media (max-width: 414px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav.scrolled {
+                left: 8px;
+                right: 8px;
+            }
+
+            .page-hero {
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: calc(64px + var(--space-xl));
+            }
+
+            .hero-h1 {
+                font-size: clamp(2rem, 9vw, 2.5rem);
+                letter-spacing: -0.5px;
+            }
+
+            .hero-desc {
+                font-size: var(--text-base);
+            }
+
+            .info-strip {
+                padding: var(--space-lg) 20px;
+            }
+
+            .info-item {
+                width: 100%;
+            }
+
+            .calendar-section {
+                padding: var(--space-xl) 20px;
+            }
+
+            .calendar-frame-wrap iframe {
+                min-height: 600px;
+            }
+
+            .section-join {
+                padding: var(--space-xl) 20px;
+            }
+
+            .join-sub {
+                font-size: var(--text-base);
+            }
+
+            .footer {
+                padding: var(--space-xl) 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+
+            .footer-partners {
+                flex-wrap: wrap;
+                gap: var(--space-md);
+                padding: var(--space-lg) 0;
+            }
+
+            .footer-partners img {
+                height: 32px;
+            }
+        }
+
+        /* ============================================================
+        390px — iPhone 12/13/14 (standard)
+        ============================================================ */
+        @media (max-width: 390px) {
+            .nav {
+                padding: 0 18px;
+            }
+
+            .nav.scrolled {
+                left: 7px;
+                right: 7px;
+            }
+
+            .page-hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.9375rem, 8.8vw, 2.375rem);
+            }
+
+            .info-strip {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .calendar-section {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .calendar-frame-wrap iframe {
+                min-height: 560px;
+            }
+
+            .section-join {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        /* ============================================================
+        375px — iPhone SE / standard iPhone
+        ============================================================ */
+        @media (max-width: 375px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .nav.scrolled {
+                left: 6px;
+                right: 6px;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.875rem, 9.5vw, 2.25rem);
+            }
+
+            .info-strip {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .calendar-section {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        360px — standard Android (Samsung Galaxy etc.)
+        ============================================================ */
+        @media (max-width: 360px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .hero-h1 {
+                font-size: 1.75rem;
+                letter-spacing: -0.5px;
+            }
+
+            .hero-eyebrow {
+                letter-spacing: 1.5px;
+            }
+
+            .info-strip {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .calendar-section {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .calendar-frame-wrap iframe {
+                min-height: 520px;
+            }
+
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .join-h2 {
+                font-size: var(--text-xl);
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        320px — iPhone SE (1st gen) / minimum screen
+        ============================================================ */
+        @media (max-width: 320px) {
+            .nav {
+                padding: 0 12px;
+                height: 60px;
+            }
+
+            .nav-logo img {
+                height: 36px;
+            }
+
+            .page-hero {
+                padding-left: 12px;
+                padding-right: 12px;
+                padding-top: calc(60px + var(--space-lg));
+            }
+
+            .hero-h1 {
+                font-size: 1.625rem;
+            }
+
+            .hero-desc {
+                font-size: var(--text-sm);
+            }
+
+            .info-strip {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .calendar-section {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .calendar-frame-wrap iframe {
+                min-height: 480px;
+            }
+
+            .section-join {
+                padding: var(--space-lg) 12px;
+            }
+
+            .join-h2 {
+                font-size: var(--text-lg);
+            }
+
+            .join-sub {
+                font-size: var(--text-sm);
+            }
+
+            .btn-white,
+            .btn-ghost,
+            .btn-primary {
+                font-size: var(--text-sm);
+                padding: 12px 20px;
+            }
+
+            .footer {
+                padding: var(--space-xl) 12px;
+            }
+
+            .footer-partners img {
+                height: 28px;
+            }
+        }
     </style>
 </head>
 
