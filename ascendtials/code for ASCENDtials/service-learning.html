@@ -91,6 +91,7 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         body {
@@ -688,26 +689,32 @@
         ============================================================ */
         .info-strip {
             background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
             border-bottom: 1px solid var(--color-line);
             padding: var(--space-xl) max(48px, 6vw);
             display: flex;
             align-items: center;
-            gap: var(--space-2xl);
+            justify-content: space-between;
+            gap: var(--space-xl);
             flex-wrap: wrap;
         }
 
         .info-item {
             display: flex;
-            flex-direction: column;
-            gap: 4px;
+            align-items: center;
+            gap: 14px;
         }
 
-        .info-num {
-            font-family: var(--font-display);
-            font-size: var(--text-3xl);
-            font-weight: 300;
-            color: var(--color-navy);
-            line-height: 1;
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
         }
 
         .info-label {
@@ -716,13 +723,31 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             color: var(--color-text-light);
+            margin-bottom: 3px;
+        }
+
+        .info-value {
+            font-size: var(--text-sm);
+            color: var(--color-navy);
         }
 
         .info-divider {
             width: 1px;
-            height: 48px;
+            height: 40px;
             background: var(--color-line);
             flex-shrink: 0;
+        }
+
+        @media (max-width: 900px) {
+            .info-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--space-xl) 24px;
+            }
+
+            .info-divider {
+                display: none;
+            }
         }
 
         /* ============================================================
@@ -794,6 +819,12 @@
             .what-img-badge {
                 right: 16px;
                 top: 16px;
+            }
+        }
+
+        @media (max-width: 414px) {
+            .what-img-badge {
+                display: none;
             }
         }
 
@@ -1472,9 +1503,15 @@
                 grid-template-columns: 1fr;
             }
 
+            .demo-donut-wrap {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+
             .donut-svg-wrap {
-                width: 260px;
-                height: 260px;
+                width: 320px;
+                height: 320px;
             }
 
             .donut-legend {
@@ -1495,8 +1532,8 @@
             }
 
             .donut-svg-wrap {
-                width: 220px;
-                height: 220px;
+                width: 320px;
+                height: 320px;
             }
         }
 
@@ -1524,7 +1561,7 @@
 
         .uni-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: var(--space-md);
         }
 
@@ -1546,7 +1583,7 @@
         }
 
         .uni-card--wide {
-            grid-column: span 2;
+            grid-column: span 1;
         }
 
         .uni-card-dot {
@@ -1585,7 +1622,7 @@
 
         @media (max-width: 600px) {
             .uni-grid {
-                grid-template-columns: 1fr;
+                gap: var(--space-sm);
             }
         }
 
@@ -1628,10 +1665,6 @@
             gap: var(--space-lg);
         }
 
-        .t-slide.slide-pair {
-            grid-template-columns: 1fr 1fr;
-        }
-
         .t-slide.slide-single {
             grid-template-columns: 1fr;
         }
@@ -1640,7 +1673,7 @@
             background: var(--color-white);
             border: 1px solid var(--color-line);
             border-radius: var(--radius-xl);
-            padding: var(--space-2xl);
+            padding: var(--space-xl);
             display: flex;
             flex-direction: column;
             gap: var(--space-lg);
@@ -1776,10 +1809,6 @@
         }
 
         @media (max-width: 900px) {
-            .t-slide.slide-pair {
-                grid-template-columns: 1fr;
-            }
-
             .section-testimonials {
                 padding-left: 24px;
                 padding-right: 24px;
@@ -1832,7 +1861,7 @@
         .explore-cta-block {
             background: var(--color-navy);
             border-radius: var(--radius-xl);
-            padding: var(--space-2xl);
+            padding: var(--space-xl);
             color: var(--color-white);
             position: relative;
             overflow: hidden;
@@ -1876,8 +1905,14 @@
 
         .explore-cta-actions {
             display: flex;
+            flex-direction: column;
             gap: 12px;
-            flex-wrap: wrap;
+        }
+
+        .explore-cta-actions .btn-white,
+        .explore-cta-actions .btn-ghost {
+            width: 100%;
+            text-align: center;
         }
 
         @media (max-width: 960px) {
@@ -2197,6 +2232,547 @@
                 padding-right: 24px;
             }
         }
+
+        /* ============================================================
+           ADAPTIVE — 1280px  wide desktop
+        ============================================================ */
+        @media (max-width: 1280px) {
+            .page-hero {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .section-what,
+            .section-env,
+            .section-programs,
+            .section-pillars,
+            .section-demographics,
+            .section-universities,
+            .section-testimonials,
+            .section-explore,
+            .section-contact {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+        }
+
+        /* ============================================================
+           ADAPTIVE — 1024px  landscape tablet / small laptop
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 24px;
+            }
+
+            .nav.scrolled {
+                left: 12px;
+                right: 12px;
+            }
+
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-photo-wrap img {
+                height: 420px;
+            }
+
+            .info-strip {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .section-what,
+            .section-env,
+            .section-programs,
+            .section-pillars,
+            .section-demographics,
+            .section-universities,
+            .section-testimonials,
+            .section-explore,
+            .section-contact {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .section-join {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+           ADAPTIVE — 768px  portrait tablet
+        ============================================================ */
+        @media (max-width: 768px) {
+
+            /* Nav */
+            .nav {
+                padding: 0 20px;
+                height: 64px;
+            }
+
+            .nav.scrolled {
+                top: 8px;
+                left: 12px;
+                right: 12px;
+            }
+
+            .nav-logo img {
+                height: 44px;
+            }
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+
+            /* Hero */
+            .page-hero {
+                padding-top: calc(64px + var(--space-xl));
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero-main {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .hero-h1 {
+                font-size: clamp(2.25rem, 7vw, 3rem);
+                letter-spacing: -1px;
+            }
+
+            .hero-desc {
+                font-size: var(--text-base);
+                max-width: 100%;
+            }
+
+            .hero-photo-wrap img {
+                height: 340px;
+            }
+
+            .hero-photo-badge {
+                display: none;
+            }
+
+            /* Info strip */
+            .info-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--space-xl) 20px;
+            }
+
+            .info-divider {
+                display: none;
+            }
+
+            /* Sections */
+            .section-what,
+            .section-env,
+            .section-programs,
+            .section-pillars,
+            .section-demographics,
+            .section-universities,
+            .section-testimonials,
+            .section-explore,
+            .section-contact {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            /* Join CTA */
+            .join-cta {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-cta-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-cta-row .btn-primary,
+            .hero-cta-row .btn-outline,
+            .join-cta .btn-white,
+            .join-cta .btn-ghost {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .uni-layout .btn-primary,
+            .uni-layout .btn-outline {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        /* ============================================================
+           ADAPTIVE — 414px  large phones (portrait)
+        ============================================================ */
+        @media (max-width: 414px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav.scrolled {
+                left: 8px;
+                right: 8px;
+            }
+
+            .page-hero {
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: calc(64px + var(--space-lg));
+            }
+
+            .hero-h1 {
+                font-size: clamp(2rem, 9vw, 2.5rem);
+                letter-spacing: -0.5px;
+            }
+
+            .hero-cta-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-photo-wrap img {
+                height: 280px;
+            }
+
+            .info-strip {
+                padding: var(--space-lg) 20px;
+            }
+
+            .section-what,
+            .section-env,
+            .section-programs,
+            .section-pillars,
+            .section-demographics,
+            .section-universities,
+            .section-testimonials,
+            .section-explore,
+            .section-contact {
+                padding: var(--space-xl) 20px;
+            }
+
+            .section-join {
+                margin: 0 8px var(--space-xl);
+                padding: var(--space-xl) 20px;
+            }
+
+            .footer {
+                padding: var(--space-xl) 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+
+            .footer-partners {
+                flex-wrap: wrap;
+                gap: var(--space-md);
+                padding: var(--space-lg) 20px;
+            }
+
+            .footer-partners img {
+                height: 36px;
+            }
+        }
+
+        /* ============================================================
+           ADAPTIVE — 390px  iPhone 12/13/14
+        ============================================================ */
+        @media (max-width: 390px) {
+            .nav {
+                padding: 0 18px;
+            }
+
+            .nav.scrolled {
+                left: 7px;
+                right: 7px;
+            }
+
+            .page-hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .hero-photo-wrap img {
+                height: 260px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.9375rem, 9.2vw, 2.375rem);
+            }
+
+            .info-strip {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-what,
+            .section-env,
+            .section-programs,
+            .section-pillars,
+            .section-demographics,
+            .section-universities,
+            .section-testimonials,
+            .section-explore,
+            .section-contact {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-join {
+                margin-left: 7px;
+                margin-right: 7px;
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer-partners {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        /* ============================================================
+           ADAPTIVE — 375px  iPhone SE / standard iPhone
+        ============================================================ */
+        @media (max-width: 375px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .nav.scrolled {
+                left: 6px;
+                right: 6px;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.875rem, 9.5vw, 2.25rem);
+            }
+
+            .hero-photo-wrap img {
+                height: 240px;
+            }
+
+            .info-strip {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-what,
+            .section-env,
+            .section-programs,
+            .section-pillars,
+            .section-demographics,
+            .section-universities,
+            .section-testimonials,
+            .section-explore,
+            .section-contact {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-join {
+                margin-left: 6px;
+                margin-right: 6px;
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+           ADAPTIVE — 360px  Android standard
+        ============================================================ */
+        @media (max-width: 360px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .hero-h1 {
+                font-size: 1.75rem;
+                letter-spacing: -0.5px;
+            }
+
+            .hero-eyebrow {
+                letter-spacing: 1.5px;
+            }
+
+            .hero-photo-wrap img {
+                height: 220px;
+            }
+
+            .info-strip {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-what,
+            .section-env,
+            .section-programs,
+            .section-pillars,
+            .section-demographics,
+            .section-universities,
+            .section-testimonials,
+            .section-explore,
+            .section-contact {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .join-h2 {
+                font-size: var(--text-xl);
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+           ADAPTIVE — 320px  iPhone SE 1st gen / minimum screen
+        ============================================================ */
+        @media (max-width: 320px) {
+            .nav {
+                padding: 0 12px;
+                height: 60px;
+            }
+
+            .nav-logo img {
+                height: 36px;
+            }
+
+            .page-hero {
+                padding-left: 12px;
+                padding-right: 12px;
+                padding-top: calc(60px + var(--space-md));
+            }
+
+            .hero-h1 {
+                font-size: 1.625rem;
+            }
+
+            .hero-desc {
+                font-size: var(--text-sm);
+            }
+
+            .hero-photo-wrap img {
+                height: 200px;
+            }
+
+            .info-strip {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .section-what,
+            .section-env,
+            .section-programs,
+            .section-pillars,
+            .section-demographics,
+            .section-universities,
+            .section-testimonials,
+            .section-explore,
+            .section-contact {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .section-join {
+                padding: var(--space-lg) 12px;
+            }
+
+            .join-h2 {
+                font-size: var(--text-lg);
+            }
+
+            .footer {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .footer-partners {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        }
     </style>
 </head>
 
@@ -2360,28 +2936,43 @@
     ============================================================ -->
     <div class="info-strip">
         <div class="info-item">
-            <span class="info-num">15–25</span>
-            <span class="info-label">Hours / Term</span>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Format</div>
+                <div class="info-value">In-person &amp; Online</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <span class="info-num">3–4</span>
-            <span class="info-label">Hrs / Week</span>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Internships</div>
+                <div class="info-value">Paid &amp; Unpaid Available</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <span class="info-num">5+</span>
-            <span class="info-label">Universities</span>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Location</div>
+                <div class="info-value">San Diego, CA &amp; Beyond</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <span class="info-num">88</span>
-            <span class="info-label">Volunteers Worldwide</span>
-        </div>
-        <div class="info-divider"></div>
-        <div class="info-item">
-            <span class="info-num">SD</span>
-            <span class="info-label">San Diego-Based</span>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Focus</div>
+                <div class="info-value">BIPOC Community-centered</div>
+            </div>
         </div>
     </div>
 
@@ -2759,8 +3350,8 @@
             </div>
             <div class="testimonials-viewport">
                 <div class="testimonials-track" id="testimonialsTrack">
-                    <!-- Slide 1: 2 cards -->
-                    <div class="t-slide slide-pair">
+                    <!-- Slide 1 -->
+                    <div class="t-slide slide-single">
                         <div class="t-card">
                             <div class="t-quote-mark">"</div>
                             <p class="t-text">Volunteering with Ascendtials for the past 1.5 years has been an amazing
@@ -2776,6 +3367,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="t-slide slide-single">
                         <div class="t-card">
                             <div class="t-quote-mark">"</div>
                             <p class="t-text">Volunteering with ASCENDtials has been a valuable experience so far. I've
@@ -2792,7 +3386,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Slide 2: 1 card full width -->
+                    <!-- Slide 3 -->
                     <div class="t-slide slide-single">
                         <div class="t-card">
                             <div class="t-quote-mark">"</div>
@@ -2819,6 +3413,7 @@
                 </button>
                 <div class="testimonials-dots" id="testimonialsDots">
                     <div class="t-dot active"></div>
+                    <div class="t-dot"></div>
                     <div class="t-dot"></div>
                 </div>
                 <button class="t-arrow" id="tNext" aria-label="Next">
