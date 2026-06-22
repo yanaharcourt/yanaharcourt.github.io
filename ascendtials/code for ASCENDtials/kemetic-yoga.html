@@ -702,6 +702,10 @@
                 gap: var(--space-2xl);
             }
 
+            .hero-photo-wrap {
+                order: -1;
+            }
+
             .hero-photo-wrap img {
                 height: 380px;
             }
@@ -718,8 +722,8 @@
                 padding-right: 24px;
             }
 
-            .hero-photo-wrap {
-                display: none;
+            .hero-photo-wrap img {
+                height: 300px;
             }
         }
 
@@ -1689,6 +1693,19 @@
             .section-join {
                 padding: var(--space-2xl) 24px;
             }
+
+            .join-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-white,
+            .btn-ghost {
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto;
+                text-align: center;
+            }
         }
 
         /* ════════════════════════════════════════════════════════════
@@ -1859,6 +1876,535 @@
             .footer-partners {
                 padding-left: 24px;
                 padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        1280px — large desktop / small desktop
+        ============================================================ */
+        @media (max-width: 1280px) {
+            .page-hero {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .info-strip {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .section-curriculum {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .section-why {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .section-origin {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .section-events {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .section-volunteer {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .section-join {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+        }
+
+        /* ============================================================
+        1024px — tablet landscape
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 24px;
+            }
+
+            .nav.scrolled {
+                left: 12px;
+                right: 12px;
+            }
+
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .info-strip {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .section-curriculum {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .section-why {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .section-origin {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .section-events {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .section-volunteer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .section-join {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        768px — portrait tablet
+        ============================================================ */
+        @media (max-width: 768px) {
+            .hero-h1 {
+                font-size: clamp(2.25rem, 7vw, 3rem);
+                letter-spacing: -1px;
+            }
+        }
+
+        /* ============================================================
+        414px — large phone (iPhone Pro Max / Plus)
+        ============================================================ */
+        @media (max-width: 414px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav.scrolled {
+                left: 8px;
+                right: 8px;
+            }
+
+            .page-hero {
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: calc(72px + var(--space-lg));
+            }
+
+            .hero-h1 {
+                font-size: clamp(2rem, 9vw, 2.5rem);
+                letter-spacing: -0.5px;
+            }
+
+            .hero-desc {
+                font-size: var(--text-base);
+            }
+
+            .hero-photo-wrap img {
+                height: 280px;
+            }
+
+            .info-strip {
+                padding: var(--space-lg) 20px;
+            }
+
+            .section-curriculum {
+                padding: var(--space-xl) 20px;
+            }
+
+            .section-why {
+                padding: var(--space-xl) 20px;
+            }
+
+            .section-origin {
+                padding: var(--space-xl) 20px;
+            }
+
+            .section-events {
+                padding: var(--space-xl) 20px;
+            }
+
+            .section-volunteer {
+                padding: var(--space-xl) 20px;
+            }
+
+            .section-join {
+                padding: var(--space-xl) 20px;
+            }
+
+            .join-sub {
+                font-size: var(--text-base);
+            }
+
+            .footer {
+                padding: var(--space-xl) 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+
+            .footer-partners {
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+
+            .footer-partners img {
+                height: 32px;
+            }
+        }
+
+        /* ============================================================
+        390px — iPhone 12/13/14 standard width
+        ============================================================ */
+        @media (max-width: 390px) {
+            .nav {
+                padding: 0 18px;
+            }
+
+            .nav.scrolled {
+                left: 7px;
+                right: 7px;
+            }
+
+            .page-hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.9375rem, 9.2vw, 2.375rem);
+            }
+
+            .hero-photo-wrap img {
+                height: 260px;
+            }
+
+            .info-strip {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-curriculum {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-why {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-origin {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-events {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-volunteer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-join {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+            
+            .hero-photo-badge {
+                left: 16px;
+                bottom: 16px;
+                display: none;
+            }
+
+            .hero-cta-row  {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .volunteer-cta-row  {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+        }
+
+        /* ============================================================
+        375px — iPhone SE / standard iPhone
+        ============================================================ */
+        @media (max-width: 375px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .nav.scrolled {
+                left: 6px;
+                right: 6px;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.875rem, 9.5vw, 2.25rem);
+            }
+
+            .hero-photo-wrap img {
+                height: 240px;
+            }
+
+            .info-strip {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-curriculum {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-why {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-origin {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-events {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-volunteer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        360px — Galaxy S8/S9/S20 standard Android width
+        ============================================================ */
+        @media (max-width: 360px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .hero-h1 {
+                font-size: 1.75rem;
+                letter-spacing: -0.5px;
+            }
+
+            .hero-eyebrow {
+                letter-spacing: 1.5px;
+            }
+
+            .hero-photo-wrap img {
+                height: 220px;
+            }
+
+            .info-strip {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-curriculum {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-why {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-origin {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-events {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-volunteer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .join-h2 {
+                font-size: var(--text-xl);
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        320px — iPhone SE (1st gen) / minimum screen
+        ============================================================ */
+        @media (max-width: 320px) {
+            .nav {
+                padding: 0 12px;
+                height: 60px;
+            }
+
+            .nav-logo img {
+                height: 36px;
+            }
+
+            .page-hero {
+                padding-left: 12px;
+                padding-right: 12px;
+                padding-top: calc(60px + var(--space-md));
+            }
+
+            .hero-h1 {
+                font-size: 1.625rem;
+            }
+
+            .hero-desc {
+                font-size: var(--text-sm);
+            }
+
+            .hero-photo-wrap img {
+                height: 200px;
+            }
+
+            .info-strip {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .section-curriculum {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .section-why {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .section-origin {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .section-events {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .section-volunteer {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .section-join {
+                padding: var(--space-lg) 12px;
+            }
+
+            .join-h2 {
+                font-size: var(--text-lg);
+            }
+
+            .join-sub {
+                font-size: var(--text-sm);
+            }
+
+            .btn-white,
+            .btn-ghost,
+            .btn-primary,
+            .btn-outline {
+                font-size: var(--text-sm);
+                padding: 12px 20px;
+            }
+
+            .footer {
+                padding: var(--space-xl) 12px;
+            }
+
+            .footer-partners img {
+                height: 28px;
             }
         }
     </style>
