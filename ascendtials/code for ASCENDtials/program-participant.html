@@ -450,12 +450,16 @@
 
         .nav-burger {
             display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
             background: none;
             border: none;
-            flex-direction: column;
-            gap: 5px;
-            padding: 6px;
-            margin-left: auto;
+            cursor: pointer;
+            padding: 0;
+            gap: 0;
         }
 
         .nav-burger span {
@@ -467,23 +471,27 @@
             transition: all var(--dur-base) var(--ease-out);
         }
 
+        /* Mobile menu */
         .mobile-menu {
             display: none;
             position: fixed;
-            inset: 0;
-            background: var(--color-bg);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-white);
             z-index: 490;
-            padding: 90px 24px 32px;
-            overflow-y: auto;
             flex-direction: column;
-            gap: 4px;
+            padding: 88px 32px 40px;
+            overflow-y: auto;
         }
 
         .mobile-menu.open {
             display: flex;
         }
 
-        .mobile-menu a {
+        /* Одиночные ссылки */
+        .mobile-menu > a {
             display: block;
             padding: 14px 16px;
             font-size: var(--text-xl);
@@ -492,15 +500,128 @@
             font-family: var(--font-display);
         }
 
+        .mobile-menu > a:hover {
+            color: var(--color-navy);
+        }
+
+        /* Группа-аккордеон */
+        .mob-group {
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .mob-group-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 14px 16px;
+            font-size: var(--text-xl);
+            font-family: var(--font-display);
+            color: var(--color-text);
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .mob-group-trigger svg {
+            flex-shrink: 0;
+            transition: transform var(--dur-base) var(--ease-out);
+        }
+
+        .mob-group.open .mob-group-trigger svg {
+            transform: rotate(180deg);
+        }
+
+        .mob-group-links {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows var(--dur-base) var(--ease-out);
+        }
+
+        .mob-group.open .mob-group-links {
+            grid-template-rows: 1fr;
+        }
+
+        .mob-group-links-inner {
+            overflow: hidden;
+        }
+
+        .mob-group-links a {
+            display: block;
+            padding: 10px 16px 10px 28px;
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            font-family: var(--font-body);
+            transition: color var(--dur-fast);
+        }
+
+        .mob-group-links a:hover {
+            color: var(--color-accent);
+        }
+
+        /* CTA */
         .mobile-menu .mob-cta {
-            margin-top: 24px;
+            display: block;
+            margin-top: var(--space-xl);
             background: var(--color-navy);
             color: var(--color-white);
+            border-radius: var(--radius-pill);
             text-align: center;
             padding: 16px;
-            border-radius: var(--radius-pill);
             font-size: var(--text-lg);
-            border-bottom: none;
+            font-family: var(--font-body);
+            font-weight: 600;
+        }
+
+        /* Бургер → крестик */
+        .nav-burger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--color-text);
+            border-radius: 2px;
+            transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-base);
+        }
+
+        .nav-burger span:nth-child(2) {
+            margin: 5px 0;
+        }
+
+        .nav-burger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav-burger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-burger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .footer-partners {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) max(40px, 5vw);
+            border-top: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            flex-wrap: wrap;
+        }
+
+        .footer-partners img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(20%);
+            transition: opacity var(--dur-fast);
+        }
+
+        .footer-partners img:hover {
+            opacity: 1;
         }
 
         @media (max-width: 900px) {
@@ -512,6 +633,10 @@
 
             .nav-burger {
                 display: flex;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
             }
         }
 
@@ -564,6 +689,24 @@
             .breadcrumb {
                 padding-left: 0;
                 padding-right: 0;
+            }
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-bottom-links {
+                justify-content: center;
+            }
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
             }
         }
 
@@ -729,10 +872,58 @@
             .page-hero {
                 padding-left: 24px;
                 padding-right: 24px;
+                padding-top: calc(72px + var(--space-lg));
+            }
+
+            .hero-main {
+                display: flex;
+                flex-direction: column-reverse;
+                gap: var(--space-xl);
             }
 
             .hero-photo-wrap {
+                display: block;
+            }
+
+            .hero-photo-wrap img {
+                height: 260px;
+                border-radius: var(--radius-lg);
+            }
+
+            .hero-photo-badge {
+                left: 12px;
+                bottom: 12px;
+                padding: var(--space-md) var(--space-lg);
+            }
+
+            .hero-cta-row {
+                flex-direction: column;
+            }
+
+            .hero-cta-row .btn-primary,
+            .hero-cta-row .btn-outline {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) { 
+            .hero-photo-badge {
                 display: none;
+            }
+            .footer {
+                padding: var(--space-2xl) 20px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+            .footer-partners {
+                gap: var(--space-xl);
+                padding: var(--space-lg) 20px;
+            }
+            .footer-partners img {
+                height: 44px;
             }
         }
 
@@ -747,22 +938,26 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: var(--space-2xl);
+            gap: var(--space-xl);
             flex-wrap: wrap;
         }
 
         .info-item {
             display: flex;
-            flex-direction: column;
-            gap: 4px;
+            align-items: center;
+            gap: 14px;
         }
 
-        .info-num {
-            font-family: var(--font-display);
-            font-size: var(--text-3xl);
-            font-weight: 300;
-            color: var(--color-navy);
-            line-height: 1;
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-sky);
         }
 
         .info-label {
@@ -771,11 +966,17 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             color: var(--color-text-light);
+            margin-bottom: 3px;
+        }
+
+        .info-value {
+            font-size: var(--text-sm);
+            color: var(--color-navy);
         }
 
         .info-divider {
             width: 1px;
-            height: 48px;
+            height: 40px;
             background: var(--color-line);
             flex-shrink: 0;
         }
@@ -783,8 +984,9 @@
         @media (max-width: 900px) {
             .info-strip {
                 padding: var(--space-xl) 24px;
-                justify-content: flex-start;
-                gap: var(--space-xl);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-lg);
             }
 
             .info-divider {
@@ -876,6 +1078,11 @@
             .section-pathways {
                 padding-left: 24px;
                 padding-right: 24px;
+            }
+
+            .pathway-card .btn-outline {
+                width: 100%;
+                justify-content: center;
             }
         }
 
@@ -1435,6 +1642,14 @@
                 padding-left: 24px;
                 padding-right: 24px;
             }
+
+            .fees-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .fee-card--wide {
+                grid-column: span 1;
+            }
         }
 
         /* ============================================================
@@ -1555,11 +1770,21 @@
             }
 
             .steps-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
             }
 
             .step-card {
-                min-height: 180px;
+                min-height: unset;
+            }
+
+            .steps-cta-row {
+                flex-direction: column;
+            }
+
+            .steps-cta-row .btn-primary,
+            .steps-cta-row .btn-outline {
+                width: 100%;
+                justify-content: center;
             }
         }
 
@@ -1635,6 +1860,11 @@
             .section-expect {
                 padding-left: 24px;
                 padding-right: 24px;
+            }
+
+            .expect-sticky .btn-outline {
+                width: 100%;
+                justify-content: center;
             }
         }
 
@@ -1735,6 +1965,16 @@
                 margin-left: 16px;
                 margin-right: 16px;
             }
+
+            .join-cta {
+                flex-direction: column;
+            }
+
+            .join-cta .btn-white,
+            .join-cta .btn-ghost {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         /* ============================================================
@@ -1826,31 +2066,6 @@
             background: var(--color-accent);
             color: var(--color-white);
         }
-
-        .footer-partners {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            gap: var(--space-2xl);
-            padding: var(--space-xl) max(40px, 5vw);
-            border-top: 1px solid var(--color-line);
-            border-bottom: 1px solid var(--color-line);
-            flex-wrap: wrap;
-        }
-
-        .footer-partners img {
-            height: 56px;
-            width: auto;
-            object-fit: contain;
-            opacity: 0.7;
-            filter: grayscale(20%);
-            transition: opacity var(--dur-fast);
-        }
-
-        .footer-partners img:hover {
-            opacity: 1;
-        }
-
         .footer-bottom {
             padding-top: var(--space-xl);
             border-top: 1px solid var(--color-line);
@@ -1907,6 +2122,100 @@
                 padding-right: 24px;
             }
         }
+        @media (max-width: 1024px) {
+            .footer {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        @media (max-width: 414px) {
+            .footer {
+                padding: var(--space-xl) 20px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+            .footer-brand p {
+                max-width: 100%;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+            }
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+            .footer-partners {
+                flex-wrap: wrap;
+                gap: var(--space-md);
+                padding: var(--space-lg) 20px;
+            }
+            .footer-partners img {
+                height: 36px;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+            .footer-partners {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .footer {
+                padding: var(--space-xl) 12px;
+            }
+            .footer-partners {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+            .footer-partners img {
+                height: 30px;
+            }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            .footer {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .footer-partners {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
     </style>
 </head>
 
@@ -1989,36 +2298,86 @@
     <div class="mobile-menu" id="mobileMenu">
         <a href="./index.html">Home</a>
 
-        <a href="./about.html">About Us</a>
-        <a href="./our-team.html">Our Team</a>
-        <a href="./contact.html">Contact Us</a>
+        <div class="mob-group">
+            <button class="mob-group-trigger">
+                About
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="mob-group-links">
+                <div class="mob-group-links-inner">
+                    <a href="./about.html">About Us</a>
+                    <a href="./our-team.html">Our Team</a>
+                    <a href="./contact.html">Contact Us</a>
+                </div>
+            </div>
+        </div>
 
-        <a href="./education-and-training.html">Education and Training</a>
-        <a href="./literacy-workshops.html">Literacy Workshops</a>
-        <a href="./kemetic-yoga.html">Kemetic Yoga</a>
-        <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
-        <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
-        <a href="./service-learning.html">Service Learning</a>
+        <div class="mob-group">
+            <button class="mob-group-trigger">
+                Education
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="mob-group-links">
+                <div class="mob-group-links-inner">
+                    <a href="./education-and-training.html">Education and Training</a>
+                    <a href="./literacy-workshops.html">Literacy Workshops</a>
+                    <a href="./kemetic-yoga.html">Kemetic Yoga</a>
+                    <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
+                    <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
+                    <a href="./service-learning.html">Service Learning</a>
+                </div>
+            </div>
+        </div>
 
-        <a href="./events.html">Event Calendar</a>
-        <a href="./program-participant.html">Program Participant</a>
-        <a href="./farmers-market.html">Farmers' Market</a>
-        <a href="./food-distribution.html">Food Distribution</a>
-        <a href="./youth-programs.html">Youth Program</a>
-        <a href="./environmental-programs.html">Environmental Programs</a>
-        <a href="./court-order-community-service.html">Court Order Community Service</a>
+        <div class="mob-group">
+            <button class="mob-group-trigger">
+                Programs
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="mob-group-links">
+                <div class="mob-group-links-inner">
+                    <a href="./events.html">Event Calendar</a>
+                    <a href="./program-participant.html">Program Participant</a>
+                    <a href="./farmers-market.html">Farmers' Market</a>
+                    <a href="./food-distribution.html">Food Distribution</a>
+                    <a href="./youth-programs.html">Youth Program</a>
+                    <a href="./environmental-programs.html">Environmental Programs</a>
+                    <a href="./court-order-community-service.html">Court Order Community Service</a>
+                </div>
+            </div>
+        </div>
 
-        <a href="./mdba-portal.html">MDBA Portal</a>
-        <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
-        <a href="./join-our-community.html">Join our community</a>
+        <div class="mob-group">
+            <button class="mob-group-trigger">
+                Clubs
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="mob-group-links">
+                <div class="mob-group-links-inner">
+                    <a href="./mdba-portal.html">MDBA Portal</a>
+                    <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+                    <a href="./join-our-community.html">Join our community</a>
+                </div>
+            </div>
+        </div>
 
-        <a href="./get-involved.html">Get Involved</a>
-        <a href="./partner-with-us.html">Partner with Us</a>
-        <a href="./sponsor.html">Becone a sponsor</a>
-        <a href="./vendor.html">Vendor</a>
-        <a href="./volunteer.html">Volunteer</a>
+        <div class="mob-group">
+            <button class="mob-group-trigger">
+                Join Us
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="mob-group-links">
+                <div class="mob-group-links-inner">
+                    <a href="./get-involved.html">Get Involved</a>
+                    <a href="./partner-with-us.html">Partner with Us</a>
+                    <a href="./sponsor.html">Become a Sponsor</a>
+                    <a href="./vendor.html">Vendor</a>
+                    <a href="./volunteer.html">Volunteer</a>
+                </div>
+            </div>
+        </div>
 
-        <a class="mob-cta" href="./support-us.html"> Support Us </a>
+        <a href="./support-us.html" class="mob-cta">Support Us →</a>
     </div>
 
     <!-- ============================================================
@@ -2076,28 +2435,64 @@
     ============================================================ -->
     <div class="info-strip">
         <div class="info-item">
-            <span class="info-num">2</span>
-            <span class="info-label">Membership Pathways</span>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Pathways</div>
+                <div class="info-value">2 Membership Options</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <span class="info-num">$25</span>
-            <span class="info-label">One-Time Enrollment</span>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Enrollment</div>
+                <div class="info-value">$25 One-Time Fee</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <span class="info-num">$10</span>
-            <span class="info-label">Per Hour</span>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Session Rate</div>
+                <div class="info-value">$10 Per Hour</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <span class="info-num">4</span>
-            <span class="info-label">Pathway Levels</span>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Pathway Levels</div>
+                <div class="info-value">4 Structured Stages</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <span class="info-num">Sliding</span>
-            <span class="info-label">Scale Available</span>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+            </div>
+            <div>
+                <div class="info-label">Pricing</div>
+                <div class="info-value">Sliding Scale Available</div>
+            </div>
         </div>
     </div>
 
@@ -2560,7 +2955,7 @@
         </div>
 
         <!-- Partners row -->
-        <div class="footer-partners">
+                <div class="footer-partners">
             <img src="assets/img/country-of-san-diego.png" alt="County of San Diego">
             <img src="assets/img/Live-well-with-San-diego.png" alt="Live Well San Diego">
             <img src="https://ascendtials.org/wp-content/uploads/2024/08/Ascendtials-Logo-png-1-1.png"
@@ -2584,11 +2979,31 @@
         const nav = document.getElementById('mainNav');
         window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
 
-        // Mobile menu
+       // Mobile menu + burger → X
         const burger = document.getElementById('navBurger');
-        const mm = document.getElementById('mobileMenu');
-        burger.addEventListener('click', () => mm.classList.toggle('open'));
-        mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        burger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            burger.classList.toggle('open');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                burger.classList.remove('open');
+            });
+        });
+
+        // Accordion
+        mobileMenu.querySelectorAll('.mob-group-trigger').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const group = trigger.closest('.mob-group');
+                const isOpen = group.classList.contains('open');
+                mobileMenu.querySelectorAll('.mob-group').forEach(g => g.classList.remove('open'));
+                if (!isOpen) group.classList.add('open');
+            });
+        });
 
         // Scroll reveal
         const obs = new IntersectionObserver((entries) => {

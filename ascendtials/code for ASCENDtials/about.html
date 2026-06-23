@@ -380,12 +380,16 @@
 
         .nav-burger {
             display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
             background: none;
             border: none;
-            flex-direction: column;
-            gap: 5px;
-            padding: 6px;
-            margin-left: auto;
+            cursor: pointer;
+            padding: 0;
+            gap: 0;
         }
 
         .nav-burger span {
@@ -401,20 +405,23 @@
         .mobile-menu {
             display: none;
             position: fixed;
-            inset: 0;
-            background: var(--color-bg);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-white);
             z-index: 490;
-            padding: 90px 24px 32px;
-            overflow-y: auto;
             flex-direction: column;
-            gap: 4px;
+            padding: 88px 32px 40px;
+            overflow-y: auto;
         }
 
         .mobile-menu.open {
             display: flex;
         }
 
-        .mobile-menu a {
+        /* Одиночные ссылки */
+        .mobile-menu > a {
             display: block;
             padding: 14px 16px;
             font-size: var(--text-xl);
@@ -423,15 +430,104 @@
             font-family: var(--font-display);
         }
 
+        .mobile-menu > a:hover {
+            color: var(--color-navy);
+        }
+
+        /* Группа-аккордеон */
+        .mob-group {
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .mob-group-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 14px 16px;
+            font-size: var(--text-xl);
+            font-family: var(--font-display);
+            color: var(--color-text);
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .mob-group-trigger svg {
+            flex-shrink: 0;
+            transition: transform var(--dur-base) var(--ease-out);
+        }
+
+        .mob-group.open .mob-group-trigger svg {
+            transform: rotate(180deg);
+        }
+
+        .mob-group-links {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows var(--dur-base) var(--ease-out);
+        }
+
+        .mob-group.open .mob-group-links {
+            grid-template-rows: 1fr;
+        }
+
+        .mob-group-links-inner {
+            overflow: hidden;
+        }
+
+        .mob-group-links a {
+            display: block;
+            padding: 10px 16px 10px 28px;
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            font-family: var(--font-body);
+            transition: color var(--dur-fast);
+        }
+
+        .mob-group-links a:hover {
+            color: var(--color-accent);
+        }
+
+        /* CTA */
         .mobile-menu .mob-cta {
-            margin-top: 24px;
+            display: block;
+            margin-top: var(--space-xl);
             background: var(--color-navy);
             color: var(--color-white);
+            border-radius: var(--radius-pill);
             text-align: center;
             padding: 16px;
-            border-radius: var(--radius-pill);
             font-size: var(--text-lg);
-            border-bottom: none;
+            font-family: var(--font-body);
+            font-weight: 600;
+        }
+
+        /* Бургер → крестик */
+        .nav-burger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--color-text);
+            border-radius: 2px;
+            transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-base);
+        }
+
+        .nav-burger span:nth-child(2) {
+            margin: 5px 0;
+        }
+
+        .nav-burger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav-burger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-burger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
         }
 
         @media (max-width: 900px) {
@@ -2941,36 +3037,86 @@
     <div class="mobile-menu" id="mobileMenu">
         <a href="./index.html">Home</a>
 
-        <a href="./about.html">About Us</a>
-        <a href="./our-team.html">Our Team</a>
-        <a href="./contact.html">Contact Us</a>
+        <div class="mob-group">
+            <button class="mob-group-trigger">
+                About
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="mob-group-links">
+                <div class="mob-group-links-inner">
+                    <a href="./about.html">About Us</a>
+                    <a href="./our-team.html">Our Team</a>
+                    <a href="./contact.html">Contact Us</a>
+                </div>
+            </div>
+        </div>
 
-        <a href="./education-and-training.html">Education and Training</a>
-        <a href="./literacy-workshops.html">Literacy Workshops</a>
-        <a href="./kemetic-yoga.html">Kemetic Yoga</a>
-        <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
-        <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
-        <a href="./service-learning.html">Service Learning</a>
+        <div class="mob-group">
+            <button class="mob-group-trigger">
+                Education
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="mob-group-links">
+                <div class="mob-group-links-inner">
+                    <a href="./education-and-training.html">Education and Training</a>
+                    <a href="./literacy-workshops.html">Literacy Workshops</a>
+                    <a href="./kemetic-yoga.html">Kemetic Yoga</a>
+                    <a href="./from-whiteness-to-oneness.html">Whiteness to Oneness</a>
+                    <a href="./internship-and-fellowship.html">Internship and Fellowship Programs</a>
+                    <a href="./service-learning.html">Service Learning</a>
+                </div>
+            </div>
+        </div>
 
-        <a href="./events.html">Event Calendar</a>
-        <a href="./program-participant.html">Program Participant</a>
-        <a href="./farmers-market.html">Farmers' Market</a>
-        <a href="./food-distribution.html">Food Distribution</a>
-        <a href="./youth-programs.html">Youth Program</a>
-        <a href="./environmental-programs.html">Environmental Programs</a>
-        <a href="./court-order-community-service.html">Court Order Community Service</a>
+        <div class="mob-group">
+            <button class="mob-group-trigger">
+                Programs
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="mob-group-links">
+                <div class="mob-group-links-inner">
+                    <a href="./events.html">Event Calendar</a>
+                    <a href="./program-participant.html">Program Participant</a>
+                    <a href="./farmers-market.html">Farmers' Market</a>
+                    <a href="./food-distribution.html">Food Distribution</a>
+                    <a href="./youth-programs.html">Youth Program</a>
+                    <a href="./environmental-programs.html">Environmental Programs</a>
+                    <a href="./court-order-community-service.html">Court Order Community Service</a>
+                </div>
+            </div>
+        </div>
 
-        <a href="./mdba-portal.html">MDBA Portal</a>
-        <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
-        <a href="./join-our-community.html">Join our community</a>
+        <div class="mob-group">
+            <button class="mob-group-trigger">
+                Clubs
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="mob-group-links">
+                <div class="mob-group-links-inner">
+                    <a href="./mdba-portal.html">MDBA Portal</a>
+                    <a href="./clubs-and-community-groups.html">Clubs and Community Groups</a>
+                    <a href="./join-our-community.html">Join our community</a>
+                </div>
+            </div>
+        </div>
 
-        <a href="./get-involved.html">Get Involved</a>
-        <a href="./partner-with-us.html">Partner with Us</a>
-        <a href="./sponsor.html">Becone a sponsor</a>
-        <a href="./vendor.html">Vendor</a>
-        <a href="./volunteer.html">Volunteer</a>
+        <div class="mob-group">
+            <button class="mob-group-trigger">
+                Join Us
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="mob-group-links">
+                <div class="mob-group-links-inner">
+                    <a href="./get-involved.html">Get Involved</a>
+                    <a href="./partner-with-us.html">Partner with Us</a>
+                    <a href="./sponsor.html">Become a Sponsor</a>
+                    <a href="./vendor.html">Vendor</a>
+                    <a href="./volunteer.html">Volunteer</a>
+                </div>
+            </div>
+        </div>
 
-        <a class="mob-cta" href="./support-us.html"> Support Us </a>
+        <a href="./support-us.html" class="mob-cta">Support Us →</a>
     </div>
 
     <!-- ============================================================
@@ -3620,11 +3766,31 @@
         const nav = document.getElementById('mainNav');
         window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
 
-        // Mobile menu
+        // Mobile menu + burger → X
         const burger = document.getElementById('navBurger');
         const mobileMenu = document.getElementById('mobileMenu');
-        burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+        burger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            burger.classList.toggle('open');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                burger.classList.remove('open');
+            });
+        });
+
+        // Accordion
+        mobileMenu.querySelectorAll('.mob-group-trigger').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const group = trigger.closest('.mob-group');
+                const isOpen = group.classList.contains('open');
+                mobileMenu.querySelectorAll('.mob-group').forEach(g => g.classList.remove('open'));
+                if (!isOpen) group.classList.add('open');
+            });
+        });
 
         // Scroll reveal
         const observer = new IntersectionObserver((entries) => {
