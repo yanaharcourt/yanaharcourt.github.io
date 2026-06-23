@@ -760,30 +760,36 @@
             }
         }
 
-        /* ── INFO STRIP ── */
         .info-strip {
             background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
             border-bottom: 1px solid var(--color-line);
             padding: var(--space-xl) max(48px, 6vw);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: var(--space-lg);
+            gap: var(--space-xl);
             flex-wrap: nowrap;
+            overflow-x: auto;
         }
 
         .info-item {
+            flex-shrink: 0;
             display: flex;
-            flex-direction: column;
-            gap: 4px;
+            align-items: center;
+            gap: 14px;
         }
 
-        .info-num {
-            font-family: var(--font-display);
-            font-size: var(--text-3xl);
-            font-weight: 300;
-            color: var(--color-navy);
-            line-height: 1;
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            flex-shrink: 0;
         }
 
         .info-label {
@@ -792,11 +798,17 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             color: var(--color-text-light);
+            margin-bottom: 3px;
+        }
+
+        .info-value {
+            font-size: var(--text-sm);
+            color: var(--color-navy);
         }
 
         .info-divider {
             width: 1px;
-            height: 48px;
+            height: 40px;
             background: var(--color-line);
             flex-shrink: 0;
         }
@@ -1967,6 +1979,95 @@
                 padding-right: 24px;
             }
         }
+
+        /* ============================================================
+        ADAPTIVE CSS
+        ============================================================ */
+
+        /* === 1280px — large desktop === */
+        @media (max-width: 1280px) {
+            .section-markets, .section-seek, .section-permits,
+            .section-toolkit, .section-mission, .section-apply, .section-join {
+                padding-left: max(40px, 4vw);
+                padding-right: max(40px, 4vw);
+            }
+        }
+
+        /* === 1024px — tablet landscape === */
+        @media (max-width: 1024px) {
+            .hero-h1 { font-size: clamp(2.4rem, 4.5vw, 4rem); letter-spacing: -1.5px; }
+            .section-h2 { font-size: 2rem; }
+            .section-apply-inner { grid-template-columns: 1fr; gap: var(--space-xl); }
+            .apply-sticky { position: static; }
+        }
+
+        /* === 768px — tablet portrait === */
+        @media (max-width: 768px) {
+            .hero-h1 { font-size: 2.2rem; letter-spacing: -1px; }
+            .section-h2 { font-size: 1.75rem; }
+            .page-hero { padding-left: 24px; padding-right: 24px; padding-top: calc(64px + var(--space-xl)); }
+            .hero-main { grid-template-columns: 1fr; gap: var(--space-xl); }
+            .hero-photo-wrap img { height: 320px; }
+            .hero-photo-badge { left: 16px; bottom: 16px; }
+            .info-strip { padding: var(--space-lg) 24px; justify-content: flex-start; }
+            .section-markets, .section-seek, .section-permits,
+            .section-toolkit, .section-mission, .section-apply, .section-join {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+            .section-seek-inner { grid-template-columns: 1fr; gap: var(--space-xl); }
+            .section-permits-inner { grid-template-columns: 1fr; gap: var(--space-xl); }
+        }
+
+        /* === 414px — large phone === */
+        @media (max-width: 414px) {
+            .section-h2 { font-size: 1.6rem; }
+            .hero-h1 { font-size: 2rem; }
+            .hero-cta-row { flex-direction: column; }
+            .hero-cta-row .btn-primary,
+            .hero-cta-row .btn-outline { width: 100%; justify-content: center; }
+            .markets-grid { grid-template-columns: 1fr; }
+            .seek-grid { grid-template-columns: 1fr; }
+            .permits-list { grid-template-columns: 1fr; }
+            .toolkit-grid { grid-template-columns: 1fr; }
+            .join-cta { flex-direction: column; }
+            .join-cta .btn-white,
+            .join-cta .btn-ghost { width: 100%; justify-content: center; }
+        }
+
+        /* === 390px — iPhone Pro === */
+        @media (max-width: 390px) {
+            .hero-h1 { font-size: 1.9rem; }
+            .section-h2 { font-size: 1.5rem; }
+        }
+
+        /* === 375px — iPhone SE === */
+        @media (max-width: 375px) {
+            .hero-h1 { font-size: 1.8rem; }
+            .section-h2 { font-size: 1.4rem; }
+            .hero-photo-wrap { display: none; }
+        }
+
+        /* === 360px — small Android === */
+        @media (max-width: 360px) {
+            .hero-h1 { font-size: 1.7rem; }
+        }
+
+        /* === 320px — extra small === */
+        @media (max-width: 320px) {
+            .hero-h1 { font-size: 1.55rem; letter-spacing: -0.5px; }
+            .section-h2 { font-size: 1.3rem; }
+            .page-hero, .section-markets, .section-seek, .section-permits,
+            .section-toolkit, .section-mission, .section-apply, .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* === landscape mobile === */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .page-hero { padding-top: calc(60px + var(--space-lg)); }
+        }
     </style>
 </head>
 
@@ -2178,28 +2279,53 @@
     ============================================================ -->
     <div class="info-strip">
         <div class="info-item">
-            <div class="info-num">2</div>
-            <div class="info-label">Market Locations</div>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Markets</div>
+                <div class="info-value">2 San Diego Locations</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <div class="info-num">52×</div>
-            <div class="info-label">Weeks Per Year</div>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Schedule</div>
+                <div class="info-value">2× Monthly</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <div class="info-num">SNAP</div>
-            <div class="info-label">EBT Accepted</div>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Community</div>
+                <div class="info-value">BIPOC-Centered</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <div class="info-num">BIPOC</div>
-            <div class="info-label">Community First</div>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Setup Time</div>
+                <div class="info-value">From 6:00 AM</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <div class="info-num">CA</div>
-            <div class="info-label">Certified Market</div>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Vendor Types</div>
+                <div class="info-value">Food, Craft &amp; Services</div>
+            </div>
         </div>
     </div>
 

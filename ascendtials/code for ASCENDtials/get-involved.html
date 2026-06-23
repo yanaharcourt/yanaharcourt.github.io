@@ -562,6 +562,30 @@
             transform: translateY(-7px) rotate(-45deg);
         }
 
+
+        /* === 1024px — tablet landscape === */
+        @media (max-width: 1024px) {
+            .nav { padding: 0 24px; }
+        }
+
+        /* === 768px — tablet portrait === */
+        @media (max-width: 768px) {
+            .nav { padding: 0 20px; height: 64px; }
+            .nav-logo img { height: 44px; }
+        }
+
+        /* === 375px — small phone === */
+        @media (max-width: 375px) {
+            .nav { padding: 0 16px; }
+            .nav-logo img { height: 40px; }
+        }
+
+        /* === 320px — extra small === */
+        @media (max-width: 320px) {
+            .nav { padding: 0 12px; height: 60px; }
+            .nav-logo img { height: 36px; }
+        }
+
         @media (max-width: 900px) {
 
             .nav-links,

@@ -1952,12 +1952,159 @@
             color: var(--color-sky);
         }
 
+        
+        /* ============================================================
+        860px
+        ============================================================ */
         @media (max-width: 860px) {
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
             }
         }
 
+        /* ============================================================
+           768px — nav, hero фото сверху, кнопки stretch, footer
+        ============================================================ */
+        @media (max-width: 768px) {
+
+            /* Nav */
+            .nav {
+                padding: 0 20px;
+                height: 64px;
+            }
+
+            .nav.scrolled {
+                top: 8px;
+                left: 12px;
+                right: 12px;
+            }
+
+            .nav-logo img {
+                height: 44px;
+            }
+
+            /* Hero: фото сверху через order */
+            .hero-photo-wrap {
+                order: -1;
+                display: block;
+            }
+
+            .hero-photo-wrap img {
+                height: 260px;
+            }
+
+            /* Hero кнопки stretch */
+            .hero-cta-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-cta-row .btn-primary,
+            .hero-cta-row .btn-outline {
+                width: 100%;
+                text-align: center;
+                display: block;
+            }
+
+            /* Иконка слева, тег справа в одну строку */
+            .club-card {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .club-tag {
+                flex: 1 1 auto;
+                align-self: center;
+            }
+
+            .club-icon-wrap {
+                flex: 0 0 auto;
+            }
+
+            .club-title,
+            .club-body,
+            .club-detail,
+            .club-link {
+                flex: 0 0 100%;
+            }
+
+            /* Все кнопки в секциях stretch */
+            .btn-wrap-sm,
+            .btn-wrap-xl {
+                display: flex;
+            }
+
+            .btn-wrap-sm .btn-primary,
+            .btn-wrap-xl .btn-primary,
+            .btn-wrap-sm .btn-outline,
+            .btn-wrap-xl .btn-outline {
+                width: 100%;
+                text-align: center;
+                display: block;
+            }
+
+            /* Одиночные кнопки без враппера */
+            .book-text .btn-primary,
+            .join-card .btn-primary,
+            .join-ctas .btn-primary,
+            .join-ctas .btn-outline {
+                width: 100%;
+                text-align: center;
+                display: block;
+            }
+
+            .join-ctas {
+                flex-direction: column;
+            }
+
+            /* join-card padding как у других карточек */
+            .join-card {
+                padding: var(--space-xl);
+            }
+
+            /* Newsletter */
+            .nl-input-group {
+                flex-direction: column;
+            }
+
+            .nl-submit {
+                width: 100%;
+            }
+
+            /* Footer */
+            .footer {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+
+            .footer-partners {
+                gap: var(--space-xl);
+                padding: var(--space-lg) 20px;
+            }
+
+            .footer-partners img {
+                height: 44px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-photo-wrap img {
+                height: 220px;
+            }
+        }
+
+        /* ============================================================
+           560px — footer одна колонка
+        ============================================================ */
         @media (max-width: 560px) {
             .footer-grid {
                 grid-template-columns: 1fr;
@@ -1966,6 +2113,240 @@
             .footer-bottom {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+        }
+
+        /* ============================================================
+           414px — footer полный сброс, nav мелкий
+        ============================================================ */
+        @media (max-width: 414px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav.scrolled {
+                left: 8px;
+                right: 8px;
+            }
+
+            .page-hero {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            .hero-photo-badge {
+                display: none;
+            }
+
+            .footer {
+                padding: var(--space-xl) 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+
+            .footer-partners {
+                flex-wrap: wrap;
+                gap: var(--space-md);
+                padding: var(--space-lg) 20px;
+            }
+
+            .footer-partners img {
+                height: 36px;
+            }
+        }
+
+        /* ============================================================
+           390px — iPhone 12/13/14
+        ============================================================ */
+        @media (max-width: 390px) {
+            .nav {
+                padding: 0 18px;
+            }
+
+            .nav.scrolled {
+                left: 7px;
+                right: 7px;
+            }
+
+            .page-hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-clubs,
+            .section-mdba,
+            .section-writing,
+            .section-book,
+            .section-garden,
+            .section-newsletter,
+            .section-join {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer-partners {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        /* ============================================================
+           375px — iPhone SE / стандартный iPhone
+        ============================================================ */
+        @media (max-width: 375px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .nav.scrolled {
+                left: 6px;
+                right: 6px;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-clubs,
+            .section-mdba,
+            .section-writing,
+            .section-book,
+            .section-garden,
+            .section-newsletter,
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+           360px — Android standard
+        ============================================================ */
+        @media (max-width: 360px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-clubs,
+            .section-mdba,
+            .section-writing,
+            .section-book,
+            .section-garden,
+            .section-newsletter,
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+           320px — iPhone SE 1st gen
+        ============================================================ */
+        @media (max-width: 320px) {
+            .nav {
+                padding: 0 12px;
+                height: 60px;
+            }
+
+            .nav-logo img {
+                height: 36px;
+            }
+
+            .page-hero {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .hero-h1 {
+                font-size: 1.625rem;
+            }
+
+            .hero-desc {
+                font-size: var(--text-sm);
+            }
+
+            .section-clubs,
+            .section-mdba,
+            .section-writing,
+            .section-book,
+            .section-garden,
+            .section-newsletter,
+            .section-join {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .btn-primary,
+            .btn-outline {
+                font-size: var(--text-sm);
+                padding: 12px 20px;
+            }
+
+            .footer {
+                padding: var(--space-xl) 12px;
+            }
+
+            .footer-partners {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .footer-partners img {
+                height: 30px;
             }
         }
     </style>

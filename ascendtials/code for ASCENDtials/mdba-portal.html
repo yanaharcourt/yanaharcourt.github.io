@@ -427,7 +427,7 @@
             opacity: 1;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 900px) {
 
             .nav-links,
             .nav-cta {
@@ -437,32 +437,99 @@
             .nav-burger {
                 display: flex;
             }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 0 20px;
+                height: 64px;
+            }
+
+            .nav.scrolled {
+                top: 8px;
+                left: 12px;
+                right: 12px;
+            }
+
+            .nav-logo img {
+                height: 44px;
+            }
+
             .footer {
-                padding: var(--space-2xl) 24px;
+                padding: var(--space-2xl) 20px;
             }
         }
 
         @media (max-width: 600px) {
-            .nav {
-                padding: 0 20px;
-            }
             .footer {
                 padding-left: 24px;
                 padding-right: 24px;
             }
+
             .footer-grid {
                 grid-template-columns: 1fr;
             }
+
             .footer-bottom {
                 flex-direction: column;
                 text-align: center;
             }
+
             .footer-bottom-links {
                 justify-content: center;
             }
+
             .footer-partners {
                 padding-left: 24px;
                 padding-right: 24px;
+            }
+        }
+
+        @media (max-width: 414px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav.scrolled {
+                left: 8px;
+                right: 8px;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .nav {
+                padding: 0 18px;
+            }
+
+            .nav.scrolled {
+                left: 7px;
+                right: 7px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .nav.scrolled {
+                left: 6px;
+                right: 6px;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .nav {
+                padding: 0 12px;
+                height: 60px;
+            }
+
+            .nav-logo img {
+                height: 36px;
             }
         }
 

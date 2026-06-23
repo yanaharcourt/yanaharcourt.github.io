@@ -731,30 +731,36 @@
             margin-top: 6px;
         }
 
-        /* ── INFO STRIP ── */
         .info-strip {
             background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
             border-bottom: 1px solid var(--color-line);
             padding: var(--space-xl) max(48px, 6vw);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: var(--space-lg);
+            gap: var(--space-xl);
             flex-wrap: nowrap;
+            overflow-x: auto;
         }
 
         .info-item {
+            flex-shrink: 0;
             display: flex;
-            flex-direction: column;
-            gap: 4px;
+            align-items: center;
+            gap: 14px;
         }
 
-        .info-num {
-            font-family: var(--font-display);
-            font-size: var(--text-3xl);
-            font-weight: 300;
-            color: var(--color-navy);
-            line-height: 1;
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-sky-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sky);
+            flex-shrink: 0;
         }
 
         .info-label {
@@ -763,11 +769,17 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             color: var(--color-text-light);
+            margin-bottom: 3px;
+        }
+
+        .info-value {
+            font-size: var(--text-sm);
+            color: var(--color-navy);
         }
 
         .info-divider {
             width: 1px;
-            height: 48px;
+            height: 40px;
             background: var(--color-line);
             flex-shrink: 0;
         }
@@ -1663,6 +1675,103 @@
                 padding-right: 24px;
             }
         }
+
+        /* ============================================================
+        ADAPTIVE CSS
+        ============================================================ */
+
+        /* === 1280px — large desktop === */
+        @media (max-width: 1280px) {
+            .hero-main { gap: var(--space-2xl); }
+            .section-why, .section-impact, .section-sponsors,
+            .section-alumni, .section-how, .section-join {
+                padding-left: max(40px, 4vw);
+                padding-right: max(40px, 4vw);
+            }
+        }
+
+        /* === 1024px — tablet landscape === */
+        @media (max-width: 1024px) {
+            .section-h2 { font-size: 2rem; }
+            .hero-h1 { font-size: clamp(2.4rem, 4.5vw, 4rem); letter-spacing: -1.5px; }
+            .why-bento { grid-template-columns: 1fr 1fr; }
+            .why-card.wide { grid-column: span 2; }
+            .sponsors-grid { grid-template-columns: 1fr 1fr; }
+            .alumni-list { grid-template-columns: 1fr 1fr; }
+            .impact-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* === 768px — tablet portrait === */
+        @media (max-width: 768px) {
+            .section-h2 { font-size: 1.75rem; }
+            .hero-h1 { font-size: 2.2rem; letter-spacing: -1px; }
+            .page-hero { padding-left: 24px; padding-right: 24px; padding-top: calc(64px + var(--space-xl)); }
+            .hero-main { grid-template-columns: 1fr; gap: var(--space-xl); }
+            .hero-photo-wrap img { height: 320px; }
+            .hero-photo-badge { left: 16px; bottom: 16px; }
+            .info-strip { padding: var(--space-lg) 24px; justify-content: flex-start; }
+            .section-why-header { grid-template-columns: 1fr; gap: var(--space-lg); }
+            .section-how-inner { grid-template-columns: 1fr; gap: var(--space-xl); }
+            .how-contact-card { position: static; }
+            .alumni-header { grid-template-columns: 1fr; gap: var(--space-lg); }
+            .section-why, .section-impact, .section-sponsors,
+            .section-alumni, .section-how, .section-join {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* === 414px — large phone === */
+        @media (max-width: 414px) {
+            .section-h2 { font-size: 1.6rem; }
+            .hero-h1 { font-size: 2rem; }
+            .hero-cta-row { flex-direction: column; }
+            .hero-cta-row .btn-primary,
+            .hero-cta-row .btn-outline { width: 100%; justify-content: center; }
+            .why-bento { grid-template-columns: 1fr; }
+            .why-card.wide { grid-column: span 1; }
+            .sponsors-grid { grid-template-columns: 1fr; }
+            .alumni-list { grid-template-columns: 1fr; }
+            .join-cta { flex-direction: column; }
+            .join-cta .btn-white,
+            .join-cta .btn-ghost { width: 100%; justify-content: center; }
+            .how-contact-cta .btn-white,
+            .how-contact-cta .btn-ghost { width: 100%; justify-content: center; }
+        }
+
+        /* === 390px — iPhone Pro === */
+        @media (max-width: 390px) {
+            .hero-h1 { font-size: 1.9rem; }
+            .section-h2 { font-size: 1.5rem; }
+        }
+
+        /* === 375px — iPhone SE === */
+        @media (max-width: 375px) {
+            .hero-h1 { font-size: 1.8rem; }
+            .section-h2 { font-size: 1.4rem; }
+            .hero-photo-wrap { display: none; }
+        }
+
+        /* === 360px — small Android === */
+        @media (max-width: 360px) {
+            .hero-h1 { font-size: 1.7rem; }
+        }
+
+        /* === 320px — extra small === */
+        @media (max-width: 320px) {
+            .hero-h1 { font-size: 1.55rem; letter-spacing: -0.5px; }
+            .section-h2 { font-size: 1.3rem; }
+            .page-hero, .section-why, .section-impact, .section-sponsors,
+            .section-alumni, .section-how, .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* === landscape mobile === */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .page-hero { padding-top: calc(60px + var(--space-lg)); }
+        }
     </style>
 </head>
 
@@ -1866,28 +1975,53 @@
     ============================================================ -->
     <div class="info-strip">
         <div class="info-item">
-            <div class="info-num">12+</div>
-            <div class="info-label">Years in Service</div>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            </div>
+            <div>
+                <div class="info-label">501(c)(3)</div>
+                <div class="info-value">Registered Nonprofit</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <div class="info-num">1K+</div>
-            <div class="info-label">Community Members Reached</div>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Community</div>
+                <div class="info-value">1,000+ Members Reached</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <div class="info-num">2×</div>
-            <div class="info-label">Monthly Farmers' Markets</div>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Visibility</div>
+                <div class="info-value">Web, Social &amp; Events</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <div class="info-num">6+</div>
-            <div class="info-label">Program Tracks</div>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Location</div>
+                <div class="info-value">San Diego, CA</div>
+            </div>
         </div>
         <div class="info-divider"></div>
         <div class="info-item">
-            <div class="info-num">100%</div>
-            <div class="info-label">Free Food Distribution</div>
+            <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div>
+                <div class="info-label">Tax-Deductible</div>
+                <div class="info-value">All Donations Qualify</div>
+            </div>
         </div>
     </div>
 
