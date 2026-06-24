@@ -2232,6 +2232,554 @@
                 padding-right: 24px;
             }
         }
+        /* ============================================================
+   ADAPTIVE CSS — partner-with-us.html
+   Cascade: 1280 → 1024 → 768 → 414 → 390 → 375 → 360 → 320px
+   Reference: index.html
+============================================================ */
+
+/* === 1280px — wide laptop === */
+@media (max-width: 1280px) {
+    .page-hero {
+        padding-left: max(32px, 4vw);
+        padding-right: max(32px, 4vw);
+    }
+
+    .info-strip {
+        padding: var(--space-lg) max(32px, 4vw);
+    }
+
+    .types-section,
+    .alumni-section,
+    .engage-section,
+    .cta-banner,
+    .section-faq,
+    .ptypes-section,
+    .why-section,
+    .process-section,
+    .partners-wall-section {
+        padding: var(--space-section) max(32px, 4vw);
+    }
+
+    .impact-cta-section {
+        padding: var(--space-2xl) max(32px, 4vw);
+    }
+
+    .footer {
+        padding: var(--space-2xl) max(32px, 4vw);
+    }
+
+    .footer-partners {
+        padding: var(--space-xl) max(32px, 4vw);
+    }
+}
+
+/* === 1024px — tablet landscape / small laptop === */
+@media (max-width: 1024px) {
+    .nav {
+        padding: 0 24px;
+    }
+
+    .nav.scrolled {
+        left: 12px;
+        right: 12px;
+    }
+
+    .page-hero {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .info-strip {
+        padding: var(--space-lg) 24px;
+    }
+
+    .types-section,
+    .alumni-section,
+    .engage-section,
+    .cta-banner,
+    .section-faq,
+    .ptypes-section,
+    .why-section,
+    .process-section,
+    .partners-wall-section {
+        padding: var(--space-2xl) 24px;
+    }
+
+    .impact-cta-section {
+        padding: var(--space-2xl) 24px;
+    }
+
+    .footer {
+        padding: var(--space-2xl) 24px;
+    }
+
+    .footer-partners {
+        padding: var(--space-lg) 24px;
+    }
+}
+
+/* === 768px — tablet portrait === */
+@media (max-width: 768px) {
+
+    /* Nav */
+    .nav {
+        padding: 0 20px;
+        height: 64px;
+    }
+
+    .nav.scrolled {
+        top: 8px;
+        left: 12px;
+        right: 12px;
+    }
+
+    .nav-logo img {
+        height: 44px;
+    }
+
+    /* Hero */
+    .page-hero {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: calc(64px + var(--space-xl));
+    }
+
+    .hero-main {
+        flex-direction: column;
+        gap: var(--space-xl);
+    }
+
+    .hero-photo-wrap {
+        max-width: 100%;
+    }
+
+    .hero-cta-row {
+        flex-direction: column;
+    }
+
+    .hero-cta-row .btn-primary,
+    .hero-cta-row .btn-outline {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    /* Info strip */
+    .info-strip {
+        padding: var(--space-lg) 20px;
+    }
+
+    /* Sections */
+    .types-section,
+    .alumni-section,
+    .engage-section,
+    .cta-banner,
+    .section-faq,
+    .ptypes-section,
+    .why-section,
+    .process-section,
+    .partners-wall-section {
+        padding: var(--space-2xl) 20px;
+    }
+
+    .impact-cta-section {
+        padding: var(--space-2xl) 20px;
+    }
+
+    /* Cards */
+    .type-card,
+    .engage-card,
+    .ptype-card,
+    .process-step,
+    .alumni-benefit {
+        padding: var(--space-lg);
+    }
+
+    /* Why section — single column */
+    .why-inner {
+        grid-template-columns: 1fr;
+    }
+
+    /* Alumni section */
+    .alumni-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .alumni-quote-card {
+        position: static;
+        margin-top: var(--space-lg);
+        max-width: 100%;
+    }
+
+    .alumni-img-wrap img {
+        height: 320px;
+    }
+
+    /* Partners wall */
+    .partners-wall-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .partners-wall-logo-grid {
+        max-width: 100%;
+    }
+
+    /* CTA banner — buttons stretch */
+    .cta-banner-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-banner-actions {
+        align-items: stretch;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cta-banner-actions .btn-primary,
+    .cta-banner-actions .btn-outline {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    /* Impact CTA buttons — stretch */
+    .impact-cta-inner .btn-primary,
+    .impact-cta-inner .btn-outline,
+    .impact-cta-inner .btn-white,
+    .impact-cta-inner .btn-ghost {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    /* ptype card button — stretch */
+    .ptype-card .ptype-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        align-self: stretch;
+    }
+
+    /* FAQ sticky sidebar */
+    .faq-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .faq-sticky {
+        position: static;
+    }
+
+    .type-card--tall .tall-body {
+        padding: var(--space-xl) 0;
+    }
+    
+    /* Footer */
+    .footer {
+        padding: var(--space-2xl) 20px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-xl);
+    }
+
+    .footer-partners {
+        gap: var(--space-xl);
+        padding: var(--space-lg) 20px;
+    }
+
+    .footer-partners img {
+        height: 44px;
+    }
+}
+
+/* === 414px — iPhone Plus (portrait) === */
+@media (max-width: 414px) {
+    .nav {
+        padding: 0 20px;
+    }
+
+    .nav.scrolled {
+        left: 8px;
+        right: 8px;
+    }
+
+    .page-hero {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: calc(64px + var(--space-lg));
+    }
+
+    .info-strip {
+        padding: var(--space-md) 20px;
+    }
+
+    .types-section,
+    .alumni-section,
+    .engage-section,
+    .cta-banner,
+    .section-faq,
+    .ptypes-section,
+    .why-section,
+    .process-section,
+    .partners-wall-section,
+    .impact-cta-section {
+        padding: var(--space-xl) 20px;
+    }
+
+    .alumni-img-wrap img {
+        height: 260px;
+    }
+
+    .footer {
+        padding: var(--space-xl) 20px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    .footer-brand p {
+        max-width: 100%;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-sm);
+    }
+
+    .footer-bottom-links {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+    }
+
+    .footer-partners {
+        flex-wrap: wrap;
+        gap: var(--space-md);
+        padding: var(--space-lg) 20px;
+    }
+
+    .footer-partners img {
+        height: 36px;
+    }
+}
+
+/* === 390px — iPhone 12/13/14 (standard) === */
+@media (max-width: 390px) {
+    .nav {
+        padding: 0 18px;
+    }
+
+    .nav.scrolled {
+        left: 7px;
+        right: 7px;
+    }
+
+    .page-hero {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .info-strip,
+    .types-section,
+    .alumni-section,
+    .engage-section,
+    .cta-banner,
+    .section-faq,
+    .ptypes-section,
+    .why-section,
+    .process-section,
+    .partners-wall-section,
+    .impact-cta-section {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .footer {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .footer-partners {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+
+/* === 375px — iPhone SE / standard iPhone === */
+@media (max-width: 375px) {
+    .nav {
+        padding: 0 16px;
+    }
+
+    .nav.scrolled {
+        left: 6px;
+        right: 6px;
+    }
+
+    .nav-logo img {
+        height: 40px;
+    }
+
+    .page-hero {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .info-strip,
+    .types-section,
+    .alumni-section,
+    .engage-section,
+    .cta-banner,
+    .section-faq,
+    .ptypes-section,
+    .why-section,
+    .process-section,
+    .partners-wall-section,
+    .impact-cta-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .footer {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .footer-partners {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+/* === 360px — Android standard (Samsung Galaxy etc.) === */
+@media (max-width: 360px) {
+    .nav {
+        padding: 0 16px;
+    }
+
+    .page-hero {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .info-strip,
+    .types-section,
+    .alumni-section,
+    .engage-section,
+    .cta-banner,
+    .section-faq,
+    .ptypes-section,
+    .why-section,
+    .process-section,
+    .partners-wall-section,
+    .impact-cta-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .footer {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .footer-partners {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+/* === 320px — iPhone SE 1st gen / minimum screen === */
+@media (max-width: 320px) {
+    .nav {
+        padding: 0 12px;
+        height: 60px;
+    }
+
+    .nav-logo img {
+        height: 36px;
+    }
+
+    .page-hero {
+        padding-left: 12px;
+        padding-right: 12px;
+        padding-top: calc(60px + var(--space-lg));
+    }
+
+    .info-strip,
+    .types-section,
+    .alumni-section,
+    .engage-section,
+    .cta-banner,
+    .section-faq,
+    .ptypes-section,
+    .why-section,
+    .process-section,
+    .partners-wall-section,
+    .impact-cta-section {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .type-card,
+    .engage-card,
+    .ptype-card,
+    .process-step,
+    .alumni-benefit {
+        padding: var(--space-md);
+    }
+
+    .footer {
+        padding: var(--space-xl) 12px;
+    }
+
+    .footer-partners {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .footer-partners img {
+        height: 30px;
+    }
+}
+
+/* === LANDSCAPE — iPhone (896×414, 915×412 etc.) === */
+@media (max-height: 500px) and (orientation: landscape) {
+    .nav {
+        height: 56px;
+    }
+
+    .nav-logo img {
+        height: 38px;
+    }
+
+    .page-hero {
+        padding-top: calc(56px + var(--space-lg));
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .types-section,
+    .alumni-section,
+    .engage-section,
+    .cta-banner,
+    .section-faq,
+    .ptypes-section,
+    .why-section,
+    .process-section,
+    .partners-wall-section,
+    .impact-cta-section {
+        padding: var(--space-xl) 20px;
+    }
+
+    .footer {
+        padding: var(--space-xl) 20px;
+    }
+}
     </style>
 </head>
 

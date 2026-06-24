@@ -2224,6 +2224,604 @@
                 padding-right: 24px;
             }
         }
+        
+        /* ============================================================
+        1024px — планшет landscape / небольшой ноутбук
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 24px;
+            }
+
+            .nav.scrolled {
+                left: 12px;
+                right: 12px;
+            }
+
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .info-strip {
+                padding: var(--space-lg) 24px;
+            }
+
+            .section-paths {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .section-volunteer {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .section-membership {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .section-donate {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .section-support {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .section-join {
+                margin: 0 16px var(--space-2xl);
+                padding: var(--space-2xl) 32px;
+            }
+
+            .footer {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .footer-partners {
+                padding: var(--space-lg) 24px;
+            }
+        }
+
+        /* ============================================================
+        900px — info-strip в колонку (как во всех других страницах)
+        ============================================================ */
+        @media (max-width: 900px) {
+            .info-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--space-lg) 24px;
+            }
+
+            .info-divider {
+                display: none;
+            }
+        }
+
+        /* ============================================================
+        768px — планшет portrait
+        ============================================================ */
+        @media (max-width: 768px) {
+
+            /* Nav */
+            .nav {
+                padding: 0 20px;
+                height: 64px;
+            }
+
+            .nav.scrolled {
+                top: 8px;
+                left: 12px;
+                right: 12px;
+            }
+
+            .nav-logo img {
+                height: 44px;
+            }
+
+            /* Hero */
+            .page-hero {
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: calc(64px + var(--space-xl));
+            }
+
+            .hero-h1 {
+                font-size: clamp(2.25rem, 7vw, 3rem);
+            }
+
+            .hero-cta-row {
+                flex-direction: column;
+            }
+
+            .hero-cta-row .btn-primary,
+            .hero-cta-row .btn-outline {
+                width: 100%;
+                text-align: center;
+            }
+
+            /* Info strip */
+            .info-strip {
+                padding: var(--space-lg) 20px;
+            }
+
+            /* Paths */
+            .section-paths {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .path-card {
+                padding: var(--space-lg);
+            }
+
+            .path-card:nth-child(1) {
+                padding: var(--space-xl) var(--space-lg);
+            }
+
+            /* Card 4 — сбрасываем горизонтальный layout в вертикальный */
+            .path-card:nth-child(4) {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-md);
+            }
+
+            .path-card:nth-child(4) .path-num {
+                font-size: 2rem;
+            }
+
+            /* Volunteer */
+            .section-volunteer {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .vol-card {
+                padding: var(--space-lg);
+            }
+
+            .vol-portal {
+                padding: var(--space-lg) var(--space-xl);
+            }
+
+            /* Membership */
+            .section-membership {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .mem-card {
+                padding: var(--space-lg);
+            }
+
+            /* Donate */
+            .section-donate {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .donate-card-header {
+                padding: var(--space-lg) var(--space-xl) var(--space-md);
+            }
+
+            .donate-card-body {
+                padding: var(--space-lg) var(--space-xl);
+            }
+
+            /* Support */
+            .section-support {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .support-card {
+                padding: var(--space-lg);
+            }
+
+            /* Join CTA */
+            .section-join {
+                margin: 0 12px var(--space-2xl);
+                padding: var(--space-2xl) 24px;
+                border-radius: var(--radius-lg);
+            }
+
+            .join-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .join-actions .btn-white,
+            .join-actions .btn-ghost {
+                width: 100%;
+                max-width: 320px;
+                text-align: center;
+            }
+
+            /* Footer */
+            .footer {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+
+            .footer-partners {
+                gap: var(--space-xl);
+                padding: var(--space-lg) 20px;
+            }
+
+            .footer-partners img {
+                height: 44px;
+            }
+        }
+
+        /* ============================================================
+        414px — iPhone Plus / landscape target (portrait)
+        ============================================================ */
+        @media (max-width: 414px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav.scrolled {
+                left: 8px;
+                right: 8px;
+            }
+
+            .page-hero {
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: calc(64px + var(--space-lg));
+            }
+
+            .hero-h1 {
+                font-size: clamp(2rem, 9vw, 2.5rem);
+            }
+
+            .info-strip {
+                padding: var(--space-md) 20px;
+            }
+
+            .section-paths {
+                padding: var(--space-xl) 20px;
+            }
+
+            .section-volunteer {
+                padding: var(--space-xl) 20px;
+            }
+
+            .section-membership {
+                padding: var(--space-xl) 20px;
+            }
+
+            .section-donate {
+                padding: var(--space-xl) 20px;
+            }
+
+            .section-support {
+                padding: var(--space-xl) 20px;
+            }
+
+            .section-join {
+                margin: 0 8px var(--space-xl);
+                padding: var(--space-xl) 20px;
+                border-radius: var(--radius-lg);
+            }
+
+            .footer {
+                padding: var(--space-xl) 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+
+            .footer-partners {
+                flex-wrap: wrap;
+                gap: var(--space-md);
+                padding: var(--space-lg) 20px;
+            }
+
+            .footer-partners img {
+                height: 36px;
+            }
+        }
+
+        /* ============================================================
+        390px — iPhone 12/13/14 (standard)
+        ============================================================ */
+        @media (max-width: 390px) {
+            .nav {
+                padding: 0 18px;
+            }
+
+            .nav.scrolled {
+                left: 7px;
+                right: 7px;
+            }
+
+            .page-hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .info-strip {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-paths {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-volunteer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-membership {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-donate {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-support {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section-join {
+                margin-left: 7px;
+                margin-right: 7px;
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer-partners {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        /* ============================================================
+        375px — iPhone SE / standard iPhone
+        ============================================================ */
+        @media (max-width: 375px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .nav.scrolled {
+                left: 6px;
+                right: 6px;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.875rem, 9.5vw, 2.25rem);
+            }
+
+            .info-strip,
+            .section-paths,
+            .section-volunteer,
+            .section-membership,
+            .section-donate,
+            .section-support {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-join {
+                margin-left: 6px;
+                margin-right: 6px;
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        360px — Android standard (Samsung Galaxy и др.)
+        ============================================================ */
+        @media (max-width: 360px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .hero-h1 {
+                font-size: 1.75rem;
+                letter-spacing: -0.5px;
+            }
+
+            .info-strip,
+            .section-paths,
+            .section-volunteer,
+            .section-membership,
+            .section-donate,
+            .section-support {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+                margin-left: 6px;
+                margin-right: 6px;
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        320px — iPhone SE (1st gen) / минимальный экран
+        ============================================================ */
+        @media (max-width: 320px) {
+            .nav {
+                padding: 0 12px;
+                height: 60px;
+            }
+
+            .nav-logo img {
+                height: 36px;
+            }
+
+            .page-hero {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .hero-h1 {
+                font-size: 1.625rem;
+            }
+
+            .hero-desc {
+                font-size: var(--text-sm);
+            }
+
+            .info-strip,
+            .section-paths,
+            .section-volunteer,
+            .section-membership,
+            .section-donate,
+            .section-support {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            /* Все карточки — минимальный padding */
+            .path-card,
+            .path-card:nth-child(1),
+            .vol-card,
+            .vol-portal,
+            .mem-card,
+            .donate-card-header,
+            .donate-card-body,
+            .support-card {
+                padding: var(--space-lg);
+            }
+
+            .section-join {
+                padding: var(--space-lg) 12px;
+                margin-left: 4px;
+                margin-right: 4px;
+            }
+
+            .join-actions .btn-white,
+            .join-actions .btn-ghost {
+                font-size: var(--text-sm);
+                padding: 12px 20px;
+            }
+
+            .footer {
+                padding: var(--space-xl) 12px;
+            }
+
+            .footer-partners {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .footer-partners img {
+                height: 30px;
+            }
+        }
+
+        /* ============================================================
+        LANDSCAPE — iPhone (896×414, 915×412 и аналоги)
+        ============================================================ */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .nav {
+                height: 56px;
+            }
+
+            .nav-logo img {
+                height: 38px;
+            }
+
+            .page-hero {
+                padding-top: calc(56px + var(--space-lg));
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero-abstract {
+                display: none;
+            }
+
+            .hero-h1 {
+                font-size: clamp(1.5rem, 5vw, 2rem);
+            }
+
+            .hero-desc {
+                font-size: var(--text-sm);
+                margin-bottom: var(--space-md);
+            }
+
+            .section-paths,
+            .section-volunteer,
+            .section-membership,
+            .section-donate,
+            .section-support {
+                padding: var(--space-xl) 20px;
+            }
+
+            .footer {
+                padding: var(--space-xl) 20px;
+            }
+        }
     </style>
 </head>
 
