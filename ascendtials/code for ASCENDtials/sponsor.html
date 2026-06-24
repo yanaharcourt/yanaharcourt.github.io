@@ -1772,7 +1772,342 @@
         @media (max-height: 500px) and (orientation: landscape) {
             .page-hero { padding-top: calc(60px + var(--space-lg)); }
         }
-        
+        /* ============================================================
+        1024px
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 24px;
+            }
+
+            .nav.scrolled {
+                left: 12px;
+                right: 12px;
+            }
+
+            .footer {
+                padding: var(--space-2xl) 24px;
+            }
+        }
+
+        /* ============================================================
+        768px
+        ============================================================ */
+        @media (max-width: 768px) {
+
+            /* Nav */
+            .nav {
+                padding: 0 20px;
+                height: 64px;
+            }
+
+            .nav.scrolled {
+                top: 8px;
+                left: 12px;
+                right: 12px;
+            }
+
+            .nav-logo img {
+                height: 44px;
+            }
+
+            /* Hero: фото вверху, текст внизу */
+            .hero-main {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+
+            .hero-photo-wrap {
+                display: block;
+                order: -1;
+            }
+
+            .hero-photo-wrap img {
+                height: 320px;
+            }
+
+            .hero-photo-badge {
+                display: none;
+            }
+
+            /* Info strip */
+            .info-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                overflow-x: visible;
+            }
+
+            .info-divider {
+                display: none;
+            }
+
+            /* Impact grid */
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-card {
+                flex-direction: row;
+                align-items: center;
+                gap: var(--space-lg);
+                padding: var(--space-lg);
+            }
+
+            .impact-card-num {
+                font-size: 2.4rem;
+                flex-shrink: 0;
+                min-width: 72px;
+            }
+
+            /* Sponsor card */
+            .sponsor-card {
+                flex-wrap: wrap;
+                align-items: center;
+                row-gap: 0;
+                column-gap: var(--space-md);
+            }
+
+            .sponsor-card-icon {
+                order: 1;
+                flex-shrink: 0;
+                margin-bottom: var(--space-md);
+            }
+
+            .sponsor-card-body {
+                display: contents;
+            }
+
+            .sponsor-card-name {
+                order: 3;
+                flex: 1 1 100%;
+                margin-top: var(--space-md);
+            }
+
+            .sponsor-card-desc {
+                order: 4;
+                flex: 1 1 100%;
+                margin-top: 6px;
+            }
+
+            .sponsor-tag {
+                order: 2;
+                margin-top: 0;
+                margin-left: auto;
+                flex-shrink: 0;
+            }
+
+            /* How contact card */
+            .how-contact-card {
+                padding: var(--space-xl);
+            }
+
+            /* Footer */
+            .footer {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+
+            .footer-partners {
+                gap: var(--space-xl);
+                padding: var(--space-lg) 20px;
+            }
+
+            .footer-partners img {
+                height: 44px;
+            }
+        }
+
+        /* ============================================================
+        414px
+        ============================================================ */
+        @media (max-width: 414px) {
+
+            /* Nav */
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav.scrolled {
+                left: 8px;
+                right: 8px;
+            }
+
+            /* Footer */
+            .footer {
+                padding: var(--space-xl) 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+
+            .footer-partners {
+                flex-wrap: wrap;
+                gap: var(--space-md);
+                padding: var(--space-lg) 20px;
+            }
+
+            .footer-partners img {
+                height: 36px;
+            }
+        }
+
+        /* ============================================================
+        390px
+        ============================================================ */
+        @media (max-width: 390px) {
+
+            /* Nav */
+            .nav {
+                padding: 0 18px;
+            }
+
+            .nav.scrolled {
+                left: 7px;
+                right: 7px;
+            }
+
+            /* Footer */
+            .footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer-partners {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        /* ============================================================
+        375px
+        ============================================================ */
+        @media (max-width: 375px) {
+
+            /* Nav */
+            .nav {
+                padding: 0 16px;
+            }
+
+            .nav.scrolled {
+                left: 6px;
+                right: 6px;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+
+            /* Footer */
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        360px
+        ============================================================ */
+        @media (max-width: 360px) {
+
+            /* Nav */
+            .nav {
+                padding: 0 16px;
+            }
+
+            /* Footer */
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        320px
+        ============================================================ */
+        @media (max-width: 320px) {
+
+            /* Nav */
+            .nav {
+                padding: 0 12px;
+                height: 60px;
+            }
+
+            .nav-logo img {
+                height: 36px;
+            }
+
+            /* Footer */
+            .footer {
+                padding: var(--space-xl) 12px;
+            }
+
+            .footer-partners {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .footer-partners img {
+                height: 30px;
+            }
+        }
+
+        /* ============================================================
+        landscape
+        ============================================================ */
+        @media (max-height: 500px) and (orientation: landscape) {
+
+            /* Nav */
+            .nav {
+                height: 56px;
+            }
+
+            .nav-logo img {
+                height: 38px;
+            }
+
+            /* Footer */
+            .footer {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .footer-partners {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
     </style>
 </head>
 
