@@ -2368,89 +2368,715 @@
         ADAPTIVE CSS
         ============================================================ */
 
-        /* === 1280px — large desktop === */
+        /* ============================================================
+        ADAPTIVE CASCADE
+        ============================================================ */
+
+        /* ============================================================
+        1280px — large desktop trim
+        ============================================================ */
         @media (max-width: 1280px) {
+            .page-hero {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
             .section-why, .section-pathways, .section-steps,
             .section-membership, .section-access, .section-portal-features, .section-join {
-                padding-left: max(40px, 4vw);
-                padding-right: max(40px, 4vw);
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .footer {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
+            }
+
+            .footer-partners {
+                padding-left: max(32px, 4vw);
+                padding-right: max(32px, 4vw);
             }
         }
 
-        /* === 1024px — tablet landscape === */
+        /* ============================================================
+        1024px — tablet landscape / small laptop
+        ============================================================ */
         @media (max-width: 1024px) {
-            .hero-h1 { font-size: clamp(2.4rem, 4.5vw, 4rem); letter-spacing: -1.5px; }
-            .section-h2 { font-size: 2rem; }
-            .section-steps-inner { grid-template-columns: 1fr; gap: var(--space-xl); }
-            .steps-sticky { position: static; }
-        }
+            .nav {
+                padding: 0 24px;
+            }
 
-        /* === 768px — tablet portrait === */
-        @media (max-width: 768px) {
-            .hero-h1 { font-size: 2.2rem; letter-spacing: -1px; }
-            .section-h2 { font-size: 1.75rem; }
-            .page-hero { padding-left: 24px; padding-right: 24px; padding-top: calc(64px + var(--space-xl)); }
-            .hero-main { grid-template-columns: 1fr; gap: var(--space-xl); }
-            .hero-photo-wrap img { height: 320px; }
-            .hero-photo-badge { left: 16px; bottom: 16px; }
-            .info-strip { padding: var(--space-lg) 24px; justify-content: flex-start; }
+            .nav.scrolled {
+                left: 12px;
+                right: 12px;
+            }
+
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-h1 {
+                font-size: clamp(2.4rem, 4.5vw, 4rem);
+                letter-spacing: -1.5px;
+            }
+
+            .hero-photo-wrap img {
+                height: 420px;
+            }
+
+            .info-strip {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .section-h2 {
+                font-size: 2rem;
+            }
+
+            /* Why: bento reset to 2 cols */
+            .why-bento {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .why-item:nth-child(1),
+            .why-item:nth-child(2),
+            .why-item:nth-child(3),
+            .why-item:nth-child(4) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            /* Steps: collapse, unstick portal-card */
+            .section-steps-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .portal-card {
+                position: static;
+            }
+
+            /* Access: collapse */
+            .section-access-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            /* Portal features header: collapse */
+            .portal-features-header {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
             .section-why, .section-pathways, .section-steps,
             .section-membership, .section-access, .section-portal-features, .section-join {
                 padding-left: 24px;
                 padding-right: 24px;
             }
-            .section-access-inner { grid-template-columns: 1fr; gap: var(--space-xl); }
-            .section-portal-features-inner { grid-template-columns: 1fr; gap: var(--space-xl); }
+
+            .footer {
+                padding: var(--space-2xl) 24px;
+            }
+
+            .footer-partners {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
         }
 
-        /* === 414px — large phone === */
+        /* ============================================================
+        768px — tablet portrait
+        ============================================================ */
+        @media (max-width: 768px) {
+
+            /* Nav */
+            .nav {
+                padding: 0 20px;
+                height: 64px;
+            }
+
+            .nav.scrolled {
+                top: 8px;
+                left: 12px;
+                right: 12px;
+            }
+
+            .nav-logo img {
+                height: 44px;
+            }
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+
+            /* Hero */
+            .page-hero {
+                padding-top: calc(64px + var(--space-xl));
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero-main {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+
+            .hero-photo-wrap {
+                display: block;
+                order: -1;
+            }
+
+            .hero-photo-wrap img {
+                height: 300px;
+                width: 100%;
+                object-fit: cover;
+            }
+
+            .hero-photo-badge {
+                display: none;
+            }
+
+            .hero-h1 {
+                font-size: clamp(2.25rem, 7vw, 3rem);
+                letter-spacing: -1px;
+            }
+
+            .hero-desc {
+                font-size: var(--text-base);
+            }
+
+            /* Info strip */
+            .info-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--space-xl) 20px;
+                overflow-x: visible;
+            }
+
+            .info-divider {
+                display: none;
+            }
+
+            /* Why */
+            .section-why {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .why-bento {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .why-item:nth-child(1),
+            .why-item:nth-child(2),
+            .why-item:nth-child(3),
+            .why-item:nth-child(4) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            /* Pathways */
+            .section-pathways {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .pathways-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .pathway-card:nth-child(n) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            /* Steps */
+            .section-steps {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .section-steps-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .portal-card {
+                position: static;
+                padding: var(--space-xl);
+            }
+
+            /* Membership */
+            .section-membership {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            /* Access */
+            .section-access {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .section-access-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .access-quote {
+                padding-left: var(--space-xl);
+            }
+
+            .access-quote-text {
+                font-size: clamp(1.2rem, 4vw, 1.6rem);
+            }
+
+            /* Portal features */
+            .section-portal-features {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .portal-features-header {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .portal-features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .portal-features-grid .portal-feature-card:nth-child(n) {
+                grid-column: auto;
+            }
+
+            .portal-features-grid .portal-feature-card:nth-child(6) {
+                grid-column: auto;
+            }
+
+            /* Join */
+            .section-join {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .join-h2 {
+                font-size: clamp(1.75rem, 6vw, 2.5rem);
+            }
+
+            .section-h2 {
+                font-size: 1.75rem;
+            }
+
+            /* Footer */
+            .footer {
+                padding: var(--space-2xl) 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+            }
+
+            .footer-partners {
+                gap: var(--space-xl);
+                padding: var(--space-lg) 20px;
+            }
+
+            .footer-partners img {
+                height: 44px;
+            }
+        }
+
+        /* ============================================================
+        414px — iPhone Plus / large phone
+        ============================================================ */
         @media (max-width: 414px) {
-            .section-h2 { font-size: 1.6rem; }
-            .hero-h1 { font-size: 2rem; }
-            .hero-cta-row { flex-direction: column; }
+
+            /* Nav */
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav.scrolled {
+                left: 8px;
+                right: 8px;
+            }
+
+            /* Hero */
+            .page-hero {
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 76px;
+            }
+
+            .hero-h1 {
+                font-size: 2rem;
+            }
+
+            .hero-cta-row {
+                flex-direction: column;
+            }
+
             .hero-cta-row .btn-primary,
-            .hero-cta-row .btn-outline { width: 100%; justify-content: center; }
-            .why-bento { grid-template-columns: 1fr; }
-            .pathways-grid { grid-template-columns: 1fr; }
-            .membership-grid { grid-template-columns: 1fr; }
-            .portal-features-grid { grid-template-columns: 1fr; }
-            .join-cta { flex-direction: column; }
+            .hero-cta-row .btn-outline {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .section-h2 {
+                font-size: 1.6rem;
+            }
+
+            /* Why: 1 col */
+            .why-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .why-item:nth-child(n) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            /* Pathways: 1 col */
+            .pathways-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pathway-card:nth-child(n) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            /* Portal card: CTA buttons full width */
+            .portal-cta .btn-primary,
+            .portal-cta .btn-ghost,
+            .portal-cta .btn-outline {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+
+            /* Portal features: 1 col */
+            .portal-features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portal-features-grid .portal-feature-card:nth-child(n) {
+                grid-column: auto;
+            }
+
+            .portal-features-grid .portal-feature-card:nth-child(6) {
+                grid-column: auto;
+            }
+
+            /* Access pills: wrap tighter */
+            .access-pill-group {
+                gap: var(--space-xs);
+            }
+
+            /* Join buttons: full width */
+            .join-cta {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
             .join-cta .btn-white,
-            .join-cta .btn-ghost { width: 100%; justify-content: center; }
-        }
+            .join-cta .btn-ghost {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
 
-        /* === 390px — iPhone Pro === */
-        @media (max-width: 390px) {
-            .hero-h1 { font-size: 1.9rem; }
-            .section-h2 { font-size: 1.5rem; }
-        }
-
-        /* === 375px — iPhone SE === */
-        @media (max-width: 375px) {
-            .hero-h1 { font-size: 1.8rem; }
-            .section-h2 { font-size: 1.4rem; }
-            .hero-photo-wrap { display: none; }
-        }
-
-        /* === 360px — small Android === */
-        @media (max-width: 360px) {
-            .hero-h1 { font-size: 1.7rem; }
-        }
-
-        /* === 320px — extra small === */
-        @media (max-width: 320px) {
-            .hero-h1 { font-size: 1.55rem; letter-spacing: -0.5px; }
-            .section-h2 { font-size: 1.3rem; }
-            .page-hero, .section-why, .section-pathways, .section-steps,
+            /* Sections padding */
+            .section-why, .section-pathways, .section-steps,
             .section-membership, .section-access, .section-portal-features, .section-join {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            /* Footer */
+            .footer {
+                padding: var(--space-xl) 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+
+            .footer-partners {
+                flex-wrap: wrap;
+                gap: var(--space-md);
+                padding: var(--space-lg) 20px;
+            }
+
+            .footer-partners img {
+                height: 36px;
+            }
+        }
+
+        /* ============================================================
+        390px — iPhone 14 Pro / iPhone 15
+        ============================================================ */
+        @media (max-width: 390px) {
+
+            .nav {
+                padding: 0 18px;
+            }
+
+            .nav.scrolled {
+                left: 7px;
+                right: 7px;
+            }
+
+            .page-hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .hero-h1 {
+                font-size: 1.9rem;
+            }
+
+            .section-h2 {
+                font-size: 1.5rem;
+            }
+
+            .section-why, .section-pathways, .section-steps,
+            .section-membership, .section-access, .section-portal-features, .section-join {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer-partners {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        /* ============================================================
+        375px — iPhone SE / standard iPhone
+        ============================================================ */
+        @media (max-width: 375px) {
+
+            .nav {
+                padding: 0 16px;
+            }
+
+            .nav.scrolled {
+                left: 6px;
+                right: 6px;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .hero-h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-photo-wrap {
+                display: none;
+            }
+
+            .section-h2 {
+                font-size: 1.4rem;
+            }
+
+            .portal-card {
+                padding: var(--space-lg);
+            }
+
+            .access-quote {
+                padding-left: var(--space-lg);
+            }
+
+            .section-why, .section-pathways, .section-steps,
+            .section-membership, .section-access, .section-portal-features, .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-partners {
                 padding-left: 16px;
                 padding-right: 16px;
             }
         }
 
-        /* === landscape mobile === */
+        /* ============================================================
+        360px — standard Android (Samsung Galaxy etc.)
+        ============================================================ */
+        @media (max-width: 360px) {
+
+            .nav {
+                padding: 0 16px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .hero-h1 {
+                font-size: 1.7rem;
+                letter-spacing: -0.5px;
+            }
+
+            .section-h2 {
+                font-size: 1.35rem;
+            }
+
+            .section-why, .section-pathways, .section-steps,
+            .section-membership, .section-access, .section-portal-features, .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        320px — iPhone SE (1st gen) / minimum screen
+        ============================================================ */
+        @media (max-width: 320px) {
+
+            .nav {
+                padding: 0 12px;
+                height: 60px;
+            }
+
+            .nav-logo img {
+                height: 36px;
+            }
+
+            .page-hero {
+                padding-left: 12px;
+                padding-right: 12px;
+                padding-top: calc(60px + var(--space-md));
+            }
+
+            .hero-h1 {
+                font-size: 1.55rem;
+                letter-spacing: -0.5px;
+            }
+
+            .hero-desc {
+                font-size: var(--text-sm);
+            }
+
+            .section-h2 {
+                font-size: 1.3rem;
+            }
+
+            .portal-card {
+                padding: var(--space-md);
+            }
+
+            .portal-card-title {
+                font-size: 1.4rem;
+            }
+
+            .access-quote {
+                padding-left: var(--space-md);
+            }
+
+            .access-quote::before {
+                font-size: 5rem;
+            }
+
+            .join-h2 {
+                font-size: var(--text-xl);
+            }
+
+            .section-why, .section-pathways, .section-steps,
+            .section-membership, .section-access, .section-portal-features, .section-join {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .footer {
+                padding: var(--space-xl) 12px;
+            }
+
+            .footer-partners {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .footer-partners img {
+                height: 30px;
+            }
+        }
+
+        /* ============================================================
+        LANDSCAPE — mobile (iPhone 896×414, 915×412 etc.)
+        ============================================================ */
         @media (max-height: 500px) and (orientation: landscape) {
-            .page-hero { padding-top: calc(60px + var(--space-lg)); }
+
+            .nav {
+                height: 56px;
+            }
+
+            .nav-logo img {
+                height: 38px;
+            }
+
+            .page-hero {
+                padding-top: calc(56px + var(--space-lg));
+            }
+
+            .footer {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
         }
     </style>
 </head>

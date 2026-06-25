@@ -1863,6 +1863,452 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* ============================================================
+        1024px — планшет landscape / небольшой ноутбук
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 24px;
+            }
+
+            .nav.scrolled {
+                left: 12px;
+                right: 12px;
+            }
+
+            .page-hero {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .give-section,
+            .hero-mission,
+            .wisdom-section,
+            .offers-section,
+            .how-section,
+            .quote-section,
+            .section-join {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer-partners {
+                padding: var(--space-lg) 24px;
+            }
+
+            .footer-grid,
+            .footer-bottom {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        /* ============================================================
+        900px — info-strip в колонку
+        ============================================================ */
+        @media (max-width: 900px) {
+            .info-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--space-lg) 24px;
+            }
+
+            .info-divider {
+                display: none;
+            }
+        }
+
+        /* ============================================================
+        768px — планшет portrait
+        ============================================================ */
+        @media (max-width: 768px) {
+
+            /* Nav */
+            .nav {
+                padding: 0 20px;
+                height: 64px;
+            }
+
+            .nav.scrolled {
+                top: 8px;
+                left: 12px;
+                right: 12px;
+            }
+
+            .nav-logo img {
+                height: 44px;
+            }
+
+            /* Hero */
+            .page-hero {
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: calc(64px + var(--space-xl));
+            }
+
+            /* Hero кнопки — stretch */
+            .hero-cta-row {
+                flex-direction: column;
+            }
+
+            .hero-cta-row .btn-primary,
+            .hero-cta-row .btn-outline {
+                width: 100%;
+                text-align: center;
+            }
+
+            /* Info strip */
+            .info-strip {
+                padding: var(--space-lg) 20px;
+            }
+
+            /* Sections */
+            .give-section,
+            .hero-mission,
+            .wisdom-section,
+            .offers-section,
+            .how-section,
+            .quote-section,
+            .section-join {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            /* Карточки */
+            .gc,
+            .hs-card,
+            .how-step {
+                padding: var(--space-lg);
+            }
+
+            /* hero-mission кнопки — stretch */
+            .hero-mission-cta {
+                flex-direction: column;
+            }
+
+            .hero-mission-cta .btn-primary,
+            .hero-mission-cta .btn-outline {
+                width: 100%;
+                text-align: center;
+            }
+
+            /* quote-section кнопки — stretch */
+            .quote-cta-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .quote-cta-row .btn-primary,
+            .quote-cta-row .btn-outline {
+                width: 100%;
+                text-align: center;
+            }
+
+            /* section-join кнопки — stretch */
+            .join-actions {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .join-actions .btn-white,
+            .join-actions .btn-ghost {
+                width: 100%;
+                text-align: center;
+            }
+
+            /* Footer */
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .footer-partners {
+                gap: var(--space-xl);
+                padding: var(--space-lg) 20px;
+            }
+
+            .footer-partners img {
+                height: 44px;
+            }
+
+            .footer-bottom {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        /* ============================================================
+        414px — iPhone Plus / landscape target (portrait)
+        ============================================================ */
+        @media (max-width: 414px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav.scrolled {
+                left: 8px;
+                right: 8px;
+            }
+
+            .page-hero {
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: calc(64px + var(--space-lg));
+            }
+
+            .info-strip {
+                padding: var(--space-md) 20px;
+            }
+
+            .give-section,
+            .hero-mission,
+            .wisdom-section,
+            .offers-section,
+            .how-section,
+            .quote-section,
+            .section-join {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+
+            .footer-partners {
+                flex-wrap: wrap;
+                gap: var(--space-md);
+                padding: var(--space-lg) 20px;
+            }
+
+            .footer-partners img {
+                height: 36px;
+            }
+        }
+
+        /* ============================================================
+        390px — iPhone 12/13/14 (standard)
+        ============================================================ */
+        @media (max-width: 390px) {
+            .nav {
+                padding: 0 18px;
+            }
+
+            .nav.scrolled {
+                left: 7px;
+                right: 7px;
+            }
+
+            .page-hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .info-strip,
+            .give-section,
+            .hero-mission,
+            .wisdom-section,
+            .offers-section,
+            .how-section,
+            .quote-section,
+            .section-join {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .footer-grid,
+            .footer-bottom,
+            .footer-partners {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        /* ============================================================
+        375px — iPhone SE / standard iPhone
+        ============================================================ */
+        @media (max-width: 375px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .nav.scrolled {
+                left: 6px;
+                right: 6px;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .info-strip,
+            .give-section,
+            .hero-mission,
+            .wisdom-section,
+            .offers-section,
+            .how-section,
+            .quote-section,
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-grid,
+            .footer-bottom,
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        360px — Android standard (Samsung Galaxy и др.)
+        ============================================================ */
+        @media (max-width: 360px) {
+            .nav {
+                padding: 0 16px;
+            }
+
+            .page-hero {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .info-strip,
+            .give-section,
+            .hero-mission,
+            .wisdom-section,
+            .offers-section,
+            .how-section,
+            .quote-section,
+            .section-join {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .footer-grid,
+            .footer-bottom,
+            .footer-partners {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* ============================================================
+        320px — iPhone SE (1st gen) / минимальный экран
+        ============================================================ */
+        @media (max-width: 320px) {
+            .nav {
+                padding: 0 12px;
+                height: 60px;
+            }
+
+            .nav-logo img {
+                height: 36px;
+            }
+
+            .page-hero {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .info-strip,
+            .give-section,
+            .hero-mission,
+            .wisdom-section,
+            .offers-section,
+            .how-section,
+            .quote-section,
+            .section-join {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            /* Все карточки — минимальный padding */
+            .gc,
+            .hs-card,
+            .how-step {
+                padding: var(--space-lg);
+            }
+
+            .footer-grid,
+            .footer-bottom,
+            .footer-partners {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .footer-partners img {
+                height: 30px;
+            }
+        }
+
+        /* ============================================================
+        LANDSCAPE — iPhone (896×414, 915×412 и аналоги)
+        ============================================================ */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .nav {
+                height: 56px;
+            }
+
+            .nav-logo img {
+                height: 38px;
+            }
+
+            .page-hero {
+                padding-top: calc(56px + var(--space-lg));
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .give-section,
+            .hero-mission,
+            .wisdom-section,
+            .offers-section,
+            .how-section,
+            .quote-section,
+            .section-join {
+                padding: var(--space-xl) 20px;
+            }
+
+            .footer-grid,
+            .footer-bottom,
+            .footer-partners {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
     </style>
 </head>
 
