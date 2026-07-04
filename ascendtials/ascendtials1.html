@@ -258,7 +258,7 @@
 
     .hero-title em {
       font-style: italic;
-      color: var(--terra);
+      color: var(--accent);
     }
 
     .hero-sub {
@@ -361,7 +361,6 @@
     }
 
     .section-inner {
-      max-width: 1200px;
       margin: 0 auto;
     }
 
@@ -442,23 +441,15 @@
     /* ──── CHALLENGE ──── */
     .challenge-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(12, 1fr);
       gap: 16px;
     }
 
     .challenge-card {
-      background: var(--warm);
-      border-radius: 16px;
+      background: var(--surface);
+      border: 1px solid var(--sand);
+      border-radius: 24px;
       padding: 56px;
-    }
-
-    .challenge-card.dark {
-      background: var(--forest);
-      color: var(--white);
-    }
-
-    .challenge-card.accent-bg {
-      background: var(--accent);
     }
 
     .challenge-num {
@@ -470,10 +461,6 @@
       margin-bottom: 16px;
     }
 
-    .challenge-card.dark .challenge-num {
-      color: rgba(255, 255, 255, .1);
-    }
-
     .challenge-card-title {
       font-family: var(--serif);
       font-size: 28px;
@@ -483,10 +470,6 @@
       line-height: 1.3;
     }
 
-    .challenge-card.dark .challenge-card-title {
-      color: var(--white);
-    }
-
     .challenge-card-text {
       font-size: 15px;
       color: var(--mid);
@@ -494,8 +477,9 @@
       font-weight: 300;
     }
 
-    .challenge-card.dark .challenge-card-text {
-      color: rgba(255, 255, 255, .7);
+    .challenge-card-text em {
+      font-style: italic;
+      color: var(--accent);
     }
 
     .pain-list {
@@ -522,18 +506,12 @@
       margin-top: 2px;
     }
 
-    .challenge-card.dark .pain-list li {
-      color: rgba(255, 255, 255, .7);
-    }
-
-    .challenge-card.dark .pain-list li::before {
-      color: var(--accent);
-    }
-
     /* ──── PROCESS ORBITAL ──── */
     .process-orbital {
-      background: var(--terra);
-      padding: 120px max(40px, 5vw);
+      background: linear-gradient(135deg, var(--terra) 0%, #2A4A5A 100%);
+      margin: 0 max(24px, 4vw);
+      border-radius: 32px;
+      padding: 120px max(40px, 6vw);
       position: relative;
       overflow: hidden;
     }
@@ -541,26 +519,22 @@
     .process-orbital::before {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 800px;
-      height: 800px;
-      border-radius: 50%;
-      border: 1px solid rgba(201, 169, 110, .08);
+      top: -80px;
+      right: -80px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(201, 169, 110, .18) 0%, transparent 70%);
       pointer-events: none;
     }
 
     .process-orbital::after {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 1200px;
-      height: 1200px;
-      border-radius: 50%;
-      border: 1px solid rgba(201, 169, 110, .04);
+      bottom: -100px;
+      left: -60px;
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(178, 213, 209, .2) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -771,7 +745,7 @@
     .persona-card {
       background: var(--white);
       border: 1px solid var(--sand);
-      border-radius: 12px;
+      border-radius: 20px;
       overflow: hidden;
     }
 
@@ -2625,7 +2599,7 @@ margin-bottom: var(--space-md);
 
 .real-tab-demo-scope .ba-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-md);
   margin-top: var(--space-2xl);
 }
@@ -3490,71 +3464,71 @@ border: 1px solid var(--color-line);
   </div>
 
   <!-- CHALLENGE -->
-  <section id="challenge" style="background: var(--cream); padding-top:120px; padding-bottom:0;">
+  <section id="challenge" style="background: var(--cream); padding-bottom:0;">
     <div class="section-inner">
       <div class="section-header rv">
         <span class="lbl">01 - The Challenge</span>
         <h2 class="section-title">A mission worth <em>fighting for</em>,<br>hidden behind a broken experience</h2>
       </div>
+      <div class="challenge-grid">
+        <div class="challenge-card rv" style="grid-column: span 7;">
+          <div class="challenge-num">01</div>
+          <h3 class="challenge-card-title">The Situation</h3>
+          <p class="challenge-card-text">
+            ASCENDtials is a nonprofit founded in 2014, offering holistic educational tools, Kemetic yoga, farmers' markets,
+            environmental cleanups and youth programs across Southern California's BIPOC community. Their work is genuinely
+            impactful. But their digital presence told a completely different story.
+          </p>
+          <ul class="pain-list">
+            <li>The website felt overwhelming, heavy and hard to navigate</li>
+            <li>Key pages and programs were buried under layers of content</li>
+            <li>The brand didn't communicate the depth of what they actually do</li>
+            <li>Mobile experience was close to unusable</li>
+          </ul>
+        </div>
+        <div class="challenge-card rv d1" style="grid-column: span 5;">
+          <div class="challenge-num">02</div>
+          <h3 class="challenge-card-title">My Mandate</h3>
+          <p class="challenge-card-text">
+            I joined as a volunteer UX/UI designer and developer. The CEO had a clear vision for how she wanted the
+            organization to be perceived - as a serious, culturally rooted, forward-thinking community institution. My job
+            was to translate that vision into a site that reflected it, while solving real usability problems.
+          </p>
+          <ul class="pain-list">
+            <li>Maintain the brand's bold, individualistic identity</li>
+            <li>Make complex navigation actually work</li>
+            <li>Elevate the visual positioning to match the mission</li>
+            <li>Design and code 27 pages for WordPress, end to end</li>
+          </ul>
+        </div>
+        <div class="challenge-card rv d1" style="grid-column: span 5;">
+          <div class="challenge-num">03</div>
+          <h3 class="challenge-card-title">The Design Tension</h3>
+          <p class="challenge-card-text">
+            The original design was described internally as their style - heavy, layered, rich. The CEO loved the aesthetic
+            boldness. My challenge was to honour that personality while eliminating the parts that actively hurt users: the
+            information architecture, the text overload, the inconsistent interactive elements.
+          </p>
+          <p class="challenge-card-text" style="margin-top:16px;">This meant I couldn't do a clean-slate minimal redesign. I
+            had to work with the brand's expressive DNA and make it <em>better</em>, not different.</p>
+        </div>
+        <div class="challenge-card rv d2" style="grid-column: span 7;">
+          <div class="challenge-num">04</div>
+          <h3 class="challenge-card-title">Design Principles I Set</h3>
+          <ul class="pain-list">
+            <li>Navigation must surface key sections within 2 clicks</li>
+            <li>Every page needs a single clear purpose and CTA</li>
+            <li>Community warmth over corporate polish</li>
+            <li>Typography carries cultural identity - not just text</li>
+            <li>Mobile-first on all new pages</li>
+            <li>Performance-conscious animations only</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
-  <div class="challenge-grid">
-    <div class="challenge-card rv">
-      <div class="challenge-num">01</div>
-      <h3 class="challenge-card-title">The Situation</h3>
-      <p class="challenge-card-text">
-        ASCENDtials is a nonprofit founded in 2014, offering holistic educational tools, Kemetic yoga, farmers' markets,
-        environmental cleanups and youth programs across Southern California's BIPOC community. Their work is genuinely
-        impactful. But their digital presence told a completely different story.
-      </p>
-      <ul class="pain-list">
-        <li>The website felt overwhelming, heavy and hard to navigate</li>
-        <li>Key pages and programs were buried under layers of content</li>
-        <li>The brand didn't communicate the depth of what they actually do</li>
-        <li>Mobile experience was close to unusable</li>
-      </ul>
-    </div>
-    <div class="challenge-card dark rv d1">
-      <div class="challenge-num">02</div>
-      <h3 class="challenge-card-title">My Mandate</h3>
-      <p class="challenge-card-text">
-        I joined as a volunteer UX/UI designer and developer. The CEO had a clear vision for how she wanted the
-        organization to be perceived - as a serious, culturally rooted, forward-thinking community institution. My job
-        was to translate that vision into a site that reflected it, while solving real usability problems.
-      </p>
-      <ul class="pain-list">
-        <li>Maintain the brand's bold, individualistic identity</li>
-        <li>Make complex navigation actually work</li>
-        <li>Elevate the visual positioning to match the mission</li>
-        <li>Design and code 27 pages for WordPress, end to end</li>
-      </ul>
-    </div>
-    <div class="challenge-card dark rv d1" style="background: var(--forest);">
-      <div class="challenge-num" style="color: rgba(255,255,255,.1);">03</div>
-      <h3 class="challenge-card-title" style="color: var(--white);">The Design Tension</h3>
-      <p class="challenge-card-text" style="color: rgba(255,255,255,.7);">
-        The original design was described internally as their style - heavy, layered, rich. The CEO loved the aesthetic
-        boldness. My challenge was to honour that personality while eliminating the parts that actively hurt users: the
-        information architecture, the text overload, the inconsistent interactive elements.
-      </p>
-      <p class="challenge-card-text" style="margin-top:16px; color: rgba(255,255,255,.7);">This meant I couldn't do a clean-slate minimal redesign. I
-        had to work with the brand's expressive DNA and make it <em style="color: var(--accent);">better</em>, not different.</p>
-    </div>
-    <div class="challenge-card rv d2" style="background: var(--warm);">
-      <div class="challenge-num">04</div>
-      <h3 class="challenge-card-title">Design Principles I Set</h3>
-      <ul class="pain-list">
-        <li>Navigation must surface key sections within 2 clicks</li>
-        <li>Every page needs a single clear purpose and CTA</li>
-        <li>Community warmth over corporate polish</li>
-        <li>Typography carries cultural identity - not just text</li>
-        <li>Mobile-first on all new pages</li>
-        <li>Performance-conscious animations only</li>
-      </ul>
-    </div>
-  </div>
 
-  <div class="divider" style="margin-top:0;"></div>
+  <div class="divider" style="margin-top:80px; margin-bottom:80px;"></div>
 
   <!-- PROCESS -->
   <div class="process-orbital" id="process">
@@ -4106,12 +4080,14 @@ border: 1px solid var(--color-line);
 
       <!-- Result - chosen fonts -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;margin-bottom: 20px;" class="rv d2">
-        <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:56px;">
-          <div class="chosen-badge"><i class="bi bi-check-circle-fill"></i> CEO's Choice - Display</div>
+        
+        <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:56px; border-radius: 20px;">
+
+          <div class="font-pair-label">Display Typeface</div>
           <div
             style="font-size:72px; color:var(--white); font-weight:500; line-height:1; margin:24px 0; letter-spacing:-1px; font-family:'Playfair Display',serif; font-style:normal;">
             Playfair Display</div>
-          <p style="font-size:15px; color:rgba(255,255,255,.55); line-height:1.75; font-weight:300; max-width:400px;">
+          <p style="font-size:15px; color:rgba(255,255,255,.55); line-height:1.75; font-weight:300; max-width:400px; ">
             This font brought the editorial warmth and quiet confidence the brand needed. Its serif detail feels
             rooted and considered without tipping into formality - it gives the site a distinct, memorable voice.</p>
           <div
@@ -4136,8 +4112,10 @@ border: 1px solid var(--color-line);
             </div>
           </div>
         </div>
-        <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:56px;">
-          <div class="chosen-badge"><i class="bi bi-check-circle-fill"></i> CEO's Choice - Body</div>
+
+        <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:56px; border-radius: 20px;">
+
+          <div class="font-pair-label">Body Typeface</div>
           <div
             style="font-size:72px; color:var(--white); font-weight:400; line-height:1; margin:24px 0; font-family:'DM Sans',sans-serif;">
             DM Sans</div>
@@ -4158,6 +4136,12 @@ border: 1px solid var(--color-line);
                 style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,.3); text-transform:uppercase; margin-bottom:4px;">
                 Weight</div>
               <div style="font-size:13px; color:rgba(255,255,255,.7);">300 / 400 / 500 (Light / Regular / Medium)</div>
+            </div>
+            <div>
+              <div
+                style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,.3); text-transform:uppercase; margin-bottom:4px;">
+                Feel</div>
+              <div style="font-size:13px; color:rgba(255,255,255,.7);">Clean, balanced, approachable</div>
             </div>
           </div>
         </div>
@@ -4238,7 +4222,7 @@ border: 1px solid var(--color-line);
             </ul>
           </div>
 
-          <div class="real-tab-demo-scope full-bleed" id="heroDemoScope" style="padding-top: 40px;">
+          <div class="real-tab-demo-scope" id="heroDemoScope" style="padding-top: 40px;">
             <div class="ba-grid">
               <div class="ba-col">
                 <span class="ba-badge before">Before</span>
@@ -4297,6 +4281,34 @@ border: 1px solid var(--color-line);
                 </div>
                 <div class="ba-caption">Contact Us</div>
               </div>
+              <div class="ba-col">
+                <span class="ba-badge before">Before</span>
+                <div class="browser-frame ba-expand" data-tag="Our Team — Before">
+                  <div class="browser-frame-bar">
+                    <span class="bf-dot"></span><span class="bf-dot"></span><span class="bf-dot"></span>
+                    <span class="browser-frame-url">ascendtials.org</span>
+                  </div>
+                  <div class="browser-frame-imgbox">
+                    <img src="./assets/img/Our Team Page Before.png" alt="Our Team page — original design"
+                      onerror="this.closest('.browser-frame').style.background='var(--color-navy-deep)'; this.style.display='none';">
+                  </div>
+                </div>
+                <div class="ba-caption">Our Team</div>
+              </div>
+              <div class="ba-col">
+                <span class="ba-badge before">Before</span>
+                <div class="browser-frame ba-expand" data-tag="Get Involved — Before">
+                  <div class="browser-frame-bar">
+                    <span class="bf-dot"></span><span class="bf-dot"></span><span class="bf-dot"></span>
+                    <span class="browser-frame-url">ascendtials.org</span>
+                  </div>
+                  <div class="browser-frame-imgbox">
+                    <img src="./assets/img/Get Involved Page Before.png" alt="Get Involved page — original design"
+                      onerror="this.closest('.browser-frame').style.background='var(--color-navy-deep)'; this.style.display='none';">
+                  </div>
+                </div>
+                <div class="ba-caption">Get Involved</div>
+              </div>
             </div>
             <a href="#pagesMosaic" class="ba-after-link">See the after gallery - all 27 redesigned pages ↓</a>
           </div>
@@ -4320,7 +4332,7 @@ border: 1px solid var(--color-line);
             </ul>
           </div>
 
-          <div class="real-tab-demo-scope full-bleed" id="progTabsSection">
+          <div class="real-tab-demo-scope" id="progTabsSection">
             <div class="prog-tabs-section prog-tabs-wrapper">
               <div class="prog-tabs-header">
                 <span class="section-label">Our Programs</span>
@@ -4345,7 +4357,7 @@ border: 1px solid var(--color-line);
                 <div class="tab-page">
                   <div class="tab-page-hero">
                     <div class="tab-page-hero-img">
-                      <img src="./assets/img/kemetic-yoga/Kemetic Yoga.jpg"
+                      <img src="./code for ASCENDtials/assets/img/kemetic-yoga/Kemetic Yoga.jpg"
                         onerror="this.parentElement.style.background='var(--color-navy-deep)'; this.style.display='none';"
                         alt="Kemetic Yoga">
                     </div>
@@ -4365,131 +4377,6 @@ border: 1px solid var(--color-line);
                       </div>
                     </div>
                   </div>
-
-                  <div class="tab-section">
-                    <h3 class="tab-section-title">What is Kemetic Yoga?</h3>
-                    <div class="tab-two-col">
-                      <div>
-                        <p class="tab-body-p tab-body-p--mb">Kemetic Yoga is an ancient African Yoga art form that
-                          promotes African philosophy and practices that originated from the land of Kemet. This
-                          ancient Yoga art form emphasizes the rejuvenation of the body and mind as it attempts to
-                          provide BIPOC communities with cultural roots that stem from its antique African origins.
-                        </p>
-                        <p class="tab-body-p">Kemetic Yoga preserves ancient African culture through deep breath
-                          techniques and movements that activate the nervous system and place the mind into a flow
-                          state - emitting alpha waves associated with deep relaxation, increased concentration, and
-                          emotional balance.</p>
-                      </div>
-                      <div>
-                        <p class="tab-body-p tab-body-p--mb">Kemetic Yoga is innovative because it places an emphasis
-                          on the alignment of the vertebral column while mimicking the geometric configuration of
-                          Egyptian pyramids within its poses and movements. Its African origins are imperative to its
-                          success, giving BIPOC participants a way to reconnect with their roots while mitigating
-                          stress.</p>
-                        <p class="tab-body-p">Our program hopes to create a safe environment for participants
-                          willing to explore themselves through Kemetic Yoga breathwork, movements, poses, postures,
-                          grounding, and meditation.</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="tab-section">
-                    <h3 class="tab-section-title">Benefits of Practice</h3>
-                    <div class="tab-bento-grid">
-                      <div class="tab-bento-card wide">
-                        <div class="tab-bento-icon">
-                          <svg viewBox="0 0 24 24">
-                            <path
-                              d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
-                            <path d="M12 8v4l3 3" />
-                          </svg>
-                        </div>
-                        <strong>Flow State Activation</strong>
-                        <span>Deep breath techniques activate the nervous system, placing the mind in an alpha-wave
-                          flow state for heightened focus, deep relaxation, and inner calm.</span>
-                      </div>
-                      <div class="tab-bento-card narrow">
-                        <div class="tab-bento-icon">
-                          <svg viewBox="0 0 24 24">
-                            <path
-                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                          </svg>
-                        </div>
-                        <strong>Mental Health Support</strong>
-                        <span>Relieves stress, depression, and anxiety while cultivating emotional balance.</span>
-                      </div>
-                      <div class="tab-bento-card narrow">
-                        <div class="tab-bento-icon">
-                          <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                          </svg>
-                        </div>
-                        <strong>Ancestral Reconnection</strong>
-                        <span>Reconnects BIPOC participants with African cultural traditions and the wisdom of their
-                          ancestors.</span>
-                      </div>
-                      <div class="tab-bento-card narrow">
-                        <div class="tab-bento-icon">
-                          <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M12 8v4M12 16h.01" />
-                          </svg>
-                        </div>
-                        <strong>Body Strengthening</strong>
-                        <span>Builds flexibility, endurance, and digestive health through pyramid-geometry poses.</span>
-                      </div>
-                      <div class="tab-bento-card narrow">
-                        <div class="tab-bento-icon">
-                          <svg viewBox="0 0 24 24">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                          </svg>
-                        </div>
-                        <strong>Community &amp; Oneness</strong>
-                        <span>A safe, affirming space for collective healing, cultural pride, and shared ancestral
-                          identity.</span>
-                      </div>
-                      <div class="tab-bento-card full">
-                        <div class="tab-bento-icon">
-                          <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="3" />
-                            <path
-                              d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-                          </svg>
-                        </div>
-                        <div>
-                          <strong>KOS-Melanin-ology™</strong>
-                          <span>Encourages participants to explore Knowledge of Self through our proprietary
-                            curriculum as a form of self-healing and empowerment. BIPOC-centered, all backgrounds
-                            welcome.</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="tab-two-col tab-two-col--mb">
-                    <div>
-                      <h3 class="tab-section-title">Where &amp; When</h3>
-                      <div class="tab-section-body">
-                        <p>Sessions are offered at the <strong>Marina District</strong> and other San Diego
-                          locations. Kemetic Yoga is also incorporated into our Fellowship Program, youth Park
-                          Takeover events, and our Cosmic Literacy workshops (evening sessions).</p>
-                        <p>Open to all - BIPOC-centered, all backgrounds welcome.</p>
-                      </div>
-                      <div class="tab-cta-row">
-                        <a href="#" class="btn-primary">Sign Up for a Session</a>
-                        <a href="#" class="btn-outline">Full Program Page</a>
-                      </div>
-                    </div>
-                    <div class="tab-callout tab-callout--flush">
-                      <p><strong>Our curriculum foundation:</strong> Our Kemetic Yoga sessions use our Whiteness to
-                        Oneness™ and KOS-Melanin-ology™ curricula at their foundation. We work to dismantle
-                        structural inequality and foster constructive dialogue around Melanin and its purpose. Our
-                        program is geared toward BIPOC participants, but we welcome participants from all cultures
-                        and backgrounds.</p>
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -4498,10 +4385,11 @@ border: 1px solid var(--color-line);
                 <div class="tab-page">
                   <div class="tab-page-hero">
                     <div class="tab-page-hero-img">
-                      <img src="./assets/img/environmental-programs/hike.jpg"
+                      <img src="./code for ASCENDtials/assets/img/environmental-programs/hike.jpg"
                         onerror="this.style.background='var(--color-surface)';this.removeAttribute('src')"
                         alt="Hike with ASCENDtials">
                     </div>
+
                     <div class="tab-page-hero-text">
                       <span class="section-label">Outdoor Experience</span>
                       <h2>Hike with<br><em>ASCENDtials</em></h2>
@@ -4515,25 +4403,7 @@ border: 1px solid var(--color-line);
                     </div>
                   </div>
 
-                  <div class="tab-section">
-                    <h3 class="tab-section-title">Hike with us</h3>
-                    <div class="tab-section-body">
-                      <p>Join ASCENDtials for guided hikes through some of San Diego's most beautiful landscapes.
-                        Our hikes are led by experienced volunteers who know the trails and love sharing the hidden
-                        gems of the region.</p>
-                      <p>No matter your fitness level, there is a hike for you. We believe in the power of movement
-                        in nature to heal the body and mind.</p>
-                    </div>
-                    <div class="tab-callout">
-                      <p><strong>Hike with Park Ranger</strong> - Join us for a guided hike with a local Park Ranger
-                        through San Diego's stunning nature preserves. Experience breathtaking views, learn about
-                        local ecology, and build community with fellow outdoor enthusiasts of all skill levels.</p>
-                    </div>
-                    <div class="tab-cta-row">
-                      <a href="#" class="btn-primary">Sign Up for a Hike</a>
-                      <a href="#" class="btn-outline">Contact Us</a>
-                    </div>
-                  </div>
+                  
                 </div>
               </div>
 
@@ -4542,7 +4412,7 @@ border: 1px solid var(--color-line);
                 <div class="tab-page">
                   <div class="tab-page-hero">
                     <div class="tab-page-hero-img">
-                      <img src="./assets/img/environmental-programs/Highway cleanups.jpg"
+                      <img src="./code for ASCENDtials/assets/img/environmental-programs/Highway cleanups.jpg"
                         onerror="this.style.background='var(--color-surface)';this.removeAttribute('src')"
                         alt="Highway Cleanups">
                     </div>
@@ -4557,76 +4427,6 @@ border: 1px solid var(--color-line);
                       <div class="tab-cta-row tab-cta-row--flush">
                         <a href="#" class="btn-primary">Sign Up &amp; Sign Waiver</a>
                         <a href="#" class="btn-outline">Become a Volunteer</a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="tab-photo-strip">
-                    <img src="https://ascendtials.org/wp-content/uploads/2026/02/Cornado.webp"
-                      alt="Coronado Highway Cleanup" onerror="this.style.display='none'">
-                    <img src="https://ascendtials.org/wp-content/uploads/2026/02/highway.webp" alt="Highway Cleanup"
-                      onerror="this.style.display='none'">
-                    <img src="https://ascendtials.org/wp-content/uploads/2025/05/highway-5n.png"
-                      alt="Highway 5 North Cleanup" onerror="this.style.display='none'">
-                    <img src="https://ascendtials.org/wp-content/uploads/2025/05/highway-94e-e1750100135101.png"
-                      alt="Highway 94 East Cleanup" onerror="this.style.display='none'">
-                    <img src="https://ascendtials.org/wp-content/uploads/2025/05/highway-125N.png"
-                      alt="Highway 125 North Cleanup" onerror="this.style.display='none'">
-                  </div>
-
-                  <div class="tab-section">
-                    <h3 class="tab-section-title">Clean with us - starting by signing our waiver</h3>
-                    <div class="cleanup-prep-grid">
-                      <div class="cleanup-notes-col">
-                        <div class="cleanup-notes-heading">Before Your First Cleanup</div>
-                        <div class="cleanup-bento">
-                          <div class="cleanup-card cleanup-card--4col">
-                            <div class="cleanup-card-num">01</div>
-                            <p class="cleanup-card-text">Watch the safety video below before all cleanups take
-                              place.</p>
-                          </div>
-                          <div class="cleanup-card cleanup-card--2col">
-                            <div class="cleanup-card-num">02</div>
-                            <p class="cleanup-card-text">All volunteers receive safety vests, goggles, gloves, trash
-                              grabbers, and bags.</p>
-                          </div>
-                          <div class="cleanup-card cleanup-card--2col">
-                            <div class="cleanup-card-num">03</div>
-                            <p class="cleanup-card-text">Max 12 volunteers per single cleanup event.</p>
-                          </div>
-                          <div class="cleanup-card cleanup-card--4col cleanup-card--gold">
-                            <div class="cleanup-card-num">04</div>
-                            <p class="cleanup-card-text">No cap on how often you can volunteer - come back as many
-                              times as you like.</p>
-                          </div>
-                          <div class="cleanup-card cleanup-card--3col">
-                            <div class="cleanup-card-num">05</div>
-                            <p class="cleanup-card-text">Request a Letter of Appreciation once your cleanup is
-                              complete.</p>
-                          </div>
-                          <div class="cleanup-card cleanup-card--3col">
-                            <div class="cleanup-card-num">06</div>
-                            <p class="cleanup-card-text">Group cleanups available - sign up with your team.</p>
-                          </div>
-                          <div class="cleanup-card cleanup-card--6col cleanup-card--row">
-                            <div class="cleanup-card-num cleanup-card-num--shrink">07</div>
-                            <p class="cleanup-card-text">Please sign the waiver form before your cleanup begins.</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="cleanup-signup-col">
-                        <div>
-                          <div class="cleanup-signup-heading">How to Sign Up</div>
-                          <p class="cleanup-signup-body cleanup-signup-body--mb">Sign up as a volunteer for
-                            unlimited access to cleanups. Once registered, follow the instructions in the
-                            confirmation message to access our cleanup events.</p>
-                          <p class="cleanup-signup-body">We look forward to seeing you there!</p>
-                        </div>
-                        <div class="cleanup-after-section">
-                          <div class="cleanup-signup-heading">After the Cleanup</div>
-                          <p class="cleanup-signup-body">We celebrate with lunch together! Participation is free -
-                            we accept donations for supplies and lunch for the groups.</p>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -4657,53 +4457,7 @@ border: 1px solid var(--color-line);
                     </div>
                   </div>
 
-                  <div class="tab-section">
-                    <h3 class="tab-section-title">Join a Beach Cleanup</h3>
-                    <div class="tab-section-body">
-                      <p>All equipment is provided on-site - just show up ready to help. Cleanups are open to all
-                        ages, families, and experience levels. Hours count toward volunteer and community service
-                        requirements.</p>
-                    </div>
-                    <div class="tab-benefits-grid">
-                      <div class="tab-benefit-card">
-                        <div class="tab-benefit-icon">
-                          <svg viewBox="0 0 24 24">
-                            <path
-                              d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3.5 9 10 7M12 12C12 7 17 4 22 5c0 5-3.5 9-10 7" />
-                          </svg>
-                        </div>
-                        <strong>All Equipment Provided</strong>
-                        <span>Safety vests, gloves, trash bags, and grabbers are all provided on-site. Just show up
-                          ready to help.</span>
-                      </div>
-                      <div class="tab-benefit-card">
-                        <div class="tab-benefit-icon">
-                          <svg viewBox="0 0 24 24">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                          </svg>
-                        </div>
-                        <strong>All Ages &amp; Skill Levels</strong>
-                        <span>Open to families, youth, elders, and first-time volunteers. No experience needed.</span>
-                      </div>
-                      <div class="tab-benefit-card">
-                        <div class="tab-benefit-icon">
-                          <svg viewBox="0 0 24 24">
-                            <path
-                              d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z" />
-                          </svg>
-                        </div>
-                        <strong>Service Hours</strong>
-                        <span>Hours count toward volunteer, school, or community service requirements. Letters
-                          available upon request.</span>
-                      </div>
-                    </div>
-                    <div class="tab-cta-row">
-                      <a href="#" class="btn-primary">Sign Up for a Cleanup</a>
-                      <a href="#" class="btn-outline">Become a Volunteer</a>
-                    </div>
-                  </div>
+                  
                 </div>
               </div>
 
@@ -4728,81 +4482,6 @@ border: 1px solid var(--color-line);
                       </div>
                     </div>
                   </div>
-
-                  <div class="tab-section">
-                    <h3 class="tab-section-title">Our Mission</h3>
-                    <div class="tab-section-body">
-                      <p>The Garden Project stems from ASCENDtials' goal to better connect with the earth. We
-                        empower people to grow food in pesticide-free garden beds, available to volunteers every
-                        day. This project aims to grow not just plants, but a community.</p>
-                    </div>
-                  </div>
-
-                  <div class="tab-section">
-                    <h3 class="tab-section-title">What to Expect as a Garden Project Member</h3>
-                    <h4 class="tab-sub-heading">Membership Privileges</h4>
-                    <div class="tab-benefits-grid">
-                      <div class="tab-benefit-card">
-                        <div class="tab-benefit-icon">
-                          <svg viewBox="0 0 24 24">
-                            <rect x="3" y="3" width="18" height="18" rx="2" />
-                            <path d="M3 9h18M9 21V9" />
-                          </svg>
-                        </div>
-                        <strong>Access to Garden Beds</strong>
-                        <span>Well-maintained planting beds suitable for growing fresh fruits, vegetables, grains,
-                          or herbs - available every day.</span>
-                      </div>
-                      <div class="tab-benefit-card">
-                        <div class="tab-benefit-icon">
-                          <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M12 8v4l3 3" />
-                          </svg>
-                        </div>
-                        <strong>Tools &amp; Resources</strong>
-                        <span>Members can use on-site gardening tools, water, and supplies included with
-                          membership.</span>
-                      </div>
-                      <div class="tab-benefit-card">
-                        <div class="tab-benefit-icon">
-                          <svg viewBox="0 0 24 24">
-                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-                          </svg>
-                        </div>
-                        <strong>Exclusive Events &amp; Workshops</strong>
-                        <span>Members-only events and workshops held at Sweetwater Community Garden.</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="tab-section">
-                    <h3 class="tab-section-title">Membership Enrollment</h3>
-                    <div class="tab-section-body">
-                      <p>Becoming a member of the ASCENDtials Garden Project is easy. Membership becomes active
-                        upon receipt of the membership fee and a $5 key fee for new members.</p>
-                    </div>
-                    <div class="tab-price-grid">
-                      <div class="tab-price-card">
-                        <div class="price-amount">$5</div>
-                        <div class="price-period">per month</div>
-                      </div>
-                      <div class="tab-price-card">
-                        <div class="price-amount">$45</div>
-                        <div class="price-period">per year</div>
-                      </div>
-                    </div>
-                    <div class="tab-callout">
-                      <p><strong>New members:</strong> A $5 key fee applies to all new members. Both new and
-                        returning members must attend the annual Spring Gathering and an orientation session to
-                        stay active.</p>
-                    </div>
-                    <div class="tab-cta-row">
-                      <a href="#" class="btn-primary">Join as a Member</a>
-                      <a href="#" class="btn-outline">Contact Us with Questions</a>
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -4825,97 +4504,6 @@ border: 1px solid var(--color-line);
                         <a href="#" class="btn-primary">Reserve a Free Tree</a>
                         <a href="#" class="btn-outline">Get Involved</a>
                       </div>
-                    </div>
-                  </div>
-
-                  <div class="tab-section">
-                    <h3 class="tab-section-title">Leaf Your Legacy - Free Tree Giveaway!</h3>
-                    <div class="tab-two-col tab-two-col--stretch tab-two-col--mb">
-                      <div class="tab-section-body tab-section-body--flush">
-                        <p>As we mark a decade of dedication to cultivating San Diego's urban forest, we've
-                          partnered with Tree San Diego on the "Leafing Our Legacy" initiative. This year-long
-                          celebration will see us donating <strong>800 trees across San Diego</strong>, enriching
-                          our green landscape.</p>
-                        <p class="tab-body-p--mt">We'll be distributing trees at our Farmers' Markets in <strong>City
-                            Heights</strong> and the <strong>Marina District</strong>. Fill out the form to reserve
-                          a tree.</p>
-                      </div>
-                      <div class="tree-stat-card">
-                        <div>
-                          <div class="tree-stat-number">800</div>
-                          <div class="tree-stat-label">trees donated across San Diego</div>
-                        </div>
-                        <div class="tree-stat-divider"></div>
-                        <div>
-                          <div class="tree-stat-partner-label">In partnership with</div>
-                          <div class="tree-stat-partner-name">Tree San Diego</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="event-details-card">
-                      <div>
-                        <div class="event-details-label">Event Details</div>
-                        <div class="event-details-rows">
-                          <div class="event-details-row">
-                            <span class="event-details-key">When</span>
-                            <span class="event-details-val">Sunday, November 3rd · 10:00 AM - 2:00 PM</span>
-                          </div>
-                          <div class="event-details-row">
-                            <span class="event-details-key">Where</span>
-                            <span class="event-details-val">ASCENDKemet Collective Certified Farmers' Market of City
-                              Heights<br>4325 Wightman St, San Diego, CA 92105</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="event-details-label">Monthly Distribution</div>
-                        <p class="tab-body-p">Pick up your free tree and help us green San Diego! Each month, we'll
-                          be hosting tree-distribution events across the city.</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="tab-section">
-                    <h3 class="tab-section-title">Why Trees Matter</h3>
-                    <div class="tab-benefits-grid">
-                      <div class="tab-benefit-card">
-                        <div class="tab-benefit-icon">
-                          <svg viewBox="0 0 24 24">
-                            <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z" />
-                            <path
-                              d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                          </svg>
-                        </div>
-                        <strong>Air Quality</strong>
-                        <span>Trees exchange large amounts of carbon dioxide for oxygen, directly improving the air
-                          we breathe.</span>
-                      </div>
-                      <div class="tab-benefit-card">
-                        <div class="tab-benefit-icon">
-                          <svg viewBox="0 0 24 24">
-                            <path
-                              d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3.5 9 10 7M12 12C12 7 17 4 22 5c0 5-3.5 9-10 7" />
-                          </svg>
-                        </div>
-                        <strong>Wildlife Habitat</strong>
-                        <span>Urban trees provide essential habitat and food sources for birds, insects, and other
-                          wildlife.</span>
-                      </div>
-                      <div class="tab-benefit-card">
-                        <div class="tab-benefit-icon">
-                          <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                          </svg>
-                        </div>
-                        <strong>Climate Combat</strong>
-                        <span>Trees reduce stormwater runoff, cool cities, and help combat the effects of climate
-                          change.</span>
-                      </div>
-                    </div>
-                    <div class="tab-cta-row">
-                      <a href="#" class="btn-primary">Reserve a Free Tree</a>
-                      <a href="#" class="btn-outline">Contact Us</a>
                     </div>
                   </div>
                 </div>
@@ -4999,8 +4587,8 @@ border: 1px solid var(--color-line);
             <div class="ds-bento-zoom">⤢</div>
           </div>
           <div class="mosaic-item ds-bento-item" data-category="programs">
-            <img src="./assets/img/Events Page.png" alt="Event Calendar">
-            <div class="ds-bento-label">Event Calendar</div>
+            <img src="./assets/img/Sponsor.png" alt="Sponsors">
+            <div class="ds-bento-label">Sponsor</div>
             <div class="ds-bento-zoom">⤢</div>
           </div>
           <div class="mosaic-item ds-bento-item" data-category="programs">
@@ -5033,31 +4621,7 @@ border: 1px solid var(--color-line);
             <div class="ds-bento-label">Join Our Community</div>
             <div class="ds-bento-zoom">⤢</div>
           </div>
-          <div class="mosaic-item ds-bento-item wide" data-category="join">
-            <img src="./assets/img/Get Involved Page.png" alt="Get Involved">
-            <div class="ds-bento-label">Get Involved (5 tabs)</div>
-            <div class="ds-bento-zoom">⤢</div>
-          </div>
-          <div class="mosaic-item ds-bento-item" data-category="join">
-            <img src="./assets/img/Sponsor Page.png" alt="Sponsor">
-            <div class="ds-bento-label">Sponsor</div>
-            <div class="ds-bento-zoom">⤢</div>
-          </div>
-          <div class="mosaic-item ds-bento-item" data-category="join">
-            <img src="./assets/img/Vendor Page.png" alt="Vendor">
-            <div class="ds-bento-label">Vendor</div>
-            <div class="ds-bento-zoom">⤢</div>
-          </div>
-          <div class="mosaic-item ds-bento-item" data-category="join">
-            <img src="./assets/img/Volunteer Page.png" alt="Volunteer">
-            <div class="ds-bento-label">Volunteer</div>
-            <div class="ds-bento-zoom">⤢</div>
-          </div>
-          <div class="mosaic-item ds-bento-item" data-category="join">
-            <img src="./assets/img/Partner with Us Page.png" alt="Partner with Us">
-            <div class="ds-bento-label">Partner with Us</div>
-            <div class="ds-bento-zoom">⤢</div>
-          </div>
+          
         </div>
       </div>
 
