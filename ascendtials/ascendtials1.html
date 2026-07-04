@@ -1,0 +1,5268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASCENDtials - Case Study · Yana Harcourt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      /* Same tokens as the live site (index.html / environmental-programs.html) */
+      --cream: #FAFAF8;
+      --warm: #FAFAF8;
+      --sand: #E2DDD6;
+      --terra: #1E3A47;
+      --forest: #1E3A47;
+      --navy-deep: #152E3A;
+      --dark: #1A1A18;
+      --mid: #666660;
+      --light: #9D9A93;
+      --accent: #C9A96E;
+      --teal: #C9A96E;
+      --white: #FFFFFF;
+      --surface: #F4F2EE;
+
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ──── CURSOR ──── */
+    #cur {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--terra);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform .15s;
+    }
+
+    #ctr {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid rgba(201, 169, 110, .5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all .35s cubic-bezier(.23, 1, .32, 1);
+    }
+
+    /* ──── REVEAL (disabled — content always visible) ──── */
+    .rv {
+      opacity: 1;
+      transform: none;
+    }
+
+    .rv.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    .rv.d1,
+    .rv.d2,
+    .rv.d3,
+    .rv.d4 {
+      transition-delay: 0s;
+    }
+
+    /* ──── LABEL ──── */
+    .lbl {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--terra);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    /* ──── NAV ──── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: 72px;
+      padding: 0 max(40px, 5vw);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250, 250, 248, .9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(30, 58, 71, .1);
+      transition: all .4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    nav.scrolled {
+      top: 10px;
+      left: 16px;
+      right: 16px;
+      height: 64px;
+      padding: 0 32px;
+      background: rgba(250, 250, 248, .75);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border: 1px solid rgba(255, 255, 255, .5);
+      border-bottom: 1px solid rgba(255, 255, 255, .5);
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 8px 24px rgba(0, 0, 0, .08), inset 0 1px 0 rgba(255, 255, 255, .9);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--mid);
+      text-decoration: none;
+      letter-spacing: .5px;
+      transition: color .3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--terra);
+    }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--terra);
+      text-decoration: none;
+      transition: gap .3s;
+    }
+
+    .nav-back:hover {
+      gap: 12px;
+    }
+
+    /* ──── HERO ──── */
+    .hero {
+      min-height: 100vh;
+      padding: 0 max(40px, 5vw);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 80px;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201, 169, 110, .15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: 'ASCENDtials';
+      position: absolute;
+      bottom: -60px;
+      left: -10px;
+      font-family: var(--serif);
+      font-size: clamp(80px, 12vw, 180px);
+      font-weight: 300;
+      color: rgba(30, 58, 71, .05);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -4px;
+    }
+
+    .hero-left {
+      padding-top: 100px;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .hero-eyebrow-line {
+      width: 40px;
+      height: 1px;
+      background: var(--terra);
+    }
+
+    .hero-eyebrow-text {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--terra);
+      font-weight: 600;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(52px, 6vw, 96px);
+      font-weight: 300;
+      line-height: 1.0;
+      color: var(--dark);
+      margin-bottom: 32px;
+      letter-spacing: -1px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--terra);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--mid);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 48px;
+      font-weight: 300;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 48px;
+    }
+
+    .hero-meta-item .meta-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 6px;
+    }
+
+    .hero-meta-item .meta-value {
+      font-size: 14px;
+      color: var(--dark);
+      font-weight: 500;
+    }
+
+    .hero-right {
+      position: relative;
+      padding-top: 100px;
+      padding-left: 24px;
+      overflow: visible;
+    }
+
+    .hero-img-frame {
+      position: relative;
+      border-radius: 12px;
+    }
+
+    .hero-img-frame img {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .hero-img-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--forest);
+      color: var(--white);
+      padding: 20px 28px;
+      border-radius: 30px;
+      max-width: 240px;
+      z-index: 2;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .2);
+    }
+
+    .hero-img-badge .badge-num {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .hero-img-badge .badge-text {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .7);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .hero-visit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border: 1.5px solid var(--terra);
+      color: var(--terra);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1px;
+      border-radius: 50px;
+      transition: all .3s;
+      margin-top: 40px;
+    }
+
+    .hero-visit-btn:hover {
+      background: var(--terra);
+      color: var(--white);
+    }
+
+    /* ──── SECTION COMMON ──── */
+    section {
+      padding: 120px max(40px, 5vw);
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 4vw, 64px);
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1.1;
+      letter-spacing: -.5px;
+    }
+
+    .section-title em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    hr.section-rule {
+      border: none;
+      border-top: 1px solid var(--sand);
+      margin: 24px 0;
+    }
+
+    /* ──── DIVIDER ──── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--sand) 20%, var(--sand) 80%, transparent);
+      margin: 0 60px;
+    }
+
+    /* ──── OVERVIEW BAND ──── */
+    .overview-band {
+      background: var(--forest);
+      color: var(--white);
+      padding: 80px max(40px, 5vw);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 0;
+    }
+
+    .ov-item {
+      padding: 0 40px;
+      border-right: 1px solid rgba(255, 255, 255, .12);
+    }
+
+    .ov-item:first-child {
+      padding-left: 0;
+    }
+
+    .ov-item:last-child {
+      border-right: none;
+    }
+
+    .ov-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 12px;
+    }
+
+    .ov-value {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .ov-accent {
+      color: var(--accent);
+    }
+
+    /* ──── CHALLENGE ──── */
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .challenge-card {
+      background: var(--warm);
+      border-radius: 16px;
+      padding: 56px;
+    }
+
+    .challenge-card.dark {
+      background: var(--forest);
+      color: var(--white);
+    }
+
+    .challenge-card.accent-bg {
+      background: var(--accent);
+    }
+
+    .challenge-num {
+      font-family: var(--serif);
+      font-size: 96px;
+      font-weight: 300;
+      color: rgba(30, 58, 71, .12);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .challenge-card.dark .challenge-num {
+      color: rgba(255, 255, 255, .1);
+    }
+
+    .challenge-card-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 20px;
+      color: var(--dark);
+      line-height: 1.3;
+    }
+
+    .challenge-card.dark .challenge-card-title {
+      color: var(--white);
+    }
+
+    .challenge-card-text {
+      font-size: 15px;
+      color: var(--mid);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .challenge-card.dark .challenge-card-text {
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .pain-list {
+      list-style: none;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pain-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    .pain-list li::before {
+      content: '-';
+      color: var(--terra);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .challenge-card.dark .pain-list li {
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .challenge-card.dark .pain-list li::before {
+      color: var(--accent);
+    }
+
+    /* ──── PROCESS ORBITAL ──── */
+    .process-orbital {
+      background: var(--terra);
+      padding: 120px max(40px, 5vw);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .process-orbital::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 169, 110, .08);
+      pointer-events: none;
+    }
+
+    .process-orbital::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1200px;
+      height: 1200px;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 169, 110, .04);
+      pointer-events: none;
+    }
+
+    .orbital-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .orbital-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .orbital-header .lbl {
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .orbital-header .section-title {
+      color: var(--white);
+    }
+
+    .orbital-header .section-title em {
+      color: var(--accent);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .process-step {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: 16px;
+      padding: 48px 40px;
+      position: relative;
+      transition: background .3s;
+      cursor: default;
+    }
+
+    .process-step:hover {
+      background: rgba(201, 169, 110, .08);
+      border-color: rgba(201, 169, 110, .2);
+    }
+
+    .step-num {
+      font-family: var(--serif);
+      font-size: 72px;
+      font-weight: 300;
+      color: rgba(201, 169, 110, .15);
+      line-height: 1;
+      position: absolute;
+      top: 24px;
+      right: 32px;
+    }
+
+    .step-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(201, 169, 110, .12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .step-icon i {
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    .step-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .step-text {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .5);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ──── RESEARCH ──── */
+    .research-section {
+      background: var(--warm);
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .finding-item {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--sand);
+    }
+
+    .finding-item:first-child {
+      border-top: 1px solid var(--sand);
+    }
+
+    .finding-tag {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--terra);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .finding-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .finding-text {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .research-quote-block {
+      background: var(--forest);
+      padding: 56px;
+      border-radius: 12px;
+      position: sticky;
+      top: 120px;
+    }
+
+    .quote-mark {
+      font-family: var(--serif);
+      font-size: 96px;
+      color: var(--accent);
+      line-height: .6;
+      margin-bottom: 24px;
+    }
+
+    .quote-text {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.55;
+      font-style: italic;
+      margin-bottom: 32px;
+    }
+
+    .quote-attribution {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .5);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, .05);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .stat-big {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-desc {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .5);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    /* ──── PERSONAS ──── */
+    .personas-section {
+      background: var(--cream);
+    }
+
+    .personas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .persona-card {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .persona-header {
+      padding: 40px 40px 32px;
+      background: var(--warm);
+      border-bottom: 1px solid var(--sand);
+    }
+
+    .persona-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--terra);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .persona-avatar i {
+      color: var(--white);
+      font-size: 28px;
+    }
+
+    .persona-name {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--dark);
+    }
+
+    .persona-role {
+      font-size: 13px;
+      color: var(--terra);
+      font-weight: 500;
+      margin-top: 4px;
+      letter-spacing: .5px;
+    }
+
+    .persona-body {
+      padding: 40px;
+    }
+
+    .persona-bio {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.75;
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+
+    .persona-section-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--terra);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .persona-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .persona-tag {
+      padding: 6px 14px;
+      background: var(--warm);
+      border-radius: 50px;
+      font-size: 12px;
+      color: var(--mid);
+      border: 1px solid var(--sand);
+    }
+
+    .persona-pains {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .persona-pains li {
+      display: flex;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    .persona-pains li::before {
+      content: '↓';
+      color: #e07878;
+      flex-shrink: 0;
+    }
+
+    .persona-goals {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .persona-goals li {
+      display: flex;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    .persona-goals li::before {
+      content: '↑';
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+
+    /* ──── CJM ──── */
+    .cjm-section {
+      background: var(--warm);
+      padding: 120px max(40px, 5vw);
+      overflow-x: auto;
+    }
+
+    .cjm-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .cjm-header {
+      margin-bottom: 64px;
+    }
+
+    .cjm-header .lbl {
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .cjm-header .section-title {
+      color: var(--dark);
+    }
+
+    .cjm-persona-switch {
+      display: flex;
+      gap: 0;
+      margin-bottom: 48px;
+    }
+
+    .cjm-tab {
+      padding: 12px 28px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: .5px;
+      border: 1px solid rgba(26, 26, 26, .15);
+      color: rgba(26, 26, 26, .55);
+      transition: all .3s;
+      background: transparent;
+    }
+
+    .cjm-tab:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+
+    .cjm-tab:last-child {
+      border-radius: 0 10px 10px 0;
+      border-left: none;
+    }
+
+    .cjm-tab.active {
+      background: var(--accent);
+      color: var(--dark);
+      border-color: var(--accent);
+    }
+
+    .cjm-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+
+    .cjm-table th {
+      text-align: left;
+      padding: 16px 20px;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(26, 26, 26, .4);
+      font-weight: 600;
+      border-bottom: 1px solid rgba(26, 26, 26, .1);
+    }
+
+    .cjm-table td {
+      padding: 20px;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(26, 26, 26, .08);
+    }
+
+    .cjm-stage {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--accent);
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .cjm-action {
+      font-size: 13px;
+      color: rgba(26, 26, 26, .7);
+      line-height: 1.6;
+      max-width: 220px;
+    }
+
+    .cjm-thought {
+      font-size: 13px;
+      color: rgba(26, 26, 26, .55);
+      line-height: 1.6;
+      font-style: italic;
+      max-width: 220px;
+    }
+
+    .emotion-dots {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot.happy {
+      background: var(--accent);
+    }
+
+    .dot.neutral {
+      background: transparent;
+      border: 1.5px solid rgba(26, 26, 26, .25);
+    }
+
+    .dot.frustrated {
+      background: #B23A34;
+    }
+
+    .emotion-label {
+      font-size: 11px;
+      color: rgba(26, 26, 26, .5);
+      margin-left: 6px;
+      font-weight: 500;
+    }
+
+    .pain-chip {
+      display: inline-block;
+      padding: 5px 11px;
+      background: rgba(178, 58, 52, .07);
+      border: 1.5px solid rgba(178, 58, 52, .35);
+      border-radius: 8px;
+      font-size: 11px;
+      color: #8A2E29;
+      margin: 2px;
+      font-weight: 600;
+    }
+
+    .opp-chip {
+      display: inline-block;
+      padding: 5px 11px;
+      background: rgba(30, 58, 71, .06);
+      border: 1.5px solid rgba(30, 58, 71, .3);
+      border-radius: 8px;
+      font-size: 11px;
+      color: var(--terra);
+      margin: 2px;
+      font-weight: 600;
+    }
+
+    /* ──── USER FLOW ──── */
+    .flow-section {
+      background: var(--warm);
+      padding: 120px max(40px, 5vw);
+    }
+
+    .flow-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .flow-diagram {
+      margin-top: 64px;
+    }
+
+    .flow-path-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 56px;
+    }
+
+    .flow-node {
+      padding: 14px 20px;
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--dark);
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    .flow-node-title {
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--dark);
+    }
+
+    .flow-node-sub {
+      font-size: 11px;
+      color: var(--light);
+      margin-top: 2px;
+    }
+
+    .flow-node.start,
+    .flow-node.end {
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-weight: 600;
+      font-size: 13px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .flow-node.start {
+      background: var(--forest);
+      color: var(--white);
+      border-color: var(--forest);
+    }
+
+    .flow-node.end {
+      background: var(--accent);
+      color: var(--dark);
+      border-color: var(--accent);
+    }
+
+    .flow-arrow-sep {
+      color: var(--sand);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .flow-stage-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 16px;
+    }
+
+    .flow-compare-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .flow-phase-bar {
+      background: var(--forest);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 6px;
+    }
+
+    .flow-chip {
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .flow-chip-title {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .flow-chip.problem {
+      background: rgba(178, 58, 52, .06);
+      border: 1px solid rgba(178, 58, 52, .25);
+      color: #8A2E29;
+    }
+
+    .flow-chip.solution {
+      background: rgba(201, 169, 110, .1);
+      border: 1px solid rgba(201, 169, 110, .35);
+      color: var(--forest);
+    }
+
+    .flow-features-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .flow-feature-chip {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 12px;
+      color: var(--dark);
+    }
+
+    .flow-feature-chip .flow-feature-sub {
+      color: var(--light);
+      font-size: 11px;
+    }
+
+    .flow-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .flow-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--light);
+    }
+
+    .flow-legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 900px) {
+      .flow-compare-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .flow-compare-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    /* ──── WIREFRAMES ──── */
+    .wireframe-section {
+      background: var(--cream);
+    }
+
+    .wf-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .wf-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 10px;
+    }
+
+    .wf-frame {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: 12px;
+      padding: 24px;
+      min-height: 260px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wf-mockup {
+      width: 100%;
+    }
+
+    /* Wireframe SVG placeholders */
+    .wf-bar {
+      height: 8px;
+      background: var(--sand);
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .wf-bar.short {
+      width: 40%;
+    }
+
+    .wf-bar.med {
+      width: 65%;
+    }
+
+    .wf-bar.full {
+      width: 100%;
+    }
+
+    .wf-block {
+      background: var(--warm);
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .wf-nav {
+      height: 32px;
+      background: var(--warm);
+      margin-bottom: 16px;
+      border-radius: 8px;
+      display: flex;
+      gap: 6px;
+      padding: 0 8px;
+      align-items: center;
+    }
+
+    .wf-nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--sand);
+    }
+
+    .wf-hero-block {
+      height: 80px;
+      background: linear-gradient(135deg, var(--forest) 0%, var(--terra) 100%);
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .wf-card-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+    }
+
+    .wf-card {
+      height: 50px;
+      background: var(--warm);
+      border-radius: 8px;
+    }
+
+    .wf-caption {
+      font-size: 12px;
+      color: var(--light);
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    /* ──── FONTS SECTION ──── */
+    .fonts-section {
+      background: var(--forest);
+      padding: 120px max(40px, 5vw);
+    }
+
+    .fonts-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .fonts-header .lbl {
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .fonts-header .section-title {
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .fonts-header .section-title em {
+      color: var(--accent);
+    }
+
+    .fonts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .font-card {
+      background: rgba(255, 255, 255, .04);
+      padding: 56px;
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: 16px;
+    }
+
+    .font-pair-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: rgba(255, 255, 255, .35);
+      margin-bottom: 32px;
+      text-transform: uppercase;
+    }
+
+    .font-display {
+      margin-bottom: 24px;
+    }
+
+    .font-display-heading {
+      line-height: 1.0;
+    }
+
+    .font-display-body {
+      font-size: 15px;
+      color: rgba(255, 255, 255, .55);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 400px;
+    }
+
+    .font-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .font-meta-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, .3);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .font-meta-value {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .chosen-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--accent);
+      color: var(--dark);
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .chosen-badge i {
+      font-size: 12px;
+    }
+
+    /* ──── GALLERY / SCREENS ──── */
+    .screens-section {
+      background: var(--cream);
+    }
+
+    .screens-intro {
+      max-width: 640px;
+      margin-bottom: 64px;
+    }
+
+    .screens-intro p {
+      font-size: 16px;
+      color: var(--mid);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .page-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
+    }
+
+    .showcase-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 80px;
+      align-items: start;
+    }
+
+    .showcase-item.reverse {
+      direction: rtl;
+    }
+
+    .showcase-item-full {
+      display: block;
+    }
+
+    .showcase-item.reverse>* {
+      direction: ltr;
+    }
+
+    .showcase-tag {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--terra);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .showcase-title {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--dark);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .showcase-text {
+      font-size: 15px;
+      color: var(--mid);
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 28px;
+    }
+
+    .showcase-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .showcase-features li {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--mid);
+    }
+
+    .showcase-features li::before {
+      content: '✦';
+      color: var(--accent);
+      font-size: 10px;
+      margin-top: 2px;
+    }
+
+    .showcase-img-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--sand);
+    }
+
+    .showcase-img-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    .pages-mosaic {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4px;
+      margin-top: 64px;
+    }
+
+    .mosaic-item {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mosaic-item img {
+      width: 100%;
+      display: block;
+      transition: transform .5s ease;
+    }
+
+    .mosaic-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .mosaic-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: linear-gradient(transparent, rgba(26, 26, 26, .8));
+      color: var(--white);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transform: translateY(4px);
+      transition: transform .3s;
+    }
+
+    .mosaic-item:hover .mosaic-label {
+      transform: translateY(0);
+    }
+
+    /* ──── DESIGN SYSTEM (08 rebuild) ──── */
+    .ds-stat-callout {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      background: var(--warm);
+      border: 1px solid var(--sand);
+      border-radius: 12px;
+      padding: 28px 36px;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+    }
+
+    .ds-stat-num {
+      font-family: var(--serif);
+      font-size: 40px;
+      font-weight: 400;
+      color: var(--terra);
+      white-space: nowrap;
+    }
+
+    .ds-stat-text {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.6;
+      max-width: 480px;
+    }
+
+    .ds-template-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-bottom: 110px;
+    }
+
+    .ds-template-card {
+      grid-column: span 2;
+    }
+
+    .ds-template-card.wide {
+      grid-column: span 3;
+    }
+
+    .ds-template-card {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: 12px;
+      padding: 32px 28px;
+    }
+
+    .ds-template-num {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .ds-template-name {
+      font-family: var(--serif);
+      font-size: 21px;
+      color: var(--dark);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .ds-template-desc {
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      font-weight: 300;
+    }
+
+    .ds-template-used {
+      font-size: 11px;
+      color: var(--light);
+      letter-spacing: .3px;
+    }
+
+    .ds-template-used b {
+      color: var(--forest);
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .ds-template-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ds-template-card,
+      .ds-template-card.wide {
+        grid-column: span 1;
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       REAL CODE, PORTED DIRECTLY FROM THE LIVE SITE
+       Design tokens scoped locally so the original selectors
+       (.prog-tab-*, .nav, .nav-links...) can be pasted as-is.
+       ───────────────────────────────────────────────────────── */
+    .real-tab-demo-scope {
+      --color-navy: #1E3A47;
+      --color-navy-deep: #152E3A;
+      --color-sky: #C9A96E;
+      --color-sky-light: #F5EBD8;
+      --color-sky-faint: #FBF6EC;
+      --color-white: #FFFFFF;
+      --color-bg: #FAFAF8;
+      --color-surface: #F4F2EE;
+      --color-line: #E2DDD6;
+      --color-text-muted: #666660;
+      --color-text-light: #9D9A93;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.375rem;
+      --text-2xl: 1.75rem;
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 40px;
+      --space-2xl: 64px;
+      --space-section: 120px;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --radius-pill: 999px;
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, .08), 0 2px 4px rgba(0, 0, 0, .04);
+      --shadow-lg: 0 16px 48px rgba(0, 0, 0, .10);
+      --dur-fast: 180ms;
+      --dur-base: 280ms;
+      --dur-slow: 420ms;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ── Contained demo card: rounded, sits inside the page margins,
+       never touches the screen edges. ── */
+    .real-tab-demo-scope.full-bleed {
+      background: var(--color-bg);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      padding: 0 clamp(20px, 4vw, 56px) var(--space-2xl);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* ── Pasted 1:1 from environmental-programs.html, scoped under .real-tab-demo-scope ── */
+.real-tab-demo-scope .prog-tabs-section {
+margin-top: var(--space-section);
+}
+.real-tab-demo-scope .prog-tabs-header {
+margin-bottom: var(--space-2xl);
+}
+.real-tab-demo-scope .prog-tab-bar {
+display: flex;
+align-items: stretch;
+gap: 0;
+margin-bottom: var(--space-2xl);
+border-bottom: 1px solid var(--color-line);
+padding-bottom: 0;
+overflow-x: auto;
+overflow-y: hidden;
+}
+.real-tab-demo-scope .prog-tab-btn {
+flex: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+padding: 12px 16px;
+font-size: var(--text-sm);
+font-weight: 500;
+color: var(--color-text-muted);
+background: none;
+border: none;
+border-bottom: 2px solid transparent;
+margin-bottom: -1px;
+border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+cursor: pointer;
+white-space: nowrap;
+transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
+}
+.real-tab-demo-scope .prog-tab-btn:hover {
+color: var(--color-navy);
+background: var(--color-surface);
+}
+.real-tab-demo-scope .prog-tab-btn.active {
+color: var(--color-navy);
+font-weight: 600;
+border-bottom-color: var(--color-sky);
+background: transparent;
+}
+.real-tab-demo-scope .prog-tab-panel {
+display: none;
+}
+.real-tab-demo-scope .prog-tab-panel.active {
+display: block;
+}
+@media (max-width: 600px) {
+  .real-tab-demo-scope .prog-tab-btn {
+    flex: 0 0 auto;
+    padding: 10px 14px;
+    font-size: var(--text-xs);
+  }
+}
+.real-tab-demo-scope .tab-page {
+padding-top: var(--space-2xl);
+}
+.real-tab-demo-scope .tab-page-hero {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: var(--space-2xl);
+align-items: center;
+margin-bottom: var(--space-2xl);
+padding-bottom: var(--space-2xl);
+border-bottom: 1px solid var(--color-line);
+}
+.real-tab-demo-scope .tab-page-hero-img {
+border-radius: var(--radius-xl);
+overflow: hidden;
+aspect-ratio: 4/3;
+background: var(--color-surface);
+}
+.real-tab-demo-scope .tab-page-hero-img img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+cursor: zoom-in;
+transition: transform var(--dur-base) var(--ease-out);
+}
+.real-tab-demo-scope .tab-page-hero-img img:hover {
+transform: scale(1.03);
+}
+.real-tab-demo-scope .tab-page-hero-text h2 {
+font-family: var(--font-display);
+font-size: clamp(1.8rem, 2.5vw, 2.75rem);
+font-weight: 400;
+color: var(--color-navy);
+line-height: 1.15;
+letter-spacing: -0.5px;
+margin-bottom: var(--space-md);
+}
+.real-tab-demo-scope .tab-page-hero-text h2 em {
+font-style: italic;
+color: var(--color-sky);
+}
+.real-tab-demo-scope .tab-page-hero-text p {
+font-size: var(--text-lg);
+color: var(--color-text-muted);
+line-height: 1.8;
+margin-bottom: var(--space-lg);
+}
+.real-tab-demo-scope .tab-photo-strip {
+display: flex;
+gap: 10px;
+margin-bottom: var(--space-2xl);
+overflow-x: auto;
+}
+.real-tab-demo-scope .tab-photo-strip img {
+height: 200px;
+width: auto;
+border-radius: var(--radius-md);
+object-fit: cover;
+flex-shrink: 0;
+cursor: zoom-in;
+transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base);
+}
+.real-tab-demo-scope .tab-photo-strip img:hover {
+transform: scale(1.03);
+box-shadow: var(--shadow-lg);
+}
+.real-tab-demo-scope .tab-section {
+margin-bottom: var(--space-2xl);
+padding-bottom: var(--space-2xl);
+border-bottom: 1px solid var(--color-line);
+}
+.real-tab-demo-scope .tab-section:last-child {
+border-bottom: none;
+margin-bottom: 0;
+}
+.real-tab-demo-scope .tab-section-title {
+font-family: var(--font-display);
+font-size: var(--text-2xl);
+font-weight: 400;
+color: var(--color-navy);
+margin-bottom: var(--space-lg);
+letter-spacing: -0.5px;
+}
+.real-tab-demo-scope .tab-section-body {
+font-size: var(--text-base);
+color: var(--color-text-muted);
+line-height: 1.8;
+margin-bottom: var(--space-lg);
+}
+.real-tab-demo-scope .tab-section-body--flush {
+margin-bottom: 0;
+}
+.real-tab-demo-scope .tab-section-body p+p {
+margin-top: var(--space-md);
+}
+.real-tab-demo-scope .tab-notes-list {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: var(--space-md);
+margin-bottom: var(--space-xl);
+}
+.real-tab-demo-scope .tab-notes-list li {
+display: flex;
+gap: 16px;
+align-items: flex-start;
+font-size: var(--text-base);
+color: var(--color-text-muted);
+line-height: 1.65;
+}
+.real-tab-demo-scope .tab-notes-list li .note-num {
+flex-shrink: 0;
+width: 28px;
+height: 28px;
+border-radius: 50%;
+background: var(--color-sky-light);
+color: var(--color-sky);
+font-size: var(--text-xs);
+font-weight: 700;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-top: 2px;
+}
+.real-tab-demo-scope .tab-callout {
+background: var(--color-navy);
+border-radius: var(--radius-xl);
+padding: var(--space-xl) var(--space-2xl);
+margin-bottom: var(--space-2xl);
+}
+.real-tab-demo-scope .tab-callout--flush {
+margin-bottom: 0;
+}
+.real-tab-demo-scope .tab-callout p {
+color: rgba(255, 255, 255, 0.75);
+font-size: var(--text-base);
+line-height: 1.8;
+}
+.real-tab-demo-scope .tab-callout strong {
+color: var(--color-white);
+}
+.real-tab-demo-scope .tab-infobox {
+background: var(--color-sky-faint);
+border: 1px solid rgba(201, 169, 110, 0.3);
+border-radius: var(--radius-lg);
+padding: var(--space-xl);
+margin-bottom: var(--space-xl);
+}
+.real-tab-demo-scope .tab-infobox-title {
+font-family: var(--font-display);
+font-size: var(--text-xl);
+font-weight: 400;
+color: var(--color-navy);
+margin-bottom: var(--space-md);
+}
+.real-tab-demo-scope .tab-infobox p {
+font-size: var(--text-sm);
+color: var(--color-text-muted);
+line-height: 1.75;
+}
+.real-tab-demo-scope .tab-video-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: var(--space-md);
+margin-bottom: var(--space-2xl);
+}
+.real-tab-demo-scope .tab-video-wrap {
+border-radius: var(--radius-lg);
+overflow: hidden;
+aspect-ratio: 16/9;
+background: var(--color-navy-deep);
+}
+.real-tab-demo-scope .tab-video-wrap iframe {
+width: 100%;
+height: 100%;
+border: none;
+display: block;
+}
+.real-tab-demo-scope .tab-price-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: var(--space-md);
+margin-bottom: var(--space-xl);
+}
+.real-tab-demo-scope .tab-price-card {
+background: var(--color-surface);
+border: 1px solid var(--color-line);
+border-radius: var(--radius-xl);
+padding: var(--space-xl);
+text-align: center;
+transition: box-shadow var(--dur-base), border-color var(--dur-base);
+}
+.real-tab-demo-scope .tab-price-card:hover {
+box-shadow: var(--shadow-md);
+border-color: rgba(201, 169, 110, 0.4);
+}
+.real-tab-demo-scope .tab-price-card .price-amount {
+font-family: var(--font-display);
+font-size: 2.5rem;
+font-weight: 300;
+color: var(--color-sky);
+line-height: 1;
+margin-bottom: var(--space-sm);
+}
+.real-tab-demo-scope .tab-price-card .price-period {
+font-size: var(--text-sm);
+color: var(--color-text-light);
+text-transform: uppercase;
+letter-spacing: 1.5px;
+font-weight: 600;
+}
+.real-tab-demo-scope .tab-cta-row {
+display: flex;
+gap: 12px;
+flex-wrap: wrap;
+padding-top: var(--space-xl);
+}
+.real-tab-demo-scope .tab-cta-row--flush {
+padding-top: 0;
+}
+.real-tab-demo-scope .tab-two-col {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: var(--space-xl);
+align-items: start;
+}
+.real-tab-demo-scope .tab-two-col--stretch {
+align-items: stretch;
+}
+.real-tab-demo-scope .tab-two-col--mb {
+margin-bottom: var(--space-xl);
+}
+.real-tab-demo-scope .tab-sub-heading {
+font-family: var(--font-display);
+font-size: var(--text-xl);
+font-weight: 400;
+color: var(--color-navy);
+margin-bottom: var(--space-md);
+margin-top: var(--space-xl);
+}
+.real-tab-demo-scope .tab-body-p {
+font-size: var(--text-sm);
+color: var(--color-text-muted);
+line-height: 1.75;
+}
+.real-tab-demo-scope .tab-body-p--mb {
+margin-bottom: var(--space-md);
+}
+.real-tab-demo-scope .tab-body-p--mt {
+margin-top: var(--space-md);
+}
+.real-tab-demo-scope .tab-video-wrap {
+border-radius: var(--radius-xl);
+overflow: hidden;
+aspect-ratio: 16/7;
+margin-bottom: var(--space-xl);
+}
+.real-tab-demo-scope .tab-video-iframe {
+border: 0;
+display: block;
+}
+.real-tab-demo-scope .cleanup-prep-grid {
+display: grid;
+grid-template-columns: 1.2fr 1fr;
+gap: var(--space-xl);
+align-items: stretch;
+margin-bottom: var(--space-xl);
+}
+.real-tab-demo-scope .cleanup-notes-col {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+.real-tab-demo-scope .cleanup-notes-heading {
+font-size: var(--text-xs);
+font-weight: 700;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(--color-sky);
+margin-bottom: 4px;
+}
+.real-tab-demo-scope .cleanup-bento {
+display: grid;
+grid-template-columns: repeat(6, 1fr);
+gap: 10px;
+}
+.real-tab-demo-scope .cleanup-card {
+background: var(--color-white);
+border: 1px solid var(--color-line);
+border-radius: var(--radius-md);
+padding: var(--space-lg);
+}
+.real-tab-demo-scope .cleanup-card--gold {
+border-color: rgba(201, 169, 110, 0.3);
+}
+.real-tab-demo-scope .cleanup-card--row {
+display: flex;
+align-items: center;
+gap: var(--space-lg);
+padding: var(--space-md) var(--space-xl);
+}
+.real-tab-demo-scope .cleanup-card--4col { grid-column: span 4; }
+.real-tab-demo-scope .cleanup-card--2col { grid-column: span 2; }
+.real-tab-demo-scope .cleanup-card--3col { grid-column: span 3; }
+.real-tab-demo-scope .cleanup-card--6col { grid-column: span 6; }
+.real-tab-demo-scope .cleanup-card-num {
+font-size: 1.4rem;
+font-family: var(--font-display);
+color: var(--color-sky);
+font-weight: 300;
+line-height: 1;
+margin-bottom: 8px;
+}
+.real-tab-demo-scope .cleanup-card-num--shrink {
+flex-shrink: 0;
+margin-bottom: 0;
+}
+.real-tab-demo-scope .cleanup-card-text {
+font-size: var(--text-sm);
+color: var(--color-text-muted);
+line-height: 1.6;
+margin: 0;
+}
+.real-tab-demo-scope .cleanup-signup-col {
+background: var(--color-surface);
+border-radius: var(--radius-lg);
+padding: var(--space-xl);
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+gap: var(--space-lg);
+}
+.real-tab-demo-scope .cleanup-signup-heading {
+font-size: var(--text-xs);
+font-weight: 700;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(--color-sky);
+margin-bottom: var(--space-md);
+}
+.real-tab-demo-scope .cleanup-signup-body {
+font-size: var(--text-sm);
+color: var(--color-text-muted);
+line-height: 1.75;
+}
+.real-tab-demo-scope .cleanup-signup-body--mb {
+margin-bottom: var(--space-md);
+}
+.real-tab-demo-scope .cleanup-after-section {
+border-top: 1px solid var(--color-line);
+padding-top: var(--space-lg);
+}
+.real-tab-demo-scope .tree-stat-card {
+background: var(--color-navy-deep);
+border-radius: var(--radius-lg);
+padding: var(--space-xl);
+display: flex;
+flex-direction: column;
+justify-content: center;
+gap: var(--space-lg);
+}
+.real-tab-demo-scope .tree-stat-number {
+font-family: var(--font-display);
+font-size: 3rem;
+font-weight: 300;
+color: var(--color-sky);
+line-height: 1;
+}
+.real-tab-demo-scope .tree-stat-label {
+font-size: var(--text-sm);
+color: rgba(255, 255, 255, 0.6);
+margin-top: 4px;
+}
+.real-tab-demo-scope .tree-stat-divider {
+width: 40px;
+height: 1px;
+background: rgba(201, 169, 110, 0.3);
+}
+.real-tab-demo-scope .tree-stat-partner-label {
+font-size: var(--text-sm);
+font-weight: 600;
+color: var(--color-white);
+margin-bottom: 6px;
+}
+.real-tab-demo-scope .tree-stat-partner-name {
+font-size: var(--text-base);
+color: rgba(255, 255, 255, 0.7);
+}
+.real-tab-demo-scope .event-details-card {
+background: var(--color-surface);
+border: 1px solid var(--color-line);
+border-radius: var(--radius-lg);
+padding: var(--space-xl);
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: var(--space-xl);
+align-items: start;
+}
+.real-tab-demo-scope .event-details-label {
+font-size: var(--text-xs);
+font-weight: 700;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(--color-sky);
+margin-bottom: var(--space-md);
+}
+.real-tab-demo-scope .event-details-rows {
+display: flex;
+flex-direction: column;
+gap: var(--space-sm);
+}
+.real-tab-demo-scope .event-details-row {
+display: flex;
+gap: 12px;
+align-items: baseline;
+}
+.real-tab-demo-scope .event-details-key {
+font-size: var(--text-sm);
+font-weight: 600;
+color: var(--color-navy);
+min-width: 52px;
+}
+.real-tab-demo-scope .event-details-val {
+font-size: var(--text-sm);
+color: var(--color-text-muted);
+}
+.real-tab-demo-scope .link-sky {
+color: var(--color-sky);
+}
+.real-tab-demo-scope .tab-dark-hero {
+background: var(--color-navy-deep);
+border-radius: var(--radius-xl);
+padding: var(--space-2xl);
+margin-bottom: var(--space-2xl);
+position: relative;
+overflow: hidden;
+}
+.real-tab-demo-scope .tab-dark-hero::before {
+content: '';
+position: absolute;
+top: -80px;
+right: -80px;
+width: 300px;
+height: 300px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(201, 169, 110, 0.1) 0%, transparent 70%);
+pointer-events: none;
+}
+.real-tab-demo-scope .tab-dark-hero h2 {
+font-family: var(--font-display);
+font-size: clamp(2rem, 3vw, 3rem);
+font-weight: 300;
+color: var(--color-white);
+letter-spacing: -1px;
+line-height: 1.1;
+margin-bottom: var(--space-lg);
+}
+.real-tab-demo-scope .tab-dark-hero h2 em {
+font-style: italic;
+color: var(--color-sky);
+}
+.real-tab-demo-scope .tab-dark-hero p {
+font-size: var(--text-lg);
+color: rgba(255, 255, 255, 0.65);
+line-height: 1.8;
+max-width: 640px;
+margin-bottom: var(--space-lg);
+}
+.real-tab-demo-scope .tab-benefits-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: var(--space-md);
+margin-bottom: var(--space-2xl);
+}
+.real-tab-demo-scope .tab-benefit-card {
+background: var(--color-white);
+border: 1px solid var(--color-line);
+border-radius: var(--radius-lg);
+padding: var(--space-lg);
+transition: box-shadow var(--dur-base), transform var(--dur-base);
+}
+.real-tab-demo-scope .tab-benefit-card:hover {
+box-shadow: var(--shadow-md);
+transform: translateY(-2px);
+}
+.real-tab-demo-scope .tab-benefit-icon {
+width: 40px;
+height: 40px;
+border-radius: var(--radius-md);
+background: var(--color-sky-light);
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: var(--space-md);
+}
+.real-tab-demo-scope .tab-benefit-icon svg {
+width: 20px;
+height: 20px;
+stroke: var(--color-sky);
+fill: none;
+stroke-width: 1.6;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+.real-tab-demo-scope .tab-benefit-card strong {
+display: block;
+font-size: var(--text-base);
+font-weight: 600;
+color: var(--color-navy);
+margin-bottom: 4px;
+}
+.real-tab-demo-scope .tab-benefit-card span {
+font-size: var(--text-sm);
+color: var(--color-text-muted);
+line-height: 1.6;
+}
+.real-tab-demo-scope .tab-bento-grid {
+display: grid;
+grid-template-columns: repeat(6, 1fr);
+grid-template-rows: auto auto;
+gap: 12px;
+margin-bottom: var(--space-2xl);
+}
+.real-tab-demo-scope .tab-bento-card {
+background: var(--color-white);
+border: 1px solid var(--color-line);
+border-radius: var(--radius-lg);
+padding: var(--space-xl) var(--space-lg);
+transition: box-shadow var(--dur-base), transform var(--dur-base);
+display: flex;
+flex-direction: column;
+}
+.real-tab-demo-scope .tab-bento-card:hover {
+box-shadow: var(--shadow-md);
+transform: translateY(-2px);
+}
+.real-tab-demo-scope .tab-bento-card.wide {
+grid-column: span 4;
+}
+.real-tab-demo-scope .tab-bento-card.narrow {
+grid-column: span 2;
+}
+.real-tab-demo-scope .tab-bento-card.full {
+grid-column: span 6;
+flex-direction: row;
+align-items: center;
+gap: var(--space-xl);
+background: var(--color-surface);
+}
+.real-tab-demo-scope .tab-bento-card.dark {
+background: var(--color-navy-deep);
+border-color: transparent;
+}
+.real-tab-demo-scope .tab-bento-card.dark strong {
+color: var(--color-white);
+}
+.real-tab-demo-scope .tab-bento-card.dark span {
+color: rgba(255, 255, 255, 0.6);
+}
+.real-tab-demo-scope .tab-bento-card.gold {
+background: var(--color-sky-light);
+border-color: rgba(201, 169, 110, 0.3);
+}
+.real-tab-demo-scope .tab-bento-icon {
+width: 44px;
+height: 44px;
+border-radius: var(--radius-md);
+background: var(--color-sky-light);
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: var(--space-md);
+flex-shrink: 0;
+}
+.real-tab-demo-scope .tab-bento-card.dark .tab-bento-icon {
+background: rgba(201, 169, 110, 0.18);
+}
+.real-tab-demo-scope .tab-bento-card.full .tab-bento-icon {
+margin-bottom: 0;
+}
+.real-tab-demo-scope .tab-bento-icon svg {
+width: 22px;
+height: 22px;
+stroke: var(--color-sky);
+fill: none;
+stroke-width: 1.5;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+.real-tab-demo-scope .tab-bento-card strong {
+display: block;
+font-size: var(--text-lg);
+font-weight: 600;
+color: var(--color-navy);
+margin-bottom: 6px;
+line-height: 1.3;
+}
+.real-tab-demo-scope .tab-bento-card span {
+font-size: var(--text-sm);
+color: var(--color-text-muted);
+line-height: 1.65;
+}
+.real-tab-demo-scope .prog-tabs-wrapper {
+position: relative;
+}
+.real-tab-demo-scope .prog-tab-bar-sticky {
+position: sticky;
+top: 82px;
+z-index: 200;
+background: var(--color-bg);
+border-bottom: 1px solid var(--color-line);
+margin-bottom: var(--space-2xl);
+margin-left: calc(-1 * clamp(20px, 4vw, 56px));
+margin-right: calc(-1 * clamp(20px, 4vw, 56px));
+padding-left: clamp(20px, 4vw, 56px);
+padding-right: clamp(20px, 4vw, 56px);
+}
+.real-tab-demo-scope .prog-tab-bar-sticky.stuck {
+box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+}
+.real-tab-demo-scope .tab-section-body, .real-tab-demo-scope .tab-notes-list, .real-tab-demo-scope .tab-infobox p, .real-tab-demo-scope .tab-callout p {
+max-width: 72ch;
+}
+.real-tab-demo-scope .tab-page-hero-text p {
+max-width: 56ch;
+}
+.real-tab-demo-scope .prog-tabs-header .section-label {
+font-size: var(--text-xs);
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(--color-sky);
+font-weight: 600;
+display: block;
+margin-bottom: var(--space-md);
+}
+.real-tab-demo-scope .prog-tabs-header h2.section-h2 {
+font-family: var(--font-display);
+font-weight: 400;
+font-size: clamp(1.8rem, 3vw, 2.75rem);
+color: var(--color-navy);
+}
+.real-tab-demo-scope .prog-tabs-header h2.section-h2 em {
+font-style: italic;
+color: var(--color-sky);
+}
+.real-tab-demo-scope .tab-page-hero-text .section-label {
+font-size: var(--text-xs);
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(--color-sky);
+font-weight: 600;
+display: block;
+margin-bottom: var(--space-md);
+}
+
+.real-tab-demo-scope .hero-real {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xl);
+  flex-wrap: wrap;
+  padding-bottom: var(--space-xl);
+}
+
+.real-tab-demo-scope .hero-real-content {
+  flex: 1 1 480px;
+  max-width: 600px;
+}
+
+.real-tab-demo-scope .hero-real .hero-tag {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--color-sky);
+  margin-bottom: var(--space-lg);
+}
+
+.real-tab-demo-scope .hero-real-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.5vw, 3.75rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  color: var(--color-navy);
+  margin-bottom: var(--space-lg);
+}
+
+.real-tab-demo-scope .hero-real-h1 em {
+  font-style: italic;
+  font-weight: 300;
+  display: block;
+}
+
+.real-tab-demo-scope .hero-real-desc {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-xl);
+}
+
+.real-tab-demo-scope .hero-email-form {
+  display: flex;
+  position: relative;
+  margin-bottom: var(--space-md);
+}
+
+.real-tab-demo-scope .hero-email-input {
+  width: 100%;
+  padding: 18px 150px 18px 24px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-base);
+  font-family: var(--font-body);
+  color: var(--color-navy);
+  background: var(--color-surface);
+  outline: none;
+}
+
+.real-tab-demo-scope .hero-email-input::placeholder {
+  color: var(--color-text-light);
+}
+
+.real-tab-demo-scope .hero-email-btn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  bottom: 5px;
+  padding: 0 28px;
+  background: var(--color-navy);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.real-tab-demo-scope .hero-real-btn-row {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.real-tab-demo-scope .hero-real-visual {
+  flex: 0 0 auto;
+  width: min(420px, 40vw);
+  aspect-ratio: 1/1;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--color-surface);
+  margin-left: auto;
+}
+
+.real-tab-demo-scope .hero-real-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.real-tab-demo-scope .browser-frame {
+  margin-top: var(--space-2xl);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-lg);
+  background: var(--color-white);
+}
+
+.real-tab-demo-scope .browser-frame-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.real-tab-demo-scope .bf-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-line);
+  display: inline-block;
+}
+
+.real-tab-demo-scope .browser-frame-url {
+  margin-left: 12px;
+  font-size: var(--text-xs);
+  color: var(--color-text-light);
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  padding: 4px 16px;
+  flex: 1;
+  max-width: 260px;
+}
+
+.real-tab-demo-scope .browser-frame img {
+  width: 100%;
+  display: block;
+}
+
+.real-tab-demo-scope .ba-col .browser-frame {
+  cursor: zoom-in;
+}
+
+.real-tab-demo-scope .ba-col .browser-frame-imgbox {
+  height: 200px;
+  overflow: hidden;
+}
+
+.real-tab-demo-scope .ba-col .browser-frame-imgbox img {
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  filter: saturate(.75) contrast(.96);
+}
+
+.real-tab-demo-scope .ba-expand-hint {
+  text-align: center;
+  font-size: var(--text-xs);
+  color: var(--color-text-light);
+  padding: 10px;
+  border-top: 1px solid var(--color-line);
+}
+
+.real-tab-demo-scope .ba-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-2xl);
+}
+
+.real-tab-demo-scope .ba-col {
+  position: relative;
+}
+
+.real-tab-demo-scope .ba-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+}
+
+.real-tab-demo-scope .ba-badge.before {
+  background: rgba(178, 58, 52, .1);
+  color: #8A2E29;
+  border: 1px solid rgba(178, 58, 52, .3);
+}
+
+.real-tab-demo-scope .ba-caption {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 10px 8px 0;
+}
+
+.real-tab-demo-scope .ba-after-link {
+  display: block;
+  text-align: center;
+  margin-top: var(--space-xl);
+  font-size: var(--text-sm);
+  color: var(--color-navy);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .real-tab-demo-scope .ba-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .real-tab-demo-scope .ba-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .real-tab-demo-scope .hero-real-visual {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.real-tab-demo-scope .btn-primary, .real-tab-demo-scope .btn-outline {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+padding: 13px 24px;
+border-radius: var(--radius-pill);
+font-size: var(--text-sm);
+font-weight: 500;
+white-space: nowrap;
+text-decoration: none;
+}
+.real-tab-demo-scope .btn-primary {
+background: var(--color-navy);
+color: var(--color-bg);
+}
+.real-tab-demo-scope .btn-outline {
+background: transparent;
+color: var(--color-navy);
+border: 1px solid var(--color-line);
+}
+
+    /* Mosaic category filters */
+    .ds-filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 24px 0 32px;
+    }
+
+    .ds-filter-btn {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border: 1px solid var(--sand);
+      background: transparent;
+      color: var(--mid);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .ds-filter-btn:hover {
+      border-color: var(--terra);
+      color: var(--terra);
+    }
+
+    .ds-filter-btn.active {
+      background: var(--terra);
+      border-color: var(--terra);
+      color: #fff;
+    }
+
+    .mosaic-item.ds-hidden {
+      display: none;
+    }
+
+    /* Bento grid + lightbox for "All Pages" */
+    .ds-bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-flow: dense;
+      gap: 6px;
+    }
+
+    .ds-bento-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      aspect-ratio: 4 / 3;
+      cursor: zoom-in;
+      background: var(--warm);
+    }
+
+    .ds-bento-item.wide {
+      grid-column: span 2;
+      aspect-ratio: 8 / 3;
+    }
+
+    .ds-bento-item img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top;
+      transition: transform .5s var(--ease, ease);
+    }
+
+    .ds-bento-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .ds-bento-label {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 10px 14px 8px;
+      font-size: 12px;
+      color: var(--white);
+      background: linear-gradient(to top, rgba(0, 0, 0, .55), transparent);
+      transform: translateY(0);
+    }
+
+    .ds-bento-zoom {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    .ds-bento-item:hover .ds-bento-zoom {
+      opacity: 1;
+    }
+
+    .ds-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: rgba(20, 18, 15, .9);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      cursor: zoom-out;
+    }
+
+    .ds-lightbox.open {
+      display: flex;
+    }
+
+    .ds-lightbox-inner {
+      max-width: 720px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      border-radius: 16px;
+      background: var(--white);
+      cursor: default;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, .4);
+    }
+
+    .ds-lightbox-inner img {
+      width: 100%;
+      display: block;
+    }
+
+    .ds-lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .12);
+      border: 1px solid rgba(255, 255, 255, .3);
+      color: var(--white);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ds-lightbox-tag {
+      position: absolute;
+      top: 30px;
+      left: 32px;
+      color: var(--white);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: .7;
+    }
+
+    .ds-showcase-spaced {
+      margin-bottom: 60px;
+    }
+
+    .ds-mosaic-wrap {
+      margin-top: 100px;
+    }
+
+    .ds-mosaic-intro {
+      font-size: 14px;
+      color: var(--mid);
+      font-weight: 300;
+      max-width: 560px;
+      margin-bottom: 4px;
+    }
+
+    .lbl-block {
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* ──── SCREENSHOTS placeholder ──── */
+    .screen-placeholder {
+      background: var(--warm);
+      border: 1px solid var(--sand);
+      border-radius: 12px;
+      aspect-ratio: 16/10;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .sp-nav {
+      height: 36px;
+      background: var(--white);
+      border-bottom: 1px solid var(--sand);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .sp-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .sp-logo-bar {
+      flex: 1;
+      height: 14px;
+      background: var(--sand);
+      border-radius: 6px;
+      max-width: 80px;
+    }
+
+    .sp-links {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .sp-link {
+      width: 40px;
+      height: 8px;
+      background: var(--warm);
+      border-radius: 6px;
+    }
+
+    .sp-body {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .sp-hero {
+      height: 80px;
+      background: linear-gradient(135deg, var(--forest) 0%, #3d6b5e 100%);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 12px;
+    }
+
+    .sp-hero-title {
+      height: 16px;
+      background: rgba(255, 255, 255, .4);
+      border-radius: 6px;
+      width: 120px;
+    }
+
+    .sp-hero-sub {
+      height: 10px;
+      background: rgba(255, 255, 255, .2);
+      border-radius: 6px;
+      width: 80px;
+    }
+
+    .sp-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .sp-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .sp-card-img {
+      height: 40px;
+      background: var(--sand);
+      border-radius: 8px;
+      margin-bottom: 6px;
+    }
+
+    .sp-card-line {
+      height: 8px;
+      background: var(--warm);
+      border-radius: 6px;
+      margin-bottom: 4px;
+    }
+
+    .sp-card-line.short {
+      width: 60%;
+    }
+
+    /* About screen */
+    .sp-about-hero {
+      height: 100px;
+      background: linear-gradient(135deg, rgba(201, 169, 110, .2) 0%, rgba(30, 58, 71, .2) 100%);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sp-about-photo {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      width: 60px;
+      height: 80px;
+      background: var(--sand);
+      border-radius: 8px;
+    }
+
+    /* Membership screen */
+    .sp-pricing {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .sp-price-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .sp-price-card.featured {
+      background: var(--forest);
+    }
+
+    .sp-price-num {
+      height: 16px;
+      background: var(--sand);
+      border-radius: 6px;
+      margin: 6px auto;
+      width: 50%;
+    }
+
+    .sp-price-card.featured .sp-price-num {
+      background: var(--accent);
+    }
+
+    .sp-price-btn {
+      height: 12px;
+      background: var(--warm);
+      border-radius: 10px;
+      margin-top: 8px;
+    }
+
+    .sp-price-card.featured .sp-price-btn {
+      background: rgba(255, 255, 255, .3);
+    }
+
+    /* ──── IMPACT ──── */
+    .impact-section {
+      background: var(--terra);
+      color: var(--white);
+      padding: 120px max(40px, 5vw);
+    }
+
+    .impact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .impact-header {
+      margin-bottom: 80px;
+    }
+
+    .impact-header .lbl {
+      color: rgba(255, 255, 255, .6);
+      margin-bottom: 20px;
+    }
+
+    .impact-header .section-title {
+      color: var(--white);
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .impact-card {
+      background: rgba(255, 255, 255, .08);
+      border-radius: 16px;
+      padding: 48px 40px;
+    }
+
+    .impact-num {
+      font-family: var(--serif);
+      font-size: 72px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .impact-num sup {
+      font-size: 32px;
+      vertical-align: super;
+    }
+
+    .impact-desc {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .65);
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    .impact-note {
+      margin-top: 64px;
+      font-size: 15px;
+      color: rgba(255, 255, 255, .7);
+      line-height: 1.75;
+      max-width: 720px;
+      font-weight: 300;
+    }
+
+    /* ──── LEARNINGS ──── */
+    .learnings-section {
+      background: var(--cream);
+    }
+
+    .learnings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+    }
+
+    .learning-item {
+      padding: 48px 40px;
+      background: var(--warm);
+      border-radius: 12px;
+    }
+
+    .learning-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--forest);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .learning-icon i {
+      color: var(--accent);
+      font-size: 20px;
+    }
+
+    .learning-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .learning-text {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    /* ──── FOOTER ──── */
+    footer {
+      background: var(--forest);
+      color: var(--white);
+      padding: 80px max(40px, 5vw);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, .12);
+    }
+
+    .footer-center {
+      text-align: center;
+    }
+
+    .footer-center p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .4);
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .5);
+      text-decoration: none;
+      letter-spacing: .5px;
+      transition: color .3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-social a {
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, .5);
+      text-decoration: none;
+      transition: all .3s;
+      font-size: 16px;
+    }
+
+    .footer-social a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ──── SCROLL TOP ──── */
+    #scrollTop {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 48px;
+      height: 48px;
+      background: var(--terra);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all .3s;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #scrollTop.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    #scrollTop:hover {
+      background: var(--forest);
+      transform: translateY(-3px);
+    }
+
+    /* ──── RESPONSIVE ──── */
+    @media (max-width: 1100px) {
+      nav {
+        padding: 18px 32px;
+      }
+
+      section,
+      .process-orbital,
+      .fonts-section,
+      .impact-section,
+      .learnings-section,
+      .flow-section,
+      .cjm-section {
+        padding: 80px 32px;
+      }
+
+      .hero {
+        padding: 0 32px;
+        gap: 40px;
+      }
+
+      .overview-band {
+        padding: 60px 32px;
+        grid-template-columns: 1fr 1fr;
+        gap: 2px;
+      }
+
+      .ov-item {
+        padding: 24px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, .08);
+      }
+
+      .challenge-grid,
+      .research-grid,
+      .personas-grid,
+      .showcase-item,
+      .fonts-grid,
+      .impact-grid,
+      .learnings-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-item.reverse {
+        direction: ltr;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 120px 24px 60px;
+      }
+
+      .hero-right {
+        display: none;
+      }
+
+      nav {
+        padding: 18px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section,
+      .process-orbital,
+      .fonts-section,
+      .impact-section,
+      .learnings-section,
+      .flow-section,
+      .cjm-section {
+        padding: 60px 24px;
+      }
+
+      .overview-band {
+        padding: 40px 24px;
+        grid-template-columns: 1fr;
+      }
+
+      .wf-grid,
+      .pages-mosaic {
+        grid-template-columns: 1fr;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .impact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer {
+        padding: 48px 24px;
+        flex-direction: column;
+      }
+
+      .divider {
+        margin: 0 24px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- CURSOR -->
+  <div id="cur"></div>
+  <div id="ctr"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="../index.html" class="nav-back">
+      <i class="bi bi-arrow-left"></i>
+      Back to Portfolio
+    </a>
+    <div class="nav-links">
+      <a href="#challenge">Challenge</a>
+      <a href="#process">Process</a>
+      <a href="#research">Research</a>
+      <a href="#personas">Personas</a>
+      <a href="#cjm">Journey</a>
+      <a href="#screens">Screens</a>
+      <a href="#impact">Impact</a>
+    </div>
+    <a href="https://ascendtials.org" target="_blank" class="nav-back" style="font-size:12px; color:var(--mid);">
+      Live Site <i class="bi bi-arrow-up-right" style="font-size:11px;"></i>
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <div class="hero-eyebrow rv">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">Case Study · Volunteer Project · 2024</span>
+      </div>
+      <h1 class="hero-title rv d1">
+        <em>Redesigning</em><br>
+        ASCENDtials
+      </h1>
+      <p class="hero-sub rv d2">
+        A full UX/UI overhaul and coded WordPress redesign for a nonprofit uplifting BIPOC communities across Southern
+        California - transforming a cluttered, inaccessible experience into a living, breathing brand.
+      </p>
+      <div class="hero-meta rv d3">
+        <div class="hero-meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-value">UX/UI Designer & Developer</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="meta-label">Deliverable</div>
+          <div class="meta-value">27 Pages, Full Code</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="meta-label">Year</div>
+          <div class="meta-value">2024</div>
+        </div>
+      </div>
+      <a href="./code for ASCENDtials/index.html" target="_blank" class="hero-visit-btn rv d4">
+        Visit Live Site <i class="bi bi-arrow-up-right"></i>
+      </a>
+    </div>
+
+    <div class="hero-right rv d2">
+      <div class="hero-img-frame">
+        <img src="./assets/img/banner2.png" alt="ASCENDtials Homepage redesign"
+          style="width:100%; display:block; border-radius:12px;">
+        <div class="hero-img-badge">
+          <div class="badge-num">15<sup style="font-size:24px;">+</sup></div>
+          <div class="badge-text">Pages fully designed & coded for WordPress</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW BAND -->
+  <div class="overview-band">
+    <div class="ov-item rv">
+      <div class="ov-label">Organization</div>
+      <div class="ov-value">ASCENDtials<br><span
+          style="font-size:14px; color:rgba(255,255,255,.4); font-family:var(--sans); font-weight:300;">Nonprofit · San
+          Diego, CA</span></div>
+    </div>
+    <div class="ov-item rv d1">
+      <div class="ov-label">My Contribution</div>
+      <div class="ov-value">Full redesign + WordPress build, 27 pages end to end</div>
+    </div>
+    <div class="ov-item rv d2">
+      <div class="ov-label">Core Problem</div>
+      <div class="ov-value">Navigation so complex users <span class="ov-accent">couldn't find</span> what they came for
+      </div>
+    </div>
+    <div class="ov-item rv d3">
+      <div class="ov-label">Outcome</div>
+      <div class="ov-value">↑ Membership signups &nbsp;|&nbsp; ↑ Engagement &nbsp;|&nbsp; Brand repositioned</div>
+    </div>
+  </div>
+
+  <!-- CHALLENGE -->
+  <section id="challenge" style="background: var(--cream); padding-top:120px; padding-bottom:0;">
+    <div class="section-inner">
+      <div class="section-header rv">
+        <span class="lbl">01 - The Challenge</span>
+        <h2 class="section-title">A mission worth <em>fighting for</em>,<br>hidden behind a broken experience</h2>
+      </div>
+    </div>
+  </section>
+  <div class="challenge-grid">
+    <div class="challenge-card rv">
+      <div class="challenge-num">01</div>
+      <h3 class="challenge-card-title">The Situation</h3>
+      <p class="challenge-card-text">
+        ASCENDtials is a nonprofit founded in 2014, offering holistic educational tools, Kemetic yoga, farmers' markets,
+        environmental cleanups and youth programs across Southern California's BIPOC community. Their work is genuinely
+        impactful. But their digital presence told a completely different story.
+      </p>
+      <ul class="pain-list">
+        <li>The website felt overwhelming, heavy and hard to navigate</li>
+        <li>Key pages and programs were buried under layers of content</li>
+        <li>The brand didn't communicate the depth of what they actually do</li>
+        <li>Mobile experience was close to unusable</li>
+      </ul>
+    </div>
+    <div class="challenge-card dark rv d1">
+      <div class="challenge-num">02</div>
+      <h3 class="challenge-card-title">My Mandate</h3>
+      <p class="challenge-card-text">
+        I joined as a volunteer UX/UI designer and developer. The CEO had a clear vision for how she wanted the
+        organization to be perceived - as a serious, culturally rooted, forward-thinking community institution. My job
+        was to translate that vision into a site that reflected it, while solving real usability problems.
+      </p>
+      <ul class="pain-list">
+        <li>Maintain the brand's bold, individualistic identity</li>
+        <li>Make complex navigation actually work</li>
+        <li>Elevate the visual positioning to match the mission</li>
+        <li>Design and code 27 pages for WordPress, end to end</li>
+      </ul>
+    </div>
+    <div class="challenge-card dark rv d1" style="background: var(--forest);">
+      <div class="challenge-num" style="color: rgba(255,255,255,.1);">03</div>
+      <h3 class="challenge-card-title" style="color: var(--white);">The Design Tension</h3>
+      <p class="challenge-card-text" style="color: rgba(255,255,255,.7);">
+        The original design was described internally as their style - heavy, layered, rich. The CEO loved the aesthetic
+        boldness. My challenge was to honour that personality while eliminating the parts that actively hurt users: the
+        information architecture, the text overload, the inconsistent interactive elements.
+      </p>
+      <p class="challenge-card-text" style="margin-top:16px; color: rgba(255,255,255,.7);">This meant I couldn't do a clean-slate minimal redesign. I
+        had to work with the brand's expressive DNA and make it <em style="color: var(--accent);">better</em>, not different.</p>
+    </div>
+    <div class="challenge-card rv d2" style="background: var(--warm);">
+      <div class="challenge-num">04</div>
+      <h3 class="challenge-card-title">Design Principles I Set</h3>
+      <ul class="pain-list">
+        <li>Navigation must surface key sections within 2 clicks</li>
+        <li>Every page needs a single clear purpose and CTA</li>
+        <li>Community warmth over corporate polish</li>
+        <li>Typography carries cultural identity - not just text</li>
+        <li>Mobile-first on all new pages</li>
+        <li>Performance-conscious animations only</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:0;"></div>
+
+  <!-- PROCESS -->
+  <div class="process-orbital" id="process">
+    <div class="orbital-inner">
+      <div class="orbital-header rv">
+        <span class="lbl">02 - Design Process</span>
+        <h2 class="section-title">How I <em>approached</em> it</h2>
+      </div>
+      <div class="process-steps">
+        <div class="process-step rv">
+          <div class="step-num">01</div>
+          <div class="step-icon"><i class="bi bi-search"></i></div>
+          <h3 class="step-title">Discovery & Audit</h3>
+          <p class="step-text">Reviewed all existing pages. Mapped every navigation path. Identified pattern breaks and
+            accessibility failures. Interviewed the founder to understand positioning goals.</p>
+        </div>
+        <div class="process-step rv d1">
+          <div class="step-num">02</div>
+          <div class="step-icon"><i class="bi bi-people"></i></div>
+          <h3 class="step-title">User Research</h3>
+          <p class="step-text">Moderated usability testing sessions with community members and potential members.
+            Identified 4 key failure points. Created 2 primary personas based on findings.</p>
+        </div>
+        <div class="process-step rv d2">
+          <div class="step-num">03</div>
+          <div class="step-icon"><i class="bi bi-graph-up-arrow"></i></div>
+          <h3 class="step-title">Competitive Analysis</h3>
+          <p class="step-text">Researched comparable nonprofits, BIPOC-led organisations, and community platforms to
+            understand positioning opportunities and patterns that resonate with the audience.</p>
+        </div>
+        <div class="process-step rv">
+          <div class="step-num">04</div>
+          <div class="step-icon"><i class="bi bi-palette2"></i></div>
+          <h3 class="step-title">Visual Direction</h3>
+          <p class="step-text">Developed font pair candidates, refined the colour palette to feel warmer and more
+            culturally expressive. Presented options to CEO - she chose what felt uniquely theirs.</p>
+        </div>
+        <div class="process-step rv d1">
+          <div class="step-num">05</div>
+          <div class="step-icon"><i class="bi bi-grid-1x2"></i></div>
+          <h3 class="step-title">Wireframes & IA</h3>
+          <p class="step-text">Restructured the information architecture from the ground up. Created low-fidelity
+            wireframes for client sign-off before moving to high-fidelity design.</p>
+        </div>
+        <div class="process-step rv d2">
+          <div class="step-num">06</div>
+          <div class="step-icon"><i class="bi bi-code-slash"></i></div>
+          <h3 class="step-title">Design → Code</h3>
+          <p class="step-text">Designed and then hand-coded all 27 pages in WordPress. Built custom animations,
+            parallax effects, hover interactions, and a mobile-responsive layout throughout.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESEARCH -->
+  <section class="research-section" id="research">
+    <div class="section-inner">
+      <div class="section-header rv">
+        <span class="lbl">03 - Research</span>
+        <h2 class="section-title">What the <em>testing</em> told me</h2>
+      </div>
+      <div class="research-grid">
+        <div class="research-findings">
+          <div class="finding-item rv">
+            <div class="finding-tag">Navigation</div>
+            <div class="finding-title">Users lost in the menu</div>
+            <div class="finding-text">During testing sessions, participants consistently couldn't distinguish between
+              top-level navigation items. "Education" and "Programs" felt interchangeable. Users gave up before finding
+              what they needed.</div>
+          </div>
+          <div class="finding-item rv d1">
+            <div class="finding-tag">Content Overload</div>
+            <div class="finding-title">Too much, all at once</div>
+            <div class="finding-text">Every page tried to do too many things. Long blocks of text, multiple competing
+              CTAs, and dense imagery meant users couldn't identify a single clear action to take. Scanning was nearly
+              impossible.</div>
+          </div>
+          <div class="finding-item rv d2">
+            <div class="finding-tag">Mobile Experience</div>
+            <div class="finding-title">Broken on the devices people actually use</div>
+            <div class="finding-text">The majority of the target audience accesses the internet via mobile. The site was
+              not mobile-responsive in meaningful ways - layouts broke, text overflowed, buttons were unreachable.</div>
+          </div>
+          <div class="finding-item rv d3">
+            <div class="finding-tag">Brand Perception</div>
+            <div class="finding-title">The site didn't match the mission</div>
+            <div class="finding-text">When shown the site, several participants used words like "busy" and "confusing."
+              The CEO wanted to be seen as serious, culturally rooted and trustworthy. The site communicated none of
+              that.</div>
+          </div>
+        </div>
+
+        <div class="rv d1">
+          <div class="research-quote-block">
+            <div class="quote-mark">"</div>
+            <p class="quote-text">I wanted to sign up for yoga but I couldn't even find where to go. I gave up and
+              looked for something else.</p>
+            <div class="quote-attribution">- Usability Test Participant</div>
+          </div>
+          <div class="stat-row" style="margin-top:24px;">
+            <div class="stat-box" style="background:var(--warm); border:1px solid var(--sand);">
+              <div class="stat-big" style="color:var(--terra);">4</div>
+              <div class="stat-desc" style="color:var(--mid);">Critical navigation failure points identified in testing
+              </div>
+            </div>
+            <div class="stat-box" style="background:var(--warm); border:1px solid var(--sand);">
+              <div class="stat-big" style="color:var(--terra);">78%</div>
+              <div class="stat-desc" style="color:var(--mid);">Of participants couldn't complete a key task on first
+                attempt</div>
+            </div>
+            <div class="stat-box" style="background:var(--warm); border:1px solid var(--sand);">
+              <div class="stat-big" style="color:var(--terra);">45</div>
+              <div class="stat-desc" style="color:var(--mid);">Existing pages with inconsistent layouts, CTAs, or
+                broken mobile views</div>
+            </div>
+            <div class="stat-box" style="background:var(--warm); border:1px solid var(--sand);">
+              <div class="stat-big" style="color:var(--terra);">2</div>
+              <div class="stat-desc" style="color:var(--mid);">Rounds of usability testing conducted pre- and mid-design
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERSONAS -->
+  <section class="personas-section" id="personas">
+    <div class="section-inner">
+      <div class="section-header rv">
+        <span class="lbl">04 - User Personas</span>
+        <h2 class="section-title">Who I was <em>designing for</em></h2>
+        <p
+          style="margin-top:16px; font-size:16px; color:var(--mid); line-height:1.7; font-weight:300; max-width:640px;">
+          Two primary user archetypes emerged from research. They differ in familiarity with ASCENDtials but share the
+          same core need: to quickly understand what the organisation offers and how to get involved.</p>
+      </div>
+      <div class="personas-grid">
+
+        <div class="persona-card rv">
+          <div class="persona-header">
+            <div class="persona-avatar" style="background: var(--forest);">
+              <i class="bi bi-person-heart"></i>
+            </div>
+            <div class="persona-name">Amara</div>
+            <div class="persona-role">The Community Seeker · 28 · San Diego</div>
+          </div>
+          <div class="persona-body">
+            <p class="persona-bio">Amara is a Black woman who recently moved to San Diego. She's actively looking for
+              community, cultural events, and wellness activities that feel authentic to her background. She heard about
+              ASCENDtials through Instagram and is visiting the site for the first time.</p>
+            <div class="persona-section-label">Motivations</div>
+            <div class="persona-tags">
+              <span class="persona-tag">Finding community</span>
+              <span class="persona-tag">Kemetic yoga</span>
+              <span class="persona-tag">Cultural rootedness</span>
+              <span class="persona-tag">Safe spaces</span>
+            </div>
+            <div class="persona-section-label">Pain Points on the Site</div>
+            <ul class="persona-pains">
+              <li>Can't quickly understand what programs exist or when they happen</li>
+              <li>Doesn't know if the organisation is active and credible</li>
+              <li>Sign-up process is unclear - no obvious first step</li>
+            </ul>
+            <div class="persona-section-label" style="margin-top:20px;">Goals on This Visit</div>
+            <ul class="persona-goals">
+              <li>Find a yoga session she can attend this week</li>
+              <li>Understand the membership options and costs</li>
+              <li>Feel like this is a place she belongs</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="persona-card rv d1">
+          <div class="persona-header">
+            <div class="persona-avatar" style="background: var(--forest);">
+              <i class="bi bi-briefcase"></i>
+            </div>
+            <div class="persona-name">Marcus</div>
+            <div class="persona-role">The Potential Partner · 45 · Los Angeles
+            </div>
+          </div>
+          <div class="persona-body">
+            <p class="persona-bio">Marcus runs a small BIPOC-owned business and heard ASCENDtials has a farmers' market
+              where he might be able to sell. He's evaluating whether the organisation is professional and trustworthy
+              enough to partner with. He needs to see legitimacy fast.</p>
+            <div class="persona-section-label">Motivations</div>
+            <div class="persona-tags">
+              <span class="persona-tag">Vendor opportunities</span>
+              <span class="persona-tag">Legitimacy signals</span>
+              <span class="persona-tag">Community network</span>
+              <span class="persona-tag">Affordable exposure</span>
+            </div>
+            <div class="persona-section-label">Pain Points on the Site</div>
+            <ul class="persona-pains">
+              <li>Can't find the vendor application or market info quickly</li>
+              <li>Site looks amateur - raises doubts about professionalism</li>
+              <li>No clear contact path for business inquiries</li>
+            </ul>
+            <div class="persona-section-label" style="margin-top:20px;">Goals on This Visit</div>
+            <ul class="persona-goals">
+              <li>Find vendor membership pricing and what's included</li>
+              <li>Read about who runs the organisation and their track record</li>
+              <li>Contact the team easily if interested</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CJM -->
+  <section class="cjm-section" id="cjm">
+    <div class="cjm-inner">
+      <div class="cjm-header rv">
+        <span class="lbl">05 - Customer Journey Map</span>
+        <h2 class="section-title" style="color:var(--dark);">The experience, <em>mapped</em></h2>
+        <p
+          style="margin-top:16px; font-size:15px; color:var(--mid); line-height:1.7; max-width:640px; font-weight:300;">
+          Tracing Amara's first visit to the site - from discovery to (attempted) signup - reveals exactly where and why
+          the experience broke down, and where my redesign intervened.</p>
+      </div>
+
+      <div class="cjm-persona-switch rv d1">
+        <div class="cjm-tab active">Amara - Community Seeker</div>
+        <div class="cjm-tab">Marcus - Potential Partner</div>
+      </div>
+
+      <div class="rv d2" style="overflow-x:auto;">
+        <table class="cjm-table" id="cjm-table-amara">
+          <thead>
+            <tr>
+              <th style="width:120px;">Stage</th>
+              <th>Action</th>
+              <th>Thoughts</th>
+              <th>Emotion</th>
+              <th>Pain Points</th>
+              <th>Opportunities</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="cjm-stage">Discovery</span></td>
+              <td><span class="cjm-action">Sees ASCENDtials on Instagram. Clicks link in bio. Lands on homepage.</span>
+              </td>
+              <td><span class="cjm-thought">"This looks interesting. Let me see what they actually do."</span></td>
+              <td>
+                <div class="emotion-dots">
+                  <div class="dot happy"></div>
+                  <div class="dot happy"></div>
+                  <div class="dot happy"></div>
+                  <span class="emotion-label">Curious</span>
+                </div>
+              </td>
+              <td><span class="pain-chip">Homepage overwhelming</span><span class="pain-chip">No clear mission statement
+                  above fold</span></td>
+              <td><span class="opp-chip">Strong hero with mission + visual</span><span
+                  class="opp-chip">Personality-first layout</span></td>
+            </tr>
+            <tr>
+              <td><span class="cjm-stage">Explore</span></td>
+              <td><span class="cjm-action">Scrolls homepage. Tries to navigate via the menu. Clicks "Programs"
+                  dropdown.</span></td>
+              <td><span class="cjm-thought">"Wait, what's the difference between Programs and Education? There are so
+                  many options."</span></td>
+              <td>
+                <div class="emotion-dots">
+                  <div class="dot neutral"></div>
+                  <div class="dot frustrated"></div>
+                  <span class="emotion-label">Confused</span>
+                </div>
+              </td>
+              <td><span class="pain-chip">8-item navigation with similar labels</span><span class="pain-chip">No visual
+                  hierarchy</span></td>
+              <td><span class="opp-chip">Simplified nav groupings</span><span class="opp-chip">Visual program tiles on
+                  homepage</span></td>
+            </tr>
+            <tr>
+              <td><span class="cjm-stage">Find Yoga</span></td>
+              <td><span class="cjm-action">Tries to find yoga sessions. Clicks multiple pages. Eventually finds Kemetic
+                  Yoga page.</span></td>
+              <td><span class="cjm-thought">"I had to click through 5 pages to find this. Hopefully it's still
+                  active..."</span></td>
+              <td>
+                <div class="emotion-dots">
+                  <div class="dot frustrated"></div>
+                  <div class="dot frustrated"></div>
+                  <span class="emotion-label">Frustrated</span>
+                </div>
+              </td>
+              <td><span class="pain-chip">Yoga buried 3 levels deep</span><span class="pain-chip">Session schedule
+                  unclear</span><span class="pain-chip">Outdated event dates</span></td>
+              <td><span class="opp-chip">Yoga as featured section on Programs page</span><span
+                  class="opp-chip">Interactive session cards with hover info</span></td>
+            </tr>
+            <tr>
+              <td><span class="cjm-stage">Consider</span></td>
+              <td><span class="cjm-action">Reads about sessions. Wants to sign up. Looks for a button or form.</span>
+              </td>
+              <td><span class="cjm-thought">"How do I actually book? Do I need to be a member first?"</span></td>
+              <td>
+                <div class="emotion-dots">
+                  <div class="dot neutral"></div>
+                  <div class="dot frustrated"></div>
+                  <span class="emotion-label">Uncertain</span>
+                </div>
+              </td>
+              <td><span class="pain-chip">No clear CTA on yoga page</span><span class="pain-chip">Membership vs. free
+                  access unclear</span></td>
+              <td><span class="opp-chip">Dedicated CTA per session type</span><span class="opp-chip">Membership
+                  comparison made visible</span></td>
+            </tr>
+            <tr>
+              <td><span class="cjm-stage">Membership</span></td>
+              <td><span class="cjm-action">Navigates to Membership page. Sees pricing. Tries to subscribe.</span></td>
+              <td><span class="cjm-thought">"$25 seems reasonable. But I don't understand what I actually get."</span>
+              </td>
+              <td>
+                <div class="emotion-dots">
+                  <div class="dot neutral"></div>
+                  <div class="dot neutral"></div>
+                  <span class="emotion-label">Evaluating</span>
+                </div>
+              </td>
+              <td><span class="pain-chip">Tier benefits poorly explained</span><span class="pain-chip">No social proof
+                  or testimonials</span></td>
+              <td><span class="opp-chip">Clear benefit breakdown per tier</span><span class="opp-chip">Add member
+                  testimonials</span></td>
+            </tr>
+            <tr>
+              <td><span class="cjm-stage">Decision</span></td>
+              <td><span class="cjm-action">Clicks Subscribe. Navigates away. Doesn't complete.</span></td>
+              <td><span class="cjm-thought">"Let me think about this. I'll come back later." (She doesn't.)</span></td>
+              <td>
+                <div class="emotion-dots">
+                  <div class="dot frustrated"></div>
+                  <div class="dot neutral"></div>
+                  <span class="emotion-label">Abandoned</span>
+                </div>
+              </td>
+              <td><span class="pain-chip">No urgency or motivation to act now</span><span class="pain-chip">Lost trust
+                  due to clunky experience</span></td>
+              <td><span class="opp-chip">Streamlined subscribe flow</span><span class="opp-chip">Add community photos
+                  for belonging signal</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="cjm-table" id="cjm-table-marcus" style="display:none;">
+          <thead>
+            <tr>
+              <th style="width:120px;">Stage</th>
+              <th>Action</th>
+              <th>Thoughts</th>
+              <th>Emotion</th>
+              <th>Pain Points</th>
+              <th>Opportunities</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="cjm-stage">Awareness</span></td>
+              <td><span class="cjm-action">Hears about ASCENDtials farmers' market from a colleague. Searches online and
+                  lands on site.</span></td>
+              <td><span class="cjm-thought">"Let's see if these people are legit."</span></td>
+              <td>
+                <div class="emotion-dots">
+                  <div class="dot neutral"></div>
+                  <div class="dot neutral"></div><span class="emotion-label">Evaluating</span>
+                </div>
+              </td>
+              <td><span class="pain-chip">Homepage doesn't signal credibility</span></td>
+              <td><span class="opp-chip">Mission + track record front and centre</span></td>
+            </tr>
+            <tr>
+              <td><span class="cjm-stage">Assess</span></td>
+              <td><span class="cjm-action">Looks for About page, team info, history, and proof of impact.</span></td>
+              <td><span class="cjm-thought">"Who founded this? How long have they been around? Are they serious?"</span>
+              </td>
+              <td>
+                <div class="emotion-dots">
+                  <div class="dot neutral"></div>
+                  <div class="dot frustrated"></div><span class="emotion-label">Skeptical</span>
+                </div>
+              </td>
+              <td><span class="pain-chip">Team page hard to find</span><span class="pain-chip">No impact numbers
+                  visible</span></td>
+              <td><span class="opp-chip">Founder story prominently placed</span><span class="opp-chip">Stats on
+                  homepage</span></td>
+            </tr>
+            <tr>
+              <td><span class="cjm-stage">Find Market</span></td>
+              <td><span class="cjm-action">Tries to find farmers' market vendor info. Navigates Clubs dropdown.</span>
+              </td>
+              <td><span class="cjm-thought">"Why is vendor info under 'Clubs'? That makes no sense."</span></td>
+              <td>
+                <div class="emotion-dots">
+                  <div class="dot frustrated"></div>
+                  <div class="dot frustrated"></div>
+                  <div class="dot frustrated"></div><span class="emotion-label">Frustrated</span>
+                </div>
+              </td>
+              <td><span class="pain-chip">Vendor section buried in wrong category</span><span class="pain-chip">Pricing
+                  not immediately visible</span></td>
+              <td><span class="opp-chip">Vendor CTA on Farmers' Market page</span><span class="opp-chip">Clearer nav
+                  label for market</span></td>
+            </tr>
+            <tr>
+              <td><span class="cjm-stage">Evaluate</span></td>
+              <td><span class="cjm-action">Reads vendor membership pricing. Compares Basic/Pro/Premium tiers.</span>
+              </td>
+              <td><span class="cjm-thought">"The prices seem reasonable but I still don't know what the booth setup is
+                  like."</span></td>
+              <td>
+                <div class="emotion-dots">
+                  <div class="dot neutral"></div>
+                  <div class="dot neutral"></div><span class="emotion-label">Cautious</span>
+                </div>
+              </td>
+              <td><span class="pain-chip">No photos of the market environment</span><span class="pain-chip">Enrol button
+                  feels untrustworthy</span></td>
+              <td><span class="opp-chip">Market photos + testimonials from vendors</span></td>
+            </tr>
+            <tr>
+              <td><span class="cjm-stage">Contact</span></td>
+              <td><span class="cjm-action">Decides to reach out before committing. Looks for a contact form or
+                  email.</span></td>
+              <td><span class="cjm-thought">"I'll just email them. But I can't even find a direct email."</span></td>
+              <td>
+                <div class="emotion-dots">
+                  <div class="dot frustrated"></div><span class="emotion-label">Annoyed</span>
+                </div>
+              </td>
+              <td><span class="pain-chip">Contact info inconsistently placed</span><span class="pain-chip">No response
+                  time expectation set</span></td>
+              <td><span class="opp-chip">Contact form on every market-related page</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- USER FLOW -->
+  <section class="flow-section" id="userflow">
+    <div class="flow-inner">
+      <div class="section-header rv">
+        <span class="lbl">06 - User Flow</span>
+        <h2 class="section-title">Redesigning the <em>path</em></h2>
+        <p
+          style="margin-top:16px; font-size:15px; color:var(--mid); line-height:1.7; max-width:640px; font-weight:300;">
+          The original site had no clear user flows - pages connected arbitrarily. Below is the redesigned path for
+          Amara's primary goal: discovering yoga and signing up for membership.</p>
+      </div>
+
+      <div class="flow-diagram rv d1">
+        <div class="flow-path-row">
+          <div class="flow-node start">Instagram / Word of Mouth</div>
+          <span class="flow-arrow-sep">→</span>
+          <div class="flow-node">
+            <div class="flow-node-title">Homepage</div>
+            <div class="flow-node-sub">Mission + Program tiles</div>
+          </div>
+          <span class="flow-arrow-sep">→</span>
+          <div class="flow-node">
+            <div class="flow-node-title">Programs Page</div>
+            <div class="flow-node-sub">Yoga tile visible</div>
+          </div>
+          <span class="flow-arrow-sep">→</span>
+          <div class="flow-node">
+            <div class="flow-node-title">Kemetic Yoga Page</div>
+            <div class="flow-node-sub">Session cards, hover info</div>
+          </div>
+          <span class="flow-arrow-sep">→</span>
+          <div class="flow-node">
+            <div class="flow-node-title">Membership</div>
+            <div class="flow-node-sub">Clear tier comparison</div>
+          </div>
+          <span class="flow-arrow-sep">→</span>
+          <div class="flow-node end">Signed Up</div>
+        </div>
+
+        <div class="flow-stage-label">Before Redesign → Redesign Solution</div>
+        <div class="flow-compare-grid">
+          <div class="flow-phase-bar">Explore</div>
+          <div class="flow-phase-bar">Decide</div>
+          <div class="flow-phase-bar">Convert</div>
+          <div class="flow-phase-bar">Engage</div>
+
+          <div class="flow-chip problem"><span class="flow-chip-title">Complex Menu</span>8 ambiguous items</div>
+          <div class="flow-chip problem"><span class="flow-chip-title">Content Overload</span>No clear CTA</div>
+          <div class="flow-chip problem"><span class="flow-chip-title">Yoga buried deep</span>5 clicks to find</div>
+          <div class="flow-chip problem"><span class="flow-chip-title">Drop-off</span>User abandons</div>
+
+          <div class="flow-chip solution"><span class="flow-chip-title">Restructured Nav</span>5 clear groupings</div>
+          <div class="flow-chip solution"><span class="flow-chip-title">Visual Program Tiles</span>1 CTA per section
+          </div>
+          <div class="flow-chip solution"><span class="flow-chip-title">Yoga Featured</span>Hover cards, 2 clicks
+          </div>
+          <div class="flow-chip solution"><span class="flow-chip-title">Clear Membership</span>Benefits explained
+          </div>
+        </div>
+
+        <div class="flow-stage-label">Interactive Features Built</div>
+        <div class="flow-features-row">
+          <div class="flow-feature-chip">Parallax Hero Effect <span class="flow-feature-sub">· Mouse-driven
+              depth</span></div>
+          <div class="flow-feature-chip">Hover Cards <span class="flow-feature-sub">· Yoga sessions expand</span>
+          </div>
+          <div class="flow-feature-chip">Font Carousel <span class="flow-feature-sub">· CEO brand selection</span>
+          </div>
+          <div class="flow-feature-chip">Pricing Toggle <span class="flow-feature-sub">· Membership comparison</span>
+          </div>
+          <div class="flow-feature-chip">Event Calendar <span class="flow-feature-sub">· Filter by program</span>
+          </div>
+          <div class="flow-feature-chip">Mobile Nav <span class="flow-feature-sub">· Hamburger menu</span></div>
+        </div>
+
+        <div class="flow-legend">
+          <div class="flow-legend-item"><span class="flow-legend-swatch"
+              style="background: var(--white); border: 1px solid var(--sand);"></span>Redesigned screens</div>
+          <div class="flow-legend-item"><span class="flow-legend-swatch"
+              style="background: rgba(178,58,52,.06); border: 1px solid rgba(178,58,52,.35);"></span>Original
+            problems</div>
+          <div class="flow-legend-item"><span class="flow-legend-swatch"
+              style="background: rgba(201,169,110,.1); border: 1px solid rgba(201,169,110,.4);"></span>Solutions
+            applied</div>
+          <div class="flow-legend-item"><span class="flow-legend-swatch" style="background: var(--accent);"></span>
+            Success state</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FONTS SECTION -->
+  <div class="fonts-section" id="typography">
+    <div class="fonts-inner">
+      <div class="fonts-header rv">
+        <span class="lbl">07 - Typography</span>
+        <h2 class="section-title">Finding the <em>voice</em></h2>
+        <p
+          style="color:rgba(255,255,255,.55); font-size:15px; line-height:1.75; max-width:620px; font-weight:300; margin-bottom:64px;">
+          To find a visual style that reflects the unique identity of ASCENDtials, I began by selecting fonts. My
+          options included Aesthetic Romance, Grotesk, Playfair Display, Harmony Embrace, Quantify, and Satoshi. I tested
+          each pairing and presented them to the CEO. She chose what felt genuinely theirs.</p>
+      </div>
+
+      <!-- Result - chosen fonts -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;margin-bottom: 20px;" class="rv d2">
+        <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:56px;">
+          <div class="chosen-badge"><i class="bi bi-check-circle-fill"></i> CEO's Choice - Display</div>
+          <div
+            style="font-size:72px; color:var(--white); font-weight:500; line-height:1; margin:24px 0; letter-spacing:-1px; font-family:'Playfair Display',serif; font-style:normal;">
+            Playfair Display</div>
+          <p style="font-size:15px; color:rgba(255,255,255,.55); line-height:1.75; font-weight:300; max-width:400px;">
+            This font brought the editorial warmth and quiet confidence the brand needed. Its serif detail feels
+            rooted and considered without tipping into formality - it gives the site a distinct, memorable voice.</p>
+          <div
+            style="margin-top:28px; padding-top:28px; border-top:1px solid rgba(255,255,255,.08); display:flex; gap:32px; flex-wrap:wrap;">
+            <div>
+              <div
+                style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,.3); text-transform:uppercase; margin-bottom:4px;">
+                Usage</div>
+              <div style="font-size:13px; color:rgba(255,255,255,.7);">All headings & titles</div>
+            </div>
+            <div>
+              <div
+                style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,.3); text-transform:uppercase; margin-bottom:4px;">
+                Weight</div>
+              <div style="font-size:13px; color:rgba(255,255,255,.7);">500 / 600 (Medium / Semibold)</div>
+            </div>
+            <div>
+              <div
+                style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,.3); text-transform:uppercase; margin-bottom:4px;">
+                Feel</div>
+              <div style="font-size:13px; color:rgba(255,255,255,.7);">Editorial, warm, distinctive</div>
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:56px;">
+          <div class="chosen-badge"><i class="bi bi-check-circle-fill"></i> CEO's Choice - Body</div>
+          <div
+            style="font-size:72px; color:var(--white); font-weight:400; line-height:1; margin:24px 0; font-family:'DM Sans',sans-serif;">
+            DM Sans</div>
+          <p
+            style="font-size:15px; color:rgba(255,255,255,.55); line-height:1.75; font-weight:300; max-width:400px; font-family:'DM Sans',sans-serif;">
+            Selected for readability and harmony with Playfair Display. DM Sans creates a clean, balanced style that
+            reinforces an approachable feel across all pages.</p>
+          <div
+            style="margin-top:28px; padding-top:28px; border-top:1px solid rgba(255,255,255,.08); display:flex; gap:32px; flex-wrap:wrap;">
+            <div>
+              <div
+                style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,.3); text-transform:uppercase; margin-bottom:4px;">
+                Usage</div>
+              <div style="font-size:13px; color:rgba(255,255,255,.7);">Body text & UI labels</div>
+            </div>
+            <div>
+              <div
+                style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,.3); text-transform:uppercase; margin-bottom:4px;">
+                Weight</div>
+              <div style="font-size:13px; color:rgba(255,255,255,.7);">300 / 400 / 500 (Light / Regular / Medium)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN SYSTEM -->
+  <section class="screens-section" id="screens">
+    <div class="section-inner">
+      <div class="section-header rv">
+        <span class="lbl">08 - The Design System</span>
+        <h2 class="section-title">Built once, <em>reused</em> everywhere</h2>
+      </div>
+      <div class="screens-intro rv d1">
+        <p>27 pages don't scale if every one of them is a one-off. I built a small set of reusable templates - nav,
+          hero, tab container, card grid, and form block - and every page on the site is one of these five patterns
+          with different content dropped in.</p>
+      </div>
+
+      <div class="ds-template-grid">
+        <div class="ds-template-card">
+          <div class="ds-template-num">TEMPLATE 00</div>
+          <div class="ds-template-name">Navigation</div>
+          <div class="ds-template-desc">Floating glass nav on scroll - flat and full-width at rest, lifts and blurs
+            once you're deep in a page.</div>
+          <div class="ds-template-used">Used on: <b>All 27 pages</b></div>
+        </div>
+        <div class="ds-template-card">
+          <div class="ds-template-num">TEMPLATE 01</div>
+          <div class="ds-template-name">Editorial Hero</div>
+          <div class="ds-template-desc">Full-bleed, mission-first hero with a mouse-tracking radial highlight behind
+            the visual.</div>
+          <div class="ds-template-used">Used on: <b>Homepage, Environmental Programs, Farmers Market</b></div>
+        </div>
+        <div class="ds-template-card">
+          <div class="ds-template-num">TEMPLATE 02</div>
+          <div class="ds-template-name">Tab Container</div>
+          <div class="ds-template-desc">Six programs, one page - a sticky tab bar swaps in a full hero + content
+            panel per program.</div>
+          <div class="ds-template-used">Used on: <b>Environmental Programs</b></div>
+        </div>
+        <div class="ds-template-card wide">
+          <div class="ds-template-num">TEMPLATE 03</div>
+          <div class="ds-template-name">Card Grid</div>
+          <div class="ds-template-desc">Repeatable program tiles with icon, short copy, and a single CTA - used
+            anywhere the org needs to list several offerings at a glance.</div>
+          <div class="ds-template-used">Used on: <b>Youth Programs, Literacy Workshops, Join Us</b></div>
+        </div>
+        <div class="ds-template-card wide">
+          <div class="ds-template-num">TEMPLATE 04</div>
+          <div class="ds-template-name">Contact / Form Block</div>
+          <div class="ds-template-desc">One consistent form pattern - validation, spacing, confirmation state -
+            reused across every intake point on the site.</div>
+          <div class="ds-template-used">Used on: <b>Contact, Volunteer, Sponsor, Vendor</b></div>
+        </div>
+      </div>
+
+      <!-- Page Showcases -->
+      <div class="page-showcase">
+
+        <!-- ═══ TEMPLATE 01 — EDITORIAL HERO ════════════════════════════════════ -->
+        <div class="showcase-item-full rv">
+          <div class="showcase-info" style="max-width: 640px; margin-bottom: 40px;">
+            <div class="showcase-tag">Template 01 - Editorial Hero · Homepage, Environmental Programs, Farmers
+              Market</div>
+            <h3 class="showcase-title">First impression, reimagined</h3>
+            <p class="showcase-text">The homepage was the biggest offender - too much content, no hierarchy, no
+              breathing room. I restructured it around a single editorial hero: mission-first copy, one clear CTA
+              pair, above the fold. Same pattern reused on 3 top-level pages with different copy. (The nav above is
+              doing its own thing too - flat at rest, floating glass on scroll, same component on all 27 pages.)
+              Below is what these pages looked like before the redesign - the full after gallery is further down the
+              page.</p>
+            <ul class="showcase-features">
+              <li>Bold hero with mission statement above the fold</li>
+              <li>Cut the homepage from 11 stacked sections down to 6</li>
+              <li>Headline max 2 lines on desktop, forced with white-space rules</li>
+            </ul>
+          </div>
+
+          <div class="real-tab-demo-scope full-bleed" id="heroDemoScope" style="padding-top: 40px;">
+            <div class="ba-grid">
+              <div class="ba-col">
+                <span class="ba-badge before">Before</span>
+                <div class="browser-frame ba-expand" data-tag="Homepage — Before">
+                  <div class="browser-frame-bar">
+                    <span class="bf-dot"></span><span class="bf-dot"></span><span class="bf-dot"></span>
+                    <span class="browser-frame-url">ascendtials.org</span>
+                  </div>
+                  <div class="browser-frame-imgbox">
+                    <img src="./assets/img/Home Page Before.png" alt="ASCENDtials homepage — original design"
+                      onerror="this.closest('.browser-frame').style.background='var(--color-navy-deep)'; this.style.display='none';">
+                  </div>
+                </div>
+                <div class="ba-caption">Homepage</div>
+              </div>
+              <div class="ba-col">
+                <span class="ba-badge before">Before</span>
+                <div class="browser-frame ba-expand" data-tag="Environmental Programs — Before">
+                  <div class="browser-frame-bar">
+                    <span class="bf-dot"></span><span class="bf-dot"></span><span class="bf-dot"></span>
+                    <span class="browser-frame-url">ascendtials.org</span>
+                  </div>
+                  <div class="browser-frame-imgbox">
+                    <img src="./assets/img/Environmental Programs Page Before.png"
+                      alt="Environmental Programs page — original design"
+                      onerror="this.closest('.browser-frame').style.background='var(--color-navy-deep)'; this.style.display='none';">
+                  </div>
+                </div>
+                <div class="ba-caption">Environmental Programs</div>
+              </div>
+              <div class="ba-col">
+                <span class="ba-badge before">Before</span>
+                <div class="browser-frame ba-expand" data-tag="Farmers Market — Before">
+                  <div class="browser-frame-bar">
+                    <span class="bf-dot"></span><span class="bf-dot"></span><span class="bf-dot"></span>
+                    <span class="browser-frame-url">ascendtials.org</span>
+                  </div>
+                  <div class="browser-frame-imgbox">
+                    <img src="./assets/img/Farmers Market Page Before.png" alt="Farmers Market page — original design"
+                      onerror="this.closest('.browser-frame').style.background='var(--color-navy-deep)'; this.style.display='none';">
+                  </div>
+                </div>
+                <div class="ba-caption">Farmers Market</div>
+              </div>
+              <div class="ba-col">
+                <span class="ba-badge before">Before</span>
+                <div class="browser-frame ba-expand" data-tag="Contact Us — Before">
+                  <div class="browser-frame-bar">
+                    <span class="bf-dot"></span><span class="bf-dot"></span><span class="bf-dot"></span>
+                    <span class="browser-frame-url">ascendtials.org</span>
+                  </div>
+                  <div class="browser-frame-imgbox">
+                    <img src="./assets/img/Contact Us Page Before.png" alt="Contact Us page — original design"
+                      onerror="this.closest('.browser-frame').style.background='var(--color-navy-deep)'; this.style.display='none';">
+                  </div>
+                </div>
+                <div class="ba-caption">Contact Us</div>
+              </div>
+            </div>
+            <a href="#pagesMosaic" class="ba-after-link">See the after gallery - all 27 redesigned pages ↓</a>
+          </div>
+        </div>
+
+        <!-- ═══ TEMPLATE 02 — TAB CONTAINER (real code, ported, full width) ════════════════════════════════════ -->
+        <div class="showcase-item-full rv d1">
+          <div class="showcase-info" style="max-width: 640px; margin-bottom: 40px;">
+            <div class="showcase-tag">Template 02 - Tab Container · Environmental Programs</div>
+            <h3 class="showcase-title">Six programs, one page</h3>
+            <p class="showcase-text">Kemetic Yoga, hikes, highway clean-ups, beach clean-ups, the garden project, and
+              tree planting each used to live on a separate page - same header, same footer, same nav, six times
+              over. I pulled them into one page with a tab switcher instead: one URL, one set of shared styles, and a
+              much easier page for the team to update. Below is the actual component, pasted in with its real
+              classes and real copy.</p>
+            <ul class="showcase-features">
+              <li>6 programs consolidated into a single template</li>
+              <li>Same tab pattern reused on Farmers Market and Get Involved</li>
+              <li>Each tab keeps its own hero image, benefits grid, and CTA</li>
+              <li>Deep-linkable and keyboard accessible (role="tab")</li>
+            </ul>
+          </div>
+
+          <div class="real-tab-demo-scope full-bleed" id="progTabsSection">
+            <div class="prog-tabs-section prog-tabs-wrapper">
+              <div class="prog-tabs-header">
+                <span class="section-label">Our Programs</span>
+                <h2 class="section-h2">Take action <em>with us</em></h2>
+              </div>
+              <div class="prog-tab-bar prog-tab-bar-sticky" role="tablist" id="progTabBar">
+                <button class="prog-tab-btn active" data-tab="yoga" role="tab" aria-selected="true">Kemetic
+                  Yoga</button>
+                <button class="prog-tab-btn" data-tab="hike" role="tab" aria-selected="false">Hike with Us</button>
+                <button class="prog-tab-btn" data-tab="highway" role="tab" aria-selected="false">Highway
+                  Cleanup</button>
+                <button class="prog-tab-btn" data-tab="beach" role="tab" aria-selected="false">Beach
+                  Cleanup</button>
+                <button class="prog-tab-btn" data-tab="garden" role="tab" aria-selected="false">Garden
+                  Project</button>
+                <button class="prog-tab-btn" data-tab="trees" role="tab" aria-selected="false">Tree
+                  Planting</button>
+              </div>
+
+              <!-- TAB 1 · KEMETIC YOGA -->
+              <div class="prog-tab-panel active" id="tab-yoga">
+                <div class="tab-page">
+                  <div class="tab-page-hero">
+                    <div class="tab-page-hero-img">
+                      <img src="./assets/img/kemetic-yoga/Kemetic Yoga.jpg"
+                        onerror="this.parentElement.style.background='var(--color-navy-deep)'; this.style.display='none';"
+                        alt="Kemetic Yoga">
+                    </div>
+                    <div class="tab-page-hero-text">
+                      <span class="section-label">Ancestral Wellness · Spiritual Practice</span>
+                      <h2>Kemetic Yoga<br><em>Ancient African roots</em></h2>
+                      <p>Kemetic Yoga is an ancient African Yoga art form that promotes African philosophy and
+                        practices originating from the land of Kemet. This ancient practice emphasizes the
+                        rejuvenation of the body and mind, providing BIPOC communities with cultural roots that stem
+                        from their African origins.</p>
+                      <p>Our Kemetic Yoga sessions use our Whiteness to Oneness™ and KOS-Melanin-ology™ curricula at
+                        their foundation. We work to dismantle structural inequality and foster constructive dialogue
+                        around Melanin and its purpose.</p>
+                      <div class="tab-cta-row tab-cta-row--flush">
+                        <a href="#" class="btn-primary">Sign Up for a Session</a>
+                        <a href="#" class="btn-outline">Full Program Page</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-section">
+                    <h3 class="tab-section-title">What is Kemetic Yoga?</h3>
+                    <div class="tab-two-col">
+                      <div>
+                        <p class="tab-body-p tab-body-p--mb">Kemetic Yoga is an ancient African Yoga art form that
+                          promotes African philosophy and practices that originated from the land of Kemet. This
+                          ancient Yoga art form emphasizes the rejuvenation of the body and mind as it attempts to
+                          provide BIPOC communities with cultural roots that stem from its antique African origins.
+                        </p>
+                        <p class="tab-body-p">Kemetic Yoga preserves ancient African culture through deep breath
+                          techniques and movements that activate the nervous system and place the mind into a flow
+                          state - emitting alpha waves associated with deep relaxation, increased concentration, and
+                          emotional balance.</p>
+                      </div>
+                      <div>
+                        <p class="tab-body-p tab-body-p--mb">Kemetic Yoga is innovative because it places an emphasis
+                          on the alignment of the vertebral column while mimicking the geometric configuration of
+                          Egyptian pyramids within its poses and movements. Its African origins are imperative to its
+                          success, giving BIPOC participants a way to reconnect with their roots while mitigating
+                          stress.</p>
+                        <p class="tab-body-p">Our program hopes to create a safe environment for participants
+                          willing to explore themselves through Kemetic Yoga breathwork, movements, poses, postures,
+                          grounding, and meditation.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-section">
+                    <h3 class="tab-section-title">Benefits of Practice</h3>
+                    <div class="tab-bento-grid">
+                      <div class="tab-bento-card wide">
+                        <div class="tab-bento-icon">
+                          <svg viewBox="0 0 24 24">
+                            <path
+                              d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                            <path d="M12 8v4l3 3" />
+                          </svg>
+                        </div>
+                        <strong>Flow State Activation</strong>
+                        <span>Deep breath techniques activate the nervous system, placing the mind in an alpha-wave
+                          flow state for heightened focus, deep relaxation, and inner calm.</span>
+                      </div>
+                      <div class="tab-bento-card narrow">
+                        <div class="tab-bento-icon">
+                          <svg viewBox="0 0 24 24">
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                          </svg>
+                        </div>
+                        <strong>Mental Health Support</strong>
+                        <span>Relieves stress, depression, and anxiety while cultivating emotional balance.</span>
+                      </div>
+                      <div class="tab-bento-card narrow">
+                        <div class="tab-bento-icon">
+                          <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                          </svg>
+                        </div>
+                        <strong>Ancestral Reconnection</strong>
+                        <span>Reconnects BIPOC participants with African cultural traditions and the wisdom of their
+                          ancestors.</span>
+                      </div>
+                      <div class="tab-bento-card narrow">
+                        <div class="tab-bento-icon">
+                          <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 8v4M12 16h.01" />
+                          </svg>
+                        </div>
+                        <strong>Body Strengthening</strong>
+                        <span>Builds flexibility, endurance, and digestive health through pyramid-geometry poses.</span>
+                      </div>
+                      <div class="tab-bento-card narrow">
+                        <div class="tab-bento-icon">
+                          <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                          </svg>
+                        </div>
+                        <strong>Community &amp; Oneness</strong>
+                        <span>A safe, affirming space for collective healing, cultural pride, and shared ancestral
+                          identity.</span>
+                      </div>
+                      <div class="tab-bento-card full">
+                        <div class="tab-bento-icon">
+                          <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                              d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                          </svg>
+                        </div>
+                        <div>
+                          <strong>KOS-Melanin-ology™</strong>
+                          <span>Encourages participants to explore Knowledge of Self through our proprietary
+                            curriculum as a form of self-healing and empowerment. BIPOC-centered, all backgrounds
+                            welcome.</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-two-col tab-two-col--mb">
+                    <div>
+                      <h3 class="tab-section-title">Where &amp; When</h3>
+                      <div class="tab-section-body">
+                        <p>Sessions are offered at the <strong>Marina District</strong> and other San Diego
+                          locations. Kemetic Yoga is also incorporated into our Fellowship Program, youth Park
+                          Takeover events, and our Cosmic Literacy workshops (evening sessions).</p>
+                        <p>Open to all - BIPOC-centered, all backgrounds welcome.</p>
+                      </div>
+                      <div class="tab-cta-row">
+                        <a href="#" class="btn-primary">Sign Up for a Session</a>
+                        <a href="#" class="btn-outline">Full Program Page</a>
+                      </div>
+                    </div>
+                    <div class="tab-callout tab-callout--flush">
+                      <p><strong>Our curriculum foundation:</strong> Our Kemetic Yoga sessions use our Whiteness to
+                        Oneness™ and KOS-Melanin-ology™ curricula at their foundation. We work to dismantle
+                        structural inequality and foster constructive dialogue around Melanin and its purpose. Our
+                        program is geared toward BIPOC participants, but we welcome participants from all cultures
+                        and backgrounds.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TAB 2 · HIKE WITH ASCENDTIALS -->
+              <div class="prog-tab-panel" id="tab-hike">
+                <div class="tab-page">
+                  <div class="tab-page-hero">
+                    <div class="tab-page-hero-img">
+                      <img src="./assets/img/environmental-programs/hike.jpg"
+                        onerror="this.style.background='var(--color-surface)';this.removeAttribute('src')"
+                        alt="Hike with ASCENDtials">
+                    </div>
+                    <div class="tab-page-hero-text">
+                      <span class="section-label">Outdoor Experience</span>
+                      <h2>Hike with<br><em>ASCENDtials</em></h2>
+                      <p>ASCENDtials is hosting a hiking event for all skill levels, featuring guided tours of hidden
+                        treasures and breathtaking views. Participants will be captivated by towering mountains,
+                        waterfalls, and lush forests, while forming new bonds with fellow outdoor enthusiasts.</p>
+                      <div class="tab-cta-row tab-cta-row--flush">
+                        <a href="#" class="btn-primary">Sign Up</a>
+                        <a href="#" class="btn-outline">Get More Info</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-section">
+                    <h3 class="tab-section-title">Hike with us</h3>
+                    <div class="tab-section-body">
+                      <p>Join ASCENDtials for guided hikes through some of San Diego's most beautiful landscapes.
+                        Our hikes are led by experienced volunteers who know the trails and love sharing the hidden
+                        gems of the region.</p>
+                      <p>No matter your fitness level, there is a hike for you. We believe in the power of movement
+                        in nature to heal the body and mind.</p>
+                    </div>
+                    <div class="tab-callout">
+                      <p><strong>Hike with Park Ranger</strong> - Join us for a guided hike with a local Park Ranger
+                        through San Diego's stunning nature preserves. Experience breathtaking views, learn about
+                        local ecology, and build community with fellow outdoor enthusiasts of all skill levels.</p>
+                    </div>
+                    <div class="tab-cta-row">
+                      <a href="#" class="btn-primary">Sign Up for a Hike</a>
+                      <a href="#" class="btn-outline">Contact Us</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TAB 3 · HIGHWAY CLEANUP -->
+              <div class="prog-tab-panel" id="tab-highway">
+                <div class="tab-page">
+                  <div class="tab-page-hero">
+                    <div class="tab-page-hero-img">
+                      <img src="./assets/img/environmental-programs/Highway cleanups.jpg"
+                        onerror="this.style.background='var(--color-surface)';this.removeAttribute('src')"
+                        alt="Highway Cleanups">
+                    </div>
+                    <div class="tab-page-hero-text">
+                      <span class="section-label">Environmental Action</span>
+                      <h2>Highway<br><em>Cleanups</em></h2>
+                      <p>Monthly cleanups are conducted for 9 highways and ramps, with volunteers provided with
+                        safety equipment, trash grabbers, and bags. Reservations can be made via scheduling and
+                        entire groups can reserve space.</p>
+                      <p>Cleanups are during the mornings on Saturdays and Sundays. Sign up as a volunteer for
+                        unlimited access.</p>
+                      <div class="tab-cta-row tab-cta-row--flush">
+                        <a href="#" class="btn-primary">Sign Up &amp; Sign Waiver</a>
+                        <a href="#" class="btn-outline">Become a Volunteer</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-photo-strip">
+                    <img src="https://ascendtials.org/wp-content/uploads/2026/02/Cornado.webp"
+                      alt="Coronado Highway Cleanup" onerror="this.style.display='none'">
+                    <img src="https://ascendtials.org/wp-content/uploads/2026/02/highway.webp" alt="Highway Cleanup"
+                      onerror="this.style.display='none'">
+                    <img src="https://ascendtials.org/wp-content/uploads/2025/05/highway-5n.png"
+                      alt="Highway 5 North Cleanup" onerror="this.style.display='none'">
+                    <img src="https://ascendtials.org/wp-content/uploads/2025/05/highway-94e-e1750100135101.png"
+                      alt="Highway 94 East Cleanup" onerror="this.style.display='none'">
+                    <img src="https://ascendtials.org/wp-content/uploads/2025/05/highway-125N.png"
+                      alt="Highway 125 North Cleanup" onerror="this.style.display='none'">
+                  </div>
+
+                  <div class="tab-section">
+                    <h3 class="tab-section-title">Clean with us - starting by signing our waiver</h3>
+                    <div class="cleanup-prep-grid">
+                      <div class="cleanup-notes-col">
+                        <div class="cleanup-notes-heading">Before Your First Cleanup</div>
+                        <div class="cleanup-bento">
+                          <div class="cleanup-card cleanup-card--4col">
+                            <div class="cleanup-card-num">01</div>
+                            <p class="cleanup-card-text">Watch the safety video below before all cleanups take
+                              place.</p>
+                          </div>
+                          <div class="cleanup-card cleanup-card--2col">
+                            <div class="cleanup-card-num">02</div>
+                            <p class="cleanup-card-text">All volunteers receive safety vests, goggles, gloves, trash
+                              grabbers, and bags.</p>
+                          </div>
+                          <div class="cleanup-card cleanup-card--2col">
+                            <div class="cleanup-card-num">03</div>
+                            <p class="cleanup-card-text">Max 12 volunteers per single cleanup event.</p>
+                          </div>
+                          <div class="cleanup-card cleanup-card--4col cleanup-card--gold">
+                            <div class="cleanup-card-num">04</div>
+                            <p class="cleanup-card-text">No cap on how often you can volunteer - come back as many
+                              times as you like.</p>
+                          </div>
+                          <div class="cleanup-card cleanup-card--3col">
+                            <div class="cleanup-card-num">05</div>
+                            <p class="cleanup-card-text">Request a Letter of Appreciation once your cleanup is
+                              complete.</p>
+                          </div>
+                          <div class="cleanup-card cleanup-card--3col">
+                            <div class="cleanup-card-num">06</div>
+                            <p class="cleanup-card-text">Group cleanups available - sign up with your team.</p>
+                          </div>
+                          <div class="cleanup-card cleanup-card--6col cleanup-card--row">
+                            <div class="cleanup-card-num cleanup-card-num--shrink">07</div>
+                            <p class="cleanup-card-text">Please sign the waiver form before your cleanup begins.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cleanup-signup-col">
+                        <div>
+                          <div class="cleanup-signup-heading">How to Sign Up</div>
+                          <p class="cleanup-signup-body cleanup-signup-body--mb">Sign up as a volunteer for
+                            unlimited access to cleanups. Once registered, follow the instructions in the
+                            confirmation message to access our cleanup events.</p>
+                          <p class="cleanup-signup-body">We look forward to seeing you there!</p>
+                        </div>
+                        <div class="cleanup-after-section">
+                          <div class="cleanup-signup-heading">After the Cleanup</div>
+                          <p class="cleanup-signup-body">We celebrate with lunch together! Participation is free -
+                            we accept donations for supplies and lunch for the groups.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TAB 4 · BEACH CLEANUP -->
+              <div class="prog-tab-panel" id="tab-beach">
+                <div class="tab-page">
+                  <div class="tab-page-hero">
+                    <div class="tab-page-hero-img">
+                      <img src="https://ascendtials.org/wp-content/uploads/2024/08/Beach-cleanups.jpg"
+                        onerror="this.style.background='var(--color-surface)';this.removeAttribute('src')"
+                        alt="Beach Cleanups">
+                    </div>
+                    <div class="tab-page-hero-text">
+                      <span class="section-label">Coastal Stewardship</span>
+                      <h2>Beach<br><em>Cleanups</em></h2>
+                      <p>San Diego's coastline is one of our community's most treasured resources - and one of the
+                        most threatened. ASCENDtials organizes regular beach cleanup events to protect our shores,
+                        remove harmful litter, and restore the health of coastal ecosystems.</p>
+                      <p>Whether you're a first-time volunteer or a regular steward of the coast, you'll find
+                        community, purpose, and a cleaner beach at the end of your morning.</p>
+                      <div class="tab-cta-row tab-cta-row--flush">
+                        <a href="#" class="btn-primary">Sign Up</a>
+                        <a href="#" class="btn-outline">Become a Volunteer</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-section">
+                    <h3 class="tab-section-title">Join a Beach Cleanup</h3>
+                    <div class="tab-section-body">
+                      <p>All equipment is provided on-site - just show up ready to help. Cleanups are open to all
+                        ages, families, and experience levels. Hours count toward volunteer and community service
+                        requirements.</p>
+                    </div>
+                    <div class="tab-benefits-grid">
+                      <div class="tab-benefit-card">
+                        <div class="tab-benefit-icon">
+                          <svg viewBox="0 0 24 24">
+                            <path
+                              d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3.5 9 10 7M12 12C12 7 17 4 22 5c0 5-3.5 9-10 7" />
+                          </svg>
+                        </div>
+                        <strong>All Equipment Provided</strong>
+                        <span>Safety vests, gloves, trash bags, and grabbers are all provided on-site. Just show up
+                          ready to help.</span>
+                      </div>
+                      <div class="tab-benefit-card">
+                        <div class="tab-benefit-icon">
+                          <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                          </svg>
+                        </div>
+                        <strong>All Ages &amp; Skill Levels</strong>
+                        <span>Open to families, youth, elders, and first-time volunteers. No experience needed.</span>
+                      </div>
+                      <div class="tab-benefit-card">
+                        <div class="tab-benefit-icon">
+                          <svg viewBox="0 0 24 24">
+                            <path
+                              d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z" />
+                          </svg>
+                        </div>
+                        <strong>Service Hours</strong>
+                        <span>Hours count toward volunteer, school, or community service requirements. Letters
+                          available upon request.</span>
+                      </div>
+                    </div>
+                    <div class="tab-cta-row">
+                      <a href="#" class="btn-primary">Sign Up for a Cleanup</a>
+                      <a href="#" class="btn-outline">Become a Volunteer</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TAB 5 · GARDEN PROJECT & MEMBERSHIP -->
+              <div class="prog-tab-panel" id="tab-garden">
+                <div class="tab-page">
+                  <div class="tab-page-hero">
+                    <div class="tab-page-hero-img">
+                      <img src="https://ascendtials.org/wp-content/uploads/2024/09/Join-Our-Gardening-Initiative.jpg"
+                        onerror="this.style.background='var(--color-surface)';this.removeAttribute('src')"
+                        alt="Garden Project">
+                    </div>
+                    <div class="tab-page-hero-text">
+                      <span class="section-label">Urban Agriculture</span>
+                      <h2>Garden Project<br><em>&amp; Membership</em></h2>
+                      <p>Welcome to the ASCENDtials Garden Project, where community and sustainability come
+                        together. Our garden, in Bonita's Sweetwater Summit Park, is more than a food source. It's a
+                        vibrant space for learning, connection, and caring for the environment.</p>
+                      <div class="tab-cta-row tab-cta-row--flush">
+                        <a href="#" class="btn-primary">Join as a Member</a>
+                        <a href="#" class="btn-outline">Ask a Question</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-section">
+                    <h3 class="tab-section-title">Our Mission</h3>
+                    <div class="tab-section-body">
+                      <p>The Garden Project stems from ASCENDtials' goal to better connect with the earth. We
+                        empower people to grow food in pesticide-free garden beds, available to volunteers every
+                        day. This project aims to grow not just plants, but a community.</p>
+                    </div>
+                  </div>
+
+                  <div class="tab-section">
+                    <h3 class="tab-section-title">What to Expect as a Garden Project Member</h3>
+                    <h4 class="tab-sub-heading">Membership Privileges</h4>
+                    <div class="tab-benefits-grid">
+                      <div class="tab-benefit-card">
+                        <div class="tab-benefit-icon">
+                          <svg viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <path d="M3 9h18M9 21V9" />
+                          </svg>
+                        </div>
+                        <strong>Access to Garden Beds</strong>
+                        <span>Well-maintained planting beds suitable for growing fresh fruits, vegetables, grains,
+                          or herbs - available every day.</span>
+                      </div>
+                      <div class="tab-benefit-card">
+                        <div class="tab-benefit-icon">
+                          <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 8v4l3 3" />
+                          </svg>
+                        </div>
+                        <strong>Tools &amp; Resources</strong>
+                        <span>Members can use on-site gardening tools, water, and supplies included with
+                          membership.</span>
+                      </div>
+                      <div class="tab-benefit-card">
+                        <div class="tab-benefit-icon">
+                          <svg viewBox="0 0 24 24">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                          </svg>
+                        </div>
+                        <strong>Exclusive Events &amp; Workshops</strong>
+                        <span>Members-only events and workshops held at Sweetwater Community Garden.</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-section">
+                    <h3 class="tab-section-title">Membership Enrollment</h3>
+                    <div class="tab-section-body">
+                      <p>Becoming a member of the ASCENDtials Garden Project is easy. Membership becomes active
+                        upon receipt of the membership fee and a $5 key fee for new members.</p>
+                    </div>
+                    <div class="tab-price-grid">
+                      <div class="tab-price-card">
+                        <div class="price-amount">$5</div>
+                        <div class="price-period">per month</div>
+                      </div>
+                      <div class="tab-price-card">
+                        <div class="price-amount">$45</div>
+                        <div class="price-period">per year</div>
+                      </div>
+                    </div>
+                    <div class="tab-callout">
+                      <p><strong>New members:</strong> A $5 key fee applies to all new members. Both new and
+                        returning members must attend the annual Spring Gathering and an orientation session to
+                        stay active.</p>
+                    </div>
+                    <div class="tab-cta-row">
+                      <a href="#" class="btn-primary">Join as a Member</a>
+                      <a href="#" class="btn-outline">Contact Us with Questions</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TAB 6 · TREE PLANTING -->
+              <div class="prog-tab-panel" id="tab-trees">
+                <div class="tab-page">
+                  <div class="tab-page-hero">
+                    <div class="tab-page-hero-img">
+                      <img src="./assets/img/environmental-programs/Tree Planting.jpg"
+                        onerror="this.style.background='var(--color-surface)';this.removeAttribute('src')"
+                        alt="Tree Planting">
+                    </div>
+                    <div class="tab-page-hero-text">
+                      <span class="section-label">Urban Forestry · "Leafing Our Legacy"</span>
+                      <h2>Tree Planting<br><em>with ASCENDtials</em></h2>
+                      <p>Join ASCENDtials during the tree planting season and assist the Sweetwater Park Rangers in
+                        their efforts to restore San Diego's forests. Trees improve air quality, provide habitat
+                        for wildlife, reduce stormwater runoff, and cool off our cities.</p>
+                      <div class="tab-cta-row tab-cta-row--flush">
+                        <a href="#" class="btn-primary">Reserve a Free Tree</a>
+                        <a href="#" class="btn-outline">Get Involved</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-section">
+                    <h3 class="tab-section-title">Leaf Your Legacy - Free Tree Giveaway!</h3>
+                    <div class="tab-two-col tab-two-col--stretch tab-two-col--mb">
+                      <div class="tab-section-body tab-section-body--flush">
+                        <p>As we mark a decade of dedication to cultivating San Diego's urban forest, we've
+                          partnered with Tree San Diego on the "Leafing Our Legacy" initiative. This year-long
+                          celebration will see us donating <strong>800 trees across San Diego</strong>, enriching
+                          our green landscape.</p>
+                        <p class="tab-body-p--mt">We'll be distributing trees at our Farmers' Markets in <strong>City
+                            Heights</strong> and the <strong>Marina District</strong>. Fill out the form to reserve
+                          a tree.</p>
+                      </div>
+                      <div class="tree-stat-card">
+                        <div>
+                          <div class="tree-stat-number">800</div>
+                          <div class="tree-stat-label">trees donated across San Diego</div>
+                        </div>
+                        <div class="tree-stat-divider"></div>
+                        <div>
+                          <div class="tree-stat-partner-label">In partnership with</div>
+                          <div class="tree-stat-partner-name">Tree San Diego</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="event-details-card">
+                      <div>
+                        <div class="event-details-label">Event Details</div>
+                        <div class="event-details-rows">
+                          <div class="event-details-row">
+                            <span class="event-details-key">When</span>
+                            <span class="event-details-val">Sunday, November 3rd · 10:00 AM - 2:00 PM</span>
+                          </div>
+                          <div class="event-details-row">
+                            <span class="event-details-key">Where</span>
+                            <span class="event-details-val">ASCENDKemet Collective Certified Farmers' Market of City
+                              Heights<br>4325 Wightman St, San Diego, CA 92105</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="event-details-label">Monthly Distribution</div>
+                        <p class="tab-body-p">Pick up your free tree and help us green San Diego! Each month, we'll
+                          be hosting tree-distribution events across the city.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-section">
+                    <h3 class="tab-section-title">Why Trees Matter</h3>
+                    <div class="tab-benefits-grid">
+                      <div class="tab-benefit-card">
+                        <div class="tab-benefit-icon">
+                          <svg viewBox="0 0 24 24">
+                            <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z" />
+                            <path
+                              d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                          </svg>
+                        </div>
+                        <strong>Air Quality</strong>
+                        <span>Trees exchange large amounts of carbon dioxide for oxygen, directly improving the air
+                          we breathe.</span>
+                      </div>
+                      <div class="tab-benefit-card">
+                        <div class="tab-benefit-icon">
+                          <svg viewBox="0 0 24 24">
+                            <path
+                              d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3.5 9 10 7M12 12C12 7 17 4 22 5c0 5-3.5 9-10 7" />
+                          </svg>
+                        </div>
+                        <strong>Wildlife Habitat</strong>
+                        <span>Urban trees provide essential habitat and food sources for birds, insects, and other
+                          wildlife.</span>
+                      </div>
+                      <div class="tab-benefit-card">
+                        <div class="tab-benefit-icon">
+                          <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                          </svg>
+                        </div>
+                        <strong>Climate Combat</strong>
+                        <span>Trees reduce stormwater runoff, cool cities, and help combat the effects of climate
+                          change.</span>
+                      </div>
+                    </div>
+                    <div class="tab-cta-row">
+                      <a href="#" class="btn-primary">Reserve a Free Tree</a>
+                      <a href="#" class="btn-outline">Contact Us</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function () {
+            const wrap = document.getElementById('progTabsSection');
+            if (!wrap) return;
+            wrap.querySelectorAll('.prog-tab-btn').forEach(btn => {
+              btn.addEventListener('click', () => {
+                wrap.querySelectorAll('.prog-tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+                btn.classList.add('active');
+                btn.setAttribute('aria-selected', 'true');
+                wrap.querySelectorAll('.prog-tab-panel').forEach(p => p.classList.remove('active'));
+                const panel = wrap.querySelector('#tab-' + btn.dataset.tab);
+                if (panel) panel.classList.add('active');
+              });
+            });
+          })();
+        </script>
+
+
+
+      </div>
+
+      <!-- Pages mosaic - all pages, filterable by category -->
+      <div class="rv ds-mosaic-wrap">
+        <span class="lbl lbl-block">All 27 Pages, By Category</span>
+        <p class="ds-mosaic-intro">Every page
+          maps to one of the five templates above. Filter by category to see how the same system holds up across
+          very different content.</p>
+
+        <div class="ds-filter-bar">
+          <button class="ds-filter-btn active" data-filter="all">All</button>
+          <button class="ds-filter-btn" data-filter="about">About (3)</button>
+          <button class="ds-filter-btn" data-filter="education">Education (10)</button>
+          <button class="ds-filter-btn" data-filter="programs">Programs (17)</button>
+          <button class="ds-filter-btn" data-filter="clubs">Clubs (3)</button>
+          <button class="ds-filter-btn" data-filter="join">Join Us (5)</button>
+        </div>
+
+        <div class="ds-bento-grid" id="pagesMosaic">
+          <div class="mosaic-item ds-bento-item wide" data-category="about">
+            <img src="./assets/img/Home Page.png" alt="Home">
+            <div class="ds-bento-label">Home</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="about">
+            <img src="./assets/img/Our Team Page.png" alt="Our Team">
+            <div class="ds-bento-label">Our Team</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="about">
+            <img src="./assets/img/Contact Us Page.png" alt="Contact Us">
+            <div class="ds-bento-label">Contact Us</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="education">
+            <img src="./assets/img/Literacy Workshops Page.png" alt="Literacy Workshops">
+            <div class="ds-bento-label">Literacy Workshops</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="education">
+            <img src="./assets/img/From Whiteness to Oneness Page.png" alt="From Whiteness to Oneness">
+            <div class="ds-bento-label">From Whiteness to Oneness</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="education">
+            <img src="./assets/img/Internship and Fellowship Page.png" alt="Internship and Fellowship">
+            <div class="ds-bento-label">Internship &amp; Fellowship</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="education">
+            <img src="./assets/img/Service Learning Page.png" alt="Service Learning">
+            <div class="ds-bento-label">Service Learning</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="programs">
+            <img src="./assets/img/Events Page.png" alt="Event Calendar">
+            <div class="ds-bento-label">Event Calendar</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="programs">
+            <img src="./assets/img/Farmers Market Page.png" alt="Farmers Market">
+            <div class="ds-bento-label">Farmers Market + FAQ</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item wide" data-category="programs">
+            <img src="./assets/img/Environmental Programs Page.png" alt="Environmental Programs">
+            <div class="ds-bento-label">Environmental Programs (6 tabs)</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="programs">
+            <img src="./assets/img/Youth Programs Page.png" alt="Youth Programs">
+            <div class="ds-bento-label">Youth Programs</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="programs">
+            <img src="./assets/img/Program Participant Page.png" alt="Program Participant">
+            <div class="ds-bento-label">Program Participant</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="clubs">
+            <img src="./assets/img/MDBA Portal Page.png" alt="MDBA Portal">
+            <div class="ds-bento-label">MDBA Portal</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="clubs">
+            <img src="./assets/img/Join Our Community Page.png" alt="Join Our Community">
+            <div class="ds-bento-label">Join Our Community</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item wide" data-category="join">
+            <img src="./assets/img/Get Involved Page.png" alt="Get Involved">
+            <div class="ds-bento-label">Get Involved (5 tabs)</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="join">
+            <img src="./assets/img/Sponsor Page.png" alt="Sponsor">
+            <div class="ds-bento-label">Sponsor</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="join">
+            <img src="./assets/img/Vendor Page.png" alt="Vendor">
+            <div class="ds-bento-label">Vendor</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="join">
+            <img src="./assets/img/Volunteer Page.png" alt="Volunteer">
+            <div class="ds-bento-label">Volunteer</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+          <div class="mosaic-item ds-bento-item" data-category="join">
+            <img src="./assets/img/Partner with Us Page.png" alt="Partner with Us">
+            <div class="ds-bento-label">Partner with Us</div>
+            <div class="ds-bento-zoom">⤢</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lightbox: click any page thumbnail to view full, scrollable -->
+      <div class="ds-lightbox" id="dsLightbox">
+        <span class="ds-lightbox-tag" id="dsLightboxTag"></span>
+        <button class="ds-lightbox-close" id="dsLightboxClose" aria-label="Close">✕</button>
+        <div class="ds-lightbox-inner" id="dsLightboxInner">
+          <img id="dsLightboxImg" src="" alt="">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const bar = document.querySelector('.ds-filter-bar');
+      const grid = document.getElementById('pagesMosaic');
+      if (!bar || !grid) return;
+      const buttons = bar.querySelectorAll('.ds-filter-btn');
+      const items = grid.querySelectorAll('.mosaic-item');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const filter = btn.dataset.filter;
+          items.forEach(item => {
+            const show = filter === 'all' || item.dataset.category === filter;
+            item.classList.toggle('ds-hidden', !show);
+          });
+        });
+      });
+
+      // Lightbox - click a page thumbnail to view full size, scrollable
+      const lightbox = document.getElementById('dsLightbox');
+      const lightboxImg = document.getElementById('dsLightboxImg');
+      const lightboxTag = document.getElementById('dsLightboxTag');
+      const lightboxInner = document.getElementById('dsLightboxInner');
+      const lightboxClose = document.getElementById('dsLightboxClose');
+
+      items.forEach(item => {
+        item.addEventListener('click', () => {
+          const img = item.querySelector('img');
+          const label = item.querySelector('.ds-bento-label');
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt;
+          lightboxTag.textContent = label ? label.textContent : img.alt;
+          lightbox.classList.add('open');
+        });
+      });
+
+      function closeLightbox() { lightbox.classList.remove('open'); }
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+      lightboxInner.addEventListener('click', (e) => e.stopPropagation());
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+    })();
+  </script>
+
+  <!-- IMPACT -->
+  <section class="impact-section" id="impact">
+    <div class="impact-inner">
+      <div class="impact-header rv">
+        <span class="lbl">09 - Outcomes</span>
+        <h2 class="section-title">Real results for a real community</h2>
+      </div>
+      <div class="impact-grid">
+        <div class="impact-card rv">
+          <div class="impact-num" style="font-size:44px;">45 → 27</div>
+          <div class="impact-desc">Pages consolidated through a shared tab component and reusable templates - fewer
+            pages, same content, zero navigation confusion</div>
+        </div>
+        <div class="impact-card rv d1">
+          <div class="impact-num" style="font-size:56px;">↑ Mem-<br>berships</div>
+          <div class="impact-desc">Increased subscription signups following the redesign launch, attributed to clearer
+            value communication</div>
+        </div>
+        <div class="impact-card rv d2">
+          <div class="impact-num">2×</div>
+          <div class="impact-desc">Rounds of usability testing - before and during design - to validate decisions with
+            real users</div>
+        </div>
+        <div class="impact-card rv d3">
+          <div class="impact-num" style="font-size:52px;">100%</div>
+          <div class="impact-desc">Mobile-responsive pages - a complete shift from the previous desktop-only layout
+          </div>
+        </div>
+      </div>
+      <p class="impact-note rv d2">
+        Note: This project was a volunteer engagement. After my departure, the site was partially modified by a
+        subsequent developer which altered some of the coded interactions. The screenshots and documentation in this
+        case study reflect the original designs as I delivered them.
+      </p>
+    </div>
+  </section>
+
+  <!-- LEARNINGS -->
+  <section class="learnings-section">
+    <div class="section-inner">
+      <div class="section-header rv">
+        <span class="lbl">10 - Reflections</span>
+        <h2 class="section-title">What I <em>learned</em></h2>
+      </div>
+      <div class="learnings-grid">
+        <div class="learning-item rv">
+          <div class="learning-icon"><i class="bi bi-heart"></i></div>
+          <h3 class="learning-title">Design within constraints is the hardest skill</h3>
+          <p class="learning-text">Being told "keep the bold, heavy style we love" while also fixing navigation and
+            usability forced me to deeply understand the difference between aesthetic preference and functional design
+            debt. The answer was never "simplify everything" - it was "simplify the right things."</p>
+        </div>
+        <div class="learning-item rv d1">
+          <div class="learning-icon"><i class="bi bi-people-fill"></i></div>
+          <h3 class="learning-title">Testing with the actual community changes everything</h3>
+          <p class="learning-text">Testing with community members - not generic user profiles - revealed barriers I
+            never would have anticipated. Cultural context, trust signals, and belonging cues mattered enormously to
+            this audience, and wouldn't have surfaced in a standard usability session.</p>
+        </div>
+        <div class="learning-item rv d2">
+          <div class="learning-icon"><i class="bi bi-code-slash"></i></div>
+          <h3 class="learning-title">Being able to code your own designs is a superpower</h3>
+          <p class="learning-text">Designing and coding 27 pages gave me real insight into what's possible in
+            production, how animations behave at real sizes, and where assumptions break. The parallax effects, hover
+            cards, and responsive layouts I built would have been lost in translation to any developer who didn't share
+            the design intent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">YH</div>
+    <div class="footer-center">
+      <p>ASCENDtials · UX/UI & Development Case Study · 2024</p>
+
+    </div>
+    <div class="footer-social">
+      <!-- <a href="https://www.linkedin.com/in/yana-h-16800a296/" target="_blank"><i class="bi bi-linkedin"></i></a>
+    <a href="https://www.behance.net/yana_harcourt" target="_blank"><i class="bi bi-behance"></i></a>
+    <a href="https://www.instagram.com/yana.uxui.lab/" target="_blank"><i class="bi bi-instagram"></i></a>
+    <a href="https://github.com/yanaharcourt" target="_blank"><i class="bi bi-github"></i></a> -->
+    </div>
+  </footer>
+
+  <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <script>
+    // ── CURSOR
+    const cur = document.getElementById('cur');
+    const ctr = document.getElementById('ctr');
+    document.addEventListener('mousemove', e => {
+      cur.style.left = e.clientX + 'px';
+      cur.style.top = e.clientY + 'px';
+      ctr.style.left = e.clientX + 'px';
+      ctr.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a,button,[class*="card"],[class*="step"],[class*="item"]').forEach(el => {
+      el.addEventListener('mouseenter', () => { ctr.style.transform = 'translate(-50%,-50%) scale(1.6)'; ctr.style.borderColor = 'var(--terra)'; });
+      el.addEventListener('mouseleave', () => { ctr.style.transform = 'translate(-50%,-50%) scale(1)'; ctr.style.borderColor = 'rgba(139,99,71,.4)'; });
+    });
+
+    // ── SCROLL REVEAL: disabled, content is always visible
+
+    // ── SCROLL TOP
+    const st = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => st.classList.toggle('show', window.scrollY > 500));
+
+    // ── BEFORE/AFTER: click to expand in the shared lightbox
+    (function () {
+      const lightbox = document.getElementById('dsLightbox');
+      const lightboxImg = document.getElementById('dsLightboxImg');
+      const lightboxTag = document.getElementById('dsLightboxTag');
+      if (!lightbox) return;
+      document.querySelectorAll('.ba-expand').forEach(frame => {
+        frame.addEventListener('click', () => {
+          const img = frame.querySelector('img');
+          if (!img) return;
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt;
+          lightboxTag.textContent = frame.dataset.tag || img.alt;
+          lightbox.classList.add('open');
+        });
+      });
+    })();
+
+    // ── NAV: same floating-glass mechanic as the live site (Template 00)
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── CJM TABS
+    document.querySelectorAll('.cjm-tab').forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.cjm-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('cjm-table-amara').style.display = i === 0 ? 'table' : 'none';
+        document.getElementById('cjm-table-marcus').style.display = i === 1 ? 'table' : 'none';
+      });
+    });
+  </script>
+</body>
+
+</html>
