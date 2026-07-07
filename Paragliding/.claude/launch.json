@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ascendtials-preview",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd \"/Users/yana/Desktop/my Desktop/yanaharcourt.github.io/ascendtials\" && exec python3 -m http.server 4173"],
+      "port": 4173
+    },
+    {
+      "name": "aura-preview",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd \"/Users/yana/Desktop/my Desktop/yanaharcourt.github.io/Aura\" && exec python3 -m http.server 4174"],
+      "port": 4174
+    },
+    {
+      "name": "paragliding-preview",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd \"/Users/yana/Desktop/my Desktop/Paragliding\" && exec python3 -m http.server 4175"],
+      "port": 4175
+    }
+  ]
+}

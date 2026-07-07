@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:innsbruck-paragliding.at)",
+      "Bash(curl -s -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0.0.0 Safari/537.36\" \"https://innsbruck-paragliding.at/shop/\" -o /tmp/shop_orig.html -w \"%{http_code}\\\\n\")",
+      "Bash(grep -o '<nav[^>]*>.*</nav>' /tmp/shop_orig.html | head -1 | grep -oE '<a[^>]*>[^<]*</a>' | head -30; echo \"---raw menu search---\"; grep -oiE '\\(menu-item[^>]*>\\\\s*<a[^>]*>[^<]+\\)' /tmp/shop_orig.html | sed -E 's/.*>//' | head -30)",
+      "Bash(curl -s -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0.0.0 Safari/537.36\" \"https://innsbruck-paragliding.at/kontakt/\" -o /tmp/kontakt_orig.html -w \"%{http_code}\\\\n\")",
+      "Read(//tmp/**)",
+      "Bash(python3 -)",
+      "Bash(curl -s -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0.0.0 Safari/537.36\" \"https://innsbruck-paragliding.at/impressum/\" -o /tmp/impressum_orig.html -w \"%{http_code}\\\\n\")",
+      "Bash(curl -s -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0.0.0 Safari/537.36\" \"https://innsbruck-paragliding.at/\" -o /tmp/home_orig.html -w \"%{http_code}\\\\n\")",
+      "Bash(curl -s -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0.0.0 Safari/537.36\" \"https://innsbruck-paragliding.at/datenschutzerklarung/\" -o /tmp/datenschutz_orig.html -w \"%{http_code}\\\\n\")",
+      "Read(//System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/**)",
+      "Bash(python3 -c \"import esprima\")",
+      "Bash(find ~/Desktop -iname \"*ascendtials*\" 2>/dev/null; echo \"---\"; ls -la \"/Users/yana/Desktop/my Desktop/Paragliding\" 2>/dev/null)",
+      "Skill(redesign-existing-projects)",
+      "Skill(redesign-existing-projects:*)",
+      "mcp__Claude_Preview__preview_start",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(open \"/Users/yana/Desktop/my Desktop/yanaharcourt.github.io/ascendtials/ascendtials.html\")"
+    ]
+  }
+}

@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop – Innsbruck Paragliding</title>
+<meta name="description" content="Flug buchen bei Innsbruck Paragliding: Actionflug, Thermikflug, Standardflug, Premium Tandemflug, Kombo-Flug und Fluggutschein — alle Tandemflüge im Überblick.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M2 13c6-9 22-9 28 0-6 2-10 1.5-14-2-4 3.5-8 4-14 2z' fill='%23E0562D'/%3E%3Cpath d='M16 11v13m0 0l-5 4m5-4l5 4' stroke='%231C1B19' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   DESIGN TOKENS — kept identical to index.html so both pages
+   share one visual language.
+========================================================= */
+:root{
+  --color-bg:#F7F3EC;
+  --color-bg-alt:#EFE8D9;
+  --color-surface:#FFFFFF;
+  --color-ink:#1C1B19;
+  --color-ink-soft:#5B5850;
+  --color-ink-faint:#8C8880;
+  --color-line:rgba(28,27,25,0.10);
+  --color-line-strong:rgba(28,27,25,0.16);
+  --color-accent:#E0562D;
+  --color-accent-dark:#B8431F;
+  --color-accent-soft:#F7E2D9;
+  --color-night:#14181B;
+  --color-night-soft:#232A30;
+  --color-on-dark:#FFFFFF;
+  --color-on-dark-soft:rgba(255,255,255,.78);
+  --color-on-dark-faint:rgba(255,255,255,.55);
+  --color-on-dark-line:rgba(255,255,255,.16);
+
+  --font-display:'Bricolage Grotesque', sans-serif;
+  --font-body:'Plus Jakarta Sans', sans-serif;
+
+  --fs-2xs:.78rem;
+  --fs-xs:.85rem;
+  --fs-sm:.92rem;
+  --fs-base:1rem;
+  --fs-md:1.05rem;
+  --fs-lg:1.15rem;
+  --fs-xl:1.4rem;
+  --fs-2xl:1.6rem;
+  --fs-stat:2.3rem;
+  --fs-price:3rem;
+  --fs-h3:1.4rem;
+  --fs-h2:clamp(2rem,3vw,2.7rem);
+  --fs-h2-sm:clamp(1.9rem,2.6vw,2.5rem);
+  --fs-h1:clamp(3.3rem,6.2vw,6.4rem);
+  --fs-h1-sm:clamp(2.6rem,4.6vw,4.2rem);
+
+  --lh-tight:1.05;
+  --lh-heading:1.3;
+  --lh-body:1.6;
+
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px;
+  --space-6:24px; --space-7:28px; --space-8:32px; --space-9:36px; --space-10:40px;
+  --space-11:44px; --space-12:48px; --space-14:56px; --space-16:64px; --space-18:72px;
+  --space-20:80px; --space-24:96px; --space-28:112px; --space-32:128px; --space-36:144px;
+  --space-40:160px; --space-50:190px;
+
+  --radius-sm:14px; --radius-md:20px; --radius-lg:28px; --radius-xl:32px;
+  --radius-pill:999px; --radius-round:50%;
+
+  --shadow-card:0 20px 40px -20px rgba(20,15,10,.25);
+  --shadow-card-hover:0 30px 60px -28px rgba(20,15,10,.28);
+  --shadow-float:0 30px 60px -30px rgba(20,15,10,.35);
+  --shadow-nav:0 2px 8px rgba(20,15,10,.04), 0 20px 40px -18px rgba(20,15,10,.18), inset 0 1px 0 rgba(255,255,255,.9);
+  --shadow-dark-lg:0 40px 70px -28px rgba(6,8,10,.55);
+  --shadow-btn:0 10px 24px -8px rgba(224,86,45,.55);
+  --shadow-btn-hover:0 14px 30px -8px rgba(224,86,45,.65);
+
+  --container-width:1280px;
+  --container-pad:56px;
+  --nav-h:88px;
+  --nav-h-scrolled:68px;
+
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --dur-fast:.3s;
+  --dur-base:.4s;
+  --dur-slow:.5s;
+  --dur-slower:.8s;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;width:100%;}
+body{
+  font-family:var(--font-body);
+  background:var(--color-bg);
+  color:var(--color-ink);
+  line-height:var(--lh-body);
+  font-size:var(--fs-base);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer;}
+button:focus{outline:none;}
+button:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;}
+.container{max-width:var(--container-width);margin:0 auto;padding:0 var(--container-pad);}
+section{position:relative;}
+
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;letter-spacing:-0.02em;line-height:var(--lh-tight);color:var(--color-ink);}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:var(--space-3);
+  font-size:var(--fs-2xs);font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--color-accent-dark);margin-bottom:var(--space-5);
+}
+.eyebrow::before{content:'';width:22px;height:2px;background:var(--color-accent);border-radius:var(--radius-pill);}
+.eyebrow.on-dark{color:var(--color-accent);}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--space-3);
+  padding:var(--space-4) var(--space-7);border-radius:var(--radius-pill);font-weight:600;font-size:var(--fs-sm);
+  cursor:pointer;border:1px solid transparent;white-space:nowrap;
+  transition:transform var(--dur-slow) var(--ease-spring), box-shadow var(--dur-base) var(--ease-out), background var(--dur-fast) ease, color var(--dur-fast) ease, border-color var(--dur-fast) ease;
+}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--color-accent);color:var(--color-on-dark);box-shadow:var(--shadow-btn);}
+.btn-primary:hover{background:var(--color-accent-dark);box-shadow:var(--shadow-btn-hover);}
+.btn-block{width:100%;}
+.btn-ghost-dark{border-color:var(--color-on-dark-line);color:var(--color-on-dark);}
+.btn-ghost-dark:hover{border-color:var(--color-on-dark);background:rgba(255,255,255,.08);}
+.btn-ghost-light{border-color:var(--color-line);color:var(--color-ink);}
+.btn-ghost-light:hover{border-color:var(--color-ink);}
+.btn-sm{padding:var(--space-3) var(--space-6);font-size:var(--fs-xs);}
+
+/* =========================================================
+   NAV — identical component to index.html
+========================================================= */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;height:var(--nav-h);
+  padding:0 var(--container-pad);gap:var(--space-8);
+  transition:all var(--dur-slow) var(--ease-out);
+}
+nav::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:180px;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg, rgba(6,8,10,.65) 0%, rgba(6,8,10,.38) 55%, rgba(6,8,10,0) 100%);
+  opacity:1;transition:opacity var(--dur-base) ease;
+}
+nav.scrolled::before{opacity:0;}
+.nav-logo{display:flex;align-items:center;margin-right:auto;}
+.nav-logo-img{height:42px;width:auto;display:block;filter:brightness(0) invert(1);transition:filter var(--dur-fast) ease;}
+nav.scrolled .nav-logo-img{filter:none;}
+footer .nav-logo-img{filter:brightness(0) invert(1);}
+
+.nav-links{display:flex;align-items:center;gap:var(--space-9);list-style:none;}
+.nav-links a{
+  font-size:var(--fs-sm);font-weight:500;color:var(--color-on-dark-soft);position:relative;
+  transition:color var(--dur-fast) ease;padding:var(--space-1) 0;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-2px;width:0;height:1.5px;background:var(--color-accent);
+  transition:width var(--dur-base) var(--ease-out);
+}
+.nav-links a:hover{color:var(--color-on-dark);}
+.nav-links a:hover::after{width:100%;}
+.nav-links a[aria-current="page"]{color:var(--color-on-dark);}
+.nav-links a[aria-current="page"]::after{width:100%;}
+nav.scrolled .nav-links a[aria-current="page"]{color:var(--color-ink);}
+
+.nav-links-mobile-cta{display:none;}
+
+.cart-badge{
+  display:flex;align-items:center;gap:var(--space-2);flex-shrink:0;
+  color:var(--color-on-dark);font-size:var(--fs-sm);font-weight:600;
+  padding:var(--space-2) var(--space-4);border-radius:var(--radius-pill);
+  border:1px solid var(--color-on-dark-line);transition:border-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+nav.scrolled .cart-badge{color:var(--color-ink);border-color:var(--color-line-strong);}
+
+.lang-toggle{display:flex;align-items:center;gap:2px;padding:3px;border-radius:var(--radius-pill);border:1px solid var(--color-on-dark-line);flex-shrink:0;transition:border-color var(--dur-fast) ease;}
+.lang-toggle-btn{padding:var(--space-1) var(--space-3);border-radius:var(--radius-pill);font-size:var(--fs-2xs);font-weight:700;letter-spacing:.02em;color:var(--color-on-dark-soft);transition:background var(--dur-fast) ease, color var(--dur-fast) ease;}
+.lang-toggle-btn.active{background:var(--color-accent);color:var(--color-on-dark);}
+nav.scrolled .lang-toggle{border-color:var(--color-line-strong);}
+nav.scrolled .lang-toggle-btn{color:var(--color-ink-soft);}
+nav.scrolled .lang-toggle-btn.active{background:var(--color-accent);color:var(--color-on-dark);}
+
+.nav-burger{
+  display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;
+  width:44px;height:44px;flex-shrink:0;border-radius:var(--radius-round);
+  border:1px solid var(--color-on-dark-line);background:transparent;z-index:520;
+}
+.nav-burger span{display:block;width:18px;height:2px;background:var(--color-on-dark);border-radius:var(--radius-pill);transition:transform var(--dur-base) var(--ease-spring), opacity var(--dur-fast) ease, background var(--dur-fast) ease;}
+nav.scrolled .nav-burger{border-color:var(--color-line-strong);}
+nav.scrolled .nav-burger span{background:var(--color-ink);}
+nav.scrolled #navBurger.open{border-color:var(--color-on-dark-line);}
+nav.scrolled #navBurger.open span{background:var(--color-on-dark);}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+.nav-scrim{position:fixed;inset:0;z-index:400;background:rgba(8,9,10,.5);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity var(--dur-base) ease;}
+.nav-scrim.open{opacity:1;pointer-events:auto;}
+
+nav.scrolled{
+  top:var(--space-3);left:var(--space-6);right:var(--space-6);
+  height:var(--nav-h-scrolled);padding:0 var(--space-7);
+  background:rgba(255,255,255,.72);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-radius:var(--radius-pill);
+  border:1px solid rgba(255,255,255,.6);
+  box-shadow:var(--shadow-nav);
+}
+nav.scrolled .nav-links a{color:var(--color-ink-soft);}
+nav.scrolled .nav-links a:hover{color:var(--color-ink);}
+
+/* =========================================================
+   REVEAL
+========================================================= */
+[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity var(--dur-slower) var(--ease-out), transform var(--dur-slower) var(--ease-out);}
+[data-reveal].in{opacity:1;transform:translateY(0);}
+.delay-1{transition-delay:90ms;}
+.delay-2{transition-delay:180ms;}
+.delay-3{transition-delay:270ms;}
+
+/* =========================================================
+   SHOP HEADER — compact banner (this page's "hero")
+========================================================= */
+.shop-header{position:relative;min-height:56vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--color-night);}
+.shop-header-media{position:absolute;inset:0;z-index:0;}
+.shop-header-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);}
+.shop-header-media::after{
+  content:'';position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, rgba(10,12,14,.35) 0%, rgba(10,12,14,.3) 34%, rgba(9,11,13,.94) 96%),
+    linear-gradient(90deg, rgba(6,8,10,.55) 0%, rgba(6,8,10,.05) 55%);
+}
+.shop-header-inner{position:relative;z-index:2;width:100%;padding:calc(var(--nav-h) + var(--space-14)) var(--container-pad) var(--space-14);max-width:var(--container-width);margin:0 auto;color:var(--color-on-dark);display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-8);}
+.breadcrumb{display:flex;align-items:center;gap:var(--space-2);font-size:var(--fs-xs);color:var(--color-on-dark-soft);margin-bottom:var(--space-5);}
+.breadcrumb a{color:var(--color-on-dark-soft);transition:color var(--dur-fast) ease;}
+.breadcrumb a:hover{color:var(--color-on-dark);}
+.breadcrumb span{color:var(--color-on-dark-faint);}
+.shop-header h1{font-size:var(--fs-h1-sm);color:var(--color-on-dark);max-width:16ch;text-shadow:0 2px 24px rgba(0,0,0,.35);}
+.shop-header-sub{margin-top:var(--space-5);max-width:48ch;font-size:var(--fs-lg);color:var(--color-on-dark-soft);}
+.shop-header-orb{width:56px;height:56px;flex-shrink:0;}
+
+/* =========================================================
+   TOOLBAR — result count + sort
+========================================================= */
+.shop-toolbar{display:flex;justify-content:space-between;align-items:center;padding:var(--space-10) 0 var(--space-8);flex-wrap:wrap;gap:var(--space-4);z-index:6;}
+.shop-toolbar p{color:var(--color-ink-soft);font-size:var(--fs-sm);}
+
+.shop-select{position:relative;width:230px;flex-shrink:0;z-index:5;}
+.shop-select.open{z-index:30;}
+.shop-select-trigger{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);
+  padding:var(--space-3) var(--space-5);border-radius:var(--radius-pill);
+  background:var(--color-surface);border:1px solid var(--color-line);color:var(--color-ink);
+  font-family:var(--font-body);font-size:var(--fs-sm);font-weight:500;text-align:left;
+  transition:border-color var(--dur-fast) ease;
+}
+.shop-select-trigger:hover{border-color:var(--color-line-strong);}
+.shop-select.open .shop-select-trigger{border-color:var(--color-accent);}
+.shop-select-chevron{flex-shrink:0;color:var(--color-ink-faint);transition:transform var(--dur-base) var(--ease-spring);}
+.shop-select.open .shop-select-chevron{transform:rotate(180deg);}
+.shop-select-list{
+  position:absolute;left:0;right:0;top:calc(100% + var(--space-2));z-index:20;list-style:none;
+  background:var(--color-surface);border:1px solid var(--color-line);border-radius:var(--radius-md);
+  box-shadow:var(--shadow-card-hover);padding:var(--space-2);
+  opacity:0;transform:translateY(-6px) scale(.98);pointer-events:none;
+  transition:opacity var(--dur-fast) ease, transform var(--dur-base) var(--ease-spring);
+}
+.shop-select.open .shop-select-list{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+.shop-select-list li{padding:var(--space-3) var(--space-4);border-radius:var(--radius-sm);font-size:var(--fs-sm);color:var(--color-ink-soft);cursor:pointer;transition:background var(--dur-fast) ease, color var(--dur-fast) ease;}
+.shop-select-list li:hover{background:var(--color-bg-alt);color:var(--color-ink);}
+.shop-select-list li.selected{color:var(--color-accent-dark);font-weight:600;}
+
+/* =========================================================
+   PRODUCT GRID
+========================================================= */
+.shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6);transition:opacity var(--dur-base) ease;padding-bottom:var(--space-32);}
+
+.product-card{
+  position:relative;display:flex;flex-direction:column;scroll-margin-top:calc(var(--nav-h) + var(--space-8));
+  border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--color-line);background:var(--color-surface);
+  transition:transform var(--dur-slow) var(--ease-spring), box-shadow var(--dur-base) ease, border-color var(--dur-fast) ease;
+}
+.product-card::before{
+  content:'';position:absolute;inset:0;z-index:2;opacity:0;pointer-events:none;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%), rgba(224,86,45,.14), transparent 70%);
+  transition:opacity var(--dur-base) ease;
+}
+.product-card:hover::before{opacity:1;}
+.product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-card-hover);}
+.product-card.featured{border-color:var(--color-accent);}
+
+.product-thumb{position:relative;aspect-ratio:4/3;overflow:hidden;flex-shrink:0;}
+.product-thumb img{width:100%;height:100%;object-fit:cover;transition:transform var(--dur-slower) var(--ease-out);}
+.product-card:hover .product-thumb img{transform:scale(1.06);}
+.product-badge{
+  position:absolute;top:var(--space-4);left:var(--space-4);z-index:3;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(6px);color:var(--color-accent-dark);
+  font-size:var(--fs-2xs);font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  padding:var(--space-2) var(--space-4);border-radius:var(--radius-pill);
+}
+
+.product-body{padding:var(--space-7);display:flex;flex-direction:column;flex:1;position:relative;z-index:1;}
+.product-tag{font-size:var(--fs-2xs);font-weight:600;color:var(--color-ink-faint);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--space-3);}
+.product-body h3{font-size:var(--fs-xl);margin-bottom:var(--space-3);}
+.product-price{font-family:var(--font-display);font-size:var(--fs-2xl);font-weight:700;margin-bottom:var(--space-4);}
+.product-price span{font-size:var(--fs-sm);font-weight:500;color:var(--color-ink-faint);}
+.product-body p{color:var(--color-ink-soft);font-size:var(--fs-sm);margin-bottom:var(--space-7);flex:1;}
+.product-body .btn{align-self:flex-start;}
+
+/* =========================================================
+   TRUST STRIP
+========================================================= */
+.trust-strip{border-top:1px solid var(--color-line);padding:var(--space-14) 0;}
+.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-8);}
+.trust-item{display:flex;align-items:center;gap:var(--space-5);}
+.trust-icon{width:52px;height:52px;border-radius:var(--radius-md);background:var(--color-accent-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.trust-item h4{font-size:var(--fs-md);margin-bottom:var(--space-1);}
+.trust-item p{color:var(--color-ink-soft);font-size:var(--fs-xs);}
+
+/* =========================================================
+   FAQ — accordion
+========================================================= */
+.faq{padding:var(--space-24) 0;border-top:1px solid var(--color-line);}
+.faq-head{max-width:52ch;margin-bottom:var(--space-14);}
+.faq-head h2{font-size:var(--fs-h2-sm);}
+.faq-head p{margin-top:var(--space-4);color:var(--color-ink-soft);font-size:var(--fs-md);}
+.faq-list{width:100%;}
+.faq-item{border-bottom:1px solid var(--color-line);}
+.faq-item:first-child{border-top:1px solid var(--color-line);}
+.faq-q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);
+  padding:var(--space-7) 0;text-align:left;font-family:var(--font-display);font-weight:700;
+  font-size:var(--fs-lg);color:var(--color-ink);
+}
+.faq-q-icon{
+  flex-shrink:0;width:34px;height:34px;border-radius:var(--radius-round);
+  background:var(--color-accent-soft);display:flex;align-items:center;justify-content:center;
+  color:var(--color-accent-dark);position:relative;transition:background var(--dur-fast) ease, transform var(--dur-base) var(--ease-spring);
+}
+.faq-q-icon::before,.faq-q-icon::after{content:'';position:absolute;background:currentColor;border-radius:var(--radius-pill);transition:transform var(--dur-base) var(--ease-spring), opacity var(--dur-fast) ease;}
+.faq-q-icon::before{width:14px;height:1.6px;}
+.faq-q-icon::after{width:1.6px;height:14px;}
+.faq-item.open .faq-q-icon{background:var(--color-accent);color:var(--color-on-dark);}
+.faq-item.open .faq-q-icon::after{opacity:0;transform:rotate(90deg);}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--dur-slow) var(--ease-out);}
+.faq-a-inner{overflow:hidden;}
+.faq-a p{padding-bottom:var(--space-7);max-width:64ch;color:var(--color-ink-soft);font-size:var(--fs-sm);}
+.faq-item.open .faq-a{grid-template-rows:1fr;}
+
+/* =========================================================
+   FOOTER — identical component to index.html
+========================================================= */
+footer{background:var(--color-night);color:var(--color-on-dark);padding:var(--space-24) 0 var(--space-8);}
+.footer-top{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:var(--space-16);padding-bottom:var(--space-18);border-bottom:1px solid var(--color-on-dark-line);}
+.footer-brand p{color:var(--color-on-dark-faint);margin-top:var(--space-5);max-width:34ch;}
+.footer-col h4{font-size:var(--fs-2xs);text-transform:uppercase;letter-spacing:.08em;color:var(--color-on-dark-faint);margin-bottom:var(--space-5);font-weight:600;}
+.footer-col a{display:block;color:var(--color-on-dark-soft);margin-bottom:var(--space-3);font-size:var(--fs-md);transition:color var(--dur-fast) ease;}
+.footer-col a:hover{color:var(--color-accent);}
+.footer-social{display:flex;gap:var(--space-3);margin-top:var(--space-5);}
+.footer-social a{
+  width:42px;height:42px;border-radius:var(--radius-round);border:1px solid var(--color-on-dark-line);display:flex;align-items:center;justify-content:center;
+  transition:background var(--dur-fast) ease, border-color var(--dur-fast) ease, transform var(--dur-fast) ease;
+}
+.footer-social a:hover{background:var(--color-accent);border-color:var(--color-accent);transform:translateY(-3px);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:var(--space-7);color:var(--color-on-dark-faint);font-size:var(--fs-xs);gap:var(--space-6);}
+.footer-bottom-info{display:flex;gap:var(--space-6);flex-wrap:wrap;}
+.footer-credit{position:relative;color:var(--color-on-dark-faint);font-weight:600;flex-shrink:0;transition:color var(--dur-fast) ease;}
+.footer-credit::after{content:'';position:absolute;left:0;bottom:-3px;width:100%;height:1px;background:var(--color-accent);transform:scaleX(0);transform-origin:right;transition:transform var(--dur-base) var(--ease-out);}
+.footer-credit:hover{color:var(--color-accent);}
+.footer-credit:hover::after{transform:scaleX(1);transform-origin:left;}
+
+/* =========================================================
+   RESPONSIVE — 1920 / 1600 / 1280 / 1024 / 768 / 414 / 390 / 375 / 360 / 320
+========================================================= */
+@media (max-width:1280px){ :root{--container-pad:40px;} }
+
+@media (max-width:1024px){
+  :root{--container-pad:32px;}
+  .shop-grid{grid-template-columns:repeat(2,1fr);}
+}
+
+@media (max-width:860px){
+  .nav-burger{display:flex;}
+  nav.scrolled{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(255,255,255,.94);}
+  .nav-links{
+    position:fixed;top:0;right:0;height:100dvh;width:100%;
+    background:rgba(18,20,22,.98);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
+    flex-direction:column;align-items:flex-start;justify-content:center;
+    gap:var(--space-8);padding:var(--space-16) var(--space-10);
+    transform:translateX(100%);transition:transform var(--dur-slow) var(--ease-out);
+    z-index:510;box-shadow:var(--shadow-dark-lg);
+  }
+  .nav-links.open{transform:translateX(0);}
+  .nav-links a{font-size:var(--fs-xl);color:var(--color-on-dark);}
+  .nav-links a[aria-current="page"]{color:var(--color-accent);}
+  nav.scrolled .nav-links a{color:var(--color-on-dark);}
+  nav.scrolled .nav-links a[aria-current="page"]{color:var(--color-accent);}
+  .nav-links-mobile-cta{display:block;width:100%;margin-top:var(--space-4);}
+}
+
+@media (max-width:768px){
+  :root{--container-pad:24px;}
+  .shop-header-inner{flex-direction:column;align-items:flex-start;padding-top:calc(var(--nav-h) + var(--space-10));}
+  .footer-top{grid-template-columns:1fr;gap:var(--space-10);}
+  .trust-grid{grid-template-columns:1fr;gap:var(--space-6);}
+}
+
+@media (max-width:600px){
+  .shop-grid{grid-template-columns:1fr;}
+  .shop-toolbar{flex-direction:column;align-items:flex-start;}
+  .shop-select{width:100%;}
+}
+
+@media (max-width:480px){
+  :root{--container-pad:20px;}
+  nav{height:72px;}
+  nav.scrolled{height:60px;left:var(--space-4);right:var(--space-4);}
+  .nav-logo-img{height:34px;}
+  .cart-badge span{display:none;}
+  .lang-toggle-btn{padding:var(--space-1) var(--space-2);}
+  .shop-header{min-height:48vh;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:var(--space-3);}
+  .footer-bottom-info{flex-direction:column;gap:var(--space-2);}
+}
+
+@media (max-width:360px){ :root{--container-pad:16px;} }
+</style>
+</head>
+<body>
+
+<nav id="siteNav">
+  <a class="nav-logo" href="index.html">
+    <img class="nav-logo-img" src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/INNParagliding_Logo_Final-1-300x152.png" alt="Innsbruck Paragliding Logo">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#home" data-i18n="nav.home">Home</a></li>
+    <li><a href="index.html#geschichte" data-i18n="nav.story">Unsere Geschichte</a></li>
+    <li><a href="index.html#ablauf" data-i18n="nav.process">Ablauf</a></li>
+    <li><a href="index.html#preise" data-i18n="nav.pricing">Preise</a></li>
+    <li><a href="shop.html" aria-current="page" data-i18n="nav.book">Flug buchen</a></li>
+    <li><a href="kontakt.html" data-i18n="nav.contact">Kontakt</a></li>
+    <li><a href="impressum.html" data-i18n="nav.impressum">Impressum</a></li>
+    <li class="nav-links-mobile-cta"><a class="btn btn-primary btn-block" href="#produkte" data-i18n="nav.book">Flug buchen</a></li>
+  </ul>
+  <div class="cart-badge" aria-label="Warenkorb">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2l2.2 12.2a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L21 7H6"/></svg>
+    <span>0,00 €</span>
+  </div>
+  <div class="lang-toggle" role="group" aria-label="Sprache wählen / Choose language">
+    <button type="button" class="lang-toggle-btn active" data-lang="de">DE</button>
+    <button type="button" class="lang-toggle-btn" data-lang="en">EN</button>
+  </div>
+  <button class="nav-burger" id="navBurger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-scrim" id="navScrim"></div>
+
+<section class="shop-header">
+  <div class="shop-header-media">
+    <img src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-03-26-19h20m14s628-1024x576.webp" alt="Start am Startplatz im Stubaital">
+  </div>
+  <div class="shop-header-inner">
+    <div>
+      <div class="breadcrumb"><a href="index.html" data-i18n="nav.home">Home</a><span>/</span><span data-i18n="shop.breadcrumb">Shop</span></div>
+      <h1 data-i18n="shop.h1">Flug buchen</h1>
+      <p class="shop-header-sub" data-i18n="shop.sub">Sechs Erlebnisse über dem Stubaital — von kurz &amp; intensiv bis ausgiebig &amp; entspannt. Wähle deinen Flug, den Rest übernehmen wir.</p>
+    </div>
+    <canvas class="shop-header-orb" id="shopOrb" width="56" height="56" aria-hidden="true"></canvas>
+  </div>
+</section>
+
+<section id="produkte">
+  <div class="container">
+    <div class="shop-toolbar" data-reveal>
+      <p data-i18n="shop.resultCount">Alle 6 Ergebnisse werden angezeigt</p>
+      <div class="shop-select" id="sortSelect" data-value="default">
+        <button type="button" class="shop-select-trigger" id="sortTrigger" aria-haspopup="listbox" aria-expanded="false">
+          <span id="sortText" data-i18n="sort.opt1">Standardsortierung</span>
+          <svg class="shop-select-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <ul class="shop-select-list" id="sortList" role="listbox">
+          <li data-value="default" role="option" class="selected" data-i18n="sort.opt1">Standardsortierung</li>
+          <li data-value="price-asc" role="option" data-i18n="sort.opt2">Preis: aufsteigend</li>
+          <li data-value="price-desc" role="option" data-i18n="sort.opt3">Preis: absteigend</li>
+          <li data-value="name" role="option" data-i18n="sort.opt4">Name A–Z</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="shop-grid" id="shopGrid">
+
+      <article class="product-card featured" id="thermikflug" data-index="0" data-price="170" data-name="Thermikflug" data-reveal>
+        <div class="product-thumb">
+          <img src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2022-03-27-23h06m42s086-300x225.webp" alt="Thermikflug über dem Stubaital">
+          <span class="product-badge" data-i18n="product.badge">Empfehlung</span>
+        </div>
+        <div class="product-body">
+          <span class="product-tag" data-i18n="product.tag">Tandemflüge</span>
+          <h3 data-i18n="p1.name">Thermikflug</h3>
+          <div class="product-price">170,00 €</div>
+          <p data-i18n="p1.p">Der längste reguläre Flug: über 30 Minuten in der Luft, viel Zeit für das Bergpanorama rund um Innsbruck.</p>
+          <a class="btn btn-primary" href="#" data-i18n="product.btn">Flug buchen</a>
+        </div>
+      </article>
+
+      <article class="product-card" id="actionflug" data-index="1" data-price="130" data-name="Actionflug" data-reveal>
+        <div class="product-thumb">
+          <img src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2022-03-29-10h53m22s616-300x225.webp" alt="Actionflug mit Wingover und Spirale">
+        </div>
+        <div class="product-body">
+          <span class="product-tag" data-i18n="product.tag">Tandemflüge</span>
+          <h3 data-i18n="p2.name">Actionflug</h3>
+          <div class="product-price">130,00 €</div>
+          <p data-i18n="p2.p">Kurz, intensiv, mit Nervenkitzel — Wingover schwerelos und Spirale mit rund 4G.</p>
+          <a class="btn btn-ghost-light" href="#" data-i18n="product.btn">Flug buchen</a>
+        </div>
+      </article>
+
+      <article class="product-card" id="standardflug" data-index="2" data-price="125" data-name="Standardflug" data-reveal>
+        <div class="product-thumb">
+          <img src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/WhatsApp-Image-2024-06-19-at-22.17.39-300x225.jpeg" alt="Standardflug für Einsteiger">
+        </div>
+        <div class="product-body">
+          <span class="product-tag" data-i18n="product.tag">Tandemflüge</span>
+          <h3 data-i18n="p3.name">Standardflug</h3>
+          <div class="product-price">125,00 €</div>
+          <p data-i18n="p3.p">Der entspannte Einstieg: ruhiger Gleitflug mit Rundumblick — ideal für den allerersten Flug.</p>
+          <a class="btn btn-ghost-light" href="#" data-i18n="product.btn">Flug buchen</a>
+        </div>
+      </article>
+
+      <article class="product-card" id="premium-tandemflug" data-index="3" data-price="200" data-name="Premium Tandemflug" data-reveal>
+        <div class="product-thumb">
+          <img src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-11-07-11h22m59s107-300x225.webp" alt="Premium Tandemflug mit ErlebnisCard">
+        </div>
+        <div class="product-body">
+          <span class="product-tag" data-i18n="product.tag">Tandemflüge</span>
+          <h3><span data-i18n="p4.name">Premium Tandemflug</span> <span style="font-weight:500;color:var(--color-ink-faint);font-size:var(--fs-xs);">(ErlebnisCard)</span></h3>
+          <div class="product-price">200,00 €</div>
+          <p data-i18n="p4.p">Unser ausgiebigstes Erlebnis mit der meisten Zeit in der Luft — einlösbar mit der Tiroler ErlebnisCard.</p>
+          <a class="btn btn-ghost-light" href="#" data-i18n="product.btn">Flug buchen</a>
+        </div>
+      </article>
+
+      <article class="product-card" id="kombo-flug" data-index="4" data-price="150" data-name="Kombo-Flug" data-reveal>
+        <div class="product-thumb">
+          <img src="https://innsbruck-paragliding.at/wp-content/uploads/2024/06/WhatsApp-Image-2024-06-19-at-22.17.20-300x225.jpeg" alt="Kombo-Flug über dem Stubaital">
+        </div>
+        <div class="product-body">
+          <span class="product-tag" data-i18n="product.tag">Tandemflüge</span>
+          <h3 data-i18n="p5.name">Kombo-Flug</h3>
+          <div class="product-price">150,00 €</div>
+          <p data-i18n="p5.p">Zwei Erlebnisse in einem Flug — Nervenkitzel und Ruhe kombiniert, für alle, die sich nicht entscheiden wollen.</p>
+          <a class="btn btn-ghost-light" href="#" data-i18n="product.btn">Flug buchen</a>
+        </div>
+      </article>
+
+      <article class="product-card" id="fluggutschein" data-index="5" data-price="130" data-name="Fluggutschein" data-reveal>
+        <div class="product-thumb">
+          <img src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-10-04-00h57m08s289-300x225.webp" alt="Fluggutschein verschenken">
+        </div>
+        <div class="product-body">
+          <span class="product-tag" data-i18n="product.tag">Tandemflüge</span>
+          <h3 data-i18n="p6.name">Fluggutschein</h3>
+          <div class="product-price">130,00 € <span>– 200,00 €</span></div>
+          <p data-i18n="p6.p">Verschenke einen Flug nach Wahl. Ein Jahr gültig, Flugtyp und Termin sucht sich die beschenkte Person selbst aus.</p>
+          <a class="btn btn-ghost-light" href="#" data-i18n="p6.btn">Gutschein bestellen</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="trust-strip">
+  <div class="container trust-grid">
+    <div class="trust-item" data-reveal>
+      <div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E0562D" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+      <div><h4 data-i18n="trust1.h4">Sichere Buchung</h4><p data-i18n="trust1.p">Verschlüsselte Zahlung im Shop</p></div>
+    </div>
+    <div class="trust-item delay-1" data-reveal>
+      <div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E0562D" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg></div>
+      <div><h4 data-i18n="trust2.h4">Kostenlose Terminänderung</h4><p data-i18n="trust2.p">Flexibel bei schlechtem Wetter</p></div>
+    </div>
+    <div class="trust-item" data-reveal class="delay-2">
+      <div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E0562D" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4 8.5 8.5 0 0 1-6.2-2.8L3 19l.9-3a8.4 8.4 0 0 1-.9-3.8A8.5 8.5 0 1 1 21 11.5z"/></svg></div>
+      <div><h4 data-i18n="trust3.h4">Antwort innerhalb 24h</h4><p data-i18n="trust3.p">Fragen? Wir melden uns per WhatsApp</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="container">
+    <div class="faq-head" data-reveal>
+      <span class="eyebrow" data-i18n="faq.eyebrow">Häufige Fragen</span>
+      <h2 data-i18n="faq.h2">Noch Fragen vor der Buchung?</h2>
+      <p data-i18n="faq.p">Die wichtigsten Antworten rund um Gewicht, Wetter, Umbuchung und Ausrüstung — kurz und klar.</p>
+    </div>
+    <div class="faq-list" id="faqList" data-reveal>
+
+      <div class="faq-item open">
+        <button class="faq-q" type="button" aria-expanded="true">
+          <span data-i18n="faq1.q">Bis zu welchem Gewicht kann ich fliegen?</span>
+          <span class="faq-q-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner"><p data-i18n="faq1.a">Wir fliegen Gäste von ca. 15 kg bis 125 kg. Bei Abweichungen sprich uns vor der Buchung kurz an — wir finden fast immer eine Lösung.</p></div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span data-i18n="faq2.q">Was passiert bei schlechtem Wetter?</span>
+          <span class="faq-q-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner"><p data-i18n="faq2.a">Sicherheit geht vor. Können wir wetterbedingt nicht starten, verschieben wir deinen Termin kostenlos — ganz ohne Aufpreis, so oft wie nötig.</p></div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span data-i18n="faq3.q">Kann ich meinen Termin kostenlos ändern?</span>
+          <span class="faq-q-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner"><p data-i18n="faq3.a">Ja. Umbuchungen bis 24 Stunden vor Abflug sind kostenlos möglich — melde dich einfach per WhatsApp oder Telefon.</p></div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span data-i18n="faq4.q">Ab welchem Alter ist ein Tandemflug möglich?</span>
+          <span class="faq-q-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner"><p data-i18n="faq4.a">Ab 6 Jahren mit Einverständnis der Erziehungsberechtigten. Nach oben gibt es keine feste Grenze — entscheidend ist die allgemeine Fitness.</p></div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span data-i18n="faq5.q">Was soll ich anziehen und mitbringen?</span>
+          <span class="faq-q-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner"><p data-i18n="faq5.a">Wetterfeste, bequeme Kleidung nach Zwiebelprinzip und feste Schuhe. Gurtzeug, Helm und Ausrüstung stellen wir komplett zur Verfügung.</p></div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span data-i18n="faq6.q">Bekomme ich Fotos oder Video vom Flug?</span>
+          <span class="faq-q-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner"><p data-i18n="faq6.a">Optional buchbar direkt beim Check-in. Unser Pilot fotografiert und filmt während des Flugs, du erhältst alles digital zum Download.</p></div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span data-i18n="faq7.q">Wie löse ich einen Fluggutschein ein?</span>
+          <span class="faq-q-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner"><p data-i18n="faq7.a">Einfach bei der Terminvereinbarung den Gutscheincode angeben. Er ist ein Jahr ab Kaufdatum gültig und für jeden Flugtyp einlösbar.</p></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer id="kontakt">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="nav-logo" href="index.html">
+          <img class="nav-logo-img" src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/INNParagliding_Logo_Final-1-300x152.png" alt="Innsbruck Paragliding Logo">
+        </a>
+        <p data-i18n="footer.brand">Fürstenweg 25, 6020 Innsbruck. Tandemflüge über dem Stubaital, ganzjährig buchbar.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/sooperfly.at/" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="https://www.facebook.com/profile.php?id=100066481061602" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 9h3V5h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V9a1 1 0 0 1 1-1z"/></svg></a>
+          <a href="https://search.google.com/local/reviews?placeid=ChIJv325taT6CiIRrSl10RYXCTM" aria-label="Google Reviews"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 12l8-2a8 8 0 1 1-2.6-5.4"/><path d="M12 12h8"/></svg></a>
+          <a href="https://api.whatsapp.com/send?phone=436804019589" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20l1.2-3.6A8 8 0 1 1 9 19l-5 1z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.navHead">Navigation</h4>
+        <a href="index.html#home" data-i18n="nav.home">Home</a>
+        <a href="index.html#geschichte" data-i18n="nav.story">Unsere Geschichte</a>
+        <a href="index.html#ablauf" data-i18n="nav.process">Ablauf</a>
+        <a href="index.html#preise" data-i18n="nav.pricing">Preise</a>
+        <a href="shop.html" data-i18n="nav.book">Flug buchen</a>
+        <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
+        <a href="impressum.html" data-i18n="nav.impressum">Impressum</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.legalHead">Rechtliches</h4>
+        <a href="https://innsbruck-paragliding.at/datenschutzerklarung/" data-i18n="footer.privacy">Datenschutzerklärung</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-info">
+        <span data-i18n="footer.copy">© 2026 Fly with us</span>
+        <span>Innsbruck Paragliding · Fürstenweg 25 · 6020 Innsbruck</span>
+      </div>
+      <a class="footer-credit" href="https://yanaharcourt.dev" target="_blank" rel="noopener">Made by Yana Harcourt</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+/* ---------- floating nav ---------- */
+const nav = document.getElementById('siteNav');
+function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 80); }
+document.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+/* ---------- mobile nav burger ---------- */
+const navBurger = document.getElementById('navBurger');
+const navLinksPanel = document.getElementById('navLinks');
+const navScrim = document.getElementById('navScrim');
+function closeNavPanel(){
+  navBurger.classList.remove('open');
+  navLinksPanel.classList.remove('open');
+  navScrim.classList.remove('open');
+  navBurger.setAttribute('aria-expanded', false);
+}
+function toggleNavPanel(){
+  const isOpen = navBurger.classList.toggle('open');
+  navLinksPanel.classList.toggle('open', isOpen);
+  navScrim.classList.toggle('open', isOpen);
+  navBurger.setAttribute('aria-expanded', isOpen);
+}
+navBurger.addEventListener('click', toggleNavPanel);
+navScrim.addEventListener('click', closeNavPanel);
+navLinksPanel.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeNavPanel));
+document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeNavPanel(); });
+
+/* ---------- reveal on scroll ---------- */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:0.15});
+document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+
+/* ---------- product card spotlight ---------- */
+document.querySelectorAll('.product-card').forEach(card=>{
+  card.addEventListener('mousemove', e=>{
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+    card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+  });
+});
+
+/* ---------- vanilla-tilt (desktop / fine-pointer only) ---------- */
+if(window.VanillaTilt && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+  VanillaTilt.init(document.querySelectorAll('.product-card'), { max:4, speed:400, glare:false, "max-glare":0, scale:1.01 });
+}
+
+/* ---------- custom themed sort dropdown ---------- */
+const sortSelect = document.getElementById('sortSelect');
+const sortTrigger = document.getElementById('sortTrigger');
+const sortList = document.getElementById('sortList');
+const sortText = document.getElementById('sortText');
+const shopGrid = document.getElementById('shopGrid');
+
+sortTrigger.addEventListener('click', e=>{
+  e.stopPropagation();
+  const isOpen = sortSelect.classList.toggle('open');
+  sortTrigger.setAttribute('aria-expanded', isOpen);
+});
+sortList.querySelectorAll('li').forEach(li=>{
+  li.addEventListener('click', ()=>{
+    sortList.querySelectorAll('li').forEach(o=>o.classList.remove('selected'));
+    li.classList.add('selected');
+    sortText.textContent = li.textContent;
+    sortText.setAttribute('data-i18n', li.getAttribute('data-i18n'));
+    sortSelect.dataset.value = li.dataset.value;
+    sortSelect.classList.remove('open');
+    sortTrigger.setAttribute('aria-expanded', false);
+    applySort(li.dataset.value);
+  });
+});
+document.addEventListener('click', ()=>{ sortSelect.classList.remove('open'); sortTrigger.setAttribute('aria-expanded', false); });
+document.addEventListener('keydown', e=>{ if(e.key === 'Escape'){ sortSelect.classList.remove('open'); sortTrigger.setAttribute('aria-expanded', false); } });
+
+function applySort(mode){
+  const cards = Array.from(shopGrid.children);
+  let sorted;
+  if(mode === 'price-asc') sorted = cards.slice().sort((a,b)=> +a.dataset.price - +b.dataset.price);
+  else if(mode === 'price-desc') sorted = cards.slice().sort((a,b)=> +b.dataset.price - +a.dataset.price);
+  else if(mode === 'name') sorted = cards.slice().sort((a,b)=> a.dataset.name.localeCompare(b.dataset.name, 'de'));
+  else sorted = cards.slice().sort((a,b)=> +a.dataset.index - +b.dataset.index);
+
+  shopGrid.style.opacity = 0;
+  setTimeout(()=>{
+    sorted.forEach(card=>shopGrid.appendChild(card));
+    shopGrid.style.opacity = 1;
+  }, 220);
+}
+
+/* ---------- FAQ accordion ---------- */
+document.querySelectorAll('.faq-item').forEach(item=>{
+  const btn = item.querySelector('.faq-q');
+  btn.addEventListener('click', ()=>{
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(o=>{
+      o.classList.remove('open');
+      o.querySelector('.faq-q').setAttribute('aria-expanded', false);
+    });
+    if(!isOpen){
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', true);
+    }
+  });
+});
+
+/* ---------- decorative three.js wind badge in shop header ---------- */
+(function(){
+  const canvas = document.getElementById('shopOrb');
+  if(!canvas || !window.THREE) return;
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(56, 56, false);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 10);
+  camera.position.z = 3.6;
+  const geo = new THREE.IcosahedronGeometry(1, 0);
+  const mat = new THREE.MeshBasicMaterial({color:0xE0562D, wireframe:true});
+  const mesh = new THREE.Mesh(geo, mat);
+  scene.add(mesh);
+  (function animate(){
+    mesh.rotation.x += 0.006;
+    mesh.rotation.y += 0.009;
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  })();
+})();
+
+/* ---------- language toggle (DE/EN) ---------- */
+const I18N = {
+  de: {},
+  en: {
+    'nav.home': 'Home', 'nav.story': 'Our Story', 'nav.process': 'How It Works', 'nav.pricing': 'Pricing',
+    'nav.book': 'Book a Flight', 'nav.contact': 'Contact', 'nav.impressum': 'Legal Notice',
+    'shop.breadcrumb': 'Shop', 'shop.h1': 'Book a Flight',
+    'shop.sub': 'Six experiences over the Stubai Valley — from short &amp; intense to long &amp; relaxed. Pick your flight, we handle the rest.',
+    'shop.resultCount': 'Showing all 6 results',
+    'sort.opt1': 'Default sorting', 'sort.opt2': 'Price: low to high', 'sort.opt3': 'Price: high to low', 'sort.opt4': 'Name A–Z',
+    'product.badge': 'Recommended', 'product.tag': 'Tandem Flights', 'product.btn': 'Book Flight',
+    'p1.name': 'Thermal Flight',
+    'p1.p': 'The longest regular flight: over 30 minutes in the air, plenty of time for the mountain panorama around Innsbruck.',
+    'p2.name': 'Action Flight',
+    'p2.p': 'Short, intense, thrilling — weightless wingover and a spiral at around 4G.',
+    'p3.name': 'Standard Flight',
+    'p3.p': 'The relaxed way in: a calm glide with panoramic views — ideal for your very first flight.',
+    'p4.name': 'Premium Tandem Flight',
+    'p4.p': 'Our most extensive experience with the most time in the air — redeemable with the Tyrol ErlebnisCard.',
+    'p5.name': 'Combo Flight',
+    'p5.p': 'Two experiences in one flight — thrill and calm combined, for anyone who can\'t decide.',
+    'p6.name': 'Flight Voucher',
+    'p6.p': 'Give the gift of a flight of choice. Valid for one year — the recipient chooses the flight type and date themselves.',
+    'p6.btn': 'Order Voucher',
+    'trust1.h4': 'Secure Booking', 'trust1.p': 'Encrypted payment in the shop',
+    'trust2.h4': 'Free Rescheduling', 'trust2.p': 'Flexible in case of bad weather',
+    'trust3.h4': 'Reply Within 24h', 'trust3.p': 'Questions? We\'ll get back to you on WhatsApp',
+    'faq.eyebrow': 'Frequently Asked Questions', 'faq.h2': 'Still Have Questions Before Booking?',
+    'faq.p': 'The key answers on weight, weather, rescheduling and gear — short and clear.',
+    'faq1.q': 'Up to what weight can I fly?',
+    'faq1.a': 'We fly guests from about 15 kg to 125 kg. If you\'re outside that range, just ask us before booking — we can almost always find a solution.',
+    'faq2.q': 'What happens in bad weather?',
+    'faq2.a': 'Safety comes first. If we can\'t launch due to weather, we reschedule your appointment for free — no surcharge, as often as needed.',
+    'faq3.q': 'Can I reschedule my appointment for free?',
+    'faq3.a': 'Yes. Rescheduling up to 24 hours before departure is free — just reach out via WhatsApp or phone.',
+    'faq4.q': 'From what age is a tandem flight possible?',
+    'faq4.a': 'From age 6 with a guardian\'s consent. There\'s no fixed upper limit — general fitness is what matters.',
+    'faq5.q': 'What should I wear and bring?',
+    'faq5.a': 'Weatherproof, comfortable layered clothing and sturdy shoes. We fully provide the harness, helmet and equipment.',
+    'faq6.q': 'Do I get photos or video of the flight?',
+    'faq6.a': 'Bookable as an option directly at check-in. Our pilot photographs and films during the flight, and you get everything digitally to download.',
+    'faq7.q': 'How do I redeem a flight voucher?',
+    'faq7.a': 'Just provide the voucher code when scheduling your appointment. It\'s valid for one year from purchase and redeemable for any flight type.',
+    'footer.brand': 'Fürstenweg 25, 6020 Innsbruck. Tandem paragliding flights over the Stubai Valley, bookable year-round.',
+    'footer.navHead': 'Navigation', 'footer.legalHead': 'Legal', 'footer.privacy': 'Privacy Policy',
+    'footer.copy': '© 2026 Fly with us'
+  }
+};
+function applyLang(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    if (!el.dataset.i18nDe) el.dataset.i18nDe = el.innerHTML;
+    const dict = I18N[lang] || {};
+    const key = el.getAttribute('data-i18n');
+    el.innerHTML = (lang === 'en' && dict[key]) ? dict[key] : el.dataset.i18nDe;
+  });
+  document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  document.documentElement.setAttribute('lang', lang);
+  localStorage.setItem('ip_lang', lang);
+}
+document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+applyLang(localStorage.getItem('ip_lang') || 'de');
+</script>
+</body>
+</html>
