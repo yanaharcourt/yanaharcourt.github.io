@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LGBT Voice Tanzania — Advancing LGBT+ Human Rights</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --color-background: #FAFAF8;
+      --color-surface: #F2F0EB;
+      --color-accent: #7C3AED;
+      --color-accent-light: #EDE9FA;
+      --color-text: #1A1A2E;
+      --color-text-muted: #6B6B80;
+      --color-border: #E4E2DC;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --spacing-page-inline: 80px;
+      --spacing-section-block: 80px;
+      --spacing-grid-gap: 14px;
+      --radius-card: 26px;
+
+      /* Extended tokens — all hardcoded values referenced via variables */
+      --color-white: #FFFFFF;
+      --color-accent-hover: #6D28D9;
+      --color-background-nav: rgba(250, 250, 248, 0.92);
+      --color-overlay-light: rgba(255, 255, 255, 0.92);
+      --color-overlay-white-10: rgba(255, 255, 255, 0.1);
+      --color-overlay-white-12: rgba(255, 255, 255, 0.12);
+      --color-overlay-white-22: rgba(255, 255, 255, 0.22);
+      --color-overlay-white-28: rgba(255, 255, 255, 0.28);
+      --color-overlay-white-45: rgba(255, 255, 255, 0.45);
+      --color-overlay-white-55: rgba(255, 255, 255, 0.55);
+      --color-overlay-white-60: rgba(255, 255, 255, 0.6);
+      --color-overlay-white-65: rgba(255, 255, 255, 0.65);
+      --color-overlay-white-75: rgba(255, 255, 255, 0.75);
+      --color-overlay-white-85: rgba(255, 255, 255, 0.85);
+      --color-overlay-white-90: rgba(255, 255, 255, 0.9);
+      --color-overlay-dark-soft: rgba(15, 12, 35, 0.55);
+      --color-overlay-dark-mid: rgba(15, 12, 35, 0.85);
+      --color-text-on-dark: rgba(255, 255, 255, 0.6);
+      --color-accent-border-tinted: rgba(124, 58, 237, 0.14);
+      --color-accent-focus-ring: rgba(124, 58, 237, 0.1);
+      --color-accent-bg-dark: rgba(124, 58, 237, 0.12);
+      --color-dark-backdrop: rgba(0, 0, 0, 0.07);
+      --color-dark-text-overlay: rgba(26, 26, 46, 0.55);
+      --color-white-hover: #f0f0f0;
+      --shadow-accent: 0 6px 20px rgba(124, 58, 237, 0.35);
+      --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-card-hover: 0 8px 28px rgba(0, 0, 0, 0.08);
+      --shadow-dropdown: 0 16px 48px rgba(0, 0, 0, 0.14);
+      --gradient-pride: linear-gradient(90deg, #E40303, #FF8C00, #FFED00, #008026, #004DFF, #750787);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--color-background);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    .page-padding {
+      padding-inline: var(--spacing-page-inline)
+    }
+
+    .italic-accent {
+      font-style: italic;
+      color: var(--color-accent);
+      font-family: var(--font-display)
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--color-accent)
+    }
+
+    .tag::before {
+      content: '';
+      width: 20px;
+      height: 2px;
+      background: var(--color-accent);
+      border-radius: 2px;
+      flex-shrink: 0
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: .875rem;
+      font-weight: 600;
+      padding: 10px 22px;
+      border-radius: 999px;
+      cursor: pointer;
+      border: none;
+      transition: all .18s ease;
+      white-space: nowrap
+    }
+
+    .btn-primary {
+      background: var(--color-accent);
+      color: var(--color-white)
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-accent)
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-text);
+      border: 1.5px solid var(--color-border)
+    }
+
+    .btn-outline:hover {
+      border-color: var(--color-text)
+    }
+
+    .btn-outline-inverse {
+      background: transparent;
+      color: var(--color-white);
+      border: 1.5px solid var(--color-overlay-white-55)
+    }
+
+    .btn-outline-inverse:hover {
+      border-color: var(--color-white);
+      background: var(--color-overlay-white-10)
+    }
+
+
+    .btn-large {
+      font-size: 1rem;
+      padding: 14px 32px
+    }
+
+    .btn-white {
+      background: var(--color-white);
+      color: var(--color-text)
+    }
+
+    .btn-white:hover {
+      background: var(--color-white-hover);
+      transform: translateY(-1px)
+    }
+
+    .btn-ghost-white {
+      background: var(--color-overlay-white-12);
+      color: var(--color-white);
+      border: 1.5px solid var(--color-overlay-white-28)
+    }
+
+    .btn-ghost-white:hover {
+      background: var(--color-overlay-white-22)
+    }
+
+    /* PRIDE STRIPE */
+    .pride {
+      height: 4px;
+      background: var(--gradient-pride)
+    }
+
+    /* NAV */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-background-nav);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border)
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 32px
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1;
+      display: flex;
+      flex-direction: column
+    }
+
+    .logo small {
+      font-size: 11px;
+      font-family: var(--font-body);
+      font-weight: 400;
+      color: var(--color-text-muted);
+      letter-spacing: .05em
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none
+    }
+
+    .nav-links a {
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      transition: color .18s
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text)
+    }
+
+    .nav-links a.active {
+      color: var(--color-accent);
+      font-weight: 600
+    }
+
+
+    /* ── DROPDOWN NAV ── */
+    .nav-item-with-dropdown {
+      position: relative
+    }
+
+    .nav-item-with-dropdown>a {
+      display: flex;
+      align-items: center;
+      gap: 5px
+    }
+
+    .nav-item-with-dropdown>a::after {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform .18s ease;
+      flex-shrink: 0
+    }
+
+    .nav-item-with-dropdown:hover>a::after,
+    .nav-item-with-dropdown:focus-within>a::after {
+      transform: rotate(-135deg) translateY(-2px)
+    }
+
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 240px;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 8px;
+      box-shadow: var(--shadow-dropdown);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .2s ease, visibility .2s ease;
+      list-style: none;
+      z-index: 200
+    }
+
+    /* invisible bridge so mouse doesn't leave hover zone */
+    .nav-item-with-dropdown::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 12px;
+      display: block
+    }
+
+    .nav-item-with-dropdown:hover .nav-dropdown,
+    .nav-item-with-dropdown:focus-within .nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .nav-dropdown li a {
+      display: block;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: background .15s, color .15s
+    }
+
+    .nav-dropdown li a:hover {
+      background: var(--color-accent-light);
+      color: var(--color-accent)
+    }
+
+    /* Logo image */
+    .logo-image {
+      height: 38px;
+      width: auto;
+      object-fit: contain
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px
+    }
+
+    /* ─── PAGE HERO ─── */
+    .hero-wrapper {
+      padding: 32px var(--spacing-page-inline) 0
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 82vh;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: flex-end
+    }
+
+    .hero-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 50%
+    }
+
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+          transparent 20%,
+          rgba(15, 12, 35, .55) 60%,
+          rgba(15, 12, 35, .85) 100%);
+      border-radius: 28px
+    }
+
+    .hero-pride-stripe {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--gradient-pride);
+      border-radius: 0 0 28px 28px;
+      z-index: 3
+    }
+
+    /* Content sits over the photo */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 660px
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--color-overlay-white-60);
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: var(--color-accent-light);
+      border-radius: 2px;
+      display: block;
+      flex-shrink: 0
+    }
+
+    .hero-heading {
+      font-family: var(--font-display);
+      font-size: clamp(3.4rem, 5.2vw, 6.2rem);
+      font-weight: 500;
+      line-height: .93;
+      letter-spacing: -.025em;
+      color: var(--color-white)
+    }
+
+    .hero-heading .italic-accent {
+      color: var(--color-accent-light)
+    }
+
+    .hero-description {
+      font-size: 1.05rem;
+      color: var(--color-overlay-white-75);
+      line-height: 1.7;
+      max-width: 520px
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 4px
+    }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      padding-block: var(--spacing-section-block)
+    }
+
+    .section-inner {
+      padding-inline: var(--spacing-page-inline)
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 40px
+    }
+
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -.02em
+    }
+
+    .section-header p {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      max-width: 520px;
+      line-height: 1.65
+    }
+
+    /* ─── BENTO ─── */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--spacing-grid-gap)
+    }
+
+    .bento-card {
+      border-radius: var(--radius-card);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      border: 1px solid var(--color-border);
+      transition: transform .22s, box-shadow .22s
+    }
+
+    .bento-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card)
+    }
+
+    .bento-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.15
+    }
+
+    .bento-card p {
+      font-size: .875rem;
+      color: var(--color-text-muted);
+      line-height: 1.7
+    }
+
+    .bento-card--surface {
+      background: var(--color-surface)
+    }
+
+    .bento-card--white {
+      background: var(--color-white)
+    }
+
+    .bento-card--tinted {
+      background: var(--color-accent-light);
+      border-color: var(--color-accent-border-tinted)
+    }
+
+    .bento-card--dark {
+      background: var(--color-text);
+      border-color: transparent;
+      color: var(--color-white)
+    }
+
+    .bento-card--dark p {
+      color: var(--color-overlay-white-60)
+    }
+
+    .bento-card--dark h3 {
+      color: var(--color-white)
+    }
+
+    .bento-number {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1;
+      color: var(--color-accent)
+    }
+
+    .bento-card--dark .bento-number {
+      color: rgba(255, 255, 255, .9)
+    }
+
+    .bento-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--color-accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .bento-card--dark .bento-icon {
+      background: var(--color-overlay-white-12)
+    }
+
+    .col-span-7 {
+      grid-column: span 7
+    }
+
+    .col-span-5 {
+      grid-column: span 5
+    }
+
+    .col-span-6 {
+      grid-column: span 6
+    }
+
+    .col-span-4 {
+      grid-column: span 4
+    }
+
+    .col-span-3 {
+      grid-column: span 3
+    }
+
+    .col-span-8 {
+      grid-column: span 8
+    }
+
+    .col-span-12 {
+      grid-column: span 12
+    }
+
+    /* ─── IMPACT ROW ─── */
+    .impact-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-grid-gap)
+    }
+
+    .impact-card {
+      background: var(--color-white);
+      border-radius: var(--radius-card);
+      padding: 36px 24px;
+      text-align: center;
+      border: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px
+    }
+
+    .impact-card .impact-number {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--color-accent);
+      line-height: 1
+    }
+
+    .impact-card .impact-label {
+      font-size: .875rem;
+      color: var(--color-text-muted);
+      max-width: 160px
+    }
+
+    /* ─── WHAT WE DO — asymmetric alternating rows ─── */
+    .program-rows {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-grid-gap)
+    }
+
+    .program-row {
+      display: grid;
+      gap: var(--spacing-grid-gap);
+      align-items: stretch
+    }
+
+    .program-row--layout-a {
+      grid-template-columns: 5fr 4fr
+    }
+
+    .program-row--layout-b {
+      grid-template-columns: 3fr 5fr
+    }
+
+    .program-row--layout-c {
+      grid-template-columns: 4fr 5fr
+    }
+
+    .program-row--layout-d {
+      grid-template-columns: 5fr 3fr
+    }
+
+    .program-card {
+      border-radius: var(--radius-card);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--color-white);
+      border: 1px solid var(--color-border)
+    }
+
+    .program-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 600;
+      line-height: 1.15;
+      margin-top: 10px
+    }
+
+    .program-card ul {
+      padding-left: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1
+    }
+
+    .program-card ul li {
+      font-size: .875rem;
+      color: var(--color-text-muted);
+      line-height: 1.65
+    }
+
+    .program-image-cell {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      position: relative;
+      min-height: 280px
+    }
+
+    .program-image-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease
+    }
+
+    .program-image-cell:hover img {
+      transform: scale(1.03)
+    }
+
+    .program-image-label {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      background: var(--color-overlay-light);
+      backdrop-filter: blur(8px);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      z-index: 2
+    }
+
+    .link-arrow {
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: gap .18s;
+      width: fit-content
+    }
+
+    .link-arrow:hover {
+      gap: 9px
+    }
+
+    /* ─── QUOTE BANNER ─── */
+    .quote-band {
+      background: var(--color-accent);
+      border-radius: var(--radius-card);
+      padding: 52px 60px;
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 40px;
+      align-items: center
+    }
+
+    .quote-band blockquote {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-style: italic;
+      color: var(--color-white);
+      line-height: 1.45;
+      position: relative
+    }
+
+    .quote-band blockquote::before {
+      content: '\201C';
+      font-size: 5rem;
+      line-height: 0;
+      position: absolute;
+      top: 28px;
+      left: -32px;
+      opacity: .25;
+      font-family: var(--font-display)
+    }
+
+    .quote-attribution {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      color: var(--color-white)
+    }
+
+    .quote-attribution strong {
+      font-size: 1rem;
+      font-weight: 600
+    }
+
+    .quote-attribution span {
+      font-size: .8rem;
+      opacity: .65
+    }
+
+    .quote-image {
+      border-radius: 20px;
+      overflow: hidden;
+      height: 200px
+    }
+
+    .quote-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top
+    }
+
+    /* ─── GALLERY BENTO ─── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 300px 220px;
+      gap: var(--spacing-grid-gap)
+    }
+
+    .gallery-cell {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      position: relative
+    }
+
+    .gallery-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease
+    }
+
+    .gallery-cell:hover img {
+      transform: scale(1.04)
+    }
+
+    .gallery-cell--tall {
+      grid-row: span 2
+    }
+
+    .gallery-cell--wide {
+      grid-column: span 2
+    }
+
+    .gallery-cell-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26, 26, 46, .55) 0%, transparent 60%);
+      z-index: 1;
+      opacity: 0;
+      transition: opacity .3s ease
+    }
+
+    .gallery-cell:hover .gallery-cell-overlay {
+      opacity: 1
+    }
+
+    .tag--inverse {
+      color: var(--color-overlay-white-45)
+    }
+
+    .tag--inverse::before {
+      background: rgba(255, 255, 255, .35)
+    }
+
+    .link-arrow--inverse {
+      color: var(--color-overlay-white-65)
+    }
+
+    .gallery-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--spacing-grid-gap);
+      margin-top: var(--spacing-grid-gap)
+    }
+
+    .gallery-row .gallery-cell {
+      height: 200px
+    }
+
+    /* ─── PRESS — editorial ─── */
+    .press-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-grid-gap)
+    }
+
+    .press-card {
+      background: var(--color-white);
+      border-radius: var(--radius-card);
+      padding: 36px 32px;
+      border: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: transform .22s, box-shadow .22s
+    }
+
+    .press-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card-hover)
+    }
+
+    .press-logo-wrapper {
+      height: 100px;
+      display: flex;
+      align-items: center
+    }
+
+    .press-logo-wrapper img {
+      width: auto;
+      max-height: 100px;
+      object-fit: contain;
+      filter: grayscale(1);
+      opacity: .55;
+      transition: filter .2s, opacity .2s
+    }
+
+    .press-card:hover .press-logo-wrapper img {
+      filter: none;
+      opacity: 1
+    }
+
+    .press-quote {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--color-text);
+      line-height: 1.6;
+      flex: 1
+    }
+
+    .press-card a.link-arrow {
+      margin-top: auto
+    }
+
+    /* ─── GET HELP ─── */
+    .get-help-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-grid-gap);
+      align-items: center
+    }
+
+    .get-help-image {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      height: 500px
+    }
+
+    .get-help-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    .get-help-text {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px 0
+    }
+
+    .get-help-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3vw, 3.2rem);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -.02em
+    }
+
+    .get-help-text p {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      line-height: 1.7
+    }
+
+    .get-help-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .get-help-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .9rem;
+      color: var(--color-text-muted);
+      line-height: 1.6
+    }
+
+    .get-help-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      flex-shrink: 0;
+      margin-top: 7px
+    }
+
+    /* ─── GET INVOLVED ─── */
+    .get-involved-grid {
+      display: grid;
+      grid-template-columns: 5fr 4fr 3fr;
+      gap: var(--spacing-grid-gap)
+    }
+
+    .get-involved-card {
+      border-radius: var(--radius-card);
+      padding: 36px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 230px
+    }
+
+    .get-involved-card h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.1
+    }
+
+    .get-involved-card p {
+      font-size: .875rem;
+      line-height: 1.65;
+      margin-top: 6px
+    }
+
+    .get-involved-card--light,
+    .get-involved-card--light,
+    .get-involved-card--light {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text)
+    }
+
+    .get-involved-card--light p,
+    .get-involved-card--light p,
+    .get-involved-card--light p {
+      color: var(--color-text-muted)
+    }
+
+    .get-involved-card--light h3 {
+      font-size: 1.5rem
+    }
+
+    /* ─── BLOG GRID ─── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-grid-gap)
+    }
+
+    .blog-card {
+      background: var(--color-white);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      transition: transform .22s, box-shadow .22s
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card)
+    }
+
+    .blog-image {
+      height: 200px;
+      overflow: hidden;
+      background: var(--color-surface)
+    }
+
+    .blog-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s
+    }
+
+    .blog-card:hover .blog-image img {
+      transform: scale(1.04)
+    }
+
+    .blog-card-body {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1
+    }
+
+    .blog-card-meta {
+      font-size: .75rem;
+      color: var(--color-text-muted);
+      display: flex;
+      gap: 12px
+    }
+
+    .blog-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      line-height: 1.25;
+      flex: 1
+    }
+
+    .blog-card p {
+      font-size: .85rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-grid-gap)
+    }
+
+    .contact-info {
+      background: var(--color-text);
+      border-radius: var(--radius-card);
+      padding: 48px 44px;
+      color: var(--color-white);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .contact-info::before {
+      content: '';
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      opacity: .14
+    }
+
+    .contact-info h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+      font-weight: 500;
+      line-height: 1.1;
+      color: var(--color-white);
+      position: relative
+    }
+
+    .contact-info p {
+      font-size: .95rem;
+      color: var(--color-overlay-white-65);
+      line-height: 1.7;
+      position: relative
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative
+    }
+
+    .contact-detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px
+    }
+
+    .contact-detail-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--color-overlay-white-10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .contact-detail-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px
+    }
+
+    .contact-detail-text span {
+      font-size: .75rem;
+      color: var(--color-overlay-white-45);
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase
+    }
+
+    .contact-detail-text a,
+    .contact-detail-text p {
+      font-size: .9rem;
+      color: var(--color-overlay-white-85)
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+      position: relative
+    }
+
+    .social-link {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: var(--color-overlay-white-10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .18s;
+      border: 1px solid var(--color-overlay-white-12)
+    }
+
+    .social-link:hover {
+      background: var(--color-accent)
+    }
+
+    .social-link svg {
+      width: 16px;
+      height: 16px
+    }
+
+    .contact-form {
+      background: var(--color-white);
+      border-radius: var(--radius-card);
+      padding: 48px 44px;
+      border: 1px solid var(--color-border)
+    }
+
+    .contact-form h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 24px
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px
+    }
+
+    .form-group label {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      letter-spacing: .04em;
+      text-transform: uppercase
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--color-border);
+      font-family: var(--font-body);
+      font-size: .9rem;
+      background: var(--color-background);
+      color: var(--color-text);
+      transition: border-color .18s, box-shadow .18s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-accent-focus-ring)
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical
+    }
+
+    .form-note {
+      font-size: .78rem;
+      color: var(--color-text-muted);
+      margin-top: -6px;
+      line-height: 1.5
+    }
+
+    /* ─── CTA ─── */
+    .cta {
+      background: var(--color-text);
+      border-radius: var(--radius-card);
+      padding: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      right: -90px;
+      top: -90px;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      opacity: .12
+    }
+
+    .cta-text {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      position: relative
+    }
+
+    .cta-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 3.2rem);
+      font-weight: 500;
+      line-height: 1.05;
+      color: var(--color-white)
+    }
+
+    .cta-text p {
+      font-size: 1.05rem;
+      color: var(--color-overlay-white-55);
+      max-width: 420px
+    }
+
+    .cta-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--color-overlay-white-45)
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+      position: relative
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding-block: 56px 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      font-size: .875rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      max-width: 280px;
+      margin-bottom: 16px;
+    }
+
+    .footer-social-icons {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .footer-social-link {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .18s, background .18s;
+    }
+
+    .footer-social-link:hover {
+      border-color: var(--color-text-muted);
+      background: var(--color-border);
+    }
+
+    .footer-social-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .footer-contact-text {
+      font-size: .8rem;
+      color: var(--color-text-muted);
+    }
+
+    .color-accent {
+      color: var(--color-accent);
+    }
+
+    .footer-column h4 {
+      font-family: var(--font-body);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 16px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-column ul li a {
+      font-size: .875rem;
+      color: var(--color-text);
+      transition: color .18s;
+    }
+
+    .footer-column ul li a:hover {
+      color: var(--color-accent);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .8rem;
+      color: var(--color-text-muted);
+    }
+
+    .footer-bottom>div {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .credit-link {
+      color: inherit;
+      text-decoration: none;
+      transition: color .18s, font-weight .18s;
+    }
+
+    .credit-link:hover {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:1100px) {
+      :root {
+        --spacing-page-inline: 40px
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto
+      }
+
+      .hero-visual {
+        height: 60vw;
+        border-bottom-left-radius: var(--radius-card)
+      }
+
+      .hero-copy {
+        justify-content: flex-start
+      }
+
+      .bento .col-span-7,
+      .bento .col-span-5,
+      .bento .col-span-6 {
+        grid-column: span 12
+      }
+
+      .bento .col-span-4 {
+        grid-column: span 6
+      }
+
+      .bento .col-span-3 {
+        grid-column: span 6
+      }
+
+      .program-row {
+        grid-template-columns: 1fr
+      }
+
+      .program-image-double {
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr
+      }
+
+      .quote-band {
+        grid-template-columns: 1fr;
+        text-align: center
+      }
+
+      .quote-image {
+        display: none
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto
+      }
+
+      .gallery-cell--wide,
+      .gallery-cell--tall {
+        grid-column: span 1;
+        grid-row: span 1
+      }
+
+      .media-logo-grid {
+        grid-template-columns: repeat(3, 1fr)
+      }
+
+      .get-help-grid {
+        grid-template-columns: 1fr
+      }
+
+      .get-help-image {
+        display: none
+      }
+
+      .get-involved-grid {
+        grid-template-columns: 1fr
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr
+      }
+
+      .cta {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 48px 40px
+      }
+
+      .impact-stats-row {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media(max-width:640px) {
+      :root {
+        --spacing-page-inline: 20px;
+        --spacing-section-block: 56px
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .hero-heading {
+        font-size: 2.8rem
+      }
+
+      .bento .col-span-4,
+      .bento .col-span-3 {
+        grid-column: span 12
+      }
+
+      .form-row {
+        grid-template-columns: 1fr
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr
+      }
+
+      .media-logo-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .hero-stats {
+        flex-wrap: wrap;
+        gap: 20px
+      }
+
+      .cta {
+        padding: 36px 22px
+      }
+
+      .quote-band {
+        padding: 36px 28px
+      }
+    }
+
+    /* ─── RAINBOW PROGRESS BAR ─── */
+    .pride-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: var(--gradient-pride);
+      background-size: 100vw 4px;
+      z-index: 9999;
+      transition: width .05s linear
+    }
+
+    .logo-fallback-text {
+      display: none;
+      flex-direction: column
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="pride-progress-bar" id="prideBar"></div>
+
+  <div class="hero"> 
+
+  </div>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner page-padding">
+      <a href="index.html" class="logo">
+        <img src="./assets/img/Logo.svg" alt="LGBT Voice Tanzania" class="logo-image"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="logo-fallback-text">LGBT Voice<small>Tanzania</small></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="who_we_are.html">Who We Are</a></li>
+        <li class="nav-item-with-dropdown">
+          <a>What We Do</a>
+          <ul class="nav-dropdown">
+            <li><a href="what_we_do.html">Overview</a></li>
+            <li><a href="our_projects.html">Our Projects</a></li>
+            <li><a href="lived_realities.html">Lived Realities of LGBTQ+ People in Tanzania Report</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item-with-dropdown">
+          <a>Get Involved</a>
+          <ul class="nav-dropdown">
+            <li><a href="join_our_movement.html">Join Our Movement</a></li>
+            <li><a href="volunteer_with_us.html">Volunteer</a></li>
+            <li><a href="jobs_opening.html">Job Openings</a></li>
+            <li><a href="press_kit.html">Press Kit</a></li>
+          </ul>
+        </li>
+
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="get_help.html" class="btn btn-outline">Get Help</a>
+        <a href="https://www.omprakash.org/office-rent2025" target="_blank" class="btn btn-primary">Donate Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero-wrapper">
+    <div class="hero-image">
+      <img src="./assets/img/index-hero.jpg" alt="LGBT Voice Tanzania community with pride flags" />
+      <div class="hero-content">
+        <div class="hero-eyebrow">Tanzania — Est. 2013</div>
+        <h1 class="hero-heading">
+          Advancing <span class="italic-accent">LGBT+</span><br>
+          Human Rights
+        </h1>
+        <p class="hero-description">Join us in championing equal rights for the LGBT+ community in Tanzania. Your
+          support
+          empowers us to break down barriers and create a more inclusive society for all.</p>
+        <div class="hero-actions">
+          <a href="https://www.omprakash.org/office-rent2025" class="btn btn-primary btn-large">Donate Today</a>
+          <a href="what_we_do.html" class="btn btn-outline-inverse btn-large">Our Work</a>
+        </div>
+      </div>
+      <div class="hero-pride-stripe"></div>
+    </div>
+  </div>
+
+  <!-- ═══ VISION & MISSION ═══ -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="tag">Our Foundation</span>
+        <h2>Our Vision &amp; <span class="italic-accent">Mission</span></h2>
+        <p>LGBT Voice's work is guided by five core values.</p>
+      </div>
+      <div class="bento">
+        <div class="bento-card bento-card--surface col-span-7">
+          <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg></div>
+          <h3>Social <span class="italic-accent">Justice</span></h3>
+          <p>We believe all people, regardless of sexual orientation or gender identity, have equal rights to a fair and
+            equitable society.</p>
+        </div>
+        <div class="bento-card bento-card--surface col-span-5">
+          <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg></div>
+          <h3>Building <span class="italic-accent">Communities</span></h3>
+          <p>Our strength is in community. We work to build relationships and organisations that serve LGBT people.</p>
+        </div>
+        <div class="bento-card bento-card--surface col-span-4">
+          <div class="bento-number">01</div>
+          <h3>Diversity</h3>
+          <p>We promote the idea that love, respect and acceptance should be afforded to individuals, regardless of who
+            they are.</p>
+        </div>
+        <div class="bento-card bento-card--surface col-span-4">
+          <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg></div>
+          <h3>Openness, Inclusion, <span class="italic-accent">Partnership</span></h3>
+          <p>We form inclusive partnerships with government, policymakers, educational and religious institutions, legal
+            professionals, and healthcare providers.</p>
+        </div>
+        <div class="bento-card bento-card--surface col-span-4">
+          <div class="bento-number bento-number--large">Ending<br>Discrimination</div>
+          <p>Working toward a society where individuals of all sexual orientations and gender identities are treated
+            with dignity, respect, and equality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ IMPACT NUMBERS ═══ -->
+  <section class="section section--no-top-padding">
+    <div class="section-inner">
+      <div class="impact-stats-row">
+        <div class="impact-card">
+          <div class="impact-number">2M+</div>
+          <div class="impact-label">LGBT+ people without quality healthcare access in Tanzania</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-number">10+</div>
+          <div class="impact-label">Years of uninterrupted human rights advocacy</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-number">100%</div>
+          <div class="impact-label">Free crisis services for those in immediate need</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ WHAT WE DO ═══ -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="tag">Our Programs</span>
+        <h2>What We <span class="italic-accent">Do</span></h2>
+        <p>We promote LGBT+ rights in Tanzania and provide practical help to individuals in need.</p>
+      </div>
+
+      <div class="program-rows">
+
+        <!-- Row 1: text wide left, image narrower right -->
+        <div class="program-row program-row--layout-a">
+          <div class="program-card">
+            <div>
+              <span class="tag">Healthcare Access</span>
+              <h3>Provide Health <span class="italic-accent">Care Access</span></h3>
+            </div>
+            <ul>
+              <li>More than 2 million LGBT people in Tanzania do not have access to quality health services, including
+                HIV prevention, treatment, care, and support, due to prejudice based on gender identity and sexual
+                orientation.</li>
+
+              <li>LGBT Voice works in partnership with health providers who run LGBT+ friendly facilities in Dar es
+                Salaam to provide free quality health services to LGBT+ people.</li>
+            </ul>
+            <a href="what_we_do.html" class="link-arrow">Learn more →</a>
+          </div>
+          <div class="program-image-cell">
+            <img src="./assets/img/nurse.jpg" alt="Healthcare worker" />
+            <span class="program-image-label">Healthcare</span>
+          </div>
+        </div>
+
+        <!-- Row 2: image narrower left, text wider right -->
+        <div class="program-row program-row--layout-b">
+          <div class="program-image-cell">
+            <img src="./assets/img/crisis-aid.png" alt="Crisis support" />
+            <span class="program-image-label">Crisis Aid</span>
+          </div>
+          <div class="program-card">
+            <div>
+              <span class="tag">Crisis Support</span>
+              <h3>Crisis <span class="italic-accent">Aid</span></h3>
+            </div>
+            <ul>
+              <li>LGBT Voice provides immediate aid to people in crisis situations, including when a LGBT person is
+                denied access to health clinics, is evicted from their home, is fired from their job or is expelled from
+                school.</li>
+
+              <li>We can also help in situations involving the police, false charges, wrongful termination from
+                employment or even helping individuals obtain asylum in other countries.</li>
+            </ul>
+            <a href="what_we_do.html" class="link-arrow">Learn more →</a>
+          </div>
+        </div>
+
+        <!-- Row 3: text narrower left, image wider right -->
+        <div class="program-row program-row--layout-c">
+          <div class="program-card">
+            <div>
+              <span class="tag">Advocacy</span>
+              <h3>Political <span class="italic-accent">Advocacy</span></h3>
+            </div>
+            <ul>
+              <li>We work towards the development and implementation of laws and policies that protect and promote the
+                rights of LGBT individuals in Tanzania.</li>
+              <li>Networking and empowering community based organisations, training leaders and public advocates, and
+                monitoring legislation to ensure the LGBT community is considered.</li>
+            </ul>
+            <a href="what_we_do.html" class="link-arrow">Learn more →</a>
+          </div>
+          <div class="program-image-cell">
+            <img src="./assets/img/political-advocacy.jpg" alt="Political Advocacy" />
+            <span class="program-image-label">Advocacy</span>
+          </div>
+        </div>
+
+        <!-- Row 4: image narrower right, text wider left -->
+        <div class="program-row program-row--layout-d">
+          <div class="program-card">
+            <div>
+              <span class="tag">Education &amp; Media</span>
+              <h3><span class="italic-accent">Education</span></h3>
+            </div>
+            <ul>
+              <li>We are a watchdog and advocate to the media, empowering real people to share their stories, while
+                holding the media accountable for the words and images they present.</li>
+              <li>As more Tanzanians see our stories in newspapers, on our website and social media, or in entertainment
+                media, they will grow to respect and understand our community.</li>
+            </ul>
+            <a href="what_we_do.html" class="link-arrow">Learn more →</a>
+          </div>
+          <div class="program-image-cell">
+            <img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/supporting_lgbt_poster.jpg"
+              alt="Supporting LGBT+" />
+            <span class="program-image-label">Education</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ QUOTE — Executive Director ═══ -->
+  <section class="section section--no-top-padding">
+    <div class="section-inner">
+      <div class="quote-band">
+        <blockquote>
+          As a member of the LGBTQ community in Tanzania, I have faced numerous instances where I have been refused
+          access to crucial public services solely because of my sexual orientation. This widespread problem has fueled
+          my determination to find a solution.
+          <footer class="mt-20">
+            <strong class="blockquote-author">James
+              Wandera Ouma</strong>
+            <span class="blockquote-role">Executive
+              Director, LGBT Voice Tanzania</span>
+          </footer>
+        </blockquote>
+        <div class="quote-image">
+          <img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/group_2.jpg"
+            alt="LGBT Voice Tanzania community" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PHOTO GALLERY ═══ -->
+  <section class="section section--no-top-padding">
+    <div class="section-inner">
+      <div class="gallery-grid">
+        <!-- Big feature photo — tall left -->
+        <div class="gallery-cell gallery-cell--tall">
+          <img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/crowd-with-flags-scaled.jpg"
+            alt="LGBT Voice Tanzania community with pride flags" />
+          <div class="gallery-cell-overlay"></div>
+        </div>
+        <!-- Top middle -->
+        <div class="gallery-cell">
+          <img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/crowd_close_up_2.jpg" alt="Community close up" />
+          <div class="gallery-cell-overlay"></div>
+        </div>
+        <!-- Top right -->
+        <div class="gallery-cell">
+          <img src="https://lgbtvoicetz.org/wp-content/uploads/2021/10/DSCN2404-1024x768.jpg" alt="LGBT Voice event" />
+          <div class="gallery-cell-overlay"></div>
+        </div>
+        <!-- Bottom middle — wide -->
+        <div class="gallery-cell gallery-cell--wide">
+          <img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/biking_with_flag_cropped.png"
+            alt="Biking with pride flag" />
+          <div class="gallery-cell-overlay"></div>
+        </div>
+      </div>
+      <!-- Second row — 3 equal -->
+      <div class="gallery-row">
+        <div class="gallery-cell">
+          <img src="https://lgbtvoicetz.org/wp-content/uploads/2014/06/young_people_with_flag_on_street_2-1004x1024.png"
+            alt="Young people with flag" />
+          <div class="gallery-cell-overlay"></div>
+        </div>
+        <div class="gallery-cell">
+          <img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/lgbt_voice_volunteers.jpg"
+            alt="LGBT Voice volunteers" />
+          <div class="gallery-cell-overlay"></div>
+        </div>
+        <div class="gallery-cell">
+          <img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/young_people_with_flag_on_street_cropped.png"
+            alt="Community members with flag on street" />
+          <div class="gallery-cell-overlay"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ IN THE MEDIA ═══ -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="tag">Press</span>
+        <h2>LGBT Voice <span class="italic-accent">In The Media</span></h2>
+        <p>Our LGBT+ Advocacy Is Covered By Media Globally.</p>
+      </div>
+
+      <div class="press-grid">
+
+        <div class="press-card">
+          <div class="press-logo-wrapper"><img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/m2-huff.png"
+              alt="HuffPost" /></div>
+          <p class="press-quote">"Through LGBT Voice, people in East Africa and around the world can hear what is
+            happening to our gay community."</p>
+          <a href="https://www.huffpost.com/entry/gay-and-living-on-africas_b_6572738" class="link-arrow"
+            target="_blank">Read
+            →</a>
+        </div>
+
+        <div class="press-card">
+          <div class="press-logo-wrapper"><img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/m2-pink.png"
+              alt="Pink News" /></div>
+          <p class="press-quote">"Tanzania has launched yet another crackdown on LGBT advocates, threatening to
+            arrest and expel them from the country."</p>
+          <a href="https://www.thepinknews.com/2017/06/27/tanzania-launches-crackdown-on-lgbt-activists/"
+            class="link-arrow" target="_blank">Read →</a>
+        </div>
+
+        <div class="press-card">
+          <div class="press-logo-wrapper"><img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/m3-wct.png"
+              alt="Windy City Times" /></div>
+          <p class="press-quote">"Our goal is to provide food and shelter for these young LGBT+ people. We also
+            encourage them to continue their education."</p>
+          <a href="https://www.windycitytimes.com/lgbt/LGBT-activist-Ouma-on-work-Tanzania-and-future-hopes/49798.html"
+            class="link-arrow" target="_blank">Read →</a>
+        </div>
+
+        <div class="press-card">
+          <div class="press-logo-wrapper"><img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/m2-fmt.png"
+              alt="Free Malaysia Today" /></div>
+          <p class="press-quote">"Tanzania has had a recent spike in anti-gay rhetoric by the government."</p>
+          <a href="https://www.freemalaysiatoday.com/category/world/2017/02/18/tanzania-threatens-to-publish-list-of-gay-people/"
+            class="link-arrow" target="_blank">Read →</a>
+        </div>
+
+        <div class="press-card">
+          <div class="press-logo-wrapper"><img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/m2-unhcr.png"
+              alt="UNHCR" /></div>
+          <p class="press-quote">"A Human Rights Committee found that homosexuality is a criminal offence under the
+            penal code in Tanzania."</p>
+          <a href="https://www.refworld.org/cgi-bin/texis/vtx/rwmain?docid=3ae6abaa8c" class="link-arrow"
+            target="_blank">Read
+            →</a>
+        </div>
+
+        <div class="press-card">
+          <div class="press-logo-wrapper"><img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/m2-mamba.png"
+              alt="Mamba Online" /></div>
+          <p class="press-quote">"LGBT Voice encourages people to raise their voices. Not quietly, not silently. We
+            need external pressure to make our government accountable."</p>
+          <a href="https://www.mambaonline.com/2017/02/27/killing-lgbt-community-says-tanzanian-activist/"
+            class="link-arrow" target="_blank">Read →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DO YOU NEED HELP ═══ -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="get-help-grid">
+        <div class="get-help-text">
+          <span class="tag">Support Services</span>
+          <h2>Do You <span class="italic-accent">Need Help?</span></h2>
+          <p>Are you experiencing hate in Tanzania? If you are experiencing hate crimes, physical or sexual abuse,
+            problems with the police or any other type of discrimination, we can help you in a number of ways,
+            including:</p>
+          <ul class="get-help-list">
+            <li>Listening to you</li>
+            <li>Recording what happened</li>
+            <li>Exploring your options</li>
+            <li>Communicating with the police on your behalf</li>
+            <li>Coming up with plans to make you safer</li>
+          </ul>
+          <p class="fs-sm color-text-muted">We won't pressure you into any action you're not comfortable
+            with, and we won't share your information without your consent. <strong
+              class="color-accent">Wezesha</strong>
+            is here for you.</p>
+          <a href="https://lgbtvoicetz.org/get-help/" class="btn btn-primary btn-fit-content mt-6">Get Our
+            Help</a>
+        </div>
+        <div class="get-help-image">
+          <img
+            src="https://lgbtvoicetz.org/wp-content/uploads/elementor/thumbs/pexels-anete-lusina-5721302-scaled-qkf96q9p7y4obkmumtrb332n5xjqwzs9s7stroxosw.jpg"
+            alt="Pride colours on wrist — symbol of support" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GET INVOLVED ═══ -->
+  <section class="section section--no-top-padding">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="tag">Take Action</span>
+        <h2>Get <span class="italic-accent">Involved</span></h2>
+      </div>
+      <div class="get-involved-grid">
+        <div class="get-involved-card get-involved-card--light">
+          <div>
+            <h3>Donate <span class="italic-accent">Today</span></h3>
+            <p>Your generous donation fuels our mission, empowering us to break down barriers and create a more
+              inclusive society for all.</p>
+          </div>
+          <a href="https://www.omprakash.org/office-rent2025" class="btn btn-primary">Make a donation →</a>
+        </div>
+        <div class="get-involved-card get-involved-card--light">
+          <div>
+            <h3>Join Our <span class="italic-accent">Movement</span></h3>
+            <p>Stand with thousands of allies. Sign up to receive updates, actions, and ways you can make a real
+              difference.</p>
+          </div>
+          <a href="https://lgbtvoicetz.org/join-our-movement/" class="btn btn-primary">Join now →</a>
+        </div>
+        <div class="get-involved-card get-involved-card--light">
+          <div>
+            <h3>Volunteer</h3>
+            <p>Give your time and skills to create real impact in the community.</p>
+          </div>
+          <a href="https://lgbtvoicetz.org/volunteer-with-us/" class="btn btn-primary">Apply →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BLOG / LATEST POSTS ═══ -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header-row">
+        <div class="section-header mb-0">
+          <span class="tag">Our Blog</span>
+          <h2>Latest <span class="italic-accent">Blog Posts</span></h2>
+          <p>We write about LGBT+ issues in Tanzania and around the world.</p>
+        </div>
+        <a href="https://lgbtvoicetz.org/blog/" class="btn btn-outline">View all posts</a>
+      </div>
+
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="blog-image"><img src="https://lgbtvoicetz.org/wp-content/uploads/2026/06/Pride-2026-1024x576.png"
+              alt="Pride 2026" /></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta"><span>Pride</span><span>June 10, 2026</span></div>
+            <h3>Pride Is More Than a Celebration — It's a Commitment to Protect Lives</h3>
+            <p>Every June, Pride Month offers an opportunity to celebrate the courage, resilience, and achievements of
+              the LGBT+ community...</p>
+            <a href="https://lgbtvoicetz.org/pride-is-more-than-a-celebration-its-a-commitment-to-protect-lives/"
+              class="link-arrow mt-auto pt-10">Read more →</a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-image"><img
+              src="https://lgbtvoicetz.org/wp-content/uploads/2014/06/young_people_with_flag_on_street_2-1004x1024.png"
+              alt="17 Years Later" /></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta"><span>Anniversary</span><span>June 22, 2026</span></div>
+            <h3>17 Years Later: The Stories, the Struggles, and the Hope That Keeps Us Moving Forward</h3>
+            <p>As we mark Pride Month and 17 years of LGBT Voice Tanzania, we reflect on everything the community has
+              built...</p>
+            <a href="https://lgbtvoicetz.org/17-years-later-the-stories-the-struggles-and-the-hope-that-keeps-us-moving-forward/"
+              class="link-arrow mt-auto pt-10">Read more →</a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-image"><img
+              src="https://lgbtvoicetz.org/wp-content/uploads/2015/04/For-the-article-1024x768.jpg"
+              alt="Law and Enforcement" /></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta"><span>Legal</span><span>April 17, 2026</span></div>
+            <h3>When Law and Enforcement Diverge: The Lived Reality of LGBTQ+ People in Tanzania</h3>
+            <p>"Justice is not merely written in law—it is measured in how it is lived." By James Wandera Ouma...</p>
+            <a href="https://lgbtvoicetz.org/when-law-and-enforcement-diverge-the-lived-reality-of-lgbtq-people-in-tanzania/"
+              class="link-arrow mt-auto pt-10">Read more →</a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-image"><img src="https://lgbtvoicetz.org/wp-content/uploads/2024/01/Activisim-1-1024x576.png"
+              alt="Activism in Tanzania" /></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta"><span>Activism</span><span>January 27, 2024</span></div>
+            <h3>LGBTQ Visibility and Activism in Tanzania: 2009 vs 2024</h3>
+            <p>Over the past fifteen years, the LGBTQ rights movement in Tanzania has undergone significant
+              transformations...</p>
+            <a href="https://lgbtvoicetz.org/when-comparing-2024-to-2009-there-is-a-clear-distinction-in-terms-of-lgbtq-visibility-and-activism-in-tanzania/"
+              class="link-arrow mt-auto pt-10">Read more →</a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-image"><img src="https://lgbtvoicetz.org/wp-content/uploads/2023/12/Homophobia.jpeg"
+              alt="Homophobia in Tanzania" /></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta"><span>Human Rights</span><span>December 19, 2023</span></div>
+            <h3>Colonial Laws and Religious Teachings Fuel Homophobia in Tanzania</h3>
+            <p>Homophobia in Tanzania is not rooted in traditions and cultures, but rather in colonial law and imported
+              morality...</p>
+            <a href="https://lgbtvoicetz.org/colonial-laws-and-religious-teachings-fuel-homophobia-in-tanzania-2/"
+              class="link-arrow mt-auto pt-10">Read more →</a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-image"><img src="https://lgbtvoicetz.org/wp-content/uploads/2024/02/lgbt-month-resized.png"
+              alt="LGBTQ History Month" /></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta"><span>History</span><span>February 13, 2026</span></div>
+            <h3>LGBTQ+ History Month: Tanzania's Reality, Resilience, and the Urgent Call for Dignity</h3>
+            <p>Every February, LGBTQ+ History Month invites the world to reflect on stories that were silenced...</p>
+            <a href="https://lgbtvoicetz.org/lgbtq-history-month-tanzanias-reality-resilience-and-the-urgent-call-for-dignity/"
+              class="link-arrow mt-auto pt-10">Read more →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section class="section" id="contact">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="tag">Get In Touch</span>
+        <h2>Contact <span class="italic-accent">Us</span></h2>
+      </div>
+      <div class="contact-grid">
+
+        <!-- Left — info -->
+        <div class="contact-info">
+          <div>
+            <h2>We're here<br><span class="italic-accent color-accent-light">for you.</span></h2>
+            <p class="mt-14">Whether you need help, want to get involved, or just want to learn more about our
+              work — reach out. We would love to hear from you.</p>
+          </div>
+          <div class="contact-details">
+            <div class="contact-detail-item">
+              <div class="contact-detail-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg></div>
+              <div class="contact-detail-text"><span>Location</span>
+                <p>Dar es Salaam, Tanzania</p>
+              </div>
+            </div>
+            <div class="contact-detail-item">
+              <div class="contact-detail-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg></div>
+              <div class="contact-detail-text"><span>Email</span><a
+                  href="mailto:info@lgbtvoicetz.org">info@lgbtvoicetz.org</a>
+              </div>
+            </div>
+            <div class="contact-detail-item">
+              <div class="contact-detail-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.17-1.17a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg></div>
+              <div class="contact-detail-text"><span>Twitter / X</span><a href="https://twitter.com/lgbtvoicetz"
+                  target="_blank">@lgbtvoicetz</a></div>
+            </div>
+          </div>
+          <div>
+            <p class="label-overline">
+              Follow Us</p>
+            <div class="social-links">
+              <!-- Facebook -->
+              <a href="https://web.facebook.com/lgbtvoiceintz" class="social-link" target="_blank" title="Facebook">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                </svg>
+              </a>
+              <!-- Twitter/X -->
+              <a href="https://twitter.com/lgbtvoicetz" class="social-link" target="_blank" title="Twitter">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path
+                    d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+                </svg>
+              </a>
+              <!-- Instagram -->
+              <a href="#" class="social-link" target="_blank" title="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+              </a>
+              <!-- YouTube -->
+              <a href="#" class="social-link" target="_blank" title="YouTube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path
+                    d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                  <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="#fff" fill="#fff" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right — form -->
+        <div class="contact-form">
+          <h3>Send Us a <span class="italic-accent">Message</span></h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="James" />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Ouma" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <select>
+              <option value="">Select a topic…</option>
+              <option>I need help / crisis support</option>
+              <option>Volunteer enquiry</option>
+              <option>Donation / partnership</option>
+              <option>Media / press enquiry</option>
+              <option>General question</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell us how we can help…"></textarea>
+          </div>
+          <p class="form-note">We won't share your information without your consent. All communications are
+            confidential.</p>
+          <button class="btn btn-primary btn-large btn-full-width mt-14" type="submit">Send
+            Message</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA BANNER ═══ -->
+  <section class="section section--no-top-padding">
+    <div class="section-inner">
+      <div class="cta">
+        <div class="cta-text">
+          <p class="cta-eyebrow">Make a difference</p>
+          <h2>Every voice<br><span class="italic-accent color-accent-light">matters.</span></h2>
+          <p>Help us protect, empower, and celebrate the LGBT+ community in Tanzania. Your support saves lives.</p>
+        </div>
+        <div class="cta-buttons">
+          <a href="https://www.omprakash.org/office-rent2025" class="btn btn-white btn-large">Donate Now</a>
+          <a href="https://lgbtvoicetz.org/get-help/" class="btn btn-ghost-white btn-large">Get Help</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="section-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">LGBT Voice <span class="italic-accent">Tanzania</span></div>
+          <p>Advancing LGBT+ human rights in Tanzania since 2013 — building a more inclusive and accepting society for
+            all.</p>
+          <div class="footer-social-icons">
+            <a href="https://web.facebook.com/lgbtvoiceintz" class="footer-social-link" target="_blank"
+              title="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+            <a href="https://twitter.com/lgbtvoicetz" class="footer-social-link" target="_blank" title="Twitter / X">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+              </svg>
+            </a>
+            <a href="#" class="footer-social-link" target="_blank" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+            <a href="#" class="footer-social-link" target="_blank" title="YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="var(--color-text-muted)"
+                  fill="var(--color-text-muted)" />
+              </svg>
+            </a>
+          </div>
+          <p class="footer-contact-text">Contact: <a href="mailto:info@lgbtvoicetz.org"
+              class="color-accent">info@lgbtvoicetz.org</a></p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Organisation</h4>
+          <ul>
+            <li><a href="who_we_are.html">Who We Are</a></li>
+            <li><a href="what_we_do.html">What We Do</a></li>
+            <li><a href="our_projects.html">Our Projects</a></li>
+            <li><a href="lived_realities.html">LGBTQ+ Report</a></li>
+            <li><a href="press_kit.html">Press Kit</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Get Involved</h4>
+          <ul>
+            <li><a href="https://www.omprakash.org/office-rent2025">Donate</a></li>
+            <li><a href="join_our_movement.html">Join Movement</a></li>
+            <li><a href="volunteer_with_us.html">Volunteer</a></li>
+            <li><a href="jobs_opening.html">Job Openings</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="get_help.html">Get Help</a></li>
+            <li><a href="contact_us.html">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          <p>© 2025 LGBT Voice Tanzania. All rights reserved.</p>
+          <p>Made by <a href="https://yanaharcourt.dev/" target="_blank" class="credit-link">Yana Harcourt</a></p>
+        </div>
+        <p>Designed with pride 🏳️‍🌈</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var bar = document.getElementById("prideBar");
+      function update() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docH = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+        bar.style.width = pct + "%";
+      }
+      window.addEventListener("scroll", update, { passive: true });
+      update();
+    })();
+  </script>
+
+
+</body>
+
+</html>

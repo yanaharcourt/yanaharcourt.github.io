@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Openings — LGBT Voice Tanzania</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --color-background: #FAFAF8;
+      --color-surface: #F2F0EB;
+      --color-accent: #7C3AED;
+      --color-accent-light: #EDE9FA;
+      --color-text: #1A1A2E;
+      --color-text-muted: #6B6B80;
+      --color-border: #E4E2DC;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --spacing-page-inline: 80px;
+      --spacing-section-block: 80px;
+      --spacing-grid-gap: 14px;
+      --radius-card: 26px;
+
+      --color-white: #FFFFFF;
+      --color-accent-hover: #6D28D9;
+      --color-background-nav: rgba(250, 250, 248, 0.92);
+      --color-overlay-white-10: rgba(255, 255, 255, 0.1);
+      --color-overlay-white-12: rgba(255, 255, 255, 0.12);
+      --color-overlay-white-22: rgba(255, 255, 255, 0.22);
+      --color-overlay-white-28: rgba(255, 255, 255, 0.28);
+      --color-overlay-white-45: rgba(255, 255, 255, 0.45);
+      --color-overlay-white-55: rgba(255, 255, 255, 0.55);
+      --color-overlay-white-60: rgba(255, 255, 255, 0.6);
+      --color-overlay-white-65: rgba(255, 255, 255, 0.65);
+      --color-overlay-white-75: rgba(255, 255, 255, 0.75);
+      --color-overlay-white-85: rgba(255, 255, 255, 0.85);
+      --color-overlay-white-90: rgba(255, 255, 255, 0.9);
+      --color-accent-border-tinted: rgba(124, 58, 237, 0.14);
+      --color-accent-focus-ring: rgba(124, 58, 237, 0.1);
+      --color-accent-bg-dark: rgba(124, 58, 237, 0.12);
+      --color-white-hover: #f0f0f0;
+      --shadow-accent: 0 6px 20px rgba(124, 58, 237, 0.35);
+      --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-card-hover: 0 8px 28px rgba(0, 0, 0, 0.08);
+      --shadow-dropdown: 0 16px 48px rgba(0, 0, 0, 0.14);
+      --gradient-pride: linear-gradient(90deg, #E40303, #FF8C00, #FFED00, #008026, #004DFF, #750787);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html { scroll-behavior: smooth }
+
+    body {
+      background: var(--color-background);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased
+    }
+
+    a { color: inherit; text-decoration: none }
+
+    img { display: block; max-width: 100%; height: 100%; object-fit: cover }
+
+    .page-padding { padding-inline: var(--spacing-page-inline) }
+
+    .italic-accent {
+      font-style: italic;
+      color: var(--color-accent);
+      font-family: var(--font-display)
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--color-accent)
+    }
+
+    .tag::before {
+      content: '';
+      width: 20px;
+      height: 2px;
+      background: var(--color-accent);
+      border-radius: 2px;
+      flex-shrink: 0
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: .875rem;
+      font-weight: 600;
+      padding: 10px 22px;
+      border-radius: 999px;
+      cursor: pointer;
+      border: none;
+      transition: all .18s ease;
+      white-space: nowrap
+    }
+
+    .btn-primary { background: var(--color-accent); color: var(--color-white) }
+    .btn-primary:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-accent)
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-text);
+      border: 1.5px solid var(--color-border)
+    }
+    .btn-outline:hover { border-color: var(--color-text) }
+
+    .btn-outline-inverse {
+      background: transparent;
+      color: var(--color-white);
+      border: 1.5px solid var(--color-overlay-white-55)
+    }
+    .btn-outline-inverse:hover {
+      border-color: var(--color-white);
+      background: var(--color-overlay-white-10)
+    }
+
+    .btn-large { font-size: 1rem; padding: 14px 32px }
+
+    .btn-white { background: var(--color-white); color: var(--color-text) }
+    .btn-white:hover { background: var(--color-white-hover); transform: translateY(-1px) }
+
+    .btn-ghost-white {
+      background: var(--color-overlay-white-12);
+      color: var(--color-white);
+      border: 1.5px solid var(--color-overlay-white-28)
+    }
+    .btn-ghost-white:hover { background: var(--color-overlay-white-22) }
+
+    /* PRIDE STRIPE */
+    .pride { height: 4px; background: var(--gradient-pride) }
+
+    /* NAV */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-background-nav);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border)
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 32px
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1;
+      display: flex;
+      flex-direction: column
+    }
+
+    .logo small {
+      font-size: 11px;
+      font-family: var(--font-body);
+      font-weight: 400;
+      color: var(--color-text-muted);
+      letter-spacing: .05em
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none
+    }
+
+    .nav-links a {
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      transition: color .18s
+    }
+
+    .nav-links a:hover { color: var(--color-text) }
+    .nav-links a.active { color: var(--color-accent); font-weight: 600 }
+
+    .nav-item-with-dropdown { position: relative }
+
+    .nav-item-with-dropdown > a {
+      display: flex;
+      align-items: center;
+      gap: 5px
+    }
+
+    .nav-item-with-dropdown > a::after {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform .18s ease;
+      flex-shrink: 0
+    }
+
+    .nav-item-with-dropdown:hover > a::after,
+    .nav-item-with-dropdown:focus-within > a::after {
+      transform: rotate(-135deg) translateY(-2px)
+    }
+
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 240px;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 8px;
+      box-shadow: var(--shadow-dropdown);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .2s ease, visibility .2s ease;
+      list-style: none;
+      z-index: 200
+    }
+
+    .nav-item-with-dropdown::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 12px;
+      display: block
+    }
+
+    .nav-item-with-dropdown:hover .nav-dropdown,
+    .nav-item-with-dropdown:focus-within .nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto
+    }
+
+    .nav-dropdown li a {
+      display: block;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: background .15s, color .15s
+    }
+
+    .nav-dropdown li a:hover {
+      background: var(--color-accent-light);
+      color: var(--color-accent)
+    }
+
+    .logo-image { height: 38px; width: auto; object-fit: contain }
+
+    .nav-actions { display: flex; gap: 10px }
+
+    /* PAGE HERO — full height with photo, matches join_our_movement.html */
+    .page-hero-wrapper {
+      padding: 32px var(--spacing-page-inline) 0
+    }
+
+    .page-hero-image {
+      width: 100%;
+      height: 82vh;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: flex-end
+    }
+
+    .page-hero-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%
+    }
+
+    .page-hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+          transparent 15%,
+          rgba(15, 12, 35, 0.55) 55%,
+          rgba(15, 12, 35, 0.85) 100%);
+      border-radius: 28px
+    }
+
+    .page-hero-pride-stripe {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--gradient-pride);
+      border-radius: 0 0 28px 28px;
+      z-index: 3
+    }
+
+    .page-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 720px
+    }
+
+    .page-hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--color-overlay-white-60);
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .page-hero-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: var(--color-accent-light);
+      border-radius: 2px;
+      display: block;
+      flex-shrink: 0
+    }
+
+    .page-hero-heading {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 500;
+      line-height: .95;
+      letter-spacing: -.025em;
+      color: var(--color-white)
+    }
+
+    .page-hero-heading .italic-accent {
+      color: var(--color-accent-light)
+    }
+
+    .page-hero-description {
+      font-size: 1.05rem;
+      color: var(--color-overlay-white-75);
+      line-height: 1.7;
+      max-width: 560px
+    }
+
+    .page-hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 4px
+    }
+
+    /* SECTIONS */
+    .section { padding-block: var(--spacing-section-block) }
+    .section--no-top-padding { padding-top: 0 }
+
+    .section-inner { padding-inline: var(--spacing-page-inline) }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 40px
+    }
+
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -.02em
+    }
+
+    .section-header p {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      max-width: 520px;
+      line-height: 1.65
+    }
+
+    /* JOB CARD */
+    .job-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 44px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      transition: box-shadow .22s, transform .22s
+    }
+
+    .job-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-2px)
+    }
+
+    .job-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 32px
+    }
+
+    .job-card-header { display: flex; flex-direction: column; gap: 12px }
+
+    .job-card-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    .job-tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--color-accent-light);
+      color: var(--color-accent)
+    }
+
+    .job-tag--neutral {
+      background: var(--color-surface);
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border)
+    }
+
+    .job-card h3 {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -.015em
+    }
+
+    .job-card-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap
+    }
+
+    .job-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: .82rem;
+      color: var(--color-text-muted)
+    }
+
+    .job-meta-item svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      stroke: var(--color-text-muted)
+    }
+
+    .job-card-apply-aside {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      flex-shrink: 0
+    }
+
+    .job-compensation-badge {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 14px 20px;
+      text-align: center;
+      min-width: 140px
+    }
+
+    .job-compensation-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 4px
+    }
+
+    .job-compensation-value {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-text)
+    }
+
+    .job-divider {
+      height: 1px;
+      background: var(--color-border)
+    }
+
+    .job-description {
+      font-size: .95rem;
+      color: var(--color-text-muted);
+      line-height: 1.72;
+      max-width: 720px
+    }
+
+    .job-section-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 14px
+    }
+
+    .job-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 40px
+    }
+
+    .job-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .job-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .9rem;
+      color: var(--color-text-muted);
+      line-height: 1.55
+    }
+
+    .job-list li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      flex-shrink: 0;
+      margin-top: 7px
+    }
+
+    .job-offers-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px
+    }
+
+    .job-offer-item {
+      grid-column: span 2;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      font-size: .875rem;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.45
+    }
+
+    .job-offer-item::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      flex-shrink: 0
+    }
+
+    .job-offer-item:nth-child(4),
+    .job-offer-item:nth-child(5) {
+      grid-column: span 3
+    }
+
+    /* HOW TO APPLY */
+    .apply-box {
+      background: var(--color-text);
+      border-radius: var(--radius-card);
+      padding: 56px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .apply-box::before {
+      content: '';
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      opacity: .12
+    }
+
+    .apply-box-text {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative
+    }
+
+    .apply-box-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 500;
+      line-height: 1.05;
+      color: var(--color-white)
+    }
+
+    .apply-box-text p {
+      font-size: 1rem;
+      color: var(--color-overlay-white-65);
+      line-height: 1.7;
+      max-width: 380px
+    }
+
+    .apply-box-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--color-overlay-white-45)
+    }
+
+    .apply-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative
+    }
+
+    .apply-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px
+    }
+
+    .apply-step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-overlay-white-10);
+      border: 1px solid var(--color-overlay-white-12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--color-overlay-white-60);
+      flex-shrink: 0
+    }
+
+    .apply-step-text strong {
+      display: block;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--color-white);
+      margin-bottom: 2px
+    }
+
+    .apply-step-text span {
+      font-size: .85rem;
+      color: var(--color-overlay-white-55);
+      line-height: 1.5
+    }
+
+    /* CTA */
+    .cta {
+      background: var(--color-text);
+      border-radius: var(--radius-card);
+      padding: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      right: -90px;
+      top: -90px;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      opacity: .12
+    }
+
+    .cta-text { display: flex; flex-direction: column; gap: 13px; position: relative }
+
+    .cta-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 3.2rem);
+      font-weight: 500;
+      line-height: 1.05;
+      color: var(--color-white)
+    }
+
+    .cta-text p {
+      font-size: 1.05rem;
+      color: var(--color-overlay-white-55);
+      max-width: 420px
+    }
+
+    .cta-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--color-overlay-white-45)
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+      position: relative
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding-block: 56px 32px
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 12px
+    }
+
+    .footer-brand p {
+      font-size: .875rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      max-width: 280px;
+      margin-bottom: 16px
+    }
+
+    .footer-social-icons { display: flex; gap: 8px; margin-bottom: 16px }
+
+    .footer-social-link {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .18s, background .18s
+    }
+
+    .footer-social-link:hover {
+      border-color: var(--color-text-muted);
+      background: var(--color-border)
+    }
+
+    .footer-social-link svg { width: 14px; height: 14px }
+
+    .footer-contact-text { font-size: .8rem; color: var(--color-text-muted) }
+
+    .color-accent { color: var(--color-accent) }
+
+    .footer-column h4 {
+      font-family: var(--font-body);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 16px
+    }
+
+    .footer-column ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .footer-column ul li a {
+      font-size: .875rem;
+      color: var(--color-text);
+      transition: color .18s
+    }
+
+    .footer-column ul li a:hover { color: var(--color-accent) }
+
+    .footer-bottom {
+      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .8rem;
+      color: var(--color-text-muted)
+    }
+
+    .footer-bottom > div { display: flex; flex-direction: column; gap: 3px }
+
+    .credit-link { color: inherit; text-decoration: none; transition: color .18s, font-weight .18s }
+    .credit-link:hover { color: var(--color-accent); font-weight: 600 }
+
+    /* RAINBOW PROGRESS BAR */
+    .pride-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: var(--gradient-pride);
+      background-size: 100vw 4px;
+      z-index: 9999;
+      transition: width .05s linear
+    }
+
+    .logo-fallback-text { display: none; flex-direction: column }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      :root { --spacing-page-inline: 40px }
+
+      .page-hero-image { height: 70vh }
+
+      .job-card-top { flex-direction: column }
+      .job-card-apply-aside { align-items: flex-start; flex-direction: row; align-items: center }
+
+      .job-two-col { grid-template-columns: 1fr }
+      .job-offers-grid { grid-template-columns: 1fr 1fr }
+
+      .apply-box { grid-template-columns: 1fr; padding: 48px 44px; gap: 36px }
+
+      .cta {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 48px 40px
+      }
+
+      .footer-grid { grid-template-columns: 1fr 1fr }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --spacing-page-inline: 20px;
+        --spacing-section-block: 56px
+      }
+
+      .nav-links { display: none }
+
+      .page-hero-image { height: 85vh }
+      .page-hero-content { padding: 32px 28px }
+
+      .job-card { padding: 28px 24px }
+      .job-offers-grid { grid-template-columns: 1fr }
+
+      .apply-box { padding: 36px 28px }
+
+      .cta { padding: 36px 22px }
+
+      .footer-grid { grid-template-columns: 1fr }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="pride-progress-bar" id="prideBar"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner page-padding">
+      <a href="index.html" class="logo">
+        <img src="./assets/img/Logo.svg" alt="LGBT Voice Tanzania" class="logo-image"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="logo-fallback-text">LGBT Voice<small>Tanzania</small></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="who_we_are.html">Who We Are</a></li>
+        <li class="nav-item-with-dropdown">
+          <a>What We Do</a>
+          <ul class="nav-dropdown">
+            <li><a href="what_we_do.html">Overview</a></li>
+            <li><a href="our_projects.html">Our Projects</a></li>
+            <li><a href="lived_realities.html">Lived Realities of LGBTQ+ People in Tanzania Report</a></li>
+          </ul>
+        </li>
+        <li class="nav-item-with-dropdown">
+          <a class="active">Get Involved</a>
+          <ul class="nav-dropdown">
+            <li><a href="join_our_movement.html">Join Our Movement</a></li>
+            <li><a href="volunteer_with_us.html">Volunteer</a></li>
+            <li><a href="job_openings.html" class="active">Job Openings</a></li>
+            <li><a href="press_kit.html">Press Kit</a></li>
+          </ul>
+        </li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="get_help.html" class="btn btn-outline">Get Help</a>
+        <a href="https://www.omprakash.org/office-rent2025" target="_blank" class="btn btn-primary">Donate Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero-wrapper">
+    <div class="page-hero-image">
+      <img src="./assets/img/job-opening.png" alt="LGBT Voice Tanzania team at work" />
+      <div class="page-hero-content">
+        <span class="page-hero-eyebrow">Get Involved · Tanzania</span>
+        <h1 class="page-hero-heading">
+          Job <span class="italic-accent">Openings</span>
+        </h1>
+        <p class="page-hero-description">Join our team and help advance LGBTQ+ human rights in Tanzania. We welcome passionate individuals ready to make a lasting difference.</p>
+        <div class="page-hero-actions">
+          <a href="mailto:info@lgbtvoicetz.org?subject=Application – Volunteer Social Media Manager" class="btn btn-primary btn-large">Apply Now</a>
+          <a href="#openings" class="btn btn-outline-inverse btn-large">See Openings</a>
+        </div>
+      </div>
+      <div class="page-hero-pride-stripe"></div>
+    </div>
+  </div>
+
+  <!-- JOB LISTINGS -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="tag">Current Openings</span>
+        <h2>Open <span class="italic-accent">Positions</span></h2>
+        <p>We are a small but dedicated team. Every role here carries real impact.</p>
+      </div>
+
+      <!-- Job Card -->
+      <div class="job-card" id="openings">
+
+        <!-- Top: header + apply aside -->
+        <div class="job-card-top">
+          <div class="job-card-header">
+            <div class="job-card-tags">
+              <span class="job-tag">Volunteer</span>
+              <span class="job-tag job-tag--neutral">Part-time</span>
+              <span class="job-tag job-tag--neutral">Remote</span>
+            </div>
+            <h3>Volunteer Social Media <span class="italic-accent">Manager</span></h3>
+            <div class="job-card-meta">
+              <div class="job-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Remote
+              </div>
+              <div class="job-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Start date: As soon as possible
+              </div>
+              <div class="job-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Reports to Executive Director
+              </div>
+            </div>
+          </div>
+          <div class="job-card-apply-aside">
+            <div class="job-compensation-badge">
+              <div class="job-compensation-label">Compensation</div>
+              <div class="job-compensation-value">Volunteer</div>
+            </div>
+            <a href="mailto:info@lgbtvoicetz.org?subject=Application – Volunteer Social Media Manager"
+              class="btn btn-primary">Apply Now</a>
+          </div>
+        </div>
+
+        <div class="job-divider"></div>
+
+        <!-- About -->
+        <div>
+          <p class="job-section-label">About the Role</p>
+          <p class="job-description">We are seeking a creative and committed Volunteer Social Media Manager to help amplify our message, grow our digital presence, and engage audiences with meaningful content. This is a unique opportunity to support LGBTQ+ rights in Tanzania by helping us tell our story and mobilise support locally and internationally.</p>
+        </div>
+
+        <div class="job-divider"></div>
+
+        <!-- Responsibilities + Qualifications side by side -->
+        <div class="job-two-col">
+          <div>
+            <p class="job-section-label">Key Responsibilities</p>
+            <ul class="job-list">
+              <li>Develop and implement a consistent social media strategy across platforms (Facebook, Bluesky, Twitter/X, LinkedIn)</li>
+              <li>Create and schedule engaging, mission-aligned content — graphics, captions, reels, stories, infographics</li>
+              <li>Monitor and respond to messages, comments, and mentions in a timely manner</li>
+              <li>Track engagement metrics and suggest improvements to grow audience reach</li>
+              <li>Collaborate with staff to amplify events, campaigns, and advocacy messages</li>
+              <li>Ensure online safety and maintain confidentiality on sensitive topics</li>
+            </ul>
+          </div>
+          <div>
+            <p class="job-section-label">Qualifications</p>
+            <ul class="job-list">
+              <li>Strong understanding of social media platforms and trends</li>
+              <li>Excellent written communication skills in English</li>
+              <li>Graphic design skills — Canva, Adobe Spark, or similar</li>
+              <li>Commitment to LGBTQ+ rights, inclusion, and equality</li>
+              <li>Ability to work independently and manage time effectively</li>
+              <li>Experience in social media management or digital activism (preferred, not required)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job-divider"></div>
+
+        <!-- What we offer -->
+        <div>
+          <p class="job-section-label">What We Offer</p>
+          <div class="job-offers-grid">
+            <div class="job-offer-item">Opportunity to contribute to a vital human rights cause</div>
+            <div class="job-offer-item">Professional experience in digital communications</div>
+            <div class="job-offer-item">Flexibility in work hours and location</div>
+            <div class="job-offer-item">A supportive and passionate team</div>
+            <div class="job-offer-item">Reference letter and recognition for your service</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW TO APPLY -->
+  <section class="section section--no-top-padding">
+    <div class="section-inner">
+      <div class="apply-box">
+        <div class="apply-box-text">
+          <p class="apply-box-eyebrow">Application Process</p>
+          <h2>How to <span class="italic-accent">Apply</span></h2>
+          <p>Send your application to <strong style="color:var(--color-overlay-white-85)">info@lgbtvoicetz.org</strong> with the subject line matching the role. We review all applications and aim to respond within two weeks.</p>
+          <a href="mailto:info@lgbtvoicetz.org?subject=Application – Volunteer Social Media Manager"
+            class="btn btn-white btn-large" style="align-self:flex-start;margin-top:8px">Send Application</a>
+        </div>
+        <div class="apply-steps">
+          <div class="apply-step">
+            <div class="apply-step-number">01</div>
+            <div class="apply-step-text">
+              <strong>Your CV</strong>
+              <span>Attach your current CV or résumé in PDF format</span>
+            </div>
+          </div>
+          <div class="apply-step">
+            <div class="apply-step-number">02</div>
+            <div class="apply-step-text">
+              <strong>Short Statement</strong>
+              <span>Up to 300 words — tell us why you're interested in this role and what draws you to our mission</span>
+            </div>
+          </div>
+          <div class="apply-step">
+            <div class="apply-step-number">03</div>
+            <div class="apply-step-text">
+              <strong>Portfolio (optional)</strong>
+              <span>Links to social media accounts or content you've managed, if applicable</span>
+            </div>
+          </div>
+          <div class="apply-step">
+            <div class="apply-step-number">04</div>
+            <div class="apply-step-text">
+              <strong>Subject Line</strong>
+              <span>Use "Application – Volunteer Social Media Manager" so we don't miss it</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="section section--no-top-padding">
+    <div class="section-inner">
+      <div class="cta">
+        <div class="cta-text">
+          <p class="cta-eyebrow">Other ways to help</p>
+          <h2>Not the right<br><span class="italic-accent">role for you?</span></h2>
+          <p>There are many ways to support our work — donate, volunteer, or join our movement. Every contribution matters.</p>
+        </div>
+        <div class="cta-buttons">
+          <a href="volunteer_with_us.html" class="btn btn-white btn-large">Volunteer</a>
+          <a href="join_our_movement.html" class="btn btn-ghost-white btn-large">Join Movement</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="section-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">LGBT Voice <span class="italic-accent">Tanzania</span></div>
+          <p>Advancing LGBT+ human rights in Tanzania since 2013 — building a more inclusive and accepting society for all.</p>
+          <div class="footer-social-icons">
+            <a href="https://web.facebook.com/lgbtvoiceintz" class="footer-social-link" target="_blank" title="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+            <a href="https://twitter.com/lgbtvoicetz" class="footer-social-link" target="_blank" title="Twitter / X">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+              </svg>
+            </a>
+            <a href="#" class="footer-social-link" target="_blank" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+            <a href="#" class="footer-social-link" target="_blank" title="YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="var(--color-text-muted)" fill="var(--color-text-muted)" />
+              </svg>
+            </a>
+          </div>
+          <p class="footer-contact-text">Contact: <a href="mailto:info@lgbtvoicetz.org" class="color-accent">info@lgbtvoicetz.org</a></p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Organisation</h4>
+          <ul>
+            <li><a href="who_we_are.html">Who We Are</a></li>
+            <li><a href="what_we_do.html">What We Do</a></li>
+            <li><a href="our_projects.html">Our Projects</a></li>
+            <li><a href="lived_realities.html">LGBTQ+ Report</a></li>
+            <li><a href="press_kit.html">Press Kit</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Get Involved</h4>
+          <ul>
+            <li><a href="https://www.omprakash.org/office-rent2025">Donate</a></li>
+            <li><a href="join_our_movement.html">Join Movement</a></li>
+            <li><a href="volunteer_with_us.html">Volunteer</a></li>
+            <li><a href="job_openings.html">Job Openings</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="get_help.html">Get Help</a></li>
+            <li><a href="contact_us.html">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          <p>© 2025 LGBT Voice Tanzania. All rights reserved.</p>
+          <p>Made by <a href="https://yanaharcourt.dev/" target="_blank" class="credit-link">Yana Harcourt</a></p>
+        </div>
+        <p>Designed with pride 🏳️‍🌈</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var bar = document.getElementById("prideBar");
+      function update() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docH = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+        bar.style.width = pct + "%";
+      }
+      window.addEventListener("scroll", update, { passive: true });
+      update();
+    })();
+  </script>
+
+</body>
+</html>
