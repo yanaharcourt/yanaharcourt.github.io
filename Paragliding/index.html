@@ -159,21 +159,152 @@
         <p data-i18n="story.p2">Unser Team besteht aus Weltcup-Piloten, Fluglehrern und Gleitschirmherstellern. Geflogen
           wird meist im
           Stubaital: Die geschützte, inneralpine Lage macht dort mehr als 300 Flugtage im Jahr möglich.</p>
-        <div class="team-row">
-          <div class="team-card" data-tilt data-tilt-max="6" data-tilt-scale="1.02"><img
-              src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/jo.png"
-              alt="Johannes Glatz, Gründer und Tandempilot">
-            <div>
-              <h4>Johannes Glatz</h4><span data-i18n="team1.role">Gründer &amp; Tandempilot</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="pilots" id="piloten">
+    <div class="container pilots-grid">
+      <div data-reveal>
+        <span class="eyebrow" data-i18n="pilots.eyebrow">Unsere Piloten</span>
+        <h2 data-i18n="pilots.h2">Wer euch trägt, sollte man kennen.</h2>
+
+        <div class="pilots-switch" role="tablist">
+          <button class="pilot-tab active" type="button" data-pilot="johannes" role="tab" aria-selected="true">
+            <span class="pilot-tab-name">Johannes Glatz</span>
+            <span class="pilot-tab-role" data-i18n="pilot1.role">Gründer &amp; Weltcup-Pilot</span>
+          </button>
+          <button class="pilot-tab" type="button" data-pilot="simon" role="tab" aria-selected="false">
+            <span class="pilot-tab-name">Simon Klemenc</span>
+            <span class="pilot-tab-role" data-i18n="pilot2.role">Fluglehrer &amp; Tandempilot</span>
+          </button>
+        </div>
+
+        <div class="pilots-panels">
+          <div class="pilot-panel active" data-pilot-panel="johannes">
+            <p data-i18n="pilot1.p">Johannes fliegt seit über zwölf Jahren im Stubaital und kennt jede Thermik im Tal
+              beim Namen. Nebenbei testet und entwickelt er Gleitschirme für internationale Hersteller — sein Gespür
+              für Material und Flugverhalten fließt in jeden Start mit ein.</p>
+            <div class="pilot-stats">
+              <div><strong>640+</strong><span data-i18n="pilot1.stat1">Tandemflüge</span></div>
+              <div><strong>12</strong><span data-i18n="pilot1.stat2">Jahre im Cockpit</span></div>
+              <div><strong data-i18n="pilot1.stat3num">Weltcup</strong><span data-i18n="pilot1.stat3">aktiver
+                  Pilot</span></div>
             </div>
+            <p class="pilot-quote" data-i18n="pilot1.quote">„Ich will, dass sich jeder Gast am Ende sicherer fühlt,
+              als er sich das vorher vorstellen konnte.“</p>
           </div>
-          <div class="team-card" data-tilt data-tilt-max="6" data-tilt-scale="1.02"><img
-              src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/6becc819d69bb07e9fd480c39f723725.jpg"
-              alt="Simon Klemenc, Tandempilot">
-            <div>
-              <h4>Simon Klemenc</h4><span data-i18n="team2.role">Tandempilot</span>
+          <div class="pilot-panel" data-pilot-panel="simon">
+            <p data-i18n="pilot2.p">Simon bildet selbst Piloten aus und bringt dieses Gespür für Ruhe und Präzision
+              in jeden Tandemflug mit. Er fliegt bevorzugt die ruhigeren Linien über dem Tal — perfekt für alle, die
+              zum ersten Mal abheben.</p>
+            <div class="pilot-stats">
+              <div><strong>410+</strong><span data-i18n="pilot2.stat1">Tandemflüge</span></div>
+              <div><strong>7</strong><span data-i18n="pilot2.stat2">Jahre im Cockpit</span></div>
+              <div><strong data-i18n="pilot2.stat3num">Fluglehrer</strong><span data-i18n="pilot2.stat3">staatlich
+                  geprüft</span></div>
             </div>
+            <p class="pilot-quote" data-i18n="pilot2.quote">„Die meiste Aufregung ist beim Start weg — sobald wir in
+              der Luft sind, grinst jeder.“</p>
           </div>
+        </div>
+      </div>
+
+      <div class="pilots-media delay-1" data-reveal>
+        <button class="pilot-photo active" type="button" data-pilot-photo="johannes" aria-label="Johannes Glatz anzeigen">
+          <img
+            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/jo.png"
+            alt="Johannes Glatz im Gleitschirm-Cockpit über den Alpen"></button>
+        <button class="pilot-photo" type="button" data-pilot-photo="simon" aria-label="Simon Klemenc anzeigen">
+          <img
+            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/6becc819d69bb07e9fd480c39f723725.jpg"
+            alt="Simon Klemenc im Gleitschirm-Cockpit über den Alpen"></button>
+        <div class="pilots-media-badge"><strong id="pilotCounter">01</strong><span>/ 02</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why" id="warum-wir">
+    <div class="container">
+      <div class="why-head" data-reveal>
+        <span class="eyebrow" data-i18n="why.eyebrow">Warum wir</span>
+        <h2 data-i18n="why.h2">Nicht irgendein Tandempartner.</h2>
+      </div>
+
+      <div class="why-lead" data-reveal>
+        <div class="why-lead-icon" aria-hidden="true">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 9c3-4 7-6 10-6s7 2 10 6" />
+            <path d="M2 9c1.2 1 2.4 1.4 3.6 1.2M22 9c-1.2 1-2.4 1.4-3.6 1.2" />
+            <path d="M5.6 10.2L9 20M12 9v11M18.4 10.2L15 20" />
+          </svg>
+        </div>
+        <div class="why-lead-body">
+          <span class="why-tag" data-i18n="why.feature.tag">Einzigartig in Tirol</span>
+          <h3 data-i18n="why.feature.h3">Wir konstruieren unsere eigenen Schirme</h3>
+          <p data-i18n="why.feature.p">Die meisten Anbieter fliegen Ausrüstung von der Stange. Bei uns testet und
+            entwickelt das Team Gleitschirme für internationale Hersteller, bevor sie überhaupt in Serie gehen. Ihr
+            fliegt nicht nur mit erfahrenen Piloten, sondern mit den Leuten, die wissen, warum ein Schirm sich so
+            verhält, wie er sich verhält.</p>
+        </div>
+      </div>
+
+      <div class="why-facts">
+        <div class="why-fact" data-reveal>
+          <div class="why-fact-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 4h10v4a5 5 0 0 1-10 0V4z" />
+              <path d="M7 5H4a3 3 0 0 0 3 5M17 5h3a3 3 0 0 1-3 5" />
+              <path d="M12 13v3" />
+              <path d="M9 20h6M9 20l.5-2.5a1 1 0 0 1 1-.8h3a1 1 0 0 1 1 .8L15 20" />
+            </svg>
+          </div>
+          <h4 data-i18n="why.card1.h3">Weltcup-Niveau in der Luft</h4>
+          <p data-i18n="why.card1.p">Unsere Piloten fliegen selbst im Weltcup mit — Sicherheit, die aus jahrelangem
+            Spitzensport kommt, nicht nur aus der Theorie.</p>
+        </div>
+
+        <div class="why-fact delay-1" data-reveal>
+          <div class="why-fact-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4v5h5" />
+              <path d="M20 20v-5h-5" />
+              <path d="M5 15a8 8 0 0 0 14.3 3.6M19 9A8 8 0 0 0 4.7 5.4" />
+            </svg>
+          </div>
+          <h4 data-i18n="why.card2.h3">Rund 600 Flüge im Jahr</h4>
+          <p data-i18n="why.card2.p">So viel Routine hat kaum ein Team in Tirol. Genau diese Praxis macht jeden
+            einzelnen Start ruhiger und sicherer.</p>
+        </div>
+
+        <div class="why-fact delay-2" data-reveal>
+          <div class="why-fact-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="8" r="3" />
+              <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" />
+              <circle cx="18" cy="8" r="2.4" />
+              <path d="M15.5 14.2c2.6.4 4.5 2.7 4.5 5.8" />
+            </svg>
+          </div>
+          <h4 data-i18n="why.trust1.h4">Kleines Team, volle Aufmerksamkeit</h4>
+          <p data-i18n="why.trust1.p">Zwei Piloten statt Massenabfertigung — ihr seid Gäste, keine Flugnummer.</p>
+        </div>
+
+        <div class="why-fact delay-3" data-reveal>
+          <div class="why-fact-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 19l6-10 4 6 2-3 6 7H3z" />
+              <circle cx="17" cy="6" r="1.6" />
+            </svg>
+          </div>
+          <h4 data-i18n="why.trust2.h4">Zuhause im Stubaital</h4>
+          <p data-i18n="why.trust2.p">Über zehn Jahre lokale Erfahrung mit jeder Thermik, jedem Aufwind und den
+            schönsten Perspektiven.</p>
         </div>
       </div>
     </div>
@@ -347,6 +478,67 @@
     </div>
   </section>
 
+  <section class="reviews">
+    <div class="container">
+      <div class="reviews-head" data-reveal>
+        <span class="eyebrow" data-i18n="reviews.eyebrow">Google Bewertungen</span>
+        <h2 data-i18n="reviews.h2">Was unsere Gäste sagen</h2>
+        <div class="reviews-score">
+          <span class="reviews-stars" aria-hidden="true">★★★★★</span>
+          <span class="reviews-score-num" data-i18n="reviews.num">5,0</span>
+          <span class="reviews-score-count" data-i18n="reviews.count">aus 107 Bewertungen auf Google</span>
+        </div>
+      </div>
+      <div class="reviews-grid" data-reveal>
+        <div class="review-card">
+          <div class="review-top">
+            <span class="reviews-stars" aria-hidden="true">★★★★★</span>
+            <span class="review-time" data-i18n="review1.time">vor 4 Monaten</span>
+          </div>
+          <p class="review-text">"Today I went paragliding with this organization, and I can honestly say this is
+            an experience I will never forget. My instructor, Johannes, was amazing — he explained everything calmly
+            and gave me so much confidence to fully enjoy the moment. Once in the air, it was pure freedom."</p>
+          <div class="review-author">
+            <span class="review-avatar" aria-hidden="true">A</span>
+            <span class="review-name">Aline Deckx</span>
+          </div>
+        </div>
+
+        <div class="review-card delay-1">
+          <div class="review-top">
+            <span class="reviews-stars" aria-hidden="true">★★★★★</span>
+            <span class="review-time" data-i18n="review2.time">vor 5 Monaten</span>
+          </div>
+          <p class="review-text">"I came to Innsbruck for paragliding. My instructor was very kind and responded very
+            quickly. Thanks to that, I was able to complete an amazing paragliding experience. It was incredible and
+            so much fun. I highly recommend it!"</p>
+          <div class="review-author">
+            <span class="review-avatar" aria-hidden="true">김</span>
+            <span class="review-name">김윤경</span>
+          </div>
+        </div>
+
+        <div class="review-card delay-2">
+          <div class="review-top">
+            <span class="reviews-stars" aria-hidden="true">★★★★★</span>
+            <span class="review-time" data-i18n="review3.time">vor 3 Monaten</span>
+          </div>
+          <p class="review-text">"Yesterday, my brother and I went paragliding with Johannes and Norbert. Wow, what
+            an insane experience! It was bursting with joy, excitement, and pure adrenaline from start to finish.
+            These guys are absolute legends, super skilled and made us feel safe while pushing the fun to the
+            max."</p>
+          <div class="review-author">
+            <span class="review-avatar" aria-hidden="true">J</span>
+            <span class="review-name">Juliette bleichrodt</span>
+          </div>
+        </div>
+      </div>
+      <a class="btn btn-ghost-light reviews-cta"
+        href="https://search.google.com/local/reviews?placeid=ChIJv325taT6CiIRrSl10RYXCTM" target="_blank"
+        rel="noopener" data-i18n="reviews.cta">Alle Bewertungen auf Google ansehen</a>
+    </div>
+  </section>
+
   <section class="showcase">
     <div class="container showcase-grid">
       <div class="showcase-card" data-reveal>
@@ -375,6 +567,111 @@
             data-i18n="showcase2.btn">Interview
             lesen</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <div class="container">
+      <div class="faq-head" data-reveal>
+        <span class="eyebrow" data-i18n="faq.eyebrow">Häufige Fragen</span>
+        <h2 data-i18n="faq.h2">Noch Fragen vor der Buchung?</h2>
+        <p data-i18n="faq.p">Die wichtigsten Antworten rund um Gewicht, Wetter, Umbuchung und Ausrüstung — kurz und
+          klar.</p>
+      </div>
+      <div class="faq-list" id="faqList" data-reveal>
+
+        <div class="faq-item open">
+          <button class="faq-q" type="button" aria-expanded="true">
+            <span data-i18n="faq1.q">Bis zu welchem Gewicht kann ich fliegen?</span>
+            <span class="faq-q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <p data-i18n="faq1.a">Wir fliegen Gäste von ca. 15 kg bis 125 kg. Bei Abweichungen sprich uns vor der
+                Buchung kurz an — wir finden fast immer eine Lösung.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span data-i18n="faq2.q">Was passiert bei schlechtem Wetter?</span>
+            <span class="faq-q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <p data-i18n="faq2.a">Sicherheit geht vor. Können wir wetterbedingt nicht starten, verschieben wir deinen
+                Termin kostenlos — ganz ohne Aufpreis, so oft wie nötig.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span data-i18n="faq3.q">Kann ich meinen Termin kostenlos ändern?</span>
+            <span class="faq-q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <p data-i18n="faq3.a">Ja. Umbuchungen bis 24 Stunden vor Abflug sind kostenlos möglich — melde dich
+                einfach per WhatsApp oder Telefon.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span data-i18n="faq4.q">Ab welchem Alter ist ein Tandemflug möglich?</span>
+            <span class="faq-q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <p data-i18n="faq4.a">Ab 6 Jahren mit Einverständnis der Erziehungsberechtigten. Nach oben gibt es keine
+                feste Grenze — entscheidend ist die allgemeine Fitness.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span data-i18n="faq5.q">Was soll ich anziehen und mitbringen?</span>
+            <span class="faq-q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <p data-i18n="faq5.a">Wetterfeste, bequeme Kleidung nach Zwiebelprinzip und feste Schuhe. Gurtzeug, Helm
+                und Ausrüstung stellen wir komplett zur Verfügung.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span data-i18n="faq6.q">Bekomme ich Fotos oder Video vom Flug?</span>
+            <span class="faq-q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <p data-i18n="faq6.a">Optional buchbar direkt beim Check-in. Unser Pilot fotografiert und filmt während
+                des Flugs, du erhältst alles digital zum Download.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span data-i18n="faq7.q">Wie löse ich einen Fluggutschein ein?</span>
+            <span class="faq-q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <p data-i18n="faq7.a">Einfach bei der Terminvereinbarung den Gutscheincode angeben. Er ist ein Jahr ab
+                Kaufdatum gültig und für jeden Flugtyp einlösbar.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -508,7 +805,16 @@
         'story.eyebrow': 'Our Story', 'story.h2': "Flying isn't a job for us. It's how we live.",
         'story.p1': "For over ten years we've been in the air as often as possible — around 600 flights a year on average. That routine is exactly what gives you the highest level of safety.",
         'story.p2': 'Our team is made up of World Cup pilots, flight instructors and paraglider manufacturers. We fly mostly in the Stubai Valley: its sheltered, inner-alpine location allows for more than 300 flying days a year.',
-        'team1.role': 'Founder &amp; Tandem Pilot', 'team2.role': 'Tandem Pilot',
+        'pilots.eyebrow': 'Our Pilots', 'pilots.h2': 'The people who carry you deserve an introduction.',
+        'pilot1.role': 'Founder &amp; World Cup Pilot', 'pilot2.role': 'Flight Instructor &amp; Tandem Pilot',
+        'pilot1.p': 'Johannes has been flying the Stubai Valley for more than twelve years and knows every thermal in the valley by name. On the side, he tests and develops paragliders for international manufacturers — his feel for material and flight behavior goes into every launch.',
+        'pilot1.stat1': 'Tandem Flights', 'pilot1.stat2': 'Years in the Cockpit',
+        'pilot1.stat3num': 'World Cup', 'pilot1.stat3': 'Active Pilot',
+        'pilot1.quote': '"I want every guest to land feeling safer than they imagined they would."',
+        'pilot2.p': 'Simon trains pilots himself and brings that same calm precision to every tandem flight. He prefers the quieter lines above the valley — perfect for anyone flying for the first time.',
+        'pilot2.stat1': 'Tandem Flights', 'pilot2.stat2': 'Years in the Cockpit',
+        'pilot2.stat3num': 'Flight Instructor', 'pilot2.stat3': 'State-Certified',
+        'pilot2.quote': '"Most of the nerves disappear at launch — once we\'re in the air, everyone\'s grinning."',
         'gallery.h2': 'A Few Views From Above',
         'gallery.p': 'Photos from real flights over the Stubai Valley and the Nordkette. Click to browse.',
         'process.eyebrow': 'How It Works', 'process.h2': 'Three Steps Between Ground and Sky',
@@ -535,12 +841,44 @@
         'banner.h3': 'Flight Voucher — €130–170',
         'banner.p': 'Give the gift of a flight of choice. Valid for one year — the recipient chooses the flight type and date themselves.',
         'banner.btn': 'Order Voucher',
+        'why.eyebrow': 'Why Us', 'why.h2': 'Not just another tandem operator.',
+        'why.feature.tag': 'Unique in Tyrol',
+        'why.feature.h3': 'We help engineer the wings we fly',
+        'why.feature.p': "Most operators fly gear bought off the shelf. Our team tests and develops paragliders for international manufacturers before they ever go into production. You're not just flying with experienced pilots — you're flying with the people who know exactly why a wing behaves the way it does.",
+        'why.card1.h3': 'World Cup pilots at the controls',
+        'why.card1.p': 'Our pilots compete on the World Cup circuit themselves — safety built on years of top-level competition, not just theory.',
+        'why.card2.h3': 'About 600 flights a year',
+        'why.card2.p': 'Hardly any team in Tyrol flies this often. That routine is exactly what makes every single launch calmer and safer.',
+        'why.trust1.h4': 'Small team, full attention',
+        'why.trust1.p': "Two pilots, no mass processing — you're a guest, not a flight number.",
+        'why.trust2.h4': 'At home in the Stubai Valley',
+        'why.trust2.p': 'Over ten years of local experience with every thermal, every updraft, and the best views.',
         'showcase1.eyebrow': 'Your Flight, Your Film', 'showcase1.h2': 'Your Own Flight Video After Landing',
         'showcase1.p': 'Proof that it really happened — on request with video and photos straight from the flight.',
         'showcase2.eyebrow': 'In Conversation with innsbruck.info',
         'showcase2.quote': 'Our pilot on flying above the Nordkette.',
         'showcase2.p': 'An interview about experiences in the Alps, safety in the air, and tips for anyone flying with us for the first time.',
         'showcase2.btn': 'Read Interview',
+        'reviews.eyebrow': 'Google Reviews', 'reviews.h2': 'What Our Guests Say',
+        'reviews.num': '5.0', 'reviews.count': 'from 107 reviews on Google',
+        'reviews.cta': 'See All Reviews on Google',
+        'review1.time': '4 months ago', 'review2.time': '5 months ago', 'review3.time': '3 months ago',
+        'faq.eyebrow': 'Frequently Asked Questions', 'faq.h2': 'Still Have Questions Before Booking?',
+        'faq.p': 'The key answers on weight, weather, rescheduling and gear — short and clear.',
+        'faq1.q': 'Up to what weight can I fly?',
+        'faq1.a': 'We fly guests from about 15 kg to 125 kg. If you\'re outside that range, just ask us before booking — we can almost always find a solution.',
+        'faq2.q': 'What happens in bad weather?',
+        'faq2.a': 'Safety comes first. If we can\'t launch due to weather, we reschedule your appointment for free — no surcharge, as often as needed.',
+        'faq3.q': 'Can I reschedule my appointment for free?',
+        'faq3.a': 'Yes. Rescheduling up to 24 hours before departure is free — just reach out via WhatsApp or phone.',
+        'faq4.q': 'From what age is a tandem flight possible?',
+        'faq4.a': 'From age 6 with a guardian\'s consent. There\'s no fixed upper limit — general fitness is what matters.',
+        'faq5.q': 'What should I wear and bring?',
+        'faq5.a': 'Weatherproof, comfortable layered clothing and sturdy shoes. We fully provide the harness, helmet and equipment.',
+        'faq6.q': 'Do I get photos or video of the flight?',
+        'faq6.a': 'Bookable as an option directly at check-in. Our pilot photographs and films during the flight, and you get everything digitally to download.',
+        'faq7.q': 'How do I redeem a flight voucher?',
+        'faq7.a': 'Just provide the voucher code when scheduling your appointment. It\'s valid for one year from purchase and redeemable for any flight type.',
         'partners.head': 'Our Partners',
         'footer.brand': 'Fürstenweg 25, 6020 Innsbruck. Tandem paragliding flights over the Stubai Valley, bookable year-round.',
         'footer.navHead': 'Navigation', 'footer.legalHead': 'Legal', 'footer.privacy': 'Privacy Policy',
@@ -653,6 +991,41 @@
         const rect = card.getBoundingClientRect();
         card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
         card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+      });
+    });
+
+    /* ---------- pilot switcher / переключатель пилотов ---------- */
+    const pilotCounter = { johannes: '01', simon: '02' };
+    function switchPilot(id) {
+      document.querySelectorAll('.pilot-tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.pilot === id);
+        t.setAttribute('aria-selected', t.dataset.pilot === id);
+      });
+      document.querySelectorAll('.pilot-photo').forEach(p => p.classList.toggle('active', p.dataset.pilotPhoto === id));
+      document.querySelectorAll('.pilot-panel').forEach(p => p.classList.toggle('active', p.dataset.pilotPanel === id));
+      const counter = document.getElementById('pilotCounter');
+      if (counter) counter.textContent = pilotCounter[id] || '01';
+    }
+    document.querySelectorAll('.pilot-tab').forEach(tab => {
+      tab.addEventListener('click', () => switchPilot(tab.dataset.pilot));
+    });
+    document.querySelectorAll('.pilot-photo').forEach(photo => {
+      photo.addEventListener('click', () => switchPilot(photo.dataset.pilotPhoto));
+    });
+
+    /* ---------- FAQ accordion / аккордеон частых вопросов ---------- */
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const btn = item.querySelector('.faq-q');
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(o => {
+          o.classList.remove('open');
+          o.querySelector('.faq-q').setAttribute('aria-expanded', false);
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', true);
+        }
       });
     });
 

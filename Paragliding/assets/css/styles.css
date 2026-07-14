@@ -1187,44 +1187,188 @@ STORY / ИСТОРИЯ
   margin-top: var(--space-4);
 }
 
-.team-row {
-  display: flex;
-  gap: var(--space-5);
-  margin-top: var(--space-11);
+/* =========================================================
+PILOTS — switchable pilot profiles / ПИЛОТЫ — переключаемые профили
+========================================================= */
+.pilots {
+  padding: var(--space-16) 0 var(--space-32);
 }
 
-.team-card {
-  flex: 1;
-  display: flex;
+.pilots-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-20);
   align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-4);
-  background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-medium);
-  transition: transform var(--duration-base) var(--ease-spring), box-shadow var(--duration-base) ease;
 }
 
-.team-card:hover {
-  box-shadow: var(--shadow-card);
+.pilots-media {
+  position: relative;
+  aspect-ratio: 4/5;
 }
 
-.team-card img {
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-round);
+.pilot-photo {
+  position: absolute;
+  display: block;
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--radius-large);
+  transition: width var(--duration-slower) var(--ease-spring), height var(--duration-slower) var(--ease-spring),
+    inset var(--duration-slower) var(--ease-spring), filter var(--duration-slow) ease, transform var(--duration-base) ease;
+}
+
+.pilot-photo img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  flex-shrink: 0;
+  border-radius: inherit;
+  display: block;
 }
 
-.team-card h4 {
-  font-size: var(--font-size-small);
-  font-weight: 700;
+.pilot-photo.active {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  box-shadow: var(--shadow-dark-large);
+  filter: none;
 }
 
-.team-card span {
+.pilot-photo:not(.active) {
+  inset: auto calc(-1 * var(--space-8)) calc(-1 * var(--space-8)) auto;
+  width: 44%;
+  height: 56%;
+  z-index: 1;
+  box-shadow: var(--shadow-card);
+  filter: grayscale(0.65) brightness(0.85);
+  outline: 4px solid var(--color-background);
+}
+
+.pilot-photo:not(.active):hover {
+  filter: grayscale(0.15) brightness(0.96);
+  transform: translateY(-4px);
+}
+
+.pilots-media-badge {
+  position: absolute;
+  z-index: 3;
+  top: var(--space-5);
+  left: var(--space-5);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-dark-large);
+  pointer-events: none;
+}
+
+.pilots-media-badge strong {
+  font-family: var(--font-display);
+  font-size: var(--font-size-extra-large);
+  color: var(--color-accent);
+}
+
+.pilots-media-badge span {
   font-size: var(--font-size-extra-small);
+  color: var(--color-on-dark-faint);
+}
+
+.pilots-switch {
+  display: flex;
+  gap: var(--space-8);
+  border-bottom: 1px solid var(--color-line);
+  margin: var(--space-8) 0 var(--space-7);
+}
+
+.pilot-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+  padding-bottom: var(--space-4);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  text-align: left;
+  transition: border-color var(--duration-base) ease;
+}
+
+.pilot-tab-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--font-size-large);
   color: var(--color-ink-faint);
+  transition: color var(--duration-base) ease;
+}
+
+.pilot-tab-role {
+  font-size: var(--font-size-tiny);
+  color: var(--color-ink-faint);
+}
+
+.pilot-tab.active {
+  border-color: var(--color-accent);
+}
+
+.pilot-tab.active .pilot-tab-name {
+  color: var(--color-ink);
+}
+
+.pilots-panels {
+  position: relative;
+  display: grid;
+}
+
+.pilot-panel {
+  grid-area: 1/1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
+}
+
+.pilot-panel.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.pilot-panel p {
+  color: var(--color-ink-soft);
+  font-size: var(--font-size-medium);
+  max-width: 56ch;
+}
+
+.pilot-stats {
+  display: flex;
+  gap: var(--space-8);
+  margin: var(--space-7) 0;
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.pilot-stats strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--font-size-extra-large);
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+}
+
+.pilot-stats span {
+  font-size: var(--font-size-tiny);
+  color: var(--color-ink-faint);
+}
+
+.pilot-quote {
+  font-style: italic;
+  color: var(--color-ink-soft) !important;
+  font-size: var(--font-size-medium) !important;
+  max-width: 52ch;
 }
 
 /* =========================================================
@@ -1783,6 +1927,100 @@ PRICING / ЦЕНЫ
 }
 
 /* =========================================================
+WHY US — lead statement + plain fact grid / ПОЧЕМУ МЫ — вступление и сетка фактов
+========================================================= */
+.why {
+  padding: var(--space-16) 0 var(--space-32);
+}
+
+.why-head {
+  max-width: 46ch;
+  margin-bottom: var(--space-12);
+}
+
+.why-head h2 {
+  font-size: var(--font-size-heading-2-small);
+  margin-top: var(--space-2);
+}
+
+.why-lead {
+  display: flex;
+  gap: var(--space-7);
+  align-items: flex-start;
+  padding-bottom: var(--space-12);
+  margin-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.why-lead-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-medium);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.why-lead-body {
+  max-width: 60ch;
+}
+
+.why-tag {
+  display: inline-block;
+  font-size: var(--font-size-tiny);
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+  background: var(--color-accent-soft);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-4);
+}
+
+.why-lead-body h3 {
+  font-size: var(--font-size-heading-3);
+  margin-bottom: var(--space-3);
+  max-width: 26ch;
+}
+
+.why-lead-body p {
+  color: var(--color-ink-soft);
+  font-size: var(--font-size-medium);
+}
+
+.why-facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-9);
+}
+
+.why-fact-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-medium);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-5);
+}
+
+.why-fact h4 {
+  font-size: var(--font-size-medium);
+  margin-bottom: var(--space-2);
+}
+
+.why-fact p {
+  color: var(--color-ink-soft);
+  font-size: var(--font-size-small);
+}
+
+/* =========================================================
 SHOWCASE — video CTA + press, matched pair
 ВИТРИНА — видео-CTA и пресса, парный блок
 ========================================================= */
@@ -1987,6 +2225,122 @@ PARTNERS — marquee / ПАРТНЁРЫ — бегущая строка
 }
 
 /* =========================================================
+REVIEWS — Google reviews summary + testimonial cards / ОТЗЫВЫ GOOGLE
+========================================================= */
+.reviews {
+  padding: var(--space-24) 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.reviews-head {
+  max-width: 52ch;
+  margin-bottom: var(--space-12);
+}
+
+.reviews-head h2 {
+  font-size: var(--font-size-heading-2-small);
+  margin-top: var(--space-2);
+}
+
+.reviews-score {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.reviews-stars {
+  color: var(--color-accent);
+  font-size: var(--font-size-large);
+  letter-spacing: 2px;
+}
+
+.reviews-score-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--font-size-extra-large);
+  color: var(--color-ink);
+}
+
+.reviews-score-count {
+  color: var(--color-ink-soft);
+  font-size: var(--font-size-small);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-7);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-medium);
+  transition: transform var(--duration-base) var(--ease-spring), box-shadow var(--duration-base) ease;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.review-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.review-top .reviews-stars {
+  font-size: var(--font-size-base);
+}
+
+.review-time {
+  font-size: var(--font-size-tiny);
+  color: var(--color-ink-faint);
+}
+
+.review-text {
+  font-size: var(--font-size-small);
+  color: var(--color-ink-soft);
+  flex: 1;
+}
+
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.review-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-round);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: var(--font-size-small);
+  flex-shrink: 0;
+}
+
+.review-name {
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.reviews-cta {
+  margin-top: var(--space-10);
+}
+
+/* =========================================================
 RESPONSIVE / АДАПТИВНОСТЬ — 1920 / 1600 / 1280 / 1024 / 768 / 414 / 390 / 375 / 360 / 320
 Container padding cascades through the token system; components
 reflow at the breakpoints below.
@@ -2045,10 +2399,6 @@ reflow at the breakpoints below.
     left: var(--space-5);
   }
 
-  .team-row {
-    flex-direction: column;
-  }
-
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-areas: none;
@@ -2068,8 +2418,31 @@ reflow at the breakpoints below.
     grid-row: auto;
   }
 
+  .pilots-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+
+  .pilots-media {
+    max-width: 420px;
+  }
+
+  .why-lead {
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .why-facts {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+
   .showcase-grid {
     grid-template-columns: 1fr;
+  }
+
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -2167,9 +2540,35 @@ reflow at the breakpoints below.
     font-size: 1.7rem;
   }
 
+  .pilots-media-badge {
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .pilot-photo:not(.active) {
+    inset: auto calc(-1 * var(--space-5)) calc(-1 * var(--space-5)) auto;
+  }
+
+  .pilots-switch {
+    gap: var(--space-6);
+  }
+
+  .pilot-stats {
+    flex-wrap: wrap;
+    gap: var(--space-6) var(--space-8);
+  }
+
+  .why-facts {
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+
   .gallery-grid {
     grid-template-columns: 1fr;
     grid-auto-rows: 230px;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
   }
 
   .process-step {
