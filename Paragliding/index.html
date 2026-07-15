@@ -301,32 +301,40 @@
     <div class="container">
       <div class="gallery-head" data-reveal>
         <h2 data-i18n="gallery.h2">Ein paar Blicke von oben</h2>
-        <p data-i18n="gallery.p">Bilder aus echten Flügen über dem Stubaital und der Nordkette. Anklicken zum
-          Durchblättern.</p>
+        <div class="gallery-head-side">
+          <p data-i18n="gallery.p">Bilder aus echten Flügen über dem Stubaital und der Nordkette. Anklicken zum
+            Durchblättern.</p>
+          <button class="gallery-view-all" type="button" id="galleryViewAll">
+            <span data-i18n="gallery.viewAll">Alle Fotos ansehen</span>
+            <span class="gallery-view-all-count" id="galleryCount"></span>
+          </button>
+        </div>
       </div>
       <div class="gallery-grid" id="galleryGrid">
         <div class="gallery-item" data-reveal><img
             src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-08-10-00h07m36s827-1024x576.webp"
             alt="Gleitschirmflug über grünen Almwiesen"></div>
         <div class="gallery-item delay-1" data-reveal><img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-08-10-18h54m19s732-1024x576.webp"
-            alt="Abendstimmung beim Tandemflug"></div>
-        <div class="gallery-item delay-2" data-reveal><img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-08-13-21h29m38s544-1024x576.webp"
-            alt="Blick auf die Alpenkette während des Fluges"></div>
-        <div class="gallery-item delay-1" data-reveal><img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-03-29-21h44m58s972-1024x576.webp"
-            alt="Landeanflug über dem Tal"></div>
-        <div class="gallery-item delay-2" data-reveal><img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-02-18-09h55m43s291-1024x576.webp"
-            alt="Schneebedeckte Gipfel aus der Vogelperspektive"></div>
-        <div class="gallery-item delay-3" data-reveal><img
             src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-03-08-21h32m41s836-1024x576.webp"
             alt="Zwei Gleitschirme nebeneinander in der Luft"></div>
         <div class="gallery-item delay-2" data-reveal><img
+            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-02-18-09h55m43s291-1024x576.webp"
+            alt="Schneebedeckte Gipfel aus der Vogelperspektive"></div>
+        <div class="gallery-item delay-1" data-reveal><img
             src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-03-26-19h20m14s628-1024x576.webp"
             alt="Start am Startplatz im Stubaital"></div>
-        <div class="gallery-item delay-3" data-reveal><img
+      </div>
+      <div class="gallery-hidden" id="galleryHidden" hidden>
+        <div class="gallery-item"><img
+            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-08-10-18h54m19s732-1024x576.webp"
+            alt="Abendstimmung beim Tandemflug"></div>
+        <div class="gallery-item"><img
+            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-08-13-21h29m38s544-1024x576.webp"
+            alt="Blick auf die Alpenkette während des Fluges"></div>
+        <div class="gallery-item"><img
+            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-03-29-21h44m58s972-1024x576.webp"
+            alt="Landeanflug über dem Tal"></div>
+        <div class="gallery-item"><img
             src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-01-13-11h38m31s575-1024x576.webp"
             alt="Winterlicher Tandemflug über Tirol"></div>
       </div>
@@ -347,40 +355,52 @@
         <span class="eyebrow" data-i18n="process.eyebrow">Der Ablauf</span>
         <h2 data-i18n="process.h2">Drei Schritte zwischen Boden und Himmel</h2>
       </div>
-      <div class="process-timeline">
-        <svg class="process-line-svg" viewBox="0 0 2 600" preserveAspectRatio="none">
-          <path d="M1 0 L1 600" />
-          <path class="fill" id="processLineFill" d="M1 0 L1 600" />
-        </svg>
+      <div class="process-body">
+        <div class="process-timeline">
+          <svg class="process-line-svg" viewBox="0 0 2 600" preserveAspectRatio="none">
+            <path d="M1 0 L1 600" />
+            <path class="fill" id="processLineFill" d="M1 0 L1 600" />
+          </svg>
 
-        <div class="process-step" data-reveal>
-          <div class="step-num">01</div>
-          <div class="step-body">
-            <h3 data-i18n="step1.h3">Einweisung &amp; Check</h3>
-            <p data-i18n="step1.p">Am Startplatz bekommt ihr eine kurze Einweisung, danach folgen ein letzter Wetter-
-              und Ausrüstungscheck.
-              Dann kann es losgehen.</p>
+          <div class="process-step" data-reveal>
+            <div class="step-num">01</div>
+            <div class="step-body">
+              <h3 data-i18n="step1.h3">Einweisung &amp; Check</h3>
+              <p data-i18n="step1.p">Am Startplatz bekommt ihr eine kurze Einweisung, danach folgen ein letzter Wetter-
+                und Ausrüstungscheck.
+                Dann kann es losgehen.</p>
+            </div>
+          </div>
+          <div class="process-step delay-1" data-reveal>
+            <div class="step-num">02</div>
+            <div class="step-body">
+              <h3 data-i18n="step2.h3">Start &amp; Gleitflug</h3>
+              <p data-i18n="step2.p">Ein paar Schritte auf der Wiese — und schon seid ihr in der Luft. Wir gleiten
+                entspannt mit rund 40 km/h,
+                ihr dürft auch selbst steuern.</p>
+              <div class="step-tags"><span data-i18n="step2.tag1">Wingover — schwerelos</span><span
+                  data-i18n="step2.tag2">Spirale — ca. 4G</span></div>
+            </div>
+          </div>
+          <div class="process-step delay-2" data-reveal>
+            <div class="step-num">03</div>
+            <div class="step-body">
+              <h3 data-i18n="step3.h3">Landung &amp; Erinnerung</h3>
+              <p data-i18n="step3.p">Nach rund 15 Minuten landen wir sanft. Das Grinsen hält erfahrungsgemäß tagelang —
+                optional bekommt ihr
+                Video und Fotos von eurem Flug dazu.</p>
+            </div>
           </div>
         </div>
-        <div class="process-step delay-1" data-reveal>
-          <div class="step-num">02</div>
-          <div class="step-body">
-            <h3 data-i18n="step2.h3">Start &amp; Gleitflug</h3>
-            <p data-i18n="step2.p">Ein paar Schritte auf der Wiese — und schon seid ihr in der Luft. Wir gleiten
-              entspannt mit rund 40 km/h,
-              ihr dürft auch selbst steuern.</p>
-            <div class="step-tags"><span data-i18n="step2.tag1">Wingover — schwerelos</span><span
-                data-i18n="step2.tag2">Spirale — ca. 4G</span></div>
-          </div>
-        </div>
-        <div class="process-step delay-2" data-reveal>
-          <div class="step-num">03</div>
-          <div class="step-body">
-            <h3 data-i18n="step3.h3">Landung &amp; Erinnerung</h3>
-            <p data-i18n="step3.p">Nach rund 15 Minuten landen wir sanft. Das Grinsen hält erfahrungsgemäß tagelang —
-              optional bekommt ihr
-              Video und Fotos von eurem Flug dazu.</p>
-          </div>
+
+        <div class="process-side" data-reveal>
+          <span class="process-side-tag" data-i18n="process.side.tag">Gut zu wissen</span>
+          <ul class="process-side-list">
+            <li data-i18n="process.side.li1">Keine Erfahrung nötig</li>
+            <li data-i18n="process.side.li2">Kostenlose Umbuchung bei Wetter</li>
+            <li data-i18n="process.side.li3">Flug ab 6 Jahren möglich</li>
+          </ul>
+          <a class="btn btn-primary btn-block" href="#preise" data-i18n="process.side.cta">Flug aussuchen</a>
         </div>
       </div>
     </div>
@@ -749,10 +769,6 @@
         </div>
       </div>
     </div>
-    <div class="footer_bg" aria-hidden="true">
-      <div class="footer_bg_one"></div>
-      <div class="footer_bg_two"></div>
-    </div>
     <div class="container">
       <div class="footer-bottom">
         <div class="footer-bottom-info">
@@ -804,6 +820,7 @@
         'pilot2.quote': '"Most of the nerves disappear at launch — once we\'re in the air, everyone\'s grinning."',
         'gallery.h2': 'A Few Views From Above',
         'gallery.p': 'Photos from real flights over the Stubai Valley and the Nordkette. Click to browse.',
+        'gallery.viewAll': 'View All Photos',
         'process.eyebrow': 'How It Works', 'process.h2': 'Three Steps Between Ground and Sky',
         'step1.h3': 'Briefing &amp; Check',
         'step1.p': "At the launch site you'll get a short briefing, followed by a final weather and equipment check. Then it's time to go.",
@@ -812,6 +829,9 @@
         'step2.tag1': 'Wingover — weightless', 'step2.tag2': 'Spiral — approx. 4G',
         'step3.h3': 'Landing &amp; Memories',
         'step3.p': 'After about 15 minutes we land gently. The grin usually lasts for days — and you can optionally get video and photos of your flight.',
+        'process.side.tag': 'Good to Know',
+        'process.side.li1': 'No experience needed', 'process.side.li2': 'Free rebooking for bad weather', 'process.side.li3': 'Flights possible from age 6',
+        'process.side.cta': 'Choose a Flight',
         'pricing.h2': 'Choose Your Flight, Pick a Date, Take Off',
         'card1.tag': 'Thermal Flight · Recommended',
         'card1.p': 'The longest regular flight: over 30 minutes in the air, plenty of time for the mountain panorama around Innsbruck.',
@@ -1022,11 +1042,9 @@
     }
 
     /* ---------- gallery lightbox / лайтбокс галереи ---------- */
-    const galleryImages = Array.from(document.querySelectorAll('.gallery-item img')).map(img => ({ src: img.src, alt: img.alt }));
-    galleryImages.push({
-      src: 'https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-01-13-11h38m31s575-1024x576.webp',
-      alt: 'Bonus-Aufnahme aus einem Winterflug'
-    });
+    const galleryImages = Array.from(document.querySelectorAll('.gallery-grid .gallery-item img, .gallery-hidden .gallery-item img')).map(img => ({ src: img.src, alt: img.alt }));
+    const galleryCountEl = document.getElementById('galleryCount');
+    if (galleryCountEl) galleryCountEl.textContent = '(' + galleryImages.length + ')';
     let lbIndex = 0;
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
@@ -1047,9 +1065,11 @@
     function nextLightbox() { lbIndex = (lbIndex + 1) % galleryImages.length; updateLightbox(); }
     function prevLightbox() { lbIndex = (lbIndex - 1 + galleryImages.length) % galleryImages.length; updateLightbox(); }
 
-    document.querySelectorAll('.gallery-item').forEach((el, i) => {
+    document.querySelectorAll('.gallery-grid .gallery-item').forEach((el, i) => {
       el.addEventListener('click', () => openLightbox(i));
     });
+    const galleryViewAllBtn = document.getElementById('galleryViewAll');
+    if (galleryViewAllBtn) galleryViewAllBtn.addEventListener('click', () => openLightbox(0));
     document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
     document.getElementById('lightboxNext').addEventListener('click', nextLightbox);
     document.getElementById('lightboxPrev').addEventListener('click', prevLightbox);

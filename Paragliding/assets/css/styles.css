@@ -523,38 +523,6 @@ footer {
   padding: var(--space-24) 0 var(--space-8);
 }
 
-.footer_bg {
-  position: relative;
-  width: 100%;
-  height: 386px;
-  overflow: hidden;
-  background: url("../footer_bg_accent.png") no-repeat scroll center bottom;
-  background-size: 100% auto;
-  pointer-events: none;
-}
-
-.footer_bg .footer_bg_one {
-  background: url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEia0PYPxwT5ifToyP3SNZeQWfJEWrUENYA5IXM6sN5vLwAKvaJS1pQVu8mOFFUa_ET4JuHNTFAxKURFerJYHDUWXLXl1vDofYXuij45JZelYOjEFoCOn7E6Vxu0fwV7ACPzArcno1rYuVxGB7JY6G7__e4_KZW4lTYIaHSLVaVLzklZBLZnQw047oq5-Q/s16000/volks.gif") no-repeat center center;
-  background-size: 100%;
-  width: 330px;
-  height: 105px;
-  position: absolute;
-  bottom: 0;
-  left: 30%;
-  animation: myfirst 22s linear infinite;
-}
-
-.footer_bg .footer_bg_two {
-  background: url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyLGwEUVwPK6Vi8xXMymsc-ZXVwLWyXhogZxbcXQYSY55REw_0D4VTQnsVzCrL7nsyjd0P7RVOI5NKJbQ75koZIalD8mqbMquP20fL3DxsWngKkOLOzoOf9sMuxlbyfkIBTsDw5WFUj-YJiI50yzgVjF8cZPHhEjkOP_PRTQXDHEq8AyWpBiJdN9SfQA/s16000/cyclist.gif") no-repeat center center;
-  background-size: 100%;
-  width: 88px;
-  height: 100px;
-  position: absolute;
-  bottom: 0;
-  left: 38%;
-  animation: myfirst 30s linear infinite;
-}
-
 .footer-top {
   display: grid;
   grid-template-columns: 1.2fr 1fr 1fr;
@@ -1129,14 +1097,14 @@ STORY / ИСТОРИЯ
 
 .story-grid {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: var(--space-20);
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--space-16);
   align-items: center;
 }
 
 .story-media {
   position: relative;
-  aspect-ratio: 4/5;
+  aspect-ratio: 16/10;
 }
 
 .story-media img {
@@ -1391,19 +1359,53 @@ GALLERY / ГАЛЕРЕЯ
   max-width: 12ch;
 }
 
+.gallery-head-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-4);
+}
+
 .gallery-head p {
   color: var(--color-ink-soft);
   max-width: 38ch;
+  text-align: right;
+}
+
+.gallery-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  color: var(--color-ink);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--color-ink);
+  padding: 0 0 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out), gap var(--duration-base) var(--ease-out);
+}
+
+.gallery-view-all:hover {
+  color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  gap: var(--space-3);
+}
+
+.gallery-view-all-count {
+  color: var(--color-ink-faint);
+  font-weight: 500;
 }
 
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 190px);
+  grid-template-rows: repeat(2, 220px);
   grid-template-areas:
   "a a b c"
-  "a a d c"
-  "e f g h";
+  "a a d c";
   gap: var(--space-4);
 }
 
@@ -1414,41 +1416,26 @@ GALLERY / ГАЛЕРЕЯ
   cursor: pointer;
 }
 
-.gallery-item:nth-child(1) {
+.gallery-grid .gallery-item:nth-child(1) {
   grid-area: a;
 }
 
-.gallery-item:nth-child(2) {
+.gallery-grid .gallery-item:nth-child(2) {
   grid-area: b;
 }
 
-.gallery-item:nth-child(3) {
+.gallery-grid .gallery-item:nth-child(3) {
   grid-area: c;
 }
 
-.gallery-item:nth-child(4) {
+.gallery-grid .gallery-item:nth-child(4) {
   grid-area: d;
-}
-
-.gallery-item:nth-child(5) {
-  grid-area: e;
-}
-
-.gallery-item:nth-child(6) {
-  grid-area: f;
-}
-
-.gallery-item:nth-child(7) {
-  grid-area: g;
-}
-
-.gallery-item:nth-child(8) {
-  grid-area: h;
 }
 
 .gallery-item img {
   width: 100%;
   height: 100%;
+  filter: saturate(.94) contrast(1.03);
   object-fit: cover;
   transition: transform var(--duration-slower) var(--ease-out);
 }
@@ -1534,10 +1521,10 @@ GALLERY / ГАЛЕРЕЯ
 }
 
 .lightbox-close:hover,
-    .lightbox-prev:hover,
-    .lightbox-next:hover {
+.lightbox-prev:hover,
+.lightbox-next:hover {
   background: var(--color-accent);
-  transform: scale(1.06);
+  /* transform: scale(1.06); */
 }
 
 .lightbox-close {
@@ -1588,8 +1575,65 @@ PROCESS / ПРОЦЕСС
   font-size: var(--font-size-heading-2);
 }
 
+.process-body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--space-14);
+  align-items: start;
+}
+
 .process-timeline {
   position: relative;
+}
+
+.process-side {
+  position: sticky;
+  top: calc(var(--navbar-height) + var(--space-8));
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-large);
+  padding: var(--space-8);
+}
+
+.process-side-tag {
+  display: inline-block;
+  font-size: var(--font-size-tiny);
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+  background: var(--color-accent-soft);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-6);
+}
+
+.process-side-list {
+  list-style: none;
+  margin-bottom: var(--space-7);
+}
+
+.process-side-list li {
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-line);
+  font-size: var(--font-size-small);
+  color: var(--color-ink-soft);
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.process-side-list li:last-child {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.process-side-list li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-round);
+  background: var(--color-accent);
+  flex-shrink: 0;
 }
 
 .process-line-svg {
@@ -2318,15 +2362,6 @@ PARTNERS — marquee / ПАРТНЁРЫ — бегущая строка
   }
 }
 
-@keyframes myfirst {
-  0% {
-  left: -25%;
-  }
-  100% {
-  left: 100%;
-  }
-}
-
 /* =========================================================
 REVIEWS — Google reviews summary + testimonial cards / ОТЗЫВЫ GOOGLE
 ========================================================= */
@@ -2539,6 +2574,15 @@ reflow at the breakpoints below.
     padding: var(--space-8);
   }
 
+  .process-body {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+
+  .process-side {
+    position: static;
+  }
+
   .showcase-grid {
     grid-template-columns: 1fr;
   }
@@ -2578,6 +2622,21 @@ reflow at the breakpoints below.
 
   .stat-item:nth-child(n+3) {
     border-bottom: none;
+  }
+
+  .gallery-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+  }
+
+  .gallery-head-side {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .gallery-head p {
+    text-align: left;
   }
 
   .price-banner {
@@ -3270,15 +3329,6 @@ FAQ / ЧАСТЫЕ ВОПРОСЫ — accordion / аккордеон
   grid-template-rows: 1fr;
 }
 
-@keyframes myfirst {
-  0% {
-  left: -25%;
-  }
-  100% {
-  left: 100%;
-  }
-}
-
 /* =========================================================
 RESPONSIVE / АДАПТИВНОСТЬ — 1920 / 1600 / 1280 / 1024 / 768 / 414 / 390 / 375 / 360 / 320
 ========================================================= */
@@ -3648,15 +3698,6 @@ FLOATING WHATSAPP BUTTON / ПЛАВАЮЩАЯ КНОПКА WHATSAPP
   100% {
   transform: scale(1.7);
   opacity: 0;
-  }
-}
-
-@keyframes myfirst {
-  0% {
-  left: -25%;
-  }
-  100% {
-  left: 100%;
   }
 }
 
@@ -4083,15 +4124,6 @@ FLOATING WHATSAPP BUTTON / ПЛАВАЮЩАЯ КНОПКА WHATSAPP
   100% {
   transform: scale(1.7);
   opacity: 0;
-  }
-}
-
-@keyframes myfirst {
-  0% {
-  left: -25%;
-  }
-  100% {
-  left: 100%;
   }
 }
 
