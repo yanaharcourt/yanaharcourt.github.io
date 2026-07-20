@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IG Carousel — Regalia Dining In Motion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
+  <style>
+    :root {
+      --bg: #070B19;
+      --bg-2: #101728;
+      --cream: #EDE7DC;
+      --cream-2: rgba(237, 231, 220, .66);
+      --cream-3: rgba(237, 231, 220, .4);
+      --gold: #B8995C;
+      --gold-lt: #D9BE86;
+      --display: 'Croissant One', serif;
+      --sans: 'Hanken Grotesk', system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    img { display: block; max-width: 100%; }
+
+    body { background: #ccc7c0; font-family: var(--sans); }
+
+    .toolbar {
+      position: sticky; top: 0; z-index: 50;
+      background: #070B19; color: #EDE7DC;
+      padding: 18px 32px; font-size: 13px; letter-spacing: .02em;
+      display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+    }
+    .toolbar b { color: #D9BE86; }
+
+    .stage { padding: 64px 0 120px; display: flex; flex-direction: column; align-items: center; gap: 56px; }
+
+    .frame-tag {
+      width: 1080px; display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 18px; color: #55504a; font-size: 14px; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .frame-tag span:last-child { color: #948d84; text-transform: none; letter-spacing: 0; font-size: 13px; }
+
+    .slide {
+      width: 1080px; height: 1350px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: var(--bg); color: var(--cream);
+    }
+    .pad { padding: 100px 92px; height: 100%; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 21px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-lt); font-weight: 600;
+    }
+    .eyebrow::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--gold-lt); display: inline-block; }
+
+    h1, h2 { font-family: var(--display); font-weight: 400; }
+    em { font-style: normal; color: var(--gold-lt); }
+
+    .s-title { font-size: 62px; line-height: 1.16; margin: 26px 0 26px; }
+    .s-body { font-size: 29px; line-height: 1.6; color: var(--cream-2); max-width: 840px; font-weight: 300; }
+
+    /* browser-window frame for screenshots */
+    .win {
+      margin-top: 48px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #0B1020;
+      border: 1px solid rgba(237,231,220,.12);
+      box-shadow: 0 30px 70px rgba(0,0,0,.45);
+    }
+    .win__bar {
+      height: 46px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 20px;
+      background: #0D1224;
+      border-bottom: 1px solid rgba(237,231,220,.08);
+    }
+    .win__bar i { width: 11px; height: 11px; border-radius: 50%; background: rgba(237,231,220,.18); display: block; }
+    .win__url {
+      margin-left: 14px;
+      font-size: 15px;
+      color: var(--cream-3);
+      font-family: var(--sans);
+      background: rgba(237,231,220,.05);
+      padding: 5px 16px;
+      border-radius: 999px;
+    }
+    .win__crop { overflow: hidden; position: relative; }
+    .win__crop img { width: 100%; display: block; position: relative; }
+
+    /* ===== SLIDE 1 cover ===== */
+    .cover-title { font-size: 108px; line-height: 1.02; }
+    .cover-meta {
+      display: flex; gap: 56px; margin-top: 40px;
+      border-top: 1px solid rgba(237,231,220,.14); padding-top: 28px;
+    }
+    .cover-meta div { display: flex; flex-direction: column; gap: 6px; }
+    .cover-meta .l { font-size: 16px; letter-spacing: .1em; text-transform: uppercase; color: var(--cream-3); }
+    .cover-meta .v { font-size: 22px; color: var(--cream); }
+
+    /* ===== interaction icon diagram (slide 3) ===== */
+    .flow { display: flex; align-items: center; justify-content: center; gap: 26px; margin-top: 90px; flex-wrap: wrap; }
+    .flow-node {
+      width: 220px; height: 220px; border-radius: 28px;
+      background: var(--bg-2); border: 1px solid rgba(237,231,220,.12);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .flow-node img { width: 92px; height: 92px; object-fit: contain; }
+    .flow-node .badge {
+      position: absolute; top: -14px; right: -14px;
+      background: var(--gold); color: #0B1020;
+      font-size: 15px; font-weight: 800;
+      width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .flow-arrow { font-size: 40px; color: var(--cream-3); }
+    .flow-caption { text-align: center; margin-top: 26px; font-size: 22px; color: var(--cream-3); }
+    .flow-labels { display: flex; justify-content: center; gap: 60px; margin-top: 18px; }
+    .flow-labels span { width: 220px; text-align: center; font-size: 20px; color: var(--cream-2); }
+
+    /* ===== responsive slide (phone) ===== */
+    .phone-wrap { display: flex; justify-content: center; margin-top: 42px; }
+    .phone-frame {
+      border-radius: 44px;
+      overflow: hidden;
+      border: 1px solid rgba(237,231,220,.14);
+      box-shadow: 0 40px 90px rgba(0,0,0,.5);
+      width: 620px;
+    }
+    .phone-frame img { width: 100%; display: block; }
+
+    /* ===== outro ===== */
+    .outro { height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 0 92px; position: relative; }
+    .outro__title { font-size: 92px; line-height: 1.06; }
+    .outro__sub { margin-top: 26px; font-size: 29px; color: var(--cream-2); max-width: 640px; font-weight: 300; }
+    .outro__cta {
+      margin-top: 48px; display: inline-flex; width: fit-content; align-items: center; gap: 14px;
+      background: var(--gold-lt); color: #0B1020; font-weight: 700; font-size: 25px;
+      padding: 21px 38px; border-radius: 999px;
+    }
+    .outro__credit {
+      position: absolute; bottom: 90px; left: 92px; right: 92px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(237,231,220,.14); padding-top: 30px;
+      font-size: 21px; color: var(--cream-3);
+    }
+    .outro__credit b { color: var(--cream); font-weight: 600; }
+    .outro-orb { position: absolute; width: 640px; height: 640px; border-radius: 50%; border: 1px solid rgba(184,153,92,.2); left: -260px; top: -260px; }
+  </style>
+</head>
+
+<body>
+
+  <div class="toolbar">
+    <div>Regalia Dining — <b>Instagram Carousel · In Motion</b> · 7 frames · 1080×1350 (IG portrait 4:5)</div>
+    <div>Screenshots pulled from the live coded product · export each <code>.slide</code> at 100% zoom</div>
+  </div>
+
+  <div class="stage">
+
+    <!-- SLIDE 1 — COVER -->
+    <div>
+      <div class="frame-tag"><span>Slide 1 / 7 — Cover</span></div>
+      <div class="slide">
+        <div class="pad">
+          <div class="eyebrow">Live Product</div>
+          <h1 class="cover-title">Regalia<br /><em>Dining</em></h1>
+          <p class="s-body" style="margin-top:22px;">A walk through the interface — from first bite to booked table.</p>
+
+          <div class="win">
+            <div class="win__bar"><i></i><i></i><i></i><span class="win__url">regaliadining.com</span></div>
+            <div class="win__crop" style="height:560px;">
+              <img src="./img/Study case/Home-frame-V3.jpg" style="width:1000px; margin-top:0;" alt="Regalia Dining homepage" />
+            </div>
+          </div>
+
+          <div class="cover-meta">
+            <div><span class="l">Build</span><span class="v">HTML · CSS · Vanilla JS</span></div>
+            <div><span class="l">Design</span><span class="v">Figma prototype</span></div>
+            <div><span class="l">Year</span><span class="v">2024</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 — BROWSE THE MENU -->
+    <div>
+      <div class="frame-tag"><span>Slide 2 / 7 — Interaction 01</span></div>
+      <div class="slide">
+        <div class="pad">
+          <div class="eyebrow">Interaction 01</div>
+          <h2 class="s-title">Every dish, presented <em>like art</em>.</h2>
+          <p class="s-body">Dish photography sits on a dark canvas, with a favourite heart and an "add to cart" pill surfacing only on the card itself — no visual noise around the food.</p>
+
+          <div class="win">
+            <div class="win__bar"><i></i><i></i><i></i><span class="win__url">regaliadining.com/#menu</span></div>
+            <div class="win__crop" style="height:430px;">
+              <img src="./img/Study case/Home-frame-V3.jpg" style="width:1000px; margin-top:-608px;" alt="Regalia Dining menu cards" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 — MICRO FEEDBACK -->
+    <div>
+      <div class="frame-tag"><span>Slide 3 / 7 — Interaction 02</span></div>
+      <div class="slide">
+        <div class="pad">
+          <div class="eyebrow">Interaction 02</div>
+          <h2 class="s-title">Small feedback, <em>big trust</em>.</h2>
+          <p class="s-body">Every tap answers back — the cart badge bumps, the heart fills solid gold, and a quiet confirmation lets the guest know it worked.</p>
+
+          <div class="flow">
+            <div class="flow-node"><img src="./img/favourite.png" alt="favourite" /></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <svg width="92" height="92" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 28s-11.2-6.9-14-14.2C0.4 8.7 3.2 4 8 4c2.9 0 5.4 1.6 8 4.6C18.6 5.6 21.1 4 24 4c4.8 0 7.6 4.7 6 9.8C27.2 21.1 16 28 16 28z" fill="#D9BE86"/>
+              </svg>
+              <span class="badge">✓</span>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><img src="./img/cart.png" alt="cart" /><span class="badge">+1</span></div>
+          </div>
+          <div class="flow-labels">
+            <span>Tap to save</span>
+            <span>Filled + confirmed</span>
+            <span>Cart count updates</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 — MENU VARIETY -->
+    <div>
+      <div class="frame-tag"><span>Slide 4 / 7 — Interaction 03</span></div>
+      <div class="slide">
+        <div class="pad">
+          <div class="eyebrow">Interaction 03</div>
+          <h2 class="s-title">Six menus, <em>one dark canvas</em>.</h2>
+          <p class="s-body">Sushi, sashimi, noodles, appetizers, drinks, desserts — each category keeps the same moody photography and gold detailing, so the whole menu reads as one collection.</p>
+
+          <div class="win">
+            <div class="win__bar"><i></i><i></i><i></i><span class="win__url">regaliadining.com/appetizers</span></div>
+            <div class="win__crop" style="height:500px;">
+              <img src="./img/Study case/Home-frame-V3.jpg" style="width:1000px; margin-top:-960px;" alt="Regalia Dining appetizers menu" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 — DELIVERY / BOOKING -->
+    <div>
+      <div class="frame-tag"><span>Slide 5 / 7 — Interaction 04</span></div>
+      <div class="slide">
+        <div class="pad">
+          <div class="eyebrow">Interaction 04</div>
+          <h2 class="s-title">From browsing <em>to booked</em>.</h2>
+          <p class="s-body">Whether a guest books a table or has dinner delivered, the same warm, personal tone carries through — never a cold, generic form.</p>
+
+          <div class="win">
+            <div class="win__bar"><i></i><i></i><i></i><span class="win__url">regaliadining.com/delivery</span></div>
+            <div class="win__crop" style="height:520px;">
+              <img src="./img/Study case/Home-frame-V3.jpg" style="width:1000px; margin-top:-1600px;" alt="Regalia Dining delivery section" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 — RESPONSIVE -->
+    <div>
+      <div class="frame-tag"><span>Slide 6 / 7 — Interaction 05</span></div>
+      <div class="slide">
+        <div class="pad" style="padding-bottom:70px;">
+          <div class="eyebrow">Interaction 05</div>
+          <h2 class="s-title">Built to move on <em>every screen</em>.</h2>
+          <p class="s-body">Full responsive parity — the same dark-luxury feel, from a wide desktop display to a phone in your palm.</p>
+
+          <div class="phone-wrap">
+            <div class="phone-frame">
+              <div class="win__crop" style="height:760px;">
+                <img src="./img/Study case/Mobile frame.png" style="width:620px; margin-top:0;" alt="Regalia Dining mobile view" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 — OUTRO -->
+    <div>
+      <div class="frame-tag"><span>Slide 7 / 7 — Outro / CTA</span></div>
+      <div class="slide">
+        <div class="outro">
+          <div class="outro-orb"></div>
+          <div class="eyebrow" style="margin-bottom:24px;">See It Live</div>
+          <h2 class="outro__title">See it <em>live</em>.</h2>
+          <p class="outro__sub">The full experience — menus, cart, favourites and booking — one scroll away.</p>
+          <div class="outro__cta">View Live Site ↗</div>
+          <div class="outro__credit">
+            <span>Design &amp; build — <b>Yana Harcourt</b></span>
+            <span>← Swipe back for the full case study</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

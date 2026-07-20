@@ -17,6 +17,7 @@
       font-family: 'Hanken Grotesk';
       background-color: #070B19;
       color: #C7C2B7;
+      overflow-x: hidden;
     }
 
     /*--------------------------------------------------------------
@@ -148,25 +149,117 @@
       font-weight: bold;
     }
 
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      margin-left: 20px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 5;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: #C7C2B7;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    header.nav-open .nav-toggle span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    header.nav-open .nav-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    header.nav-open .nav-toggle span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .nav-overlay {
+      display: none;
+    }
+
     /* Responsive adjustments */
     @media (max-width: 1024px) {
       header {
-        padding: 10px 50px;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 30px;
       }
-      
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: min(320px, 80vw);
+        height: 100vh;
+        background-color: #101728;
+        transform: translateX(100%);
+        transition: transform 0.35s ease;
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
+        justify-self: auto;
+      }
+
+      header.nav-open nav {
+        transform: translateX(0);
+      }
+
+      nav ul {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 40px;
+        gap: 10px;
+      }
+
       nav ul li {
-        margin: 0 10px;
+        margin: 14px 0;
+      }
+
+      nav ul li a {
+        font-size: 20px;
+      }
+
+      header.nav-open .nav-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(7, 11, 25, 0.6);
+        z-index: 3;
+      }
+
+      .icons img {
+        width: 26px;
+        height: 26px;
       }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 480px) {
       header {
-        grid-template-columns: auto auto auto;
-        padding: 10px 30px;
+        padding: 10px 16px;
       }
 
       .logo span {
         display: none;
+      }
+
+      .icons {
+        gap: 14px;
       }
     }
 
@@ -467,6 +560,79 @@
     @media (max-width: 880px) {
       .product-container {
         grid-template-columns: repeat(1, 391px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-container {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+        padding: 10px;
+      }
+
+      .card-wrapper {
+        width: 100%;
+        max-width: 360px;
+        height: 420px;
+      }
+
+      .product-card {
+        width: 100%;
+        max-width: 360px;
+        height: 420px;
+        clip-path: none;
+        border-radius: 24px;
+      }
+
+      .product-image {
+        width: 100%;
+        height: 210px;
+      }
+
+      .product-card h3 {
+        font-size: 20px;
+        padding: 0 20px;
+      }
+
+      .product-card p {
+        font-size: 14px;
+        padding: 0 20px;
+      }
+
+      .product-footer {
+        padding: 0 20px;
+        bottom: 20px;
+      }
+
+      .favorite-btn {
+        width: 44px;
+        height: 44px;
+      }
+
+      .favorite-btn svg {
+        width: 44px;
+        height: 44px;
+      }
+
+      .menu-title {
+        font-size: 28px;
+      }
+
+      .menu-nav a {
+        font-size: 14px;
+        padding: 3px 8px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .card-wrapper,
+      .product-card {
+        max-width: 320px;
+        height: 400px;
+      }
+
+      .product-image {
+        height: 190px;
       }
     }
     /*--------------------------------------------------------------
@@ -774,10 +940,12 @@
     # Footer
     --------------------------------------------------------------*/
     .footer-line {
-      width: 1350px;
+      width: 100%;
+      max-width: 1350px;
       height: 1px;
       background-color: rgba(184, 153, 92, 0.1);
       margin: 200px auto 20px auto;
+      box-sizing: border-box;
     }
 
     .site-footer {
@@ -916,7 +1084,13 @@
                 <a href="#profile">
                     <img src="img/profile.png" alt="Profile">
                 </a>
+                <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </button>
             </div>
+            <div class="nav-overlay"></div>
             <script>
               window.addEventListener('scroll', function() {
               const header = document.querySelector('header');
@@ -926,6 +1100,30 @@
                 header.classList.remove('scrolled');
               }
             });
+            </script>
+            <script>
+              (function () {
+                const header = document.querySelector('header');
+                const toggle = document.querySelector('.nav-toggle');
+                const nav = document.querySelector('header nav');
+                const overlay = document.querySelector('.nav-overlay');
+
+                function closeNav() {
+                  header.classList.remove('nav-open');
+                  toggle.setAttribute('aria-expanded', 'false');
+                }
+
+                toggle.addEventListener('click', function () {
+                  const isOpen = header.classList.toggle('nav-open');
+                  toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                });
+
+                overlay.addEventListener('click', closeNav);
+                nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeNav));
+                window.addEventListener('resize', function () {
+                  if (window.innerWidth > 1024) closeNav();
+                });
+              })();
             </script>
         </header>
 
