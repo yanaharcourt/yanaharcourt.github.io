@@ -2819,6 +2819,19 @@ reflow at the breakpoints below.
     font-size: clamp(2.3rem, 11vw, 3.1rem);
   }
 
+  .hero-book-field input {
+    font-size: 16px;
+  }
+
+  .hero-book-field input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.75;
+  }
+
+  .hero-book-field input[type="date"]::-webkit-date-and-time-value {
+    text-align: left;
+  }
+
   .hero-sub {
     font-size: var(--font-size-base);
     margin-top: var(--space-5);
@@ -2885,8 +2898,30 @@ reflow at the breakpoints below.
   }
 
   .why-fact {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    column-gap: var(--space-4);
     padding: var(--space-5) var(--space-2);
-    gap: var(--space-4);
+  }
+
+  .why-fact-index {
+    grid-column: 1;
+    grid-row: 1;
+    width: auto;
+    padding-top: 0;
+    margin-bottom: var(--space-2);
+    text-align: center;
+  }
+
+  .why-fact-icon {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .why-fact-body {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
   }
 
   .gallery-grid {
@@ -4358,6 +4393,26 @@ RESPONSIVE / АДАПТИВНОСТЬ — 1920 / 1600 / 1280 / 1024 / 768 / 414 
     order: -1;
     aspect-ratio: 16/9;
   }
+
+  .contact-media-badge {
+    left: var(--space-4);
+    bottom: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-3);
+  }
+
+  .contact-media-badge .contact-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .contact-media-badge strong {
+    font-size: var(--font-size-small);
+  }
+
+  .contact-media-badge span {
+    font-size: var(--font-size-tiny);
+  }
 }
 
 @media (max-width:768px) {
@@ -4393,12 +4448,6 @@ RESPONSIVE / АДАПТИВНОСТЬ — 1920 / 1600 / 1280 / 1024 / 768 / 414 
 @media (max-width:600px) {
   .contact-item {
     gap: var(--space-4);
-  }
-
-  .contact-media-badge {
-    left: var(--space-4);
-    bottom: var(--space-4);
-    padding: var(--space-4);
   }
 }
 
