@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <!--
   ══════════════════════════════════════════════════════════
-  Website design & code by Yana Harcourt — yanaharcourt.github.io
-  Дизайн и код сайта: Яна Харкорт — yanaharcourt.github.io
+  Website design & code by Yana Harcourt — yanaharcourt.dev
+  Дизайн и код сайта: Яна Харкорт — yanaharcourt.dev
   Project / Проект: Innsbruck Paragliding — website redesign
   Built / Создано: 2026 — authorship watermark, do not remove
   Метка авторства — не удалять
@@ -68,7 +68,7 @@
   <section class="hero" id="home">
     <div class="hero-media" id="heroMedia">
       <img
-        src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-08-05-00h09m17s390-1024x576.webp"
+        src="./assets/img/003.jpg"
         alt="Tandem-Gleitschirmflug über dem Stubaital bei Sonnenlicht">
     </div>
 
@@ -144,11 +144,9 @@
     <div class="container story-grid">
       <div class="story-media" data-reveal>
         <img
-          src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-03-27-23h57m11s960-1024x576.webp"
+          src="./assets/img/028.jpg"
           alt="Pilot und Passagier beim Gleitschirmflug über den Alpen">
-        <div class="story-media-badge"><strong>2019</strong><span data-i18n="story.badge.text">Seit diesem Jahr fliegen
-            wir Tandem in
-            Innsbruck</span></div>
+        <div class="story-media-badge"><strong>2019</strong><span data-i18n="story.badge.text">Seit diesem Jahr fliegen wir Tandem in Innsbruck</span></div>
       </div>
       <div data-reveal class="delay-1">
         <span class="eyebrow" data-i18n="story.eyebrow">Unsere Geschichte</span>
@@ -174,38 +172,43 @@
             <span class="pilot-tab-name">Johannes Glatz</span>
             <span class="pilot-tab-role" data-i18n="pilot1.role">Gründer &amp; Weltcup-Pilot</span>
           </button>
+          <button class="pilot-tab" type="button" data-pilot="jessica" role="tab" aria-selected="false">
+            <span class="pilot-tab-name">Jessica</span>
+            <span class="pilot-tab-role" data-i18n="pilot2.role">Tandempilotin seit 2017</span>
+          </button>
           <button class="pilot-tab" type="button" data-pilot="simon" role="tab" aria-selected="false">
             <span class="pilot-tab-name">Simon Klemenc</span>
-            <span class="pilot-tab-role" data-i18n="pilot2.role">Fluglehrer &amp; Tandempilot</span>
+            <span class="pilot-tab-role" data-i18n="pilot3.role">Fluglehrer &amp; Tandempilot</span>
           </button>
         </div>
 
         <div class="pilots-panels">
           <div class="pilot-panel active" data-pilot-panel="johannes">
-            <p data-i18n="pilot1.p">Johannes fliegt seit über zwölf Jahren im Stubaital und kennt jede Thermik im Tal
-              beim Namen. Nebenbei testet und entwickelt er Gleitschirme für internationale Hersteller — sein Gespür
-              für Material und Flugverhalten fließt in jeden Start mit ein.</p>
+            <p data-i18n="pilot1.p">Johannes fliegt seit über zwölf Jahren im Stubaital und kennt jede Thermik im Tal beim Namen. Nebenbei testet und entwickelt er Gleitschirme für internationale Hersteller — sein Gespür für Material und Flugverhalten fließt in jeden Start mit ein.</p>
             <div class="pilot-stats">
               <div><strong>640+</strong><span data-i18n="pilot1.stat1">Tandemflüge</span></div>
               <div><strong>12</strong><span data-i18n="pilot1.stat2">Jahre im Cockpit</span></div>
-              <div><strong data-i18n="pilot1.stat3num">Weltcup</strong><span data-i18n="pilot1.stat3">aktiver
-                  Pilot</span></div>
+              <div><strong data-i18n="pilot1.stat3num">Weltcup</strong><span data-i18n="pilot1.stat3">aktiver Pilot</span></div>
             </div>
-            <p class="pilot-quote" data-i18n="pilot1.quote">„Ich will, dass sich jeder Gast am Ende sicherer fühlt,
-              als er sich das vorher vorstellen konnte.“</p>
+            <p class="pilot-quote" data-i18n="pilot1.quote">„Ich will, dass sich jeder Gast am Ende sicherer fühlt, als er sich das vorher vorstellen konnte.“</p>
+          </div>
+          <div class="pilot-panel" data-pilot-panel="jessica">
+            <p data-i18n="pilot2.p">Jessica fliegt seit 2017 und ist mitten im Zillertal aufgewachsen. Sie zählt zu den besten Gleitschirmpilotinnen der Welt und sorgt dafür, dass jeder Flug mit ihr zu einem unvergesslichen Erlebnis wird.</p>
+            <div class="pilot-stats">
+              <div><strong>2017</strong><span data-i18n="pilot2.stat1">Fliegt seit</span></div>
+              <div><strong>Zillertal</strong><span data-i18n="pilot2.stat2">Aufgewachsen</span></div>
+              <div><strong data-i18n="pilot2.stat3num">Weltklasse</strong><span data-i18n="pilot2.stat3">Pilotin</span>
+              </div>
+            </div>
           </div>
           <div class="pilot-panel" data-pilot-panel="simon">
-            <p data-i18n="pilot2.p">Simon bildet selbst Piloten aus und bringt dieses Gespür für Ruhe und Präzision
-              in jeden Tandemflug mit. Er fliegt bevorzugt die ruhigeren Linien über dem Tal — perfekt für alle, die
-              zum ersten Mal abheben.</p>
+            <p data-i18n="pilot3.p">Simon bildet selbst Piloten aus und bringt dieses Gespür für Ruhe und Präzision in jeden Tandemflug mit. Er fliegt bevorzugt die ruhigeren Linien über dem Tal — perfekt für alle, die zum ersten Mal abheben.</p>
             <div class="pilot-stats">
-              <div><strong>410+</strong><span data-i18n="pilot2.stat1">Tandemflüge</span></div>
-              <div><strong>7</strong><span data-i18n="pilot2.stat2">Jahre im Cockpit</span></div>
-              <div><strong data-i18n="pilot2.stat3num">Fluglehrer</strong><span data-i18n="pilot2.stat3">staatlich
-                  geprüft</span></div>
+              <div><strong>410+</strong><span data-i18n="pilot3.stat1">Tandemflüge</span></div>
+              <div><strong>7</strong><span data-i18n="pilot3.stat2">Jahre im Cockpit</span></div>
+              <div><strong data-i18n="pilot3.stat3num">Fluglehrer</strong><span data-i18n="pilot3.stat3">staatlich geprüft</span></div>
             </div>
-            <p class="pilot-quote" data-i18n="pilot2.quote">„Die meiste Aufregung ist beim Start weg — sobald wir in
-              der Luft sind, grinst jeder.“</p>
+            <p class="pilot-quote" data-i18n="pilot3.quote">„Die meiste Aufregung ist beim Start weg — sobald wir in der Luft sind, grinst jeder.“</p>
           </div>
         </div>
       </div>
@@ -213,13 +216,17 @@
       <div class="pilots-media delay-1" data-reveal>
         <button class="pilot-photo active" type="button" data-pilot-photo="johannes" aria-label="Johannes Glatz anzeigen">
           <img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/jo.png"
+            src="./assets/img/Johannes-Glatz.png"
             alt="Johannes Glatz im Gleitschirm-Cockpit über den Alpen"></button>
+        <button class="pilot-photo" type="button" data-pilot-photo="jessica" aria-label="Jessica anzeigen">
+          <img
+            src="./assets/img/Jessica.jpeg"
+            alt="Platzhalter-Portrait — Foto von Jessica folgt"></button>
         <button class="pilot-photo" type="button" data-pilot-photo="simon" aria-label="Simon Klemenc anzeigen">
           <img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/6becc819d69bb07e9fd480c39f723725.jpg"
+            src="./assets/img/Simon-Klemenc.jpg"
             alt="Simon Klemenc im Gleitschirm-Cockpit über den Alpen"></button>
-        <div class="pilots-media-badge"><strong id="pilotCounter">01</strong><span>/ 02</span></div>
+        <div class="pilots-media-badge"><strong id="pilotCounter">01</strong><span>/ 03</span></div>
       </div>
     </div>
   </section>
@@ -239,10 +246,7 @@
           </div>
           <span class="why-tag" data-i18n="why.feature.tag">Einzigartig in Tirol</span>
           <h3 data-i18n="why.feature.h3">Wir konstruieren unsere eigenen Schirme</h3>
-          <p data-i18n="why.feature.p">Die meisten Anbieter fliegen Ausrüstung von der Stange. Bei uns testet und
-            entwickelt das Team Gleitschirme für internationale Hersteller, bevor sie überhaupt in Serie gehen. Ihr
-            fliegt nicht nur mit erfahrenen Piloten, sondern mit den Leuten, die wissen, warum ein Schirm sich so
-            verhält, wie er sich verhält.</p>
+          <p data-i18n="why.feature.p">Seit 2011 ist das Fliegen unsere große Leidenschaft. Unter der eigenen Marke airG entwickeln wir eigene Gleitschirme und sind seit vielen Jahren selbst im Acrobatik-Weltcup am Start. Mit mehreren tausend Flügen Erfahrung bringen wir genau das Wissen mit, das ein außergewöhnliches und gleichzeitig sicheres Erlebnis möglich macht.</p>
         </div>
 
         <div class="why-list">
@@ -253,8 +257,7 @@
             </div>
             <div class="why-fact-body">
               <h4 data-i18n="why.card1.h3">Weltcup-Niveau in der Luft</h4>
-              <p data-i18n="why.card1.p">Unsere Piloten fliegen selbst im Weltcup mit — Sicherheit, die aus
-                jahrelangem Spitzensport kommt, nicht nur aus der Theorie.</p>
+              <p data-i18n="why.card1.p">Unsere Piloten fliegen selbst im Weltcup mit — Sicherheit, die aus jahrelangem Spitzensport kommt, nicht nur aus der Theorie.</p>
             </div>
           </div>
 
@@ -265,8 +268,7 @@
             </div>
             <div class="why-fact-body">
               <h4 data-i18n="why.card2.h3">Rund 600 Flüge im Jahr</h4>
-              <p data-i18n="why.card2.p">So viel Routine hat kaum ein Team in Tirol. Genau diese Praxis macht jeden
-                einzelnen Start ruhiger und sicherer.</p>
+              <p data-i18n="why.card2.p">So viel Routine hat kaum ein Team in Tirol. Genau diese Praxis macht jeden einzelnen Start ruhiger und sicherer.</p>
             </div>
           </div>
 
@@ -288,8 +290,7 @@
             </div>
             <div class="why-fact-body">
               <h4 data-i18n="why.trust2.h4">Zuhause im Stubaital</h4>
-              <p data-i18n="why.trust2.p">Über zehn Jahre lokale Erfahrung mit jeder Thermik, jedem Aufwind und den
-                schönsten Perspektiven.</p>
+              <p data-i18n="why.trust2.p">Über zehn Jahre lokale Erfahrung mit jeder Thermik, jedem Aufwind und den schönsten Perspektiven.</p>
             </div>
           </div>
         </div>
@@ -302,8 +303,7 @@
       <div class="gallery-head" data-reveal>
         <h2 data-i18n="gallery.h2">Ein paar Blicke von oben</h2>
         <div class="gallery-head-side">
-          <p data-i18n="gallery.p">Bilder aus echten Flügen über dem Stubaital und der Nordkette. Anklicken zum
-            Durchblättern.</p>
+          <p data-i18n="gallery.p">Bilder aus echten Flügen über dem Stubaital und der Nordkette. Anklicken zum Durchblättern.</p>
           <button class="gallery-view-all" type="button" id="galleryViewAll">
             <span data-i18n="gallery.viewAll">Alle Fotos ansehen</span>
             <span class="gallery-view-all-count" id="galleryCount"></span>
@@ -312,31 +312,108 @@
       </div>
       <div class="gallery-grid" id="galleryGrid">
         <div class="gallery-item" data-reveal><img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-08-10-00h07m36s827-1024x576.webp"
-            alt="Gleitschirmflug über grünen Almwiesen"></div>
+            src="./assets/img/001.jpg"
+            alt="Tandem-Gleitschirmflug Foto 001" loading="lazy"></div>
         <div class="gallery-item delay-1" data-reveal><img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-03-08-21h32m41s836-1024x576.webp"
-            alt="Zwei Gleitschirme nebeneinander in der Luft"></div>
-        <div class="gallery-item delay-2" data-reveal><img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-02-18-09h55m43s291-1024x576.webp"
-            alt="Schneebedeckte Gipfel aus der Vogelperspektive"></div>
+            src="./assets/img/002.jpg"
+            alt="Tandem-Gleitschirmflug Foto 002" loading="lazy"></div>
+        <div class="gallery-item gallery-item-video delay-2" data-reveal>
+          <video src="./assets/videos/20230731_115554_151.mp4" poster="./assets/img/004.jpg" muted playsinline
+            preload="metadata"></video>
+          <div class="play-orb"></div>
+        </div>
         <div class="gallery-item delay-1" data-reveal><img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-03-26-19h20m14s628-1024x576.webp"
-            alt="Start am Startplatz im Stubaital"></div>
+            src="./assets/img/005.jpg"
+            alt="Tandem-Gleitschirmflug Foto 004" loading="lazy"></div>
       </div>
       <div class="gallery-hidden" id="galleryHidden" hidden>
         <div class="gallery-item"><img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-08-10-18h54m19s732-1024x576.webp"
-            alt="Abendstimmung beim Tandemflug"></div>
+            src="./assets/img/005.jpg"
+            alt="Tandem-Gleitschirmflug Foto 005" loading="lazy"></div>
         <div class="gallery-item"><img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-08-13-21h29m38s544-1024x576.webp"
-            alt="Blick auf die Alpenkette während des Fluges"></div>
+            src="./assets/img/006.jpg"
+            alt="Tandem-Gleitschirmflug Foto 006" loading="lazy"></div>
         <div class="gallery-item"><img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-03-29-21h44m58s972-1024x576.webp"
-            alt="Landeanflug über dem Tal"></div>
+            src="./assets/img/007.jpg"
+            alt="Tandem-Gleitschirmflug Foto 007" loading="lazy"></div>
         <div class="gallery-item"><img
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-01-13-11h38m31s575-1024x576.webp"
-            alt="Winterlicher Tandemflug über Tirol"></div>
+            src="./assets/img/008.jpg"
+            alt="Tandem-Gleitschirmflug Foto 008" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/010.jpg"
+            alt="Tandem-Gleitschirmflug Foto 010" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/011.jpg"
+            alt="Tandem-Gleitschirmflug Foto 011" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/012.jpg"
+            alt="Tandem-Gleitschirmflug Foto 012" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/013.jpg"
+            alt="Tandem-Gleitschirmflug Foto 013" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/014.jpg"
+            alt="Tandem-Gleitschirmflug Foto 014" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/015.jpg"
+            alt="Tandem-Gleitschirmflug Foto 015" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/016.jpg"
+            alt="Tandem-Gleitschirmflug Foto 016" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/017.jpg"
+            alt="Tandem-Gleitschirmflug Foto 017" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/018.jpg"
+            alt="Tandem-Gleitschirmflug Foto 018" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/019.jpg"
+            alt="Tandem-Gleitschirmflug Foto 019" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/020.jpg"
+            alt="Tandem-Gleitschirmflug Foto 020" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/021.jpg"
+            alt="Tandem-Gleitschirmflug Foto 021" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/022.jpg"
+            alt="Tandem-Gleitschirmflug Foto 022" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/023.jpg"
+            alt="Tandem-Gleitschirmflug Foto 023" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/024.jpg"
+            alt="Tandem-Gleitschirmflug Foto 024" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/025.jpg"
+            alt="Tandem-Gleitschirmflug Foto 025" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/026.jpg"
+            alt="Tandem-Gleitschirmflug Foto 026" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/027.jpg"
+            alt="Tandem-Gleitschirmflug Foto 027" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/028.jpg"
+            alt="Tandem-Gleitschirmflug Foto 028" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/029.jpg"
+            alt="Tandem-Gleitschirmflug Foto 029" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/030.jpg"
+            alt="Tandem-Gleitschirmflug Foto 030" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/031.jpg"
+            alt="Tandem-Gleitschirmflug Foto 031" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/032.jpg"
+            alt="Tandem-Gleitschirmflug Foto 032" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/033.jpg"
+            alt="Tandem-Gleitschirmflug Foto 033" loading="lazy"></div>
+        <div class="gallery-item"><img
+            src="./assets/img/hero1.jpg"
+            alt="Tandem-Gleitschirmflug über dem Stubaital bei Sonnenlicht" loading="lazy"></div>
       </div>
     </div>
   </section>
@@ -345,8 +422,12 @@
     <button class="lightbox-close" id="lightboxClose" aria-label="Schließen">✕</button>
     <button class="lightbox-prev" id="lightboxPrev" aria-label="Vorheriges Bild">‹</button>
     <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <video class="lightbox-video" id="lightboxVideo" controls playsinline></video>
     <button class="lightbox-next" id="lightboxNext" aria-label="Nächstes Bild">›</button>
-    <span class="lightbox-count" id="lightboxCount"></span>
+    <div class="lightbox-footer">
+      <span class="lightbox-count" id="lightboxCount"></span>
+      <div class="lightbox-thumbs" id="lightboxThumbs"></div>
+    </div>
   </div>
 
   <section class="process" id="ablauf">
@@ -375,9 +456,7 @@
             <div class="step-num">02</div>
             <div class="step-body">
               <h3 data-i18n="step2.h3">Start &amp; Gleitflug</h3>
-              <p data-i18n="step2.p">Ein paar Schritte auf der Wiese — und schon seid ihr in der Luft. Wir gleiten
-                entspannt mit rund 40 km/h,
-                ihr dürft auch selbst steuern.</p>
+              <p data-i18n="step2.p">Ein paar Schritte auf der Wiese — und schon seid ihr in der Luft. Wir gleiten entspannt mit rund 40 km/h, ihr dürft auch selbst steuern.</p>
               <div class="step-tags"><span data-i18n="step2.tag1">Wingover — schwerelos</span><span
                   data-i18n="step2.tag2">Spirale — ca. 4G</span></div>
             </div>
@@ -386,9 +465,7 @@
             <div class="step-num">03</div>
             <div class="step-body">
               <h3 data-i18n="step3.h3">Landung &amp; Erinnerung</h3>
-              <p data-i18n="step3.p">Nach rund 15 Minuten landen wir sanft. Das Grinsen hält erfahrungsgemäß tagelang —
-                optional bekommt ihr
-                Video und Fotos von eurem Flug dazu.</p>
+              <p data-i18n="step3.p">Nach rund 15 Minuten landen wir sanft. Das Grinsen hält erfahrungsgemäß tagelang — optional bekommt ihr Video und Fotos von eurem Flug dazu.</p>
             </div>
           </div>
         </div>
@@ -415,13 +492,12 @@
       <div class="pricing-grid">
         <div class="price-card featured" data-reveal>
           <img class="price-bg"
-            src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-03-08-21h32m41s836-1024x576.webp"
+            src="./assets/img/031.jpg"
             alt="">
           <div>
             <span class="price-tag" data-i18n="card1.tag">Thermikflug · Empfehlung</span>
             <div class="price-amount">€170</div>
-            <p data-i18n="card1.p">Der längste reguläre Flug: über 30 Minuten in der Luft, viel Zeit für das
-              Bergpanorama rund um Innsbruck.
+            <p data-i18n="card1.p">Der längste reguläre Flug: über 30 Minuten in der Luft, viel Zeit für das Bergpanorama rund um Innsbruck.
             </p>
             <ul class="price-list">
               <li data-i18n="card1.li1">30+ Min Flugdauer</li>
@@ -430,9 +506,7 @@
             </ul>
             <a class="btn btn-ghost-light" href="shop.html#thermikflug" data-i18n="card.btn">Flug buchen</a>
           </div>
-          <div class="price-quote"><span data-i18n="card1.quote">„Der Thermikflug ist der, den erfahrene Piloten selbst
-              am liebsten fliegen.“</span><span data-i18n="card1.quoteAuthor">—
-              Johannes Glatz</span></div>
+          <div class="price-quote"><span data-i18n="card1.quote">„Der Thermikflug ist der, den erfahrene Piloten selbst am liebsten fliegen.“</span><span data-i18n="card1.quoteAuthor">— Johannes Glatz</span></div>
         </div>
 
         <div class="price-card delay-1" data-reveal>
@@ -451,9 +525,7 @@
         <div class="price-card delay-2" data-reveal>
           <span class="price-tag" data-i18n="card3.tag">Premiumflug</span>
           <div class="price-amount">€200</div>
-          <p data-i18n="card3.p">Die entspannteste Variante mit der meisten Zeit in der Luft — viel Ruhe, viel Aussicht,
-            ausgiebig Zeit für
-            Fotos.</p>
+          <p data-i18n="card3.p">Die entspannteste Variante mit der meisten Zeit in der Luft — viel Ruhe, viel Aussicht, ausgiebig Zeit für Fotos.</p>
           <ul class="price-list">
             <li data-i18n="card3.li1">Längste Flugzeit im Programm</li>
             <li data-i18n="card3.li2">Ruhiges, fotogenes Gleiten</li>
@@ -471,9 +543,7 @@
               </svg></div>
             <div class="price-banner-text">
               <h3 data-i18n="banner.h3">Fluggutschein — €130–170</h3>
-              <p data-i18n="banner.p">Verschenke einen Flug nach Wahl. Ein Jahr gültig, Flugtyp und Termin sucht sich
-                die beschenkte Person
-                selbst aus.</p>
+              <p data-i18n="banner.p">Verschenke einen Flug nach Wahl. Ein Jahr gültig, Flugtyp und Termin sucht sich die beschenkte Person selbst aus.</p>
             </div>
           </div>
           <div class="price-banner-right">
@@ -502,9 +572,7 @@
             <span class="reviews-stars" aria-hidden="true">★★★★★</span>
             <span class="review-time" data-i18n="review1.time">vor 4 Monaten</span>
           </div>
-          <p class="review-text">"Today I went paragliding with this organization, and I can honestly say this is
-            an experience I will never forget. My instructor, Johannes, was amazing — he explained everything calmly
-            and gave me so much confidence to fully enjoy the moment. Once in the air, it was pure freedom."</p>
+          <p class="review-text">"Today I went paragliding with this organization, and I can honestly say this is an experience I will never forget. My instructor, Johannes, was amazing — he explained everything calmly and gave me so much confidence to fully enjoy the moment. Once in the air, it was pure freedom."</p>
           <div class="review-author">
             <span class="review-avatar" aria-hidden="true">A</span>
             <span class="review-name">Aline Deckx</span>
@@ -516,9 +584,7 @@
             <span class="reviews-stars" aria-hidden="true">★★★★★</span>
             <span class="review-time" data-i18n="review2.time">vor 5 Monaten</span>
           </div>
-          <p class="review-text">"I came to Innsbruck for paragliding. My instructor was very kind and responded very
-            quickly. Thanks to that, I was able to complete an amazing paragliding experience. It was incredible and
-            so much fun. I highly recommend it!"</p>
+          <p class="review-text">"I came to Innsbruck for paragliding. My instructor was very kind and responded very quickly. Thanks to that, I was able to complete an amazing paragliding experience. It was incredible and so much fun. I highly recommend it!"</p>
           <div class="review-author">
             <span class="review-avatar" aria-hidden="true">김</span>
             <span class="review-name">김윤경</span>
@@ -530,10 +596,7 @@
             <span class="reviews-stars" aria-hidden="true">★★★★★</span>
             <span class="review-time" data-i18n="review3.time">vor 3 Monaten</span>
           </div>
-          <p class="review-text">"Yesterday, my brother and I went paragliding with Johannes and Norbert. Wow, what
-            an insane experience! It was bursting with joy, excitement, and pure adrenaline from start to finish.
-            These guys are absolute legends, super skilled and made us feel safe while pushing the fun to the
-            max."</p>
+          <p class="review-text">"Yesterday, my brother and I went paragliding with Johannes and Norbert. Wow, what an insane experience! It was bursting with joy, excitement, and pure adrenaline from start to finish. These guys are absolute legends, super skilled and made us feel safe while pushing the fun to the max."</p>
           <div class="review-author">
             <span class="review-avatar" aria-hidden="true">J</span>
             <span class="review-name">Juliette bleichrodt</span>
@@ -541,7 +604,7 @@
         </div>
       </div>
       <a class="btn btn-ghost-light reviews-cta"
-        href="https://search.google.com/local/reviews?placeid=ChIJv325taT6CiIRrSl10RYXCTM" target="_blank"
+        href="https://share.google/eWnzCG6GGpw8itIB6" target="_blank"
         rel="noopener" data-i18n="reviews.cta">Alle Bewertungen auf Google ansehen</a>
     </div>
   </section>
@@ -554,10 +617,9 @@
         <div class="showcase-content">
           <span class="eyebrow on-dark" data-i18n="showcase1.eyebrow">Dein Flug, dein Film</span>
           <h2 data-i18n="showcase1.h2">Dein eigenes Flugvideo nach der Landung</h2>
-          <p data-i18n="showcase1.p">Der Beweis, dass es wirklich passiert ist — auf Wunsch mit Video und Fotos direkt
-            vom Flug.</p>
+          <p data-i18n="showcase1.p">Der Beweis, dass es wirklich passiert ist — auf Wunsch mit Video und Fotos direkt vom Flug.</p>
         </div>
-        <div class="play-orb"></div>
+        <div class="play-orb" id="showcasePlayOrb"></div>
       </div>
 
       <div class="showcase-card press-card delay-1" data-reveal>
@@ -566,9 +628,7 @@
         <div class="showcase-content">
           <span class="eyebrow on-dark" data-i18n="showcase2.eyebrow">Im Gespräch mit innsbruck.info</span>
           <blockquote data-i18n="showcase2.quote">Unser Pilot über das Fliegen auf der Nordkette.</blockquote>
-          <p data-i18n="showcase2.p">Ein Interview über Erfahrungen in den Alpen, Sicherheit in der Luft und Tipps für
-            alle, die zum ersten Mal
-            mitfliegen.</p>
+          <p data-i18n="showcase2.p">Ein Interview über Erfahrungen in den Alpen, Sicherheit in der Luft und Tipps für alle, die zum ersten Mal mitfliegen.</p>
           <a class="btn btn-ghost-dark"
             href="https://www.innsbruck.info/blog/de/menschen-geschichten/einmal-ganz-ganz-oben-tandemflug-auf-der-nordkette/"
             data-i18n="showcase2.btn">Interview
@@ -583,8 +643,7 @@
       <div class="faq-head" data-reveal>
         <span class="eyebrow" data-i18n="faq.eyebrow">Häufige Fragen</span>
         <h2 data-i18n="faq.h2">Noch Fragen vor der Buchung?</h2>
-        <p data-i18n="faq.p">Die wichtigsten Antworten rund um Gewicht, Wetter, Umbuchung und Ausrüstung — kurz und
-          klar.</p>
+        <p data-i18n="faq.p">Die wichtigsten Antworten rund um Gewicht, Wetter, Umbuchung und Ausrüstung — kurz und klar.</p>
       </div>
       <div class="faq-list" id="faqList" data-reveal>
 
@@ -595,8 +654,7 @@
           </button>
           <div class="faq-a">
             <div class="faq-a-inner">
-              <p data-i18n="faq1.a">Wir fliegen Gäste von ca. 15 kg bis 125 kg. Bei Abweichungen sprich uns vor der
-                Buchung kurz an — wir finden fast immer eine Lösung.</p>
+              <p data-i18n="faq1.a">Wir fliegen Gäste von ca. 15 kg bis 125 kg. Bei Abweichungen sprich uns vor der Buchung kurz an — wir finden fast immer eine Lösung.</p>
             </div>
           </div>
         </div>
@@ -608,8 +666,9 @@
           </button>
           <div class="faq-a">
             <div class="faq-a-inner">
-              <p data-i18n="faq2.a">Sicherheit geht vor. Können wir wetterbedingt nicht starten, verschieben wir deinen
-                Termin kostenlos — ganz ohne Aufpreis, so oft wie nötig.</p>
+              <p data-i18n="faq2.a">Sicherheit hat für uns oberste Priorität — deshalb prüfen wir täglich alle
+                relevanten Wettermodelle, um die sicherste Entscheidung zu treffen. Können wir wetterbedingt nicht
+                starten, verschieben wir deinen Termin kostenlos — ganz ohne Aufpreis, so oft wie nötig.</p>
             </div>
           </div>
         </div>
@@ -647,8 +706,7 @@
           </button>
           <div class="faq-a">
             <div class="faq-a-inner">
-              <p data-i18n="faq5.a">Wetterfeste, bequeme Kleidung nach Zwiebelprinzip und feste Schuhe. Gurtzeug, Helm
-                und Ausrüstung stellen wir komplett zur Verfügung.</p>
+              <p data-i18n="faq5.a">Wetterfeste, bequeme Kleidung nach Zwiebelprinzip und feste Schuhe. Gurtzeug, Helm und Ausrüstung stellen wir komplett zur Verfügung.</p>
             </div>
           </div>
         </div>
@@ -660,8 +718,7 @@
           </button>
           <div class="faq-a">
             <div class="faq-a-inner">
-              <p data-i18n="faq6.a">Optional buchbar direkt beim Check-in. Unser Pilot fotografiert und filmt während
-                des Flugs, du erhältst alles digital zum Download.</p>
+              <p data-i18n="faq6.a">Optional buchbar direkt beim Check-in. Unser Pilot fotografiert und filmt während des Flugs, du erhältst alles digital zum Download.</p>
             </div>
           </div>
         </div>
@@ -675,6 +732,74 @@
             <div class="faq-a-inner">
               <p data-i18n="faq7.a">Einfach bei der Terminvereinbarung den Gutscheincode angeben. Er ist ein Jahr ab
                 Kaufdatum gültig und für jeden Flugtyp einlösbar.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span data-i18n="faq8.q">Brauche ich Erfahrung, um einen Tandemflug zu machen?</span>
+            <span class="faq-q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <p data-i18n="faq8.a">Nein — du musst nur ein paar Schritte auf einer Bergwiese laufen können. Den
+                Rest übernehmen wir.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span data-i18n="faq9.q">Gibt es Gewichts- und Altersbeschränkungen?</span>
+            <span class="faq-q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <p data-i18n="faq9.a">Beim Gewicht gilt der Bereich von ca. 15–125 kg. Minderjährige benötigen
+                zusätzlich die Zustimmung eines Erziehungsberechtigten.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span data-i18n="faq10.q">Wie weit im Voraus sollte ich buchen?</span>
+            <span class="faq-q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <p data-i18n="faq10.a">Gerne weit im Voraus — die finale Entscheidung ist aber wetterabhängig und
+                kann meist erst ein bis zwei Tage vor dem Flug mit Sicherheit getroffen werden.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span data-i18n="faq11.q">Warum bei Innsbruck Paragliding buchen?</span>
+            <span class="faq-q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <p data-i18n="faq11.a">Weil wir diesen Sport leben! Ihr fliegt mit absoluten Profis, die
+                jahrzehntelange Erfahrung mitbringen — deshalb bekommt ihr bei uns ein sehr individuelles,
+                außergewöhnliches und vor allem sicheres Erlebnis.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span data-i18n="faq12.q">Ich habe Höhenangst. Kann ich trotzdem fliegen?</span>
+            <span class="faq-q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <p data-i18n="faq12.a">Das hören wir oft, aber kein Problem: Sobald der Kontakt zum Boden verloren
+                geht, schaltet das Gehirn in einen anderen Modus — und im bequemen Gurtzeug ist die Angst meist
+                wie weggeblasen. Wir springen auch nicht von einer Klippe, sondern machen ein paar Schritte auf
+                einer Wiese und werden mit jedem Schritt ein bisschen schwereloser.</p>
             </div>
           </div>
         </div>
@@ -730,26 +855,21 @@
           <p data-i18n="footer.brand">Fürstenweg 25, 6020 Innsbruck. Tandemflüge über dem Stubaital, ganzjährig buchbar.
           </p>
           <div class="footer-social">
-            <a href="https://www.instagram.com/sooperfly.at/" aria-label="Instagram"><svg width="18" height="18"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.5" cy="6.5" r="1" />
-              </svg></a>
-            <a href="https://www.facebook.com/profile.php?id=100066481061602" aria-label="Facebook"><svg width="18"
-                height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M14 9h3V5h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V9a1 1 0 0 1 1-1z" />
-              </svg></a>
-            <a href="https://search.google.com/local/reviews?placeid=ChIJv325taT6CiIRrSl10RYXCTM"
-              aria-label="Google Reviews"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="1.6">
-                <path d="M12 12l8-2a8 8 0 1 1-2.6-5.4" />
-                <path d="M12 12h8" />
-              </svg></a>
-            <a href="https://api.whatsapp.com/send?phone=436804019589" aria-label="WhatsApp"><svg width="18" height="18"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M4 20l1.2-3.6A8 8 0 1 1 9 19l-5 1z" />
-              </svg></a>
+            <a href="https://www.instagram.com/innsbruck_paragliding/" aria-label="Instagram" class="badge-tint">
+              <img src="./assets/icons/Instagram.svg" alt="Instagram">
+            </a>
+
+            <a href="https://www.facebook.com/profile.php?id=100066481061602" aria-label="Facebook">
+              <img src="./assets/icons/Facebook.svg" alt="Facebook">
+            </a>
+
+            <a href="https://share.google/eWnzCG6GGpw8itIB6" aria-label="Google Reviews" class="badge-tint">
+              <img src="./assets/icons/Google.svg" alt="Google Reviews">
+            </a>
+
+            <a href="https://api.whatsapp.com/send?phone=436804019589" aria-label="WhatsApp">
+              <img src="./assets/icons/whatsapp.svg" alt="WhatsApp">
+            </a>
           </div>
         </div>
         <div class="footer-col">
@@ -809,15 +929,18 @@
         'story.p1': "For over ten years we've been in the air as often as possible — around 600 flights a year on average. That routine is exactly what gives you the highest level of safety.",
         'story.p2': 'Our team is made up of World Cup pilots, flight instructors and paraglider manufacturers. We fly mostly in the Stubai Valley: its sheltered, inner-alpine location allows for more than 300 flying days a year.',
         'pilots.eyebrow': 'Our Pilots', 'pilots.h2': 'The people who carry you deserve an introduction.',
-        'pilot1.role': 'Founder &amp; World Cup Pilot', 'pilot2.role': 'Flight Instructor &amp; Tandem Pilot',
+        'pilot1.role': 'Founder &amp; World Cup Pilot', 'pilot2.role': 'Tandem Pilot since 2017', 'pilot3.role': 'Flight Instructor &amp; Tandem Pilot',
         'pilot1.p': 'Johannes has been flying the Stubai Valley for more than twelve years and knows every thermal in the valley by name. On the side, he tests and develops paragliders for international manufacturers — his feel for material and flight behavior goes into every launch.',
         'pilot1.stat1': 'Tandem Flights', 'pilot1.stat2': 'Years in the Cockpit',
         'pilot1.stat3num': 'World Cup', 'pilot1.stat3': 'Active Pilot',
         'pilot1.quote': '"I want every guest to land feeling safer than they imagined they would."',
-        'pilot2.p': 'Simon trains pilots himself and brings that same calm precision to every tandem flight. He prefers the quieter lines above the valley — perfect for anyone flying for the first time.',
-        'pilot2.stat1': 'Tandem Flights', 'pilot2.stat2': 'Years in the Cockpit',
-        'pilot2.stat3num': 'Flight Instructor', 'pilot2.stat3': 'State-Certified',
-        'pilot2.quote': '"Most of the nerves disappear at launch — once we\'re in the air, everyone\'s grinning."',
+        'pilot2.p': 'Jessica has been flying since 2017 and grew up right in the Zillertal valley. She\'s one of the best paragliding pilots in the world, and makes sure every flight with her becomes an unforgettable experience.',
+        'pilot2.stat1': 'Flying Since', 'pilot2.stat2': 'Grew Up In',
+        'pilot2.stat3num': 'World-Class', 'pilot2.stat3': 'Pilot',
+        'pilot3.p': 'Simon trains pilots himself and brings that same calm precision to every tandem flight. He prefers the quieter lines above the valley — perfect for anyone flying for the first time.',
+        'pilot3.stat1': 'Tandem Flights', 'pilot3.stat2': 'Years in the Cockpit',
+        'pilot3.stat3num': 'Flight Instructor', 'pilot3.stat3': 'State-Certified',
+        'pilot3.quote': '"Most of the nerves disappear at launch — once we\'re in the air, everyone\'s grinning."',
         'gallery.h2': 'A Few Views From Above',
         'gallery.p': 'Photos from real flights over the Stubai Valley and the Nordkette. Click to browse.',
         'gallery.viewAll': 'View All Photos',
@@ -851,7 +974,7 @@
         'why.eyebrow': 'Why Us', 'why.h2': 'Not just another tandem operator.',
         'why.feature.tag': 'Unique in Tyrol',
         'why.feature.h3': 'We help engineer the wings we fly',
-        'why.feature.p': "Most operators fly gear bought off the shelf. Our team tests and develops paragliders for international manufacturers before they ever go into production. You're not just flying with experienced pilots — you're flying with the people who know exactly why a wing behaves the way it does.",
+        'why.feature.p': "Flying has been our great passion since 2011. Under our own brand, airG, we develop our own paragliders and have been competing in the Acrobatics World Cup for many years. With several thousand flights of experience, we bring exactly the knowledge it takes to make an experience that's both extraordinary and safe.",
         'why.card1.h3': 'World Cup pilots at the controls',
         'why.card1.p': 'Our pilots compete on the World Cup circuit themselves — safety built on years of top-level competition, not just theory.',
         'why.card2.h3': 'About 600 flights a year',
@@ -875,7 +998,7 @@
         'faq1.q': 'Up to what weight can I fly?',
         'faq1.a': 'We fly guests from about 15 kg to 125 kg. If you\'re outside that range, just ask us before booking — we can almost always find a solution.',
         'faq2.q': 'What happens in bad weather?',
-        'faq2.a': 'Safety comes first. If we can\'t launch due to weather, we reschedule your appointment for free — no surcharge, as often as needed.',
+        'faq2.a': 'Safety is our top priority — that\'s why we check all relevant weather models daily to make the safest call. If we can\'t launch due to weather, we reschedule your appointment for free — no surcharge, as often as needed.',
         'faq3.q': 'Can I reschedule my appointment for free?',
         'faq3.a': 'Yes. Rescheduling up to 24 hours before departure is free — just reach out via WhatsApp or phone.',
         'faq4.q': 'From what age is a tandem flight possible?',
@@ -886,6 +1009,16 @@
         'faq6.a': 'Bookable as an option directly at check-in. Our pilot photographs and films during the flight, and you get everything digitally to download.',
         'faq7.q': 'How do I redeem a flight voucher?',
         'faq7.a': 'Just provide the voucher code when scheduling your appointment. It\'s valid for one year from purchase and redeemable for any flight type.',
+        'faq8.q': 'Do I need experience to do a tandem flight?',
+        'faq8.a': 'No — you just need to be able to walk a few steps on a mountain meadow. We take care of the rest.',
+        'faq9.q': 'Are there weight and age restrictions?',
+        'faq9.a': 'For weight, the range is about 15–125 kg. Minors additionally need the consent of a legal guardian.',
+        'faq10.q': 'How far in advance should I book?',
+        'faq10.a': 'Feel free to book well in advance — the final call, though, depends on the weather and can usually only be made with certainty one to two days before the flight.',
+        'faq11.q': 'Why book with Innsbruck Paragliding?',
+        'faq11.a': 'Because we live this sport! You fly with absolute professionals who bring decades of experience — which is why you get a very individual, extraordinary and, above all, safe experience with us.',
+        'faq12.q': "I'm afraid of heights. Can I still fly?",
+        'faq12.a': "We hear that a lot, but it's no problem: as soon as you lose contact with the ground, your brain switches into a different mode — and sitting in the comfortable harness, the fear is usually blown away. We also don't jump off a cliff — we take a few steps across a meadow and become a little more weightless with every step forward.",
         'partners.head': 'Our Partners',
         'footer.brand': 'Fürstenweg 25, 6020 Innsbruck. Tandem paragliding flights over the Stubai Valley, bookable year-round.',
         'footer.navHead': 'Navigation', 'footer.legalHead': 'Legal', 'footer.privacy': 'Privacy Policy',
@@ -1002,7 +1135,7 @@
     });
 
     /* ---------- pilot switcher / переключатель пилотов ---------- */
-    const pilotCounter = { johannes: '01', simon: '02' };
+    const pilotCounter = { johannes: '01', jessica: '02', simon: '03' };
     function switchPilot(id) {
       document.querySelectorAll('.pilot-tab').forEach(t => {
         t.classList.toggle('active', t.dataset.pilot === id);
@@ -1042,13 +1175,51 @@
     }
 
     /* ---------- gallery lightbox / лайтбокс галереи ---------- */
-    const galleryImages = Array.from(document.querySelectorAll('.gallery-grid .gallery-item img, .gallery-hidden .gallery-item img')).map(img => ({ src: img.src, alt: img.alt }));
+    const galleryPhotos = Array.from(document.querySelectorAll('.gallery-grid .gallery-item img, .gallery-hidden .gallery-item img')).map(img => ({ type: 'image', src: img.src, alt: img.alt }));
+    const videoSources = [
+      './assets/videos/20230731_115554_151.mp4',
+      './assets/videos/20230926_115510_280.mp4',
+      './assets/videos/20230928_160947_643.mp4',
+      './assets/videos/20231217_001623_738.mp4',
+      './assets/videos/20240103_120943_804.mp4',
+      './assets/videos/20240204_161903_769.mp4',
+      './assets/videos/20240204_194123_079.mp4',
+      './assets/videos/20240207_144213_229.mp4',
+      './assets/videos/20240207_195048_963.mp4',
+      './assets/videos/20240322_163514_852.mp4',
+      './assets/videos/20240404_124417_117.mp4',
+      './assets/videos/20240711_121911_892.mp4',
+    ];
+    const galleryVideos = videoSources.map((src, i) => ({ type: 'video', src, alt: 'Tandem-Gleitschirmflug Video ' + (i + 1) }));
+    const galleryMedia = galleryPhotos.concat(galleryVideos);
+    const firstVideoIndex = galleryPhotos.length;
+
+    document.querySelectorAll('.gallery-item-video video').forEach(v => {
+      v.addEventListener('loadedmetadata', () => { v.currentTime = 0.1; }, { once: true });
+    });
+
     const galleryCountEl = document.getElementById('galleryCount');
-    if (galleryCountEl) galleryCountEl.textContent = '(' + galleryImages.length + ')';
+    if (galleryCountEl) galleryCountEl.textContent = '(' + galleryPhotos.length + ')';
     let lbIndex = 0;
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxVideo = document.getElementById('lightboxVideo');
     const lightboxCount = document.getElementById('lightboxCount');
+    const lightboxThumbs = document.getElementById('lightboxThumbs');
+
+    if (lightboxThumbs) {
+      galleryMedia.forEach((item, i) => {
+        const thumb = document.createElement('button');
+        thumb.type = 'button';
+        thumb.className = 'lightbox-thumb' + (item.type === 'video' ? ' lightbox-thumb-video' : '');
+        thumb.setAttribute('aria-label', (i + 1) + ' / ' + galleryMedia.length);
+        thumb.innerHTML = item.type === 'video'
+          ? '<span class="lightbox-thumb-play" aria-hidden="true"></span>'
+          : `<img src="${item.src}" alt="" loading="lazy">`;
+        thumb.addEventListener('click', () => { lbIndex = i; updateLightbox(); });
+        lightboxThumbs.appendChild(thumb);
+      });
+    }
 
     function openLightbox(i) {
       lbIndex = i;
@@ -1056,20 +1227,43 @@
       lightbox.classList.add('open');
     }
     function updateLightbox() {
-      const item = galleryImages[lbIndex];
-      lightboxImg.src = item.src;
-      lightboxImg.alt = item.alt;
-      lightboxCount.textContent = (lbIndex + 1) + ' / ' + galleryImages.length;
+      const item = galleryMedia[lbIndex];
+      const isVideo = item.type === 'video';
+      lightboxImg.style.display = isVideo ? 'none' : '';
+      lightboxVideo.style.display = isVideo ? '' : 'none';
+      if (isVideo) {
+        lightboxVideo.pause();
+        if (lightboxVideo.src !== item.src) lightboxVideo.src = item.src;
+      } else {
+        lightboxImg.src = item.src;
+        lightboxImg.alt = item.alt;
+        lightboxVideo.pause();
+        lightboxVideo.removeAttribute('src');
+      }
+      lightboxCount.textContent = (lbIndex + 1) + ' / ' + galleryMedia.length;
+      if (lightboxThumbs) {
+        lightboxThumbs.querySelectorAll('.lightbox-thumb').forEach((el, i) => el.classList.toggle('active', i === lbIndex));
+        const activeThumb = lightboxThumbs.children[lbIndex];
+        if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
     }
-    function closeLightbox() { lightbox.classList.remove('open'); }
-    function nextLightbox() { lbIndex = (lbIndex + 1) % galleryImages.length; updateLightbox(); }
-    function prevLightbox() { lbIndex = (lbIndex - 1 + galleryImages.length) % galleryImages.length; updateLightbox(); }
+    function closeLightbox() { lightbox.classList.remove('open'); lightboxVideo.pause(); }
+    function nextLightbox() { lbIndex = (lbIndex + 1) % galleryMedia.length; updateLightbox(); }
+    function prevLightbox() { lbIndex = (lbIndex - 1 + galleryMedia.length) % galleryMedia.length; updateLightbox(); }
 
-    document.querySelectorAll('.gallery-grid .gallery-item').forEach((el, i) => {
-      el.addEventListener('click', () => openLightbox(i));
+    let galleryPhotoIdx = 0;
+    document.querySelectorAll('.gallery-grid .gallery-item').forEach((el) => {
+      if (el.classList.contains('gallery-item-video')) {
+        el.addEventListener('click', () => openLightbox(firstVideoIndex));
+      } else {
+        const idx = galleryPhotoIdx++;
+        el.addEventListener('click', () => openLightbox(idx));
+      }
     });
     const galleryViewAllBtn = document.getElementById('galleryViewAll');
     if (galleryViewAllBtn) galleryViewAllBtn.addEventListener('click', () => openLightbox(0));
+    const showcasePlayOrb = document.getElementById('showcasePlayOrb');
+    if (showcasePlayOrb) showcasePlayOrb.addEventListener('click', () => openLightbox(firstVideoIndex));
     document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
     document.getElementById('lightboxNext').addEventListener('click', nextLightbox);
     document.getElementById('lightboxPrev').addEventListener('click', prevLightbox);

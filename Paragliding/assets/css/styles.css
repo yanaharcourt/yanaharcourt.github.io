@@ -558,25 +558,56 @@ footer {
 
 .footer-social {
   display: flex;
-  gap: var(--space-3);
+  gap: var(--space-4);
   margin-top: var(--space-5);
 }
 
+/* Inline SVG only (no external mask-image / background-image references) — CSS
+   mask-image against a file:// URL silently fails to render in some browsers, which
+   is why this uses real inline markup instead. Facebook/WhatsApp ship a self-contained
+   white-cutout badge already (drawn via their own path), so they just need a white
+   backdrop. Instagram/Google ship bare marks with no circle, so they get a solid accent
+   circle behind them and their paths are recolored white directly in the markup. /
+   Только инлайн SVG (без внешних mask-image / background-image по ссылке) — CSS
+   mask-image по file:// URL в части браузеров молча не отрисовывается, поэтому здесь
+   используется обычная встроенная разметка. У Facebook/WhatsApp уже есть собственный
+   вырез под белый цвет (сделан через сам path), им нужна только белая подложка.
+   У Instagram/Google в файле только сама иконка без круга, поэтому за ними сплошной
+   круг акцентного цвета, а сами path перекрашены в белый прямо в разметке. */
 .footer-social a {
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
   border-radius: var(--radius-round);
-  border: 1px solid var(--color-on-dark-line);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease, transform var(--duration-fast) ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .25);
+  transition: transform .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s cubic-bezier(.16, 1, .3, 1);
+  overflow: hidden;
+}
+
+/* .footer-social a.badge-tint {
+  background: var(--color-accent-dark);
+} */
+
+.footer-social a.badge-tint svg {
+  width: 56%;
+  height: 56%;
+}
+
+.footer-social a:not(.badge-tint) svg {
+  width: 100%;
+  height: 100%;
+  background: var(--color-on-dark);
 }
 
 .footer-social a:hover {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  transform: translateY(-3px);
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 14px 26px rgba(224, 86, 45, .32), inset 0 1px 0 rgba(255, 255, 255, .3);
+}
+
+.footer-social a:active {
+  transform: translateY(-1px) scale(0.97);
 }
 
 .footer-bottom {
@@ -760,6 +791,7 @@ HERO / ГЛАВНЫЙ ЭКРАН
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   transform: scale(1.08);
   transition: transform .1s linear;
 }
@@ -1204,13 +1236,26 @@ PILOTS — switchable pilot profiles / ПИЛОТЫ — переключаемы
 }
 
 .pilot-photo:not(.active) {
-  inset: auto calc(-1 * var(--space-8)) calc(-1 * var(--space-8)) auto;
-  width: 44%;
-  height: 56%;
+  width: 30%;
+  height: 42%;
   z-index: 1;
   box-shadow: var(--shadow-card);
   filter: grayscale(0.65) brightness(0.85);
   outline: 4px solid var(--color-background);
+}
+
+/* fixed thumbnail slots (by DOM order) so any 2-of-3 inactive photos never overlap /
+   фиксированные слоты миниатюр — любые 2 из 3 неактивных фото никогда не пересекаются */
+.pilot-photo:nth-of-type(1):not(.active) {
+  inset: auto calc(-1 * var(--space-8)) calc(-1 * var(--space-8)) auto;
+}
+
+.pilot-photo:nth-of-type(2):not(.active) {
+  inset: auto calc(30% + var(--space-10)) calc(-1 * var(--space-8)) auto;
+}
+
+.pilot-photo:nth-of-type(3):not(.active) {
+  inset: auto calc(60% + var(--space-12)) calc(-1 * var(--space-8)) auto;
 }
 
 .pilot-photo:not(.active):hover {
@@ -1432,7 +1477,8 @@ GALLERY / ГАЛЕРЕЯ
   grid-area: d;
 }
 
-.gallery-item img {
+.gallery-item img,
+.gallery-item video {
   width: 100%;
   height: 100%;
   filter: saturate(.94) contrast(1.03);
@@ -1465,7 +1511,12 @@ GALLERY / ГАЛЕРЕЯ
   transition: opacity var(--duration-base) ease, transform var(--duration-base) ease;
 }
 
-.gallery-item:hover img {
+.gallery-item-video::before {
+  content: 'Abspielen';
+}
+
+.gallery-item:hover img,
+.gallery-item:hover video {
   transform: scale(1.08);
 }
 
@@ -1476,6 +1527,28 @@ GALLERY / ГАЛЕРЕЯ
 .gallery-item:hover::before {
   opacity: 1;
   transform: translateY(0);
+}
+
+.gallery-item .play-orb {
+  left: 50%;
+  right: auto;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.gallery-item .play-orb:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.gallery-item .play-orb::before {
+  border-width: 9px 0 9px 15px;
+}
+
+.gallery-item .play-orb::after {
+  inset: -10px;
 }
 
 /* lightbox / просмотр фото на весь экран */
@@ -1497,11 +1570,16 @@ GALLERY / ГАЛЕРЕЯ
   pointer-events: auto;
 }
 
-.lightbox-img {
+.lightbox-img,
+.lightbox-video {
   max-width: 82vw;
-  max-height: 80vh;
+  max-height: 72vh;
   border-radius: var(--radius-medium);
   box-shadow: var(--shadow-dark-large);
+}
+
+.lightbox-video {
+  background: #000;
 }
 
 .lightbox-close,
@@ -1544,14 +1622,87 @@ GALLERY / ГАЛЕРЕЯ
   transform: translateY(-50%);
 }
 
-.lightbox-count {
+.lightbox-footer {
   position: absolute;
-  bottom: var(--space-8);
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  bottom: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0 var(--space-8);
+}
+
+.lightbox-count {
   color: var(--color-on-dark-faint);
   font-size: var(--font-size-extra-small);
   letter-spacing: .04em;
+}
+
+.lightbox-thumbs {
+  display: flex;
+  gap: 8px;
+  max-width: min(90vw, 640px);
+  overflow-x: auto;
+  padding: 4px;
+  scrollbar-width: thin;
+}
+
+.lightbox-thumbs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.lightbox-thumbs::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, .2);
+  border-radius: 4px;
+}
+
+.lightbox-thumb {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+  opacity: .5;
+  border: 2px solid transparent;
+  transition: opacity var(--duration-fast) ease, border-color var(--duration-fast) ease, transform var(--duration-fast) ease;
+}
+
+.lightbox-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.lightbox-thumb-video {
+  background: var(--color-night);
+  position: relative;
+}
+
+.lightbox-thumb-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 0 7px 11px;
+  border-color: transparent transparent transparent var(--color-on-dark);
+}
+
+.lightbox-thumb:hover {
+  opacity: .8;
+}
+
+.lightbox-thumb.active {
+  opacity: 1;
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
 }
 
 /* =========================================================
@@ -1787,13 +1938,14 @@ PRICING / ЦЕНЫ
 }
 
 .price-bg {
-  position: absolute;
-  inset: 0;
+  position: relative;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 5/3;
+  border-radius: var(--radius-medium);
   object-fit: cover;
-  opacity: .32;
+  opacity: 1;
   z-index: 0;
+  margin-bottom: var(--space-6);
 }
 
 .price-card.featured::after {
@@ -2253,6 +2405,7 @@ SHOWCASE — video CTA + press, matched pair
   align-items: center;
   justify-content: center;
   z-index: 2;
+  cursor: pointer;
   transition: transform var(--duration-base) var(--ease-spring);
 }
 
@@ -2704,8 +2857,16 @@ reflow at the breakpoints below.
     padding: var(--space-2) var(--space-4);
   }
 
-  .pilot-photo:not(.active) {
+  .pilot-photo:nth-of-type(1):not(.active) {
     inset: auto calc(-1 * var(--space-5)) calc(-1 * var(--space-5)) auto;
+  }
+
+  .pilot-photo:nth-of-type(2):not(.active) {
+    inset: auto calc(30% + var(--space-6)) calc(-1 * var(--space-5)) auto;
+  }
+
+  .pilot-photo:nth-of-type(3):not(.active) {
+    inset: auto calc(60% + var(--space-7)) calc(-1 * var(--space-5)) auto;
   }
 
   .pilots-switch {
@@ -2799,7 +2960,17 @@ reflow at the breakpoints below.
 
   .lightbox-img {
     max-width: 92vw;
-    max-height: 68vh;
+    max-height: 60vh;
+  }
+
+  .lightbox-footer {
+    bottom: var(--space-4);
+    padding: 0 var(--space-4);
+  }
+
+  .lightbox-thumb {
+    width: 44px;
+    height: 44px;
   }
 }
 
@@ -2870,6 +3041,7 @@ SHOP HEADER / ШАПКА МАГАЗИНА — compact banner (this page's "hero"
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center bottom;
   transform: scale(1.06);
 }
 
@@ -2955,6 +3127,35 @@ TOOLBAR / ПАНЕЛЬ ИНСТРУМЕНТОВ — result count + sort / счё
 .shop-toolbar p {
   color: var(--color-ink-soft);
   font-size: var(--font-size-small);
+}
+
+.shop-toolbar-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.shop-urgency-note {
+  color: var(--color-accent-dark) !important;
+  font-size: var(--font-size-tiny) !important;
+  font-weight: 600;
+}
+
+.trust-terms-note {
+  text-align: center;
+  color: var(--color-ink-faint);
+  font-size: var(--font-size-tiny);
+  padding-top: var(--space-6);
+}
+
+.trust-terms-note a {
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.trust-terms-note a:hover {
+  color: var(--color-accent-dark);
 }
 
 .shop-select {
@@ -3435,6 +3636,7 @@ PAGE HEADER / ШАПКА СТРАНИЦЫ — compact banner, shared with shop.h
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center bottom;
   transform: scale(1.06);
 }
 
@@ -3808,6 +4010,7 @@ PAGE HEADER / ШАПКА СТРАНИЦЫ — compact banner, shared with shop.h
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center bottom;
   transform: scale(1.06);
 }
 
@@ -3997,11 +4200,9 @@ CONTACT / КОНТАКТЫ — get in touch grid / сетка блока свя�
 }
 
 .contact-media-badge .contact-icon {
-  background: var(--color-accent);
   color: var(--color-on-dark);
   width: 40px;
   height: 40px;
-  border-radius: var(--radius-round);
 }
 
 .contact-media-badge strong {
