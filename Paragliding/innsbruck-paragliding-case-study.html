@@ -254,6 +254,20 @@
       transform: translate(2px, -2px);
     }
 
+    /* mirrors the live site's pinned "Flug buchen" pill inside its
+       full-screen mobile menu - hidden on desktop, shown as a full-width
+       CTA at the bottom of the mobile nav panel instead. */
+    .cs-nav-links-cta {
+      display: none;
+    }
+
+    .cs-nav-links-cta .cs-nav-live {
+      width: 100%;
+      justify-content: center;
+      padding: 16px 24px;
+      font-size: 15px;
+    }
+
     .cs-nav-burger {
       display: none;
       flex-direction: column;
@@ -314,33 +328,36 @@
     }
 
     @media (max-width: 1050px) {
+      /* full-screen off-canvas panel, matching the live site's mobile nav:
+         edge-to-edge, vertically centred, large type, no dividers. */
       .cs-nav-links {
         position: fixed;
         top: 0;
-        right: -100%;
-        height: 100vh;
-        width: min(78vw, 340px);
+        right: 0;
+        height: 100dvh;
+        width: 100%;
         background: rgba(15, 18, 21, .98);
         backdrop-filter: blur(18px);
         -webkit-backdrop-filter: blur(18px);
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-        gap: 4px;
-        padding: 40px;
+        gap: 32px;
+        padding: 64px 40px;
         z-index: 8998;
-        transition: right .35s cubic-bezier(.4, 0, .2, 1);
+        transform: translateX(100%);
+        transition: transform .35s cubic-bezier(.4, 0, .2, 1);
       }
 
       .cs-nav-links.open {
-        right: 0;
+        transform: translateX(0);
       }
 
       .cs-nav-links a {
-        font-size: 16px;
-        padding: 13px 0;
+        font-size: 22px;
+        font-weight: 700;
+        padding: 0;
         width: 100%;
-        border-bottom: 1px solid rgba(255, 255, 255, .07);
       }
 
       /* the drawer itself is always dark, scrolled or not - links must
@@ -350,8 +367,20 @@
         text-shadow: none;
       }
 
+      .cs-nav-links-cta {
+        display: block;
+        width: 100%;
+        margin-top: 12px;
+      }
+
       .cs-nav-burger {
         display: flex;
+      }
+
+      /* the header pill is replaced by .cs-nav-links-cta inside the
+         full-screen menu, so it shouldn't also sit in the collapsed bar */
+      .cs-nav-right > .cs-nav-live {
+        display: none;
       }
     }
 
@@ -373,7 +402,7 @@
         display: none;
       }
 
-      .cs-nav-live span.full {
+      .cs-nav-right .cs-nav-live span.full {
         display: none;
       }
 
@@ -2915,6 +2944,14 @@
       <li><a href="#system">Design</a></li>
       <li><a href="#craft">Craft</a></li>
       <li><a href="#impact">Impact</a></li>
+      <li class="cs-nav-links-cta">
+        <a class="cs-nav-live" href="../Paragliding/index.html" target="_blank" rel="noopener">
+          <span class="full">View Live Site</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+            <path d="M7 17L17 7M7 7h10v10" />
+          </svg>
+        </a>
+      </li>
     </ul>
     <div class="cs-nav-right">
       <!-- Live-site link: point this at wherever the real build ends up living -->
@@ -3994,7 +4031,7 @@
     csNavLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', csCloseMenu));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') csCloseMenu(); });
 
-    const csSpyLinks = Array.from(csNavLinks.querySelectorAll('a'));
+    const csSpyLinks = Array.from(csNavLinks.querySelectorAll('a[href^="#"]'));
     const csSpySections = csSpyLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
     const csSpy = new IntersectionObserver(es => {
       es.forEach(e => {
