@@ -281,6 +281,12 @@
       background: transparent;
       cursor: pointer;
       flex-shrink: 0;
+      /* the full-screen .cs-nav-links panel is a child of <nav> too, so
+         painting order (not the z-index number) decides who's on top -
+         positioning the burger lifts it into its own stacking layer above
+         the panel instead of getting buried under it when open. */
+      position: relative;
+      z-index: 8999;
     }
 
     .cs-nav-burger span {
@@ -297,6 +303,16 @@
 
     .cs-nav.scrolled .cs-nav-burger span {
       background: var(--clr-ink);
+    }
+
+    /* the panel behind it is always dark once open, scrolled or not -
+       so the close icon must stay light regardless of .scrolled state */
+    .cs-nav.scrolled .cs-nav-burger.open {
+      border-color: rgba(255, 255, 255, .22);
+    }
+
+    .cs-nav.scrolled .cs-nav-burger.open span {
+      background: #fff;
     }
 
     .cs-nav-burger.open span:nth-child(1) {
