@@ -2824,32 +2824,19 @@ reflow at the breakpoints below.
   }
 
   .hero-book-field input[type="date"] {
-    display: flex;
-    align-items: center;
+    -webkit-appearance: none;
+    appearance: none;
     width: 100%;
     max-width: 100%;
     padding-right: var(--space-3);
   }
 
-  .hero-book-field input[type="date"]::-webkit-datetime-edit {
-    flex: 1 1 auto;
-    min-width: 0;
-    padding: 0;
-  }
-
-  .hero-book-field input[type="date"]::-webkit-datetime-edit-fields-wrapper {
-    display: flex;
-    min-width: 0;
-  }
-
   .hero-book-field input[type="date"]::-webkit-date-and-time-value {
     text-align: left;
-    min-width: 0;
     margin: 0;
   }
 
   .hero-book-field input[type="date"]::-webkit-calendar-picker-indicator {
-    flex-shrink: 0;
     margin-left: var(--space-2);
     padding: 0;
     filter: invert(1);
