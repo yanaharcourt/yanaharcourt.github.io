@@ -925,7 +925,13 @@
     }
 
     .problem-card.flagship {
+      grid-column: 1 / -1;
       background: var(--clr-night);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 28px;
+      align-items: center;
+      padding: 36px 32px;
     }
 
     .problem-card.flagship .problem-num,
@@ -933,8 +939,14 @@
       color: #fff;
     }
 
+    .problem-card.flagship .problem-num {
+      font-size: 44px;
+      margin-bottom: 0;
+    }
+
     .problem-card.flagship p {
       color: rgba(255, 255, 255, .55);
+      max-width: 640px;
     }
 
     .problem-card.flagship .problem-flag {
@@ -942,6 +954,14 @@
     }
 
     @media (max-width: 900px) {
+      .problem-card.flagship {
+        grid-template-columns: 1fr;
+      }
+
+      .problem-card.flagship .problem-num {
+        margin-bottom: 16px;
+      }
+
       .problems-grid {
         grid-template-columns: 1fr;
       }
@@ -2462,17 +2482,6 @@
       white-space: pre-wrap;
     }
 
-    @media (max-width: 900px) {
-      .bug {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      .bug-num {
-        display: none;
-      }
-    }
-
     /* ══════════════════════════════════════
        08 - i18n
     ══════════════════════════════════════ */
@@ -2694,6 +2703,17 @@
       }
     }
 
+    @media (max-width: 900px) {
+      .bug {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .bug-num {
+        display: none;
+      }
+    }
+
     @media (max-width: 860px) {
       .hero-inner {
         padding: 120px 28px 56px;
@@ -2708,8 +2728,16 @@
       .jm,
       .iter,
       .resp,
-      .impact {
+      .impact,
+      .origsite {
         padding: 90px 28px;
+      }
+
+      /* .proc sits directly under the floating .meta-inner card, which
+         wraps to 3 rows on narrow phones - needs extra clearance so its
+         heading/intro don't render underneath the card. */
+      .proc {
+        padding-top: 320px;
       }
 
       .resp-row {
@@ -2746,6 +2774,15 @@
 
       .pcard {
         padding: 40px 28px;
+      }
+
+      .pattr {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .pattr-v {
+        text-align: left;
       }
 
       .feat {
@@ -2881,12 +2918,12 @@
     </ul>
     <div class="cs-nav-right">
       <!-- Live-site link: point this at wherever the real build ends up living -->
-      <!-- <a class="cs-nav-live" href="../Paragliding/index.html" target="_blank" rel="noopener">
+      <a class="cs-nav-live" href="../Paragliding/index.html" target="_blank" rel="noopener">
         <span class="full">View Live Site</span><span class="short" style="display:none;">Live</span>
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
           <path d="M7 17L17 7M7 7h10v10" />
         </svg>
-      </a> -->
+      </a>
 
       <button class="cs-nav-burger" id="csNavBurger" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -2901,8 +2938,8 @@
   <section class="hero">
     <div class="hero-media">
       <img
-        src="https://innsbruck-paragliding.at/wp-content/uploads/2022/09/vlcsnap-2021-08-05-00h09m17s390-1024x576.webp"
-        alt="Tandem paraglider over the Stubaital at sunset">
+        src="assets/img/003.jpg"
+        alt="Tandem paraglider over the Stubaital - the current live hero photo">
     </div>
     <div class="hero-inner">
       <span class="lbl hero-label">Case Study · 2026</span>
@@ -2935,7 +2972,7 @@
       </div>
       <div class="meta-item">
         <div class="meta-k">Pages</div>
-        <div class="meta-v">4 - Home, Shop, Contact, Legal</div>
+        <div class="meta-v">5 - Home, Shop, Contact, Legal ×2</div>
       </div>
       <div class="meta-item">
         <div class="meta-k">Languages</div>
@@ -2997,8 +3034,8 @@
           <div class="orb orb-xl orb-4">
             <div class="orb-glow"></div><span class="orb-label">Build &amp; Debug</span>
           </div>
-          <div class="planet-desc"><strong>4 pages shipped</strong>Home · Shop · Contact · Impressum, mobile-first, real
-            bugs fixed</div>
+          <div class="planet-desc"><strong>5 pages shipped</strong>Home · Shop · Contact · Impressum · AGB, mobile-first,
+            real bugs fixed</div>
         </div>
         <div class="p-dash"></div>
         <div class="planet">
@@ -3023,7 +3060,7 @@
           <div class="pfoot-dot"></div><span>Zero dependencies</span> - plain HTML, CSS, vanilla JS
         </div>
         <div class="pfoot-item">
-          <div class="pfoot-dot"></div><span>4 pages, 1 token system</span> - no per-page rebuilds
+          <div class="pfoot-dot"></div><span>5 pages, 1 token system</span> - no per-page rebuilds
         </div>
       </div>
     </div>
@@ -3064,7 +3101,7 @@
           <div class="compare-item"><span class="compare-ico good">✓</span><span><strong>WhatsApp-first booking</strong>
               - the channel this audience already messages on, one tap from the hero</span></div>
           <div class="compare-item"><span class="compare-ico good">✓</span><span><strong>One consistent system</strong>
-              across home, shop, contact and the Impressum/legal page</span></div>
+              across home, shop, contact and both legal pages (Impressum, AGB)</span></div>
         </div>
       </div>
     </div>
@@ -3116,18 +3153,17 @@
                 onerror="this.parentElement.innerHTML='&lt;div class=&quot;origsite-shot-fallback&quot;&gt;Screenshot unavailable&lt;/div&gt;'"></div>
           </div>
           <p class="origsite-caption">A DE/EN toggle, a stats strip that states 600+ flights up front, and a hero
-            CTA nothing sits on top of. Live, interactive renders of all four pages are further down in <a
-              href="#responsive" style="color:inherit;text-decoration:underline;">Responsive</a>.</p>
+            CTA nothing sits on top of. A live, interactive render of this same homepage at three widths is further
+            down in <a href="#responsive" style="color:inherit;text-decoration:underline;">Responsive</a>.</p>
         </div>
       </div>
 
       <div class="problems-grid rv d2">
-        <div class="problem-card flagship"
-          style="grid-column:1/-1;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;padding:36px 32px;">
-          <div class="problem-num" style="font-size:44px;margin-bottom:0;">01</div>
+        <div class="problem-card flagship">
+          <div class="problem-num">01</div>
           <div>
             <h4>No English version - for an audience that's barely German</h4>
-            <p style="max-width:640px;">Every nav label, price description and FAQ answer exists only in German.
+            <p>Every nav label, price description and FAQ answer exists only in German.
               But the two traveller profiles this operator actually books - detailed just below - skew German,
               Dutch, Danish, Swedish and American. For most visitors, evaluating trust, price and safety policy
               means translating the page themselves first.</p>
@@ -3468,7 +3504,7 @@
         <span class="lbl" style="margin-bottom:20px;">06 - Design System</span>
         <h2 class="sec-h2">Built on tokens, <em>not one-off styles.</em></h2>
         <p class="sec-sub">Every colour, radius and spacing value lives as a CSS custom property, shared across all
-          four pages - so the site reads as one product, not four separate builds.</p>
+          five pages - so the site reads as one product, not five separate builds.</p>
       </div>
       <div class="ds-grid">
         <div class="rv d1">
@@ -3562,7 +3598,7 @@
       <h3 class="feat-h3">One nav, two languages, zero reloads</h3>
       <p class="feat-body">A floating nav with a scroll-aware light/dark state, a persistent cart badge, and a DE/EN
         pill that swaps every <code>data-i18n</code> element in place. The chosen language is saved to
-        <code>localStorage</code>, so it survives navigation between all four pages.
+        <code>localStorage</code>, so it survives navigation between all five pages.
       </p>
       <div class="demo-row">
         <span class="chip-mini"
@@ -3791,7 +3827,7 @@
         </div>
         <div class="i18n-flow-row">
           <div class="i18n-flow-badge">4</div>
-          <div><strong>localStorage.setItem('ip_lang')</strong><span>Choice persists across all four pages, no reload
+          <div><strong>localStorage.setItem('ip_lang')</strong><span>Choice persists across all five pages, no reload
               flash</span></div>
         </div>
       </div>
@@ -3900,10 +3936,10 @@
   <section class="outro">
     <div class="outro-inner">
       <span class="lbl rv" style="margin-bottom:32px;">13 - Result</span>
-      <h2 class="outro-h2 rv d1">Four pages, one system, <em>zero dependencies.</em></h2>
+      <h2 class="outro-h2 rv d1">Five pages, one system, <em>zero dependencies.</em></h2>
       <div class="outro-grid rv d2">
         <div class="outro-stat">
-          <div class="outro-num">4</div>
+          <div class="outro-num">5</div>
           <div class="outro-lbl">fully responsive pages sharing one token system</div>
         </div>
         <div class="outro-stat">

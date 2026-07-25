@@ -397,6 +397,10 @@ nav.scrolled .nav-links a[aria-current="page"] {
 }
 
 .lang-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
   padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-pill);
   font-size: var(--font-size-tiny);
@@ -751,7 +755,9 @@ footer {
   }
 
   .lang-toggle-btn {
-    padding: var(--space-1) var(--space-2);
+    min-height: 44px;
+    min-width: 40px;
+    padding: var(--space-1) var(--space-3);
   }
 
   .footer-bottom {
@@ -2695,7 +2701,7 @@ reflow at the breakpoints below.
     grid-auto-rows: 220px;
   }
 
-  .gallery-grid .gallery-item {
+  .gallery-grid .gallery-item:nth-child(n) {
     grid-area: auto;
   }
 
@@ -2958,7 +2964,8 @@ reflow at the breakpoints below.
     height: 44px;
   }
 
-  .lightbox-img {
+  .lightbox-img,
+  .lightbox-video {
     max-width: 92vw;
     max-height: 60vh;
   }
