@@ -2823,13 +2823,28 @@ reflow at the breakpoints below.
     font-size: 16px;
   }
 
+  .hero-book-field:has(input[type="date"]) {
+    overflow: hidden;
+    border-radius: var(--radius-small);
+  }
+
+  .hero-book-field input[type="date"] {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    padding-right: var(--space-2);
+  }
+
   .hero-book-field input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
     opacity: 0.75;
+    margin-left: 0;
   }
 
   .hero-book-field input[type="date"]::-webkit-date-and-time-value {
     text-align: left;
+    margin-right: 0;
   }
 
   .hero-sub {
