@@ -28,11 +28,6 @@
     content="Impressum von Innsbruck Paragliding (Sooperfly Tandemparagliding, Johannes Glatz). Fürstenweg 25, 6020 Innsbruck, Österreich.">
   <meta name="author" content="Yana Harcourt — yanaharcourt.github.io">
   <link rel="icon" type="image/png" href="favicon.png?v=1783863259">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
@@ -313,7 +308,9 @@
         'footer.brand': 'Fürstenweg 25, 6020 Innsbruck. Tandem paragliding flights over the Stubai Valley, bookable year-round.',
         'footer.navHead': 'Navigation', 'footer.legalHead': 'Legal', 'footer.privacy': 'Privacy Policy',
         'footer.terms': 'Terms &amp; Cancellation',
-        'footer.copy': '© 2026 Fly with us'
+        'footer.copy': '© 2026 Fly with us',
+        'cookieNotice.text': 'This website doesn\'t use tracking or advertising cookies. We only store your language choice locally in your browser. More in our <a href="privacy.html">Privacy Policy</a>.',
+        'cookieNotice.btn': 'Got it'
       }
     };
     function applyLang(lang) {
@@ -396,6 +393,27 @@
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
       })();
+    })();
+  </script>
+  <div class="cookie-notice" id="cookieNotice" hidden>
+    <p data-i18n="cookieNotice.text">Diese Website verwendet keine Tracking- oder Werbe-Cookies. Gespeichert wird nur
+      deine Sprachauswahl lokal in deinem Browser. Mehr dazu in unserer <a href="privacy.html">Datenschutzerklärung</a>.
+    </p>
+    <button type="button" class="cookie-notice-close" id="cookieNoticeClose" data-i18n="cookieNotice.btn">Verstanden</button>
+  </div>
+  <script>
+    (function () {
+      var notice = document.getElementById('cookieNotice');
+      var btn = document.getElementById('cookieNoticeClose');
+      if (!notice || !btn) return;
+      if (typeof applyLang === 'function') applyLang(localStorage.getItem('ip_lang') || 'de');
+      if (!localStorage.getItem('ip_cookie_notice_dismissed')) {
+        notice.hidden = false;
+      }
+      btn.addEventListener('click', function () {
+        localStorage.setItem('ip_cookie_notice_dismissed', '1');
+        notice.hidden = true;
+      });
     })();
   </script>
 </body>

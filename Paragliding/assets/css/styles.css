@@ -1,4 +1,25 @@
 /* =========================================================
+   SELF-HOSTED FONTS / ЛОКАЛЬНЫЕ ШРИФТЫ — no requests to Google servers
+========================================================= */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('../fonts/bricolage-grotesque-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/plus-jakarta-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* =========================================================
    DESIGN TOKENS / ДИЗАЙН-ТОКЕНЫ — shared by every page / общие для всех страниц
 ========================================================= */
 :root {
@@ -4486,5 +4507,239 @@ RESPONSIVE / АДАПТИВНОСТЬ — 1920 / 1600 / 1280 / 1024 / 768 / 414 
 @media (max-width:360px) {
   :root {
     --container-padding: 16px;
+  }
+}
+/* =========================================================
+   404 PAGE / СТРАНИЦА 404 — nav forced into its light "scrolled" look
+   since there's no photo hero behind it here / навигация принудительно
+   в светлом виде «scrolled», т.к. фото-шапки на этой странице нет
+========================================================= */
+body.page-404 nav {
+  top: var(--space-3);
+  left: var(--space-6);
+  right: var(--space-6);
+  height: var(--navbar-height-scrolled);
+  padding: 0 var(--space-7);
+  background: rgba(255, 255, 255, .72);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, .6);
+  box-shadow: var(--shadow-navbar);
+}
+
+body.page-404 nav::before {
+  opacity: 0;
+}
+
+body.page-404 #siteNav .nav-logo-img {
+  filter: none;
+}
+
+body.page-404 .nav-links a {
+  color: var(--color-ink-soft);
+}
+
+body.page-404 .nav-links a:hover {
+  color: var(--color-ink);
+}
+
+body.page-404 .lang-toggle {
+  border-color: var(--color-line-strong);
+}
+
+body.page-404 .lang-toggle-btn {
+  color: var(--color-ink-soft);
+}
+
+body.page-404 .nav-burger {
+  border-color: var(--color-line-strong);
+}
+
+body.page-404 .nav-burger span {
+  background: var(--color-ink);
+}
+
+.error-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--navbar-height) + var(--space-14)) 0 var(--space-24);
+  overflow: hidden;
+  text-align: center;
+}
+
+.error-hero-bgnum {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(9rem, 30vw, 24rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--color-background-alt);
+  user-select: none;
+  pointer-events: none;
+}
+
+.error-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.error-hero .eyebrow {
+  justify-content: center;
+}
+
+.error-eyes {
+  display: flex;
+  gap: var(--space-8);
+  margin-bottom: var(--space-9);
+}
+
+.eye {
+  width: 108px;
+  height: 108px;
+  border-radius: var(--radius-round);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .14s var(--ease-out);
+}
+
+.eye.blink {
+  transform: scaleY(.08);
+}
+
+.eye-pupil {
+  width: 42%;
+  height: 42%;
+  border-radius: var(--radius-round);
+  background: var(--color-ink);
+  transition: transform .05s linear;
+}
+
+.error-hero h1 {
+  font-size: var(--font-size-heading-2);
+  max-width: 16ch;
+}
+
+.error-lead {
+  margin-top: var(--space-5);
+  color: var(--color-ink-soft);
+  font-size: var(--font-size-large);
+  max-width: 44ch;
+}
+
+.error-cta-row {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-10);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width:768px) {
+  .eye {
+    width: 88px;
+    height: 88px;
+  }
+
+  .error-hero-bgnum {
+    font-size: clamp(6.5rem, 38vw, 13rem);
+  }
+
+  .error-hero h1 {
+    font-size: var(--font-size-heading-2-small);
+  }
+}
+
+@media (max-width:480px) {
+  .error-eyes {
+    gap: var(--space-6);
+  }
+
+  .eye {
+    width: 72px;
+    height: 72px;
+  }
+
+  .error-cta-row {
+    width: 100%;
+  }
+
+  .error-cta-row .btn {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   COOKIE NOTICE / УВЕДОМЛЕНИЕ О COOKIES — informational only, no consent needed
+========================================================= */
+.cookie-notice {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: var(--space-5, 16px);
+  width: min(560px, calc(100vw - 32px));
+  background: var(--color-night);
+  color: var(--color-on-dark-soft);
+  padding: 16px 20px;
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .28);
+  font-size: var(--font-size-small);
+  line-height: 1.5;
+}
+
+.cookie-notice[hidden] {
+  display: none;
+}
+
+.cookie-notice p {
+  margin: 0;
+}
+
+.cookie-notice a {
+  color: var(--color-on-dark);
+}
+
+.cookie-notice-close {
+  flex-shrink: 0;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: var(--font-size-small);
+  font-family: var(--font-body);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.cookie-notice-close:hover {
+  background: var(--color-accent-dark);
+}
+
+@media (max-width: 560px) {
+  .cookie-notice {
+    flex-direction: column;
+    align-items: stretch;
+    bottom: 12px;
   }
 }
