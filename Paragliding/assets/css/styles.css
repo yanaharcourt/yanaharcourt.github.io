@@ -92,7 +92,7 @@
   --space-40: 160px;
   --space-50: 190px;
 
-  --section-padding-y: var(--space-32);
+  --section-padding-y: 100px;
 
   /* --- radius / скругления --- */
   --radius-small: 14px;
@@ -1504,11 +1504,11 @@ GALLERY / ГАЛЕРЕЯ
 }
 
 .gallery-grid .gallery-item:nth-child(3) {
-  grid-area: c;
+  grid-area: d;
 }
 
 .gallery-grid .gallery-item:nth-child(4) {
-  grid-area: d;
+  grid-area: c;
 }
 
 .gallery-item img,
@@ -1746,10 +1746,6 @@ PROCESS / ПРОЦЕСС
   padding: var(--section-padding-y) 0;
 }
 
-.process-inner {
-  padding-top: var(--space-32);
-}
-
 .process-head {
   max-width: 640px;
   margin-bottom: var(--space-20);
@@ -1824,7 +1820,7 @@ PROCESS / ПРОЦЕСС
   position: absolute;
   left: 39px;
   top: 10px;
-  bottom: 10px;
+  height: calc(100% - 20px);
   width: 2px;
 }
 
@@ -1901,6 +1897,10 @@ PROCESS / ПРОЦЕСС
   background: var(--color-accent-soft);
   color: var(--color-accent-dark);
   font-weight: 600;
+}
+
+.step-tags-spacer {
+  visibility: hidden;
 }
 
 /* =========================================================
@@ -2682,7 +2682,7 @@ reflow at the breakpoints below.
 @media (max-width:1024px) {
   :root {
     --container-padding: 32px;
-    --section-padding-y: var(--space-24);
+    --section-padding-y: var(--space-16);
   }
 
   .hero {
@@ -2783,7 +2783,7 @@ reflow at the breakpoints below.
 @media (max-width:768px) {
   :root {
     --container-padding: 24px;
-    --section-padding-y: var(--space-16);
+    --section-padding-y: var(--space-12);
   }
 
   .scroll-cue {
@@ -2843,7 +2843,7 @@ reflow at the breakpoints below.
 @media (max-width:480px) {
   :root {
     --container-padding: 20px;
-    --section-padding-y: var(--space-12);
+    --section-padding-y: var(--space-8);
   }
 
   .hero h1 {
