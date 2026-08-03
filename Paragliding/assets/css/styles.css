@@ -2831,6 +2831,46 @@ reflow at the breakpoints below.
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-6);
+    padding: var(--space-7) var(--space-6);
+  }
+
+  .price-banner-left {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    grid-template-areas:
+      "icon title"
+      "desc desc";
+    column-gap: var(--space-4);
+    row-gap: var(--space-3);
+    align-items: center;
+    width: 100%;
+  }
+
+  .price-banner-icon {
+    grid-area: icon;
+    width: 56px;
+    height: 56px;
+  }
+
+  .price-banner-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .price-banner-text {
+    display: contents;
+  }
+
+  .price-banner-text h3 {
+    grid-area: title;
+    font-size: var(--font-size-large);
+    margin-bottom: 0;
+  }
+
+  .price-banner-text p {
+    grid-area: desc;
+    max-width: none;
+    font-size: var(--font-size-small);
   }
 
   .price-banner-right {
@@ -2843,7 +2883,7 @@ reflow at the breakpoints below.
 @media (max-width:480px) {
   :root {
     --container-padding: 20px;
-    --section-padding-y: var(--space-8);
+    --section-padding-y: var(--space-10);
   }
 
   .hero h1 {
@@ -3003,6 +3043,29 @@ reflow at the breakpoints below.
 
   .process-line-svg {
     left: 27px;
+  }
+
+  .price-banner {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .price-banner-left {
+    grid-template-columns: 48px 1fr;
+    column-gap: var(--space-3);
+  }
+
+  .price-banner-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .price-banner-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .price-banner-text h3 {
+    font-size: var(--font-size-base);
   }
 
   .price-banner-right {
