@@ -1363,11 +1363,11 @@ PILOTS — switchable pilot profiles / ПИЛОТЫ — переключаемы
 
 .pilots-panels {
   position: relative;
-  display: grid;
 }
 
 .pilot-panel {
-  grid-area: 1/1;
+  position: absolute;
+  inset: 0;
   opacity: 0;
   pointer-events: none;
   transform: translateY(6px);
@@ -1375,6 +1375,7 @@ PILOTS — switchable pilot profiles / ПИЛОТЫ — переключаемы
 }
 
 .pilot-panel.active {
+  position: relative;
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
@@ -1740,7 +1741,7 @@ GALLERY / ГАЛЕРЕЯ
 PROCESS / ПРОЦЕСС
 ========================================================= */
 .process {
-  padding: var(--space-16) 0 var(--space-40);
+  padding: var(--space-16) 0 var(--space-32);
 }
 
 .process-inner {
@@ -1904,7 +1905,7 @@ PROCESS / ПРОЦЕСС
 PRICING / ЦЕНЫ
 ========================================================= */
 .pricing {
-  padding: var(--space-40) 0 var(--space-32);
+  padding: var(--space-16) 0 var(--space-32);
 }
 
 .pricing-head {
@@ -2354,7 +2355,7 @@ SHOWCASE — video CTA + press, matched pair
 ВИТРИНА — видео-CTA и пресса, парный блок
 ========================================================= */
 .showcase {
-  padding: 0 0 var(--space-32);
+  padding: var(--space-16) 0 var(--space-32);
 }
 
 .showcase-grid {
@@ -2478,7 +2479,7 @@ SHOWCASE — video CTA + press, matched pair
 PARTNERS — marquee / ПАРТНЁРЫ — бегущая строка
 ========================================================= */
 .partners {
-  padding: 0 0 var(--space-36);
+  padding: var(--space-16) 0 var(--space-36);
   overflow: hidden;
 }
 
@@ -2549,7 +2550,7 @@ PARTNERS — marquee / ПАРТНЁРЫ — бегущая строка
 REVIEWS — Google reviews summary + testimonial cards / ОТЗЫВЫ GOOGLE
 ========================================================= */
 .reviews {
-  padding: var(--space-24) 0;
+  padding: var(--space-16) 0 var(--space-32);
   border-top: 1px solid var(--color-line);
 }
 
@@ -2920,7 +2921,7 @@ reflow at the breakpoints below.
   }
 
   .story {
-    padding: var(--space-24) 0 var(--space-16);
+    padding: var(--space-24) 0 var(--space-32);
   }
 
   .story h2 {
@@ -3518,7 +3519,7 @@ TRUST STRIP / ПОЛОСА ДОВЕРИЯ
 FAQ / ЧАСТЫЕ ВОПРОСЫ — accordion / аккордеон
 ========================================================= */
 .faq {
-  padding: var(--space-24) 0;
+  padding: var(--space-16) 0 var(--space-32);
   border-top: 1px solid var(--color-line);
 }
 
