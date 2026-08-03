@@ -928,6 +928,8 @@ HERO / ГЛАВНЫЙ ЭКРАН
 
 .hero-book-field input {
   width: 100%;
+  min-height: 48px;
+  box-sizing: border-box;
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-small);
   background: rgba(255, 255, 255, .08);
@@ -959,6 +961,8 @@ HERO / ГЛАВНЫЙ ЭКРАН
 
 .custom-select-trigger {
   width: 100%;
+  min-height: 48px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2849,12 +2853,16 @@ reflow at the breakpoints below.
     appearance: none;
     width: 100%;
     max-width: 100%;
+    min-height: 48px;
     padding-right: var(--space-3);
+    line-height: 1.4;
+    box-sizing: border-box;
   }
 
   .hero-book-field input[type="date"]::-webkit-date-and-time-value {
     text-align: left;
     margin: 0;
+    min-height: 1.3em;
   }
 
   .hero-book-field input[type="date"]::-webkit-calendar-picker-indicator {
@@ -2862,6 +2870,21 @@ reflow at the breakpoints below.
     padding: 0;
     filter: invert(1);
     opacity: 0.75;
+  }
+
+  .story-media-badge {
+    left: var(--space-4);
+    bottom: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    max-width: 160px;
+  }
+
+  .story-media-badge strong {
+    font-size: var(--font-size-large);
+  }
+
+  .story-media-badge span {
+    font-size: var(--font-size-tiny);
   }
 
   .hero-sub {
@@ -4427,7 +4450,8 @@ RESPONSIVE / АДАПТИВНОСТЬ — 1920 / 1600 / 1280 / 1024 / 768 / 414 
   }
 
   .contact-media-badge {
-    left: var(--space-4);
+    left: auto;
+    right: var(--space-4);
     bottom: var(--space-4);
     padding: var(--space-3) var(--space-4);
     gap: var(--space-3);
