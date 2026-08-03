@@ -92,6 +92,8 @@
   --space-40: 160px;
   --space-50: 190px;
 
+  --section-padding-y: var(--space-32);
+
   /* --- radius / скругления --- */
   --radius-small: 14px;
   --radius-medium: 20px;
@@ -1155,7 +1157,7 @@ REVEAL / ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ
 STORY / ИСТОРИЯ
 ========================================================= */
 .story {
-  padding: var(--space-50) 0 var(--space-32);
+  padding: var(--section-padding-y) 0;
 }
 
 .story-grid {
@@ -1222,7 +1224,7 @@ STORY / ИСТОРИЯ
 PILOTS — switchable pilot profiles / ПИЛОТЫ — переключаемые профили
 ========================================================= */
 .pilots {
-  padding: var(--space-16) 0 var(--space-32);
+  padding: var(--section-padding-y) 0;
 }
 
 .pilots-grid {
@@ -1420,7 +1422,7 @@ PILOTS — switchable pilot profiles / ПИЛОТЫ — переключаемы
 GALLERY / ГАЛЕРЕЯ
 ========================================================= */
 .gallery {
-  padding: var(--space-16) 0 var(--space-32);
+  padding: var(--section-padding-y) 0;
 }
 
 .gallery-head {
@@ -1741,7 +1743,7 @@ GALLERY / ГАЛЕРЕЯ
 PROCESS / ПРОЦЕСС
 ========================================================= */
 .process {
-  padding: var(--space-16) 0 var(--space-32);
+  padding: var(--section-padding-y) 0;
 }
 
 .process-inner {
@@ -1905,7 +1907,7 @@ PROCESS / ПРОЦЕСС
 PRICING / ЦЕНЫ
 ========================================================= */
 .pricing {
-  padding: var(--space-16) 0 var(--space-32);
+  padding: var(--section-padding-y) 0;
 }
 
 .pricing-head {
@@ -2157,7 +2159,7 @@ PRICING / ЦЕНЫ
 WHY US — lead statement + plain fact grid / ПОЧЕМУ МЫ — вступление и сетка фактов
 ========================================================= */
 .why {
-  padding: var(--space-16) 0 var(--space-32);
+  padding: var(--section-padding-y) 0;
 }
 
 .why-head {
@@ -2355,7 +2357,7 @@ SHOWCASE — video CTA + press, matched pair
 ВИТРИНА — видео-CTA и пресса, парный блок
 ========================================================= */
 .showcase {
-  padding: var(--space-16) 0 var(--space-32);
+  padding: var(--section-padding-y) 0;
 }
 
 .showcase-grid {
@@ -2479,7 +2481,7 @@ SHOWCASE — video CTA + press, matched pair
 PARTNERS — marquee / ПАРТНЁРЫ — бегущая строка
 ========================================================= */
 .partners {
-  padding: var(--space-16) 0 var(--space-36);
+  padding: var(--section-padding-y) 0;
   overflow: hidden;
 }
 
@@ -2550,7 +2552,7 @@ PARTNERS — marquee / ПАРТНЁРЫ — бегущая строка
 REVIEWS — Google reviews summary + testimonial cards / ОТЗЫВЫ GOOGLE
 ========================================================= */
 .reviews {
-  padding: var(--space-16) 0 var(--space-32);
+  padding: var(--section-padding-y) 0;
   border-top: 1px solid var(--color-line);
 }
 
@@ -2680,6 +2682,7 @@ reflow at the breakpoints below.
 @media (max-width:1024px) {
   :root {
     --container-padding: 32px;
+    --section-padding-y: var(--space-24);
   }
 
   .hero {
@@ -2780,6 +2783,7 @@ reflow at the breakpoints below.
 @media (max-width:768px) {
   :root {
     --container-padding: 24px;
+    --section-padding-y: var(--space-16);
   }
 
   .scroll-cue {
@@ -2839,6 +2843,7 @@ reflow at the breakpoints below.
 @media (max-width:480px) {
   :root {
     --container-padding: 20px;
+    --section-padding-y: var(--space-12);
   }
 
   .hero h1 {
@@ -2918,10 +2923,6 @@ reflow at the breakpoints below.
 
   .stat-item:last-child {
     border-bottom: none;
-  }
-
-  .story {
-    padding: var(--space-24) 0 var(--space-32);
   }
 
   .story h2 {
@@ -3354,7 +3355,7 @@ PRODUCT GRID / СЕТКА ТОВАРОВ
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
   transition: opacity var(--duration-base) ease;
-  padding-bottom: var(--space-32);
+  padding-bottom: var(--section-padding-y);
 }
 
 .product-card {
@@ -3479,7 +3480,7 @@ TRUST STRIP / ПОЛОСА ДОВЕРИЯ
 ========================================================= */
 .trust-strip {
   border-top: 1px solid var(--color-line);
-  padding: var(--space-14) 0;
+  padding: var(--section-padding-y) 0;
 }
 
 .trust-grid {
@@ -3519,7 +3520,7 @@ TRUST STRIP / ПОЛОСА ДОВЕРИЯ
 FAQ / ЧАСТЫЕ ВОПРОСЫ — accordion / аккордеон
 ========================================================= */
 .faq {
-  padding: var(--space-16) 0 var(--space-32);
+  padding: var(--section-padding-y) 0;
   border-top: 1px solid var(--color-line);
 }
 
@@ -3807,7 +3808,7 @@ PAGE HEADER / ШАПКА СТРАНИЦЫ — compact banner, shared with shop.h
 LEGAL / ЮРИДИЧЕСКАЯ ИНФОРМАЦИЯ — Impressum content grid / сетка контента Impressum
 ========================================================= */
 .legal-section {
-  padding: var(--space-24) 0;
+  padding: var(--section-padding-y) 0;
 }
 
 .legal-grid {
@@ -3920,7 +3921,7 @@ TRUST STRIP / ПОЛОСА ДОВЕРИЯ — shared with shop.html / kontakt.ht
 ========================================================= */
 .trust-strip {
   border-top: 1px solid var(--color-line);
-  padding: var(--space-14) 0;
+  padding: var(--section-padding-y) 0;
 }
 
 .trust-grid {
@@ -4181,7 +4182,7 @@ PAGE HEADER / ШАПКА СТРАНИЦЫ — compact banner, shared with shop.h
 CONTACT / КОНТАКТЫ — get in touch grid / сетка блока связи
 ========================================================= */
 .contact-section {
-  padding: var(--space-24) 0;
+  padding: var(--section-padding-y) 0;
 }
 
 .contact-grid {
@@ -4319,7 +4320,7 @@ CONTACT / КОНТАКТЫ — get in touch grid / сетка блока свя�
 MAP / КАРТА
 ========================================================= */
 .map-section {
-  padding-bottom: var(--space-24);
+  padding-bottom: var(--section-padding-y);
 }
 
 .map-frame {
@@ -4345,7 +4346,7 @@ TRUST STRIP / ПОЛОСА ДОВЕРИЯ — shared with shop.html / общая
 ========================================================= */
 .trust-strip {
   border-top: 1px solid var(--color-line);
-  padding: var(--space-14) 0;
+  padding: var(--section-padding-y) 0;
 }
 
 .trust-grid {
