@@ -198,11 +198,6 @@ h4 {
   letter-spacing: -0.02em;
   line-height: var(--line-height-tight);
   color: var(--color-ink);
-  text-wrap: balance;
-}
-
-p {
-  text-wrap: pretty;
 }
 
 .eyebrow {
