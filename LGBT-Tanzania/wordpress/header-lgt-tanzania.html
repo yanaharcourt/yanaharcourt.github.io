@@ -1,0 +1,347 @@
+<!--
+  LGBT Voice Tanzania — HEADER (nav)
+  Вставить в WordPress: блок "Custom HTML" / плагин типа WPCode,
+  либо в header.php темы.
+
+  Перед вставкой:
+  1) Замени href="/" и остальные ссылки (/who-we-are/ и т.д.) на реальные
+     адреса твоих страниц в WordPress.
+  2) Замени src логотипа на URL картинки, загруженной в Медиатеку WP.
+  3) Все стили и классы упакованы в .lgt-header, поэтому они не затронут
+     остальной сайт/тему — можно вставлять смело.
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap');
+
+  .lgt-header {
+    --color-background-nav: rgba(250, 250, 248, 0.92);
+    --color-accent: #7C3AED;
+    --color-accent-light: #EDE9FA;
+    --color-accent-hover: #6D28D9;
+    --color-text: #1A1A2E;
+    --color-text-muted: #6B6B80;
+    --color-border: #E4E2DC;
+    --color-white: #FFFFFF;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --spacing-page-inline: 80px;
+    --shadow-accent: 0 6px 20px rgba(124, 58, 237, 0.35);
+    --shadow-dropdown: 0 16px 48px rgba(0, 0, 0, 0.14);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-background-nav);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--color-border);
+    font-family: var(--font-body) !important;
+  }
+
+  .lgt-header,
+  .lgt-header *,
+  .lgt-header *::before,
+  .lgt-header *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .lgt-header a {
+    color: inherit;
+    text-decoration: none !important;
+  }
+
+  .lgt-header ul {
+    list-style: none;
+  }
+
+  .lgt-header img {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Guard against the WordPress theme's own default styling leaking onto
+     bare tags we don't wrap in our own class (borders, background, color,
+     font on headings/lists/etc.) */
+  .lgt-header h1, .lgt-header h2, .lgt-header h3, .lgt-header h4,
+  .lgt-header h5, .lgt-header h6, .lgt-header p, .lgt-header li {
+    margin: 0 !important;
+    border: none;
+    background: none;
+    box-shadow: none;
+    color: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    text-align: left;
+  }
+
+  .lgt-header .page-padding {
+    padding-inline: var(--spacing-page-inline);
+  }
+
+  .lgt-header .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    gap: 32px;
+  }
+
+  .lgt-header .logo {
+    font-family: var(--font-display) !important;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    color: var(--color-text);
+  }
+
+  .lgt-header .logo small {
+    font-size: 11px;
+    font-family: var(--font-body) !important;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    letter-spacing: .05em;
+  }
+
+  .lgt-header .logo-image {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .lgt-header .logo-fallback-text {
+    display: none;
+    flex-direction: column;
+  }
+
+  .lgt-header .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .lgt-header .nav-links a {
+    font-size: .875rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color .18s;
+  }
+
+  .lgt-header .nav-links a:hover {
+    color: var(--color-text);
+  }
+
+  .lgt-header .nav-links a.active {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .lgt-header .nav-item-with-dropdown {
+    position: relative;
+  }
+
+  .lgt-header .nav-item-with-dropdown>a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .lgt-header .nav-item-with-dropdown>a::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform .18s ease;
+    flex-shrink: 0;
+  }
+
+  .lgt-header .nav-item-with-dropdown:hover>a::after,
+  .lgt-header .nav-item-with-dropdown:focus-within>a::after {
+    transform: rotate(-135deg) translateY(-2px);
+  }
+
+  .lgt-header .nav-item-with-dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 12px;
+    display: block;
+  }
+
+  .lgt-header .nav-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 240px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: var(--shadow-dropdown);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .2s ease, visibility .2s ease;
+    z-index: 200;
+  }
+
+  .lgt-header .nav-item-with-dropdown:hover .nav-dropdown,
+  .lgt-header .nav-item-with-dropdown:focus-within .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .lgt-header .nav-dropdown li a {
+    display: block;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: .875rem;
+    font-weight: 500;
+    color: var(--color-text);
+    transition: background .15s, color .15s;
+  }
+
+  .lgt-header .nav-dropdown li a:hover {
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+  }
+
+  .lgt-header .nav-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .lgt-header .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body) !important;
+    font-size: .875rem;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 999px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none !important;
+    transition: all .18s ease;
+    white-space: nowrap;
+  }
+
+  .lgt-header .btn-primary {
+    background: var(--color-accent);
+    color: var(--color-white);
+  }
+
+  .lgt-header .btn-primary:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-accent);
+  }
+
+  .lgt-header .btn-outline {
+    background: transparent;
+    color: var(--color-text);
+    border: 1.5px solid var(--color-border);
+  }
+
+  .lgt-header .btn-outline:hover {
+    border-color: var(--color-text);
+  }
+
+  @media (max-width: 1100px) {
+    .lgt-header {
+      --spacing-page-inline: 40px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .lgt-header {
+      --spacing-page-inline: 20px;
+    }
+
+    .lgt-header .nav-links {
+      display: none;
+    }
+  }
+
+  .lgt-pride-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, #E40303, #FF8C00, #FFED00, #008026, #004DFF, #750787);
+    background-size: 100vw 4px;
+    z-index: 9999;
+    transition: width .05s linear;
+  }
+</style>
+
+<div class="lgt-pride-bar" id="lgtPrideBar"></div>
+<nav class="lgt-header">
+  <div class="nav-inner page-padding">
+    <a href="/" class="logo">
+      <img src="https://YOUR-SITE.com/wp-content/uploads/logo.svg" alt="LGBT Voice Tanzania" class="logo-image"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="logo-fallback-text">LGBT Voice<small>Tanzania</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/" class="active">Home</a></li>
+      <li><a href="/who-we-are/">Who We Are</a></li>
+      <li class="nav-item-with-dropdown">
+        <a>What We Do</a>
+        <ul class="nav-dropdown">
+          <li><a href="/what-we-do/">Overview</a></li>
+          <li><a href="/our-projects/">Our Projects</a></li>
+          <li><a href="/lived-realities/">Lived Realities of LGBTQ+ People in Tanzania Report</a></li>
+        </ul>
+      </li>
+      <li class="nav-item-with-dropdown">
+        <a>Get Involved</a>
+        <ul class="nav-dropdown">
+          <li><a href="/join-our-movement/">Join Our Movement</a></li>
+          <li><a href="/volunteer-with-us/">Volunteer</a></li>
+          <li><a href="/jobs-opening/">Job Openings</a></li>
+          <li><a href="/press-kit/">Press Kit</a></li>
+        </ul>
+      </li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="/get-help/" class="btn btn-outline">Get Help</a>
+      <a href="https://www.omprakash.org/office-rent2025" target="_blank" class="btn btn-primary">Donate Now</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  (function () {
+    var bar = document.getElementById("lgtPrideBar");
+    if (!bar) return;
+    // Page builders (Elementor/Divi/etc.) often wrap widgets in a container
+    // that has a CSS transform — that silently breaks `position: fixed`,
+    // making the bar render as a stray line wherever it lands in the flow
+    // instead of pinned to the top of the viewport. Re-parenting it onto
+    // <body> guarantees it's fixed relative to the real viewport.
+    if (bar.parentElement !== document.body) {
+      document.body.insertBefore(bar, document.body.firstChild);
+    }
+    function update() {
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var docH = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+      bar.style.width = pct + "%";
+    }
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  })();
+</script>

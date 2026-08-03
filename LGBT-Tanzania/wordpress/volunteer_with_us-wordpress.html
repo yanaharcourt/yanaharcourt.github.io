@@ -1,0 +1,580 @@
+<!--
+  LGBT Voice Tanzania — volunteer_with_us.html (header + контент + footer)
+  Вставляется ОДНИМ блоком "Custom HTML" / Elementor "HTML код" в WordPress.
+  Замени ссылки-заглушки и src логотипа на свои.
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap');
+
+.lgt-site {
+      --color-background: #FAFAF8;
+      --color-surface: #F2F0EB;
+      --color-accent: #7C3AED;
+      --color-accent-light: #EDE9FA;
+      --color-text: #1A1A2E;
+      --color-text-muted: #6B6B80;
+      --color-border: #E4E2DC;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --spacing-page-inline: 80px;
+      --spacing-section-block: 80px;
+      --spacing-grid-gap: 14px;
+      --radius-card: 26px;
+      --color-white: #FFFFFF;
+      --color-accent-hover: #6D28D9;
+      --color-background-nav: rgba(250,250,248,0.92);
+      --color-overlay-white-10: rgba(255,255,255,0.1);
+      --color-overlay-white-12: rgba(255,255,255,0.12);
+      --color-overlay-white-22: rgba(255,255,255,0.22);
+      --color-overlay-white-28: rgba(255,255,255,0.28);
+      --color-overlay-white-45: rgba(255,255,255,0.45);
+      --color-overlay-white-55: rgba(255,255,255,0.55);
+      --color-overlay-white-60: rgba(255,255,255,0.6);
+      --color-overlay-white-65: rgba(255,255,255,0.65);
+      --color-overlay-white-75: rgba(255,255,255,0.75);
+      --color-overlay-white-85: rgba(255,255,255,0.85);
+      --color-overlay-white-90: rgba(255,255,255,0.9);
+      --color-overlay-dark-soft: rgba(15,12,35,0.55);
+      --color-overlay-dark-mid: rgba(15,12,35,0.85);
+      --color-text-on-dark: rgba(255,255,255,0.6);
+      --color-accent-border-tinted: rgba(124,58,237,0.14);
+      --color-accent-focus-ring: rgba(124,58,237,0.1);
+      --color-white-hover: #f0f0f0;
+      --shadow-accent: 0 6px 20px rgba(124,58,237,0.35);
+      --shadow-card: 0 4px 16px rgba(0,0,0,0.08);
+      --shadow-dropdown: 0 16px 48px rgba(0,0,0,0.14);
+      --gradient-pride: linear-gradient(90deg,#E40303,#FF8C00,#FFED00,#008026,#004DFF,#750787);
+    }.lgt-site, .lgt-site *, .lgt-site::before, .lgt-site *::before, .lgt-site::after, .lgt-site *::after {box-sizing:border-box;margin:0;padding:0}.lgt-site {scroll-behavior:smooth}.lgt-site {background:var(--color-background);color:var(--color-text);font-family: var(--font-body) !important;font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased}.lgt-site a {color:inherit;text-decoration:none !important}.lgt-site img {display:block;max-width:100%;height:100%;object-fit:cover}.lgt-site .page-padding {padding-inline:var(--spacing-page-inline)}.lgt-site .section-inner {padding-inline:var(--spacing-page-inline)}.lgt-site .section {padding-block:var(--spacing-section-block)}.lgt-site .section--no-top-padding {padding-top:0}.lgt-site .italic-accent {font-style:italic;color:var(--color-accent);font-family: var(--font-display) !important}.lgt-site .color-accent {color:var(--color-accent)}.lgt-site .color-accent-light {color:var(--color-accent-light)}.lgt-site .tag {display:inline-flex;align-items:center;gap:8px;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent)}.lgt-site .tag::before {content:'';width:20px;height:2px;background:var(--color-accent);border-radius:2px;flex-shrink:0}.lgt-site .section-header {display:flex;flex-direction:column;gap:10px;margin-bottom:40px}.lgt-site .section-header h2 {font-family: var(--font-display) !important;font-size:clamp(2rem,3.5vw,3.5rem);font-weight:500;line-height:1.08;letter-spacing:-.02em}.lgt-site .section-header p {font-size:1.05rem;color:var(--color-text-muted);max-width:520px;line-height:1.65}.lgt-site .link-arrow {font-size:.875rem;font-weight:600;color:var(--color-accent);display:inline-flex;align-items:center;gap:5px;transition:gap .18s;width:fit-content}.lgt-site .link-arrow:hover {gap:9px}
+
+    /* BUTTONS */.lgt-site .btn {display:inline-flex;align-items:center;gap:6px;font-family: var(--font-body) !important;font-size:.875rem;font-weight:600;padding:10px 22px;border-radius:999px;cursor:pointer;border:none;transition:all .18s ease;white-space:nowrap}.lgt-site .btn-primary {background:var(--color-accent);color:var(--color-white)}.lgt-site .btn-primary:hover {background:var(--color-accent-hover);transform:translateY(-1px);box-shadow:var(--shadow-accent)}.lgt-site .btn-outline {background:transparent;color:var(--color-text);border:1.5px solid var(--color-border)}.lgt-site .btn-outline:hover {border-color:var(--color-text)}.lgt-site .btn-outline-inverse {background:transparent;color:var(--color-white);border:1.5px solid var(--color-overlay-white-55)}.lgt-site .btn-outline-inverse:hover {border-color:var(--color-white);background:var(--color-overlay-white-10)}.lgt-site .btn-large {font-size:1rem;padding:14px 32px}.lgt-site .btn-white {background:var(--color-white);color:var(--color-text)}.lgt-site .btn-white:hover {background:var(--color-white-hover);transform:translateY(-1px)}.lgt-site .btn-ghost-white {background:var(--color-overlay-white-12);color:var(--color-white);border:1.5px solid var(--color-overlay-white-28)}.lgt-site .btn-ghost-white:hover {background:var(--color-overlay-white-22)}.lgt-site .btn-surface {background:var(--color-surface);color:var(--color-text);border:1.5px solid var(--color-border)}.lgt-site .btn-surface:hover {background:var(--color-border)}.lgt-site .btn-full {width:100%;justify-content:center}
+
+    /* PRIDE BAR */.lgt-site .pride-progress-bar {position:fixed;top:0;left:0;width:0%;height:4px;background:var(--gradient-pride);background-size:100vw 4px;z-index:9999;transition:width .05s linear}
+
+    /* NAV */.lgt-site .nav {position:sticky;top:0;z-index:100;background:var(--color-background-nav);backdrop-filter:blur(20px);border-bottom:1px solid var(--color-border)}.lgt-site .nav-inner {display:flex;align-items:center;justify-content:space-between;height:64px;gap:32px}.lgt-site .logo {font-family: var(--font-display) !important;font-size:1.2rem;font-weight:600;line-height:1;display:flex;flex-direction:column}.lgt-site .logo small {font-size:11px;font-family: var(--font-body) !important;font-weight:400;color:var(--color-text-muted);letter-spacing:.05em}.lgt-site .logo-image {height:38px;width:auto;object-fit:contain}.lgt-site .logo-fallback-text {display:none;flex-direction:column}.lgt-site .nav-links {display:flex;align-items:center;gap:28px;list-style:none}.lgt-site .nav-links a {font-size:.875rem;font-weight:500;color:var(--color-text-muted);transition:color .18s}.lgt-site .nav-links a:hover {color:var(--color-text)}.lgt-site .nav-links a.active {color:var(--color-accent);font-weight:600}.lgt-site .nav-item-with-dropdown {position:relative}.lgt-site .nav-item-with-dropdown>a {display:flex;align-items:center;gap:5px}.lgt-site .nav-item-with-dropdown>a::after {content:'';width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .18s ease;flex-shrink:0}.lgt-site .nav-item-with-dropdown:hover>a::after, .lgt-site .nav-item-with-dropdown:focus-within>a::after {transform:rotate(-135deg) translateY(-2px)}.lgt-site .nav-item-with-dropdown::after {content:'';position:absolute;top:100%;left:0;right:0;height:12px;display:block}.lgt-site .nav-dropdown {position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);min-width:240px;background:var(--color-white);border:1px solid var(--color-border);border-radius:14px;padding:8px;box-shadow:var(--shadow-dropdown);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,visibility .2s ease;list-style:none;z-index:200}.lgt-site .nav-item-with-dropdown:hover .nav-dropdown, .lgt-site .nav-item-with-dropdown:focus-within .nav-dropdown {opacity:1;visibility:visible;pointer-events:auto}.lgt-site .nav-dropdown li a {display:block;padding:10px 14px;border-radius:8px;font-size:.875rem;font-weight:500;color:var(--color-text);transition:background .15s,color .15s}.lgt-site .nav-dropdown li a:hover {background:var(--color-accent-light);color:var(--color-accent)}.lgt-site .nav-actions {display:flex;gap:10px}
+
+    /* PAGE HERO */.lgt-site .page-hero-wrapper {padding:32px var(--spacing-page-inline) 0}.lgt-site .page-hero-image {width:100%;height:82vh;border-radius:28px;overflow:hidden;position:relative;display:flex;align-items:flex-end}.lgt-site .page-hero-image img {position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}.lgt-site .page-hero-image::after {content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 15%,var(--color-overlay-dark-soft) 55%,var(--color-overlay-dark-mid) 100%);border-radius:28px}.lgt-site .page-hero-pride-stripe {position:absolute;bottom:0;left:0;right:0;height:5px;background:var(--gradient-pride);border-radius:0 0 28px 28px;z-index:3}.lgt-site .page-hero-content {position:relative;z-index:2;padding:48px;display:flex;flex-direction:column;gap:20px;max-width:720px}.lgt-site .page-hero-eyebrow {font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--color-overlay-white-60);display:flex;align-items:center;gap:10px}.lgt-site .page-hero-eyebrow::before {content:'';width:28px;height:2px;background:var(--color-accent-light);border-radius:2px;display:block;flex-shrink:0}.lgt-site .page-hero-heading {font-family: var(--font-display) !important;font-size:clamp(3rem,5vw,5.5rem);font-weight:500;line-height:.95;letter-spacing:-.025em;color:var(--color-white)}.lgt-site .page-hero-heading .italic-accent {color:var(--color-accent-light)}.lgt-site .page-hero-description {font-size:1.05rem;color:var(--color-overlay-white-75);line-height:1.7;max-width:560px}.lgt-site .page-hero-actions {display:flex;gap:12px;flex-wrap:wrap;padding-top:4px}
+
+    /* ── INTRO BENTO (same as join_our_movement) ── */.lgt-site .intro-grid {display:grid;grid-template-columns:5fr 4fr;gap:var(--spacing-grid-gap);align-items:stretch}.lgt-site .intro-text {background:var(--color-white);border-radius:var(--radius-card);padding:56px 52px;border:1px solid var(--color-border);display:flex;flex-direction:column;gap:24px}.lgt-site .intro-text h2 {font-family: var(--font-display) !important;font-size:clamp(2rem,3vw,3.2rem);font-weight:500;line-height:1.08;letter-spacing:-.02em}.lgt-site .intro-text p {font-size:1rem;color:var(--color-text-muted);line-height:1.75}.lgt-site .intro-text p strong {color:var(--color-text);font-weight:600}.lgt-site .intro-actions {display:flex;gap:12px;flex-wrap:wrap;padding-top:8px}.lgt-site .intro-aside {display:flex;flex-direction:column;gap:var(--spacing-grid-gap)}.lgt-site .stat-card {background:var(--color-accent);border-radius:var(--radius-card);padding:40px 36px;display:flex;flex-direction:column;gap:10px;flex:1;position:relative;overflow:hidden}.lgt-site .stat-card::before {content:'';position:absolute;bottom:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:var(--color-overlay-white-10)}.lgt-site .stat-number {font-family: var(--font-display) !important;font-size:5rem;font-weight:600;color:var(--color-white);line-height:1;position:relative}.lgt-site .stat-label {font-size:.85rem;color:var(--color-overlay-white-65);font-weight:500;line-height:1.5;position:relative}.lgt-site .quote-card {background:var(--color-surface);border-radius:var(--radius-card);padding:36px 32px;border:1px solid var(--color-border);display:flex;flex-direction:column;gap:16px;flex:1}.lgt-site .quote-card blockquote {font-family: var(--font-display) !important;font-size:1.2rem;font-style:italic;color:var(--color-text);line-height:1.6}.lgt-site .quote-card cite {font-size:.78rem;color:var(--color-text-muted);font-style:normal;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+
+    /* ── WHY VOLUNTEER — 3-col bento, all same bg (surface) ── */.lgt-site .reasons-grid {display:grid;grid-template-columns:repeat(3,1fr);gap:var(--spacing-grid-gap)}.lgt-site .reason-card {background:var(--color-surface);border-radius:var(--radius-card);padding:36px 32px;border:1px solid var(--color-border);display:flex;flex-direction:column;gap:14px;transition:transform .22s,box-shadow .22s}.lgt-site .reason-card:hover {transform:translateY(-3px);box-shadow:var(--shadow-card)}.lgt-site .reason-icon {width:44px;height:44px;border-radius:12px;background:var(--color-accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}.lgt-site .reason-card h3 {font-family: var(--font-display) !important;font-size:1.45rem;font-weight:600;line-height:1.2;color:var(--color-text)}.lgt-site .reason-card p {font-size:.875rem;line-height:1.65;color:var(--color-text-muted)}
+
+    /* ── ROLES — simple 2×2 grid, all same cards ── */.lgt-site .roles-grid {display:grid;grid-template-columns:repeat(2,1fr);gap:var(--spacing-grid-gap)}.lgt-site .role-card {background:var(--color-white);border-radius:var(--radius-card);padding:36px 32px;border:1px solid var(--color-border);display:flex;flex-direction:column;gap:16px;transition:transform .22s,box-shadow .22s}.lgt-site .role-card:hover {transform:translateY(-2px);box-shadow:var(--shadow-card)}.lgt-site .role-icon {width:44px;height:44px;border-radius:12px;background:var(--color-accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}.lgt-site .role-card h3 {font-family: var(--font-display) !important;font-size:1.7rem;font-weight:600;line-height:1.2}.lgt-site .role-card p {font-size:.875rem;line-height:1.65;color:var(--color-text-muted);flex:1}
+
+    /* ── HOW IT WORKS — 3 step cards same as join_our_movement ── */.lgt-site .steps-grid {display:grid;grid-template-columns:repeat(3,1fr);gap:var(--spacing-grid-gap)}.lgt-site .step-card {background:var(--color-white);border-radius:var(--radius-card);padding:40px 36px;border:1px solid var(--color-border);display:flex;flex-direction:column;gap:18px;transition:transform .22s,box-shadow .22s}.lgt-site .step-card:hover {transform:translateY(-3px);box-shadow:var(--shadow-card)}.lgt-site .step-icon {width:48px;height:48px;border-radius:12px;background:var(--color-accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}.lgt-site .step-number {font-family: var(--font-display) !important;font-size:3.5rem;font-weight:600;line-height:1;color:var(--color-accent-light)}.lgt-site .step-card h3 {font-family: var(--font-display) !important;font-size:1.7rem;font-weight:600;line-height:1.15}.lgt-site .step-card p {font-size:.9rem;color:var(--color-text-muted);line-height:1.7;flex:1}
+
+    /* ── APPLY — same pattern as newsletter: form + image card ── */.lgt-site .apply-grid {display:grid;grid-template-columns:5fr 4fr;gap:var(--spacing-grid-gap);align-items:stretch}.lgt-site .apply-form-card {background:var(--color-white);border-radius:var(--radius-card);padding:52px 48px;border:1px solid var(--color-border);display:flex;flex-direction:column;gap:28px}.lgt-site .apply-form-card h3 {font-family: var(--font-display) !important;font-size:clamp(1.8rem,2.5vw,2.6rem);font-weight:500;line-height:1.1}.lgt-site .apply-form-card>p {font-size:.95rem;color:var(--color-text-muted);line-height:1.7;margin-top:-12px !important}.lgt-site .apply-fields {display:flex;flex-direction:column;gap:14px}.lgt-site .apply-row {display:grid;grid-template-columns:1fr 1fr;gap:12px}.lgt-site .field-group {display:flex;flex-direction:column;gap:6px}.lgt-site .field-group label {font-size:.78rem;font-weight:600;color:var(--color-text-muted);letter-spacing:.04em;text-transform:uppercase}.lgt-site .field-group input, .lgt-site .field-group select, .lgt-site .field-group textarea {width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--color-border);font-family: var(--font-body) !important;font-size:.9rem;background:var(--color-background);color:var(--color-text);transition:border-color .18s,box-shadow .18s;outline:none}.lgt-site .field-group input:focus, .lgt-site .field-group select:focus, .lgt-site .field-group textarea:focus {border-color:var(--color-accent);box-shadow:0 0 0 3px var(--color-accent-focus-ring)}.lgt-site .field-group textarea {resize:vertical;min-height:110px}.lgt-site .apply-note {font-size:.78rem;color:var(--color-text-muted);line-height:1.5}
+    /* aside = dark card like connect-label-card */.lgt-site .apply-aside {background:var(--color-text);border-radius:var(--radius-card);padding:52px 48px;display:flex;flex-direction:column;justify-content:space-between;gap:32px;position:relative;overflow:hidden}.lgt-site .apply-aside::before {content:'';position:absolute;right:-70px;top:-70px;width:240px;height:240px;border-radius:50%;background:var(--color-accent);opacity:.14}.lgt-site .apply-aside h3 {font-family: var(--font-display) !important;font-size:clamp(2rem,2.8vw,3rem);font-weight:500;line-height:1.1;color:var(--color-white);position:relative}.lgt-site .apply-aside>p {font-size:.95rem;color:var(--color-overlay-white-60);line-height:1.7;position:relative}.lgt-site .apply-email-block {position:relative}.lgt-site .apply-email-label {font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-overlay-white-45);display:block;margin-bottom:6px}.lgt-site .apply-email-link {font-size:1rem;font-weight:500;color:var(--color-overlay-white-85);transition:color .18s}.lgt-site .apply-email-link:hover {color:var(--color-white)}.lgt-site .apply-info-list {list-style:none;display:flex;flex-direction:column;gap:10px;position:relative}.lgt-site .apply-info-list li {display:flex;align-items:flex-start;gap:10px;font-size:.875rem;color:var(--color-overlay-white-65);line-height:1.55}.lgt-site .apply-info-list li::before {content:'';width:5px;height:5px;border-radius:50%;background:var(--color-overlay-white-45);flex-shrink:0;margin-top:8px}
+
+    /* ── POLICY — same as section-inner surface block ── */.lgt-site .policy-block {background:var(--color-surface);border-radius:var(--radius-card);padding:56px 52px;border:1px solid var(--color-border);display:flex;flex-direction:column;gap:20px}.lgt-site .policy-block h3 {font-family: var(--font-display) !important;font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:500;line-height:1.1;letter-spacing:-.02em}.lgt-site .policy-block p {font-size:.9rem;color:var(--color-text-muted);line-height:1.8;max-width:800px}
+
+    /* ── GET INVOLVED ── */.lgt-site .get-involved-grid {display:grid;grid-template-columns:5fr 4fr 3fr;gap:var(--spacing-grid-gap)}.lgt-site .get-involved-card {border-radius:var(--radius-card);padding:36px 30px;display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:230px;background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-text)}.lgt-site .get-involved-card h3 {font-family: var(--font-display) !important;font-size:2rem;font-weight:600;line-height:1.1}.lgt-site .get-involved-card p {font-size:.875rem;line-height:1.65;margin-top:6px !important;color:var(--color-text-muted)}.lgt-site .get-involved-card--compact h3 {font-size:1.5rem}
+
+    /* ── CTA BANNER ── */.lgt-site .cta-banner {background:var(--color-text);border-radius:var(--radius-card);padding:70px;display:flex;align-items:center;justify-content:space-between;gap:48px;position:relative;overflow:hidden}.lgt-site .cta-banner::before {content:'';position:absolute;right:-90px;top:-90px;width:340px;height:340px;border-radius:50%;background:var(--color-accent);opacity:.12}.lgt-site .cta-text {display:flex;flex-direction:column;gap:13px;position:relative}.lgt-site .cta-eyebrow {font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--color-overlay-white-45)}.lgt-site .cta-text h2 {font-family: var(--font-display) !important;font-size:clamp(1.8rem,3vw,3.2rem);font-weight:500;line-height:1.05;color:var(--color-white)}.lgt-site .cta-text p {font-size:1.05rem;color:var(--color-overlay-white-55);max-width:420px}.lgt-site .cta-buttons {display:flex;gap:10px;flex-shrink:0;position:relative}
+
+    /* ── FOOTER ── */.lgt-site .footer {background:var(--color-surface);border-top:1px solid var(--color-border);padding-block:56px 32px}.lgt-site .footer-grid {display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}.lgt-site .footer-logo {font-family: var(--font-display) !important;font-size:1.4rem;font-weight:600;margin-bottom:12px}.lgt-site .footer-brand p {font-size:.875rem;color:var(--color-text-muted);line-height:1.65;max-width:280px;margin-bottom:16px !important}.lgt-site .footer-social-icons {display:flex;gap:8px;margin-bottom:16px}.lgt-site .footer-social-link {width:34px;height:34px;border-radius:8px;border:1px solid var(--color-border);display:flex;align-items:center;justify-content:center;transition:border-color .18s,background .18s}.lgt-site .footer-social-link:hover {border-color:var(--color-text-muted);background:var(--color-border)}.lgt-site .footer-social-link svg {width:14px;height:14px}.lgt-site .footer-contact-text {font-size:.8rem;color:var(--color-text-muted)}.lgt-site .footer-column h4 {font-family: var(--font-body) !important;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:16px !important}.lgt-site .footer-column ul {list-style:none;display:flex;flex-direction:column;gap:10px}.lgt-site .footer-column ul li a {font-size:.875rem;color:var(--color-text);transition:color .18s}.lgt-site .footer-column ul li a:hover {color:var(--color-accent)}.lgt-site .footer-bottom {border-top:1px solid var(--color-border);padding-top:24px;display:flex;justify-content:space-between;align-items:center}.lgt-site .footer-bottom p {font-size:.78rem;color:var(--color-text-muted);line-height:1.8}.lgt-site .footer-bottom a {color:var(--color-text-muted);transition:color .18s}.lgt-site .footer-bottom a:hover {color:var(--color-accent)}.lgt-site .credit-link {font-weight:600}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:960px){
+.lgt-site {--spacing-page-inline:40px;--spacing-section-block:64px}.lgt-site .intro-grid {grid-template-columns:1fr}.lgt-site .reasons-grid {grid-template-columns:1fr 1fr}.lgt-site .roles-grid {grid-template-columns:1fr 1fr}.lgt-site .steps-grid {grid-template-columns:1fr 1fr}.lgt-site .apply-grid {grid-template-columns:1fr}.lgt-site .apply-grid > * {min-width:0}.lgt-site .get-involved-grid {grid-template-columns:1fr}.lgt-site .cta-banner {flex-direction:column;align-items:flex-start;padding:48px 40px}.lgt-site .footer-grid {grid-template-columns:1fr 1fr}
+    
+}
+    @media(max-width:640px){
+.lgt-site {--spacing-page-inline:20px;--spacing-section-block:56px}.lgt-site .nav-links {display:none}.lgt-site .page-hero-image {height:75vh}.lgt-site .page-hero-content {padding:28px}.lgt-site .reasons-grid, .lgt-site .steps-grid, .lgt-site .roles-grid {grid-template-columns:1fr}.lgt-site .apply-row {grid-template-columns:1fr}.lgt-site .cta-banner {padding:36px 22px}.lgt-site .footer-grid {grid-template-columns:1fr}
+    
+}
+  
+
+    /* Guard against the WordPress theme's / page builder's own default
+       styling leaking onto bare tags we don't wrap in our own class
+       (this does not change any value our own design sets, it only
+       blocks outside CSS from bare-tag selectors like a global "p" rule). */
+    .lgt-site h1, .lgt-site h2, .lgt-site h3, .lgt-site h4, .lgt-site h5, .lgt-site h6,
+    .lgt-site p, .lgt-site blockquote, .lgt-site li, .lgt-site footer,
+    .lgt-site button, .lgt-site input, .lgt-site textarea, .lgt-site select, .lgt-site figure {
+      margin: 0 !important;
+      border: none;
+      background: none;
+      box-shadow: none;
+      color: inherit;
+      font-family: inherit;
+      font-weight: inherit;
+      text-align: left;
+    }
+
+    .lgt-site .section--no-top-padding { padding-top: 0 }
+
+</style>
+
+<div class="lgt-site">
+<nav class="nav">
+  <div class="nav-inner page-padding">
+    <a href="index.html" class="logo">
+      <img src="./assets/img/Logo.svg" alt="LGBT Voice Tanzania" class="logo-image"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="logo-fallback-text">LGBT Voice<small>Tanzania</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="who_we_are.html">Who We Are</a></li>
+      <li class="nav-item-with-dropdown">
+        <a>What We Do</a>
+        <ul class="nav-dropdown">
+          <li><a href="what_we_do.html">Overview</a></li>
+          <li><a href="our_projects.html">Our Projects</a></li>
+          <li><a href="lived_realities.html">Lived Realities Report</a></li>
+        </ul>
+      </li>
+      <li class="nav-item-with-dropdown">
+        <a class="active">Get Involved</a>
+        <ul class="nav-dropdown">
+          <li><a href="join_our_movement.html">Join Our Movement</a></li>
+          <li><a href="volunteer_with_us.html" class="active">Volunteer</a></li>
+          <li><a href="jobs_opening.html">Job Openings</a></li>
+          <li><a href="press_kit.html">Press Kit</a></li>
+        </ul>
+      </li>
+      
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="get_help.html" class="btn btn-outline">Get Help</a>
+      <a href="https://www.omprakash.org/office-rent2025" target="_blank" class="btn btn-primary">Donate Now</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<div class="page-hero-wrapper">
+  <div class="page-hero-image">
+    <img src="./assets/img/volunteer.png"
+      alt="LGBT Voice Tanzania volunteers with pride flags" />
+    <div class="page-hero-content">
+      <span class="page-hero-eyebrow">Get Involved · Tanzania</span>
+      <h1 class="page-hero-heading">Volunteer <span class="italic-accent">With Us</span></h1>
+      <p class="page-hero-description">Volunteers are the backbone of LGBT Voice Tanzania. Give your time, share your skills, and stand alongside our community on the front lines of the fight for equality.</p>
+      <div class="page-hero-actions">
+        <a href="#apply" class="btn btn-primary btn-large">Apply to Volunteer</a>
+        <a href="#roles" class="btn btn-outline-inverse btn-large">See Open Roles</a>
+      </div>
+    </div>
+    <div class="page-hero-pride-stripe"></div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="tag">Our Volunteers</span>
+      <h2>The Backbone of <span class="italic-accent">Our Work</span></h2>
+    </div>
+    <div class="intro-grid">
+      <div class="intro-text">
+        <h2>People Who Make <span class="italic-accent">Change Possible</span></h2>
+        <p>LGBT Voice Tanzania's <strong>all-volunteer network</strong> is made up of people from a wide array of backgrounds, experiences, identities, and skill sets. Our volunteers work on the front lines in the fight for LGBTQ+ equality — in healthcare advocacy, community outreach, legal support, and beyond.</p>
+        <p>We invest in our volunteers through <strong>leadership development and recognition programs</strong>, offering workshops, conferences, and direct staff support to ensure our leaders become the strongest and most effective advocates they can be.</p>
+        <p>No matter how much time you're able to give, LGBT Voice Tanzania has something meaningful for you. We match you with a project that fits your availability, your interests, and your experience.</p>
+        <div class="intro-actions">
+          <a href="#apply" class="btn btn-primary">Apply Now →</a>
+          <a href="#roles" class="btn btn-outline">Explore Roles</a>
+        </div>
+      </div>
+      <div class="intro-aside">
+        <div class="stat-card">
+          <div class="stat-number">200+</div>
+          <div class="stat-label">Committed volunteers working across Tanzania for LGBT+ equality</div>
+        </div>
+        <div class="quote-card">
+          <blockquote>"People committed to making a difference in the world are the lifeblood and energy of LGBT Voice."</blockquote>
+          <cite>LGBT Voice Tanzania</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY VOLUNTEER -->
+<section class="section section--no-top-padding">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="tag">Why Volunteer</span>
+      <h2>What You'll <span class="italic-accent">Gain</span></h2>
+      <p>Volunteering with LGBT Voice Tanzania is an opportunity to grow, connect, and create lasting impact.</p>
+    </div>
+    <div class="reasons-grid">
+      <div class="reason-card">
+        <div class="reason-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3>Be Part of a <span class="italic-accent">Movement</span></h3>
+        <p>Become part of the ever-growing movement of LGBTQ+ people and allies working to build equity across communities in Tanzania and beyond.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Grow Your <span class="italic-accent">Network</span></h3>
+        <p>Connect with pro-equality minded people and their professional and social networks. Build meaningful relationships with advocates and leaders.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Build Real <span class="italic-accent">Skills</span></h3>
+        <p>Enhance your abilities and channel your creativity while strengthening our community — from fundraising and PR to event management and legal advocacy.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Nonprofit <span class="italic-accent">Experience</span></h3>
+        <p>Gain hands-on experience in a human rights organisation. Strengthen your CV with meaningful, values-led work in the third sector.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>Make New <span class="italic-accent">Friends</span></h3>
+        <p>Meet people who share your values and your drive for change. Our community is warm, diverse, and genuinely welcoming to everyone.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Support LGBT+ <span class="italic-accent">Equality</span></h3>
+        <p>Channel your professional skills — public relations, fundraising, legal, tech — directly into the most meaningful cause: equal rights for all.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN ROLES -->
+<section class="section section--no-top-padding" id="roles">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="tag">Open Roles</span>
+      <h2>Where Your <span class="italic-accent">Skills Fit</span></h2>
+      <p>We have meaningful work for people from every background. Find the role that's right for you.</p>
+    </div>
+    <div class="roles-grid">
+
+      <div class="role-card">
+        <div class="role-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3>Advocacy &amp; <span class="italic-accent">Campaigning</span></h3>
+        <p>Help us design and deliver campaigns that shift public opinion and hold institutions to account. Roles include campaign coordinators, social media managers, and communications writers. No prior activism experience required — just passion and commitment.</p>
+        <a href="#apply" class="link-arrow">Apply for this role →</a>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>Community <span class="italic-accent">Outreach</span></h3>
+        <p>Work directly with LGBT+ communities in Tanzania — supporting peer programmes, safe spaces, and grassroots connections that build resilience from the ground up.</p>
+        <a href="#apply" class="link-arrow">Apply for this role →</a>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3>Fundraising &amp; <span class="italic-accent">Events</span></h3>
+        <p>Help us sustain our work by planning fundraising events, building donor relationships, and making our initiatives financially strong and community-supported.</p>
+        <a href="#apply" class="link-arrow">Apply for this role →</a>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>Legal &amp; <span class="italic-accent">Research</span></h3>
+        <p>Support our legal team with case documentation, policy research, and rights monitoring. Ideal for law students, researchers, or anyone with analytical skills who wants to put their mind to work for human rights.</p>
+        <a href="#apply" class="link-arrow">Apply for this role →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section--no-top-padding">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="tag">How It Works</span>
+      <h2>Three Steps to <span class="italic-accent">Get Started</span></h2>
+      <p>The process is simple. We'll guide you from application to your first contribution.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <div class="step-number">01</div>
+        <h3>Tell Us <span class="italic-accent">About You</span></h3>
+        <p>Fill in the form below. Share the type of work you'd like to do, how much time you can give, and your preferred start date.</p>
+        <a href="#apply" class="link-arrow">Go to the form →</a>
+      </div>
+      <div class="step-card">
+        <div class="step-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="step-number">02</div>
+        <h3>We <span class="italic-accent">Match</span> You</h3>
+        <p>We match you with a project that fits your available time, your interests, and sometimes your experience. Every role is meaningful, whatever your background.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="step-number">03</div>
+        <h3>Start Making <span class="italic-accent">Impact</span></h3>
+        <p>Receive a warm welcome, an orientation, and full staff support. From your very first day, your contribution matters and your voice is heard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section class="section section--no-top-padding" id="apply">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="tag">Apply Today</span>
+      <h2>Ready to <span class="italic-accent">Get Started?</span></h2>
+    </div>
+    <div class="apply-grid">
+      <div class="apply-form-card">
+        <h3>Send Us Your <span class="italic-accent">Expression of Interest</span></h3>
+        <p>Tell us a little about yourself and what you'd like to contribute. We'll get back to you within a few days to discuss the best fit.</p>
+        <div class="apply-fields">
+          <div class="apply-row">
+            <div class="field-group">
+              <label>First Name</label>
+              <input type="text" placeholder="James" />
+            </div>
+            <div class="field-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Ouma" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="your@email.com" />
+          </div>
+          <div class="field-group">
+            <label>Area of Interest</label>
+            <select>
+              <option value="">Select a volunteer role…</option>
+              <option>Advocacy &amp; Campaigning</option>
+              <option>Community Outreach</option>
+              <option>Fundraising &amp; Events</option>
+              <option>Legal &amp; Research</option>
+              <option>Communications &amp; Social Media</option>
+              <option>General / Open to Anything</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Availability</label>
+            <select>
+              <option value="">How much time can you give?</option>
+              <option>A few hours per week</option>
+              <option>One day per week</option>
+              <option>Several days per week</option>
+              <option>Full-time (internship)</option>
+              <option>Flexible / project-based</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Tell Us About Yourself</label>
+            <textarea placeholder="Share a little about your background, skills, and why you'd like to volunteer with us…"></textarea>
+          </div>
+        </div>
+        <p class="apply-note">We won't share your information without your consent. All communications are confidential.</p>
+        <button class="btn btn-primary btn-large btn-full" type="submit">Submit Expression of Interest</button>
+      </div>
+
+      <div class="apply-aside">
+        <h3>Prefer to <span class="italic-accent">email directly?</span></h3>
+        <p>Contact us to let us know you're interested. Just share the type of work you'd like to do, how long you plan to stay, and your start date.</p>
+        <div class="apply-email-block">
+          <span class="apply-email-label">Write to us</span>
+          <a href="mailto:info@lgbtvoicetz.org" class="apply-email-link">info@lgbtvoicetz.org</a>
+        </div>
+        <ul class="apply-info-list">
+          <li>The type of volunteer work you'd like to do</li>
+          <li>Your skills and relevant experience</li>
+          <li>How much time you're able to give</li>
+          <li>Your preferred start date</li>
+          <li>Any questions you have for us</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POLICY -->
+<section class="section section--no-top-padding">
+  <div class="section-inner">
+    <div class="policy-block">
+      <span class="tag">Our Commitment</span>
+      <h3>Equal Opportunity <span class="italic-accent">Policy</span></h3>
+      <p>LGBT Voice Tanzania is committed to providing equal opportunity to all volunteers and applicants without regard to race, colour, religious creed, sex, gender identity, age, national origin, ancestry, citizenship status, physical or mental disability, medical condition, pregnancy, marital or veteran status, sexual orientation, or other personal characteristics as may be protected by applicable law.</p>
+      <p>This policy applies to all terms and conditions of engagement — including placement, promotion, transfer, leaves of absence, and compensation — and governs our relationships with outside vendors, customers, and the general public.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GET INVOLVED -->
+<section class="section section--no-top-padding">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="tag">Take Action</span>
+      <h2>More Ways to <span class="italic-accent">Make a Difference</span></h2>
+    </div>
+    <div class="get-involved-grid">
+      <div class="get-involved-card">
+        <div>
+          <h3>Donate <span class="italic-accent">Today</span></h3>
+          <p>Your generous donation fuels our mission, empowering us to break down barriers and create a more inclusive society for all.</p>
+        </div>
+        <a href="https://www.omprakash.org/office-rent2025" class="btn btn-primary">Make a donation →</a>
+      </div>
+      <div class="get-involved-card">
+        <div>
+          <h3>Join the <span class="italic-accent">Movement</span></h3>
+          <p>Sign up for updates and become part of a growing network of allies and advocates standing up for LGBT+ rights in Tanzania.</p>
+        </div>
+        <a href="join_our_movement.html" class="btn btn-primary">Join now →</a>
+      </div>
+      <div class="get-involved-card get-involved-card--compact">
+        <div>
+          <h3>Job Openings</h3>
+          <p>Looking for a career in human rights? See our current openings.</p>
+        </div>
+        <a href="https://lgbtvoicetz.org/job-openings/" class="btn btn-primary">View openings →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section section--no-top-padding">
+  <div class="section-inner">
+    <div class="cta-banner">
+      <div class="cta-text">
+        <p class="cta-eyebrow">Make a difference</p>
+        <h2>Every voice<br><span class="italic-accent color-accent-light">matters.</span></h2>
+        <p>Help us protect, empower, and celebrate the LGBT+ community in Tanzania. Your support saves lives.</p>
+      </div>
+      <div class="cta-buttons">
+        <a href="https://www.omprakash.org/office-rent2025" class="btn btn-white btn-large">Donate Now</a>
+        <a href="get_help.html" class="btn btn-ghost-white btn-large">Get Help</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+    <div class="section-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">LGBT Voice <span class="italic-accent">Tanzania</span></div>
+          <p>Advancing LGBT+ human rights in Tanzania since 2013 — building a more inclusive and accepting society for
+            all.</p>
+          <div class="footer-social-icons">
+            <a href="https://web.facebook.com/lgbtvoiceintz" class="footer-social-link" target="_blank" title="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+            <a href="https://twitter.com/lgbtvoicetz" class="footer-social-link" target="_blank" title="Twitter / X">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+              </svg>
+            </a>
+            <a href="#" class="footer-social-link" target="_blank" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+            <a href="#" class="footer-social-link" target="_blank" title="YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="var(--color-text-muted)" fill="var(--color-text-muted)" />
+              </svg>
+            </a>
+          </div>
+          <p class="footer-contact-text">Contact: <a href="mailto:info@lgbtvoicetz.org" class="color-accent">info@lgbtvoicetz.org</a></p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Organisation</h4>
+          <ul>
+            <li><a href="who_we_are.html">Who We Are</a></li>
+            <li><a href="what_we_do.html">What We Do</a></li>
+            <li><a href="our_projects.html">Our Projects</a></li>
+            <li><a href="lived_realities.html">LGBTQ+ Report</a></li>
+            <li><a href="press_kit.html">Press Kit</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Get Involved</h4>
+          <ul>
+            <li><a href="https://www.omprakash.org/office-rent2025">Donate</a></li>
+            <li><a href="join_our_movement.html">Join Movement</a></li>
+            <li><a href="volunteer_with_us.html">Volunteer</a></li>
+            <li><a href="jobs_opening.html">Job Openings</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="get_help.html">Get Help</a></li>
+            <li><a href="contact_us.html">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          <p>© 2025 LGBT Voice Tanzania. All rights reserved.</p>
+          <p>Made by <a href="https://yanaharcourt.dev/" target="_blank" class="credit-link">Yana Harcourt</a></p>
+        </div>
+        <p>Designed with pride 🏳️‍🌈</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var bar = document.getElementById("prideBar");
+    if (!bar) return;
+    if (bar.parentElement !== document.body) {
+      document.body.insertBefore(bar, document.body.firstChild);
+    }
+    function update() {
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var docH = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+      bar.style.width = pct + "%";
+    }
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  })();
+</script>

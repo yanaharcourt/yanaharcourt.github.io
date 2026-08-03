@@ -1,0 +1,1476 @@
+<!--
+  LGBT Voice Tanzania — our_projects.html (header + контент + footer)
+  Вставляется ОДНИМ блоком "Custom HTML" / Elementor "HTML код" в WordPress.
+  Замени ссылки-заглушки и src логотипа на свои.
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap');
+
+
+    /* ════════════════════════════════════════
+       DESIGN TOKENS
+    ════════════════════════════════════════ */.lgt-site {
+      --color-background: #FAFAF8;
+      --color-surface: #F2F0EB;
+      --color-accent: #7C3AED;
+      --color-accent-light: #EDE9FA;
+      --color-text: #1A1A2E;
+      --color-text-muted: #6B6B80;
+      --color-border: #E4E2DC;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --spacing-page-inline: 80px;
+      --spacing-section-block: 80px;
+      --spacing-grid-gap: 14px;
+      --radius-card: 26px;
+    
+      /* Extended tokens — all hardcoded values referenced via variables */
+      --color-white: #FFFFFF;
+      --color-accent-hover: #6D28D9;
+      --color-background-nav: rgba(250, 250, 248, 0.92);
+      --color-overlay-light: rgba(255, 255, 255, 0.92);
+      --color-overlay-white-10: rgba(255, 255, 255, 0.1);
+      --color-overlay-white-12: rgba(255, 255, 255, 0.12);
+      --color-overlay-white-22: rgba(255, 255, 255, 0.22);
+      --color-overlay-white-28: rgba(255, 255, 255, 0.28);
+      --color-overlay-white-45: rgba(255, 255, 255, 0.45);
+      --color-overlay-white-55: rgba(255, 255, 255, 0.55);
+      --color-overlay-white-60: rgba(255, 255, 255, 0.6);
+      --color-overlay-white-65: rgba(255, 255, 255, 0.65);
+      --color-overlay-white-75: rgba(255, 255, 255, 0.75);
+      --color-overlay-white-85: rgba(255, 255, 255, 0.85);
+      --color-overlay-white-90: rgba(255, 255, 255, 0.9);
+      --color-overlay-dark-soft: rgba(15, 12, 35, 0.55);
+      --color-overlay-dark-mid: rgba(15, 12, 35, 0.85);
+      --color-text-on-dark: rgba(255, 255, 255, 0.6);
+      --color-accent-border-tinted: rgba(124, 58, 237, 0.14);
+      --color-accent-focus-ring: rgba(124, 58, 237, 0.1);
+      --color-accent-bg-dark: rgba(124, 58, 237, 0.12);
+      --color-dark-backdrop: rgba(0, 0, 0, 0.07);
+      --color-dark-text-overlay: rgba(26, 26, 46, 0.55);
+      --color-white-hover: #f0f0f0;
+      --shadow-accent: 0 6px 20px rgba(124, 58, 237, 0.35);
+      --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-card-hover: 0 8px 28px rgba(0, 0, 0, 0.08);
+      --shadow-dropdown: 0 16px 48px rgba(0, 0, 0, 0.14);
+      --gradient-pride: linear-gradient(90deg, #E40303, #FF8C00, #FFED00, #008026, #004DFF, #750787);
+    }
+
+    /* ════════════════════════════════════════
+       RESET & BASE
+    ════════════════════════════════════════ */.lgt-site, .lgt-site *, .lgt-site::before, .lgt-site *::before, .lgt-site::after, .lgt-site *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }.lgt-site {
+      scroll-behavior: smooth;
+    }.lgt-site {
+      background: var(--color-background);
+      color: var(--color-text);
+      font-family: var(--font-body) !important;
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }.lgt-site a {
+      color: inherit;
+      text-decoration: none !important;
+    }.lgt-site img {
+      display: block;
+      max-width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ════════════════════════════════════════
+       UTILITY CLASSES
+    ════════════════════════════════════════ */.lgt-site .page-padding {
+      padding-inline: var(--spacing-page-inline);
+    }.lgt-site .section-inner {
+      padding-inline: var(--spacing-page-inline);
+    }.lgt-site .italic-accent {
+      font-style: italic;
+      color: var(--color-accent);
+      font-family: var(--font-display) !important;
+    }.lgt-site .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }.lgt-site .tag::before {
+      content: '';
+      width: 20px;
+      height: 2px;
+      background: var(--color-accent);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }.lgt-site .section {
+      padding-block: var(--spacing-section-block);
+    }.lgt-site .section--no-top-padding {
+      padding-top: 0;
+    }.lgt-site .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 40px;
+    }.lgt-site .section-header h2 {
+      font-family: var(--font-display) !important;
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -.02em;
+    }.lgt-site .section-header p {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      max-width: 520px;
+      line-height: 1.65;
+    }.lgt-site .link-arrow {
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: gap .18s;
+      width: fit-content;
+    }.lgt-site .link-arrow:hover {
+      gap: 9px;
+    }
+
+    /* ════════════════════════════════════════
+       BUTTONS
+    ════════════════════════════════════════ */.lgt-site .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body) !important;
+      font-size: .875rem;
+      font-weight: 600;
+      padding: 10px 22px;
+      border-radius: 999px;
+      cursor: pointer;
+      border: none;
+      transition: all .18s ease;
+      white-space: nowrap;
+    }.lgt-site .btn-primary {
+      background: var(--color-accent);
+      color: var(--color-white);
+    }.lgt-site .btn-primary:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-accent);
+    }.lgt-site .btn-outline {
+      background: transparent;
+      color: var(--color-text);
+      border: 1.5px solid var(--color-border);
+    }.lgt-site .btn-outline:hover {
+      border-color: var(--color-text);
+    }.lgt-site .btn-outline-inverse {
+      background: transparent;
+      color: var(--color-white);
+      border: 1.5px solid var(--color-overlay-white-55);
+    }.lgt-site .btn-outline-inverse:hover {
+      border-color: var(--color-white);
+      background: var(--color-overlay-white-10);
+    }.lgt-site .btn-large {
+      font-size: 1rem;
+      padding: 14px 32px;
+    }.lgt-site .btn-white {
+      background: var(--color-white);
+      color: var(--color-text);
+    }.lgt-site .btn-white:hover {
+      background: var(--color-white-hover);
+      transform: translateY(-1px);
+    }.lgt-site .btn-ghost-white {
+      background: var(--color-overlay-white-12);
+      color: var(--color-white);
+      border: 1.5px solid var(--color-overlay-white-28);
+    }.lgt-site .btn-ghost-white:hover {
+      background: var(--color-overlay-white-22);
+    }
+
+    /* ════════════════════════════════════════
+       PRIDE STRIPE
+    ════════════════════════════════════════ */.lgt-site .pride {
+      height: 4px;
+      background: var(--gradient-pride);
+    }.lgt-site .pride-progress-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      height: 4px;
+      background: var(--color-dark-backdrop);
+    }.lgt-site .pride-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--gradient-pride);
+      transition: width .1s linear;
+    }
+
+    /* ════════════════════════════════════════
+       NAVIGATION
+    ════════════════════════════════════════ */.lgt-site .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-background-nav);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+    }.lgt-site .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 32px;
+    }.lgt-site .logo {
+      font-family: var(--font-display) !important;
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1;
+      display: flex;
+      flex-direction: column;
+    }.lgt-site .logo small {
+      font-size: 11px;
+      font-family: var(--font-body) !important;
+      font-weight: 400;
+      color: var(--color-text-muted);
+      letter-spacing: .05em;
+    }.lgt-site .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }.lgt-site .nav-links a {
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      transition: color .18s;
+    }.lgt-site .nav-links a:hover {
+      color: var(--color-text);
+    }.lgt-site .nav-links a.active {
+      color: var(--color-accent);
+      font-weight: 600;
+    }.lgt-site .nav-item-with-dropdown {
+      position: relative;
+    }.lgt-site .nav-item-with-dropdown > a {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }.lgt-site .nav-item-with-dropdown > a::after {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform .18s ease;
+      flex-shrink: 0;
+    }.lgt-site .nav-item-with-dropdown:hover > a::after, .lgt-site .nav-item-with-dropdown:focus-within > a::after {
+      transform: rotate(-135deg) translateY(-2px);
+    }.lgt-site .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 240px;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 8px;
+      box-shadow: var(--shadow-dropdown);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .2s ease, visibility .2s ease;
+      list-style: none;
+      z-index: 200;
+    }.lgt-site .nav-item-with-dropdown::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 12px;
+      display: block;
+    }.lgt-site .nav-item-with-dropdown:hover .nav-dropdown, .lgt-site .nav-item-with-dropdown:focus-within .nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }.lgt-site .nav-dropdown li a {
+      display: block;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: background .15s, color .15s;
+    }.lgt-site .nav-dropdown li a:hover {
+      background: var(--color-accent-light);
+      color: var(--color-accent);
+    }.lgt-site .nav-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* ════════════════════════════════════════
+       PAGE HERO
+    ════════════════════════════════════════ */.lgt-site .hero-wrapper {
+      padding: 32px var(--spacing-page-inline) 0;
+    }.lgt-site .hero-image {
+      width: 100%;
+      height: 82vh;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+    }.lgt-site .hero-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+    }.lgt-site .hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+          transparent 20%,
+          rgba(15, 12, 35, .55) 60%,
+          rgba(15, 12, 35, .85) 100%);
+      border-radius: 28px;
+    }.lgt-site .hero-pride-stripe {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--gradient-pride);
+      border-radius: 0 0 28px 28px;
+      z-index: 3;
+    }.lgt-site .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 700px;
+    }.lgt-site .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--color-overlay-white-60);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }.lgt-site .hero-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: var(--color-accent-light);
+      border-radius: 2px;
+      display: block;
+      flex-shrink: 0;
+    }.lgt-site .hero-heading {
+      font-family: var(--font-display) !important;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 500;
+      line-height: .93;
+      letter-spacing: -.025em;
+      color: var(--color-white);
+    }.lgt-site .hero-heading .italic-accent {
+      color: var(--color-accent-light);
+    }.lgt-site .hero-description {
+      font-size: 1.05rem;
+      color: var(--color-overlay-white-75);
+      line-height: 1.7;
+      max-width: 500px;
+    }
+
+    /* ════════════════════════════════════════
+       PROJECT STATS STRIP
+    ════════════════════════════════════════ */.lgt-site .stats-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.2fr 1.8fr;
+      gap: var(--spacing-grid-gap);
+      margin-top: var(--spacing-grid-gap);
+    }.lgt-site .stat-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform .22s, box-shadow .22s;
+    }.lgt-site .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .07);
+    }.lgt-site .stat-num {
+      font-family: var(--font-display) !important;
+      font-size: clamp(2.2rem, 3vw, 3rem);
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1;
+    }.lgt-site .stat-label {
+      font-size: .8rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* ════════════════════════════════════════
+       PROJECT CARDS — EDITORIAL LAYOUT
+    ════════════════════════════════════════ */.lgt-site .projects-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    /* ── Each project row ── */.lgt-site .proj-row {
+      display: grid;
+      gap: var(--spacing-grid-gap);
+      align-items: stretch;
+    }.lgt-site .proj-row-odd {
+      grid-template-columns: 3fr 2fr;
+    }.lgt-site .proj-row-even {
+      grid-template-columns: 2fr 3fr;
+    }
+
+    /* ── Content card ── */.lgt-site .proj-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }.lgt-site .proj-num {
+      font-family: var(--font-display) !important;
+      font-size: clamp(3.5rem, 5vw, 5.5rem);
+      font-weight: 600;
+      line-height: 1;
+      color: var(--color-accent-light);
+      letter-spacing: -.04em;
+    }.lgt-site .proj-card-header {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }.lgt-site .proj-card h2 {
+      font-family: var(--font-display) !important;
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+    }.lgt-site .proj-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+    }.lgt-site .proj-card p {
+      font-size: .9rem;
+      color: var(--color-text-muted);
+      line-height: 1.75;
+    }.lgt-site .proj-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }.lgt-site .proj-highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .875rem;
+      color: var(--color-text);
+      line-height: 1.5;
+    }.lgt-site .proj-highlight-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--color-accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }.lgt-site .proj-highlight-dot svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* ── All project cards unified: white base, accent only via status/number ── */.lgt-site .proj-card-acc, .lgt-site .proj-card-dk, .lgt-site .proj-card-surf {
+      background: var(--color-white);
+      border-color: var(--color-border);
+      color: var(--color-text);
+    }.lgt-site .proj-card-acc .proj-num, .lgt-site .proj-card-dk .proj-num {
+      color: var(--color-accent-light);
+    }.lgt-site .proj-card-acc h2, .lgt-site .proj-card-dk h2 {
+      color: var(--color-text);
+    }.lgt-site .proj-card-acc p, .lgt-site .proj-card-dk p {
+      color: var(--color-text-muted);
+    }.lgt-site .proj-card-acc .proj-highlight-dot, .lgt-site .proj-card-dk .proj-highlight-dot {
+      background: var(--color-accent-light);
+    }.lgt-site .proj-card-acc .proj-highlight-dot svg {
+      stroke: var(--color-accent);
+    }.lgt-site .proj-card-dk .proj-highlight-dot svg {
+      stroke: var(--color-accent);
+    }.lgt-site .proj-card-acc .proj-highlight-item, .lgt-site .proj-card-dk .proj-highlight-item {
+      color: var(--color-text);
+    }.lgt-site .proj-card-acc .link-arrow, .lgt-site .proj-card-dk .link-arrow {
+      color: var(--color-accent);
+    }.lgt-site .proj-card-acc .link-arrow:hover, .lgt-site .proj-card-dk .link-arrow:hover {
+      color: #6D28D9;
+    }.lgt-site .proj-visual-panel {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      position: relative;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-grid-gap);
+    }.lgt-site .proj-visual-panel-inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-grid-gap);
+      height: 100%;
+      flex: 1;
+    }.lgt-site .proj-stat-tile {
+      border-radius: var(--radius-card);
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      flex: 1;
+    }.lgt-site .proj-stat-tile-big {
+      font-family: var(--font-display) !important;
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1;
+    }.lgt-site .proj-stat-tile-lbl {
+      font-size: .82rem;
+      color: var(--color-text-muted);
+      line-height: 1.45;
+    }
+
+    /* Tile size modifiers */.lgt-site .proj-stat-tile--large {
+      flex: 1.4;
+    }.lgt-site .proj-stat-tile--xlarge {
+      flex: 1.6;
+    }
+
+    /* Bottom tile grid row (Data + ∞) */.lgt-site .proj-stat-tile-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-grid-gap);
+      flex: 1;
+    }
+
+    /* Large display number for 5-Year tile */.lgt-site .proj-stat-tile-big--display {
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+    }
+
+    /* Usalama name: italic serif accent */.lgt-site .proj-stat-tile-big--usalama {
+      font-family: var(--font-display) !important;
+      font-style: italic;
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      color: var(--color-accent);
+    }
+
+    /* ── Image panel ── */.lgt-site .proj-img {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      position: relative;
+      min-height: 360px;
+    }.lgt-site .proj-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }.lgt-site .proj-img:hover img {
+      transform: scale(1.03);
+    }.lgt-site .proj-img-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: var(--color-overlay-light);
+      backdrop-filter: blur(8px);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      z-index: 2;
+    }.lgt-site .proj-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26, 26, 46, .5) 0%, transparent 55%);
+    }.lgt-site .proj-img-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      font-family: var(--font-display) !important;
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--color-white);
+      line-height: 1.3;
+      z-index: 2;
+    }
+
+    /* ── Tall stat sub-panel ── */.lgt-site .proj-side-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-grid-gap);
+    }.lgt-site .proj-side-stat {
+      border-radius: var(--radius-card);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border: 1px solid var(--color-border);
+      flex: 1;
+    }.lgt-site .proj-side-stat-bg {
+      background: var(--color-surface);
+      border-color: transparent;
+    }.lgt-site .proj-side-stat-surf {
+      background: var(--color-surface);
+      border-color: transparent;
+    }.lgt-site .proj-side-stat-tint {
+      background: var(--color-surface);
+      border-color: transparent;
+    }.lgt-site .proj-side-stat .big {
+      font-family: var(--font-display) !important;
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1;
+    }.lgt-site .proj-side-stat .lbl {
+      font-size: .8rem;
+      color: var(--color-text-muted);
+      line-height: 1.4;
+    }
+
+    /* ════════════════════════════════════════
+       QUOTE BANNER
+    ════════════════════════════════════════ */.lgt-site .quote-band {
+      background: var(--color-accent);
+      border-radius: var(--radius-card);
+      padding: 52px 60px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+    }.lgt-site .quote-band blockquote {
+      font-family: var(--font-display) !important;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-style: italic;
+      color: var(--color-white);
+      line-height: 1.45;
+      position: relative;
+      padding-left: 28px;
+    }.lgt-site .quote-band blockquote::before {
+      content: '\201C';
+      font-size: 5rem;
+      line-height: 0;
+      position: absolute;
+      top: 28px;
+      left: -10px;
+      opacity: .25;
+      font-family: var(--font-display) !important;
+    }.lgt-site .quote-attribution {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      color: var(--color-white);
+      text-align: right;
+      white-space: nowrap;
+    }.lgt-site .quote-attribution strong {
+      font-size: 1rem;
+      font-weight: 600;
+    }.lgt-site .quote-attribution span {
+      font-size: .8rem;
+      opacity: .65;
+    }
+
+    /* ════════════════════════════════════════
+       TIMELINE / ONGOING BADGE
+    ════════════════════════════════════════ */.lgt-site .proj-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }.lgt-site .proj-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }.lgt-site .status-ongoing {
+      color: #16A34A;
+    }.lgt-site .status-active {
+      color: var(--color-accent);
+    }.lgt-site .status-2027 {
+      color: #D97706;
+    }
+
+    /* ════════════════════════════════════════
+       GET INVOLVED CTA
+    ════════════════════════════════════════ */.lgt-site .get-involved-grid {
+      display: grid;
+      grid-template-columns: 5fr 4fr 3fr;
+      gap: var(--spacing-grid-gap);
+    }.lgt-site .get-involved-card {
+      border-radius: var(--radius-card);
+      padding: 36px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 230px;
+    }.lgt-site .get-involved-card h3 {
+      font-family: var(--font-display) !important;
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.1;
+    }.lgt-site .get-involved-card p {
+      font-size: .875rem;
+      line-height: 1.65;
+      margin-top: 6px !important;
+    }.lgt-site .get-involved-card--light {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+    }.lgt-site .get-involved-card--light p {
+      color: var(--color-text-muted);
+    }.lgt-site .get-involved-card--light h3 {
+      color: var(--color-text);
+    }.lgt-site .get-involved-card--light {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+    }.lgt-site .get-involved-card--light p {
+      color: var(--color-text-muted);
+    }.lgt-site .get-involved-card--light {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+    }.lgt-site .get-involved-card--light h3 {
+      font-size: 1.5rem;
+      color: var(--color-text);
+    }.lgt-site .get-involved-card--light p {
+      color: var(--color-text-muted);
+    }
+
+    /* ════════════════════════════════════════
+       CTA BANNER
+    ════════════════════════════════════════ */.lgt-site .cta {
+      background: var(--color-text);
+      border-radius: var(--radius-card);
+      padding: 60px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+    }.lgt-site .cta-text {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 500px;
+    }.lgt-site .cta-eyebrow {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--color-accent-light);
+    }.lgt-site .cta h2 {
+      font-family: var(--font-display) !important;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      font-weight: 500;
+      line-height: 1;
+      color: var(--color-white);
+      letter-spacing: -.025em;
+    }.lgt-site .cta p {
+      font-size: .95rem;
+      color: var(--color-overlay-white-60);
+      line-height: 1.65;
+    }.lgt-site .cta-buttons {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }.lgt-site .color-accent-light {
+      color: var(--color-accent-light);
+    }
+
+    /* ════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════ */.lgt-site .footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding-block: 56px 32px;
+    }.lgt-site .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }.lgt-site .footer-logo {
+      font-family: var(--font-display) !important;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }.lgt-site .footer-brand p {
+      font-size: .875rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      max-width: 280px;
+      margin-bottom: 16px !important;
+    }.lgt-site .footer-social-icons {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }.lgt-site .footer-social-link {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .18s, background .18s;
+    }.lgt-site .footer-social-link:hover {
+      border-color: var(--color-text-muted);
+      background: var(--color-border);
+    }.lgt-site .footer-social-link svg {
+      width: 14px;
+      height: 14px;
+    }.lgt-site .footer-contact-text {
+      font-size: .8rem;
+      color: var(--color-text-muted);
+    }.lgt-site .color-accent {
+      color: var(--color-accent);
+    }.lgt-site .footer-column h4 {
+      font-family: var(--font-body) !important;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 16px !important;
+    }.lgt-site .footer-column ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }.lgt-site .footer-column ul li a {
+      font-size: .875rem;
+      color: var(--color-text);
+      transition: color .18s;
+    }.lgt-site .footer-column ul li a:hover {
+      color: var(--color-accent);
+    }.lgt-site .footer-bottom {
+      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .8rem;
+      color: var(--color-text-muted);
+    }.lgt-site .footer-bottom > div {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }.lgt-site .credit-link {
+      color: inherit;
+      text-decoration: none;
+      transition: color .18s, font-weight .18s;
+    }.lgt-site .credit-link:hover {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    /* ════════════════════════════════════════
+       HELPER
+    ════════════════════════════════════════ */.lgt-site .mt-8 { margin-top: 8px; }.lgt-site .mt-16 { margin-top: 16px; }.lgt-site .mt-24 { margin-top: 24px; }.lgt-site .label-overline {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 6px;
+    }
+
+    /* status on dark card */.lgt-site .status-emergency {
+      color: var(--color-overlay-white-60);
+    }
+
+    /* logo image */.lgt-site .logo-image {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }.lgt-site .logo-fallback {
+      display: none;
+      flex-direction: column;
+    }
+
+    /* Usalama special stat */.lgt-site .proj-side-stat-usalama {
+      flex: 2;
+    }.lgt-site .proj-side-stat-usalama .big {
+      font-size: 2.4rem;
+    }
+
+    /* pride progress bar */.lgt-site .pride-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: var(--gradient-pride);
+      background-size: 100vw 4px;
+      z-index: 9999;
+      transition: width .05s linear;
+    }
+
+    /* gi section — button adapts to neutral bg */.lgt-site .get-involved-card--light .btn-white, .lgt-site .get-involved-card--light .btn-outline-inverse {
+      background: var(--color-accent);
+      color: var(--color-white);
+      border-color: transparent;
+    }.lgt-site .get-involved-card--light .btn-white:hover, .lgt-site .get-involved-card--light .btn-outline-inverse:hover {
+      background: var(--color-accent-hover);
+    }.lgt-site .logo-fallback-text { display: none; flex-direction: column }
+  
+
+    /* Guard against the WordPress theme's / page builder's own default
+       styling leaking onto bare tags we don't wrap in our own class
+       (this does not change any value our own design sets, it only
+       blocks outside CSS from bare-tag selectors like a global "p" rule). */
+    .lgt-site h1, .lgt-site h2, .lgt-site h3, .lgt-site h4, .lgt-site h5, .lgt-site h6,
+    .lgt-site p, .lgt-site blockquote, .lgt-site li, .lgt-site footer,
+    .lgt-site button, .lgt-site input, .lgt-site textarea, .lgt-site select, .lgt-site figure {
+      margin: 0 !important;
+      border: none;
+      background: none;
+      box-shadow: none;
+      color: inherit;
+      font-family: inherit;
+      font-weight: inherit;
+      text-align: left;
+    }
+
+    .lgt-site .section--no-top-padding { padding-top: 0 }
+
+    /* This page's original stylesheet had zero @media breakpoints at all,
+       so the nav and these grids overflowed the screen on phones/tablets. */
+    @media (max-width: 1100px) {
+      .lgt-site { --spacing-page-inline: 40px }
+      .lgt-site .footer-grid { grid-template-columns: 1fr 1fr }
+      .lgt-site .stats-strip { grid-template-columns: 1fr 1fr }
+      .lgt-site .get-involved-grid { grid-template-columns: 1fr }
+    }
+    @media (max-width: 900px) {
+      .lgt-site .proj-row-odd, .lgt-site .proj-row-even { grid-template-columns: 1fr }
+      .lgt-site .quote-band { grid-template-columns: 1fr }
+      .lgt-site .cta { flex-direction: column; align-items: flex-start }
+    }
+    @media (max-width: 640px) {
+      .lgt-site { --spacing-page-inline: 20px }
+      .lgt-site .nav-links { display: none }
+      .lgt-site .footer-grid { grid-template-columns: 1fr }
+      .lgt-site .stats-strip { grid-template-columns: 1fr }
+      .lgt-site .proj-stat-tile-row { grid-template-columns: 1fr }
+      .lgt-site .cta-buttons { flex-wrap: wrap }
+      .lgt-site .cta-buttons .btn { flex: 1 1 auto; justify-content: center }
+    }
+
+</style>
+
+<div class="lgt-site">
+<nav class="nav">
+    <div class="nav-inner page-padding">
+      <a href="index.html" class="logo">
+        <img src="./assets/img/Logo.svg" alt="LGBT Voice Tanzania" class="logo-image"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="logo-fallback-text">LGBT Voice<small>Tanzania</small></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="who_we_are.html">Who We Are</a></li>
+        
+        <li class="nav-item-with-dropdown">
+          <a class="active">What We Do</a>
+          <ul class="nav-dropdown">
+            <li><a href="what_we_do.html">Overview</a></li>
+            <li><a href="our_projects.html" class="active">Our Projects</a></li>
+            <li><a href="lived_realities.html">Lived Realities of LGBTQ+ People in Tanzania Report</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item-with-dropdown">
+          <a>Get Involved</a>
+          <ul class="nav-dropdown">
+            <li><a href="join_our_movement.html">Join Our Movement</a></li>
+            <li><a href="volunteer_with_us.html">Volunteer</a></li>
+            <li><a href="jobs_opening.html">Job Openings</a></li>
+            <li><a href="press_kit.html">Press Kit</a></li>
+          </ul>
+        </li>
+
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="get_help.html" class="btn btn-outline">Get Help</a>
+        <a href="https://www.omprakash.org/office-rent2025" target="_blank" class="btn btn-primary">Donate Now</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero-wrapper">
+    <div class="hero-image" role="img" aria-label="LGBT+ community gathering in Tanzania">
+      <img
+        src="./assets/img/our-projects-hero.jpg"
+        alt="Community members gathered together with flags at an LGBT+ event in Tanzania"
+        width="1400" height="700" />
+      <div class="hero-pride-stripe" aria-hidden="true"></div>
+      <div class="hero-content">
+        <span class="hero-eyebrow">What We Do — Programmes</span>
+        <h1 class="hero-heading">Our <span class="italic-accent">Projects</span></h1>
+        <p class="hero-description">Four flagship initiatives fighting for equality, safety, and dignity for LGBTQ+ people across Tanzania.</p>
+      </div>
+    </div>
+
+    <!-- Stats strip sits inside hero-wrap so it overlaps the bottom edge -->
+    <div class="stats-strip">
+      <div class="stat-card">
+        <span class="stat-num">4</span>
+        <span class="stat-label">Active programmes running today</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">30+</span>
+        <span class="stat-label">Scholarships awarded in 2025</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">2027</span>
+        <span class="stat-label">Horizon for 5-year data initiative</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">Since<br>2013</span>
+        <span class="stat-label">Advocating for LGBT+ rights in Tanzania</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PROJECTS ═══ -->
+  <section class="section" aria-label="Our projects">
+    <div class="section-inner">
+
+      <div class="section-header">
+        <span class="tag">Four Programmes, One Mission</span>
+        <h2>Building a <span class="italic-accent">safer Tanzania</span><br>for everyone</h2>
+        <p>Each initiative is designed to address a distinct and urgent dimension of LGBTQ+ life — from legal rights to emergency shelter, education and data-driven advocacy.</p>
+      </div>
+
+      <!-- ─── PROJECTS STACK ─── -->
+      <div class="projects-stack">
+
+        <!-- ── PROJECT 1: Equal Rights ── -->
+        <article class="proj-row proj-row-odd" aria-labelledby="proj1-title">
+          <div class="proj-card">
+            <div class="proj-num" aria-hidden="true">01</div>
+            <div class="proj-card-header">
+              <span class="proj-status status-ongoing">
+                <span class="proj-status-dot" aria-hidden="true"></span>
+                Ongoing
+              </span>
+              <h2 id="proj1-title">Ensuring Equal Rights of LGBTQ+ People in Tanzania</h2>
+            </div>
+            <div class="proj-card-body">
+              <p>Our central advocacy initiative is dedicated to protecting and promoting the rights of LGBTQ+ individuals in a country where same-sex relationships are criminalised. We work to change perceptions through awareness campaigns, community dialogue, and international partnerships.</p>
+              <p>By engaging local leaders and educators, we foster broader understanding and acceptance — building sustainable strategies for long-term improvement.</p>
+              <div class="proj-highlights">
+                <div class="proj-highlight-item">
+                  <div class="proj-highlight-dot" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+                  </div>
+                  <span>Awareness campaigns reaching national audiences</span>
+                </div>
+                <div class="proj-highlight-item">
+                  <div class="proj-highlight-dot" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+                  </div>
+                  <span>Collaboration with international human-rights advocates</span>
+                </div>
+                <div class="proj-highlight-item">
+                  <div class="proj-highlight-dot" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+                  </div>
+                  <span>Community-led dialogues on inclusion and dignity</span>
+                </div>
+              </div>
+              <a href="what_we_do.html" class="link-arrow mt-8">
+                Learn about our advocacy work
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="proj-img">
+            <img
+              src="https://lgbtvoicetz.org/wp-content/uploads/2025/01/u1251941971_lgbt_africa_stories_in_the_news_-v_6.1_48df4a63-89ca-4e19-a86d-d8497a88cec2_0.png"
+              alt="LGBTQ+ advocacy and community organising in Tanzania"
+              width="600" height="500" loading="lazy" />
+            <div class="proj-img-overlay" aria-hidden="true"></div>
+            <span class="proj-img-badge">Advocacy</span>
+            <p class="proj-img-caption">Equal rights for all — regardless of who you love.</p>
+          </div>
+        </article>
+
+        <!-- ── PROJECT 2: Dynamic Needs (5-year data initiative) ── -->
+        <article class="proj-row proj-row-even" aria-labelledby="proj2-title">
+          <div class="proj-visual-panel">
+            <div class="proj-visual-panel-inner">
+              <div class="proj-stat-tile proj-stat-tile--large">
+                <span class="proj-stat-tile-big proj-stat-tile-big--display">5-Year</span>
+                <span class="proj-stat-tile-lbl">Programme running through 2027</span>
+              </div>
+              <div class="proj-stat-tile-row">
+                <div class="proj-stat-tile">
+                  <span class="proj-stat-tile-big">Data</span>
+                  <span class="proj-stat-tile-lbl">Driven by lived stories and statistical evidence</span>
+                </div>
+                <div class="proj-stat-tile">
+                  <span class="proj-stat-tile-big">∞</span>
+                  <span class="proj-stat-tile-lbl">Ripple effect — inspiring wider societal acceptance</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-card proj-card-dk">
+            <div class="proj-num" aria-hidden="true">02</div>
+            <div class="proj-card-header">
+              <span class="proj-status status-2027">
+                <span class="proj-status-dot" aria-hidden="true"></span>
+                Concluding 2027
+              </span>
+              <h2 id="proj2-title">Addressing the Dynamic Needs of LGBTQ+ People</h2>
+            </div>
+            <div class="proj-card-body">
+              <p>This ambitious five-year initiative meets the changing needs of LGBTQ+ individuals in Tanzania by combining statistical analysis with personal narratives — ensuring voices are heard and receive the recognition they deserve.</p>
+              <p>Through educational campaigns, community workshops, and partnerships with local organisations, we dismantle bias and cultivate an inclusive environment where everyone can thrive.</p>
+              <div class="proj-highlights">
+                <div class="proj-highlight-item">
+                  <div class="proj-highlight-dot" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+                  </div>
+                  <span>Data analysis on workplace discrimination and healthcare access</span>
+                </div>
+                <div class="proj-highlight-item">
+                  <div class="proj-highlight-dot" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+                  </div>
+                  <span>Personal narratives humanising statistics and fostering empathy</span>
+                </div>
+                <div class="proj-highlight-item">
+                  <div class="proj-highlight-dot" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+                  </div>
+                  <span>Proactive strategies to benefit future generations</span>
+                </div>
+              </div>
+              <a href="lived_realities.html" class="link-arrow mt-8">
+                Read the Lived Realities report
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── QUOTE BAND ── -->
+        <div class="quote-band" role="blockquote">
+          <blockquote>
+            By examining both statistical data and personal stories, we aim to nurture an atmosphere of tolerance, foster mutual respect, and advance equality among diverse societal groups.
+          </blockquote>
+          <div class="quote-attribution">
+            <strong>LGBT Voice Tanzania</strong>
+            <span>5-Year Data Initiative</span>
+          </div>
+        </div>
+
+        <!-- ── PROJECT 3: Usalama House ── -->
+        <article class="proj-row proj-row-odd" aria-labelledby="proj3-title">
+          <div class="proj-card">
+            <div class="proj-num" aria-hidden="true">03</div>
+            <div class="proj-card-header">
+              <span class="proj-status status-ongoing">
+                <span class="proj-status-dot" aria-hidden="true"></span>
+                Emergency Response
+              </span>
+              <h2 id="proj3-title">Usalama House — LGBTQ+ Safe Space</h2>
+            </div>
+            <div class="proj-card-body">
+              <p>A critical emergency initiative creating a nurturing sanctuary for LGBTQ+ youth facing displacement, intimidation, or family rejection due to their sexual orientation or gender identity.</p>
+              <p>Beyond temporary accommodation, Usalama House provides therapy, social integration support, and a community of care — empowering young people to build a more hopeful future.</p>
+              <div class="proj-highlights">
+                <div class="proj-highlight-item">
+                  <div class="proj-highlight-dot" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+                  </div>
+                  <span>Emergency temporary accommodation for displaced youth</span>
+                </div>
+                <div class="proj-highlight-item">
+                  <div class="proj-highlight-dot" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+                  </div>
+                  <span>Mental health therapy and trauma processing</span>
+                </div>
+                <div class="proj-highlight-item">
+                  <div class="proj-highlight-dot" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+                  </div>
+                  <span>Social integration and long-term community building</span>
+                </div>
+              </div>
+              <a href="https://lgbtvoicetz.org/get-help/" class="link-arrow mt-8">
+                Get help or refer someone
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="proj-visual-panel">
+            <div class="proj-visual-panel-inner">
+              <div class="proj-stat-tile proj-stat-tile--xlarge">
+                <span class="label-overline">The name means</span>
+                <span class="proj-stat-tile-big proj-stat-tile-big--usalama">Usalama</span>
+                <span class="proj-stat-tile-lbl">Safety in Swahili — a promise of protection to every young person who walks through our door.</span>
+              </div>
+              <div class="proj-stat-tile">
+                <span class="proj-stat-tile-big">24/7</span>
+                <span class="proj-stat-tile-lbl">Crisis support and safe access</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── PROJECT 4: Pink Heart ── -->
+        <article class="proj-row proj-row-even" aria-labelledby="proj4-title">
+          <div class="proj-img">
+            <img
+              src="./assets/img/Pink-heart.png"
+              alt="Young LGBTQ+ people benefiting from education and scholarship opportunities"
+              width="600" height="500" loading="lazy" />
+            <div class="proj-img-overlay" aria-hidden="true"></div>
+            <span class="proj-img-badge">Education</span>
+            <p class="proj-img-caption">Every young person deserves a chance to reach their full potential.</p>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-num" aria-hidden="true">04</div>
+            <div class="proj-card-header">
+              <span class="proj-status status-active">
+                <span class="proj-status-dot" aria-hidden="true"></span>
+                Active — 2025 Cohort Open
+              </span>
+              <h2 id="proj4-title">Pink Heart Project</h2>
+            </div>
+            <div class="proj-card-body">
+              <p>An innovative initiative committed to expanding educational opportunities for LGBTQ+ youth. In 2025, Pink Heart aims to award scholarships to 30 deserving young people — providing transformative experiences that can alter the course of their lives.</p>
+              <p>From resume workshops and interview preparation to networking events, Pink Heart equips participants with academic and career tools that open doors to fulfilling futures.</p>
+              <div class="proj-highlights">
+                <div class="proj-highlight-item">
+                  <div class="proj-highlight-dot" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+                  </div>
+                  <span>30 scholarships awarded to LGBTQ+ youth in 2025</span>
+                </div>
+                <div class="proj-highlight-item">
+                  <div class="proj-highlight-dot" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+                  </div>
+                  <span>Tutoring, online courses and skills workshops</span>
+                </div>
+                <div class="proj-highlight-item">
+                  <div class="proj-highlight-dot" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+                  </div>
+                  <span>Career guidance, networking and mentorship</span>
+                </div>
+              </div>
+              <a href="https://lgbtvoicetz.org/join-our-movement/" class="link-arrow mt-8">
+                Support Pink Heart
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /projects-stack -->
+    </div>
+  </section>
+
+  <!-- ═══ GET INVOLVED ═══ -->
+  <section class="section section--no-top-padding" aria-label="Get involved">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="tag">Take Action</span>
+        <h2>Stand with <span class="italic-accent">Tanzania's</span><br>LGBTQ+ community</h2>
+      </div>
+      <div class="get-involved-grid">
+        <div class="get-involved-card get-involved-card--light">
+          <div>
+            <h3>Donate to our work</h3>
+            <p>Your contribution directly funds emergency shelter, scholarships, legal advocacy, and life-changing support services.</p>
+          </div>
+          <a href="https://www.omprakash.org/office-rent2025" class="btn btn-white btn-large">Donate Now</a>
+        </div>
+        <div class="get-involved-card get-involved-card--light">
+          <div>
+            <h3>Volunteer with us</h3>
+            <p>Bring your skills and time to support our programmes on the ground in Tanzania or remotely.</p>
+          </div>
+          <a href="https://lgbtvoicetz.org/volunteer-with-us/" class="btn btn-outline-inverse btn-large">Get Involved</a>
+        </div>
+        <div class="get-involved-card get-involved-card--light">
+          <div>
+            <h3>Get Help</h3>
+            <p>If you or someone you know needs urgent support, our team is here.</p>
+          </div>
+          <a href="https://lgbtvoicetz.org/get-help/" class="btn btn-primary btn-large">Reach Out</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA BANNER ═══ -->
+  <section class="section section--no-top-padding">
+    <div class="section-inner">
+      <div class="cta">
+        <div class="cta-text">
+          <p class="cta-eyebrow">Make a difference</p>
+          <h2>Every voice<br><span class="italic-accent color-accent-light">matters.</span></h2>
+          <p>Help us protect, empower, and celebrate the LGBT+ community in Tanzania. Your support saves lives.</p>
+        </div>
+        <div class="cta-buttons">
+          <a href="https://www.omprakash.org/office-rent2025" class="btn btn-white btn-large">Donate Now</a>
+          <a href="https://lgbtvoicetz.org/get-help/" class="btn btn-ghost-white btn-large">Get Help</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  
+<footer class="footer">
+    <div class="section-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">LGBT Voice <span class="italic-accent">Tanzania</span></div>
+          <p>Advancing LGBT+ human rights in Tanzania since 2013 — building a more inclusive and accepting society for
+            all.</p>
+          <div class="footer-social-icons">
+            <a href="https://web.facebook.com/lgbtvoiceintz" class="footer-social-link" target="_blank" title="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+            <a href="https://twitter.com/lgbtvoicetz" class="footer-social-link" target="_blank" title="Twitter / X">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+              </svg>
+            </a>
+            <a href="#" class="footer-social-link" target="_blank" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+            <a href="#" class="footer-social-link" target="_blank" title="YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="var(--color-text-muted)" fill="var(--color-text-muted)" />
+              </svg>
+            </a>
+          </div>
+          <p class="footer-contact-text">Contact: <a href="mailto:info@lgbtvoicetz.org" class="color-accent">info@lgbtvoicetz.org</a></p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Organisation</h4>
+          <ul>
+            <li><a href="who_we_are.html">Who We Are</a></li>
+            <li><a href="what_we_do.html">What We Do</a></li>
+            <li><a href="our_projects.html">Our Projects</a></li>
+            <li><a href="lived_realities.html">LGBTQ+ Report</a></li>
+            <li><a href="press_kit.html">Press Kit</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Get Involved</h4>
+          <ul>
+            <li><a href="https://www.omprakash.org/office-rent2025">Donate</a></li>
+            <li><a href="join_our_movement.html">Join Movement</a></li>
+            <li><a href="volunteer_with_us.html">Volunteer</a></li>
+            <li><a href="jobs_opening.html">Job Openings</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="get_help.html">Get Help</a></li>
+            <li><a href="contact_us.html">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          <p>© 2025 LGBT Voice Tanzania. All rights reserved.</p>
+          <p>Made by <a href="https://yanaharcourt.dev/" target="_blank" class="credit-link">Yana Harcourt</a></p>
+        </div>
+        <p>Designed with pride 🏳️‍🌈</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var bar = document.getElementById("prideBar");
+    if (!bar) return;
+    if (bar.parentElement !== document.body) {
+      document.body.insertBefore(bar, document.body.firstChild);
+    }
+    function update() {
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var docH = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+      bar.style.width = pct + "%";
+    }
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  })();
+</script>
