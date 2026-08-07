@@ -30,6 +30,9 @@
   <meta name="author" content="Yana Harcourt — yanaharcourt.github.io">
   <link rel="icon" type="image/png" href="favicon.png?v=1783863259">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- Calendly popup widget assets — used by the "Flug buchen" buttons below -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 
 <body>
@@ -121,6 +124,7 @@
             <div class="product-price">170,00 €</div>
             <p data-i18n="p1.p">Der längste reguläre Flug: über 30 Minuten in der Luft, viel Zeit für das Bergpanorama rund um Innsbruck.</p>
             <a class="btn btn-primary product-cta" href="#" data-flight="Thermikflug (170€)"
+              data-calendly="https://calendly.com/airgdistribution/thermikflug-buchen-170"
               data-i18n="product.btn">Flug buchen</a>
           </div>
         </article>
@@ -138,6 +142,7 @@
             <div class="product-price">130,00 €</div>
             <p data-i18n="p2.p">Kurz, intensiv, mit Nervenkitzel — Wingover schwerelos und Spirale mit rund 4G.</p>
             <a class="btn btn-ghost-light product-cta" href="#" data-flight="Actionflug (130€)"
+              data-calendly="https://calendly.com/airgdistribution/action-flight-130"
               data-i18n="product.btn">Flug buchen</a>
           </div>
         </article>
@@ -156,6 +161,7 @@
             <p data-i18n="p3.p">Der entspannte Einstieg: ruhiger Gleitflug mit Rundumblick — ideal für den allerersten
               Flug.</p>
             <a class="btn btn-ghost-light product-cta" href="#" data-flight="Standardflug (125€)"
+              data-calendly="https://calendly.com/airgdistribution/standard-flight-125"
               data-i18n="product.btn">Flug buchen</a>
           </div>
         </article>
@@ -175,6 +181,7 @@
             <p data-i18n="p4.p">Unser ausgiebigstes Erlebnis mit der meisten Zeit in der Luft — einlösbar mit der
               Tiroler ErlebnisCard.</p>
             <a class="btn btn-ghost-light product-cta" href="#" data-flight="Premium Tandemflug (200€)"
+              data-calendly="https://calendly.com/airgdistribution/premium-flight-200"
               data-i18n="product.btn">Flug buchen</a>
           </div>
         </article>
@@ -193,6 +200,7 @@
             <p data-i18n="p5.p">Zwei Erlebnisse in einem Flug — Nervenkitzel und Ruhe kombiniert, für alle, die sich
               nicht entscheiden wollen.</p>
             <a class="btn btn-ghost-light product-cta" href="#" data-flight="Kombo-Flug (150€)"
+              data-calendly="https://calendly.com/airgdistribution/combo-flight-150"
               data-i18n="product.btn">Flug buchen</a>
           </div>
         </article>
@@ -646,8 +654,15 @@
     document.querySelectorAll('.product-cta[data-flight]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const text = `Hallo! Ich möchte gerne einen ${btn.dataset.flight} buchen.`;
-        window.open('https://api.whatsapp.com/send?phone=436804019589&text=' + encodeURIComponent(text), '_blank');
+        const calendlyUrl = btn.dataset.calendly;
+        if (calendlyUrl && window.Calendly) {
+          // Flight types with a Calendly event → open the booking popup directly
+          window.Calendly.initPopupWidget({ url: calendlyUrl });
+        } else {
+          // No Calendly event for this item (e.g. Fluggutschein) → fall back to WhatsApp
+          const text = `Hallo! Ich möchte gerne einen ${btn.dataset.flight} buchen.`;
+          window.open('https://api.whatsapp.com/send?phone=436804019589&text=' + encodeURIComponent(text), '_blank');
+        }
       });
     });
 
