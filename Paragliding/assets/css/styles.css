@@ -142,6 +142,7 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   width: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -152,6 +153,13 @@ body {
   font-size: var(--font-size-base);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a,
+button,
+.btn {
+  -webkit-tap-highlight-color: transparent;
 }
 
 img {
@@ -4026,7 +4034,7 @@ FLOATING WHATSAPP BUTTON / ПЛАВАЮЩАЯ КНОПКА WHATSAPP
 .wa-float {
   position: fixed;
   right: var(--space-6);
-  bottom: var(--space-6);
+  bottom: calc(var(--space-6) + env(safe-area-inset-bottom));
   z-index: 450;
   width: 60px;
   height: 60px;
@@ -4121,7 +4129,7 @@ RESPONSIVE / АДАПТИВНОСТЬ — 1920 / 1600 / 1280 / 1024 / 768 / 414 
 
   .wa-float {
     right: var(--space-4);
-    bottom: var(--space-4);
+    bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
     width: 52px;
     height: 52px;
   }
@@ -4451,7 +4459,7 @@ FLOATING WHATSAPP BUTTON / ПЛАВАЮЩАЯ КНОПКА WHATSAPP
 .wa-float {
   position: fixed;
   right: var(--space-6);
-  bottom: var(--space-6);
+  bottom: calc(var(--space-6) + env(safe-area-inset-bottom));
   z-index: 450;
   width: 60px;
   height: 60px;
@@ -4583,7 +4591,7 @@ RESPONSIVE / АДАПТИВНОСТЬ — 1920 / 1600 / 1280 / 1024 / 768 / 414 
 
   .wa-float {
     right: var(--space-4);
-    bottom: var(--space-4);
+    bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
     width: 52px;
     height: 52px;
   }
@@ -4779,7 +4787,7 @@ body.page-404 .nav-burger span {
 .cookie-notice {
   position: fixed;
   left: 50%;
-  bottom: 20px;
+  bottom: calc(20px + env(safe-area-inset-bottom));
   transform: translateX(-50%);
   z-index: 999;
   display: flex;
@@ -4829,6 +4837,6 @@ body.page-404 .nav-burger span {
   .cookie-notice {
     flex-direction: column;
     align-items: stretch;
-    bottom: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
   }
 }
