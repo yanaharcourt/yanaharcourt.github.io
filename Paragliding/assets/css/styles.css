@@ -3692,9 +3692,11 @@ FAQ / ЧАСТЫЕ ВОПРОСЫ — accordion / аккордеон
 
 .faq-a p {
   padding-bottom: var(--space-7);
-  max-width: 64ch;
+  max-width: none;
   color: var(--color-ink-soft);
-  font-size: var(--font-size-small);
+  font-family: var(--font-body);
+  font-size: var(--font-size-medium);
+  line-height: 1.7;
 }
 
 .faq-item.open .faq-a {
