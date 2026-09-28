@@ -1909,6 +1909,7 @@ PROCESS / ПРОЦЕСС
 
 .step-tags-spacer {
   visibility: hidden;
+  display: none;
 }
 
 /* =========================================================
