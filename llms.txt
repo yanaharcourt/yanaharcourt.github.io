@@ -1,0 +1,16 @@
+# Yana Harcourt - Web & UX/UI Designer, Bray, Ireland
+
+> Yana Harcourt is a UX/UI designer and front-end developer based in Bray, Co. Wicklow, Ireland. She designs and builds websites and redesigns outdated sites for startups, founders and small businesses across Ireland and remotely. Languages: English, Russian.
+
+## Pages
+- [Home, services, process and FAQ](https://yanaharcourt.dev/): what Yana offers and answers to common questions about cost, timelines, SEO and AI visibility, GDPR and support
+- [Case studies](https://yanaharcourt.dev/all-work.html): full project case studies
+- [Contact](https://yanaharcourt.dev/#contact): request a quote
+
+## Services
+- Website design and build
+- Website redesign
+- Startup and MVP design
+- App UX/UI design
+- Search and AI-ready website structure
+- UX audit
