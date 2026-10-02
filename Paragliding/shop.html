@@ -29,7 +29,7 @@
     content="Flug buchen bei Innsbruck Paragliding: Actionflug, Thermikflug, Standardflug, SuperComboFlight und Fluggutschein - alle Tandemflüge im Überblick.">
   <meta name="author" content="Yana Harcourt — yanaharcourt.github.io">
   <link rel="icon" type="image/png" href="favicon.png?v=1783863259">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261002">
   <!-- Calendly popup widget assets - used by the "Flug buchen" buttons below -->
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
@@ -110,26 +110,46 @@
 
       <div class="shop-grid" id="shopGrid">
 
-        <article class="product-card featured" id="thermikflug" data-index="0" data-price="170" data-name="Thermikflug"
+        <article class="product-card featured" id="kombo-flug" data-index="0" data-price="150" data-name="SuperComboFlight"
+          data-reveal>
+          <div class="product-thumb">
+            <img
+              src="./assets/img/026.jpg"
+              alt="SuperComboFlight über dem Stubaital" loading="lazy">
+            <span class="product-badge" data-i18n="product.badge">Empfehlung</span>
+          </div>
+          <div class="product-body">
+            <span class="product-tag" data-i18n="product.tag">Tandemflüge</span>
+            <h3 data-i18n="p5.name">SuperComboFlight</h3>
+            <div class="product-price">150,00 €</div>
+            <p data-i18n="p5.p">Drei Erlebnisse in einem Flug: optionales Thermikfliegen, Selbststeuern und zum
+              Abschluss ein Rollercoaster oder eine weitere Sightseeing-Runde. Wir sind die Piloten, du bist der
+              Kapitän - unsere beliebteste Option, das beste Erlebnis.</p>
+            <a class="btn btn-primary product-cta" href="#" data-flight="SuperComboFlight (150€)"
+              data-calendly="https://calendly.com/airgdistribution/flug-buchen"
+              data-i18n="product.btn">Flug buchen</a>
+          </div>
+        </article>
+
+        <article class="product-card" id="thermikflug" data-index="1" data-price="170" data-name="Thermikflug"
           data-reveal>
           <div class="product-thumb">
             <img
               src="./assets/img/028.jpg"
               alt="Thermikflug über dem Stubaital" loading="lazy">
-            <span class="product-badge" data-i18n="product.badge">Empfehlung</span>
           </div>
           <div class="product-body">
             <span class="product-tag" data-i18n="product.tag">Tandemflüge</span>
             <h3 data-i18n="p1.name">Thermikflug</h3>
             <div class="product-price">170,00 €</div>
             <p data-i18n="p1.p">Der längste reguläre Flug: über 30 Minuten in der Luft, viel Zeit für das Bergpanorama rund um Innsbruck.</p>
-            <a class="btn btn-primary product-cta" href="#" data-flight="Thermikflug (170€)"
+            <a class="btn btn-ghost-light product-cta" href="#" data-flight="Thermikflug (170€)"
               data-calendly="https://calendly.com/airgdistribution/flug-buchen"
               data-i18n="product.btn">Flug buchen</a>
           </div>
         </article>
 
-        <article class="product-card" id="actionflug" data-index="1" data-price="130" data-name="Actionflug"
+        <article class="product-card" id="actionflug" data-index="2" data-price="130" data-name="Actionflug"
           data-reveal>
           <div class="product-thumb">
             <img
@@ -147,7 +167,7 @@
           </div>
         </article>
 
-        <article class="product-card" id="standardflug" data-index="2" data-price="125" data-name="Standardflug"
+        <article class="product-card" id="standardflug" data-index="3" data-price="125" data-name="Standardflug"
           data-reveal>
           <div class="product-thumb">
             <img
@@ -161,26 +181,6 @@
             <p data-i18n="p3.p">Der entspannte Einstieg: ruhiger Gleitflug mit Rundumblick - ideal für den allerersten
               Flug.</p>
             <a class="btn btn-ghost-light product-cta" href="#" data-flight="Standardflug (125€)"
-              data-calendly="https://calendly.com/airgdistribution/flug-buchen"
-              data-i18n="product.btn">Flug buchen</a>
-          </div>
-        </article>
-
-        <article class="product-card" id="kombo-flug" data-index="3" data-price="150" data-name="SuperComboFlight"
-          data-reveal>
-          <div class="product-thumb">
-            <img
-              src="./assets/img/026.jpg"
-              alt="SuperComboFlight über dem Stubaital" loading="lazy">
-          </div>
-          <div class="product-body">
-            <span class="product-tag" data-i18n="product.tag">Tandemflüge</span>
-            <h3 data-i18n="p5.name">SuperComboFlight</h3>
-            <div class="product-price">150,00 €</div>
-            <p data-i18n="p5.p">Drei Erlebnisse in einem Flug: optionales Thermikfliegen, Selbststeuern und zum
-              Abschluss ein Rollercoaster oder eine weitere Sightseeing-Runde. Wir sind die Piloten, du bist der
-              Kapitän - unsere beliebteste Option, das beste Erlebnis.</p>
-            <a class="btn btn-ghost-light product-cta" href="#" data-flight="SuperComboFlight (150€)"
               data-calendly="https://calendly.com/airgdistribution/flug-buchen"
               data-i18n="product.btn">Flug buchen</a>
           </div>

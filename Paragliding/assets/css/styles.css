@@ -1113,7 +1113,7 @@ HERO / ГЛАВНЫЙ ЭКРАН
   max-width: var(--container-width);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   background: rgba(255, 255, 255, .85);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
@@ -1292,11 +1292,7 @@ PILOTS — switchable pilot profiles / ПИЛОТЫ — переключаемы
 }
 
 .pilot-photo:nth-of-type(2):not(.active) {
-  inset: auto calc(30% + var(--space-10)) calc(-1 * var(--space-8)) auto;
-}
-
-.pilot-photo:nth-of-type(3):not(.active) {
-  inset: auto calc(60% + var(--space-12)) calc(-1 * var(--space-8)) auto;
+  inset: auto calc(-1 * var(--space-8)) calc(-1 * var(--space-8)) auto;
 }
 
 .pilot-photo:not(.active):hover {
@@ -1417,6 +1413,13 @@ PILOTS — switchable pilot profiles / ПИЛОТЫ — переключаемы
 .pilot-stats span {
   font-size: var(--font-size-tiny);
   color: var(--color-ink-faint);
+}
+
+.pilots-note {
+  margin-top: var(--space-7);
+  color: var(--color-ink-soft);
+  font-size: var(--font-size-medium);
+  max-width: 56ch;
 }
 
 .pilot-quote {
@@ -2987,11 +2990,7 @@ reflow at the breakpoints below.
   }
 
   .pilot-photo:nth-of-type(2):not(.active) {
-    inset: auto calc(30% + var(--space-6)) calc(-1 * var(--space-5)) auto;
-  }
-
-  .pilot-photo:nth-of-type(3):not(.active) {
-    inset: auto calc(60% + var(--space-7)) calc(-1 * var(--space-5)) auto;
+    inset: auto calc(-1 * var(--space-5)) calc(-1 * var(--space-5)) auto;
   }
 
   .pilots-switch {
